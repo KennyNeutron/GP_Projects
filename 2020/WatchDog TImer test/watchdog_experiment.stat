@@ -1,0 +1,17 @@
+// SourceBoost Linker Function Resource Usage Dump
+
+#GLOBAL:"global",line = 0,ram = 38.1,rom = 0;
+Wdt_Delay_Ms(unsigned char):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_Delay.c",line = 118,ram = 2.0,rom = 11;
+FCD_LCDDisplay0_RawSend(unsigned char,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\WatchDog TImer test\watchdog_experiment.c",line = 194,ram = 3.0,rom = 65;
+FCD_LCDDisplay0_Start(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\WatchDog TImer test\watchdog_experiment.c",line = 244,ram = 0.0,rom = 85;
+FCD_LCDDisplay0_Clear(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\WatchDog TImer test\watchdog_experiment.c",line = 277,ram = 0.0,rom = 17;
+FCD_LCDDisplay0_Cursor(unsigned char,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\WatchDog TImer test\watchdog_experiment.c",line = 314,ram = 2.0,rom = 30;
+FCD_LCDDisplay0_PrintString(unsigned char*,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\WatchDog TImer test\watchdog_experiment.c",line = 403,ram = 4.0,rom = 28;
+main(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\WatchDog TImer test\watchdog_experiment.c",line = 522,ram = 12.0,rom = 101;
+interrupt(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\WatchDog TImer test\watchdog_experiment.c",line = 617,ram = 0.0,rom = 11;
+delay_10us(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 14;
+delay_ms(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 44;
+delay_s(unsigned char):"NoSourceFile",line = 0,ram = 1.0,rom = 15;
+_startup(void):"NoSourceFile",line = 0,ram = 0.0,rom = 46;
+#HEAP_BLOCK: 0, 160, 95;
+#HEAP_BLOCK: 1, 90, 37;

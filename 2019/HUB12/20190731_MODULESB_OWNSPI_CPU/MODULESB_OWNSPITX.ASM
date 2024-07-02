@@ -1,0 +1,482 @@
+;**********************************************************************
+;                                                                     *
+;    FILENAME:	    MODULESB_OWNSPI.ASM                               *
+;    DATE:         	2019.07.31                                        *
+;    FILE VERSION:                                                    *
+;                                                                     *
+;    AUTHOR:        KENNYNEUTRON                                      *
+;    COMPANY:       GER-PER ENGINEERING                               *
+;                                                                     * 
+;                                                                     *
+;**********************************************************************
+;                                                                     *
+;    FILES REQUIRED: P16F690.INC                                      *
+;                                                                     *
+;**********************************************************************
+;                                                                     *
+;    NOTES:                                                           *
+;                                                                     *
+;**********************************************************************
+
+
+	LIST		P=16F690		; LIST DIRECTIVE TO DEFINE PROCESSOR
+	#INCLUDE	<P16F690.INC>		; PROCESSOR SPECIFIC VARIABLE DEFINITIONS
+	
+	
+	__CONFIG    _CP_OFF & _CPD_OFF & _BOR_OFF & _PWRTE_ON & _WDT_OFF & _HS_OSC & _MCLRE_OFF & _FCMEN_OFF & _IESO_OFF
+
+; '__CONFIG' DIRECTIVE IS USED TO EMBED CONFIGURATION DATA WITHIN .ASM FILE.
+; THE LABELS FOLLOWING THE DIRECTIVE ARE LOCATED IN THE RESPECTIVE .INC FILE.
+; SEE RESPECTIVE DATA SHEET FOR ADDITIONAL INFORMATION ON CONFIGURATION WORD.
+
+
+
+
+
+
+;***** VARIABLE DEFINITIONS
+W_TEMP		EQU	0X7D			; VARIABLE USED FOR CONTEXT SAVING
+STATUS_TEMP	EQU	0X7E			; VARIABLE USED FOR CONTEXT SAVING
+PCLATH_TEMP	EQU	0X7F			; VARIABLE USED FOR CONTEXT SAVING
+
+
+	#DEFINE	BANK0		BANKSEL	PORTA
+	#DEFINE	BANK1		BANKSEL	ADRESL
+	#DEFINE	BANK2		BANKSEL	ANSELH
+
+	#DEFINE	DAT_LO		BCF	PORTC,7
+	#DEFINE	DAT_HI		BSF	PORTC,7
+
+	#DEFINE	CLK_LO		BCF	PORTB,6
+	#DEFINE	CLK_HI		BSF	PORTB,6	
+
+	#DEFINE	CSB_LO		BCF	PORTC,6
+	#DEFINE	CSB_HI		BSF	PORTC,6
+
+;============================	BANK	0	===========================
+CBLOCK 0x20
+			DATREG:	.13
+			DELAYUS, DELAYMS,  MILSEC, SEC,DELAYS,	;DELAY VARIABLES
+			;=======================================================
+			LOOP,LOOP2,LOOP3
+			DATABUFF,RAWDATA
+
+ENDC
+;======================================================================
+
+
+;============================	BANK	1	===========================
+CBLOCK 0XA0
+			
+
+ENDC
+;======================================================================
+
+
+
+;============================	BANK	2	===========================
+CBLOCK 0X120
+
+
+ENDC
+;======================================================================
+
+;**********************************************************************
+	ORG		0X000				; PROCESSOR RESET VECTOR
+  	GOTO	INIT				; GO TO BEGINNING OF PROGRAM
+
+
+	ORG		0X004				; INTERRUPT VECTOR LOCATION
+	MOVWF		W_TEMP			; SAVE OFF CURRENT W REGISTER CONTENTS
+	MOVF		STATUS,W		; MOVE STATUS REGISTER INTO W REGISTER
+	MOVWF		STATUS_TEMP		; SAVE OFF CONTENTS OF STATUS REGISTER
+	MOVF		PCLATH,W		; MOVE PCLATH REGISTER INTO W REGISTER
+	MOVWF		PCLATH_TEMP		; SAVE OFF CONTENTS OF PCLATH REGISTER
+
+
+; ISR CODE CAN GO HERE OR BE LOCATED AS A CALL SUBROUTINE ELSEWHERE
+
+	MOVF		PCLATH_TEMP,W	; RETRIEVE COPY OF PCLATH REGISTER
+	MOVWF		PCLATH			; RESTORE PRE-ISR PCLATH REGISTER CONTENTS	
+	MOVF		STATUS_TEMP,W	; RETRIEVE COPY OF STATUS REGISTER
+	MOVWF		STATUS			; RESTORE PRE-ISR STATUS REGISTER CONTENTS
+	SWAPF		W_TEMP,F
+	SWAPF		W_TEMP,W		; RESTORE PRE-ISR W REGISTER CONTENTS
+	RETFIE						; RETURN FROM INTERRUPT
+
+
+
+;$$$$$$$$$$$$$$$$$$$$$	INITIALIZE	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+;DECLARE PORTC AS OUTPUT HERE:
+INIT
+BANKSEL	ANSEL
+CLRW
+MOVWF	ANSEL
+MOVWF	ANSELH
+
+BANKSEL	TRISB
+;
+MOVLW	0
+MOVWF	TRISB
+
+BANKSEL	TRISC
+MOVLW	B'00001000'
+MOVWF	TRISC
+
+BANK0
+BSF		PORTC,6
+;CALL	DELAY_ONESEC
+
+
+CLRF	DATREG+00
+CLRF	DATREG+01
+CLRF	DATREG+02
+CLRF	DATREG+03
+CLRF	DATREG+04
+CLRF	DATREG+05
+CLRF	DATREG+06
+CLRF	DATREG+07
+CLRF	DATREG+08
+CLRF	DATREG+09
+CLRF	DATREG+0A
+CLRF	DATREG+0B
+CLRF	DATREG+0C
+MOVLW	24
+MOVWF	DATREG+02
+MOVLW	09
+MOVWF	DATREG+03
+MOVLW	01
+MOVWF	DATREG+09
+MOVLW	11
+MOVWF	DATREG+08
+
+	CALL	SENDTOGPU
+	CALL	SENDTOGPU
+	CALL	SENDTOGPU
+	CALL	SENDTOGPU
+	CALL	SENDTOGPU
+
+
+
+
+
+GOTO	MAIN	; GO TO BEGINNING OF PROGRAM
+;$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+
+MAIN
+	CLRF	DATREG+06
+	MOVLW	50
+	MOVWF	DATREG+04
+	MOVLW	5
+	MOVWF	LOOP3
+
+MN0
+	MOVLW	09
+	ADDWF	DATREG+04
+	MOVLW	.9
+	MOVWF	LOOP2
+MN1
+	CALL	SENDTODIS
+
+	DECF	DATREG+04
+	DECFSZ	LOOP2,F
+	GOTO	MN1
+	CALL	SENDTODIS
+
+	INCF	DATREG+06
+
+	MOVLW	10
+	SUBWF	DATREG+04
+	DECFSZ	LOOP3,F
+	GOTO	MN0
+	
+
+	
+
+GOTO	MAIN
+
+
+SENDTODIS
+	MOVLW	.120
+	MOVWF	SEC
+MN2
+	CALL	SENDTOGPU
+	DECFSZ	SEC,F
+	GOTO	MN2
+RETURN
+
+SENDTOGPU
+	BANK0
+
+	CALL	SPISTART
+
+
+	MOVFW	DATREG+02		;SHOTCLOCK
+	MOVWF	RAWDATA
+	BANK0
+	CALL	SPWR
+
+
+	BANK0
+	MOVFW	DATREG+03		;MINUTES
+	MOVWF	RAWDATA
+	CALL	SPWR
+
+
+	BANK0
+	MOVFW	DATREG+04		;SECONDS
+	MOVWF	RAWDATA
+	CALL	SPWR
+	
+	
+	BANK0
+	MOVFW	DATREG+05		;MILLISECONDS		GAMECLOCK	SHOTCLOCK
+	MOVWF	RAWDATA
+	CALL	SPWR
+
+
+
+	BANK0
+	MOVFW	DATREG+06		;HOMESCORE			TENS	ONES
+	MOVWF	RAWDATA
+	CALL	SPWR
+
+
+	BANK0
+	MOVFW	DATREG+07		;GUESTSCORE			TENS	ONES
+	MOVWF	RAWDATA
+	CALL	SPWR
+
+	BANK0
+	MOVFW	DATREG+08		;SCORE HUNDREDS		HOME	GUEST
+	MOVWF	RAWDATA
+	CALL	SPWR
+
+
+	BANK0
+	MOVFW	DATREG+09		;POSSESSION		PERIOD
+	MOVWF	RAWDATA
+	CALL	SPWR
+
+	BANK0
+
+
+	CALL	SPISTOP
+RETURN
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SPWR
+BANK0
+	MOVFW	RAWDATA
+	MOVWF	DATABUFF
+
+
+
+	
+	MOVLW	8
+	MOVWF	LOOP
+
+SPIOUT
+	RLF		DATABUFF
+	BTFSS	STATUS,C
+	GOTO	DBIT0
+	GOTO	DBIT1
+
+DBIT0
+	DAT_LO
+	NOP
+	NOP
+	NOP
+
+
+	GOTO	SPIOUT_CONT
+DBIT1
+	DAT_HI
+	NOP
+	NOP
+	NOP
+
+	GOTO	SPIOUT_CONT
+NOP
+SPIOUT_CONT
+	CLK_HI
+	NOP
+	NOP
+	NOP
+
+	CLK_LO
+	NOP
+	NOP
+	NOP
+
+	
+	DECFSZ	LOOP,F
+	GOTO	SPIOUT
+
+
+	
+
+RETURN
+
+
+SPISTART
+	CSB_HI
+	DAT_HI
+	CLK_HI
+	NOP
+	NOP
+	NOP
+
+
+	CSB_LO
+	NOP
+	NOP
+	NOP
+	BTFSS	PORTC,3 ;ACK
+	GOTO	$-1
+
+	DAT_LO
+	NOP
+	NOP
+	NOP
+
+	CLK_LO
+	NOP
+	NOP
+	NOP
+	BTFSC	PORTC,3 ;ACK
+	GOTO	SPISTART
+
+RETURN
+
+SPISTOP
+	CSB_LO
+	DAT_LO
+	CLK_LO
+	NOP
+	NOP
+	NOP
+
+	CSB_HI
+	NOP
+	NOP
+	NOP
+	BTFSS	PORTC,3	;ACK
+	GOTO	$-1
+
+	DAT_HI
+	NOP
+	NOP
+	NOP
+
+	CLK_HI
+	NOP
+	NOP
+	NOP
+	BTFSC	PORTC,3	;ACK
+	GOTO	SPISTOP
+
+RETURN
+
+
+
+
+;==========	DELAY USEC =========
+DELAY_US
+
+	MOVWF	DELAYUS
+
+USEC
+
+	NOP
+ 	NOP
+	NOP
+	NOP
+DECFSZ	DELAYUS,F
+
+GOTO	USEC
+
+RETURN
+;=================================
+
+
+
+;=========== DELAY ONE MS ========
+DELAY_ONEMS
+
+	MOVLW	.5
+	MOVWF	LOOP
+
+MSEC
+	MOVLW	.200
+	CALL	DELAY_US
+	DECFSZ	LOOP,F
+	GOTO	MSEC
+
+RETURN
+;==================================
+
+
+;=========== DELAY MS	==========
+DELAY_MS
+	
+	MOVWF	DELAYMS
+MSEC0
+	CALL	DELAY_ONEMS
+	DECFSZ	DELAYMS,F
+	GOTO	MSEC0
+RETURN
+;=================================
+
+;=========== DELAY	ONE	SECOND ===
+DELAY_ONESEC
+
+	MOVLW	.5
+	MOVWF	SEC
+SEC0
+	MOVLW	.200
+	CALL	DELAY_MS
+	DECFSZ	SEC,F
+	GOTO	SEC0
+RETURN
+;=================================
+
+;==========	DELAY SEC ============
+DELAY_SEC
+
+	MOVWF	DELAYS
+SEC1
+	CALL	DELAY_ONESEC
+	DECFSZ	DELAYS,F
+	GOTO	SEC1
+RETURN
+;=================================
+
+
+	ORG	0X2100				; DATA EEPROM LOCATION
+	DE	1,2,3,4				; DEFINE FIRST FOUR EEPROM LOCATIONS AS 1, 2, 3, AND 4
+
+
+
+
+	END                       ; DIRECTIVE 'END OF PROGRAM'
+

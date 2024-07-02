@@ -1,0 +1,402 @@
+;/////////////////////////////////////////////////////////////////////////////////
+;// Code Generator: BoostC Compiler - http://www.sourceboost.com
+;// Version       : 7.03
+;// License Type  : Pro License
+;// Limitations   : PIC18 max code size:Unlimited, max RAM banks:Unlimited
+;/////////////////////////////////////////////////////////////////////////////////
+
+	ORG 0x00000000
+0000  EF3DF001  	GOTO	_startup
+	ORG 0x00000008
+0008  EF62F001  	GOTO	interrupt
+	ORG 0x0000000C
+000C            delay_ms_00000
+000C            ; { delay_ms ; function begin
+000C  5228      	MOVF delay_ms_00000_arg_del, F
+000E  0000      	NOP
+0010  E101      	BNZ	label1
+0012  0012      	RETURN
+0014            label1
+0014  0EF9      	MOVLW 0xF9
+0016            label2
+0016  0FFF      	ADDLW 0xFF
+0018  A4D8      	BTFSS STATUS,Z
+001A  D7FD      	BRA	label2
+001C  0000      	NOP
+001E  2E28      	DECFSZ delay_ms_00000_arg_del, F
+0020  D7F9      	BRA	label1
+0022  0012      	RETURN
+0024            ; } delay_ms function end
+
+	ORG 0x00000024
+0024            delay_10us_00000
+0024            ; { delay_10us ; function begin
+0024            label3
+0024  0000      	NOP
+0026  0000      	NOP
+0028  0000      	NOP
+002A  0000      	NOP
+002C  0000      	NOP
+002E  0000      	NOP
+0030  0000      	NOP
+0032  2E38      	DECFSZ delay_10us_00000_arg_del, F
+0034  D7F7      	BRA	label3
+0036  0012      	RETURN
+0038            ; } delay_10us function end
+
+	ORG 0x00000038
+0038            Wdt_Delay__00034
+0038            ; { Wdt_Delay_Ms ; function begin
+0038  6A27      	CLRF Wdt_Delay__00034_1_i
+003A            label4
+003A  5026      	MOVF Wdt_Delay__00034_arg_delay, W
+003C  6027      	CPFSLT Wdt_Delay__00034_1_i
+003E  0012      	RETURN
+0040  0004      	CLRWDT
+0042  0E01      	MOVLW 0x01
+0044  6E28      	MOVWF delay_ms_00000_arg_del
+0046  EC06F000  	CALL delay_ms_00000
+004A  2A27      	INCF Wdt_Delay__00034_1_i, F
+004C  D7F6      	BRA	label4
+004E            ; } Wdt_Delay_Ms function end
+
+	ORG 0x0000004E
+004E            FCD_LCDDis_00047
+004E            ; { FCD_LCDDisplay0_RawSend ; function begin
+004E  9083      	BCF gbl_portd,0
+0050  9283      	BCF gbl_portd,1
+0052  9483      	BCF gbl_portd,2
+0054  9683      	BCF gbl_portd,3
+0056  9883      	BCF gbl_portd,4
+0058  9A83      	BCF gbl_portd,5
+005A  3835      	SWAPF FCD_LCDDis_00047_arg_in, W
+005C  0B0F      	ANDLW 0x0F
+005E  6E37      	MOVWF FCD_LCDDis_00047_1_pt
+0060  0E0F      	MOVLW 0x0F
+0062  1637      	ANDWF FCD_LCDDis_00047_1_pt, F
+0064  B037      	BTFSC FCD_LCDDis_00047_1_pt,0
+0066  8083      	BSF gbl_portd,0
+0068  B237      	BTFSC FCD_LCDDis_00047_1_pt,1
+006A  8283      	BSF gbl_portd,1
+006C  B437      	BTFSC FCD_LCDDis_00047_1_pt,2
+006E  8483      	BSF gbl_portd,2
+0070  B637      	BTFSC FCD_LCDDis_00047_1_pt,3
+0072  8683      	BSF gbl_portd,3
+0074  5236      	MOVF FCD_LCDDis_00047_arg_mask, F
+0076  A4D8      	BTFSS STATUS,Z
+0078  8883      	BSF gbl_portd,4
+007A  0E0A      	MOVLW 0x0A
+007C  6E38      	MOVWF delay_10us_00000_arg_del
+007E  EC12F000  	CALL delay_10us_00000
+0082  8A83      	BSF gbl_portd,5
+0084  0E0A      	MOVLW 0x0A
+0086  6E38      	MOVWF delay_10us_00000_arg_del
+0088  EC12F000  	CALL delay_10us_00000
+008C  9A83      	BCF gbl_portd,5
+008E  0E0F      	MOVLW 0x0F
+0090  1435      	ANDWF FCD_LCDDis_00047_arg_in, W
+0092  6E37      	MOVWF FCD_LCDDis_00047_1_pt
+0094  0E0A      	MOVLW 0x0A
+0096  6E38      	MOVWF delay_10us_00000_arg_del
+0098  EC12F000  	CALL delay_10us_00000
+009C  9083      	BCF gbl_portd,0
+009E  9283      	BCF gbl_portd,1
+00A0  9483      	BCF gbl_portd,2
+00A2  9683      	BCF gbl_portd,3
+00A4  9883      	BCF gbl_portd,4
+00A6  9A83      	BCF gbl_portd,5
+00A8  B037      	BTFSC FCD_LCDDis_00047_1_pt,0
+00AA  8083      	BSF gbl_portd,0
+00AC  B237      	BTFSC FCD_LCDDis_00047_1_pt,1
+00AE  8283      	BSF gbl_portd,1
+00B0  B437      	BTFSC FCD_LCDDis_00047_1_pt,2
+00B2  8483      	BSF gbl_portd,2
+00B4  B637      	BTFSC FCD_LCDDis_00047_1_pt,3
+00B6  8683      	BSF gbl_portd,3
+00B8  5236      	MOVF FCD_LCDDis_00047_arg_mask, F
+00BA  A4D8      	BTFSS STATUS,Z
+00BC  8883      	BSF gbl_portd,4
+00BE  0E0A      	MOVLW 0x0A
+00C0  6E38      	MOVWF delay_10us_00000_arg_del
+00C2  EC12F000  	CALL delay_10us_00000
+00C6  8A83      	BSF gbl_portd,5
+00C8  0E0A      	MOVLW 0x0A
+00CA  6E38      	MOVWF delay_10us_00000_arg_del
+00CC  EC12F000  	CALL delay_10us_00000
+00D0  9A83      	BCF gbl_portd,5
+00D2  0E0A      	MOVLW 0x0A
+00D4  6E38      	MOVWF delay_10us_00000_arg_del
+00D6  EC12F000  	CALL delay_10us_00000
+00DA  0012      	RETURN
+00DC            ; } FCD_LCDDisplay0_RawSend function end
+
+	ORG 0x000000DC
+00DC            FCD_LCDDis_0004E
+00DC            ; { FCD_LCDDisplay0_PrintString ; function begin
+00DC  6A34      	CLRF FCD_LCDDis_0004E_1_idx
+00DE  6A34      	CLRF FCD_LCDDis_0004E_1_idx
+00E0            label5
+00E0  5033      	MOVF FCD_LCDDis_0004E_arg_MSZ_String, W
+00E2  6034      	CPFSLT FCD_LCDDis_0004E_1_idx
+00E4  0012      	RETURN
+00E6  5025      	MOVF FCD_LCDDis_0004E_arg_String+D'1', W
+00E8  6EEA      	MOVWF FSR0H
+00EA  5024      	MOVF FCD_LCDDis_0004E_arg_String, W
+00EC  2434      	ADDWF FCD_LCDDis_0004E_1_idx, W
+00EE  6EE9      	MOVWF FSR0L
+00F0  52EF      	MOVF INDF0, F
+00F2  B4D8      	BTFSC STATUS,Z
+00F4  0012      	RETURN
+00F6  5025      	MOVF FCD_LCDDis_0004E_arg_String+D'1', W
+00F8  6EEA      	MOVWF FSR0H
+00FA  5024      	MOVF FCD_LCDDis_0004E_arg_String, W
+00FC  2434      	ADDWF FCD_LCDDis_0004E_1_idx, W
+00FE  6EE9      	MOVWF FSR0L
+0100  50EF      	MOVF INDF0, W
+0102  6E35      	MOVWF FCD_LCDDis_00047_arg_in
+0104  0E10      	MOVLW 0x10
+0106  6E36      	MOVWF FCD_LCDDis_00047_arg_mask
+0108  EC27F000  	CALL FCD_LCDDis_00047
+010C  2A34      	INCF FCD_LCDDis_0004E_1_idx, F
+010E  D7E8      	BRA	label5
+0110            ; } FCD_LCDDisplay0_PrintString function end
+
+	ORG 0x00000110
+0110            FCD_LCDDis_0004C
+0110            ; { FCD_LCDDisplay0_Cursor ; function begin
+0110  5225      	MOVF FCD_LCDDis_0004C_arg_y, F
+0112  E103      	BNZ	label6
+0114  0E80      	MOVLW 0x80
+0116  6E25      	MOVWF FCD_LCDDis_0004C_arg_y
+0118  D00D      	BRA	label9
+011A            label6
+011A  0425      	DECF FCD_LCDDis_0004C_arg_y, W
+011C  E103      	BNZ	label7
+011E  0EC0      	MOVLW 0xC0
+0120  6E25      	MOVWF FCD_LCDDis_0004C_arg_y
+0122  D008      	BRA	label9
+0124            label7
+0124  0E02      	MOVLW 0x02
+0126  6225      	CPFSEQ FCD_LCDDis_0004C_arg_y
+0128  D003      	BRA	label8
+012A  0E90      	MOVLW 0x90
+012C  6E25      	MOVWF FCD_LCDDis_0004C_arg_y
+012E  D002      	BRA	label9
+0130            label8
+0130  0ED0      	MOVLW 0xD0
+0132  6E25      	MOVWF FCD_LCDDis_0004C_arg_y
+0134            label9
+0134  5024      	MOVF FCD_LCDDis_0004C_arg_x, W
+0136  2425      	ADDWF FCD_LCDDis_0004C_arg_y, W
+0138  6E35      	MOVWF FCD_LCDDis_00047_arg_in
+013A  6A36      	CLRF FCD_LCDDis_00047_arg_mask
+013C  EC27F000  	CALL FCD_LCDDis_00047
+0140  0E02      	MOVLW 0x02
+0142  6E26      	MOVWF Wdt_Delay__00034_arg_delay
+0144  EC1CF000  	CALL Wdt_Delay__00034
+0148  0012      	RETURN
+014A            ; } FCD_LCDDisplay0_Cursor function end
+
+	ORG 0x0000014A
+014A            FCD_LCDDis_00049
+014A            ; { FCD_LCDDisplay0_Clear ; function begin
+014A  0E01      	MOVLW 0x01
+014C  6E35      	MOVWF FCD_LCDDis_00047_arg_in
+014E  6A36      	CLRF FCD_LCDDis_00047_arg_mask
+0150  EC27F000  	CALL FCD_LCDDis_00047
+0154  0E02      	MOVLW 0x02
+0156  6E26      	MOVWF Wdt_Delay__00034_arg_delay
+0158  EC1CF000  	CALL Wdt_Delay__00034
+015C  0E02      	MOVLW 0x02
+015E  6E35      	MOVWF FCD_LCDDis_00047_arg_in
+0160  6A36      	CLRF FCD_LCDDis_00047_arg_mask
+0162  EC27F000  	CALL FCD_LCDDis_00047
+0166  0E02      	MOVLW 0x02
+0168  6E26      	MOVWF Wdt_Delay__00034_arg_delay
+016A  EC1CF000  	CALL Wdt_Delay__00034
+016E  0012      	RETURN
+0170            ; } FCD_LCDDisplay0_Clear function end
+
+	ORG 0x00000170
+0170            FCD_LCDDis_00048
+0170            ; { FCD_LCDDisplay0_Start ; function begin
+0170  9095      	BCF gbl_trisd,0
+0172  9083      	BCF gbl_portd,0
+0174  9295      	BCF gbl_trisd,1
+0176  9283      	BCF gbl_portd,1
+0178  9495      	BCF gbl_trisd,2
+017A  9483      	BCF gbl_portd,2
+017C  9695      	BCF gbl_trisd,3
+017E  9683      	BCF gbl_portd,3
+0180  9895      	BCF gbl_trisd,4
+0182  9883      	BCF gbl_portd,4
+0184  9A95      	BCF gbl_trisd,5
+0186  9A83      	BCF gbl_portd,5
+0188  0E0C      	MOVLW 0x0C
+018A  6E26      	MOVWF Wdt_Delay__00034_arg_delay
+018C  EC1CF000  	CALL Wdt_Delay__00034
+0190  0E33      	MOVLW 0x33
+0192  6E35      	MOVWF FCD_LCDDis_00047_arg_in
+0194  6A36      	CLRF FCD_LCDDis_00047_arg_mask
+0196  EC27F000  	CALL FCD_LCDDis_00047
+019A  0E02      	MOVLW 0x02
+019C  6E26      	MOVWF Wdt_Delay__00034_arg_delay
+019E  EC1CF000  	CALL Wdt_Delay__00034
+01A2  0E33      	MOVLW 0x33
+01A4  6E35      	MOVWF FCD_LCDDis_00047_arg_in
+01A6  6A36      	CLRF FCD_LCDDis_00047_arg_mask
+01A8  EC27F000  	CALL FCD_LCDDis_00047
+01AC  0E02      	MOVLW 0x02
+01AE  6E26      	MOVWF Wdt_Delay__00034_arg_delay
+01B0  EC1CF000  	CALL Wdt_Delay__00034
+01B4  0E32      	MOVLW 0x32
+01B6  6E35      	MOVWF FCD_LCDDis_00047_arg_in
+01B8  6A36      	CLRF FCD_LCDDis_00047_arg_mask
+01BA  EC27F000  	CALL FCD_LCDDis_00047
+01BE  0E02      	MOVLW 0x02
+01C0  6E26      	MOVWF Wdt_Delay__00034_arg_delay
+01C2  EC1CF000  	CALL Wdt_Delay__00034
+01C6  0E2C      	MOVLW 0x2C
+01C8  6E35      	MOVWF FCD_LCDDis_00047_arg_in
+01CA  6A36      	CLRF FCD_LCDDis_00047_arg_mask
+01CC  EC27F000  	CALL FCD_LCDDis_00047
+01D0  0E02      	MOVLW 0x02
+01D2  6E26      	MOVWF Wdt_Delay__00034_arg_delay
+01D4  EC1CF000  	CALL Wdt_Delay__00034
+01D8  0E06      	MOVLW 0x06
+01DA  6E35      	MOVWF FCD_LCDDis_00047_arg_in
+01DC  6A36      	CLRF FCD_LCDDis_00047_arg_mask
+01DE  EC27F000  	CALL FCD_LCDDis_00047
+01E2  0E02      	MOVLW 0x02
+01E4  6E26      	MOVWF Wdt_Delay__00034_arg_delay
+01E6  EC1CF000  	CALL Wdt_Delay__00034
+01EA  0E0C      	MOVLW 0x0C
+01EC  6E35      	MOVWF FCD_LCDDis_00047_arg_in
+01EE  6A36      	CLRF FCD_LCDDis_00047_arg_mask
+01F0  EC27F000  	CALL FCD_LCDDis_00047
+01F4  0E02      	MOVLW 0x02
+01F6  6E26      	MOVWF Wdt_Delay__00034_arg_delay
+01F8  EC1CF000  	CALL Wdt_Delay__00034
+01FC  0E01      	MOVLW 0x01
+01FE  6E35      	MOVWF FCD_LCDDis_00047_arg_in
+0200  6A36      	CLRF FCD_LCDDis_00047_arg_mask
+0202  EC27F000  	CALL FCD_LCDDis_00047
+0206  0E02      	MOVLW 0x02
+0208  6E26      	MOVWF Wdt_Delay__00034_arg_delay
+020A  EC1CF000  	CALL Wdt_Delay__00034
+020E  0E02      	MOVLW 0x02
+0210  6E35      	MOVWF FCD_LCDDis_00047_arg_in
+0212  6A36      	CLRF FCD_LCDDis_00047_arg_mask
+0214  EC27F000  	CALL FCD_LCDDis_00047
+0218  0E02      	MOVLW 0x02
+021A  6E26      	MOVWF Wdt_Delay__00034_arg_delay
+021C  EC1CF000  	CALL Wdt_Delay__00034
+0220  0012      	RETURN
+0222            ; } FCD_LCDDisplay0_Start function end
+
+	ORG 0x00000222
+0222            main
+0222            ; { main ; function begin
+0222  0E0F      	MOVLW 0x0F
+0224  6EC1      	MOVWF gbl_adcon1
+0226  0E08      	MOVLW 0x08
+0228  6E6F      	MOVWF gbl_ucfg
+022A  9AA0      	BCF gbl_pie2,5
+022C  ECB8F000  	CALL FCD_LCDDis_00048
+0230  ECA5F000  	CALL FCD_LCDDis_00049
+0234            label10
+0234  6A24      	CLRF FCD_LCDDis_0004C_arg_x
+0236  6A25      	CLRF FCD_LCDDis_0004C_arg_y
+0238  EC88F000  	CALL FCD_LCDDis_0004C
+023C  0E20      	MOVLW 0x20
+023E  6E2B      	MOVWF CompTempVar2204+D'5'
+0240  0E21      	MOVLW 0x21
+0242  6E31      	MOVWF CompTempVar2204+D'11'
+0244  0E64      	MOVLW 0x64
+0246  6E30      	MOVWF CompTempVar2204+D'10'
+0248  0E65      	MOVLW 0x65
+024A  6E27      	MOVWF CompTempVar2204+D'1'
+024C  0E68      	MOVLW 0x68
+024E  6E26      	MOVWF CompTempVar2204
+0250  0E6C      	MOVLW 0x6C
+0252  6E28      	MOVWF CompTempVar2204+D'2'
+0254  6E29      	MOVWF CompTempVar2204+D'3'
+0256  6E2F      	MOVWF CompTempVar2204+D'9'
+0258  0E6F      	MOVLW 0x6F
+025A  6E2A      	MOVWF CompTempVar2204+D'4'
+025C  6E2D      	MOVWF CompTempVar2204+D'7'
+025E  0E72      	MOVLW 0x72
+0260  6E2E      	MOVWF CompTempVar2204+D'8'
+0262  0E77      	MOVLW 0x77
+0264  6E2C      	MOVWF CompTempVar2204+D'6'
+0266  6A32      	CLRF CompTempVar2204+D'12'
+0268  0E00      	MOVLW HIGH(CompTempVar2204+D'0')
+026A  6E25      	MOVWF FCD_LCDDis_0004E_arg_String+D'1'
+026C  0E26      	MOVLW LOW(CompTempVar2204+D'0')
+026E  6E24      	MOVWF FCD_LCDDis_0004E_arg_String
+0270  0E0C      	MOVLW 0x0C
+0272  6E33      	MOVWF FCD_LCDDis_0004E_arg_MSZ_String
+0274  EC6EF000  	CALL FCD_LCDDis_0004E
+0278  D7DD      	BRA	label10
+027A            ; } main function end
+
+	ORG 0x0000027A
+027A            _startup
+027A  0ED5      	MOVLW 0xD5
+027C  6E05      	MOVWF gbl_14_LSR
+027E  0EC4      	MOVLW 0xC4
+0280  6E06      	MOVWF gbl_14_LSR+D'1'
+0282  0EBB      	MOVLW 0xBB
+0284  6E07      	MOVWF gbl_14_LSR+D'2'
+0286  0EDC      	MOVLW 0xDC
+0288  6E08      	MOVWF gbl_14_LSR+D'3'
+028A  6A09      	CLRF gbl_15_gbl_aSig
+028C  6A0A      	CLRF gbl_15_gbl_aSig+D'1'
+028E  6A0B      	CLRF gbl_15_gbl_aSig+D'2'
+0290  6A0C      	CLRF gbl_15_gbl_aSig+D'3'
+0292  6A0D      	CLRF gbl_15_gbl_bSig
+0294  6A0E      	CLRF gbl_15_gbl_bSig+D'1'
+0296  6A0F      	CLRF gbl_15_gbl_bSig+D'2'
+0298  6A10      	CLRF gbl_15_gbl_bSig+D'3'
+029A  6A11      	CLRF gbl_15_gbl_zSig
+029C  6A12      	CLRF gbl_15_gbl_zSig+D'1'
+029E  6A13      	CLRF gbl_15_gbl_zSig+D'2'
+02A0  6A14      	CLRF gbl_15_gbl_zSig+D'3'
+02A2  6A1E      	CLRF gbl_15_gbl_aExp
+02A4  6A1F      	CLRF gbl_15_gbl_bExp
+02A6  6A19      	CLRF gbl_15_gbl_zExp
+02A8  6A1A      	CLRF gbl_15_gbl_zExp+D'1'
+02AA  6A20      	CLRF gbl_15_gbl_aSign
+02AC  6A21      	CLRF gbl_15_gbl_bSign
+02AE  6A22      	CLRF gbl_15_gbl_zSign
+02B0  6A23      	CLRF gbl_15_gbl_zSigZero
+02B2  6A15      	CLRF gbl_15_gbl_ret
+02B4  6A16      	CLRF gbl_15_gbl_ret+D'1'
+02B6  6A17      	CLRF gbl_15_gbl_ret+D'2'
+02B8  6A18      	CLRF gbl_15_gbl_ret+D'3'
+02BA  6A1C      	CLRF gbl_float_rounding_mode
+02BC  6A1D      	CLRF gbl_float_exception_flags
+02BE  6A1B      	CLRF gbl_float_detect_tininess
+02C0  EF11F001  	GOTO	main
+	ORG 0x000002C4
+02C4            interrupt
+02C4            ; { interrupt ; function begin
+02C4  CFEAF001  	MOVFF FSR0H,  Int1Context
+02C8  CFE9F002  	MOVFF FSR0L,  Int1Context+D'1'
+02CC  CFF4F003  	MOVFF PRODH,  Int1Context+D'2'
+02D0  CFF3F004  	MOVFF PRODL,  Int1Context+D'3'
+02D4  C004FFF3  	MOVFF Int1Context+D'3',  PRODL
+02D8  C003FFF4  	MOVFF Int1Context+D'2',  PRODH
+02DC  C002FFE9  	MOVFF Int1Context+D'1',  FSR0L
+02E0  C001FFEA  	MOVFF Int1Context,  FSR0H
+02E4  0011      	RETFIE 1
+02E6            ; } interrupt function end
+
+	ORG 0x00300000
+300000  023B      	DW 0x023B
+300002  1E18      	DW 0x1E18
+300004  00FF      	DW 0x00FF
+300006  FF04      	DW 0xFF04
+300008  C00D      	DW 0xC00D
+30000A  E00F      	DW 0xE00F
+30000C  400F      	DW 0x400F

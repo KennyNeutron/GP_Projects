@@ -1,0 +1,3518 @@
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 ;**********************************************************************
+                      00002 ;                                                                     *
+                      00003 ;    Filename:      HUB12_LIBRARY3.asm                                *
+                      00004 ;    Date:          2019.07.05                                        *
+                      00005 ;    File Version:                                                   *
+                      00006 ;                                                                     *
+                      00007 ;    Author:                                                          *
+                      00008 ;    Company:      GER-PER ENGINEERING                                *
+                      00009 ;                                                                     * 
+                      00010 ;                                                                     *
+                      00011 ;**********************************************************************
+                      00012 ;                                                                     *
+                      00013 ;    Files Required: P16F690.INC                                      *
+                      00014 ;                                                                     *
+                      00015 ;**********************************************************************
+                      00016 
+                      00017 
+                      00018 
+                      00019 
+                      00020         list            p=16f690                ; list directive to define processor
+                      00021         #include        <P16F690.inc>           ; processor specific variable definitions
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC16F690 processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2013 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+                      00756         LIST
+                      00022         
+2007   30C2           00023         __CONFIG    _CP_OFF & _CPD_OFF & _BOR_OFF & _PWRTE_ON & _WDT_OFF & _HS_OSC & _MCLRE_OFF & _FCMEN
+                            _OFF & _IESO_OFF
+                      00024 
+                      00025 
+                      00026 ; '__CONFIG' directive is used to embed configuration data within .asm file.
+                      00027 ; The labels following the directive are located in the respective .inc file.
+                      00028 ; See respective data sheet for additional information on configuration word.
+                      00029 
+                      00030 
+                      00031 
+                      00032 
+                      00033 
+                      00034 
+                      00035 ;***** VARIABLE DEFINITIONS
+  0000007D            00036 w_temp          EQU     0x7D                    ; variable used for context saving
+  0000007E            00037 status_temp     EQU     0x7E                    ; variable used for context saving
+  0000007F            00038 pclath_temp     EQU     0x7F                    ; variable used for context saving
+                      00039         
+                      00040 
+                      00041         ;#DEFINE C0_ON          BSF PORTC,      0       PORTC0=====>HI
+                      00042         ;#DEFINE C0_OFF         BCF PORTC,      0       PORTC0=====>LO
+                      00043 
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00044         #DEFINE A_ON            BSF     PORTC,  0
+                      00045         #DEFINE A_OFF           BCF     PORTC,  0
+                      00046         
+                      00047         #DEFINE B_ON            BSF     PORTC,  1
+                      00048         #DEFINE B_OFF           BCF     PORTC,  1
+                      00049 
+                      00050         #DEFINE DAT_ON          BSF     PORTC,  2
+                      00051         #DEFINE DAT_OFF         BCF     PORTC,  2
+                      00052 
+                      00053         #DEFINE CLK_ON          BSF     PORTC,  7
+                      00054         #DEFINE CLK_OFF         BCF     PORTC,  7
+                      00055         
+                      00056         #DEFINE REG_ON          BSF     PORTC,  4
+                      00057         #DEFINE REG_OFF         BCF     PORTC,  4
+                      00058         
+                      00059         #DEFINE OE_ON           BSF     PORTC,  5
+                      00060         #DEFINE OE_OFF          BCF     PORTC,  5
+                      00061         
+                      00062         CBLOCK 0x20
+                      00063 
+  00000020            00064                         DELAYUS, DELAYMS, DELAYS, MILSEC, SEC   ;DELAY VARIABLES
+                      00065                         ;=======================================================
+                      00066                         
+  00000025            00067                         COUNT0, COUNT1, COUNT2, COUNT3
+                      00068                         
+  00000029            00069                         VAR0
+  0000002A            00070                         TEMPFILE, PT
+  0000002C            00071                         DRAM : .64, POINTER
+                      00072                         ;========================================================
+                      00073 
+                      00074 
+  0000006D            00075                         SHCNT
+  0000006E            00076                         CURSORX,CURSORY,GRP
+  00000071            00077                         TESTER
+  00000072            00078                         NUMBER,BTCOUNT,WIDTH,TALL
+  00000076            00079                         FONT
+                      00080 
+                      00081                 
+                      00082         ENDC
+                      00083 ;********************************************************************** 
+0000                  00084         ORG             0x000                   ; processor reset vector
+                      00085 
+Warning[207]: Found label after column 1. (.)
+0000   2810           00086         .       goto    INIT             ; go to beginning of program
+                      00087 
+0004                  00088         ORG             0x004                   ; interrupt vector location
+0004   00FD           00089         movwf           w_temp                  ; save off current W register contents
+0005   0803           00090         movf            STATUS,w                ; move status register into W register
+0006   00FE           00091         movwf           status_temp             ; save off contents of STATUS register
+0007   080A           00092         movf            PCLATH,w                ; move pclath register into W register
+0008   00FF           00093         movwf           pclath_temp             ; save off contents of PCLATH register
+                      00094 
+                      00095 
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00096 ; isr code can go here or be located as a call subroutine elsewhere
+                      00097 
+0009   087F           00098         movf            pclath_temp,w           ; retrieve copy of PCLATH registerz`
+000A   008A           00099         movwf           PCLATH                  ; restore pre-isr PCLATH register contents      
+000B   087E           00100         movf            status_temp,w           ; retrieve copy of STATUS register
+000C   0083           00101         movwf           STATUS                  ; restore pre-isr STATUS register contents
+000D   0EFD           00102         swapf           w_temp,f
+000E   0E7D           00103         swapf   w_temp,w                ; restore pre-isr W register contents
+000F   0009           00104         retfie                                  ; return from interrupt
+                      00105 
+                      00106 
+                      00107 ;$$$$$$$$$$$$$$$$$$$$$  INITIALIZE      $$$$$$$$$$$$$$$$$$$$$$$$$$$$
+                      00108 
+                      00109 
+                      00110 ;DECLARE PORTC AS OUTPUT HERE:
+0010                  00111 INIT
+Warning[205]: Found directive in column 1. (BANKSEL)
+0010   1283 1703      00112 BANKSEL ANSEL
+                      00113 
+Warning[203]: Found opcode in column 1. (MOVLW)
+0012   3000           00114 MOVLW   B'00000000'
+Warning[203]: Found opcode in column 1. (MOVWF)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0013   009E           00115 MOVWF   ANSEL
+                      00116 
+Warning[203]: Found opcode in column 1. (MOVWF)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0014   009F           00117 MOVWF   ANSELH
+                      00118 
+Warning[203]: Found opcode in column 1. (MOVLW)
+0015   3000           00119 MOVLW   B'00000000'
+Warning[203]: Found opcode in column 1. (TRIS)
+Warning[224]: Use of this instruction is not recommended.
+0016   0067           00120 TRIS    PORTC
+                      00121 
+Warning[205]: Found directive in column 1. (BANKSEL)
+0017   1283 1303      00122 BANKSEL PORTA
+                      00123 
+Warning[203]: Found opcode in column 1. (MOVLW)
+0019   3000           00124 MOVLW   0
+Warning[203]: Found opcode in column 1. (MOVWF)
+001A   00AC           00125 MOVWF   DRAM
+                      00126 
+Warning[203]: Found opcode in column 1. (CALL)
+001B   212B           00127 CALL    CLRAM
+                      00128 
+                      00129 
+                      00130 
+Warning[203]: Found opcode in column 1. (MOVLW)
+001C   300A           00131 MOVLW   .10
+Warning[203]: Found opcode in column 1. (MOVWF)
+001D   00AB           00132 MOVWF   PT
+Warning[203]: Found opcode in column 1. (MOVLW)
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+001E   3000           00133 MOVLW   0
+Warning[203]: Found opcode in column 1. (MOVWF)
+001F   00F2           00134 MOVWF   NUMBER
+                      00135 
+                      00136 
+                      00137 
+                      00138 
+Warning[203]: Found opcode in column 1. (GOTO)
+0020   2821           00139 GOTO    MAIN
+                      00140 ;$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+                      00141 
+                      00142 
+                      00143 
+                      00144 
+                      00145 
+                      00146 
+                      00147 ;#######################        MAIN    ##############################
+0021                  00148 MAIN
+                      00149 
+                      00150 
+0021   212B           00151         CALL    CLRAM
+                      00152 
+0022   3018           00153         MOVLW   .24
+0023   00EE           00154         MOVWF   CURSORX
+                      00155         
+0024   3001           00156         MOVLW   .1
+0025   00F2           00157         MOVWF   NUMBER
+                      00158 
+0026   3000           00159         MOVLW   .0
+0027   00F6           00160         MOVWF   FONT
+                      00161 
+0028   20AA           00162         CALL    DUMP
+                      00163 
+0029   2157           00164         CALL    SHIFT
+                      00165 ;--------------------
+                      00166         
+                      00167 
+002A   3010           00168         MOVLW   .16
+002B   00EE           00169         MOVWF   CURSORX
+                      00170 
+002C   3000           00171         MOVLW   .0
+002D   00F2           00172         MOVWF   NUMBER
+                      00173         
+002E   20AA           00174         CALL    DUMP
+                      00175 
+002F   3008           00176         MOVLW   .8
+0030   00F5           00177         MOVWF   TALL
+0031   2081           00178         CALL    SLICET
+                      00179 
+                      00180 
+0032   2157           00181         CALL    SHIFT
+                      00182 
+                      00183 
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00184 ;---------------------
+0033   3008           00185         MOVLW   .8
+0034   00EE           00186         MOVWF   CURSORX
+                      00187 
+                      00188 
+                      00189 
+0035   3000           00190         MOVLW   .0
+0036   00F2           00191         MOVWF   NUMBER
+                      00192         
+                      00193 
+0037   20AA           00194         CALL    DUMP
+                      00195         
+0038   3008           00196         MOVLW   .8
+0039   00F5           00197         MOVWF   TALL
+003A   2081           00198         CALL    SLICET
+                      00199         
+003B   3008           00200         MOVLW   .8
+003C   00EF           00201         MOVWF   CURSORY
+003D   2048           00202         CALL    SHIFT_YU
+                      00203 
+                      00204 
+003E   2157           00205         CALL    SHIFT
+                      00206 
+003F   3002           00207         MOVLW   .2
+0040   00F2           00208         MOVWF   NUMBER
+                      00209         
+                      00210 
+0041   20AA           00211         CALL    DUMP
+                      00212 
+0042   3008           00213         MOVLW   .8
+0043   00F5           00214         MOVWF   TALL
+0044   2081           00215         CALL    SLICET
+                      00216 ;--------------------
+                      00217 
+                      00218 
+0045   20A6           00219         CALL    SHIFTL_ALLD
+                      00220 
+0046   20EA           00221         CALL    DISPLAY
+                      00222 
+                      00223 
+                      00224 
+Warning[203]: Found opcode in column 1. (GOTO)
+0047   2821           00225 GOTO MAIN
+                      00226 ;#################################################################
+                      00227 
+                      00228 
+                      00229 
+                      00230 
+                      00231 
+                      00232 ;#################      SHIFT Y UPWARD ###############################
+0048                  00233 SHIFT_YU
+                      00234 
+0048   085F           00235         MOVFW   DRAM + 33
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0049   00AA           00236         MOVWF   TEMPFILE
+                      00237         
+004A   084F           00238         MOVFW   DRAM + 23
+004B   00DF           00239         MOVWF   DRAM + 33
+                      00240 
+004C   083F           00241         MOVFW   DRAM + 13
+004D   00CF           00242         MOVWF   DRAM + 23
+                      00243 
+004E   082F           00244         MOVFW   DRAM + 03
+004F   00BF           00245         MOVWF   DRAM + 13
+                      00246 
+0050   085E           00247         MOVFW   DRAM + 32
+0051   00AF           00248         MOVWF   DRAM + 03
+                      00249 
+0052   084E           00250         MOVFW   DRAM + 22
+0053   00DE           00251         MOVWF   DRAM + 32
+                      00252 
+0054   083E           00253         MOVFW   DRAM + 12
+0055   00CE           00254         MOVWF   DRAM + 22
+                      00255 
+0056   082E           00256         MOVFW   DRAM + 02
+0057   00BE           00257         MOVWF   DRAM + 12
+                      00258 
+0058   085D           00259         MOVFW   DRAM + 31
+0059   00AE           00260         MOVWF   DRAM + 02
+                      00261 
+005A   084D           00262         MOVFW   DRAM + 21
+005B   00DD           00263         MOVWF   DRAM + 31
+                      00264 
+005C   083D           00265         MOVFW   DRAM + 11
+005D   00CD           00266         MOVWF   DRAM + 21
+                      00267 
+005E   082D           00268         MOVFW   DRAM + 01
+005F   00BD           00269         MOVWF   DRAM + 11
+                      00270 
+0060   085C           00271         MOVFW   DRAM + 30
+0061   00AD           00272         MOVWF   DRAM + 01
+                      00273 
+0062   084C           00274         MOVFW   DRAM + 20
+0063   00DC           00275         MOVWF   DRAM + 30
+                      00276 
+0064   083C           00277         MOVFW   DRAM + 10
+0065   00CC           00278         MOVWF   DRAM + 20
+                      00279 
+0066   082C           00280         MOVFW   DRAM + 00
+0067   00BC           00281         MOVWF   DRAM + 10
+                      00282         
+0068   082A           00283         MOVFW   TEMPFILE
+0069   00AC           00284         MOVWF   DRAM + 00
+                      00285 
+006A   0BEF           00286         DECFSZ  CURSORY,F
+006B   2848           00287         GOTO    SHIFT_YU
+                      00288 
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[203]: Found opcode in column 1. (RETURN)
+006C   0008           00289 RETURN
+                      00290 ;#################################################################
+                      00291 
+                      00292 
+                      00293 
+                      00294 
+                      00295 
+                      00296 ;#################      CUTTING CHARACTERS FROM BOT ##################
+006D                  00297 SLICEB
+006D   301F           00298         MOVLW           0X1F
+006E   0084           00299         MOVWF           FSR
+                      00300 
+006F                  00301 SLB0
+006F   3004           00302         MOVLW           .4
+0070   00EC           00303         MOVWF           POINTER
+                      00304                         
+0071   300D           00305         MOVLW           0XD
+Message[305]: Using default destination of 1 (file).
+0072   0784           00306         ADDWF           FSR
+                      00307 
+0073                  00308 SLB1
+0073   30FF           00309         MOVLW           0XFF
+0074   0080           00310         MOVWF           INDF
+0075   3000           00311         MOVLW           INDF
+                      00312 
+0076   3010           00313         MOVLW           0X10
+Message[305]: Using default destination of 1 (file).
+0077   0784           00314         ADDWF           FSR
+0078   0BF5           00315         DECFSZ          TALL,F
+0079   287B           00316         GOTO            SLB2
+007A   0008           00317         RETURN          ;EXIT IF ZERO
+                      00318 
+007B                  00319 SLB2
+007B   0BEC           00320         DECFSZ          POINTER,F
+007C   2873           00321         GOTO            SLB1
+007D   304C           00322         MOVLW           0X4C
+Message[305]: Using default destination of 1 (file).
+007E   0284           00323         SUBWF           FSR
+007F   286F           00324         GOTO            SLB0
+                      00325 
+Warning[203]: Found opcode in column 1. (RETURN)
+0080   0008           00326 RETURN
+                      00327 ;#################################################################
+                      00328 
+                      00329 
+                      00330 
+                      00331 ;#################      CUTTING CHARACTERS FROM TOP ##################
+0081                  00332 SLICET
+0081   306C           00333         MOVLW           0X6C
+0082   0084           00334         MOVWF           FSR
+                      00335         
+0083                  00336 SLT0
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0083   3004           00337         MOVLW           .4
+0084   00EC           00338         MOVWF           POINTER
+0085   300D           00339         MOVLW           0XD
+Message[305]: Using default destination of 1 (file).
+0086   0284           00340         SUBWF           FSR
+                      00341 
+0087                  00342 SLT1
+0087   30FF           00343         MOVLW           0XFF
+0088   0080           00344         MOVWF           INDF
+0089   3000           00345         MOVLW           INDF
+                      00346         
+008A   3010           00347         MOVLW           0X10
+Message[305]: Using default destination of 1 (file).
+008B   0284           00348         SUBWF           FSR
+008C   0BF5           00349         DECFSZ          TALL,F
+008D   288F           00350         GOTO            SLT2
+008E   0008           00351         RETURN          ;EXIT IF ZERO
+                      00352 
+008F                  00353 SLT2
+008F   0BEC           00354         DECFSZ          POINTER,F
+0090   2887           00355         GOTO            SLT1
+0091   304C           00356         MOVLW           0X4C
+Message[305]: Using default destination of 1 (file).
+0092   0784           00357         ADDWF           FSR
+0093   2883           00358         GOTO            SLT0
+                      00359         
+                      00360 
+Warning[203]: Found opcode in column 1. (RETURN)
+0094   0008           00361 RETURN
+                      00362 ;#################################################################
+                      00363 
+                      00364 ;------------------------       SHIFT LEFT BY GROUP ------------------
+0095                  00365 SHIFTL_ALLB
+0095   300B           00366         MOVLW   0XB
+0096   00F0           00367         MOVWF   GRP
+0097   22C5           00368         CALL    SHIFTL
+                      00369 
+0098   300C           00370         MOVLW   0XC
+0099   00F0           00371         MOVWF   GRP
+009A   22C5           00372         CALL    SHIFTL
+                      00373 
+009B   300D           00374         MOVLW   0XD
+009C   00F0           00375         MOVWF   GRP
+009D   22C5           00376         CALL    SHIFTL
+Warning[203]: Found opcode in column 1. (RETURN)
+009E   0008           00377 RETURN
+                      00378 
+                      00379 
+009F                  00380 SHIFTL_ALLC
+009F   300C           00381         MOVLW   0XC
+00A0   00F0           00382         MOVWF   GRP
+00A1   22C5           00383         CALL    SHIFTL
+                      00384 
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00A2   300D           00385         MOVLW   0XD
+00A3   00F0           00386         MOVWF   GRP
+00A4   22C5           00387         CALL    SHIFTL
+Warning[203]: Found opcode in column 1. (RETURN)
+00A5   0008           00388 RETURN
+                      00389 
+00A6                  00390 SHIFTL_ALLD
+                      00391 
+00A6   300D           00392         MOVLW   0XD
+00A7   00F0           00393         MOVWF   GRP
+00A8   22C5           00394         CALL    SHIFTL
+Warning[203]: Found opcode in column 1. (RETURN)
+00A9   0008           00395 RETURN
+                      00396 ;----------------------------------------------------------
+                      00397 
+                      00398 
+                      00399 ;#################### DUMPING OF DATA #######################
+                      00400 
+00AA                  00401 DUMP
+00AA   3000           00402         MOVLW   .0
+00AB   00F3           00403         MOVWF   BTCOUNT
+                      00404 
+                      00405 
+00AC   3008           00406         MOVLW   .8
+00AD   008A           00407         MOVWF   PCLATH
+                      00408         
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00AE   2000           00409         CALL    CHAR
+00AF   00F4           00410         MOVWF   WIDTH
+Message[305]: Using default destination of 1 (file).
+00B0   0AF3           00411         INCF    BTCOUNT
+                      00412 
+                      00413 
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00B1   2000           00414         CALL    CHAR
+00B2   00DF           00415         MOVWF   DRAM+33
+Message[305]: Using default destination of 1 (file).
+00B3   0AF3           00416         INCF    BTCOUNT
+                      00417 
+                      00418         
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00B4   2000           00419         CALL    CHAR
+00B5   00CF           00420         MOVWF   DRAM+23
+Message[305]: Using default destination of 1 (file).
+00B6   0AF3           00421         INCF    BTCOUNT
+                      00422 
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00B7   2000           00423         CALL    CHAR
+00B8   00BF           00424         MOVWF   DRAM+13
+Message[305]: Using default destination of 1 (file).
+00B9   0AF3           00425         INCF    BTCOUNT
+                      00426 
+Message[306]: Crossing page boundary -- ensure page bits are set.
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 10
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00BA   2000           00427         CALL    CHAR
+00BB   00AF           00428         MOVWF   DRAM+03
+Message[305]: Using default destination of 1 (file).
+00BC   0AF3           00429         INCF    BTCOUNT
+                      00430 
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00BD   2000           00431         CALL    CHAR
+00BE   00DE           00432         MOVWF   DRAM+32
+Message[305]: Using default destination of 1 (file).
+00BF   0AF3           00433         INCF    BTCOUNT
+                      00434 
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00C0   2000           00435         CALL    CHAR
+00C1   00CE           00436         MOVWF   DRAM+22
+Message[305]: Using default destination of 1 (file).
+00C2   0AF3           00437         INCF    BTCOUNT
+                      00438 
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00C3   2000           00439         CALL    CHAR
+00C4   00BE           00440         MOVWF   DRAM+12
+Message[305]: Using default destination of 1 (file).
+00C5   0AF3           00441         INCF    BTCOUNT
+                      00442 
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00C6   2000           00443         CALL    CHAR
+00C7   00AE           00444         MOVWF   DRAM+02
+Message[305]: Using default destination of 1 (file).
+00C8   0AF3           00445         INCF    BTCOUNT
+                      00446 
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00C9   2000           00447         CALL    CHAR
+00CA   00DD           00448         MOVWF   DRAM+31
+Message[305]: Using default destination of 1 (file).
+00CB   0AF3           00449         INCF    BTCOUNT
+                      00450 
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00CC   2000           00451         CALL    CHAR
+00CD   00CD           00452         MOVWF   DRAM+21
+Message[305]: Using default destination of 1 (file).
+00CE   0AF3           00453         INCF    BTCOUNT
+                      00454 
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00CF   2000           00455         CALL    CHAR
+00D0   00BD           00456         MOVWF   DRAM+11
+Message[305]: Using default destination of 1 (file).
+00D1   0AF3           00457         INCF    BTCOUNT
+                      00458 
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00D2   2000           00459         CALL    CHAR
+00D3   00AD           00460         MOVWF   DRAM+01
+Message[305]: Using default destination of 1 (file).
+00D4   0AF3           00461         INCF    BTCOUNT
+                      00462 
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 11
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00D5   2000           00463         CALL    CHAR
+00D6   00DC           00464         MOVWF   DRAM+30
+Message[305]: Using default destination of 1 (file).
+00D7   0AF3           00465         INCF    BTCOUNT
+                      00466 
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00D8   2000           00467         CALL    CHAR
+00D9   00CC           00468         MOVWF   DRAM+20
+Message[305]: Using default destination of 1 (file).
+00DA   0AF3           00469         INCF    BTCOUNT
+                      00470 
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00DB   2000           00471         CALL    CHAR
+00DC   00BC           00472         MOVWF   DRAM+10
+Message[305]: Using default destination of 1 (file).
+00DD   0AF3           00473         INCF    BTCOUNT
+                      00474 
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00DE   2000           00475         CALL    CHAR
+00DF   00AC           00476         MOVWF   DRAM+00
+Message[305]: Using default destination of 1 (file).
+00E0   0AF3           00477         INCF    BTCOUNT
+                      00478 
+00E1   3000           00479         MOVLW   .0                      ;BACK TO PAGE1
+00E2   008A           00480         MOVWF   PCLATH
+                      00481 
+00E3   0008           00482         RETURN
+                      00483 ;########################################
+                      00484 
+                      00485 
+                      00486 
+                      00487 
+                      00488 ;-------------------
+00E4                  00489 DISP
+00E4   3050           00490         MOVLW   .80
+00E5   00A5           00491         MOVWF   COUNT0
+00E6                  00492 MN0
+00E6   20EA           00493         CALL    DISPLAY
+00E7   0BA5           00494         DECFSZ  COUNT0,F
+00E8   28E6           00495         GOTO    MN0
+                      00496 
+Warning[203]: Found opcode in column 1. (RETURN)
+00E9   0008           00497 RETURN
+                      00498 ;-------------------
+                      00499 
+                      00500 ;#########################      DISPLAY ####################
+00EA                  00501 DISPLAY
+                      00502 
+00EA                  00503 DP0
+00EA   3010           00504         MOVLW           .16
+00EB   00EC           00505         MOVWF           POINTER
+00EC   302C           00506         MOVLW           .44
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 12
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00ED   0084           00507         MOVWF           FSR
+                      00508 
+00EE                  00509 DSP0
+00EE   2115           00510         CALL            DATALATCH
+00EF   0A84           00511         INCF            FSR, F
+00F0   0BEC           00512         DECFSZ          POINTER, F
+00F1   28EE           00513         GOTO            DSP0
+                      00514 
+00F2   1407           00515         A_ON
+00F3   1487           00516         B_ON
+00F4   1687           00517         OE_ON
+00F5   213F           00518         CALL            DELAY_ONEMS
+                      00519 
+                      00520 
+00F6   3010           00521         MOVLW           .16
+00F7   00EC           00522         MOVWF           POINTER
+                      00523 
+00F8                  00524 DSP1
+00F8   2115           00525         CALL            DATALATCH
+00F9   0A84           00526         INCF            FSR, F
+00FA   0BEC           00527         DECFSZ          POINTER, F
+00FB   28F8           00528         GOTO            DSP1
+                      00529 
+00FC   1007           00530         A_OFF
+00FD   1487           00531         B_ON
+00FE   1687           00532         OE_ON
+00FF   213F           00533         CALL            DELAY_ONEMS
+                      00534 
+0100   3010           00535         MOVLW           .16
+0101   00EC           00536         MOVWF           POINTER
+                      00537 
+0102                  00538 DSP2
+0102   2115           00539         CALL            DATALATCH
+0103   0A84           00540         INCF            FSR, F
+0104   0BEC           00541         DECFSZ          POINTER, F
+0105   2902           00542         GOTO            DSP2
+                      00543 
+0106   1407           00544         A_ON
+0107   1087           00545         B_OFF
+0108   1687           00546         OE_ON
+0109   213F           00547         CALL            DELAY_ONEMS
+                      00548 
+010A   3010           00549         MOVLW           .16
+010B   00EC           00550         MOVWF           POINTER
+                      00551 
+010C                  00552 DSP3
+010C   2115           00553         CALL            DATALATCH
+010D   0A84           00554         INCF            FSR, F
+010E   0BEC           00555         DECFSZ          POINTER, F
+010F   290C           00556         GOTO            DSP3
+                      00557 
+0110   1007           00558         A_OFF
+0111   1087           00559         B_OFF
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 13
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0112   1687           00560         OE_ON
+0113   213F           00561         CALL            DELAY_ONEMS
+                      00562 
+                      00563 
+                      00564 
+                      00565 
+Warning[203]: Found opcode in column 1. (RETURN)
+0114   0008           00566 RETURN
+                      00567 ;###############################################################
+                      00568 
+                      00569 
+                      00570 
+                      00571 
+                      00572 
+                      00573 
+                      00574 
+                      00575 
+                      00576 
+                      00577 
+                      00578 
+                      00579 ;============   DATA    LATCH   ================================
+0115                  00580 DATALATCH
+0115   1387           00581         CLK_OFF
+0116   1207           00582         REG_OFF
+0117   1287           00583         OE_OFF
+0118   0800           00584         MOVF            INDF,W
+0119   00A9           00585         MOVWF           VAR0
+011A   3008           00586         MOVLW   .8
+011B   00A5           00587         MOVWF   COUNT0  
+                      00588 
+011C                  00589 DL0
+011C   0DA9           00590         RLF VAR0,F      ; Rotate "Var" one place to the left
+011D   1C03           00591         BTFSS STATUS,C  ; Is carry 1?
+011E   2920           00592         GOTO    D0
+011F   2922           00593         GOTO    D1
+                      00594 
+0120                  00595 D0
+0120   1107           00596         DAT_OFF
+0121   2924           00597         GOTO DL1
+0122                  00598 D1
+0122   1507           00599         DAT_ON
+0123   2924           00600         GOTO DL1
+                      00601         
+0124                  00602 DL1
+0124   1787           00603         CLK_ON
+0125   1387           00604         CLK_OFF
+0126   0BA5           00605         DECFSZ  COUNT0,F
+0127   291C           00606         GOTO    DL0
+0128   1607           00607         REG_ON
+0129   1207           00608         REG_OFF 
+                      00609         
+                      00610 
+Warning[203]: Found opcode in column 1. (RETURN)
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 14
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+012A   0008           00611 RETURN
+                      00612 ;===============================================================
+                      00613 
+                      00614 
+                      00615 
+                      00616 
+                      00617 
+                      00618 
+                      00619 ;=======================        CLEAR   RAM             ====================
+012B                  00620 CLRAM
+012B   3040           00621         MOVLW           .64
+012C   00EC           00622         MOVWF           POINTER
+012D   302C           00623         MOVLW           DRAM
+012E   0084           00624         MOVWF           FSR
+                      00625 
+012F                  00626 DRM0
+012F   30FF           00627         MOVLW           0XFF
+0130   0080           00628         MOVWF           INDF
+0131   3000           00629         MOVLW           INDF
+                      00630         
+0132   0A84           00631         INCF            FSR, F
+0133   0BEC           00632         DECFSZ          POINTER, F
+0134   292F           00633         GOTO            DRM0
+                      00634 
+0135   2115           00635         CALL            DATALATCH
+                      00636          
+0136   0008           00637         RETURN
+                      00638 ;===============================================================
+                      00639 
+                      00640 
+                      00641 
+                      00642 
+                      00643 
+                      00644 
+                      00645 
+                      00646 ;==========     DELAY USEC =========
+0137                  00647 DELAY_US
+                      00648 
+0137   00A0           00649         MOVWF   DELAYUS
+                      00650 
+0138                  00651 USEC
+                      00652 
+0138   0000           00653         NOP
+0139   0000           00654         NOP
+013A   0000           00655         NOP
+013B   0000           00656         NOP
+Warning[203]: Found opcode in column 1. (DECFSZ)
+013C   0BA0           00657 DECFSZ  DELAYUS,F
+                      00658 
+Warning[203]: Found opcode in column 1. (GOTO)
+013D   2938           00659 GOTO    USEC
+                      00660 
+Warning[203]: Found opcode in column 1. (RETURN)
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 15
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+013E   0008           00661 RETURN
+                      00662 ;=================================
+                      00663 
+                      00664 
+                      00665 
+                      00666 ;=========== DELAY ONE MS ========
+013F                  00667 DELAY_ONEMS
+                      00668 
+013F   3005           00669         MOVLW   .5
+0140   00A3           00670         MOVWF   MILSEC
+                      00671 
+0141                  00672 MSEC
+0141   30C8           00673         MOVLW   .200
+0142   2137           00674         CALL    DELAY_US
+0143   0BA3           00675         DECFSZ  MILSEC,F
+0144   2941           00676         GOTO    MSEC
+                      00677 
+Warning[203]: Found opcode in column 1. (RETURN)
+0145   0008           00678 RETURN
+                      00679 ;==================================
+                      00680 
+                      00681 
+                      00682 ;=========== DELAY MS   ===========
+0146                  00683 DELAY_MS
+                      00684         
+0146   00A1           00685         MOVWF   DELAYMS
+0147                  00686 MSEC0
+0147   213F           00687         CALL    DELAY_ONEMS
+0148   0BA1           00688         DECFSZ  DELAYMS,F
+0149   2947           00689         GOTO    MSEC0
+Warning[203]: Found opcode in column 1. (RETURN)
+014A   0008           00690 RETURN
+                      00691 ;==================================
+                      00692 
+                      00693 ;=========== DELAY      ONE     SECOND ====
+014B                  00694 DELAY_ONESEC
+                      00695 
+014B   3005           00696         MOVLW   .5
+014C   00A4           00697         MOVWF   SEC
+014D                  00698 SEC0
+014D   30C8           00699         MOVLW   .200
+014E   2146           00700         CALL    DELAY_MS
+014F   0BA4           00701         DECFSZ  SEC,F
+0150   294D           00702         GOTO    SEC0
+Warning[203]: Found opcode in column 1. (RETURN)
+0151   0008           00703 RETURN
+                      00704 ;==================================
+                      00705 
+                      00706 ;==========     DELAY SEC =============
+0152                  00707 DELAY_SEC
+                      00708 
+0152   00A2           00709         MOVWF   DELAYS
+0153                  00710 SEC1
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 16
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0153   214B           00711         CALL    DELAY_ONESEC
+0154   0BA2           00712         DECFSZ  DELAYS,F
+0155   2953           00713         GOTO    SEC1
+Warning[203]: Found opcode in column 1. (RETURN)
+0156   0008           00714 RETURN
+                      00715 ;==================================
+                      00716 
+                      00717 
+                      00718 ;################## DRAM SHIFT ################
+0157                  00719 SHIFT
+                      00720 
+0157   3008           00721         MOVLW   .8
+0158   00F1           00722         MOVWF   TESTER
+                      00723 
+0159   086E           00724         MOVF    CURSORX,W
+015A   0271           00725         SUBWF   TESTER,W
+015B   1903           00726         BTFSC   STATUS,Z
+015C   2960           00727         GOTO    CSR_ET7
+                      00728 
+015D   1803           00729         BTFSC   STATUS,C
+015E   2960           00730         GOTO    CSR_LT7
+015F   29C1           00731         GOTO    CSR_GT7
+                      00732 
+                      00733 
+                      00734         
+                      00735 
+0160                  00736 CSR_LT7 ;CURSOR LESS THAN DEC7
+0160                  00737 CSR_ET7 ;CURSOR EQUAL   DEC7
+0160   086E           00738         MOVF    CURSORX,0
+0161   00ED           00739         MOVWF   SHCNT
+0162                  00740 SHT00
+Message[305]: Using default destination of 1 (file).
+0162   0CDF           00741         RRF             DRAM + 33
+Message[305]: Using default destination of 1 (file).
+0163   0CE3           00742         RRF             DRAM + 37
+Message[305]: Using default destination of 1 (file).
+0164   0BED           00743         DECFSZ  SHCNT
+0165   2962           00744         GOTO    SHT00
+                      00745 
+0166   086E           00746         MOVF    CURSORX,0
+0167   00ED           00747         MOVWF   SHCNT
+0168                  00748 SHT01
+Message[305]: Using default destination of 1 (file).
+0168   0CCF           00749         RRF             DRAM + 23
+Message[305]: Using default destination of 1 (file).
+0169   0CD3           00750         RRF             DRAM + 27
+Message[305]: Using default destination of 1 (file).
+016A   0BED           00751         DECFSZ  SHCNT
+016B   2968           00752         GOTO    SHT01
+                      00753 
+016C   086E           00754         MOVF    CURSORX,0
+016D   00ED           00755         MOVWF   SHCNT
+016E                  00756 SHT02
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 17
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Message[305]: Using default destination of 1 (file).
+016E   0CBF           00757         RRF             DRAM + 13
+Message[305]: Using default destination of 1 (file).
+016F   0CC3           00758         RRF             DRAM + 17
+Message[305]: Using default destination of 1 (file).
+0170   0BED           00759         DECFSZ  SHCNT
+0171   296E           00760         GOTO    SHT02
+                      00761 
+0172   086E           00762         MOVF    CURSORX,0
+0173   00ED           00763         MOVWF   SHCNT
+0174                  00764 SHT03
+Message[305]: Using default destination of 1 (file).
+0174   0CAF           00765         RRF             DRAM + 03
+Message[305]: Using default destination of 1 (file).
+0175   0CB3           00766         RRF             DRAM + 07
+Message[305]: Using default destination of 1 (file).
+0176   0BED           00767         DECFSZ  SHCNT
+0177   2974           00768         GOTO    SHT03
+                      00769 
+0178   086E           00770         MOVF    CURSORX,0
+0179   00ED           00771         MOVWF   SHCNT
+017A                  00772 SHT04
+Message[305]: Using default destination of 1 (file).
+017A   0CDE           00773         RRF             DRAM + 32
+Message[305]: Using default destination of 1 (file).
+017B   0CE2           00774         RRF             DRAM + 36
+Message[305]: Using default destination of 1 (file).
+017C   0BED           00775         DECFSZ  SHCNT
+017D   297A           00776         GOTO    SHT04
+                      00777 
+017E   086E           00778         MOVF    CURSORX,0
+017F   00ED           00779         MOVWF   SHCNT
+0180                  00780 SHT05
+Message[305]: Using default destination of 1 (file).
+0180   0CCE           00781         RRF             DRAM + 22
+Message[305]: Using default destination of 1 (file).
+0181   0CD2           00782         RRF             DRAM + 26
+Message[305]: Using default destination of 1 (file).
+0182   0BED           00783         DECFSZ  SHCNT
+0183   2980           00784         GOTO    SHT05
+                      00785 
+0184   086E           00786         MOVF    CURSORX,0
+0185   00ED           00787         MOVWF   SHCNT
+0186                  00788 SHT06
+Message[305]: Using default destination of 1 (file).
+0186   0CBE           00789         RRF             DRAM + 12
+Message[305]: Using default destination of 1 (file).
+0187   0CC2           00790         RRF             DRAM + 16
+Message[305]: Using default destination of 1 (file).
+0188   0BED           00791         DECFSZ  SHCNT
+0189   2986           00792         GOTO    SHT06
+                      00793 
+                      00794 
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 18
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+018A   086E           00795         MOVF    CURSORX,0
+018B   00ED           00796         MOVWF   SHCNT
+018C                  00797 SHT07
+Message[305]: Using default destination of 1 (file).
+018C   0CAE           00798         RRF             DRAM + 02
+Message[305]: Using default destination of 1 (file).
+018D   0CB2           00799         RRF             DRAM + 06
+Message[305]: Using default destination of 1 (file).
+018E   0BED           00800         DECFSZ  SHCNT
+018F   298C           00801         GOTO    SHT07
+                      00802 
+0190   086E           00803         MOVF    CURSORX,0
+0191   00ED           00804         MOVWF   SHCNT
+0192                  00805 SHT08
+Message[305]: Using default destination of 1 (file).
+0192   0CDD           00806         RRF             DRAM + 31
+Message[305]: Using default destination of 1 (file).
+0193   0CE1           00807         RRF             DRAM + 35
+Message[305]: Using default destination of 1 (file).
+0194   0BED           00808         DECFSZ  SHCNT
+0195   2992           00809         GOTO    SHT08
+                      00810 
+0196   086E           00811         MOVF    CURSORX,0
+0197   00ED           00812         MOVWF   SHCNT
+0198                  00813 SHT09
+Message[305]: Using default destination of 1 (file).
+0198   0CCD           00814         RRF             DRAM + 21
+Message[305]: Using default destination of 1 (file).
+0199   0CD1           00815         RRF             DRAM + 25
+Message[305]: Using default destination of 1 (file).
+019A   0BED           00816         DECFSZ  SHCNT
+019B   2998           00817         GOTO    SHT09
+                      00818         
+019C   086E           00819         MOVF    CURSORX,0
+019D   00ED           00820         MOVWF   SHCNT
+019E                  00821 SHT0A
+Message[305]: Using default destination of 1 (file).
+019E   0CBD           00822         RRF             DRAM + 11
+Message[305]: Using default destination of 1 (file).
+019F   0CC1           00823         RRF             DRAM + 15
+Message[305]: Using default destination of 1 (file).
+01A0   0BED           00824         DECFSZ  SHCNT
+01A1   299E           00825         GOTO    SHT0A
+                      00826 
+01A2   086E           00827         MOVF    CURSORX,0
+01A3   00ED           00828         MOVWF   SHCNT
+01A4                  00829 SHT0B
+Message[305]: Using default destination of 1 (file).
+01A4   0CAD           00830         RRF             DRAM + 01
+Message[305]: Using default destination of 1 (file).
+01A5   0CB1           00831         RRF             DRAM + 05
+Message[305]: Using default destination of 1 (file).
+01A6   0BED           00832         DECFSZ  SHCNT
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 19
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+01A7   29A4           00833         GOTO    SHT0B
+                      00834 
+01A8   086E           00835         MOVF    CURSORX,0
+01A9   00ED           00836         MOVWF   SHCNT
+01AA                  00837 SHT0C
+Message[305]: Using default destination of 1 (file).
+01AA   0CDC           00838         RRF             DRAM + 30
+Message[305]: Using default destination of 1 (file).
+01AB   0CE0           00839         RRF             DRAM + 34
+Message[305]: Using default destination of 1 (file).
+01AC   0BED           00840         DECFSZ  SHCNT
+01AD   29AA           00841         GOTO    SHT0C
+                      00842 
+01AE   086E           00843         MOVF    CURSORX,0
+01AF   00ED           00844         MOVWF   SHCNT
+01B0                  00845 SHT0D
+Message[305]: Using default destination of 1 (file).
+01B0   0CCC           00846         RRF             DRAM + 20
+Message[305]: Using default destination of 1 (file).
+01B1   0CD0           00847         RRF             DRAM + 24
+Message[305]: Using default destination of 1 (file).
+01B2   0BED           00848         DECFSZ  SHCNT
+01B3   29B0           00849         GOTO    SHT0D
+                      00850 
+01B4   086E           00851         MOVF    CURSORX,0
+01B5   00ED           00852         MOVWF   SHCNT
+01B6                  00853 SHT0E
+Message[305]: Using default destination of 1 (file).
+01B6   0CBC           00854         RRF             DRAM + 10
+Message[305]: Using default destination of 1 (file).
+01B7   0CC0           00855         RRF             DRAM + 14
+Message[305]: Using default destination of 1 (file).
+01B8   0BED           00856         DECFSZ  SHCNT
+01B9   29B6           00857         GOTO    SHT0E
+                      00858         
+01BA   086E           00859         MOVF    CURSORX,0
+01BB   00ED           00860         MOVWF   SHCNT
+01BC                  00861 SHT0F
+Message[305]: Using default destination of 1 (file).
+01BC   0CAC           00862         RRF             DRAM + 00
+Message[305]: Using default destination of 1 (file).
+01BD   0CB0           00863         RRF             DRAM + 04
+Message[305]: Using default destination of 1 (file).
+01BE   0BED           00864         DECFSZ  SHCNT
+01BF   29BC           00865         GOTO    SHT0F
+                      00866 
+Warning[203]: Found opcode in column 1. (RETURN)
+01C0   0008           00867 RETURN
+                      00868 
+01C1                  00869 CSR_GT7 ;CURSOR GREATER THAN DEC7
+                      00870         
+01C1   3010           00871         MOVLW   .16
+01C2   00F1           00872         MOVWF   TESTER
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 20
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00873 
+01C3   086E           00874         MOVF    CURSORX,W
+01C4   0271           00875         SUBWF   TESTER,W
+01C5   1903           00876         BTFSC   STATUS,Z
+01C6   29CA           00877         GOTO    CSR_ETF
+                      00878 
+01C7   1803           00879         BTFSC   STATUS,C
+01C8   29CA           00880         GOTO    CSR_LTF
+01C9   2A3B           00881         GOTO    CSR_GTF 
+                      00882 
+01CA                  00883 CSR_LTF         ;CURSOR LESS THAN 0XF
+01CA                  00884 CSR_ETF         ;CURSOR EQUALS  0XF
+                      00885         
+01CA   086E           00886         MOVF    CURSORX,0
+01CB   00ED           00887         MOVWF   SHCNT
+01CC                  00888 SHT10
+Message[305]: Using default destination of 1 (file).
+01CC   0CDF           00889         RRF             DRAM + 33
+Message[305]: Using default destination of 1 (file).
+01CD   0CE3           00890         RRF             DRAM + 37
+Message[305]: Using default destination of 1 (file).
+01CE   0CE7           00891         RRF             DRAM + 3B
+Message[305]: Using default destination of 1 (file).
+01CF   0BED           00892         DECFSZ  SHCNT
+01D0   29CC           00893         GOTO    SHT10
+                      00894 
+01D1   086E           00895         MOVF    CURSORX,0
+01D2   00ED           00896         MOVWF   SHCNT
+01D3                  00897 SHT11
+Message[305]: Using default destination of 1 (file).
+01D3   0CCF           00898         RRF             DRAM + 23
+Message[305]: Using default destination of 1 (file).
+01D4   0CD3           00899         RRF             DRAM + 27
+Message[305]: Using default destination of 1 (file).
+01D5   0CD7           00900         RRF             DRAM + 2B
+Message[305]: Using default destination of 1 (file).
+01D6   0BED           00901         DECFSZ  SHCNT
+01D7   29D3           00902         GOTO    SHT11
+                      00903 
+01D8   086E           00904         MOVF    CURSORX,0
+01D9   00ED           00905         MOVWF   SHCNT
+01DA                  00906 SHT12
+Message[305]: Using default destination of 1 (file).
+01DA   0CBF           00907         RRF             DRAM + 13
+Message[305]: Using default destination of 1 (file).
+01DB   0CC3           00908         RRF             DRAM + 17
+Message[305]: Using default destination of 1 (file).
+01DC   0CC7           00909         RRF             DRAM + 1B
+Message[305]: Using default destination of 1 (file).
+01DD   0BED           00910         DECFSZ  SHCNT
+01DE   29DA           00911         GOTO    SHT12
+                      00912 
+01DF   086E           00913         MOVF    CURSORX,0
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 21
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+01E0   00ED           00914         MOVWF   SHCNT
+01E1                  00915 SHT13
+Message[305]: Using default destination of 1 (file).
+01E1   0CAF           00916         RRF             DRAM + 03
+Message[305]: Using default destination of 1 (file).
+01E2   0CB3           00917         RRF             DRAM + 07
+Message[305]: Using default destination of 1 (file).
+01E3   0CB7           00918         RRF             DRAM + 0B
+Message[305]: Using default destination of 1 (file).
+01E4   0BED           00919         DECFSZ  SHCNT
+01E5   29E1           00920         GOTO    SHT13
+                      00921 
+01E6   086E           00922         MOVF    CURSORX,0
+01E7   00ED           00923         MOVWF   SHCNT
+01E8                  00924 SHT14
+Message[305]: Using default destination of 1 (file).
+01E8   0CDE           00925         RRF             DRAM + 32
+Message[305]: Using default destination of 1 (file).
+01E9   0CE2           00926         RRF             DRAM + 36
+Message[305]: Using default destination of 1 (file).
+01EA   0CE6           00927         RRF             DRAM + 3A
+Message[305]: Using default destination of 1 (file).
+01EB   0BED           00928         DECFSZ  SHCNT
+01EC   29E8           00929         GOTO    SHT14
+                      00930 
+01ED   086E           00931         MOVF    CURSORX,0
+01EE   00ED           00932         MOVWF   SHCNT
+01EF                  00933 SHT15
+Message[305]: Using default destination of 1 (file).
+01EF   0CCE           00934         RRF             DRAM + 22
+Message[305]: Using default destination of 1 (file).
+01F0   0CD2           00935         RRF             DRAM + 26
+Message[305]: Using default destination of 1 (file).
+01F1   0CD6           00936         RRF             DRAM + 2A
+Message[305]: Using default destination of 1 (file).
+01F2   0BED           00937         DECFSZ  SHCNT
+01F3   29EF           00938         GOTO    SHT15
+                      00939 
+01F4   086E           00940         MOVF    CURSORX,0
+01F5   00ED           00941         MOVWF   SHCNT
+01F6                  00942 SHT16
+Message[305]: Using default destination of 1 (file).
+01F6   0CBE           00943         RRF             DRAM + 12
+Message[305]: Using default destination of 1 (file).
+01F7   0CC2           00944         RRF             DRAM + 16
+Message[305]: Using default destination of 1 (file).
+01F8   0CC6           00945         RRF             DRAM + 1A
+Message[305]: Using default destination of 1 (file).
+01F9   0BED           00946         DECFSZ  SHCNT
+01FA   29F6           00947         GOTO    SHT16
+                      00948 
+                      00949 
+01FB   086E           00950         MOVF    CURSORX,0
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 22
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+01FC   00ED           00951         MOVWF   SHCNT
+01FD                  00952 SHT17
+Message[305]: Using default destination of 1 (file).
+01FD   0CAE           00953         RRF             DRAM + 02
+Message[305]: Using default destination of 1 (file).
+01FE   0CB2           00954         RRF             DRAM + 06
+Message[305]: Using default destination of 1 (file).
+01FF   0CB6           00955         RRF             DRAM + 0A
+Message[305]: Using default destination of 1 (file).
+0200   0BED           00956         DECFSZ  SHCNT
+0201   29FD           00957         GOTO    SHT17
+                      00958 
+0202   086E           00959         MOVF    CURSORX,0
+0203   00ED           00960         MOVWF   SHCNT
+0204                  00961 SHT18
+Message[305]: Using default destination of 1 (file).
+0204   0CDD           00962         RRF             DRAM + 31
+Message[305]: Using default destination of 1 (file).
+0205   0CE1           00963         RRF             DRAM + 35
+Message[305]: Using default destination of 1 (file).
+0206   0CE5           00964         RRF             DRAM + 39
+Message[305]: Using default destination of 1 (file).
+0207   0BED           00965         DECFSZ  SHCNT
+0208   2A04           00966         GOTO    SHT18
+                      00967 
+0209   086E           00968         MOVF    CURSORX,0
+020A   00ED           00969         MOVWF   SHCNT
+020B                  00970 SHT19
+Message[305]: Using default destination of 1 (file).
+020B   0CCD           00971         RRF             DRAM + 21
+Message[305]: Using default destination of 1 (file).
+020C   0CD1           00972         RRF             DRAM + 25
+Message[305]: Using default destination of 1 (file).
+020D   0CD5           00973         RRF             DRAM + 29
+Message[305]: Using default destination of 1 (file).
+020E   0BED           00974         DECFSZ  SHCNT
+020F   2A0B           00975         GOTO    SHT19
+                      00976         
+0210   086E           00977         MOVF    CURSORX,0
+0211   00ED           00978         MOVWF   SHCNT
+0212                  00979 SHT1A
+Message[305]: Using default destination of 1 (file).
+0212   0CBD           00980         RRF             DRAM + 11
+Message[305]: Using default destination of 1 (file).
+0213   0CC1           00981         RRF             DRAM + 15
+Message[305]: Using default destination of 1 (file).
+0214   0CC5           00982         RRF             DRAM + 19
+Message[305]: Using default destination of 1 (file).
+0215   0BED           00983         DECFSZ  SHCNT
+0216   2A12           00984         GOTO    SHT1A
+                      00985 
+0217   086E           00986         MOVF    CURSORX,0
+0218   00ED           00987         MOVWF   SHCNT
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 23
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0219                  00988 SHT1B
+Message[305]: Using default destination of 1 (file).
+0219   0CAD           00989         RRF             DRAM + 01
+Message[305]: Using default destination of 1 (file).
+021A   0CB1           00990         RRF             DRAM + 05
+Message[305]: Using default destination of 1 (file).
+021B   0CB5           00991         RRF             DRAM + 09
+Message[305]: Using default destination of 1 (file).
+021C   0BED           00992         DECFSZ  SHCNT
+021D   2A19           00993         GOTO    SHT1B
+                      00994 
+021E   086E           00995         MOVF    CURSORX,0
+021F   00ED           00996         MOVWF   SHCNT
+0220                  00997 SHT1C
+Message[305]: Using default destination of 1 (file).
+0220   0CDC           00998         RRF             DRAM + 30
+Message[305]: Using default destination of 1 (file).
+0221   0CE0           00999         RRF             DRAM + 34
+Message[305]: Using default destination of 1 (file).
+0222   0CE4           01000         RRF             DRAM + 38
+Message[305]: Using default destination of 1 (file).
+0223   0BED           01001         DECFSZ  SHCNT
+0224   2A20           01002         GOTO    SHT1C
+                      01003 
+0225   086E           01004         MOVF    CURSORX,0
+0226   00ED           01005         MOVWF   SHCNT
+0227                  01006 SHT1D
+Message[305]: Using default destination of 1 (file).
+0227   0CCC           01007         RRF             DRAM + 20
+Message[305]: Using default destination of 1 (file).
+0228   0CD0           01008         RRF             DRAM + 24
+Message[305]: Using default destination of 1 (file).
+0229   0CD4           01009         RRF             DRAM + 28
+Message[305]: Using default destination of 1 (file).
+022A   0BED           01010         DECFSZ  SHCNT
+022B   2A27           01011         GOTO    SHT1D
+                      01012 
+022C   086E           01013         MOVF    CURSORX,0
+022D   00ED           01014         MOVWF   SHCNT
+022E                  01015 SHT1E
+Message[305]: Using default destination of 1 (file).
+022E   0CBC           01016         RRF             DRAM + 10
+Message[305]: Using default destination of 1 (file).
+022F   0CC0           01017         RRF             DRAM + 14
+Message[305]: Using default destination of 1 (file).
+0230   0CC4           01018         RRF             DRAM + 18
+Message[305]: Using default destination of 1 (file).
+0231   0BED           01019         DECFSZ  SHCNT
+0232   2A2E           01020         GOTO    SHT1E
+                      01021         
+0233   086E           01022         MOVF    CURSORX,0
+0234   00ED           01023         MOVWF   SHCNT
+0235                  01024 SHT1F
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 24
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Message[305]: Using default destination of 1 (file).
+0235   0CAC           01025         RRF             DRAM + 00
+Message[305]: Using default destination of 1 (file).
+0236   0CB0           01026         RRF             DRAM + 04
+Message[305]: Using default destination of 1 (file).
+0237   0CB4           01027         RRF             DRAM + 08
+Message[305]: Using default destination of 1 (file).
+0238   0BED           01028         DECFSZ  SHCNT
+0239   2A35           01029         GOTO    SHT1F
+Warning[203]: Found opcode in column 1. (RETURN)
+023A   0008           01030 RETURN
+                      01031 
+023B                  01032 CSR_GTF ; CURSOR GREATER THAN 0XF
+                      01033 
+023B   3019           01034         MOVLW   .25
+023C   00F1           01035         MOVWF   TESTER
+                      01036 
+023D   086E           01037         MOVF    CURSORX,W
+023E   0271           01038         SUBWF   TESTER,W
+023F   1903           01039         BTFSC   STATUS,Z
+0240   2A44           01040         GOTO    CSR_ETF8
+                      01041 
+0241   1803           01042         BTFSC   STATUS,C
+0242   2A44           01043         GOTO    CSR_LTF8
+0243   2AC4           01044         GOTO    CSR_GTF8        
+                      01045 
+0244                  01046 CSR_LTF8                ;CURSOR LESS THAN 0X18
+0244                  01047 CSR_ETF8                ;CURSOR EQUALS  0X18
+                      01048         
+0244   086E           01049         MOVF    CURSORX,0
+0245   00ED           01050         MOVWF   SHCNT
+0246                  01051 SHT20
+Message[305]: Using default destination of 1 (file).
+0246   0CDF           01052         RRF             DRAM + 33
+Message[305]: Using default destination of 1 (file).
+0247   0CE3           01053         RRF             DRAM + 37
+Message[305]: Using default destination of 1 (file).
+0248   0CE7           01054         RRF             DRAM + 3B
+Message[305]: Using default destination of 1 (file).
+0249   0CEB           01055         RRF             DRAM + 3F
+Message[305]: Using default destination of 1 (file).
+024A   0BED           01056         DECFSZ  SHCNT
+024B   2A46           01057         GOTO    SHT20
+                      01058 
+024C   086E           01059         MOVF    CURSORX,0
+024D   00ED           01060         MOVWF   SHCNT
+024E                  01061 SHT21
+Message[305]: Using default destination of 1 (file).
+024E   0CCF           01062         RRF             DRAM + 23
+Message[305]: Using default destination of 1 (file).
+024F   0CD3           01063         RRF             DRAM + 27
+Message[305]: Using default destination of 1 (file).
+0250   0CD7           01064         RRF             DRAM + 2B
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 25
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Message[305]: Using default destination of 1 (file).
+0251   0CDB           01065         RRF             DRAM + 2F
+Message[305]: Using default destination of 1 (file).
+0252   0BED           01066         DECFSZ  SHCNT
+0253   2A4E           01067         GOTO    SHT21
+                      01068 
+0254   086E           01069         MOVF    CURSORX,0
+0255   00ED           01070         MOVWF   SHCNT
+0256                  01071 SHT22
+Message[305]: Using default destination of 1 (file).
+0256   0CBF           01072         RRF             DRAM + 13
+Message[305]: Using default destination of 1 (file).
+0257   0CC3           01073         RRF             DRAM + 17
+Message[305]: Using default destination of 1 (file).
+0258   0CC7           01074         RRF             DRAM + 1B
+Message[305]: Using default destination of 1 (file).
+0259   0CCB           01075         RRF             DRAM + 1F
+Message[305]: Using default destination of 1 (file).
+025A   0BED           01076         DECFSZ  SHCNT
+025B   2A56           01077         GOTO    SHT22
+                      01078 
+025C   086E           01079         MOVF    CURSORX,0
+025D   00ED           01080         MOVWF   SHCNT
+025E                  01081 SHT23
+Message[305]: Using default destination of 1 (file).
+025E   0CAF           01082         RRF             DRAM + 03
+Message[305]: Using default destination of 1 (file).
+025F   0CB3           01083         RRF             DRAM + 07
+Message[305]: Using default destination of 1 (file).
+0260   0CB7           01084         RRF             DRAM + 0B
+Message[305]: Using default destination of 1 (file).
+0261   0CBB           01085         RRF             DRAM + 0F
+Message[305]: Using default destination of 1 (file).
+0262   0BED           01086         DECFSZ  SHCNT
+0263   2A5E           01087         GOTO    SHT23
+                      01088 
+0264   086E           01089         MOVF    CURSORX,0
+0265   00ED           01090         MOVWF   SHCNT
+0266                  01091 SHT24
+Message[305]: Using default destination of 1 (file).
+0266   0CDE           01092         RRF             DRAM + 32
+Message[305]: Using default destination of 1 (file).
+0267   0CE2           01093         RRF             DRAM + 36
+Message[305]: Using default destination of 1 (file).
+0268   0CE6           01094         RRF             DRAM + 3A
+Message[305]: Using default destination of 1 (file).
+0269   0CEA           01095         RRF             DRAM + 3E
+Message[305]: Using default destination of 1 (file).
+026A   0BED           01096         DECFSZ  SHCNT
+026B   2A66           01097         GOTO    SHT24
+                      01098 
+026C   086E           01099         MOVF    CURSORX,0
+026D   00ED           01100         MOVWF   SHCNT
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 26
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+026E                  01101 SHT25
+Message[305]: Using default destination of 1 (file).
+026E   0CCE           01102         RRF             DRAM + 22
+Message[305]: Using default destination of 1 (file).
+026F   0CD2           01103         RRF             DRAM + 26
+Message[305]: Using default destination of 1 (file).
+0270   0CD6           01104         RRF             DRAM + 2A
+Message[305]: Using default destination of 1 (file).
+0271   0CDA           01105         RRF             DRAM + 2E
+Message[305]: Using default destination of 1 (file).
+0272   0BED           01106         DECFSZ  SHCNT
+0273   2A6E           01107         GOTO    SHT25
+                      01108 
+0274   086E           01109         MOVF    CURSORX,0
+0275   00ED           01110         MOVWF   SHCNT
+0276                  01111 SHT26
+Message[305]: Using default destination of 1 (file).
+0276   0CBE           01112         RRF             DRAM + 12
+Message[305]: Using default destination of 1 (file).
+0277   0CC2           01113         RRF             DRAM + 16
+Message[305]: Using default destination of 1 (file).
+0278   0CC6           01114         RRF             DRAM + 1A
+Message[305]: Using default destination of 1 (file).
+0279   0CCA           01115         RRF             DRAM + 1E
+Message[305]: Using default destination of 1 (file).
+027A   0BED           01116         DECFSZ  SHCNT
+027B   2A76           01117         GOTO    SHT26
+                      01118 
+                      01119 
+027C   086E           01120         MOVF    CURSORX,0
+027D   00ED           01121         MOVWF   SHCNT
+027E                  01122 SHT27
+Message[305]: Using default destination of 1 (file).
+027E   0CAE           01123         RRF             DRAM + 02
+Message[305]: Using default destination of 1 (file).
+027F   0CB2           01124         RRF             DRAM + 06
+Message[305]: Using default destination of 1 (file).
+0280   0CB6           01125         RRF             DRAM + 0A
+Message[305]: Using default destination of 1 (file).
+0281   0CBA           01126         RRF             DRAM + 0E
+Message[305]: Using default destination of 1 (file).
+0282   0BED           01127         DECFSZ  SHCNT
+0283   2A7E           01128         GOTO    SHT27
+                      01129 
+0284   086E           01130         MOVF    CURSORX,0
+0285   00ED           01131         MOVWF   SHCNT
+0286                  01132 SHT28
+Message[305]: Using default destination of 1 (file).
+0286   0CDD           01133         RRF             DRAM + 31
+Message[305]: Using default destination of 1 (file).
+0287   0CE1           01134         RRF             DRAM + 35
+Message[305]: Using default destination of 1 (file).
+0288   0CE5           01135         RRF             DRAM + 39
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 27
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Message[305]: Using default destination of 1 (file).
+0289   0CE9           01136         RRF             DRAM + 3D
+Message[305]: Using default destination of 1 (file).
+028A   0BED           01137         DECFSZ  SHCNT
+028B   2A86           01138         GOTO    SHT28
+                      01139 
+028C   086E           01140         MOVF    CURSORX,0
+028D   00ED           01141         MOVWF   SHCNT
+028E                  01142 SHT29
+Message[305]: Using default destination of 1 (file).
+028E   0CCD           01143         RRF             DRAM + 21
+Message[305]: Using default destination of 1 (file).
+028F   0CD1           01144         RRF             DRAM + 25
+Message[305]: Using default destination of 1 (file).
+0290   0CD5           01145         RRF             DRAM + 29
+Message[305]: Using default destination of 1 (file).
+0291   0CD9           01146         RRF             DRAM + 2D
+Message[305]: Using default destination of 1 (file).
+0292   0BED           01147         DECFSZ  SHCNT
+0293   2A8E           01148         GOTO    SHT29
+                      01149         
+0294   086E           01150         MOVF    CURSORX,0
+0295   00ED           01151         MOVWF   SHCNT
+0296                  01152 SHT2A
+Message[305]: Using default destination of 1 (file).
+0296   0CBD           01153         RRF             DRAM + 11
+Message[305]: Using default destination of 1 (file).
+0297   0CC1           01154         RRF             DRAM + 15
+Message[305]: Using default destination of 1 (file).
+0298   0CC5           01155         RRF             DRAM + 19
+Message[305]: Using default destination of 1 (file).
+0299   0CC9           01156         RRF             DRAM + 1D
+Message[305]: Using default destination of 1 (file).
+029A   0BED           01157         DECFSZ  SHCNT
+029B   2A96           01158         GOTO    SHT2A
+                      01159 
+029C   086E           01160         MOVF    CURSORX,0
+029D   00ED           01161         MOVWF   SHCNT
+029E                  01162 SHT2B
+Message[305]: Using default destination of 1 (file).
+029E   0CAD           01163         RRF             DRAM + 01
+Message[305]: Using default destination of 1 (file).
+029F   0CB1           01164         RRF             DRAM + 05
+Message[305]: Using default destination of 1 (file).
+02A0   0CB5           01165         RRF             DRAM + 09
+Message[305]: Using default destination of 1 (file).
+02A1   0CB9           01166         RRF             DRAM + 0D
+Message[305]: Using default destination of 1 (file).
+02A2   0BED           01167         DECFSZ  SHCNT
+02A3   2A9E           01168         GOTO    SHT2B
+                      01169 
+02A4   086E           01170         MOVF    CURSORX,0
+02A5   00ED           01171         MOVWF   SHCNT
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 28
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+02A6                  01172 SHT2C
+Message[305]: Using default destination of 1 (file).
+02A6   0CDC           01173         RRF             DRAM + 30
+Message[305]: Using default destination of 1 (file).
+02A7   0CE0           01174         RRF             DRAM + 34
+Message[305]: Using default destination of 1 (file).
+02A8   0CE4           01175         RRF             DRAM + 38
+Message[305]: Using default destination of 1 (file).
+02A9   0CE8           01176         RRF             DRAM + 3C
+Message[305]: Using default destination of 1 (file).
+02AA   0BED           01177         DECFSZ  SHCNT
+02AB   2AA6           01178         GOTO    SHT2C
+                      01179 
+02AC   086E           01180         MOVF    CURSORX,0
+02AD   00ED           01181         MOVWF   SHCNT
+02AE                  01182 SHT2D
+Message[305]: Using default destination of 1 (file).
+02AE   0CCC           01183         RRF             DRAM + 20
+Message[305]: Using default destination of 1 (file).
+02AF   0CD0           01184         RRF             DRAM + 24
+Message[305]: Using default destination of 1 (file).
+02B0   0CD4           01185         RRF             DRAM + 28
+Message[305]: Using default destination of 1 (file).
+02B1   0CD8           01186         RRF             DRAM + 2C
+Message[305]: Using default destination of 1 (file).
+02B2   0BED           01187         DECFSZ  SHCNT
+02B3   2AAE           01188         GOTO    SHT2D
+                      01189 
+02B4   086E           01190         MOVF    CURSORX,0
+02B5   00ED           01191         MOVWF   SHCNT
+02B6                  01192 SHT2E
+Message[305]: Using default destination of 1 (file).
+02B6   0CBC           01193         RRF             DRAM + 10
+Message[305]: Using default destination of 1 (file).
+02B7   0CC0           01194         RRF             DRAM + 14
+Message[305]: Using default destination of 1 (file).
+02B8   0CC4           01195         RRF             DRAM + 18
+Message[305]: Using default destination of 1 (file).
+02B9   0CC8           01196         RRF             DRAM + 1C
+Message[305]: Using default destination of 1 (file).
+02BA   0BED           01197         DECFSZ  SHCNT
+02BB   2AB6           01198         GOTO    SHT2E
+                      01199         
+02BC   086E           01200         MOVF    CURSORX,0
+02BD   00ED           01201         MOVWF   SHCNT
+02BE                  01202 SHT2F
+Message[305]: Using default destination of 1 (file).
+02BE   0CAC           01203         RRF             DRAM + 00
+Message[305]: Using default destination of 1 (file).
+02BF   0CB0           01204         RRF             DRAM + 04
+Message[305]: Using default destination of 1 (file).
+02C0   0CB4           01205         RRF             DRAM + 08
+Message[305]: Using default destination of 1 (file).
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 29
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+02C1   0CB8           01206         RRF             DRAM + 0C
+Message[305]: Using default destination of 1 (file).
+02C2   0BED           01207         DECFSZ  SHCNT
+02C3   2ABE           01208         GOTO    SHT2F
+                      01209         
+02C4                  01210 CSR_GTF8 ;CURSOR IS GREATER THAN DEC24
+                      01211 
+                      01212 
+Warning[203]: Found opcode in column 1. (RETURN)
+02C4   0008           01213 RETURN
+                      01214 
+                      01215 
+                      01216 
+                      01217 
+                      01218 
+                      01219 ;########## SHIFT LEFT ##############
+                      01220 
+02C5                  01221 SHIFTL
+02C5   300B           01222         MOVLW   0XB
+02C6   00F1           01223         MOVWF   TESTER
+                      01224 
+02C7   0870           01225         MOVF    GRP,W
+02C8   0271           01226         SUBWF   TESTER,W
+02C9   1903           01227         BTFSC   STATUS,Z
+02CA   2ACE           01228         GOTO    GRP_ETB
+                      01229 
+02CB   1803           01230         BTFSC   STATUS,C
+02CC   0000           01231         NOP             ;GOTO   GRP_LTB
+02CD   2B3F           01232         GOTO    GRP_GTB
+                      01233 
+02CE                  01234 GRP_ETB
+02CE   30FF           01235         MOVLW           0XFF
+02CF   00AA           01236         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+02D0   1403           01237         SETC            1
+Message[305]: Using default destination of 1 (file).
+02D1   0DE3           01238         RLF                     DRAM+37
+Message[305]: Using default destination of 1 (file).
+02D2   0DAA           01239         RLF                     TEMPFILE
+                      01240         
+02D3   082A           01241         MOVFW           TEMPFILE
+02D4   05DF           01242         ANDWF           DRAM+33,F
+                      01243 
+02D5   30FF           01244         MOVLW           0XFF
+02D6   00AA           01245         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+02D7   1403           01246         SETC            1
+Message[305]: Using default destination of 1 (file).
+02D8   0DD3           01247         RLF                     DRAM+27
+Message[305]: Using default destination of 1 (file).
+02D9   0DAA           01248         RLF                     TEMPFILE
+                      01249         
+02DA   082A           01250         MOVFW           TEMPFILE
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 30
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+02DB   05CF           01251         ANDWF           DRAM+23,F
+                      01252 
+02DC   30FF           01253         MOVLW           0XFF
+02DD   00AA           01254         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+02DE   1403           01255         SETC            1
+Message[305]: Using default destination of 1 (file).
+02DF   0DC3           01256         RLF                     DRAM+17
+Message[305]: Using default destination of 1 (file).
+02E0   0DAA           01257         RLF                     TEMPFILE
+                      01258         
+02E1   082A           01259         MOVFW           TEMPFILE
+02E2   05BF           01260         ANDWF           DRAM+13,F
+                      01261 
+02E3   30FF           01262         MOVLW           0XFF
+02E4   00AA           01263         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+02E5   1403           01264         SETC            1
+Message[305]: Using default destination of 1 (file).
+02E6   0DB3           01265         RLF                     DRAM+07
+Message[305]: Using default destination of 1 (file).
+02E7   0DAA           01266         RLF                     TEMPFILE
+                      01267         
+02E8   082A           01268         MOVFW           TEMPFILE
+02E9   05AF           01269         ANDWF           DRAM+03,F
+                      01270 
+02EA   30FF           01271         MOVLW           0XFF
+02EB   00AA           01272         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+02EC   1403           01273         SETC            1
+Message[305]: Using default destination of 1 (file).
+02ED   0DE2           01274         RLF                     DRAM+36
+Message[305]: Using default destination of 1 (file).
+02EE   0DAA           01275         RLF                     TEMPFILE
+                      01276         
+02EF   082A           01277         MOVFW           TEMPFILE
+02F0   05DE           01278         ANDWF           DRAM+32,F
+                      01279         
+02F1   30FF           01280         MOVLW           0XFF
+02F2   00AA           01281         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+02F3   1403           01282         SETC            1
+Message[305]: Using default destination of 1 (file).
+02F4   0DD2           01283         RLF                     DRAM+26
+Message[305]: Using default destination of 1 (file).
+02F5   0DAA           01284         RLF                     TEMPFILE
+                      01285         
+02F6   082A           01286         MOVFW           TEMPFILE
+02F7   05CE           01287         ANDWF           DRAM+22,F
+                      01288 
+02F8   30FF           01289         MOVLW           0XFF
+02F9   00AA           01290         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 31
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+02FA   1403           01291         SETC            1
+Message[305]: Using default destination of 1 (file).
+02FB   0DC2           01292         RLF                     DRAM+16
+Message[305]: Using default destination of 1 (file).
+02FC   0DAA           01293         RLF                     TEMPFILE
+                      01294         
+02FD   082A           01295         MOVFW           TEMPFILE
+02FE   05BE           01296         ANDWF           DRAM+12,F
+                      01297 
+                      01298         
+02FF   30FF           01299         MOVLW           0XFF
+0300   00AA           01300         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+0301   1403           01301         SETC            1
+Message[305]: Using default destination of 1 (file).
+0302   0DB2           01302         RLF                     DRAM+06
+Message[305]: Using default destination of 1 (file).
+0303   0DAA           01303         RLF                     TEMPFILE
+                      01304         
+0304   082A           01305         MOVFW           TEMPFILE
+0305   05AE           01306         ANDWF           DRAM+02,F
+                      01307 
+0306   30FF           01308         MOVLW           0XFF
+0307   00AA           01309         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+0308   1403           01310         SETC            1
+Message[305]: Using default destination of 1 (file).
+0309   0DE1           01311         RLF                     DRAM+35
+Message[305]: Using default destination of 1 (file).
+030A   0DAA           01312         RLF                     TEMPFILE
+                      01313         
+030B   082A           01314         MOVFW           TEMPFILE
+030C   05DD           01315         ANDWF           DRAM+31,F
+                      01316 
+030D   30FF           01317         MOVLW           0XFF
+030E   00AA           01318         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+030F   1403           01319         SETC            1
+Message[305]: Using default destination of 1 (file).
+0310   0DD1           01320         RLF                     DRAM+25
+Message[305]: Using default destination of 1 (file).
+0311   0DAA           01321         RLF                     TEMPFILE
+                      01322         
+0312   082A           01323         MOVFW           TEMPFILE
+0313   05CD           01324         ANDWF           DRAM+21,F
+                      01325 
+0314   30FF           01326         MOVLW           0XFF
+0315   00AA           01327         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+0316   1403           01328         SETC            1
+Message[305]: Using default destination of 1 (file).
+0317   0DC1           01329         RLF                     DRAM+15
+Message[305]: Using default destination of 1 (file).
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 32
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0318   0DAA           01330         RLF                     TEMPFILE
+                      01331         
+0319   082A           01332         MOVFW           TEMPFILE
+031A   05BD           01333         ANDWF           DRAM+11,F
+                      01334 
+031B   30FF           01335         MOVLW           0XFF
+031C   00AA           01336         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+031D   1403           01337         SETC            1
+Message[305]: Using default destination of 1 (file).
+031E   0DB1           01338         RLF                     DRAM+05
+Message[305]: Using default destination of 1 (file).
+031F   0DAA           01339         RLF                     TEMPFILE
+                      01340         
+0320   082A           01341         MOVFW           TEMPFILE
+0321   05AD           01342         ANDWF           DRAM+01,F
+                      01343 
+0322   30FF           01344         MOVLW           0XFF
+0323   00AA           01345         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+0324   1403           01346         SETC            1
+Message[305]: Using default destination of 1 (file).
+0325   0DE0           01347         RLF                     DRAM+34
+Message[305]: Using default destination of 1 (file).
+0326   0DAA           01348         RLF                     TEMPFILE
+                      01349         
+0327   082A           01350         MOVFW           TEMPFILE
+0328   05DC           01351         ANDWF           DRAM+30,F
+                      01352 
+0329   30FF           01353         MOVLW           0XFF
+032A   00AA           01354         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+032B   1403           01355         SETC            1
+Message[305]: Using default destination of 1 (file).
+032C   0DD0           01356         RLF                     DRAM+24
+Message[305]: Using default destination of 1 (file).
+032D   0DAA           01357         RLF                     TEMPFILE
+                      01358         
+032E   082A           01359         MOVFW           TEMPFILE
+032F   05CC           01360         ANDWF           DRAM+20,F
+                      01361 
+0330   30FF           01362         MOVLW           0XFF
+0331   00AA           01363         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+0332   1403           01364         SETC            1
+Message[305]: Using default destination of 1 (file).
+0333   0DC0           01365         RLF                     DRAM+14
+Message[305]: Using default destination of 1 (file).
+0334   0DAA           01366         RLF                     TEMPFILE
+                      01367         
+0335   082A           01368         MOVFW           TEMPFILE
+0336   05BC           01369         ANDWF           DRAM+10,F
+                      01370         
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 33
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0337   30FF           01371         MOVLW           0XFF
+0338   00AA           01372         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+0339   1403           01373         SETC            1
+Message[305]: Using default destination of 1 (file).
+033A   0DB0           01374         RLF                     DRAM+04
+Message[305]: Using default destination of 1 (file).
+033B   0DAA           01375         RLF                     TEMPFILE
+                      01376         
+033C   082A           01377         MOVFW           TEMPFILE
+033D   05AC           01378         ANDWF           DRAM+00,F
+                      01379 
+                      01380 
+Warning[203]: Found opcode in column 1. (RETURN)
+033E   0008           01381 RETURN
+                      01382 
+                      01383 
+                      01384 
+033F                  01385 GRP_GTB
+033F   300C           01386         MOVLW   0XC
+0340   00F1           01387         MOVWF   TESTER
+                      01388 
+0341   0870           01389         MOVF    GRP,W
+0342   0271           01390         SUBWF   TESTER,W
+0343   1903           01391         BTFSC   STATUS,Z
+0344   2B48           01392         GOTO    GRP_ETC
+                      01393 
+0345   1803           01394         BTFSC   STATUS,C
+0346   0000           01395         NOP             ;GOTO   GRP_LTC
+0347   2BB9           01396         GOTO    GRP_GTC
+0348                  01397 GRP_ETC
+                      01398         
+0348   30FF           01399         MOVLW           0XFF
+0349   00AA           01400         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+034A   1403           01401         SETC            1
+Message[305]: Using default destination of 1 (file).
+034B   0DE7           01402         RLF                     DRAM+3B
+Message[305]: Using default destination of 1 (file).
+034C   0DAA           01403         RLF                     TEMPFILE
+                      01404         
+034D   082A           01405         MOVFW           TEMPFILE
+034E   05E3           01406         ANDWF           DRAM+37,F
+                      01407 
+034F   30FF           01408         MOVLW           0XFF
+0350   00AA           01409         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+0351   1403           01410         SETC            1
+Message[305]: Using default destination of 1 (file).
+0352   0DD7           01411         RLF                     DRAM+2B
+Message[305]: Using default destination of 1 (file).
+0353   0DAA           01412         RLF                     TEMPFILE
+                      01413         
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 34
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0354   082A           01414         MOVFW           TEMPFILE
+0355   05D3           01415         ANDWF           DRAM+27,F
+                      01416 
+0356   30FF           01417         MOVLW           0XFF
+0357   00AA           01418         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+0358   1403           01419         SETC            1
+Message[305]: Using default destination of 1 (file).
+0359   0DC7           01420         RLF                     DRAM+1B
+Message[305]: Using default destination of 1 (file).
+035A   0DAA           01421         RLF                     TEMPFILE
+                      01422         
+035B   082A           01423         MOVFW           TEMPFILE
+035C   05C3           01424         ANDWF           DRAM+17,F
+                      01425 
+035D   30FF           01426         MOVLW           0XFF
+035E   00AA           01427         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+035F   1403           01428         SETC            1
+Message[305]: Using default destination of 1 (file).
+0360   0DB7           01429         RLF                     DRAM+0B
+Message[305]: Using default destination of 1 (file).
+0361   0DAA           01430         RLF                     TEMPFILE
+                      01431         
+0362   082A           01432         MOVFW           TEMPFILE
+0363   05B3           01433         ANDWF           DRAM+07,F
+                      01434 
+0364   30FF           01435         MOVLW           0XFF
+0365   00AA           01436         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+0366   1403           01437         SETC            1
+Message[305]: Using default destination of 1 (file).
+0367   0DE6           01438         RLF                     DRAM+3A
+Message[305]: Using default destination of 1 (file).
+0368   0DAA           01439         RLF                     TEMPFILE
+                      01440         
+0369   082A           01441         MOVFW           TEMPFILE
+036A   05E2           01442         ANDWF           DRAM+36,F
+                      01443         
+036B   30FF           01444         MOVLW           0XFF
+036C   00AA           01445         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+036D   1403           01446         SETC            1
+Message[305]: Using default destination of 1 (file).
+036E   0DD6           01447         RLF                     DRAM+2A
+Message[305]: Using default destination of 1 (file).
+036F   0DAA           01448         RLF                     TEMPFILE
+                      01449         
+0370   082A           01450         MOVFW           TEMPFILE
+0371   05D2           01451         ANDWF           DRAM+26,F
+                      01452 
+0372   30FF           01453         MOVLW           0XFF
+0373   00AA           01454         MOVWF           TEMPFILE
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 35
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[211]: Extraneous arguments on the line.
+0374   1403           01455         SETC            1
+Message[305]: Using default destination of 1 (file).
+0375   0DC6           01456         RLF                     DRAM+1A
+Message[305]: Using default destination of 1 (file).
+0376   0DAA           01457         RLF                     TEMPFILE
+                      01458         
+0377   082A           01459         MOVFW           TEMPFILE
+0378   05C2           01460         ANDWF           DRAM+16,F
+                      01461 
+                      01462         
+0379   30FF           01463         MOVLW           0XFF
+037A   00AA           01464         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+037B   1403           01465         SETC            1
+Message[305]: Using default destination of 1 (file).
+037C   0DB6           01466         RLF                     DRAM+0A
+Message[305]: Using default destination of 1 (file).
+037D   0DAA           01467         RLF                     TEMPFILE
+                      01468         
+037E   082A           01469         MOVFW           TEMPFILE
+037F   05B2           01470         ANDWF           DRAM+06,F
+                      01471 
+0380   30FF           01472         MOVLW           0XFF
+0381   00AA           01473         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+0382   1403           01474         SETC            1
+Message[305]: Using default destination of 1 (file).
+0383   0DE5           01475         RLF                     DRAM+39
+Message[305]: Using default destination of 1 (file).
+0384   0DAA           01476         RLF                     TEMPFILE
+                      01477         
+0385   082A           01478         MOVFW           TEMPFILE
+0386   05E1           01479         ANDWF           DRAM+35,F
+                      01480 
+0387   30FF           01481         MOVLW           0XFF
+0388   00AA           01482         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+0389   1403           01483         SETC            1
+Message[305]: Using default destination of 1 (file).
+038A   0DD5           01484         RLF                     DRAM+29
+Message[305]: Using default destination of 1 (file).
+038B   0DAA           01485         RLF                     TEMPFILE
+                      01486         
+038C   082A           01487         MOVFW           TEMPFILE
+038D   05D1           01488         ANDWF           DRAM+25,F
+                      01489 
+038E   30FF           01490         MOVLW           0XFF
+038F   00AA           01491         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+0390   1403           01492         SETC            1
+Message[305]: Using default destination of 1 (file).
+0391   0DC5           01493         RLF                     DRAM+19
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 36
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Message[305]: Using default destination of 1 (file).
+0392   0DAA           01494         RLF                     TEMPFILE
+                      01495         
+0393   082A           01496         MOVFW           TEMPFILE
+0394   05C1           01497         ANDWF           DRAM+15,F
+                      01498 
+0395   30FF           01499         MOVLW           0XFF
+0396   00AA           01500         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+0397   1403           01501         SETC            1
+Message[305]: Using default destination of 1 (file).
+0398   0DB5           01502         RLF                     DRAM+09
+Message[305]: Using default destination of 1 (file).
+0399   0DAA           01503         RLF                     TEMPFILE
+                      01504         
+039A   082A           01505         MOVFW           TEMPFILE
+039B   05B1           01506         ANDWF           DRAM+05,F
+                      01507 
+039C   30FF           01508         MOVLW           0XFF
+039D   00AA           01509         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+039E   1403           01510         SETC            1
+Message[305]: Using default destination of 1 (file).
+039F   0DE4           01511         RLF                     DRAM+38
+Message[305]: Using default destination of 1 (file).
+03A0   0DAA           01512         RLF                     TEMPFILE
+                      01513         
+03A1   082A           01514         MOVFW           TEMPFILE
+03A2   05E0           01515         ANDWF           DRAM+34,F
+                      01516 
+03A3   30FF           01517         MOVLW           0XFF
+03A4   00AA           01518         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+03A5   1403           01519         SETC            1
+Message[305]: Using default destination of 1 (file).
+03A6   0DD4           01520         RLF                     DRAM+28
+Message[305]: Using default destination of 1 (file).
+03A7   0DAA           01521         RLF                     TEMPFILE
+                      01522         
+03A8   082A           01523         MOVFW           TEMPFILE
+03A9   05D0           01524         ANDWF           DRAM+24,F
+                      01525 
+03AA   30FF           01526         MOVLW           0XFF
+03AB   00AA           01527         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+03AC   1403           01528         SETC            1
+Message[305]: Using default destination of 1 (file).
+03AD   0DC4           01529         RLF                     DRAM+18
+Message[305]: Using default destination of 1 (file).
+03AE   0DAA           01530         RLF                     TEMPFILE
+                      01531         
+03AF   082A           01532         MOVFW           TEMPFILE
+03B0   05C0           01533         ANDWF           DRAM+14,F
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 37
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      01534         
+03B1   30FF           01535         MOVLW           0XFF
+03B2   00AA           01536         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+03B3   1403           01537         SETC            1
+Message[305]: Using default destination of 1 (file).
+03B4   0DB4           01538         RLF                     DRAM+08
+Message[305]: Using default destination of 1 (file).
+03B5   0DAA           01539         RLF                     TEMPFILE
+                      01540         
+03B6   082A           01541         MOVFW           TEMPFILE
+03B7   05B0           01542         ANDWF           DRAM+04,F
+                      01543 
+                      01544 
+Warning[203]: Found opcode in column 1. (RETURN)
+03B8   0008           01545 RETURN
+03B9                  01546 GRP_GTC
+                      01547 ;GRP == "D"
+03B9                  01548 GRP_ETD
+03B9   30FF           01549         MOVLW           0XFF
+03BA   00AA           01550         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+03BB   1403           01551         SETC            1
+Message[305]: Using default destination of 1 (file).
+03BC   0DEB           01552         RLF                     DRAM+3F
+Message[305]: Using default destination of 1 (file).
+03BD   0DAA           01553         RLF                     TEMPFILE
+                      01554         
+03BE   082A           01555         MOVFW           TEMPFILE
+03BF   05E7           01556         ANDWF           DRAM+3B,F
+                      01557 
+03C0   30FF           01558         MOVLW           0XFF
+03C1   00AA           01559         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+03C2   1403           01560         SETC            1
+Message[305]: Using default destination of 1 (file).
+03C3   0DDB           01561         RLF                     DRAM+2F
+Message[305]: Using default destination of 1 (file).
+03C4   0DAA           01562         RLF                     TEMPFILE
+                      01563         
+03C5   082A           01564         MOVFW           TEMPFILE
+03C6   05D7           01565         ANDWF           DRAM+2B,F
+                      01566 
+03C7   30FF           01567         MOVLW           0XFF
+03C8   00AA           01568         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+03C9   1403           01569         SETC            1
+Message[305]: Using default destination of 1 (file).
+03CA   0DCB           01570         RLF                     DRAM+1F
+Message[305]: Using default destination of 1 (file).
+03CB   0DAA           01571         RLF                     TEMPFILE
+                      01572         
+03CC   082A           01573         MOVFW           TEMPFILE
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 38
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+03CD   05C7           01574         ANDWF           DRAM+1B,F
+                      01575 
+03CE   30FF           01576         MOVLW           0XFF
+03CF   00AA           01577         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+03D0   1403           01578         SETC            1
+Message[305]: Using default destination of 1 (file).
+03D1   0DBB           01579         RLF                     DRAM+0F
+Message[305]: Using default destination of 1 (file).
+03D2   0DAA           01580         RLF                     TEMPFILE
+                      01581         
+03D3   082A           01582         MOVFW           TEMPFILE
+03D4   05B7           01583         ANDWF           DRAM+0B,F
+                      01584 
+03D5   30FF           01585         MOVLW           0XFF
+03D6   00AA           01586         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+03D7   1403           01587         SETC            1
+Message[305]: Using default destination of 1 (file).
+03D8   0DEA           01588         RLF                     DRAM+3E
+Message[305]: Using default destination of 1 (file).
+03D9   0DAA           01589         RLF                     TEMPFILE
+                      01590         
+03DA   082A           01591         MOVFW           TEMPFILE
+03DB   05E6           01592         ANDWF           DRAM+3A,F
+                      01593         
+03DC   30FF           01594         MOVLW           0XFF
+03DD   00AA           01595         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+03DE   1403           01596         SETC            1
+Message[305]: Using default destination of 1 (file).
+03DF   0DDA           01597         RLF                     DRAM+2E
+Message[305]: Using default destination of 1 (file).
+03E0   0DAA           01598         RLF                     TEMPFILE
+                      01599         
+03E1   082A           01600         MOVFW           TEMPFILE
+03E2   05D6           01601         ANDWF           DRAM+2A,F
+                      01602 
+03E3   30FF           01603         MOVLW           0XFF
+03E4   00AA           01604         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+03E5   1403           01605         SETC            1
+Message[305]: Using default destination of 1 (file).
+03E6   0DCA           01606         RLF                     DRAM+1E
+Message[305]: Using default destination of 1 (file).
+03E7   0DAA           01607         RLF                     TEMPFILE
+                      01608         
+03E8   082A           01609         MOVFW           TEMPFILE
+03E9   05C6           01610         ANDWF           DRAM+1A,F
+                      01611 
+                      01612         
+03EA   30FF           01613         MOVLW           0XFF
+03EB   00AA           01614         MOVWF           TEMPFILE
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 39
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[211]: Extraneous arguments on the line.
+03EC   1403           01615         SETC            1
+Message[305]: Using default destination of 1 (file).
+03ED   0DBA           01616         RLF                     DRAM+0E
+Message[305]: Using default destination of 1 (file).
+03EE   0DAA           01617         RLF                     TEMPFILE
+                      01618         
+03EF   082A           01619         MOVFW           TEMPFILE
+03F0   05B6           01620         ANDWF           DRAM+0A,F
+                      01621 
+03F1   30FF           01622         MOVLW           0XFF
+03F2   00AA           01623         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+03F3   1403           01624         SETC            1
+Message[305]: Using default destination of 1 (file).
+03F4   0DE9           01625         RLF                     DRAM+3D
+Message[305]: Using default destination of 1 (file).
+03F5   0DAA           01626         RLF                     TEMPFILE
+                      01627         
+03F6   082A           01628         MOVFW           TEMPFILE
+03F7   05E5           01629         ANDWF           DRAM+39,F
+                      01630 
+03F8   30FF           01631         MOVLW           0XFF
+03F9   00AA           01632         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+03FA   1403           01633         SETC            1
+Message[305]: Using default destination of 1 (file).
+03FB   0DD9           01634         RLF                     DRAM+2D
+Message[305]: Using default destination of 1 (file).
+03FC   0DAA           01635         RLF                     TEMPFILE
+                      01636         
+03FD   082A           01637         MOVFW           TEMPFILE
+03FE   05D5           01638         ANDWF           DRAM+29,F
+                      01639 
+03FF   30FF           01640         MOVLW           0XFF
+0400   00AA           01641         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+0401   1403           01642         SETC            1
+Message[305]: Using default destination of 1 (file).
+0402   0DC9           01643         RLF                     DRAM+1D
+Message[305]: Using default destination of 1 (file).
+0403   0DAA           01644         RLF                     TEMPFILE
+                      01645         
+0404   082A           01646         MOVFW           TEMPFILE
+0405   05C5           01647         ANDWF           DRAM+19,F
+                      01648 
+0406   30FF           01649         MOVLW           0XFF
+0407   00AA           01650         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+0408   1403           01651         SETC            1
+Message[305]: Using default destination of 1 (file).
+0409   0DB9           01652         RLF                     DRAM+0D
+Message[305]: Using default destination of 1 (file).
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 40
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+040A   0DAA           01653         RLF                     TEMPFILE
+                      01654         
+040B   082A           01655         MOVFW           TEMPFILE
+040C   05B5           01656         ANDWF           DRAM+09,F
+                      01657 
+040D   30FF           01658         MOVLW           0XFF
+040E   00AA           01659         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+040F   1403           01660         SETC            1
+Message[305]: Using default destination of 1 (file).
+0410   0DE8           01661         RLF                     DRAM+3C
+Message[305]: Using default destination of 1 (file).
+0411   0DAA           01662         RLF                     TEMPFILE
+                      01663         
+0412   082A           01664         MOVFW           TEMPFILE
+0413   05E4           01665         ANDWF           DRAM+38,F
+                      01666 
+0414   30FF           01667         MOVLW           0XFF
+0415   00AA           01668         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+0416   1403           01669         SETC            1
+Message[305]: Using default destination of 1 (file).
+0417   0DD8           01670         RLF                     DRAM+2C
+Message[305]: Using default destination of 1 (file).
+0418   0DAA           01671         RLF                     TEMPFILE
+                      01672         
+0419   082A           01673         MOVFW           TEMPFILE
+041A   05D4           01674         ANDWF           DRAM+28,F
+                      01675 
+041B   30FF           01676         MOVLW           0XFF
+041C   00AA           01677         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+041D   1403           01678         SETC            1
+Message[305]: Using default destination of 1 (file).
+041E   0DC8           01679         RLF                     DRAM+1C
+Message[305]: Using default destination of 1 (file).
+041F   0DAA           01680         RLF                     TEMPFILE
+                      01681         
+0420   082A           01682         MOVFW           TEMPFILE
+0421   05C4           01683         ANDWF           DRAM+18,F
+                      01684         
+0422   30FF           01685         MOVLW           0XFF
+0423   00AA           01686         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+0424   1403           01687         SETC            1
+Message[305]: Using default destination of 1 (file).
+0425   0DB8           01688         RLF                     DRAM+0C
+Message[305]: Using default destination of 1 (file).
+0426   0DAA           01689         RLF                     TEMPFILE
+                      01690         
+0427   082A           01691         MOVFW           TEMPFILE
+0428   05B4           01692         ANDWF           DRAM+08,F
+                      01693         
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 41
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[203]: Found opcode in column 1. (RETURN)
+0429   0008           01694 RETURN
+                      01695 ;#################################
+                      01696 
+                      01697 
+                      01698 
+                      01699 
+                      01700 
+                      01701 
+                      01702 
+                      01703 
+                      01704 
+                      01705 
+                      01706 
+                      01707 
+0800                  01708         ORG 0X800
+                      01709         
+0800                  01710 CHAR
+                      01711 ;       MOVLW   .1
+                      01712 ;       ANDWF   FONT,F
+                      01713 ;       
+                      01714 ;       BTFSS   STATUS,Z
+                      01715 ;       GOTO    L_FONT
+                      01716 
+                      01717 
+0800   0872           01718         MOVFW   NUMBER
+0801   0782           01719         ADDWF   PCL,F
+                      01720 
+0802   280C           01721         GOTO    ZERO
+                      01722 
+0803   2821           01723         GOTO    ONE
+                      01724 
+0804   2834           01725         GOTO    TWO
+                      01726 
+0805   2847           01727         GOTO    THREE
+                      01728         
+0806   285A           01729         GOTO    FOUR
+                      01730         
+0807   286D           01731         GOTO    FIVE
+                      01732         
+0808   2880           01733         GOTO    SIX
+                      01734         
+0809   2893           01735         GOTO    SEVEN
+                      01736 
+080A   28A6           01737         GOTO    EIGHT
+                      01738 
+080B   28B9           01739         GOTO    NINE
+                      01740                 
+                      01741 ;L_FONT
+                      01742 ;       
+                      01743 ;       MOVFW   NUMBER
+                      01744 ;       ADDWF   PCL,F
+                      01745 ;       
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 42
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      01746 ;       GOTO    L_ZERO
+                      01747 ;       
+                      01748 ;       GOTO    L_ONE
+                      01749 ;
+                      01750 ;       GOTO    L_TWO
+                      01751 ;
+                      01752 ;       GOTO    L_THREE
+                      01753 ;
+                      01754 ;       GOTO    L_FOUR
+                      01755 ;
+                      01756 ;       GOTO    L_FIVE
+                      01757 ;
+                      01758 ;       GOTO    L_SIX
+                      01759 ;
+                      01760 ;       GOTO    L_SEVEN
+                      01761 ;
+                      01762 ;       GOTO    L_EIGHT
+                      01763 ;
+                      01764 ;       GOTO    L_NINE
+                      01765 ;
+                      01766 
+                      01767 
+                      01768 
+                      01769 
+Warning[207]: Found label after column 1. (ZERO)
+080C                  01770         ZERO
+080C   0873           01771                         MOVFW   BTCOUNT
+080D   0782           01772                         ADDWF   PCL, F
+                      01773 
+080E   3408           01774                         DT      8
+080F   34C7           01775                         DT      B'11000111'
+0810   3483           01776                         DT      B'10000011'
+0811   3411           01777                         DT      B'00010001'
+0812   3439           01778                         DT      B'00111001'
+0813   3439           01779                         DT      B'00111001'
+0814   3439           01780                         DT      B'00111001'
+0815   3439           01781                         DT      B'00111001'
+0816   3439           01782                         DT      B'00111001'
+0817   3439           01783                         DT      B'00111001'
+0818   3439           01784                         DT      B'00111001'
+0819   3439           01785                         DT      B'00111001'
+081A   3439           01786                         DT      B'00111001'
+081B   3439           01787                         DT      B'00111001'
+081C   3411           01788                         DT      B'00010001'
+081D   3483           01789                         DT      B'10000011'
+081E   34C7           01790                         DT      B'11000111'
+081F   3000           01791                         MOVLW   .0
+0820   008A           01792                         MOVWF   PCLATH
+                      01793 
+Warning[207]: Found label after column 1. (ONE)
+0821                  01794         ONE
+0821   0873           01795                         MOVFW   BTCOUNT
+0822   0782           01796                         ADDWF   PCL, F
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 43
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      01797 
+0823   3407           01798                         DT      7
+0824   34CF           01799                         DT      B'11001111'
+0825   34CF           01800                         DT      B'11001111'
+0826   348F           01801                         DT      B'10001111'
+0827   340F           01802                         DT      B'00001111'
+0828   344F           01803                         DT      B'01001111'
+0829   34CF           01804                         DT      B'11001111'
+082A   34CF           01805                         DT      B'11001111'
+082B   34CF           01806                         DT      B'11001111'
+082C   34CF           01807                         DT      B'11001111'
+082D   34CF           01808                         DT      B'11001111'
+082E   34CF           01809                         DT      B'11001111'
+082F   34CF           01810                         DT      B'11001111'
+0830   34CF           01811                         DT      B'11001111'
+0831   34CF           01812                         DT      B'11001111'
+0832   3403           01813                         DT      B'00000011'
+0833   3403           01814                         DT      B'00000011'
+                      01815 
+Warning[207]: Found label after column 1. (TWO)
+0834                  01816         TWO
+0834   0873           01817                         MOVFW   BTCOUNT
+0835   0782           01818                         ADDWF   PCL, F
+                      01819 
+0836   3408           01820                         DT      8
+0837   3487           01821                         DT      B'10000111'
+0838   3403           01822                         DT      B'00000011'
+0839   3431           01823                         DT      B'00110001'
+083A   34F9           01824                         DT      B'11111001'
+083B   34F9           01825                         DT      B'11111001'
+083C   34F9           01826                         DT      B'11111001'
+083D   34F9           01827                         DT      B'11111001'
+083E   34F1           01828                         DT      B'11110001'
+083F   3483           01829                         DT      B'10000011'
+0840   3407           01830                         DT      B'00000111'
+0841   343F           01831                         DT      B'00111111'
+0842   343D           01832                         DT      B'00111101'
+0843   3439           01833                         DT      B'00111001'
+0844   3439           01834                         DT      B'00111001'
+0845   3401           01835                         DT      B'00000001'
+0846   3401           01836                         DT      B'00000001'
+                      01837                                 
+                      01838 
+Warning[207]: Found label after column 1. (THREE)
+0847                  01839         THREE
+0847   0873           01840                         MOVFW   BTCOUNT
+0848   0782           01841                         ADDWF   PCL, F
+                      01842 
+0849   3408           01843                         DT      8
+084A   3487           01844                         DT      B'10000111'
+084B   3403           01845                         DT      B'00000011'
+084C   3431           01846                         DT      B'00110001'
+084D   34F9           01847                         DT      B'11111001'
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 44
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+084E   34F9           01848                         DT      B'11111001'
+084F   34F9           01849                         DT      B'11111001'
+0850   34F1           01850                         DT      B'11110001'
+0851   34C3           01851                         DT      B'11000011'
+0852   34C3           01852                         DT      B'11000011'
+0853   34F1           01853                         DT      B'11110001'
+0854   34F9           01854                         DT      B'11111001'
+0855   34F9           01855                         DT      B'11111001'
+0856   34F9           01856                         DT      B'11111001'
+0857   3431           01857                         DT      B'00110001'
+0858   3403           01858                         DT      B'00000011'
+0859   3487           01859                         DT      B'10000111'
+                      01860                         
+                      01861 
+Warning[207]: Found label after column 1. (FOUR)
+085A                  01862         FOUR
+085A   0873           01863                         MOVFW   BTCOUNT
+085B   0782           01864                         ADDWF   PCL, F
+                      01865 
+085C   3408           01866                         DT      8
+085D   34FD           01867                         DT      B'11111101'
+085E   34F9           01868                         DT      B'11111001'
+085F   34E9           01869                         DT      B'11101001'
+0860   34C9           01870                         DT      B'11001001'
+0861   34C9           01871                         DT      B'11001001'
+0862   34C9           01872                         DT      B'11001001'
+0863   3499           01873                         DT      B'10011001'
+0864   3439           01874                         DT      B'00111001'
+0865   3401           01875                         DT      B'00000001'
+0866   3401           01876                         DT      B'00000001'
+0867   34F9           01877                         DT      B'11111001'
+0868   34F9           01878                         DT      B'11111001'
+0869   34F9           01879                         DT      B'11111001'
+086A   34F9           01880                         DT      B'11111001'
+086B   34F9           01881                         DT      B'11111001'
+086C   34FB           01882                         DT      B'11111011'
+                      01883 
+Warning[207]: Found label after column 1. (FIVE)
+086D                  01884         FIVE
+086D   0873           01885                         MOVFW   BTCOUNT
+086E   0782           01886                         ADDWF   PCL, F
+                      01887 
+086F   3408           01888                         DT      8
+0870   3401           01889                         DT      B'00000001'
+0871   3401           01890                         DT      B'00000001'
+0872   3439           01891                         DT      B'00111001'
+0873   343B           01892                         DT      B'00111011'
+0874   343F           01893                         DT      B'00111111'
+0875   343F           01894                         DT      B'00111111'
+0876   343F           01895                         DT      B'00111111'
+0877   3407           01896                         DT      B'00000111'
+0878   3403           01897                         DT      B'00000011'
+0879   34F1           01898                         DT      B'11110001'
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 45
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+087A   34F9           01899                         DT      B'11111001'
+087B   34F9           01900                         DT      B'11111001'
+087C   34F9           01901                         DT      B'11111001'
+087D   34F1           01902                         DT      B'11110001'
+087E   3403           01903                         DT      B'00000011'
+087F   3407           01904                         DT      B'00000111'
+                      01905 
+                      01906 
+Warning[207]: Found label after column 1. (SIX)
+0880                  01907         SIX
+0880   0873           01908                         MOVFW   BTCOUNT
+0881   0782           01909                         ADDWF   PCL, F
+                      01910 
+0882   3408           01911                         DT      8
+0883   34C7           01912                         DT      B'11000111'
+0884   3483           01913                         DT      B'10000011'
+0885   3419           01914                         DT      B'00011001'
+0886   3439           01915                         DT      B'00111001'
+0887   343F           01916                         DT      B'00111111'
+0888   343F           01917                         DT      B'00111111'
+0889   343F           01918                         DT      B'00111111'
+088A   3427           01919                         DT      B'00100111'
+088B   3403           01920                         DT      B'00000011'
+088C   3411           01921                         DT      B'00010001'
+088D   3439           01922                         DT      B'00111001'
+088E   3439           01923                         DT      B'00111001'
+088F   3439           01924                         DT      B'00111001'
+0890   3411           01925                         DT      B'00010001'
+0891   3483           01926                         DT      B'10000011'
+0892   34C7           01927                         DT      B'11000111'
+                      01928 
+Warning[207]: Found label after column 1. (SEVEN)
+0893                  01929         SEVEN   
+0893   0873           01930                         MOVFW   BTCOUNT
+0894   0782           01931                         ADDWF   PCL, F
+                      01932 
+0895   3408           01933                         DT      8       
+0896   3401           01934                         DT      B'00000001'
+0897   3401           01935                         DT      B'00000001'
+0898   3439           01936                         DT      B'00111001'
+0899   3439           01937                         DT      B'00111001'
+089A   34F9           01938                         DT      B'11111001'
+089B   34F9           01939                         DT      B'11111001'
+089C   34F9           01940                         DT      B'11111001'
+089D   34F3           01941                         DT      B'11110011'
+089E   34E7           01942                         DT      B'11100111'
+089F   34CF           01943                         DT      B'11001111'
+08A0   34CF           01944                         DT      B'11001111'
+08A1   34CF           01945                         DT      B'11001111'
+08A2   34CF           01946                         DT      B'11001111'
+08A3   34CF           01947                         DT      B'11001111'
+08A4   34CF           01948                         DT      B'11001111'
+08A5   34CF           01949                         DT      B'11001111'
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 46
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      01950                                 
+Warning[207]: Found label after column 1. (EIGHT)
+08A6                  01951         EIGHT
+08A6   0873           01952                         MOVFW   BTCOUNT
+08A7   0782           01953                         ADDWF   PCL, F
+                      01954 
+08A8   3408           01955                         DT      8
+08A9   34C7           01956                         DT      B'11000111'
+08AA   3483           01957                         DT      B'10000011'
+08AB   3411           01958                         DT      B'00010001'
+08AC   3439           01959                         DT      B'00111001'
+08AD   3439           01960                         DT      B'00111001'
+08AE   3439           01961                         DT      B'00111001'
+08AF   3493           01962                         DT      B'10010011'
+08B0   34C7           01963                         DT      B'11000111'
+08B1   3483           01964                         DT      B'10000011'
+08B2   3411           01965                         DT      B'00010001'
+08B3   3439           01966                         DT      B'00111001'
+08B4   3439           01967                         DT      B'00111001'
+08B5   3439           01968                         DT      B'00111001'
+08B6   3411           01969                         DT      B'00010001'
+08B7   3483           01970                         DT      B'10000011'
+08B8   34C7           01971                         DT      B'11000111'
+                      01972 
+Warning[207]: Found label after column 1. (NINE)
+08B9                  01973         NINE
+08B9   0873           01974                         MOVFW   BTCOUNT
+08BA   0782           01975                         ADDWF   PCL, F
+                      01976 
+08BB   3408           01977                         DT      8
+08BC   34C7           01978                         DT      B'11000111'
+08BD   3483           01979                         DT      B'10000011'
+08BE   3411           01980                         DT      B'00010001'
+08BF   3439           01981                         DT      B'00111001'
+08C0   3439           01982                         DT      B'00111001'
+08C1   3439           01983                         DT      B'00111001'
+08C2   3411           01984                         DT      B'00010001'
+08C3   3481           01985                         DT      B'10000001'
+08C4   34C9           01986                         DT      B'11001001'
+08C5   34F9           01987                         DT      B'11111001'
+08C6   34F9           01988                         DT      B'11111001'
+08C7   34F9           01989                         DT      B'11111001'
+08C8   3439           01990                         DT      B'00111001'
+08C9   3439           01991                         DT      B'00111001'
+08CA   3483           01992                         DT      B'10000011'
+08CB   34C7           01993                         DT      B'11000111'
+                      01994 
+                      01995 
+                      01996 ;
+                      01997 ;       L_ZERO
+                      01998 ;
+                      01999 ;                       MOVFW   BTCOUNT
+                      02000 ;                       ADDWF   PCL, F
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 47
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      02001 ;
+                      02002 ;                       DT      8
+                      02003 ;                       DT      B'11111111'
+                      02004 ;                       DT      B'11111111'
+                      02005 ;                       DT      B'11111111'
+                      02006 ;                       DT      B'11111111'
+                      02007 ;                       DT      B'11111111'
+                      02008 ;                       DT      B'11111111'
+                      02009 ;                       DT      B'11111111'
+                      02010 ;                       DT      B'11111111'
+                      02011 ;                       DT      B'11111111'
+                      02012 ;                       DT      B'11111111'
+                      02013 ;                       DT      B'11111111'
+                      02014 ;                       DT      B'11111111'
+                      02015 ;                       DT      B'11111111'
+                      02016 ;                       DT      B'11111111'
+                      02017 ;                       DT      B'11111111'
+                      02018 ;                       DT      B'11111111'
+                      02019 ;                       
+                      02020 ;       L_ONE
+                      02021 ;
+                      02022 ;                       MOVFW   BTCOUNT
+                      02023 ;                       ADDWF   PCL, F
+                      02024 ;
+                      02025 ;                       DT      8
+                      02026 ;                       DT      B'11111111'
+                      02027 ;                       DT      B'11111111'
+                      02028 ;                       DT      B'11111111'
+                      02029 ;                       DT      B'11111111'
+                      02030 ;                       DT      B'11111111'
+                      02031 ;                       DT      B'11111111'
+                      02032 ;                       DT      B'11111111'
+                      02033 ;                       DT      B'11111111'
+                      02034 ;                       DT      B'11011111'
+                      02035 ;                       DT      B'10011111'
+                      02036 ;                       DT      B'01011111'
+                      02037 ;                       DT      B'11011111'
+                      02038 ;                       DT      B'11011111'
+                      02039 ;                       DT      B'11011111'
+                      02040 ;                       DT      B'11011111'
+                      02041 ;                       DT      B'00000111'
+                      02042 ;
+                      02043 ;       L_TWO
+                      02044 ;       
+                      02045 ;       L_THREE
+                      02046 ;       
+                      02047 ;       L_FOUR
+                      02048 ;
+                      02049 ;       L_FIVE
+                      02050 ;
+                      02051 ;       L_SIX
+                      02052 ;
+                      02053 ;       L_SEVEN
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 48
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      02054 ;
+                      02055 ;       L_EIGHT
+                      02056 ;
+                      02057 ;       L_NINE
+                      02058 
+                      02059 
+                      02060 
+2100                  02061         ORG     0x2100                          ; data EEPROM location
+2100   0001 0002 0003 02062         DE      1,2,3,4                         ; define first four EEPROM locations as 1, 2, 3, and 4
+       0004 
+                      02063 
+                      02064 
+                      02065 
+                      02066 
+                      02067         END                       ; directive 'end of program'
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 49
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+.                                 00000000
+ABDEN                             00000000
+ABDOVF                            00000007
+ADCON0                            0000001F
+ADCON1                            0000009F
+ADCS0                             00000004
+ADCS1                             00000005
+ADCS2                             00000006
+ADDEN                             00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+ANS0                              00000000
+ANS1                              00000001
+ANS10                             00000002
+ANS11                             00000003
+ANS2                              00000002
+ANS3                              00000003
+ANS4                              00000004
+ANS5                              00000005
+ANS6                              00000006
+ANS7                              00000007
+ANS8                              00000000
+ANS9                              00000001
+ANSEL                             0000011E
+ANSELH                            0000011F
+A_OFF                             BCF     PORTC,  0
+A_ON                              BSF     PORTC,  0
+BAUDCTL                           0000009B
+BF                                00000000
+BRG0                              00000000
+BRG1                              00000001
+BRG10                             00000002
+BRG11                             00000003
+BRG12                             00000004
+BRG13                             00000005
+BRG14                             00000006
+BRG15                             00000007
+BRG16                             00000003
+BRG2                              00000002
+BRG3                              00000003
+BRG4                              00000004
+BRG5                              00000005
+BRG6                              00000006
+BRG7                              00000007
+BRG8                              00000000
+BRG9                              00000001
+BRGH                              00000002
+BTCOUNT                           00000073
+B_OFF                             BCF     PORTC,  1
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 50
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+B_ON                              BSF     PORTC,  1
+C                                 00000000
+C1CH0                             00000000
+C1CH1                             00000001
+C1IE                              00000005
+C1IF                              00000005
+C1OE                              00000005
+C1ON                              00000007
+C1OUT                             00000006
+C1POL                             00000004
+C1R                               00000002
+C1SEN                             00000005
+C1VREN                            00000007
+C2CH0                             00000000
+C2CH1                             00000001
+C2IE                              00000006
+C2IF                              00000006
+C2OE                              00000005
+C2ON                              00000007
+C2OUT                             00000006
+C2POL                             00000004
+C2R                               00000002
+C2REN                             00000004
+C2SYNC                            00000000
+C2VREN                            00000006
+CCP1CON                           00000017
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCPR                              00000015
+CCPR1H                            00000016
+CCPR1L                            00000015
+CHAR                              00000800
+CHS0                              00000002
+CHS1                              00000003
+CHS2                              00000004
+CHS3                              00000005
+CKE                               00000006
+CKP                               00000004
+CLK_OFF                           BCF     PORTC,  7
+CLK_ON                            BSF     PORTC,  7
+CLRAM                             0000012B
+CM1CON0                           00000119
+CM2CON0                           0000011A
+CM2CON1                           0000011B
+COUNT0                            00000025
+COUNT1                            00000026
+COUNT2                            00000027
+COUNT3                            00000028
+CREN                              00000004
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 51
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CSRC                              00000007
+CSR_ET7                           00000160
+CSR_ETF                           000001CA
+CSR_ETF8                          00000244
+CSR_GT7                           000001C1
+CSR_GTF                           0000023B
+CSR_GTF8                          000002C4
+CSR_LT7                           00000160
+CSR_LTF                           000001CA
+CSR_LTF8                          00000244
+CURSORX                           0000006E
+CURSORY                           0000006F
+D                                 00000005
+D0                                00000120
+D1                                00000122
+DATALATCH                         00000115
+DATA_ADDRESS                      00000005
+DAT_OFF                           BCF     PORTC,  2
+DAT_ON                            BSF     PORTC,  2
+DC                                00000001
+DC1B0                             00000004
+DC1B1                             00000005
+DELAYMS                           00000021
+DELAYS                            00000022
+DELAYUS                           00000020
+DELAY_MS                          00000146
+DELAY_ONEMS                       0000013F
+DELAY_ONESEC                      0000014B
+DELAY_SEC                         00000152
+DELAY_US                          00000137
+DISP                              000000E4
+DISPLAY                           000000EA
+DL0                               0000011C
+DL1                               00000124
+DP0                               000000EA
+DRAM                              0000002C
+DRM0                              0000012F
+DSP0                              000000EE
+DSP1                              000000F8
+DSP2                              00000102
+DSP3                              0000010C
+DUMP                              000000AA
+D_A                               00000005
+D_NOT_A                           00000005
+ECCPAS                            0000001D
+ECCPAS0                           00000004
+ECCPAS1                           00000005
+ECCPAS2                           00000006
+ECCPASE                           00000007
+EEADR                             0000010D
+EEADRH                            0000010F
+EECON1                            0000018C
+EECON2                            0000018D
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 52
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+EEDAT                             0000010C
+EEDATA                            0000010C
+EEDATH                            0000010E
+EEIE                              00000004
+EEIF                              00000004
+EEPGD                             00000007
+EIGHT                             000008A6
+F                                 00000001
+FERR                              00000002
+FIVE                              0000086D
+FONT                              00000076
+FOUR                              0000085A
+FSR                               00000004
+GIE                               00000007
+GO                                00000001
+GO_DONE                           00000001
+GO_NOT_DONE                       00000001
+GRP                               00000070
+GRP_ETB                           000002CE
+GRP_ETC                           00000348
+GRP_ETD                           000003B9
+GRP_GTB                           0000033F
+GRP_GTC                           000003B9
+HTS                               00000002
+I2C_DATA                          00000005
+I2C_READ                          00000002
+I2C_START                         00000003
+I2C_STOP                          00000004
+INDF                              00000000
+INIT                              00000010
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IOC                               00000096
+IOC0                              00000000
+IOC1                              00000001
+IOC2                              00000002
+IOC3                              00000003
+IOC4                              00000004
+IOC5                              00000005
+IOCA                              00000096
+IOCA0                             00000000
+IOCA1                             00000001
+IOCA2                             00000002
+IOCA3                             00000003
+IOCA4                             00000004
+IOCA5                             00000005
+IOCB                              00000116
+IOCB4                             00000004
+IOCB5                             00000005
+IOCB6                             00000006
+IOCB7                             00000007
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 53
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+IRCF0                             00000004
+IRCF1                             00000005
+IRCF2                             00000006
+IRP                               00000007
+LTS                               00000001
+MAIN                              00000021
+MC1OUT                            00000007
+MC2OUT                            00000006
+MILSEC                            00000023
+MN0                               000000E6
+MSEC                              00000141
+MSEC0                             00000147
+MSK                               00000093
+MSK0                              00000000
+MSK1                              00000001
+MSK2                              00000002
+MSK3                              00000003
+MSK4                              00000004
+MSK5                              00000005
+MSK6                              00000006
+MSK7                              00000007
+NINE                              000008B9
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
+NOT_BOR                           00000000
+NOT_DONE                          00000001
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_RABPU                         00000007
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+NOT_W                             00000002
+NOT_WRITE                         00000002
+NUMBER                            00000072
+OERR                              00000001
+OE_OFF                            BCF     PORTC,  5
+OE_ON                             BSF     PORTC,  5
+ONE                               00000821
+OPTION_REG                        00000081
+OSCCON                            0000008F
+OSCTUNE                           00000090
+OSFIE                             00000007
+OSFIF                             00000007
+OSTS                              00000003
+P                                 00000004
+P1M0                              00000006
+P1M1                              00000007
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PDC0                              00000000
+PDC1                              00000001
+PDC2                              00000002
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 54
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PDC3                              00000003
+PDC4                              00000004
+PDC5                              00000005
+PDC6                              00000006
+PEIE                              00000006
+PIE1                              0000008C
+PIE2                              0000008D
+PIR1                              0000000C
+PIR2                              0000000D
+POINTER                           0000006C
+PORTA                             00000005
+PORTB                             00000006
+PORTC                             00000007
+PR2                               00000092
+PRSEN                             00000007
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+PSSAC0                            00000002
+PSSAC1                            00000003
+PSSBD0                            00000000
+PSSBD1                            00000001
+PSTRCON                           0000019D
+PT                                0000002B
+PULSR                             00000002
+PULSS                             00000003
+PWM1CON                           0000001C
+R                                 00000002
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RA5                               00000005
+RABIE                             00000003
+RABIF                             00000000
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RC0                               00000000
+RC1                               00000001
+RC2                               00000002
+RC3                               00000003
+RC4                               00000004
+RC5                               00000005
+RC6                               00000006
+RC7                               00000007
+RCIDL                             00000006
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 55
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RCSTA                             00000018
+RD                                00000000
+READ_WRITE                        00000002
+REG_OFF                           BCF     PORTC,  4
+REG_ON                            BSF     PORTC,  4
+RP0                               00000005
+RP1                               00000006
+RX9                               00000006
+RX9D                              00000000
+R_NOT_W                           00000002
+R_W                               00000002
+S                                 00000003
+SBOREN                            00000004
+SCKP                              00000004
+SCS                               00000000
+SEC                               00000024
+SEC0                              0000014D
+SEC1                              00000153
+SENB                              00000003
+SENDB                             00000003
+SEVEN                             00000893
+SHCNT                             0000006D
+SHIFT                             00000157
+SHIFTL                            000002C5
+SHIFTL_ALLB                       00000095
+SHIFTL_ALLC                       0000009F
+SHIFTL_ALLD                       000000A6
+SHIFT_YU                          00000048
+SHT00                             00000162
+SHT01                             00000168
+SHT02                             0000016E
+SHT03                             00000174
+SHT04                             0000017A
+SHT05                             00000180
+SHT06                             00000186
+SHT07                             0000018C
+SHT08                             00000192
+SHT09                             00000198
+SHT0A                             0000019E
+SHT0B                             000001A4
+SHT0C                             000001AA
+SHT0D                             000001B0
+SHT0E                             000001B6
+SHT0F                             000001BC
+SHT10                             000001CC
+SHT11                             000001D3
+SHT12                             000001DA
+SHT13                             000001E1
+SHT14                             000001E8
+SHT15                             000001EF
+SHT16                             000001F6
+SHT17                             000001FD
+SHT18                             00000204
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 56
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+SHT19                             0000020B
+SHT1A                             00000212
+SHT1B                             00000219
+SHT1C                             00000220
+SHT1D                             00000227
+SHT1E                             0000022E
+SHT1F                             00000235
+SHT20                             00000246
+SHT21                             0000024E
+SHT22                             00000256
+SHT23                             0000025E
+SHT24                             00000266
+SHT25                             0000026E
+SHT26                             00000276
+SHT27                             0000027E
+SHT28                             00000286
+SHT29                             0000028E
+SHT2A                             00000296
+SHT2B                             0000029E
+SHT2C                             000002A6
+SHT2D                             000002AE
+SHT2E                             000002B6
+SHT2F                             000002BE
+SIX                               00000880
+SLB0                              0000006F
+SLB1                              00000073
+SLB2                              0000007B
+SLICEB                            0000006D
+SLICET                            00000081
+SLT0                              00000083
+SLT1                              00000087
+SLT2                              0000008F
+SMP                               00000007
+SPBRG                             00000099
+SPBRGH                            0000009A
+SPEN                              00000007
+SR0                               00000006
+SR1                               00000007
+SRCON                             0000019E
+SREN                              00000005
+SSPADD                            00000093
+SSPBUF                            00000013
+SSPCON                            00000014
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+SSPM3                             00000003
+SSPMSK                            00000093
+SSPOV                             00000006
+SSPSTAT                           00000094
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 57
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+STATUS                            00000003
+STRA                              00000000
+STRB                              00000001
+STRC                              00000002
+STRD                              00000003
+STRSYNC                           00000004
+SWDTEN                            00000000
+SYNC                              00000004
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1GINV                            00000007
+T1GSS                             00000001
+T1IE                              00000000
+T1IF                              00000000
+T1OSCEN                           00000003
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+T2IE                              00000001
+T2IF                              00000001
+TALL                              00000075
+TEMPFILE                          0000002A
+TESTER                            00000071
+THREE                             00000847
+TMR0                              00000001
+TMR1                              0000000E
+TMR1CS                            00000001
+TMR1GE                            00000006
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISA5                            00000005
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 58
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TRISB                             00000086
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+TRISC                             00000087
+TRISC0                            00000000
+TRISC1                            00000001
+TRISC2                            00000002
+TRISC3                            00000003
+TRISC4                            00000004
+TRISC5                            00000005
+TRISC6                            00000006
+TRISC7                            00000007
+TRMT                              00000001
+TUN0                              00000000
+TUN1                              00000001
+TUN2                              00000002
+TUN3                              00000003
+TUN4                              00000004
+TWO                               00000834
+TX9                               00000006
+TX9D                              00000000
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+TXSTA                             00000098
+UA                                00000001
+ULPWUE                            00000005
+USEC                              00000138
+VAR0                              00000029
+VCFG                              00000006
+VP6EN                             00000004
+VR0                               00000000
+VR1                               00000001
+VR2                               00000002
+VR3                               00000003
+VRCON                             00000118
+VRR                               00000005
+W                                 00000000
+WCOL                              00000007
+WDTCON                            00000097
+WDTPS0                            00000001
+WDTPS1                            00000002
+WDTPS2                            00000003
+WDTPS3                            00000004
+WIDTH                             00000074
+WPU                               00000095
+WPU0                              00000000
+WPU1                              00000001
+WPU2                              00000002
+WPU4                              00000004
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 59
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+WPU5                              00000005
+WPUA                              00000095
+WPUA0                             00000000
+WPUA1                             00000001
+WPUA2                             00000002
+WPUA4                             00000004
+WPUA5                             00000005
+WPUB                              00000115
+WPUB4                             00000004
+WPUB5                             00000005
+WPUB6                             00000006
+WPUB7                             00000007
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+WUE                               00000001
+Z                                 00000002
+ZERO                              0000080C
+_BOD_NSLEEP                       00003EFF
+_BOD_OFF                          00003CFF
+_BOD_ON                           00003FFF
+_BOD_SBODEN                       00003DFF
+_BOREN_NSLEEP                     00003EFF
+_BOREN_OFF                        00003CFF
+_BOREN_ON                         00003FFF
+_BOREN_SBODEN                     00003DFF
+_BOR_NSLEEP                       00003EFF
+_BOR_OFF                          00003CFF
+_BOR_ON                           00003FFF
+_BOR_SBODEN                       00003DFF
+_CONFIG                           00002007
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003F7F
+_CP_OFF                           00003FFF
+_CP_ON                            00003FBF
+_DEVID1                           00002006
+_EC_OSC                           00003FFB
+_EXTRC                            00003FFF
+_EXTRCIO                          00003FFE
+_EXTRC_OSC_CLKOUT                 00003FFF
+_EXTRC_OSC_NOCLKOUT               00003FFE
+_FCMEN_OFF                        000037FF
+_FCMEN_ON                         00003FFF
+_FOSC_EC                          00003FFB
+_FOSC_EXTRCCLK                    00003FFF
+_FOSC_EXTRCIO                     00003FFE
+_FOSC_HS                          00003FFA
+_FOSC_INTRCCLK                    00003FFD
+_FOSC_INTRCIO                     00003FFC
+_FOSC_LP                          00003FF8
+_FOSC_XT                          00003FF9
+_HS_OSC                           00003FFA
+_IDLOC0                           00002000
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 60
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_IESO_OFF                         00003BFF
+_IESO_ON                          00003FFF
+_INTOSC                           00003FFD
+_INTOSCIO                         00003FFC
+_INTRC_OSC_CLKOUT                 00003FFD
+_INTRC_OSC_NOCLKOUT               00003FFC
+_LP_OSC                           00003FF8
+_MCLRE_OFF                        00003FDF
+_MCLRE_ON                         00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FEF
+_WDTE_OFF                         00003FF7
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FF7
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FF9
+__16F690                          00000001
+__DEBUG                           1
+pclath_temp                       0000007F
+status_temp                       0000007E
+w_temp                            0000007D
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+0000 : X---XXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0080 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+00C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0100 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0140 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0180 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+01C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0200 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0240 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0280 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+02C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0300 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0340 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0380 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+03C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0400 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXX------ ----------------
+0800 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+MPASM  5.51      HUB12_CURSORCONTROL_FONT.ASM   5-8-2019  12:00:03         PAGE 61
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+
+0840 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0880 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+08C0 : XXXXXXXXXXXX---- ---------------- ---------------- ----------------
+2000 : -------X-------- ---------------- ---------------- ----------------
+2100 : XXXX------------ ---------------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:  1267
+Program Memory Words Free:  2829
+
+
+Errors   :     0
+Warnings :    98 reported,     0 suppressed
+Messages :   330 reported,     0 suppressed
+
+

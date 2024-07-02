@@ -1,0 +1,336 @@
+;**********************************************************************
+;                                                                     *
+;    FILENAME:	    HUB6CONTROLLER.ASM                                *
+;    DATE:         	2019.11.14                                        *
+;    FILE VERSION:                                                    *
+;                                                                     *
+;    AUTHOR:        KENNYNEUTRON                                      *
+;    COMPANY:       GER-PER ENGINEERING                               *
+;                                                                     * 
+;                                                                     *
+;**********************************************************************
+;                                                                     *
+;    FILES REQUIRED: P16F690.INC                                      *
+;                                                                     *
+;**********************************************************************
+;                                                                     *
+;    NOTES:                                                           *
+;                                                                     *
+;**********************************************************************
+
+
+
+	LIST		P=16F690		; LIST DIRECTIVE TO DEFINE PROCESSOR
+	#INCLUDE	<P16F690.INC>		; PROCESSOR SPECIFIC VARIABLE DEFINITIONS
+	
+	__CONFIG    _CP_OFF & _CPD_OFF & _BOR_OFF & _PWRTE_ON & _WDT_OFF & _HS_OSC & _MCLRE_OFF & _FCMEN_OFF & _IESO_OFF
+
+; '__CONFIG' DIRECTIVE IS USED TO EMBED CONFIGURATION DATA WITHIN .ASM FILE.
+; THE LABELS FOLLOWING THE DIRECTIVE ARE LOCATED IN THE RESPECTIVE .INC FILE.
+; SEE RESPECTIVE DATA SHEET FOR ADDITIONAL INFORMATION ON CONFIGURATION WORD.
+
+
+
+
+
+
+;***** VARIABLE DEFINITIONS
+W_TEMP		EQU	0X7D			; VARIABLE USED FOR CONTEXT SAVING
+STATUS_TEMP	EQU	0X7E			; VARIABLE USED FOR CONTEXT SAVING
+PCLATH_TEMP	EQU	0X7F			; VARIABLE USED FOR CONTEXT SAVING
+TXREG_T EQU 0x20
+CNT0 EQU 0x21
+CNT1 EQU 0x22
+	#DEFINE	BANK0		BANKSEL	PORTA
+	#DEFINE	BANK1		BANKSEL	ADRESL
+	#DEFINE	BANK2		BANKSEL	ANSELH
+
+
+;============================	BANK	0	===========================
+CBLOCK 0x20
+			;DRAM: .80
+			LOOP
+			DELAYUS, DELAYMS,  MILSEC, SEC,DELAYS,	;DELAY VARIABLES
+			;=======================================================
+;			LINE
+;			POINTER
+;			FONT,NUMBER,BTCOUNT
+;			HUB,STPT0,STPT1
+;			CURSORX,LOOP,VAR
+
+ENDC
+;======================================================================
+
+
+;**********************************************************************
+	ORG		0X000			; PROCESSOR RESET VECTOR
+	  	GOTO	INIT			; GO TO BEGINNING OF PROGRAM
+
+
+	ORG		0X004				; INTERRUPT VECTOR LOCATION
+	MOVWF		W_TEMP			; SAVE OFF CURRENT W REGISTER CONTENTS
+	MOVF		STATUS,W		; MOVE STATUS REGISTER INTO W REGISTER
+	MOVWF		STATUS_TEMP		; SAVE OFF CONTENTS OF STATUS REGISTER
+	MOVF		PCLATH,W		; MOVE PCLATH REGISTER INTO W REGISTER
+	MOVWF		PCLATH_TEMP		; SAVE OFF CONTENTS OF PCLATH REGISTER
+
+; ISR CODE CAN GO HERE OR BE LOCATED AS A CALL SUBROUTINE ELSEWHERE
+
+	MOVF		PCLATH_TEMP,W	; RETRIEVE COPY OF PCLATH REGISTER
+	MOVWF		PCLATH			; RESTORE PRE-ISR PCLATH REGISTER CONTENTS	
+	MOVF		STATUS_TEMP,W	; RETRIEVE COPY OF STATUS REGISTER
+	MOVWF		STATUS			; RESTORE PRE-ISR STATUS REGISTER CONTENTS
+	SWAPF		W_TEMP,F
+	SWAPF		W_TEMP,W		; RESTORE PRE-ISR W REGISTER CONTENTS
+	RETFIE						; RETURN FROM INTERRUPT
+
+
+INIT
+	BANK0
+	CLRF	PORTC
+	CLRF	PORTB
+
+
+	BANKSEL	TRISB
+	CLRF	TRISB
+
+	
+	BSF STATUS, RP0 ;SWITCH TO BANK 01
+
+
+
+	
+	;---CONFIGURE SPBRG FOR DESIRED BAUD RATE
+	MOVLW .129 ;WE WILL USE 4800bps 
+	MOVWF SPBRG ;BAUD AT 4MHZ
+
+	
+	;---CONFIGURE TXSTA
+	MOVLW B'00100100' ;CONFIGURE TXSTA AS :
+	MOVWF TXSTA ;
+	;8 BIT TRANSMISSION - 6.BIT
+	;TRANSMIT ENABLED - 5.BIT
+	;ASYNCHRONOUS MODE - 4.BIT
+	;ENABLE HIGH SPEED BAUD RATE - 2.BIT
+
+	BCF STATUS, RP0 ;SWITCH TO BANK 00
+	
+	MOVLW B'10000000' ;ENABLE SERIAL PORT
+	MOVWF RCSTA ;RECEIVE STATUS REG
+	
+	MOVLW 0x3A
+	MOVWF TXREG_T ;TO TXREG
+
+	CALL DELAY
+	CALL DELAY
+	CALL DELAY
+	CALL DELAY
+	CALL DELAY
+
+MAIN:
+
+	
+	MOVLW	0XAA				;HEADER
+	CALL	TRANSMIT_CONT2CPU
+
+	MOVLW	0XA0				;CURSORX
+	CALL	TRANSMIT_CONT2CPU
+
+
+	MOVLW	0X01				;CURSORX_L
+	CALL	TRANSMIT_CONT2CPU
+
+	MOVLW	0X04				;CURSORX_H
+	CALL	TRANSMIT_CONT2CPU
+
+	MOVLW	0XA1				;COLOR
+	CALL	TRANSMIT_CONT2CPU
+
+	MOVLW	0X00				;00=RED 01=GREEN 02= YELLOW ELSE=ERR
+	CALL	TRANSMIT_CONT2CPU
+
+
+	MOVLW	0XA1				;COLOR
+	CALL	TRANSMIT_CONT2CPU
+
+	MOVLW	0X00				;00=RED 01=GREEN 02= YELLOW ELSE=ERR
+	CALL	TRANSMIT_CONT2CPU
+
+
+
+
+
+	MOVLW	0XA2				;CHAR
+	CALL	TRANSMIT_CONT2CPU
+
+	MOVLW	0X0A				;CAP_K
+	CALL	TRANSMIT_CONT2CPU
+
+
+	MOVLW	0XA2				;CHAR
+	CALL	TRANSMIT_CONT2CPU
+
+	MOVLW	0X04				;CAP_E
+	CALL	TRANSMIT_CONT2CPU
+
+
+
+
+
+
+	MOVLW	0XA3				;SCROLL
+	CALL	TRANSMIT_CONT2CPU	
+
+	MOVLW	0X00				;01 = SCROLL	00 = NO SCROLL	 ELSE=ERROR
+	CALL	TRANSMIT_CONT2CPU
+
+	MOVLW	0XFE				;ENDC
+	CALL	TRANSMIT_CONT2CPU
+	
+	MOVLW	0XBB				;FOOTER
+	CALL	TRANSMIT_CONT2CPU
+
+			
+	GOTO MAIN
+
+
+
+
+
+TRANSMIT_CONT2CPU
+	MOVWF TXREG ;TO TXREG
+	
+TRANSWT:
+	BSF STATUS, RP0
+WTHERE:
+	BTFSS TXSTA, TRMT
+    GOTO WTHERE
+
+    BCF STATUS, RP0
+	
+	CALL	 DELAY_ONEMS
+
+RETURN
+
+
+
+
+
+
+
+
+
+
+
+DELAY:
+	MOVLW 0xF0
+	MOVWF CNT1
+D1:
+	MOVLW 0xFA
+	MOVWF CNT0
+D0:
+	DECFSZ CNT0
+	GOTO D0
+	
+	DECFSZ CNT1
+	GOTO D1
+
+	RETURN
+
+
+
+
+;==========	DELAY USEC =========
+DELAY_US
+
+	MOVWF	DELAYUS
+
+USEC
+
+	NOP
+ 	NOP
+	NOP
+	NOP
+DECFSZ	DELAYUS,F
+
+GOTO	USEC
+
+RETURN
+;=================================
+
+
+
+;=========== DELAY ONE MS ========
+DELAY_ONEMS
+
+	MOVLW	.5
+	MOVWF	LOOP
+
+MSEC
+	MOVLW	.200
+	CALL	DELAY_US
+	DECFSZ	LOOP,F
+	GOTO	MSEC
+
+RETURN
+;==================================
+
+
+;=========== DELAY MS	==========
+DELAY_MS
+	
+	MOVWF	DELAYMS
+MSEC0
+	CALL	DELAY_ONEMS
+	DECFSZ	DELAYMS,F
+	GOTO	MSEC0
+RETURN
+;=================================
+
+;=========== DELAY	ONE	SECOND ===
+DELAY_ONESEC
+
+	MOVLW	.5
+	MOVWF	SEC
+SEC0
+	MOVLW	.200
+	CALL	DELAY_MS
+	DECFSZ	SEC,F
+	GOTO	SEC0
+RETURN
+;=================================
+
+;========== DELAY SEC ============
+DELAY_SEC
+
+	MOVWF	DELAYS
+SEC1
+	CALL	DELAY_ONESEC
+	DECFSZ	DELAYS,F
+	GOTO	SEC1
+RETURN
+;=================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+	END
+
+
+	ORG	0X2100				; DATA EEPROM LOCATION
+	DE	1,2,3,4				; DEFINE FIRST FOUR EEPROM LOCATIONS AS 1, 2, 3, AND 4
+
+
+
+
+	END                       ; DIRECTIVE 'END OF PROGRAM'
+

@@ -1,0 +1,35 @@
+--------------------------------------------------- English ---------------------------------------------------------------------------
+
+Instructions:
+
+1. Copy gauge32.ocx to a directory, for example 
+
+	c:\windows\system32
+
+1. Add gauge32.ocx to the registry (or copy this entire command to the 'run' window)
+
+	regsvr32 c:\windows\system32\gauge32.ocx
+
+2. Add development licence to the registry by running (run as poweruser)
+
+     vbusc.exe
+
+3. Add the ocx to the project by selection it in 'add components'
+
+--------------------------------------------------- Nederlands ----------------------------------------------------------------------
+
+Instructies:
+
+1. Copieer gauge32.ocx naar een map, bijvoorbeeld 
+
+	c:\windows\system32
+
+1. Voeg gauge32.ocx toe aan de registry (kopieer dit gehele kommando naar de 'uitvoeren' window
+
+	regsvr32 c:\windows\system32\gauge32.ocx
+
+2. Voeg de ontwikkel licentie toe aan de registry (u moet alle rechten op de PC hebben)
+
+     vbusc.exe
+
+3. Add the ocx to the project by selection it in 'add components'

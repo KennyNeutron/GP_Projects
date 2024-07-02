@@ -1,0 +1,35 @@
+
+;############	CLEAR   IRAM  #################
+CLR_IRAM
+	
+	MOVLW		0XD
+	MOVWF		PCLATH
+	CALL		CMD_CLR_IRAM
+	MOVLW		0
+	MOVWF		PCLATH 
+
+RETURN
+;#################################################
+
+
+
+
+ORG		0XD00
+
+CMD_CLR_IRAM
+	BANK1
+	MOVLW		.64
+	MOVWF		IPOINTER
+	MOVLW		IRAM
+	MOVWF		FSR
+
+IRM0
+	MOVLW		0XFF
+	MOVWF		INDF
+	MOVLW		INDF
+	
+	INCF		FSR, F
+	DECFSZ		IPOINTER, F
+	GOTO		IRM0
+	 
+	RETURN

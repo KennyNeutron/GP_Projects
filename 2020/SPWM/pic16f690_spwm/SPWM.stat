@@ -1,0 +1,14 @@
+// SourceBoost Linker Function Resource Usage Dump
+
+#GLOBAL:"global",line = 0,ram = 39.1,rom = 0;
+__mul_8_8__8(unsigned char,unsigned char):"E:\Prg\compiler.trunk\picantc\libc\mul.c",line = 71,ram = 4.0,rom = 13;
+FCM_pwm0(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\SPWM\pic16f690_spwm\SPWM.c",line = 122,ram = 1.0,rom = 109;
+FCM_spwm(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\SPWM\pic16f690_spwm\SPWM.c",line = 252,ram = 0.0,rom = 8;
+FCM_pwm1(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\SPWM\pic16f690_spwm\SPWM.c",line = 275,ram = 1.0,rom = 109;
+main(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\SPWM\pic16f690_spwm\SPWM.c",line = 404,ram = 1.0,rom = 26;
+interrupt(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\SPWM\pic16f690_spwm\SPWM.c",line = 445,ram = 0.0,rom = 17;
+delay_us(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 5;
+_startup(void):"NoSourceFile",line = 0,ram = 0.0,rom = 45;
+#HEAP_BLOCK: 0, 160, 95;
+#HEAP_BLOCK: 1, 288, 80;
+#HEAP_BLOCK: 2, 76, 36;

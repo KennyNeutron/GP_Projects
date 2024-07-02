@@ -1,0 +1,480 @@
+;**********************************************************************
+;                                                                     *
+;    FILENAME:	    MODULECPU_SPITX.ASM                               *
+;    DATE:         	2019.08.05                                        *
+;    FILE VERSION:                                                    *
+;                                                                     *
+;    AUTHOR:        KENNYNEUTRON                                      *
+;    COMPANY:       GER-PER ENGINEERING                               *
+;                                                                     * 
+;                                                                     *
+;**********************************************************************
+;                                                                     *
+;    FILES REQUIRED: P16F690.INC                                      *
+;                                                                     *
+;**********************************************************************
+;                                                                     *
+;    NOTES:                                                           *
+;                                                                     *
+;**********************************************************************
+
+
+	LIST		P=16F690		; LIST DIRECTIVE TO DEFINE PROCESSOR
+	#INCLUDE	<P16F690.INC>		; PROCESSOR SPECIFIC VARIABLE DEFINITIONS
+	
+	
+	__CONFIG    _CP_OFF & _CPD_OFF & _BOR_OFF & _PWRTE_ON & _WDT_OFF & _HS_OSC & _MCLRE_OFF & _FCMEN_OFF & _IESO_OFF
+
+; '__CONFIG' DIRECTIVE IS USED TO EMBED CONFIGURATION DATA WITHIN .ASM FILE.
+; THE LABELS FOLLOWING THE DIRECTIVE ARE LOCATED IN THE RESPECTIVE .INC FILE.
+; SEE RESPECTIVE DATA SHEET FOR ADDITIONAL INFORMATION ON CONFIGURATION WORD.
+
+
+
+
+
+
+;***** VARIABLE DEFINITIONS
+W_TEMP		EQU	0X7D			; VARIABLE USED FOR CONTEXT SAVING
+STATUS_TEMP	EQU	0X7E			; VARIABLE USED FOR CONTEXT SAVING
+PCLATH_TEMP	EQU	0X7F			; VARIABLE USED FOR CONTEXT SAVING
+
+
+	#DEFINE	BANK0		BANKSEL	PORTA
+	#DEFINE	BANK1		BANKSEL	ADRESL
+	#DEFINE	BANK2		BANKSEL	ANSELH
+
+	#DEFINE	DAT_LO		BCF	PORTC,7
+	#DEFINE	DAT_HI		BSF	PORTC,7
+
+	#DEFINE	CLK_LO		BCF	PORTB,6
+	#DEFINE	CLK_HI		BSF	PORTB,6	
+
+	#DEFINE	DHO_LO		BCF	PORTC,3
+	#DEFINE	DHO_HI		BSF	PORTC,3
+
+	
+
+;============================	BANK	0	===========================
+CBLOCK 0x20
+			LOOP1,LOOP2
+			DBUFF
+
+
+ENDC
+;======================================================================
+
+
+;============================	BANK	1	===========================
+CBLOCK 0XA0
+			
+
+ENDC
+;======================================================================
+
+
+
+;============================	BANK	2	===========================
+CBLOCK 0X120
+
+
+ENDC
+;======================================================================
+
+;**********************************************************************
+	ORG		0X000				; PROCESSOR RESET VECTOR
+	  	GOTO	INIT				; GO TO BEGINNING OF PROGRAM
+
+
+	ORG		0X004				; INTERRUPT VECTOR LOCATION
+	MOVWF		W_TEMP			; SAVE OFF CURRENT W REGISTER CONTENTS
+	MOVF		STATUS,W		; MOVE STATUS REGISTER INTO W REGISTER
+	MOVWF		STATUS_TEMP		; SAVE OFF CONTENTS OF STATUS REGISTER
+	MOVF		PCLATH,W		; MOVE PCLATH REGISTER INTO W REGISTER
+	MOVWF		PCLATH_TEMP		; SAVE OFF CONTENTS OF PCLATH REGISTER
+
+
+; ISR CODE CAN GO HERE OR BE LOCATED AS A CALL SUBROUTINE ELSEWHERE
+
+	MOVF		PCLATH_TEMP,W	; RETRIEVE COPY OF PCLATH REGISTER
+	MOVWF		PCLATH			; RESTORE PRE-ISR PCLATH REGISTER CONTENTS	
+	MOVF		STATUS_TEMP,W	; RETRIEVE COPY OF STATUS REGISTER
+	MOVWF		STATUS			; RESTORE PRE-ISR STATUS REGISTER CONTENTS
+	SWAPF		W_TEMP,F
+	SWAPF		W_TEMP,W		; RESTORE PRE-ISR W REGISTER CONTENTS
+	RETFIE						; RETURN FROM INTERRUPT
+
+
+
+;$$$$$$$$$$$$$$$$$$$$$	INITIALIZE	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+;DECLARE PORTC AS OUTPUT HERE:
+INIT
+BANKSEL	ANSEL
+CLRW
+MOVWF	ANSEL
+MOVWF	ANSELH
+
+BANKSEL	TRISB
+
+MOVLW	0
+MOVWF	TRISB
+
+BANKSEL	TRISC
+MOVLW	B'01000000'
+MOVWF	TRISC
+
+
+
+BANK0
+CLRW
+
+DAT_HI
+CLK_HI
+DHO_LO
+
+
+
+
+GOTO	MAIN	; GO TO BEGINNING OF PROGRAM
+;$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+
+MAIN
+
+
+
+
+;
+	DAT_HI
+	CLK_HI
+	BTFSS	PORTC,6
+	GOTO	$-1
+	
+	DHO_HI
+	NOP
+	NOP
+	NOP
+	NOP
+
+
+	CALL	MATRIX_INIT
+
+	CALL	INTRDELAY
+	MOVLW	0XFF		;CLR ALL
+	CALL	SPITX
+
+
+
+
+
+
+	CALL	INTRDELAY
+	MOVLW	0X36		;HUB
+	CALL	SPITX
+
+
+
+
+
+	CALL	INTRDELAY
+	MOVLW	0X10		;CURSOR
+	CALL	SPITX
+
+
+
+
+	CALL	INTRDELAY
+	MOVLW	0X50		;DATA
+	CALL	SPITX
+
+
+	
+	CALL	INTRDELAY
+	MOVLW	0X55		;DATA
+	CALL	SPITX
+
+
+	CALL	INTRDELAY
+	MOVLW	0X4F		;DATA
+	CALL	SPITX
+
+
+	CALL	INTRDELAY
+	MOVLW	0X52		;DATA
+	CALL	SPITX
+
+
+	CALL	INTRDELAY
+	MOVLW	0X35		;HUB
+	CALL	SPITX
+
+
+
+
+
+	CALL	INTRDELAY
+	MOVLW	0X16		;CURSOR
+	CALL	SPITX
+
+
+
+
+	CALL	INTRDELAY
+	MOVLW	0X58		;DATA
+	CALL	SPITX
+
+	CALL	INTRDELAY
+	MOVLW	0X4C		;DATA
+	CALL	SPITX
+
+
+	CALL	INTRDELAY
+	MOVLW	0X40		;DATA
+	CALL	SPITX
+
+
+
+	CALL	INTRDELAY
+	MOVLW	0X34		;HUB
+	CALL	SPITX
+
+
+
+
+
+	CALL	INTRDELAY
+	MOVLW	0X1A		;CURSOR
+	CALL	SPITX
+
+
+
+
+	CALL	INTRDELAY
+	MOVLW	0X56		;DATA
+
+	CALL	SPITX
+	CALL	INTRDELAY
+	MOVLW	0X57		;DATA
+	CALL	SPITX
+
+
+
+
+	
+	CALL	INTRDELAY
+	MOVLW	0X33		;HUB
+	CALL	SPITX
+
+
+
+
+
+	CALL	INTRDELAY
+	MOVLW	0X10		;CURSOR
+	CALL	SPITX
+
+
+
+
+	CALL	INTRDELAY
+	MOVLW	0X51		;DATA
+	CALL	SPITX
+
+
+	
+	CALL	INTRDELAY
+	MOVLW	0X53		;DATA
+	CALL	SPITX
+
+	CALL	INTRDELAY
+	MOVLW	0X54		;DATA
+	CALL	SPITX
+
+
+
+	
+	CALL	INTRDELAY
+	MOVLW	0X31		;HUB
+	CALL	SPITX
+
+
+
+
+
+	CALL	INTRDELAY
+	MOVLW	0X10		;CURSOR
+	CALL	SPITX
+
+
+
+
+	CALL	INTRDELAY
+	MOVLW	0X51		;DATA
+	CALL	SPITX
+
+
+	
+	CALL	INTRDELAY
+	MOVLW	0X53		;DATA
+	CALL	SPITX
+
+	CALL	INTRDELAY
+	MOVLW	0X55		;DATA
+	CALL	SPITX
+
+
+
+
+	CALL	INTRDELAY
+	MOVLW	0X32		;HUB
+	CALL	SPITX
+
+
+
+
+
+	CALL	INTRDELAY
+	MOVLW	0X14		;CURSOR
+	CALL	SPITX
+
+
+
+
+	CALL	INTRDELAY
+	MOVLW	0X4D		;DATA
+	CALL	SPITX
+
+
+
+	CALL	INTRDELAY
+	MOVLW	0X4A		;DATA
+	CALL	SPITX
+
+	CALL	INTRDELAY
+	MOVLW	0X4E		;DATA
+	CALL	SPITX
+
+
+
+
+
+
+	DHO_LO
+
+	DAT_HI
+	CLK_HI
+	BTFSC	PORTC,6
+	GOTO	$-1
+
+
+
+
+
+
+	
+
+GOTO	MAIN
+
+
+MATRIX_INIT
+	MOVLW	0X0A		;INIT
+	CALL	SPITX
+
+	CALL	INTRDELAY
+	MOVLW	0X02		;INIT
+	CALL	SPITX
+RETURN
+
+
+
+
+SPITX
+
+	MOVWF	DBUFF
+
+	MOVLW	8
+	MOVWF	LOOP1
+	
+ST0
+	RLF		DBUFF
+	BTFSS	STATUS,C
+	GOTO	DBIT0
+	GOTO	DBIT1
+	
+DBIT0
+	DAT_LO
+	GOTO	$+2	
+DBIT1
+	DAT_HI
+	CLK_HI
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	CLK_LO
+	DECFSZ	LOOP1,F
+	GOTO	ST0
+	DAT_LO
+	
+
+RETURN
+
+
+
+
+
+
+
+INTRDELAY
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+RETURN
+
+
+
+
+
+
+
+
+
+	ORG	0X2100				; DATA EEPROM LOCATION
+	DE	1,2,3,4				; DEFINE FIRST FOUR EEPROM LOCATIONS AS 1, 2, 3, AND 4
+
+
+
+
+	END                       ; DIRECTIVE 'END OF PROGRAM'
+

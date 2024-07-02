@@ -1,0 +1,86 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Fri Apr 26 11:34:27 2019
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000004    program   0x000300
+.config_2007_HUB12_DRAM2.O       code   0x002007    program   0x000002
+                   .org_3       code   0x002100    program   0x000008
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x000183      
+                            0x002007    0x002007      
+                            0x002100    0x002103      
+            390 out of 4359 program addresses used, program memory utilization is 8%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                        .   0x000000    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                    CLRAM   0x000117    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                       D0   0x000159    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                       D1   0x00015b    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                DATALATCH   0x00014e    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                 DELAY_MS   0x000173    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+              DELAY_ONEMS   0x00016c    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+             DELAY_ONESEC   0x000178    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                DELAY_SEC   0x00017f    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                 DELAY_US   0x000164    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                  DISPLAY   0x000123    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                      DL0   0x000155    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                      DL1   0x00015d    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                     DRM0   0x00011b    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                     DSP0   0x000127    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                     DSP1   0x000131    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                     DSP2   0x00013b    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                     DSP3   0x000145    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                     INIT   0x000010    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                     MAIN   0x00001b    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                     MSEC   0x00016e    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                    MSEC0   0x000174    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                     SEC0   0x00017a    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                     SEC1   0x000180    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                     USEC   0x000165    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                        .   0x000000    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                     INIT   0x000010    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                     MAIN   0x00001b    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                    CLRAM   0x000117    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                     DRM0   0x00011b    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                  DISPLAY   0x000123    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                     DSP0   0x000127    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                     DSP1   0x000131    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                     DSP2   0x00013b    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                     DSP3   0x000145    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                DATALATCH   0x00014e    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                      DL0   0x000155    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                       D0   0x000159    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                       D1   0x00015b    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                      DL1   0x00015d    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                 DELAY_US   0x000164    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                     USEC   0x000165    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+              DELAY_ONEMS   0x00016c    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                     MSEC   0x00016e    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                 DELAY_MS   0x000173    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                    MSEC0   0x000174    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+             DELAY_ONESEC   0x000178    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                     SEC0   0x00017a    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                DELAY_SEC   0x00017f    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+                     SEC1   0x000180    program     static D:\KennyNeutron\HUB12_DRAM\HUB12_DRAM2.ASM
+
+

@@ -1,0 +1,3558 @@
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 ;**********************************************************************
+                      00002 ;                                                                     *
+                      00003 ;    FILENAME:      MODULEGPU.ASM                                                     *
+                      00004 ;    DATE:              2019.08.05                                        *
+                      00005 ;    FILE VERSION:                                                    *
+                      00006 ;                                                                     *
+                      00007 ;    AUTHOR:        KENNYNEUTRON                                      *
+                      00008 ;    COMPANY:       GER-PER ENGINEERING                               *
+                      00009 ;                                                                     * 
+                      00010 ;                                                                     *
+                      00011 ;**********************************************************************
+                      00012 ;                                                                     *
+                      00013 ;    FILES REQUIRED: P16F690.INC                                      *
+                      00014 ;                                                                     *
+                      00015 ;**********************************************************************
+                      00016 ;                                                                     *
+                      00017 ;    NOTES:                                                           *
+                      00018 ;                                                                     *
+                      00019 ;**********************************************************************
+                      00020 
+                      00021 
+                      00022         LIST            P=16F690                ; LIST DIRECTIVE TO DEFINE PROCESSOR
+                      00023         #INCLUDE        <P16F690.INC>           ; PROCESSOR SPECIFIC VARIABLE DEFINITIONS
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC16F690 processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2013 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+                      00756         LIST
+                      00024         
+                      00025 
+2007   30C2           00026         __CONFIG    _CP_OFF & _CPD_OFF & _BOR_OFF & _PWRTE_ON & _WDT_OFF & _HS_OSC & _MCLRE_OFF & _FCMEN
+                            _OFF & _IESO_OFF
+                      00027 
+                      00028 ; '__CONFIG' DIRECTIVE IS USED TO EMBED CONFIGURATION DATA WITHIN .ASM FILE.
+                      00029 ; THE LABELS FOLLOWING THE DIRECTIVE ARE LOCATED IN THE RESPECTIVE .INC FILE.
+                      00030 ; SEE RESPECTIVE DATA SHEET FOR ADDITIONAL INFORMATION ON CONFIGURATION WORD.
+                      00031 
+                      00032 
+                      00033 
+                      00034 
+                      00035 
+                      00036 
+                      00037 ;***** VARIABLE DEFINITIONS
+  0000007E            00038 W_TEMP          EQU     0X7E                    ; VARIABLE USED FOR CONTEXT SAVING
+  0000007E            00039 STATUS_TEMP     EQU     0X7E                    ; VARIABLE USED FOR CONTEXT SAVING
+  0000007F            00040 PCLATH_TEMP     EQU     0X7F                    ; VARIABLE USED FOR CONTEXT SAVING
+                      00041 
+                      00042 
+                      00043 
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00044 
+                      00045         ;#DEFINE C0_ON          BSF PORTC,      0       PORTC0=====>HI
+                      00046         ;#DEFINE C0_OFF         BCF PORTC,      0       PORTC0=====>LO
+                      00047 
+                      00048         #DEFINE A_ON            BSF     PORTC,  0
+                      00049         #DEFINE A_OFF           BCF     PORTC,  0
+                      00050         
+                      00051         #DEFINE B_ON            BSF     PORTC,  1
+                      00052         #DEFINE B_OFF           BCF     PORTC,  1
+                      00053 
+                      00054         #DEFINE DAT_ON          BSF     PORTC,  2
+                      00055         #DEFINE DAT_OFF         BCF     PORTC,  2
+                      00056 
+                      00057         #DEFINE CLK_ON          BSF     PORTC,  7
+                      00058         #DEFINE CLK_OFF         BCF     PORTC,  7
+                      00059         
+                      00060         #DEFINE REG_ON          BSF     PORTC,  4
+                      00061         #DEFINE REG_OFF         BCF     PORTC,  4
+                      00062         
+                      00063         #DEFINE OE_ON           BSF     PORTC,  5
+                      00064         #DEFINE OE_OFF          BCF     PORTC,  5
+                      00065 
+                      00066 
+                      00067         #DEFINE BANK0           BANKSEL PORTA
+                      00068         #DEFINE BANK1           BANKSEL ADRESL
+                      00069         #DEFINE BANK2           BANKSEL ANSELH
+                      00070 
+                      00071 ;============================   BANK    0       ===========================
+Warning[205]: Found directive in column 1. (CBLOCK)
+                      00072 CBLOCK 0x20
+  00000020            00073                         DRAM: .80
+Warning[210]: Extra ","
+  00000070            00074                         DELAYUS, DELAYMS,  MILSEC, ;SEC,DELAYS, ;DELAY VARIABLES
+                      00075                         ;=======================================================
+                      00076                         
+  00000073            00077                         LINE
+  00000074            00078                         POINTER
+  00000075            00079                         FONT,NUMBER,BTCOUNT
+  00000078            00080                         HUB,STPT0,STPT1
+  0000007B            00081                         CURSORX,LOOP
+                      00082 
+Warning[205]: Found directive in column 1. (ENDC)
+                      00083 ENDC
+                      00084 ;======================================================================
+                      00085 
+                      00086 
+                      00087 ;============================   BANK    1       ===========================
+Warning[205]: Found directive in column 1. (CBLOCK)
+                      00088 CBLOCK 0XA0
+                      00089                 
+  000000A0            00090                 DRAMB: .16
+                      00091         
+  000000B0            00092                 TEMPRAM: .60
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00093 
+                      00094 
+Warning[210]: Extra ","
+  000000EC            00095                 SCROLL,SCROLLCSR,
+                      00096                 
+                      00097         
+  000000EE            00098                 GPUDAT,GDLOOP,GDFSR,GPUDAT_TEMP,CLRTEST
+Warning[205]: Found directive in column 1. (ENDC)
+                      00099 ENDC
+                      00100 ;======================================================================
+                      00101 
+                      00102 
+                      00103 
+                      00104 ;============================   BANK    2       ===========================
+Warning[205]: Found directive in column 1. (CBLOCK)
+                      00105 CBLOCK 0X120
+  00000120            00106                 VDATA:  .23
+  00000137            00107                 CURSOR_TEMP,HUB_TEMP,WIDTH
+                      00108 
+Warning[205]: Found directive in column 1. (ENDC)
+                      00109 ENDC
+                      00110 ;======================================================================
+                      00111 
+                      00112 ;**********************************************************************
+0000                  00113         ORG             0X000                   ; PROCESSOR RESET VECTOR
+0000   2810           00114                         GOTO    INIT                    ;GO TO INITIALIZATION
+                      00115 
+                      00116         
+0004                  00117         ORG             0X004                   ; INTERRUPT VECTOR LOCATION
+0004   00FE           00118         MOVWF           W_TEMP                  ; SAVE OFF CURRENT W REGISTER CONTENTS
+0005   0803           00119         MOVF            STATUS,W                ; MOVE STATUS REGISTER INTO W REGISTER
+0006   00FE           00120         MOVWF           STATUS_TEMP             ; SAVE OFF CONTENTS OF STATUS REGISTER
+0007   080A           00121         MOVF            PCLATH,W                ; MOVE PCLATH REGISTER INTO W REGISTER
+0008   00FF           00122         MOVWF           PCLATH_TEMP             ; SAVE OFF CONTENTS OF PCLATH REGISTER
+                      00123 
+                      00124 
+                      00125 ; ISR CODE CAN GO HERE OR BE LOCATED AS A CALL SUBROUTINE ELSEWHERE
+                      00126 
+0009   087F           00127         MOVF            PCLATH_TEMP,W           ; RETRIEVE COPY OF PCLATH REGISTER
+000A   008A           00128         MOVWF           PCLATH                  ; RESTORE PRE-ISR PCLATH REGISTER CONTENTS      
+000B   087E           00129         MOVF            STATUS_TEMP,W           ; RETRIEVE COPY OF STATUS REGISTER
+000C   0083           00130         MOVWF           STATUS                  ; RESTORE PRE-ISR STATUS REGISTER CONTENTS
+000D   0EFE           00131         SWAPF           W_TEMP,F
+000E   0E7E           00132         SWAPF           W_TEMP,W                ; RESTORE PRE-ISR W REGISTER CONTENTS
+000F   0009           00133         RETFIE                                  ; RETURN FROM INTERRUPT
+                      00134 
+                      00135 
+                      00136 
+                      00137 ;$$$$$$$$$$$$$$$$$$$$$  INITIALIZE      $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+                      00138 
+                      00139 ;DECLARE PORTC AS OUTPUT HERE:
+0010                  00140 INIT
+Warning[205]: Found directive in column 1. (BANKSEL)
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0010   1283 1703      00141 BANKSEL ANSEL
+Warning[203]: Found opcode in column 1. (CLRW)
+0012   0103           00142 CLRW
+Warning[203]: Found opcode in column 1. (MOVWF)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0013   009E           00143 MOVWF   ANSEL
+Warning[203]: Found opcode in column 1. (MOVWF)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0014   009F           00144 MOVWF   ANSELH
+                      00145 
+Warning[205]: Found directive in column 1. (BANKSEL)
+0015   1683 1303      00146 BANKSEL TRISB
+                      00147 
+Warning[203]: Found opcode in column 1. (MOVLW)
+0017   3030           00148 MOVLW   B'00110000'
+Warning[203]: Found opcode in column 1. (MOVWF)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0018   0086           00149 MOVWF   TRISB
+                      00150 
+Warning[205]: Found directive in column 1. (BANKSEL)
+0019   1683 1303      00151 BANKSEL TRISC
+Warning[203]: Found opcode in column 1. (MOVLW)
+001B   300C           00152 MOVLW   B'00001100'
+Warning[203]: Found opcode in column 1. (MOVWF)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+001C   0087           00153 MOVWF   TRISC
+                      00154 
+Warning[205]: Found directive in column 1. (BANKSEL)
+001D   1283 1303      00155 BANKSEL SSPCON
+                      00156 
+Warning[203]: Found opcode in column 1. (MOVLW)
+001F   3030           00157 MOVLW   B'00110000'
+Warning[203]: Found opcode in column 1. (MOVWF)
+0020   0094           00158 MOVWF   SSPCON
+                      00159 
+                      00160 
+Warning[205]: Found directive in column 1. (BANKSEL)
+0021   1683 1303      00161 BANKSEL TRISA
+Warning[203]: Found opcode in column 1. (BCF)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0023   1105           00162 BCF             TRISA,2
+Warning[205]: Found directive in column 1. (BANKSEL)
+0024   1283 1303      00163 BANKSEL PORTA
+Warning[203]: Found opcode in column 1. (BCF)
+0026   1105           00164 BCF             PORTA,2
+                      00165 
+                      00166 
+Warning[205]: Found directive in column 1. (BANKSEL)
+0027   1283 1303      00167 BANK0
+Warning[203]: Found opcode in column 1. (MOVLW)
+0029   3000           00168 MOVLW   0
+Warning[203]: Found opcode in column 1. (MOVWF)
+002A   008A           00169 MOVWF   PCLATH
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00170 
+                      00171 
+Warning[203]: Found opcode in column 1. (CALL)
+002B   203E           00172 CALL    CLRTRAM
+Warning[203]: Found opcode in column 1. (CALL)
+002C   21D7           00173 CALL    CLRAM
+Warning[205]: Found directive in column 1. (BANKSEL)
+002D   1683 1303      00174 BANK1
+Warning[203]: Found opcode in column 1. (MOVLW)
+002F   3000           00175 MOVLW   0X00
+Warning[203]: Found opcode in column 1. (MOVWF)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0030   00B0           00176 MOVWF   TEMPRAM+00
+                      00177 
+Warning[203]: Found opcode in column 1. (MOVLW)
+0031   3010           00178 MOVLW   0X10
+Warning[203]: Found opcode in column 1. (MOVWF)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0032   00B1           00179 MOVWF   TEMPRAM+01
+                      00180 
+Warning[203]: Found opcode in column 1. (MOVLW)
+0033   3050           00181 MOVLW   0X50
+Warning[203]: Found opcode in column 1. (MOVWF)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0034   00B2           00182 MOVWF   TEMPRAM+02
+                      00183 
+Warning[203]: Found opcode in column 1. (MOVLW)
+0035   3055           00184 MOVLW   0X55
+Warning[203]: Found opcode in column 1. (MOVLW)
+0036   30B3           00185 MOVLW   TEMPRAM+03
+                      00186 
+                      00187 
+Warning[203]: Found opcode in column 1. (MOVLW)
+0037   3004           00188 MOVLW   4
+Warning[203]: Found opcode in column 1. (MOVWF)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0038   00F1           00189 MOVWF   GPUDAT_TEMP
+Warning[205]: Found directive in column 1. (BANKSEL)
+0039   1283 1303      00190 BANK0
+Warning[203]: Found opcode in column 1. (GOTO)
+003B   283C           00191 GOTO    MAIN    ; GO TO BEGINNING OF PROGRAM
+                      00192 ;$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+                      00193 
+                      00194 
+                      00195 ;#######################        MAIN PROGRAM  ##########################
+003C                  00196 MAIN
+                      00197 
+                      00198 
+003C   20A6           00199         CALL    DISPLAY
+                      00200 
+                      00201 
+                      00202 
+Warning[203]: Found opcode in column 1. (GOTO)
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+003D   283C           00203 GOTO    MAIN
+                      00204 ;###################################################################
+003E                  00205 CLRTRAM
+003E   30B0           00206         MOVLW   0XB0
+003F   0084           00207         MOVWF   FSR
+0040   303C           00208         MOVLW   .60
+0041   00F4           00209         MOVWF   POINTER
+                      00210 
+0042                  00211 CLRT0
+0042   3000           00212         MOVLW   0
+0043   0080           00213         MOVWF   INDF
+Message[305]: Using default destination of 1 (file).
+0044   0A84           00214         INCF    FSR
+0045   0BF4           00215         DECFSZ  POINTER,F
+0046   2842           00216         GOTO    CLRT0
+Warning[203]: Found opcode in column 1. (RETURN)
+0047   0008           00217 RETURN
+                      00218 
+                      00219 
+0048                  00220 COMCPU2GPU
+0048   1683 1303      00221         BANK1
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+004A   01EE           00222         CLRF    GPUDAT
+004B   1283 1303      00223         BANK0
+004D   30B0           00224         MOVLW   0XB0
+004E   0084           00225         MOVWF   FSR
+                      00226 
+004F                  00227 CCG
+004F   1283 1303      00228         BANK0
+                      00229         
+0051   30FA           00230         MOVLW   .250
+0052   00F4           00231         MOVWF   POINTER
+                      00232 
+0053   01FE           00233         CLRF    W_TEMP
+0054   3008           00234         MOVLW   8
+0055   00FC           00235         MOVWF   LOOP
+0056                  00236 CCG0
+0056   0BF4           00237         DECFSZ  POINTER,F
+0057   2859           00238         GOTO    CCG1
+0058   288B           00239         GOTO    CCGRET
+                      00240 
+0059                  00241 CCG1
+0059   1D07           00242         BTFSS   PORTC,2;ACK?
+005A   2856           00243         GOTO    CCG0
+005B   0000           00244         NOP
+005C   0000           00245         NOP
+005D   0000           00246         NOP
+005E   0000           00247         NOP
+                      00248 
+                      00249 
+005F                  00250 CCG2
+005F   1D87           00251         BTFSS   PORTC,3         ;CLK HI?
+0060   285F           00252         GOTO    $-1
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0061   1E06           00253         BTFSS   PORTB,4
+                      00254 
+0062   2864           00255         GOTO    DBIT0
+0063   2866           00256         GOTO    DBIT1
+                      00257 
+0064                  00258 DBIT0
+0064   1003           00259         CLRC
+0065   2867           00260         GOTO    $+2     
+                      00261 
+0066                  00262 DBIT1
+0066   1403           00263         SETC
+                      00264 
+                      00265 
+                      00266 
+0067   1987           00267         BTFSC   PORTC,3         ;CLK LO?
+0068   2867           00268         GOTO    $-1
+Message[305]: Using default destination of 1 (file).
+0069   0DFE           00269         RLF             W_TEMP
+                      00270 
+                      00271         
+006A   0BFC           00272         DECFSZ  LOOP,F
+006B   285F           00273         GOTO    CCG2
+                      00274         
+006C   087E           00275         MOVFW   W_TEMP
+006D   0080           00276         MOVWF   INDF
+006E   0000           00277         NOP
+006F   0000           00278         NOP
+                      00279 
+                      00280 
+                      00281 
+0070   1D07           00282         BTFSS   PORTC,2
+0071   287C           00283         GOTO    CCG3
+                      00284 
+0072   01FE           00285         CLRF    W_TEMP
+0073   3008           00286         MOVLW   8
+0074   00FC           00287         MOVWF   LOOP
+0075   1683 1303      00288         BANK1
+Message[305]: Using default destination of 1 (file).
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0077   0AEE           00289         INCF    GPUDAT
+0078   1283 1303      00290         BANK0
+Message[305]: Using default destination of 1 (file).
+007A   0A84           00291         INCF    FSR
+007B   285F           00292         GOTO    CCG2
+                      00293 
+                      00294 
+007C                  00295 CCG3
+                      00296         
+007C   13FE           00297                 BCF             W_TEMP,7
+007D   137E           00298                 BCF             W_TEMP,6
+007E   12FE           00299                 BCF             W_TEMP,5
+007F   127E           00300                 BCF             W_TEMP,4
+                      00301         
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0080   087E           00302                 MOVFW   W_TEMP
+0081   1283 1703      00303                 BANK2
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0083   00AB           00304                 MOVWF   VDATA+0B
+0084   1683 1303      00305                 BANK1
+Message[305]: Using default destination of 1 (file).
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0086   0AEE           00306                 INCF    GPUDAT
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0087   086E           00307                 MOVFW   GPUDAT
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0088   00F1           00308                 MOVWF   GPUDAT_TEMP
+0089   1283 1303      00309                 BANK0
+                      00310                 ;CALL   PUTDATA
+                      00311 
+008B                  00312 CCGRET
+008B   0000           00313                 NOP
+008C   1683 1303      00314                 BANK1
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+008E   0871           00315                 MOVFW   GPUDAT_TEMP
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+008F   00EE           00316                 MOVWF   GPUDAT
+0090   1283 1303      00317                 BANK0
+0092   3000           00318                 MOVLW   0
+0093   008A           00319                 MOVWF   PCLATH
+Warning[203]: Found opcode in column 1. (RETURN)
+0094   0008           00320 RETURN
+                      00321 
+                      00322 
+                      00323 
+                      00324 
+                      00325 
+                      00326 
+                      00327 
+                      00328 
+                      00329 ;============   DATALATCH ========
+0095                  00330 DATALATCH
+Warning[203]: Found opcode in column 1. (BCF)
+0095   1287           00331 OE_OFF
+Warning[203]: Found opcode in column 1. (BCF)
+0096   1207           00332 REG_OFF
+                      00333 
+Warning[203]: Found opcode in column 1. (MOVLW)
+0097   3010           00334 MOVLW   .16
+Warning[203]: Found opcode in column 1. (MOVWF)
+0098   00F4           00335 MOVWF   POINTER
+                      00336 
+                      00337 
+0099                  00338 DSP0
+Warning[204]: Found pseudo-op in column 1. (MOVFW)
+0099   0800           00339 MOVFW   INDF
+Warning[203]: Found opcode in column 1. (MOVWF)
+009A   0093           00340 MOVWF   SSPBUF
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00341 
+Warning[203]: Found opcode in column 1. (NOP)
+009B   0000           00342 NOP
+Warning[203]: Found opcode in column 1. (NOP)
+009C   0000           00343 NOP     
+Warning[203]: Found opcode in column 1. (NOP)
+009D   0000           00344 NOP
+Warning[203]: Found opcode in column 1. (NOP)
+009E   0000           00345 NOP
+Warning[203]: Found opcode in column 1. (NOP)
+009F   0000           00346 NOP
+Warning[203]: Found opcode in column 1. (NOP)
+00A0   0000           00347 NOP
+Warning[203]: Found opcode in column 1. (NOP)
+00A1   0000           00348 NOP
+                      00349 
+                      00350 
+                      00351 
+Warning[203]: Found opcode in column 1. (INCF)
+Message[305]: Using default destination of 1 (file).
+00A2   0A84           00352 INCF    FSR
+Warning[203]: Found opcode in column 1. (DECFSZ)
+00A3   0BF4           00353 DECFSZ  POINTER,F
+Warning[203]: Found opcode in column 1. (GOTO)
+00A4   2899           00354 GOTO    DSP0
+                      00355 
+                      00356 
+Warning[203]: Found opcode in column 1. (RETURN)
+00A5   0008           00357 RETURN
+                      00358 ;=================================
+                      00359 
+                      00360 
+                      00361 ;#######################        DISPLAY         ########################
+00A6                  00362 DISPLAY
+                      00363         
+                      00364 
+                      00365         ;OE_OFF
+00A6   1307           00366         BCF             PORTC,6
+                      00367 
+00A7   1607           00368         REG_ON
+00A8   1207           00369         REG_OFF
+00A9   1007           00370         A_OFF
+                      00371 
+00AA   1087           00372         B_OFF
+                      00373         ;OE_ON
+                      00374 
+00AB   1707           00375         BSF             PORTC,6
+00AC   3000           00376         MOVLW   0
+00AD   00F3           00377         MOVWF   LINE
+00AE   21D7           00378         CALL    CLRAM
+00AF   2048           00379         CALL    COMCPU2GPU
+                      00380 
+00B0   2189           00381         CALL    DISPHUB
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 10
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00382 
+                      00383 
+                      00384         
+                      00385         ;OE_OFF
+00B1   1307           00386         BCF             PORTC,6
+                      00387 
+00B2   1607           00388         REG_ON
+00B3   1207           00389         REG_OFF
+00B4   1407           00390         A_ON
+00B5   1487           00391         B_ON
+                      00392         ;OE_ON
+                      00393 
+00B6   1707           00394         BSF             PORTC,6
+00B7   3001           00395         MOVLW   1
+00B8   00F3           00396         MOVWF   LINE
+00B9   21D7           00397         CALL    CLRAM
+00BA   2048           00398         CALL    COMCPU2GPU
+00BB   2189           00399         CALL    DISPHUB
+                      00400 ;       CALL    DELAY_ONEMS
+                      00401 
+                      00402 
+                      00403         ;OE_OFF
+00BC   1307           00404         BCF             PORTC,6
+                      00405 
+00BD   1607           00406         REG_ON
+00BE   1207           00407         REG_OFF
+00BF   1007           00408         A_OFF
+00C0   1487           00409         B_ON
+                      00410         ;OE_ON
+                      00411 
+00C1   1707           00412         BSF             PORTC,6
+                      00413 
+00C2   3002           00414         MOVLW   2
+00C3   00F3           00415         MOVWF   LINE
+00C4   21D7           00416         CALL    CLRAM
+00C5   2048           00417         CALL    COMCPU2GPU
+00C6   2189           00418         CALL    DISPHUB
+                      00419 ;       CALL    DELAY_ONEMS
+                      00420 
+                      00421 
+                      00422         ;OE_OFF
+00C7   1307           00423         BCF             PORTC,6
+                      00424 
+00C8   1607           00425         REG_ON
+00C9   1207           00426         REG_OFF
+00CA   1407           00427         A_ON
+00CB   1087           00428         B_OFF
+                      00429         ;OE_ON
+                      00430 
+00CC   1707           00431         BSF             PORTC,6
+                      00432 
+00CD   3003           00433         MOVLW   3
+00CE   00F3           00434         MOVWF   LINE
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 11
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00CF   21D7           00435         CALL    CLRAM
+00D0   2048           00436         CALL    COMCPU2GPU
+00D1   2189           00437         CALL    DISPHUB
+                      00438 ;       CALL    DELAY_ONEMS
+Warning[203]: Found opcode in column 1. (RETURN)
+00D2   0008           00439 RETURN
+                      00440 ;###############################################################
+                      00441 
+                      00442 
+00D3                  00443 CLRDISPLAY
+00D3   203E           00444         CALL    CLRTRAM
+Warning[203]: Found opcode in column 1. (RETURN)
+00D4   0008           00445 RETURN
+                      00446 
+                      00447 
+Warning[205]: Found directive in column 1. (ORG)
+0100                  00448 ORG 0X100
+                      00449 
+0100                  00450 PUTDATA
+0100   1283 1303      00451                 BANK0
+                      00452         ;       BSF             STATUS,IRP
+0102   080A           00453                 MOVFW   PCLATH
+0103   00FF           00454                 MOVWF   PCLATH_TEMP
+0104   3001           00455                 MOVLW   1
+0105   008A           00456                 MOVWF   PCLATH
+                      00457 
+                      00458 
+0106   1683 1303      00459                 BANK1
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0108   086E           00460                 MOVFW   GPUDAT
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0109   00EF           00461                 MOVWF   GDLOOP
+                      00462 
+010A   30B0           00463                 MOVLW   0XB0
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+010B   00F0           00464                 MOVWF   GDFSR
+                      00465 
+010C                  00466 PDT0
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+010C   0870           00467                 MOVFW   GDFSR
+010D   1283 1303      00468                 BANK0
+010F   0084           00469                 MOVWF   FSR
+0110   211B           00470                 CALL    DDECODE
+                      00471                 
+0111   1683 1303      00472                 BANK1
+Message[305]: Using default destination of 1 (file).
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0113   0AF0           00473                 INCF    GDFSR
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0114   0BEF           00474                 DECFSZ  GDLOOP,F
+0115   290C           00475                 GOTO    PDT0
+                      00476 
+                      00477 
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 12
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00478 
+                      00479 ;               BANK0
+                      00480 ;               MOVFW   STPT0
+                      00481 ;               BANK2
+                      00482 ;               MOVWF   VDATA+05
+                      00483 ;               BANK0
+                      00484 ;               MOVFW   STPT1
+                      00485 ;               BANK2
+                      00486 ;               MOVWF   VDATA+06
+                      00487 ;               BANK0
+                      00488 
+                      00489 
+                      00490 ;               MOVLW   0XB0
+                      00491 ;               MOVWF   FSR
+                      00492 ;               CALL    DDECODE
+                      00493 ;               MOVLW   0XB1
+                      00494 ;               MOVWF   FSR
+                      00495 ;               CALL    DDECODE
+                      00496 ;
+                      00497 ;
+                      00498 ;               MOVLW   0XB2
+                      00499 ;               MOVWF   FSR
+                      00500 ;               CALL    DDECODE
+                      00501 ;               
+                      00502 ;
+                      00503 ;
+                      00504 ;;              MOVLW   0XB3
+                      00505 ;;              MOVWF   FSR
+                      00506 ;;              CALL    DDECODE
+                      00507 ;               BANK2
+                      00508 ;               MOVLW   .11
+                      00509 ;               ADDWF   CURSOR_TEMP
+                      00510 ;               BANK0
+                      00511 ;               MOVLW   0XB3
+                      00512 ;               MOVWF   FSR
+                      00513 ;               CALL    DDECODE
+                      00514 ;;
+0116   1283 1303      00515                 BANK0
+0118   087F           00516                 MOVFW   PCLATH_TEMP
+0119   008A           00517                 MOVWF   PCLATH
+                      00518 ;       ;       BCF             STATUS,IRP
+                      00519         
+Warning[203]: Found opcode in column 1. (RETURN)
+011A   0008           00520 RETURN
+                      00521 
+                      00522 
+                      00523 
+                      00524 
+011B                  00525 DDECODE
+011B   1283 1303      00526                 BANK0
+011D   3001           00527                 MOVLW   1
+011E   008A           00528                 MOVWF   PCLATH
+011F   0800           00529                 MOVFW   INDF
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 13
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0120   1903           00530                 BTFSC   STATUS,Z
+0121   0008           00531                 RETURN
+0122   00F9           00532                 MOVWF   STPT0
+0123   00FA           00533                 MOVWF   STPT1
+0124   1683 1303      00534                 BANK1
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0126   00F2           00535                 MOVWF   CLRTEST
+0127   30FF           00536                 MOVLW   0XFF
+Message[305]: Using default destination of 1 (file).
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0128   02F2           00537                 SUBWF   CLRTEST
+0129   1283 1303      00538                 BANK0
+012B   1903           00539                 BTFSC   STATUS,Z
+012C   28D3           00540                 GOTO    CLRDISPLAY
+                      00541                 
+012D   13FA           00542                 BCF             STPT1,7
+012E   137A           00543                 BCF             STPT1,6
+012F   12FA           00544                 BCF             STPT1,5
+0130   127A           00545                 BCF             STPT1,4
+                      00546                 
+0131   1003           00547                 CLRC
+Message[305]: Using default destination of 1 (file).
+0132   0CF9           00548                 RRF             STPT0
+0133   1003           00549                 CLRC
+Message[305]: Using default destination of 1 (file).
+0134   0CF9           00550                 RRF             STPT0
+0135   1003           00551                 CLRC
+Message[305]: Using default destination of 1 (file).
+0136   0CF9           00552                 RRF             STPT0
+0137   1003           00553                 CLRC
+Message[305]: Using default destination of 1 (file).
+0138   0CF9           00554                 RRF             STPT0
+                      00555 
+                      00556 
+                      00557         
+0139   0879           00558                 MOVFW   STPT0
+Message[305]: Using default destination of 1 (file).
+013A   0782           00559                 ADDWF   PCL
+                      00560                 
+013B   0000           00561                 NOP
+013C   2941           00562                 GOTO    DCURSOR0
+013D   2948           00563                 GOTO    DCURSOR1
+013E   2951           00564                 GOTO    DHUB
+013F   2958           00565                 GOTO    DFONT0
+0140   296F           00566                 GOTO    DFONT1
+                      00567 
+0141                  00568 DCURSOR0
+0141   087A           00569                 MOVFW   STPT1
+0142   1283 1703      00570                 BANK2
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0144   00B7           00571                 MOVWF   CURSOR_TEMP
+0145   1283 1303      00572                 BANK0
+0147   2987           00573                 GOTO    DDRET
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 14
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0148                  00574 DCURSOR1
+0148   087A           00575                 MOVFW   STPT1
+0149   1283 1703      00576                 BANK2
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+014B   00B7           00577                 MOVWF   CURSOR_TEMP
+014C   3010           00578                 MOVLW   .16
+Message[305]: Using default destination of 1 (file).
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+014D   07B7           00579                 ADDWF   CURSOR_TEMP
+014E   1283 1303      00580                 BANK0
+0150   2987           00581                 GOTO    DDRET
+0151                  00582 DHUB
+0151   087A           00583                 MOVFW   STPT1
+0152   1283 1703      00584                 BANK2
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0154   00B8           00585                 MOVWF   HUB_TEMP
+0155   1283 1303      00586                 BANK0
+0157   2987           00587                 GOTO    DDRET
+0158                  00588 DFONT0
+0158   3000           00589                 MOVLW   0
+0159   00F5           00590                 MOVWF   FONT
+                      00591 
+015A   087A           00592                 MOVFW   STPT1
+015B   00F6           00593                 MOVWF   NUMBER
+                      00594                 ;BCF            STATUS,IRP
+015C   1283 1703      00595                 BANK2
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+015E   0838           00596                 MOVFW   HUB_TEMP
+015F   1283 1303      00597                 BANK0
+0161   00F8           00598                 MOVWF   HUB
+                      00599 
+                      00600 
+                      00601 
+0162   1283 1703      00602                 BANK2
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0164   0837           00603                 MOVFW   CURSOR_TEMP
+0165   1283 1303      00604                 BANK0
+0167   00FB           00605                 MOVWF   CURSORX
+0168   2200           00606                 CALL    HUBDUMP
+                      00607 
+0169   080A           00608                 MOVFW   PCLATH
+016A   00FF           00609                 MOVWF   PCLATH_TEMP
+016B   3009           00610                 MOVLW   9
+016C   008A           00611                 MOVWF   PCLATH
+Message[306]: Crossing page boundary -- ensure page bits are set.
+016D   2100           00612                 CALL    WIDTHCHECKF0
+                      00613                 
+016E   2987           00614                 GOTO    DDRET
+016F                  00615 DFONT1
+016F   3001           00616                 MOVLW   1
+0170   00F5           00617                 MOVWF   FONT
+                      00618                 
+0171   087A           00619                 MOVFW   STPT1
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 15
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0172   00F6           00620                 MOVWF   NUMBER
+0173   1283 1703      00621                 BANK2
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0175   0838           00622                 MOVFW   HUB_TEMP
+0176   1283 1303      00623                 BANK0
+0178   00F8           00624                 MOVWF   HUB
+                      00625 
+0179   1283 1703      00626                 BANK2
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+017B   0837           00627                 MOVFW   CURSOR_TEMP
+017C   1283 1303      00628                 BANK0
+017E   00FB           00629                 MOVWF   CURSORX
+017F   2200           00630                 CALL    HUBDUMP
+                      00631         
+                      00632 
+0180   080A           00633                 MOVFW   PCLATH
+0181   00FF           00634                 MOVWF   PCLATH_TEMP
+0182   3009           00635                 MOVLW   9
+0183   008A           00636                 MOVWF   PCLATH
+Message[306]: Crossing page boundary -- ensure page bits are set.
+0184   2134           00637                 CALL    WIDTHCHECKF1
+                      00638 
+                      00639 
+                      00640 
+0185   2987           00641                 GOTO    DDRET
+0186   0000           00642                 NOP
+0187                  00643 DDRET
+0187   0000           00644                 NOP     
+                      00645                 
+Warning[203]: Found opcode in column 1. (RETURN)
+0188   0008           00646 RETURN
+                      00647 
+                      00648 
+                      00649 
+                      00650 ;==================     DISPLAYING THE DATA RECIEVED 
+0189                  00651 DISPHUB
+0189   3002           00652         MOVLW   2
+018A   008A           00653         MOVWF   PCLATH
+018B   2100           00654         CALL    PUTDATA
+                      00655 
+                      00656 
+                      00657 
+                      00658 ;==================     PLACING THE DATA ================
+018C   1283 1303      00659         BANK0
+018E   3020           00660         MOVLW   0X20
+018F   0084           00661         MOVWF   FSR
+0190   2095           00662         CALL    DATALATCH
+                      00663 
+                      00664 
+0191   2095           00665         CALL    DATALATCH
+                      00666 
+                      00667 
+0192   2095           00668         CALL    DATALATCH
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 16
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00669 
+0193   2095           00670         CALL    DATALATCH
+                      00671 
+                      00672 
+0194   2095           00673         CALL    DATALATCH
+0195   30A0           00674         MOVLW   0XA0
+0196   0084           00675         MOVWF   FSR
+0197   2095           00676         CALL    DATALATCH
+                      00677         
+0198   3000           00678         MOVLW   0
+0199   008A           00679         MOVWF   PCLATH
+                      00680 
+                      00681 
+Warning[203]: Found opcode in column 1. (RETURN)
+019A   0008           00682 RETURN
+                      00683 
+                      00684 
+                      00685 
+                      00686 
+                      00687 ;======================  NO SCROLL      =================
+019B                  00688 DONTSCROLLHUB1DIG2
+019B   1283 1703      00689         BANK2
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+019D   082F           00690         MOVFW   VDATA+0F
+019E   1283 1303      00691         BANK0
+01A0   00F6           00692         MOVWF   NUMBER
+                      00693 
+01A1   3001           00694         MOVLW   1
+01A2   00FB           00695         MOVWF   CURSORX
+01A3   2200           00696         CALL    HUBDUMP
+Warning[203]: Found opcode in column 1. (RETURN)
+01A4   0008           00697 RETURN
+                      00698 
+01A5                  00699 DONTSCROLLHUB1DIG1
+01A5   1283 1703      00700         BANK2
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+01A7   0830           00701         MOVFW   VDATA+10
+01A8   1283 1303      00702         BANK0
+01AA   00F6           00703         MOVWF   NUMBER
+                      00704 
+01AB   300A           00705         MOVLW   .10
+01AC   00FB           00706         MOVWF   CURSORX
+01AD   2200           00707         CALL    HUBDUMP
+Warning[203]: Found opcode in column 1. (RETURN)
+01AE   0008           00708 RETURN
+                      00709 
+01AF                  00710 DONTSCROLLHUB1DIG0
+01AF   1283 1703      00711         BANK2
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+01B1   0831           00712         MOVFW   VDATA+11
+01B2   1283 1303      00713         BANK0
+01B4   00F6           00714         MOVWF   NUMBER
+                      00715 
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 17
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+01B5   3015           00716         MOVLW   .21
+01B6   00FB           00717         MOVWF   CURSORX
+01B7   2200           00718         CALL    HUBDUMP
+Warning[203]: Found opcode in column 1. (RETURN)
+01B8   0008           00719 RETURN
+                      00720 
+                      00721 
+01B9                  00722 DONTSCROLLHUB3DIG2
+01B9   1283 1703      00723         BANK2
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+01BB   082C           00724         MOVFW   VDATA+0C
+01BC   1283 1303      00725         BANK0
+01BE   00F6           00726         MOVWF   NUMBER
+                      00727 ;       MOVLW   1
+                      00728 ;       MOVWF   FONT
+                      00729 ;       MOVLW   3
+                      00730 ;       MOVWF   HUB
+01BF   3001           00731         MOVLW   1
+01C0   00FB           00732         MOVWF   CURSORX
+01C1   2200           00733         CALL    HUBDUMP
+Warning[203]: Found opcode in column 1. (RETURN)
+01C2   0008           00734 RETURN
+                      00735 
+                      00736 
+                      00737 
+01C3                  00738 DONTSCROLLHUB3DIG1
+01C3   1283 1703      00739         BANK2
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+01C5   082D           00740         MOVFW   VDATA+0D
+01C6   1283 1303      00741         BANK0
+01C8   00F6           00742         MOVWF   NUMBER
+                      00743 ;       MOVLW   1
+                      00744 ;       MOVWF   FONT
+                      00745 ;       MOVLW   3
+                      00746 ;       MOVWF   HUB
+01C9   300A           00747         MOVLW   .10
+01CA   00FB           00748         MOVWF   CURSORX
+01CB   2200           00749         CALL    HUBDUMP
+Warning[203]: Found opcode in column 1. (RETURN)
+01CC   0008           00750 RETURN
+                      00751 
+                      00752 
+01CD                  00753 DONTSCROLLHUB3DIG0
+01CD   1283 1703      00754         BANK2
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+01CF   082E           00755         MOVFW   VDATA+0E
+01D0   1283 1303      00756         BANK0
+01D2   00F6           00757         MOVWF   NUMBER
+                      00758 ;       MOVLW   1
+                      00759 ;       MOVWF   FONT
+                      00760 ;       MOVLW   3
+                      00761 ;       MOVWF   HUB
+01D3   3015           00762         MOVLW   .21
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 18
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+01D4   00FB           00763         MOVWF   CURSORX
+01D5   2200           00764         CALL    HUBDUMP
+Warning[203]: Found opcode in column 1. (RETURN)
+01D6   0008           00765 RETURN
+                      00766 ;====================================================   
+                      00767         
+                      00768 
+                      00769 
+                      00770 
+                      00771 ;=======================        CLEAR   RAM             ===============
+01D7                  00772 CLRAM
+01D7   1283 1303      00773         BANK0
+01D9   3050           00774         MOVLW           .80
+01DA   00F4           00775         MOVWF           POINTER
+01DB   3020           00776         MOVLW           DRAM
+01DC   0084           00777         MOVWF           FSR  
+                      00778 
+01DD                  00779 CLR0
+01DD   30FF           00780         MOVLW           0XFF
+01DE   0080           00781         MOVWF           INDF
+                      00782 
+01DF   0A84           00783         INCF            FSR, F
+01E0   0BF4           00784         DECFSZ          POINTER, F
+01E1   29DD           00785         GOTO            CLR0
+                      00786 
+01E2   3010           00787         MOVLW           .16
+01E3   00F4           00788         MOVWF           POINTER
+01E4   30A0           00789         MOVLW           0XA0
+01E5   0084           00790         MOVWF           FSR  
+                      00791 
+01E6                  00792 CLR1
+01E6   30FF           00793         MOVLW           0XFF
+01E7   0080           00794         MOVWF           INDF
+                      00795 
+01E8   0A84           00796         INCF            FSR, F
+01E9   0BF4           00797         DECFSZ          POINTER, F
+01EA   29E6           00798         GOTO            CLR1
+                      00799          
+01EB   0008           00800         RETURN
+                      00801 ;==========================================================
+                      00802 
+                      00803 
+                      00804 
+                      00805 
+                      00806 
+                      00807 ;==========     DELAY USEC =========
+01EC                  00808 DELAY_US
+                      00809 
+01EC   00F0           00810         MOVWF   DELAYUS
+                      00811 
+01ED                  00812 USEC
+                      00813 
+01ED   0000           00814         NOP
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 19
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+01EE   0000           00815         NOP
+01EF   0000           00816         NOP
+01F0   0000           00817         NOP
+Warning[203]: Found opcode in column 1. (DECFSZ)
+01F1   0BF0           00818 DECFSZ  DELAYUS,F
+                      00819 
+Warning[203]: Found opcode in column 1. (GOTO)
+01F2   29ED           00820 GOTO    USEC
+                      00821 
+Warning[203]: Found opcode in column 1. (RETURN)
+01F3   0008           00822 RETURN
+                      00823 ;=================================
+                      00824 
+                      00825 
+                      00826 
+                      00827 ;=========== DELAY ONE MS ========
+01F4                  00828 DELAY_ONEMS
+                      00829 
+01F4   3005           00830         MOVLW   .5
+01F5   00FC           00831         MOVWF   LOOP
+                      00832 
+01F6                  00833 MSEC
+01F6   30C8           00834         MOVLW   .200
+01F7   21EC           00835         CALL    DELAY_US
+01F8   0BFC           00836         DECFSZ  LOOP,F
+01F9   29F6           00837         GOTO    MSEC
+                      00838 
+Warning[203]: Found opcode in column 1. (RETURN)
+01FA   0008           00839 RETURN
+                      00840 ;==================================
+                      00841 
+                      00842 
+                      00843 ;=========== DELAY MS   ==========
+01FB                  00844 DELAY_MS
+                      00845         
+01FB   00F1           00846         MOVWF   DELAYMS
+01FC                  00847 MSEC0
+01FC   21F4           00848         CALL    DELAY_ONEMS
+01FD   0BF1           00849         DECFSZ  DELAYMS,F
+01FE   29FC           00850         GOTO    MSEC0
+Warning[203]: Found opcode in column 1. (RETURN)
+01FF   0008           00851 RETURN
+                      00852 ;=================================
+                      00853 
+                      00854 ;=========== DELAY      ONE     SECOND ===
+                      00855 ;DELAY_ONESEC
+                      00856 ;
+                      00857 ;       MOVLW   .5
+                      00858 ;       MOVWF   SEC
+                      00859 ;SEC0
+                      00860 ;       MOVLW   .200
+                      00861 ;       CALL    DELAY_MS
+                      00862 ;       DECFSZ  SEC,F
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 20
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00863 ;       GOTO    SEC0
+                      00864 ;RETURN
+                      00865 ;;=================================
+                      00866 ;
+                      00867 ;;==========    DELAY SEC ============
+                      00868 ;DELAY_SEC
+                      00869 ;
+                      00870 ;       MOVWF   DELAYS
+                      00871 ;SEC1
+                      00872 ;       CALL    DELAY_ONESEC
+                      00873 ;       DECFSZ  DELAYS,F
+                      00874 ;       GOTO    SEC1
+                      00875 ;RETURN
+                      00876 ;;=================================
+                      00877 
+                      00878 
+                      00879 
+                      00880 
+                      00881 
+                      00882 
+                      00883 
+                      00884 
+                      00885 
+                      00886 
+                      00887 
+                      00888 
+                      00889 
+                      00890 
+Warning[205]: Found directive in column 1. (ORG)
+0200                  00891 ORG 0X200
+                      00892 ;######################### HUB DISPLAYS ###################
+                      00893 
+                      00894 
+                      00895 ;============================
+0200                  00896 HUBDUMP
+                      00897 ;============================
+                      00898 ;       CALL    CLRAM
+0200   1283 1303      00899         BANK0
+0202   3002           00900         MOVLW   2
+0203   008A           00901         MOVWF   PCLATH
+                      00902 
+0204   0878           00903         MOVFW   HUB
+0205   0782           00904         ADDWF   PCL,F
+                      00905         
+0206   0000           00906         NOP
+0207   2A2B           00907         GOTO    HB1
+0208   2A25           00908         GOTO    HB2
+0209   2A1F           00909         GOTO    HB3
+020A   2A19           00910         GOTO    HB4
+020B   2A13           00911         GOTO    HB5
+020C   2A0D           00912         GOTO    HB6
+                      00913 
+                      00914 
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 21
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+020D                  00915 HB6
+020D   3020           00916         MOVLW   0X20
+020E   00F9           00917         MOVWF   STPT0
+020F   3024           00918         MOVLW   0X24
+0210   00FA           00919         MOVWF   STPT1
+0211   230A           00920         CALL    CURSORTEST
+                      00921 
+                      00922 
+Warning[203]: Found opcode in column 1. (GOTO)
+0212   2A31           00923 GOTO    HDP1
+                      00924 
+                      00925 
+0213                  00926 HB5
+                      00927 
+0213   3030           00928         MOVLW   0X30
+0214   00F9           00929         MOVWF   STPT0
+0215   3034           00930         MOVLW   0X34
+0216   00FA           00931         MOVWF   STPT1
+0217   230A           00932         CALL    CURSORTEST
+Warning[203]: Found opcode in column 1. (GOTO)
+0218   2A31           00933 GOTO    HDP1
+                      00934 
+0219                  00935 HB4
+0219   3040           00936         MOVLW   0X40
+021A   00F9           00937         MOVWF   STPT0
+021B   3044           00938         MOVLW   0X44
+021C   00FA           00939         MOVWF   STPT1
+021D   230A           00940         CALL    CURSORTEST
+Warning[203]: Found opcode in column 1. (GOTO)
+021E   2A31           00941 GOTO    HDP1
+                      00942 
+                      00943 
+021F                  00944 HB3
+021F   3050           00945         MOVLW   0X50
+0220   00F9           00946         MOVWF   STPT0
+0221   3054           00947         MOVLW   0X54
+0222   00FA           00948         MOVWF   STPT1
+0223   230A           00949         CALL    CURSORTEST
+Warning[203]: Found opcode in column 1. (GOTO)
+0224   2A31           00950 GOTO    HDP1
+                      00951 
+0225                  00952 HB2
+0225   3060           00953         MOVLW   0X60
+0226   00F9           00954         MOVWF   STPT0
+0227   3064           00955         MOVLW   0X64
+0228   00FA           00956         MOVWF   STPT1
+0229   230A           00957         CALL    CURSORTEST
+Warning[203]: Found opcode in column 1. (GOTO)
+022A   2A31           00958 GOTO    HDP1
+                      00959 
+                      00960 
+022B                  00961 HB1
+022B   30A0           00962         MOVLW   0XA0
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 22
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+022C   00F9           00963         MOVWF   STPT0
+022D   30A4           00964         MOVLW   0XA4
+022E   00FA           00965         MOVWF   STPT1
+022F   230A           00966         CALL    CURSORTEST
+Warning[203]: Found opcode in column 1. (GOTO)
+0230   2A31           00967 GOTO    HDP1
+                      00968 
+                      00969 
+                      00970 
+                      00971 
+0231                  00972 HDP1
+0231   0875           00973         MOVFW   FONT
+0232   0782           00974         ADDWF   PCL,F
+                      00975         
+0233   2A35           00976         GOTO    FONT0
+0234   2A77           00977         GOTO    FONT1
+                      00978         
+                      00979 
+                      00980 
+                      00981         
+                      00982 
+                      00983 
+                      00984 
+0235                  00985 FONT0
+0235   0873           00986         MOVFW   LINE
+0236   0782           00987         ADDWF   PCL,F
+0237   2A3B           00988         GOTO    F0_LINE11
+0238   2A4A           00989         GOTO    F0_LINE01
+0239   2A59           00990         GOTO    F0_LINE10
+023A   2A68           00991         GOTO    F0_LINE00
+                      00992 
+                      00993 
+023B                  00994 F0_LINE11
+                      00995 ;       CALL    CLRAM
+023B   0879           00996         MOVFW   STPT0
+023C   0084           00997         MOVWF   FSR
+023D   3010           00998         MOVLW   .16
+023E   00F7           00999         MOVWF   BTCOUNT
+023F   3004           01000         MOVLW   4
+0240   00F4           01001         MOVWF   POINTER
+                      01002         
+                      01003 
+                      01004         
+Warning[207]: Found label after column 1. (F0LN11)
+0241                  01005         F0LN11
+0241   269B           01006         CALL    CHAR
+0242   00FE           01007         MOVWF   W_TEMP
+0243   22F1           01008         CALL    SHIFTDATA
+                      01009 
+0244   3004           01010         MOVLW   .4
+Message[305]: Using default destination of 1 (file).
+0245   02F7           01011         SUBWF   BTCOUNT
+Message[305]: Using default destination of 1 (file).
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 23
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0246   0A84           01012         INCF    FSR
+Message[305]: Using default destination of 1 (file).
+0247   0BF4           01013         DECFSZ  POINTER
+0248   2A41           01014         GOTO    F0LN11
+Warning[203]: Found opcode in column 1. (RETURN)
+0249   0008           01015 RETURN
+                      01016 
+024A                  01017 F0_LINE01
+                      01018 ;       CALL    CLRAM
+024A   0879           01019         MOVFW   STPT0
+024B   0084           01020         MOVWF   FSR
+024C   300F           01021         MOVLW   .15
+024D   00F7           01022         MOVWF   BTCOUNT
+024E   3004           01023         MOVLW   4
+024F   00F4           01024         MOVWF   POINTER
+                      01025         
+                      01026 
+                      01027 
+Warning[207]: Found label after column 1. (F0LN01)
+0250                  01028         F0LN01
+0250   269B           01029         CALL    CHAR
+0251   00FE           01030         MOVWF   W_TEMP
+0252   22F1           01031         CALL    SHIFTDATA
+                      01032 
+0253   3004           01033         MOVLW   .4
+Message[305]: Using default destination of 1 (file).
+0254   02F7           01034         SUBWF   BTCOUNT
+Message[305]: Using default destination of 1 (file).
+0255   0A84           01035         INCF    FSR
+Message[305]: Using default destination of 1 (file).
+0256   0BF4           01036         DECFSZ  POINTER
+0257   2A50           01037         GOTO    F0LN01
+                      01038 
+Warning[203]: Found opcode in column 1. (RETURN)
+0258   0008           01039 RETURN
+                      01040 
+0259                  01041 F0_LINE10
+                      01042 ;       CALL    CLRAM
+0259   0879           01043         MOVFW   STPT0
+025A   0084           01044         MOVWF   FSR
+025B   300E           01045         MOVLW   .14
+025C   00F7           01046         MOVWF   BTCOUNT
+025D   3004           01047         MOVLW   4
+025E   00F4           01048         MOVWF   POINTER
+                      01049         
+                      01050 
+                      01051 
+Warning[207]: Found label after column 1. (F0LN10)
+025F                  01052         F0LN10
+025F   269B           01053         CALL    CHAR
+0260   00FE           01054         MOVWF   W_TEMP
+0261   22F1           01055         CALL    SHIFTDATA
+                      01056 
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 24
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0262   3004           01057         MOVLW   .4
+Message[305]: Using default destination of 1 (file).
+0263   02F7           01058         SUBWF   BTCOUNT
+Message[305]: Using default destination of 1 (file).
+0264   0A84           01059         INCF    FSR
+Message[305]: Using default destination of 1 (file).
+0265   0BF4           01060         DECFSZ  POINTER
+0266   2A5F           01061         GOTO    F0LN10
+                      01062 
+Warning[203]: Found opcode in column 1. (RETURN)
+0267   0008           01063 RETURN
+                      01064 
+0268                  01065 F0_LINE00
+                      01066 ;       CALL    CLRAM
+0268   0879           01067         MOVFW   STPT0
+0269   0084           01068         MOVWF   FSR
+026A   300D           01069         MOVLW   .13
+026B   00F7           01070         MOVWF   BTCOUNT
+026C   3004           01071         MOVLW   4
+026D   00F4           01072         MOVWF   POINTER
+                      01073         
+                      01074 
+Warning[207]: Found label after column 1. (F0LN00)
+026E                  01075         F0LN00
+026E   269B           01076         CALL    CHAR
+026F   00FE           01077         MOVWF   W_TEMP
+0270   22F1           01078         CALL    SHIFTDATA
+                      01079 
+0271   3004           01080         MOVLW   .4
+Message[305]: Using default destination of 1 (file).
+0272   02F7           01081         SUBWF   BTCOUNT
+Message[305]: Using default destination of 1 (file).
+0273   0A84           01082         INCF    FSR
+Message[305]: Using default destination of 1 (file).
+0274   0BF4           01083         DECFSZ  POINTER
+0275   2A6E           01084         GOTO    F0LN00
+                      01085 
+Warning[203]: Found opcode in column 1. (RETURN)
+0276   0008           01086 RETURN
+                      01087 
+                      01088 
+                      01089 
+0277                  01090 FONT1
+0277   0873           01091         MOVFW   LINE
+0278   0782           01092         ADDWF   PCL,F
+0279   2A7D           01093         GOTO    F1_LINE11
+027A   2A9A           01094         GOTO    F1_LINE01
+027B   2AB7           01095         GOTO    F1_LINE10
+027C   2AD4           01096         GOTO    F1_LINE00
+                      01097 
+                      01098 
+                      01099 
+027D                  01100 F1_LINE11
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 25
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      01101 ;       CALL    CLRAM
+027D   0879           01102         MOVFW   STPT0
+027E   0084           01103         MOVWF   FSR
+027F   301F           01104         MOVLW   .31
+0280   00F7           01105         MOVWF   BTCOUNT
+0281   3004           01106         MOVLW   4
+0282   00F4           01107         MOVWF   POINTER
+                      01108         
+Warning[207]: Found label after column 1. (F1LN11)
+0283                  01109         F1LN11
+0283   2500           01110         CALL    T_CHAR
+0284   00FE           01111         MOVWF   W_TEMP
+0285   22F1           01112         CALL    SHIFTDATA
+                      01113 
+0286   3008           01114         MOVLW   .8
+Message[305]: Using default destination of 1 (file).
+0287   02F7           01115         SUBWF   BTCOUNT
+Message[305]: Using default destination of 1 (file).
+0288   0A84           01116         INCF    FSR
+Message[305]: Using default destination of 1 (file).
+0289   0BF4           01117         DECFSZ  POINTER
+028A   2A83           01118         GOTO    F1LN11
+                      01119 
+                      01120 
+028B   087A           01121         MOVFW   STPT1
+028C   0084           01122         MOVWF   FSR
+028D   3020           01123         MOVLW   .32
+028E   00F7           01124         MOVWF   BTCOUNT
+028F   3004           01125         MOVLW   4
+0290   00F4           01126         MOVWF   POINTER
+                      01127         
+Warning[207]: Found label after column 1. (F1LN112)
+0291                  01128         F1LN112
+0291   2500           01129         CALL    T_CHAR
+0292   00FE           01130         MOVWF   W_TEMP
+0293   22F1           01131         CALL    SHIFTDATA
+0294   3008           01132         MOVLW   .8
+Message[305]: Using default destination of 1 (file).
+0295   02F7           01133         SUBWF   BTCOUNT
+Message[305]: Using default destination of 1 (file).
+0296   0A84           01134         INCF    FSR
+Message[305]: Using default destination of 1 (file).
+0297   0BF4           01135         DECFSZ  POINTER
+0298   2A91           01136         GOTO    F1LN112
+Warning[203]: Found opcode in column 1. (RETURN)
+0299   0008           01137 RETURN
+                      01138 
+029A                  01139 F1_LINE01
+                      01140 ;       CALL    CLRAM
+029A   0879           01141         MOVFW   STPT0
+029B   0084           01142         MOVWF   FSR
+029C   301D           01143         MOVLW   .29
+029D   00F7           01144         MOVWF   BTCOUNT
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 26
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+029E   3004           01145         MOVLW   4
+029F   00F4           01146         MOVWF   POINTER
+                      01147         
+Warning[207]: Found label after column 1. (F1LN01)
+02A0                  01148         F1LN01
+02A0   2500           01149         CALL    T_CHAR
+02A1   00FE           01150         MOVWF   W_TEMP
+02A2   22F1           01151         CALL    SHIFTDATA
+                      01152 
+02A3   3008           01153         MOVLW   .8
+Message[305]: Using default destination of 1 (file).
+02A4   02F7           01154         SUBWF   BTCOUNT
+Message[305]: Using default destination of 1 (file).
+02A5   0A84           01155         INCF    FSR
+Message[305]: Using default destination of 1 (file).
+02A6   0BF4           01156         DECFSZ  POINTER
+02A7   2AA0           01157         GOTO    F1LN01
+                      01158 
+                      01159 
+                      01160 
+02A8   087A           01161         MOVFW   STPT1
+02A9   0084           01162         MOVWF   FSR
+02AA   301E           01163         MOVLW   .30
+02AB   00F7           01164         MOVWF   BTCOUNT
+02AC   3004           01165         MOVLW   4
+02AD   00F4           01166         MOVWF   POINTER
+                      01167         
+Warning[207]: Found label after column 1. (F1LN012)
+02AE                  01168         F1LN012
+02AE   2500           01169         CALL    T_CHAR
+02AF   00FE           01170         MOVWF   W_TEMP
+02B0   22F1           01171         CALL    SHIFTDATA
+02B1   3008           01172         MOVLW   .8
+Message[305]: Using default destination of 1 (file).
+02B2   02F7           01173         SUBWF   BTCOUNT
+Message[305]: Using default destination of 1 (file).
+02B3   0A84           01174         INCF    FSR
+Message[305]: Using default destination of 1 (file).
+02B4   0BF4           01175         DECFSZ  POINTER
+02B5   2AAE           01176         GOTO    F1LN012
+                      01177 
+                      01178 
+Warning[203]: Found opcode in column 1. (RETURN)
+02B6   0008           01179 RETURN
+                      01180 
+02B7                  01181 F1_LINE10
+                      01182 ;       CALL    CLRAM
+02B7   0879           01183         MOVFW   STPT0
+02B8   0084           01184         MOVWF   FSR
+02B9   301B           01185         MOVLW   .27
+02BA   00F7           01186         MOVWF   BTCOUNT
+02BB   3004           01187         MOVLW   4
+02BC   00F4           01188         MOVWF   POINTER
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 27
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      01189         
+Warning[207]: Found label after column 1. (F1LN10)
+02BD                  01190         F1LN10
+02BD   2500           01191         CALL    T_CHAR
+02BE   00FE           01192         MOVWF   W_TEMP
+02BF   22F1           01193         CALL    SHIFTDATA
+                      01194 
+02C0   3008           01195         MOVLW   .8
+Message[305]: Using default destination of 1 (file).
+02C1   02F7           01196         SUBWF   BTCOUNT
+Message[305]: Using default destination of 1 (file).
+02C2   0A84           01197         INCF    FSR
+Message[305]: Using default destination of 1 (file).
+02C3   0BF4           01198         DECFSZ  POINTER
+02C4   2ABD           01199         GOTO    F1LN10
+                      01200 
+                      01201 
+02C5   087A           01202         MOVFW   STPT1
+02C6   0084           01203         MOVWF   FSR
+02C7   301C           01204         MOVLW   .28
+02C8   00F7           01205         MOVWF   BTCOUNT
+02C9   3004           01206         MOVLW   4
+02CA   00F4           01207         MOVWF   POINTER
+                      01208         
+Warning[207]: Found label after column 1. (F1LN102)
+02CB                  01209         F1LN102
+02CB   2500           01210         CALL    T_CHAR
+02CC   00FE           01211         MOVWF   W_TEMP
+02CD   22F1           01212         CALL    SHIFTDATA
+02CE   3008           01213         MOVLW   .8
+Message[305]: Using default destination of 1 (file).
+02CF   02F7           01214         SUBWF   BTCOUNT
+Message[305]: Using default destination of 1 (file).
+02D0   0A84           01215         INCF    FSR
+Message[305]: Using default destination of 1 (file).
+02D1   0BF4           01216         DECFSZ  POINTER
+02D2   2ACB           01217         GOTO    F1LN102
+                      01218 
+Warning[203]: Found opcode in column 1. (RETURN)
+02D3   0008           01219 RETURN
+                      01220 
+02D4                  01221 F1_LINE00
+                      01222 ;       CALL    CLRAM
+02D4   0879           01223         MOVFW   STPT0
+02D5   0084           01224         MOVWF   FSR
+02D6   3019           01225         MOVLW   .25
+02D7   00F7           01226         MOVWF   BTCOUNT
+02D8   3004           01227         MOVLW   4
+02D9   00F4           01228         MOVWF   POINTER
+                      01229         
+Warning[207]: Found label after column 1. (F1LN00)
+02DA                  01230         F1LN00
+02DA   2500           01231         CALL    T_CHAR
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 28
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+02DB   00FE           01232         MOVWF   W_TEMP
+02DC   22F1           01233         CALL    SHIFTDATA
+02DD   3008           01234         MOVLW   .8
+Message[305]: Using default destination of 1 (file).
+02DE   02F7           01235         SUBWF   BTCOUNT
+Message[305]: Using default destination of 1 (file).
+02DF   0A84           01236         INCF    FSR
+Message[305]: Using default destination of 1 (file).
+02E0   0BF4           01237         DECFSZ  POINTER
+02E1   2ADA           01238         GOTO    F1LN00
+                      01239 
+02E2   087A           01240         MOVFW   STPT1
+02E3   0084           01241         MOVWF   FSR
+02E4   301A           01242         MOVLW   .26
+02E5   00F7           01243         MOVWF   BTCOUNT
+02E6   3004           01244         MOVLW   4
+02E7   00F4           01245         MOVWF   POINTER
+                      01246         
+Warning[207]: Found label after column 1. (F1LN002)
+02E8                  01247         F1LN002
+02E8   2500           01248         CALL    T_CHAR
+02E9   00FE           01249         MOVWF   W_TEMP
+02EA   22F1           01250         CALL    SHIFTDATA
+                      01251 
+02EB   3008           01252         MOVLW   .8
+Message[305]: Using default destination of 1 (file).
+02EC   02F7           01253         SUBWF   BTCOUNT
+Message[305]: Using default destination of 1 (file).
+02ED   0A84           01254         INCF    FSR
+Message[305]: Using default destination of 1 (file).
+02EE   0BF4           01255         DECFSZ  POINTER
+02EF   2AE8           01256         GOTO    F1LN002
+                      01257 
+Warning[203]: Found opcode in column 1. (RETURN)
+02F0   0008           01258 RETURN
+                      01259         
+                      01260 
+                      01261 ;============================
+                      01262 
+                      01263 
+                      01264 
+02F1                  01265 SHIFTDATA
+02F1   3002           01266         MOVLW   2
+02F2   008A           01267         MOVWF   PCLATH
+02F3   087B           01268         MOVFW   CURSORX
+02F4   00FC           01269         MOVWF   LOOP
+                      01270         
+02F5   1903           01271         BTFSC   STATUS,Z
+02F6   2B07           01272         GOTO    SHFDT1
+                      01273 
+                      01274         
+                      01275         
+02F7   30FF           01276         MOVLW   0XFF
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 29
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+02F8   00F2           01277         MOVWF   MILSEC
+                      01278 
+Warning[207]: Found label after column 1. (SHFDT0)
+02F9                  01279         SHFDT0
+02F9   1403           01280         SETC
+Message[305]: Using default destination of 1 (file).
+02FA   0CFE           01281         RRF             W_TEMP
+Message[305]: Using default destination of 1 (file).
+02FB   0CF2           01282         RRF             MILSEC  ;TEMPORARY VAR
+02FC   0BFC           01283         DECFSZ  LOOP,F
+02FD   2AF9           01284         GOTO    SHFDT0
+                      01285         
+02FE   087E           01286         MOVFW   W_TEMP
+Message[305]: Using default destination of 1 (file).
+02FF   0580           01287         ANDWF   INDF
+                      01288         
+0300   3004           01289         MOVLW   4
+Message[305]: Using default destination of 1 (file).
+0301   0784           01290         ADDWF   FSR
+                      01291 
+0302   0872           01292         MOVFW   MILSEC
+Message[305]: Using default destination of 1 (file).
+0303   0580           01293         ANDWF   INDF
+                      01294 
+0304   3004           01295         MOVLW   4
+Message[305]: Using default destination of 1 (file).
+0305   0284           01296         SUBWF   FSR
+                      01297         
+0306   0008           01298         RETURN
+                      01299 
+                      01300 
+                      01301 
+0307                  01302 SHFDT1
+0307   087E           01303         MOVFW   W_TEMP
+Message[305]: Using default destination of 1 (file).
+0308   0580           01304         ANDWF   INDF    
+                      01305 
+Warning[203]: Found opcode in column 1. (RETURN)
+0309   0008           01306 RETURN
+                      01307 
+                      01308         
+                      01309 
+030A                  01310 CURSORTEST
+030A   080A           01311         MOVFW   PCLATH
+030B   00FF           01312         MOVWF   PCLATH_TEMP
+030C   3003           01313         MOVLW   3
+030D   008A           01314         MOVWF   PCLATH
+030E   3017           01315         MOVLW   .23
+030F   00F2           01316         MOVWF   MILSEC
+0310   087B           01317         MOVFW   CURSORX
+Message[305]: Using default destination of 1 (file).
+0311   02F2           01318         SUBWF   MILSEC
+0312   1C03           01319         BTFSS   STATUS,C
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 30
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0313   2B28           01320         GOTO    CSRT1
+                      01321 
+0314   300F           01322         MOVLW   .15
+0315   00F2           01323         MOVWF   MILSEC
+0316   087B           01324         MOVFW   CURSORX
+Message[305]: Using default destination of 1 (file).
+0317   02F2           01325         SUBWF   MILSEC
+0318   1C03           01326         BTFSS   STATUS,C
+0319   2B22           01327         GOTO    CSRT0
+                      01328 
+031A   1DFB           01329         BTFSS   CURSORX,3
+031B   2B2E           01330         GOTO    CTRET1
+031C   3004           01331         MOVLW   4
+Message[305]: Using default destination of 1 (file).
+031D   07F9           01332         ADDWF   STPT0
+Message[305]: Using default destination of 1 (file).
+031E   07FA           01333         ADDWF   STPT1
+031F   3008           01334         MOVLW   8
+Message[305]: Using default destination of 1 (file).
+0320   02FB           01335         SUBWF   CURSORX
+0321   2B2E           01336         GOTO    CTRET1
+                      01337 
+                      01338 
+                      01339 ;CURSOR IS GREATER THAN 16
+0322                  01340 CSRT0
+0322   3008           01341         MOVLW   8
+Message[305]: Using default destination of 1 (file).
+0323   07F9           01342         ADDWF   STPT0
+Message[305]: Using default destination of 1 (file).
+0324   07FA           01343         ADDWF   STPT1
+0325   3010           01344         MOVLW   .16
+Message[305]: Using default destination of 1 (file).
+0326   02FB           01345         SUBWF   CURSORX
+Warning[203]: Found opcode in column 1. (GOTO)
+0327   2B2E           01346 GOTO    CTRET1
+                      01347 
+                      01348 
+                      01349 ;CURSOR IS GREATER THAN 24
+0328                  01350 CSRT1
+0328   300C           01351         MOVLW   .12
+Message[305]: Using default destination of 1 (file).
+0329   07F9           01352         ADDWF   STPT0
+Message[305]: Using default destination of 1 (file).
+032A   07FA           01353         ADDWF   STPT1
+032B   3018           01354         MOVLW   .24
+Message[305]: Using default destination of 1 (file).
+032C   02FB           01355         SUBWF   CURSORX
+Warning[203]: Found opcode in column 1. (GOTO)
+032D   2B2E           01356 GOTO    CTRET1
+                      01357 
+                      01358 
+                      01359 
+032E                  01360 CTRET1
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 31
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      01361 
+032E   087F           01362         MOVFW   PCLATH_TEMP
+032F   008A           01363         MOVWF   PCLATH
+Warning[203]: Found opcode in column 1. (RETURN)
+0330   0008           01364 RETURN
+                      01365 
+                      01366 
+                      01367 
+                      01368 
+                      01369 
+                      01370 
+                      01371 
+                      01372 
+                      01373 
+                      01374 
+                      01375 
+                      01376 
+                      01377 
+                      01378 
+                      01379 
+                      01380 
+                      01381 
+                      01382 
+                      01383 
+                      01384 
+                      01385 
+                      01386 
+                      01387 
+Warning[205]: Found directive in column 1. (ORG)
+0500                  01388 ORG 0X500
+0500                  01389 T_CHAR
+0500   3005           01390         MOVLW   5
+0501   008A           01391         MOVWF   PCLATH  
+0502   0876           01392         MOVFW   NUMBER
+0503   0782           01393         ADDWF   PCL,F
+                      01394         
+0504   2D10           01395         GOTO    T_ZERO
+                      01396         
+0505   2D33           01397         GOTO    T_ONE
+                      01398 
+0506   2D56           01399         GOTO    T_TWO
+                      01400 
+0507   2D79           01401         GOTO    T_THREE
+                      01402 
+0508   2D9C           01403         GOTO    T_FOUR
+                      01404 
+0509   2DBF           01405         GOTO    T_FIVE
+                      01406 
+Warning[203]: Found opcode in column 1. (NOP)
+050A   0000           01407 NOP
+Warning[203]: Found opcode in column 1. (NOP)
+050B   0000           01408 NOP
+Warning[203]: Found opcode in column 1. (NOP)
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 32
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+050C   0000           01409 NOP
+Warning[203]: Found opcode in column 1. (NOP)
+050D   0000           01410 NOP
+                      01411 
+Message[305]: Using default destination of 1 (file).
+050E   0A8A           01412         INCF    PCLATH
+050F   2E00           01413         GOTO    T_CHARB
+                      01414 
+                      01415 
+Warning[207]: Found label after column 1. (T_ZERO)
+0510                  01416         T_ZERO
+0510   0877           01417                         MOVFW   BTCOUNT
+0511   0782           01418                         ADDWF   PCL,F
+                      01419 
+0512   340C           01420                         DT      .12
+0513   34C0 34FF      01421                         DT      B'11000000',B'11111111'
+0515   3480 347F      01422                         DT      B'10000000',B'01111111'
+0517   341E 343F      01423                         DT      B'00011110',B'00111111'
+0519   343F 343F      01424                         DT      B'00111111',B'00111111'
+051B   343F 343F      01425                         DT      B'00111111',B'00111111'
+051D   343F 343F      01426                         DT      B'00111111',B'00111111'
+051F   343F 343F      01427                         DT      B'00111111',B'00111111'
+0521   343F 343F      01428                         DT      B'00111111',B'00111111';
+0523   343F 343F      01429                         DT      B'00111111',B'00111111';
+0525   343F 343F      01430                         DT      B'00111111',B'00111111'
+0527   343F 343F      01431                         DT      B'00111111',B'00111111'
+0529   343F 343F      01432                         DT      B'00111111',B'00111111'
+052B   343F 343F      01433                         DT      B'00111111',B'00111111'
+052D   341E 343F      01434                         DT      B'00011110',B'00111111'
+052F   3480 347F      01435                         DT      B'10000000',B'01111111'
+0531   34C0 34FF      01436                         DT      B'11000000',B'11111111'
+                      01437 
+Warning[207]: Found label after column 1. (T_ONE)
+0533                  01438         T_ONE
+0533   0877           01439                         MOVFW   BTCOUNT
+Message[305]: Using default destination of 1 (file).
+0534   0782           01440                         ADDWF   PCL
+                      01441 
+0535   340C           01442                         DT      .12
+0536   34E7 34FF      01443                         DT      B'11100111',B'11111111'
+0538   34E7 34FF      01444                         DT      B'11100111',B'11111111'
+053A   34C7 34FF      01445                         DT      B'11000111',B'11111111'
+053C   3487 34FF      01446                         DT      B'10000111',B'11111111'
+053E   3427 34FF      01447                         DT      B'00100111',B'11111111'
+0540   34E7 34FF      01448                         DT      B'11100111',B'11111111'
+0542   34E7 34FF      01449                         DT      B'11100111',B'11111111'
+0544   34E7 34FF      01450                         DT      B'11100111',B'11111111';
+0546   34E7 34FF      01451                         DT      B'11100111',B'11111111';
+0548   34E7 34FF      01452                         DT      B'11100111',B'11111111'
+054A   34E7 34FF      01453                         DT      B'11100111',B'11111111'
+054C   34E7 34FF      01454                         DT      B'11100111',B'11111111'
+054E   34E7 34FF      01455                         DT      B'11100111',B'11111111'
+0550   34E7 34FF      01456                         DT      B'11100111',B'11111111'
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 33
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0552   3400 34FF      01457                         DT      B'00000000',B'11111111'
+0554   3400 34FF      01458                         DT      B'00000000',B'11111111' 
+                      01459 
+Warning[207]: Found label after column 1. (T_TWO)
+0556                  01460         T_TWO
+0556   0877           01461                         MOVFW   BTCOUNT
+0557   0782           01462                         ADDWF   PCL,F
+                      01463                         
+0558   340C           01464                         DT      .12
+0559   34C0 34FF      01465                         DT      B'11000000',B'11111111'
+055B   3480 347F      01466                         DT      B'10000000',B'01111111'
+055D   343E 343F      01467                         DT      B'00111110',B'00111111'
+055F   34FF 343F      01468                         DT      B'11111111',B'00111111'
+0561   34FF 343F      01469                         DT      B'11111111',B'00111111'
+0563   34FF 343F      01470                         DT      B'11111111',B'00111111'
+0565   34FF 343F      01471                         DT      B'11111111',B'00111111'
+0567   34FE 343F      01472                         DT      B'11111110',B'00111111'
+0569   34C0 347F      01473                         DT      B'11000000',B'01111111'
+056B   3480 34FF      01474                         DT      B'10000000',B'11111111'
+056D   341F 34FF      01475                         DT      B'00011111',B'11111111'
+056F   343F 34FF      01476                         DT      B'00111111',B'11111111'
+0571   343F 34FF      01477                         DT      B'00111111',B'11111111'
+0573   343F 343F      01478                         DT      B'00111111',B'00111111'
+0575   3400 343F      01479                         DT      B'00000000',B'00111111'
+0577   3400 343F      01480                         DT      B'00000000',B'00111111'
+                      01481         
+Warning[207]: Found label after column 1. (T_THREE)
+0579                  01482         T_THREE
+0579   0877           01483                         MOVFW   BTCOUNT
+Message[305]: Using default destination of 1 (file).
+057A   0782           01484                         ADDWF   PCL
+                      01485 
+057B   340C           01486                         DT      .12
+057C   34C0 34FF      01487                         DT      B'11000000',B'11111111'
+057E   3480 347F      01488                         DT      B'10000000',B'01111111'
+0580   341E 343F      01489                         DT      B'00011110',B'00111111'
+0582   343F 343F      01490                         DT      B'00111111',B'00111111'
+0584   34FF 343F      01491                         DT      B'11111111',B'00111111'
+0586   34FF 343F      01492                         DT      B'11111111',B'00111111'
+0588   34FE 343F      01493                         DT      B'11111110',B'00111111'
+058A   34E0 347F      01494                         DT      B'11100000',B'01111111';
+058C   34E0 347F      01495                         DT      B'11100000',B'01111111';
+058E   34FE 343F      01496                         DT      B'11111110',B'00111111'
+0590   34FF 343F      01497                         DT      B'11111111',B'00111111'
+0592   34FF 343F      01498                         DT      B'11111111',B'00111111'
+0594   343F 343F      01499                         DT      B'00111111',B'00111111'
+0596   341E 343F      01500                         DT      B'00011110',B'00111111'
+0598   3480 347F      01501                         DT      B'10000000',B'01111111'
+059A   34C0 34FF      01502                         DT      B'11000000',B'11111111'
+                      01503         
+Warning[207]: Found label after column 1. (T_FOUR)
+059C                  01504         T_FOUR
+059C   0877           01505                         MOVFW   BTCOUNT
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 34
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Message[305]: Using default destination of 1 (file).
+059D   0782           01506                         ADDWF   PCL
+                      01507 
+059E   340C           01508                         DT      .12
+059F   34FF 34BF      01509                         DT      B'11111111',B'10111111'
+05A1   34FD 343F      01510                         DT      B'11111101',B'00111111'
+05A3   34F9 343F      01511                         DT      B'11111001',B'00111111'
+05A5   34F9 343F      01512                         DT      B'11111001',B'00111111'
+05A7   34F3 343F      01513                         DT      B'11110011',B'00111111'
+05A9   34E7 343F      01514                         DT      B'11100111',B'00111111'
+05AB   34CF 343F      01515                         DT      B'11001111',B'00111111'
+05AD   349F 343F      01516                         DT      B'10011111',B'00111111';
+05AF   343F 343F      01517                         DT      B'00111111',B'00111111';
+05B1   343F 343F      01518                         DT      B'00111111',B'00111111'
+05B3   3400 343F      01519                         DT      B'00000000',B'00111111'
+05B5   3400 343F      01520                         DT      B'00000000',B'00111111'
+05B7   34FF 343F      01521                         DT      B'11111111',B'00111111'
+05B9   34FF 343F      01522                         DT      B'11111111',B'00111111'
+05BB   34FF 343F      01523                         DT      B'11111111',B'00111111'
+05BD   34FF 347F      01524                         DT      B'11111111',B'01111111' 
+                      01525 
+Warning[207]: Found label after column 1. (T_FIVE)
+05BF                  01526         T_FIVE
+05BF   0877           01527                         MOVFW   BTCOUNT
+Message[305]: Using default destination of 1 (file).
+05C0   0782           01528                         ADDWF   PCL
+                      01529 
+05C1   340C           01530                         DT      .12
+05C2   3400 343F      01531                         DT      B'00000000',B'00111111'
+05C4   3400 343F      01532                         DT      B'00000000',B'00111111'
+05C6   343F 343F      01533                         DT      B'00111111',B'00111111'
+05C8   343F 347F      01534                         DT      B'00111111',B'01111111'
+05CA   343F 34FF      01535                         DT      B'00111111',B'11111111'
+05CC   343F 34FF      01536                         DT      B'00111111',B'11111111'
+05CE   343F 34FF      01537                         DT      B'00111111',B'11111111'
+05D0   3400 34FF      01538                         DT      B'00000000',B'11111111';
+05D2   3400 347F      01539                         DT      B'00000000',B'01111111';
+05D4   34FE 343F      01540                         DT      B'11111110',B'00111111'
+05D6   34FF 343F      01541                         DT      B'11111111',B'00111111'
+05D8   34FF 343F      01542                         DT      B'11111111',B'00111111'
+05DA   343F 343F      01543                         DT      B'00111111',B'00111111'
+05DC   341E 343F      01544                         DT      B'00011110',B'00111111'
+05DE   3480 347F      01545                         DT      B'10000000',B'01111111'
+05E0   34C0 34FF      01546                         DT      B'11000000',B'11111111'
+                      01547 
+                      01548 
+                      01549 
+Warning[205]: Found directive in column 1. (ORG)
+0600                  01550 ORG 0X600
+0600                  01551 T_CHARB
+0600   3006           01552                         MOVLW   6
+0601   008A           01553                         MOVWF   PCLATH
+                      01554 
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 35
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0602   0876           01555                         MOVFW   NUMBER
+0603   0782           01556                         ADDWF   PCL,F
+                      01557 
+0604   0008           01558                                 RETURN  
+                      01559 
+0605   0008           01560                                 RETURN
+                      01561 
+0606   0008           01562                                 RETURN
+                      01563 
+0607   0008           01564                                 RETURN
+                      01565 
+0608   0008           01566                                 RETURN
+                      01567 
+0609   0008           01568                                 RETURN
+                      01569                                 
+060A   2E0E           01570                                 GOTO    T_SIX
+                      01571         
+060B   2E31           01572                                 GOTO    T_SEVEN
+                      01573                 
+060C   2E54           01574                                 GOTO    T_EIGHT
+                      01575                 
+060D   2E77           01576                                 GOTO    T_NINE
+                      01577 
+                      01578 
+                      01579                         
+Warning[207]: Found label after column 1. (T_SIX)
+060E                  01580         T_SIX
+060E   0877           01581                         MOVFW   BTCOUNT
+Message[305]: Using default destination of 1 (file).
+060F   0782           01582                         ADDWF   PCL
+                      01583 
+0610   340C           01584                         DT      .12
+0611   34C0 347F      01585                         DT      B'11000000',B'01111111'
+0613   3480 343F      01586                         DT      B'10000000',B'00111111'
+0615   341E 343F      01587                         DT      B'00011110',B'00111111'
+0617   343F 343F      01588                         DT      B'00111111',B'00111111'
+0619   343F 34FF      01589                         DT      B'00111111',B'11111111'
+061B   343F 34FF      01590                         DT      B'00111111',B'11111111'
+061D   341F 34FF      01591                         DT      B'00011111',B'11111111'
+061F   3400 34FF      01592                         DT      B'00000000',B'11111111';
+0621   3400 347F      01593                         DT      B'00000000',B'01111111';
+0623   341E 343F      01594                         DT      B'00011110',B'00111111'
+0625   343F 343F      01595                         DT      B'00111111',B'00111111'
+0627   343F 343F      01596                         DT      B'00111111',B'00111111'
+0629   343F 343F      01597                         DT      B'00111111',B'00111111'
+062B   341E 343F      01598                         DT      B'00011110',B'00111111'
+062D   3480 347F      01599                         DT      B'10000000',B'01111111'
+062F   34C0 34FF      01600                         DT      B'11000000',B'11111111'
+                      01601         
+                      01602                         
+Warning[207]: Found label after column 1. (T_SEVEN)
+0631                  01603         T_SEVEN
+0631   0877           01604                         MOVFW   BTCOUNT
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 36
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Message[305]: Using default destination of 1 (file).
+0632   0782           01605                         ADDWF   PCL
+                      01606 
+0633   340C           01607                         DT      .12
+0634   3400 343F      01608                         DT      B'00000000',B'00111111'
+0636   3400 343F      01609                         DT      B'00000000',B'00111111'
+0638   343F 343F      01610                         DT      B'00111111',B'00111111'
+063A   343F 343F      01611                         DT      B'00111111',B'00111111'
+063C   34FF 343F      01612                         DT      B'11111111',B'00111111'
+063E   34FF 343F      01613                         DT      B'11111111',B'00111111'
+0640   34FE 343F      01614                         DT      B'11111110',B'00111111'
+0642   34FC 347F      01615                         DT      B'11111100',B'01111111';
+0644   34F8 34FF      01616                         DT      B'11111000',B'11111111';
+0646   34F1 34FF      01617                         DT      B'11110001',B'11111111'
+0648   34E3 34FF      01618                         DT      B'11100011',B'11111111'
+064A   34E7 34FF      01619                         DT      B'11100111',B'11111111'
+064C   34E7 34FF      01620                         DT      B'11100111',B'11111111'
+064E   34E7 34FF      01621                         DT      B'11100111',B'11111111'
+0650   34E7 34FF      01622                         DT      B'11100111',B'11111111'
+0652   34E7 34FF      01623                         DT      B'11100111',B'11111111' 
+                      01624         
+Warning[207]: Found label after column 1. (T_EIGHT)
+0654                  01625         T_EIGHT
+0654   0877           01626                         MOVFW   BTCOUNT
+Message[305]: Using default destination of 1 (file).
+0655   0782           01627                         ADDWF   PCL
+                      01628 
+0656   340C           01629                         DT      .12
+0657   34C0 34FF      01630                         DT      B'11000000',B'11111111'
+0659   3480 347F      01631                         DT      B'10000000',B'01111111'
+065B   341E 343F      01632                         DT      B'00011110',B'00111111'
+065D   343F 343F      01633                         DT      B'00111111',B'00111111'
+065F   343F 343F      01634                         DT      B'00111111',B'00111111'
+0661   341E 343F      01635                         DT      B'00011110',B'00111111'
+0663   3480 347F      01636                         DT      B'10000000',B'01111111'
+0665   3480 347F      01637                         DT      B'10000000',B'01111111';
+0667   341E 343F      01638                         DT      B'00011110',B'00111111';
+0669   343F 343F      01639                         DT      B'00111111',B'00111111'
+066B   343F 343F      01640                         DT      B'00111111',B'00111111'
+066D   343F 343F      01641                         DT      B'00111111',B'00111111'
+066F   343F 343F      01642                         DT      B'00111111',B'00111111'
+0671   341E 343F      01643                         DT      B'00011110',B'00111111'
+0673   3480 347F      01644                         DT      B'10000000',B'01111111'
+0675   34C0 34FF      01645                         DT      B'11000000',B'11111111' 
+                      01646 
+Warning[207]: Found label after column 1. (T_NINE)
+0677                  01647         T_NINE
+0677   0877           01648                         MOVFW   BTCOUNT
+Message[305]: Using default destination of 1 (file).
+0678   0782           01649                         ADDWF   PCL
+                      01650 
+0679   340C           01651                         DT      .12
+067A   34C0 34FF      01652                         DT      B'11000000',B'11111111'
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 37
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+067C   3480 347F      01653                         DT      B'10000000',B'01111111'
+067E   341E 343F      01654                         DT      B'00011110',B'00111111'
+0680   343F 343F      01655                         DT      B'00111111',B'00111111'
+0682   343F 343F      01656                         DT      B'00111111',B'00111111'
+0684   343F 343F      01657                         DT      B'00111111',B'00111111'
+0686   341E 343F      01658                         DT      B'00011110',B'00111111'
+0688   3480 343F      01659                         DT      B'10000000',B'00111111';
+068A   34C0 343F      01660                         DT      B'11000000',B'00111111';
+068C   34FE 343F      01661                         DT      B'11111110',B'00111111'
+068E   34FF 343F      01662                         DT      B'11111111',B'00111111'
+0690   34FF 343F      01663                         DT      B'11111111',B'00111111'
+0692   343F 343F      01664                         DT      B'00111111',B'00111111'
+0694   341E 343F      01665                         DT      B'00011110',B'00111111'
+0696   3480 347F      01666                         DT      B'10000000',B'01111111'
+0698   34C0 34FF      01667                         DT      B'11000000',B'11111111'
+                      01668 
+Warning[203]: Found opcode in column 1. (RETURN)
+069A   0008           01669 RETURN
+                      01670 
+069B                  01671 CHAR
+069B   3006           01672         MOVLW   6
+069C   008A           01673         MOVWF   PCLATH
+                      01674 
+                      01675 
+069D   0876           01676         MOVFW   NUMBER
+069E   0782           01677         ADDWF   PCL,F
+                      01678 
+069F   2EB0           01679         GOTO    ZERO
+                      01680         
+06A0   2EC3           01681         GOTO    ONE
+                      01682         
+06A1   2ED6           01683         GOTO    TWO
+                      01684 
+06A2   2EE9           01685         GOTO    THREE
+                      01686 
+06A3   0000           01687         NOP
+06A4   0000           01688         NOP
+06A5   0000           01689         NOP
+06A6   0000           01690         NOP
+06A7   0000           01691         NOP
+06A8   0000           01692         NOP
+06A9   0000           01693         NOP
+06AA   0000           01694         NOP
+06AB   0000           01695         NOP
+06AC   0000           01696         NOP
+06AD   0000           01697         NOP
+                      01698 
+Message[305]: Using default destination of 1 (file).
+06AE   0A8A           01699         INCF    PCLATH
+06AF   2F00           01700         GOTO    CHARB
+                      01701 
+                      01702 
+                      01703 
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 38
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      01704 
+                      01705 
+Warning[207]: Found label after column 1. (ZERO)
+06B0                  01706         ZERO
+06B0   0877           01707                         MOVFW   BTCOUNT
+06B1   0782           01708                         ADDWF   PCL, F
+                      01709 
+06B2   3408           01710                         DT      8
+06B3   34FF           01711                         DT      B'11111111'
+06B4   34FF           01712                         DT      B'11111111'
+06B5   34C7           01713                         DT      B'11000111'
+06B6   3483           01714                         DT      B'10000011'
+06B7   3411           01715                         DT      B'00010001'
+06B8   3439           01716                         DT      B'00111001'
+06B9   3439           01717                         DT      B'00111001'
+06BA   3439           01718                         DT      B'00111001'
+06BB   3439           01719                         DT      B'00111001'
+06BC   3439           01720                         DT      B'00111001'
+06BD   3439           01721                         DT      B'00111001'
+06BE   3439           01722                         DT      B'00111001'
+06BF   3439           01723                         DT      B'00111001'
+06C0   3411           01724                         DT      B'00010001'
+06C1   3483           01725                         DT      B'10000011'
+06C2   34C7           01726                         DT      B'11000111'
+                      01727 
+                      01728 
+                      01729 
+Warning[207]: Found label after column 1. (ONE)
+06C3                  01730         ONE
+06C3   0877           01731                         MOVFW   BTCOUNT
+06C4   0782           01732                         ADDWF   PCL, F
+                      01733 
+06C5   3407           01734                         DT      7
+06C6   34FF           01735                         DT      B'11111111'
+06C7   34FF           01736                         DT      B'11111111'
+06C8   34CF           01737                         DT      B'11001111'
+06C9   34CF           01738                         DT      B'11001111'
+06CA   348F           01739                         DT      B'10001111'
+06CB   340F           01740                         DT      B'00001111'
+06CC   344F           01741                         DT      B'01001111'
+06CD   34CF           01742                         DT      B'11001111'
+06CE   34CF           01743                         DT      B'11001111'
+06CF   34CF           01744                         DT      B'11001111'
+06D0   34CF           01745                         DT      B'11001111'
+06D1   34CF           01746                         DT      B'11001111'
+06D2   34CF           01747                         DT      B'11001111'
+06D3   34CF           01748                         DT      B'11001111'
+06D4   3403           01749                         DT      B'00000011'
+06D5   3403           01750                         DT      B'00000011'
+                      01751 
+                      01752 
+Warning[207]: Found label after column 1. (TWO)
+06D6                  01753         TWO
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 39
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+06D6   0877           01754                         MOVFW   BTCOUNT
+06D7   0782           01755                         ADDWF   PCL, F
+                      01756 
+06D8   3408           01757                         DT      8
+06D9   34FF           01758                         DT      B'11111111'
+06DA   34FF           01759                         DT      B'11111111'
+06DB   3487           01760                         DT      B'10000111'
+06DC   3403           01761                         DT      B'00000011'
+06DD   3431           01762                         DT      B'00110001'
+06DE   34F9           01763                         DT      B'11111001'
+06DF   34F9           01764                         DT      B'11111001'
+06E0   34F9           01765                         DT      B'11111001'
+06E1   34F1           01766                         DT      B'11110001'
+06E2   3483           01767                         DT      B'10000011'
+06E3   3407           01768                         DT      B'00000111'
+06E4   343F           01769                         DT      B'00111111'
+06E5   343F           01770                         DT      B'00111111'
+06E6   3439           01771                         DT      B'00111001'
+06E7   3401           01772                         DT      B'00000001'
+06E8   3401           01773                         DT      B'00000001'
+                      01774 
+                      01775 
+                      01776 
+                      01777 
+                      01778 
+                      01779                                 
+                      01780 
+Warning[207]: Found label after column 1. (THREE)
+06E9                  01781         THREE
+06E9   0877           01782                         MOVFW   BTCOUNT
+06EA   0782           01783                         ADDWF   PCL, F
+                      01784 
+06EB   3408           01785                         DT      8
+06EC   34FF           01786                         DT      B'11111111'
+06ED   34FF           01787                         DT      B'11111111'
+06EE   3487           01788                         DT      B'10000111'
+06EF   3403           01789                         DT      B'00000011'
+06F0   3431           01790                         DT      B'00110001'
+06F1   34F9           01791                         DT      B'11111001'
+06F2   34F9           01792                         DT      B'11111001'
+06F3   34F1           01793                         DT      B'11110001'
+06F4   3483           01794                         DT      B'10000011'
+06F5   3483           01795                         DT      B'10000011'
+06F6   34F1           01796                         DT      B'11110001'
+06F7   34F9           01797                         DT      B'11111001'
+06F8   34F9           01798                         DT      B'11111001'
+06F9   3439           01799                         DT      B'00111001'
+06FA   3403           01800                         DT      B'00000011'
+06FB   3487           01801                         DT      B'10000111'
+                      01802 
+Warning[205]: Found directive in column 1. (ORG)
+0700                  01803 ORG 0X700
+0700                  01804 CHARB
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 40
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      01805 
+0700   3007           01806         MOVLW   7
+0701   008A           01807         MOVWF   PCLATH
+0702   0876           01808         MOVFW   NUMBER
+0703   0782           01809         ADDWF   PCL,F
+                      01810 
+                      01811 
+0704   0008           01812         RETURN
+                      01813 
+0705   0008           01814         RETURN
+                      01815 
+0706   0008           01816         RETURN
+                      01817 
+0707   0008           01818         RETURN
+                      01819         
+0708   2F14           01820         GOTO    FOUR
+                      01821         
+0709   2F27           01822         GOTO    FIVE
+                      01823         
+070A   2F3A           01824         GOTO    SIX
+                      01825         
+070B   2F4D           01826         GOTO    SEVEN
+                      01827 
+070C   2F60           01828         GOTO    EIGHT
+                      01829 
+070D   2F73           01830         GOTO    NINE
+                      01831 
+070E   2F86           01832         GOTO    OT
+                      01833 
+070F   2F99           01834         GOTO    SCOLON
+                      01835 
+0710   2FAC           01836         GOTO    DOT
+                      01837 
+0711   2FBF           01838         GOTO    HOMEPOS
+                      01839 
+0712   2FD2           01840         GOTO    GUESTPOS
+                      01841 
+                      01842 
+0713   2FE5           01843         GOTO    COLON
+Warning[207]: Found label after column 1. (FOUR)
+0714                  01844         FOUR
+0714   0877           01845                         MOVFW   BTCOUNT
+0715   0782           01846                         ADDWF   PCL, F
+                      01847 
+0716   3408           01848                         DT      8
+0717   34FF           01849                         DT      B'11111111'
+0718   34FF           01850                         DT      B'11111111'
+0719   34F9           01851                         DT      B'11111001'
+071A   34F9           01852                         DT      B'11111001'
+071B   34C9           01853                         DT      B'11001001'
+071C   34C9           01854                         DT      B'11001001'
+071D   34C9           01855                         DT      B'11001001'
+071E   3499           01856                         DT      B'10011001'
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 41
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+071F   3439           01857                         DT      B'00111001'
+0720   3439           01858                         DT      B'00111001'
+0721   3401           01859                         DT      B'00000001'
+0722   3401           01860                         DT      B'00000001'
+0723   34F9           01861                         DT      B'11111001'
+0724   34F9           01862                         DT      B'11111001'
+0725   34F9           01863                         DT      B'11111001'
+0726   34F9           01864                         DT      B'11111001'
+                      01865 
+Warning[207]: Found label after column 1. (FIVE)
+0727                  01866         FIVE
+0727   0877           01867                         MOVFW   BTCOUNT
+0728   0782           01868                         ADDWF   PCL, F
+                      01869 
+0729   3408           01870                         DT      8
+072A   34FF           01871                         DT      B'11111111'
+072B   34FF           01872                         DT      B'11111111'
+072C   3401           01873                         DT      B'00000001'
+072D   3401           01874                         DT      B'00000001'
+072E   3439           01875                         DT      B'00111001'
+072F   343F           01876                         DT      B'00111111'
+0730   343F           01877                         DT      B'00111111'
+0731   343F           01878                         DT      B'00111111'
+0732   3407           01879                         DT      B'00000111'
+0733   3403           01880                         DT      B'00000011'
+0734   34F1           01881                         DT      B'11110001'
+0735   34F9           01882                         DT      B'11111001'
+0736   34F9           01883                         DT      B'11111001'
+0737   34F1           01884                         DT      B'11110001'
+0738   3403           01885                         DT      B'00000011'
+0739   3407           01886                         DT      B'00000111'
+                      01887 
+                      01888 
+                      01889 
+Warning[207]: Found label after column 1. (SIX)
+073A                  01890         SIX
+073A   0877           01891                         MOVFW   BTCOUNT
+073B   0782           01892                         ADDWF   PCL, F
+                      01893 
+073C   3408           01894                         DT      8
+073D   34FF           01895                         DT      B'11111111'
+073E   34FF           01896                         DT      B'11111111'
+073F   34C7           01897                         DT      B'11000111'
+0740   3483           01898                         DT      B'10000011'
+0741   3439           01899                         DT      B'00111001'
+0742   343F           01900                         DT      B'00111111'
+0743   343F           01901                         DT      B'00111111'
+0744   343F           01902                         DT      B'00111111'
+0745   3427           01903                         DT      B'00100111'
+0746   3403           01904                         DT      B'00000011'
+0747   3411           01905                         DT      B'00010001'
+0748   3439           01906                         DT      B'00111001'
+0749   3439           01907                         DT      B'00111001'
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 42
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+074A   3411           01908                         DT      B'00010001'
+074B   3483           01909                         DT      B'10000011'
+074C   34C7           01910                         DT      B'11000111'
+                      01911 
+Warning[207]: Found label after column 1. (SEVEN)
+074D                  01912         SEVEN   
+074D   0877           01913                         MOVFW   BTCOUNT
+074E   0782           01914                         ADDWF   PCL, F
+                      01915 
+074F   3408           01916                         DT      8       
+0750   34FF           01917                         DT      B'11111111'
+0751   34FF           01918                         DT      B'11111111'
+0752   3401           01919                         DT      B'00000001'
+0753   3401           01920                         DT      B'00000001'
+0754   3439           01921                         DT      B'00111001'
+0755   34F9           01922                         DT      B'11111001'
+0756   34F9           01923                         DT      B'11111001'
+0757   34F9           01924                         DT      B'11111001'
+0758   34F3           01925                         DT      B'11110011'
+0759   34E7           01926                         DT      B'11100111'
+075A   34CF           01927                         DT      B'11001111'
+075B   34CF           01928                         DT      B'11001111'
+075C   34CF           01929                         DT      B'11001111'
+075D   34CF           01930                         DT      B'11001111'
+075E   34CF           01931                         DT      B'11001111'
+075F   34CF           01932                         DT      B'11001111'
+                      01933 
+                      01934                                 
+Warning[207]: Found label after column 1. (EIGHT)
+0760                  01935         EIGHT
+0760   0877           01936                         MOVFW   BTCOUNT
+0761   0782           01937                         ADDWF   PCL, F
+                      01938 
+0762   3408           01939                         DT      8
+0763   34FF           01940                         DT      B'11111111'
+0764   34FF           01941                         DT      B'11111111'
+0765   34C7           01942                         DT      B'11000111'
+0766   3483           01943                         DT      B'10000011'
+0767   3411           01944                         DT      B'00010001'
+0768   3439           01945                         DT      B'00111001'
+0769   3439           01946                         DT      B'00111001'
+076A   3493           01947                         DT      B'10010011'
+076B   34C7           01948                         DT      B'11000111'
+076C   3493           01949                         DT      B'10010011'
+076D   3439           01950                         DT      B'00111001'
+076E   3439           01951                         DT      B'00111001'
+076F   3439           01952                         DT      B'00111001'
+0770   3411           01953                         DT      B'00010001'
+0771   3483           01954                         DT      B'10000011'
+0772   34C7           01955                         DT      B'11000111'
+                      01956 
+                      01957 
+Warning[207]: Found label after column 1. (NINE)
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 43
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0773                  01958         NINE
+0773   0877           01959                         MOVFW   BTCOUNT
+0774   0782           01960                         ADDWF   PCL, F
+                      01961 
+0775   3408           01962                         DT      8
+                      01963 
+0776   34FF           01964                         DT      B'11111111'
+0777   34FF           01965                         DT      B'11111111'
+0778   34C7           01966                         DT      B'11000111'
+0779   3483           01967                         DT      B'10000011'
+077A   3411           01968                         DT      B'00010001'
+077B   3439           01969                         DT      B'00111001'
+077C   3439           01970                         DT      B'00111001'
+077D   3439           01971                         DT      B'00111001'
+077E   3411           01972                         DT      B'00010001'
+077F   3481           01973                         DT      B'10000001'
+0780   34C9           01974                         DT      B'11001001'
+0781   34F9           01975                         DT      B'11111001'
+0782   3439           01976                         DT      B'00111001'
+0783   3411           01977                         DT      B'00010001'
+0784   3483           01978                         DT      B'10000011'
+0785   34C7           01979                         DT      B'11000111'
+                      01980 
+                      01981 
+Warning[207]: Found label after column 1. (OT)
+0786                  01982         OT      
+0786   0877           01983                         MOVFW   BTCOUNT
+0787   0782           01984                         ADDWF   PCL, F
+                      01985 
+0788   3408           01986                         DT      8
+0789   3487           01987                         DT      B'10000111'
+078A   3433           01988                         DT      B'00110011'
+078B   3433           01989                         DT      B'00110011'
+078C   3433           01990                         DT      B'00110011'
+078D   3433           01991                         DT      B'00110011'
+078E   3433           01992                         DT      B'00110011'
+078F   3487           01993                         DT      B'10000111'
+0790   34FF           01994                         DT      B'11111111'
+0791   3403           01995                         DT      B'00000011'
+0792   3403           01996                         DT      B'00000011'
+0793   34CF           01997                         DT      B'11001111'
+0794   34CF           01998                         DT      B'11001111'
+0795   34CF           01999                         DT      B'11001111'
+0796   34CF           02000                         DT      B'11001111'
+0797   34CF           02001                         DT      B'11001111'
+0798   34FF           02002                         DT      B'11111111'
+Warning[207]: Found label after column 1. (SCOLON)
+0799                  02003         SCOLON
+0799   0877           02004                         MOVFW   BTCOUNT
+079A   0782           02005                         ADDWF   PCL, F
+                      02006 
+079B   3408           02007                         DT      8
+079C   34FF           02008                         DT      B'11111111'
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 44
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+079D   34FF           02009                         DT      B'11111111'
+079E   34FF           02010                         DT      B'11111111'
+079F   343F           02011                         DT      B'00111111'
+07A0   343F           02012                         DT      B'00111111'
+07A1   34FF           02013                         DT      B'11111111'
+07A2   34FF           02014                         DT      B'11111111'
+07A3   34FF           02015                         DT      B'11111111'
+07A4   34FF           02016                         DT      B'11111111'
+07A5   34FF           02017                         DT      B'11111111'
+07A6   34FF           02018                         DT      B'11111111'
+07A7   34FF           02019                         DT      B'11111111'
+07A8   343F           02020                         DT      B'00111111'
+07A9   343F           02021                         DT      B'00111111'
+07AA   34FF           02022                         DT      B'11111111'
+07AB   34FF           02023                         DT      B'11111111'
+                      02024 
+                      02025 
+Warning[207]: Found label after column 1. (DOT)
+07AC                  02026         DOT
+07AC   0877           02027                         MOVFW   BTCOUNT
+07AD   0782           02028                         ADDWF   PCL, F
+                      02029 
+07AE   3408           02030                         DT      8
+07AF   34FF           02031                         DT      B'11111111'
+07B0   34FF           02032                         DT      B'11111111'
+07B1   34FF           02033                         DT      B'11111111'
+07B2   34FF           02034                         DT      B'11111111'
+07B3   34FF           02035                         DT      B'11111111'
+07B4   34FF           02036                         DT      B'11111111'
+07B5   34FF           02037                         DT      B'11111111'
+07B6   34FF           02038                         DT      B'11111111'
+07B7   34FF           02039                         DT      B'11111111'
+07B8   34FF           02040                         DT      B'11111111'
+07B9   34FF           02041                         DT      B'11111111'
+07BA   34FF           02042                         DT      B'11111111'
+07BB   34FF           02043                         DT      B'11111111'
+07BC   34FF           02044                         DT      B'11111111'
+07BD   343F           02045                         DT      B'00111111'
+07BE   343F           02046                         DT      B'00111111'
+                      02047 
+Warning[207]: Found label after column 1. (HOMEPOS)
+07BF                  02048         HOMEPOS
+07BF   0877           02049                         MOVFW   BTCOUNT
+07C0   0782           02050                         ADDWF   PCL, F
+                      02051 
+07C1   3408           02052                         DT      8
+07C2   34FF           02053                         DT      B'11111111'
+07C3   34FF           02054                         DT      B'11111111'
+07C4   34F8           02055                         DT      B'11111000'
+07C5   34F1           02056                         DT      B'11110001'
+07C6   34E3           02057                         DT      B'11100011'
+07C7   34C7           02058                         DT      B'11000111'
+07C8   348F           02059                         DT      B'10001111'
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 45
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+07C9   341F           02060                         DT      B'00011111'
+07CA   341F           02061                         DT      B'00011111'
+07CB   348F           02062                         DT      B'10001111'
+07CC   34C7           02063                         DT      B'11000111'
+07CD   34E3           02064                         DT      B'11100011'
+07CE   34F1           02065                         DT      B'11110001'
+07CF   34F8           02066                         DT      B'11111000'
+07D0   34FF           02067                         DT      B'11111111'
+07D1   34FF           02068                         DT      B'11111111'
+                      02069                                 
+                      02070 
+Warning[207]: Found label after column 1. (GUESTPOS)
+07D2                  02071         GUESTPOS
+07D2   0877           02072                         MOVFW   BTCOUNT
+07D3   0782           02073                         ADDWF   PCL, F
+                      02074 
+07D4   3408           02075                         DT      8
+07D5   34FF           02076                         DT      B'11111111'
+07D6   34FF           02077                         DT      B'11111111'
+07D7   341F           02078                         DT      B'00011111'
+07D8   348F           02079                         DT      B'10001111'
+07D9   34C7           02080                         DT      B'11000111'
+07DA   34E3           02081                         DT      B'11100011'
+07DB   34F1           02082                         DT      B'11110001'
+07DC   34F8           02083                         DT      B'11111000'
+07DD   34F8           02084                         DT      B'11111000'
+07DE   34F1           02085                         DT      B'11110001'
+07DF   34E3           02086                         DT      B'11100011'
+07E0   34C7           02087                         DT      B'11000111'
+07E1   348F           02088                         DT      B'10001111'
+07E2   341F           02089                         DT      B'00011111'
+07E3   34FF           02090                         DT      B'11111111'
+07E4   34FF           02091                         DT      B'11111111'
+                      02092 
+                      02093 
+Warning[207]: Found label after column 1. (COLON)
+07E5                  02094         COLON
+07E5   0877           02095                         MOVFW   BTCOUNT
+07E6   0782           02096                         ADDWF   PCL, F
+                      02097 
+07E7   3408           02098                         DT      8
+07E8   34FF           02099                         DT      B'11111111'
+07E9   34FF           02100                         DT      B'11111111'
+07EA   349F           02101                         DT      B'10011111'
+07EB   340F           02102                         DT      B'00001111'
+07EC   340F           02103                         DT      B'00001111'
+07ED   349F           02104                         DT      B'10011111'
+07EE   34FF           02105                         DT      B'11111111'
+07EF   34FF           02106                         DT      B'11111111'
+07F0   34FF           02107                         DT      B'11111111'
+07F1   34FF           02108                         DT      B'11111111'
+07F2   34FF           02109                         DT      B'11111111'
+07F3   349F           02110                         DT      B'10011111'
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 46
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+07F4   340F           02111                         DT      B'00001111'
+07F5   340F           02112                         DT      B'00001111'
+07F6   349F           02113                         DT      B'10011111'
+07F7   34FF           02114                         DT      B'11111111'
+                      02115 
+                      02116 
+                      02117         
+Warning[205]: Found directive in column 1. (ORG)
+0900                  02118 ORG 0X900
+0900                  02119 WIDTHCHECKF0
+0900   1283 1303      02120                 BANK0
+0902   0876           02121                 MOVFW   NUMBER
+Message[305]: Using default destination of 1 (file).
+0903   0782           02122                 ADDWF   PCL
+                      02123 
+                      02124 
+0904   2925           02125                 GOTO    WDF07   ;0
+0905   2920           02126                 GOTO    WDF06   ;1
+0906   2925           02127                 GOTO    WDF07   ;2
+0907   2925           02128                 GOTO    WDF07   ;3
+0908   2925           02129                 GOTO    WDF07   ;4
+0909   2925           02130                 GOTO    WDF07   ;5
+090A   2925           02131                 GOTO    WDF07   ;6
+090B   2925           02132                 GOTO    WDF07   ;7
+090C   2925           02133                 GOTO    WDF07   ;8
+090D   2925           02134                 GOTO    WDF07   ;9
+090E   2920           02135                 GOTO    WDF06   ;OT
+090F   2916           02136                 GOTO    WDF02   ;COLON
+0910   2916           02137                 GOTO    WDF02   ;DOT
+0911   292A           02138                 GOTO    WDF08   ;<
+0912   292A           02139                 GOTO    WDF08   ;>
+0913   291B           02140                 GOTO    WDF04
+0914   0000           02141                 NOP
+0915   0000           02142                 NOP
+                      02143 
+0916                  02144 WDF02
+0916   1283 1703      02145         BANK2
+0918   3003           02146         MOVLW   .3
+Message[305]: Using default destination of 1 (file).
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0919   07B7           02147         ADDWF   CURSOR_TEMP
+091A   292F           02148         GOTO    WCF0RET
+                      02149 
+                      02150 
+091B                  02151 WDF04
+091B   1283 1703      02152         BANK2
+091D   3005           02153         MOVLW   .5
+Message[305]: Using default destination of 1 (file).
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+091E   07B7           02154         ADDWF   CURSOR_TEMP
+091F   292F           02155         GOTO    WCF0RET
+                      02156 
+                      02157 
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 47
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0920                  02158 WDF06
+0920   1283 1703      02159         BANK2
+0922   3007           02160         MOVLW   .7
+Message[305]: Using default destination of 1 (file).
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0923   07B7           02161         ADDWF   CURSOR_TEMP
+0924   292F           02162         GOTO    WCF0RET
+                      02163 
+0925                  02164 WDF07
+0925   1283 1703      02165         BANK2
+0927   3008           02166         MOVLW   .8
+Message[305]: Using default destination of 1 (file).
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0928   07B7           02167         ADDWF   CURSOR_TEMP
+0929   292F           02168         GOTO    WCF0RET
+                      02169 
+                      02170 
+092A                  02171 WDF08
+092A   1283 1703      02172         BANK2
+092C   3009           02173         MOVLW   .9
+Message[305]: Using default destination of 1 (file).
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+092D   07B7           02174         ADDWF   CURSOR_TEMP
+092E   292F           02175         GOTO    WCF0RET
+                      02176 
+092F                  02177 WCF0RET
+092F   1283 1303      02178         BANK0
+0931   087F           02179         MOVFW   PCLATH_TEMP
+0932   008A           02180         MOVWF   PCLATH
+                      02181         
+                      02182 
+Warning[203]: Found opcode in column 1. (RETURN)
+0933   0008           02183 RETURN
+                      02184 
+                      02185 
+                      02186 
+0934                  02187 WIDTHCHECKF1
+0934   1283 1303      02188                 BANK0
+0936   0876           02189                 MOVFW   NUMBER
+Message[305]: Using default destination of 1 (file).
+0937   0782           02190                 ADDWF   PCL
+                      02191 
+                      02192 
+0938   2949           02193                 GOTO    WDF1A   ;0
+0939   2944           02194                 GOTO    WDF18   ;1
+093A   2949           02195                 GOTO    WDF1A   ;2
+093B   2949           02196                 GOTO    WDF1A   ;3
+093C   2949           02197                 GOTO    WDF1A   ;4
+093D   2949           02198                 GOTO    WDF1A   ;5
+093E   2949           02199                 GOTO    WDF1A   ;6
+093F   2949           02200                 GOTO    WDF1A   ;7
+0940   2949           02201                 GOTO    WDF1A   ;8
+0941   2949           02202                 GOTO    WDF1A   ;9
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 48
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0942   0000           02203                 NOP
+0943   0000           02204                 NOP
+0944                  02205 WDF18
+0944   1283 1703      02206         BANK2
+0946   3009           02207         MOVLW   .9
+Message[305]: Using default destination of 1 (file).
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0947   07B7           02208         ADDWF   CURSOR_TEMP
+0948   294F           02209         GOTO    WCF1RET
+                      02210         
+0949                  02211 WDF1A
+0949   1283 1703      02212         BANK2
+094B   300B           02213         MOVLW   .11
+Message[305]: Using default destination of 1 (file).
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+094C   07B7           02214         ADDWF   CURSOR_TEMP
+094D   294F           02215         GOTO    WCF1RET
+094E   0000           02216         NOP
+                      02217 
+094F                  02218 WCF1RET
+094F   1283 1303      02219         BANK0
+0951   087F           02220         MOVFW   PCLATH_TEMP
+0952   008A           02221         MOVWF   PCLATH
+                      02222         
+                      02223                 
+Warning[203]: Found opcode in column 1. (RETURN)
+0953   0008           02224 RETURN
+                      02225 
+                      02226 
+                      02227                 
+                      02228 
+2100                  02229         ORG     0X2100                          ; DATA EEPROM LOCATION
+2100   0001 0002 0003 02230         DE      1,2,3,4                         ; DEFINE FIRST FOUR EEPROM LOCATIONS AS 1, 2, 3, AND 4
+       0004 
+                      02231 
+                      02232 
+                      02233 
+                      02234 
+                      02235         END                       ; DIRECTIVE 'END OF PROGRAM'
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 49
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ABDEN                             00000000
+ABDOVF                            00000007
+ADCON0                            0000001F
+ADCON1                            0000009F
+ADCS0                             00000004
+ADCS1                             00000005
+ADCS2                             00000006
+ADDEN                             00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+ANS0                              00000000
+ANS1                              00000001
+ANS10                             00000002
+ANS11                             00000003
+ANS2                              00000002
+ANS3                              00000003
+ANS4                              00000004
+ANS5                              00000005
+ANS6                              00000006
+ANS7                              00000007
+ANS8                              00000000
+ANS9                              00000001
+ANSEL                             0000011E
+ANSELH                            0000011F
+A_OFF                             BCF     PORTC,  0
+A_ON                              BSF     PORTC,  0
+BANK0                             BANKSEL PORTA
+BANK1                             BANKSEL ADRESL
+BANK2                             BANKSEL ANSELH
+BAUDCTL                           0000009B
+BF                                00000000
+BRG0                              00000000
+BRG1                              00000001
+BRG10                             00000002
+BRG11                             00000003
+BRG12                             00000004
+BRG13                             00000005
+BRG14                             00000006
+BRG15                             00000007
+BRG16                             00000003
+BRG2                              00000002
+BRG3                              00000003
+BRG4                              00000004
+BRG5                              00000005
+BRG6                              00000006
+BRG7                              00000007
+BRG8                              00000000
+BRG9                              00000001
+BRGH                              00000002
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 50
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+BTCOUNT                           00000077
+B_OFF                             BCF     PORTC,  1
+B_ON                              BSF     PORTC,  1
+C                                 00000000
+C1CH0                             00000000
+C1CH1                             00000001
+C1IE                              00000005
+C1IF                              00000005
+C1OE                              00000005
+C1ON                              00000007
+C1OUT                             00000006
+C1POL                             00000004
+C1R                               00000002
+C1SEN                             00000005
+C1VREN                            00000007
+C2CH0                             00000000
+C2CH1                             00000001
+C2IE                              00000006
+C2IF                              00000006
+C2OE                              00000005
+C2ON                              00000007
+C2OUT                             00000006
+C2POL                             00000004
+C2R                               00000002
+C2REN                             00000004
+C2SYNC                            00000000
+C2VREN                            00000006
+CCG                               0000004F
+CCG0                              00000056
+CCG1                              00000059
+CCG2                              0000005F
+CCG3                              0000007C
+CCGRET                            0000008B
+CCP1CON                           00000017
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCPR                              00000015
+CCPR1H                            00000016
+CCPR1L                            00000015
+CHAR                              0000069B
+CHARB                             00000700
+CHS0                              00000002
+CHS1                              00000003
+CHS2                              00000004
+CHS3                              00000005
+CKE                               00000006
+CKP                               00000004
+CLK_OFF                           BCF     PORTC,  7
+CLK_ON                            BSF     PORTC,  7
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 51
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CLR0                              000001DD
+CLR1                              000001E6
+CLRAM                             000001D7
+CLRDISPLAY                        000000D3
+CLRT0                             00000042
+CLRTEST                           000000F2
+CLRTRAM                           0000003E
+CM1CON0                           00000119
+CM2CON0                           0000011A
+CM2CON1                           0000011B
+COLON                             000007E5
+COMCPU2GPU                        00000048
+CREN                              00000004
+CSRC                              00000007
+CSRT0                             00000322
+CSRT1                             00000328
+CTRET1                            0000032E
+CURSORTEST                        0000030A
+CURSORX                           0000007B
+CURSOR_TEMP                       00000137
+D                                 00000005
+DATALATCH                         00000095
+DATA_ADDRESS                      00000005
+DAT_OFF                           BCF     PORTC,  2
+DAT_ON                            BSF     PORTC,  2
+DBIT0                             00000064
+DBIT1                             00000066
+DC                                00000001
+DC1B0                             00000004
+DC1B1                             00000005
+DCURSOR0                          00000141
+DCURSOR1                          00000148
+DDECODE                           0000011B
+DDRET                             00000187
+DELAYMS                           00000071
+DELAYUS                           00000070
+DELAY_MS                          000001FB
+DELAY_ONEMS                       000001F4
+DELAY_US                          000001EC
+DFONT0                            00000158
+DFONT1                            0000016F
+DHUB                              00000151
+DISPHUB                           00000189
+DISPLAY                           000000A6
+DONTSCROLLHUB1DIG0                000001AF
+DONTSCROLLHUB1DIG1                000001A5
+DONTSCROLLHUB1DIG2                0000019B
+DONTSCROLLHUB3DIG0                000001CD
+DONTSCROLLHUB3DIG1                000001C3
+DONTSCROLLHUB3DIG2                000001B9
+DOT                               000007AC
+DRAM                              00000020
+DRAMB                             000000A0
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 52
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+DSP0                              00000099
+D_A                               00000005
+D_NOT_A                           00000005
+ECCPAS                            0000001D
+ECCPAS0                           00000004
+ECCPAS1                           00000005
+ECCPAS2                           00000006
+ECCPASE                           00000007
+EEADR                             0000010D
+EEADRH                            0000010F
+EECON1                            0000018C
+EECON2                            0000018D
+EEDAT                             0000010C
+EEDATA                            0000010C
+EEDATH                            0000010E
+EEIE                              00000004
+EEIF                              00000004
+EEPGD                             00000007
+EIGHT                             00000760
+F                                 00000001
+F0LN00                            0000026E
+F0LN01                            00000250
+F0LN10                            0000025F
+F0LN11                            00000241
+F0_LINE00                         00000268
+F0_LINE01                         0000024A
+F0_LINE10                         00000259
+F0_LINE11                         0000023B
+F1LN00                            000002DA
+F1LN002                           000002E8
+F1LN01                            000002A0
+F1LN012                           000002AE
+F1LN10                            000002BD
+F1LN102                           000002CB
+F1LN11                            00000283
+F1LN112                           00000291
+F1_LINE00                         000002D4
+F1_LINE01                         0000029A
+F1_LINE10                         000002B7
+F1_LINE11                         0000027D
+FERR                              00000002
+FIVE                              00000727
+FONT                              00000075
+FONT0                             00000235
+FONT1                             00000277
+FOUR                              00000714
+FSR                               00000004
+GDFSR                             000000F0
+GDLOOP                            000000EF
+GIE                               00000007
+GO                                00000001
+GO_DONE                           00000001
+GO_NOT_DONE                       00000001
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 53
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+GPUDAT                            000000EE
+GPUDAT_TEMP                       000000F1
+GUESTPOS                          000007D2
+HB1                               0000022B
+HB2                               00000225
+HB3                               0000021F
+HB4                               00000219
+HB5                               00000213
+HB6                               0000020D
+HDP1                              00000231
+HOMEPOS                           000007BF
+HTS                               00000002
+HUB                               00000078
+HUBDUMP                           00000200
+HUB_TEMP                          00000138
+I2C_DATA                          00000005
+I2C_READ                          00000002
+I2C_START                         00000003
+I2C_STOP                          00000004
+INDF                              00000000
+INIT                              00000010
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IOC                               00000096
+IOC0                              00000000
+IOC1                              00000001
+IOC2                              00000002
+IOC3                              00000003
+IOC4                              00000004
+IOC5                              00000005
+IOCA                              00000096
+IOCA0                             00000000
+IOCA1                             00000001
+IOCA2                             00000002
+IOCA3                             00000003
+IOCA4                             00000004
+IOCA5                             00000005
+IOCB                              00000116
+IOCB4                             00000004
+IOCB5                             00000005
+IOCB6                             00000006
+IOCB7                             00000007
+IRCF0                             00000004
+IRCF1                             00000005
+IRCF2                             00000006
+IRP                               00000007
+LINE                              00000073
+LOOP                              0000007C
+LTS                               00000001
+MAIN                              0000003C
+MC1OUT                            00000007
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 54
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+MC2OUT                            00000006
+MILSEC                            00000072
+MSEC                              000001F6
+MSEC0                             000001FC
+MSK                               00000093
+MSK0                              00000000
+MSK1                              00000001
+MSK2                              00000002
+MSK3                              00000003
+MSK4                              00000004
+MSK5                              00000005
+MSK6                              00000006
+MSK7                              00000007
+NINE                              00000773
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
+NOT_BOR                           00000000
+NOT_DONE                          00000001
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_RABPU                         00000007
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+NOT_W                             00000002
+NOT_WRITE                         00000002
+NUMBER                            00000076
+OERR                              00000001
+OE_OFF                            BCF     PORTC,  5
+OE_ON                             BSF     PORTC,  5
+ONE                               000006C3
+OPTION_REG                        00000081
+OSCCON                            0000008F
+OSCTUNE                           00000090
+OSFIE                             00000007
+OSFIF                             00000007
+OSTS                              00000003
+OT                                00000786
+P                                 00000004
+P1M0                              00000006
+P1M1                              00000007
+PCL                               00000002
+PCLATH                            0000000A
+PCLATH_TEMP                       0000007F
+PCON                              0000008E
+PDC0                              00000000
+PDC1                              00000001
+PDC2                              00000002
+PDC3                              00000003
+PDC4                              00000004
+PDC5                              00000005
+PDC6                              00000006
+PDT0                              0000010C
+PEIE                              00000006
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 55
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PIE1                              0000008C
+PIE2                              0000008D
+PIR1                              0000000C
+PIR2                              0000000D
+POINTER                           00000074
+PORTA                             00000005
+PORTB                             00000006
+PORTC                             00000007
+PR2                               00000092
+PRSEN                             00000007
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+PSSAC0                            00000002
+PSSAC1                            00000003
+PSSBD0                            00000000
+PSSBD1                            00000001
+PSTRCON                           0000019D
+PULSR                             00000002
+PULSS                             00000003
+PUTDATA                           00000100
+PWM1CON                           0000001C
+R                                 00000002
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RA5                               00000005
+RABIE                             00000003
+RABIF                             00000000
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RC0                               00000000
+RC1                               00000001
+RC2                               00000002
+RC3                               00000003
+RC4                               00000004
+RC5                               00000005
+RC6                               00000006
+RC7                               00000007
+RCIDL                             00000006
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+RCSTA                             00000018
+RD                                00000000
+READ_WRITE                        00000002
+REG_OFF                           BCF     PORTC,  4
+REG_ON                            BSF     PORTC,  4
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 56
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RP0                               00000005
+RP1                               00000006
+RX9                               00000006
+RX9D                              00000000
+R_NOT_W                           00000002
+R_W                               00000002
+S                                 00000003
+SBOREN                            00000004
+SCKP                              00000004
+SCOLON                            00000799
+SCROLL                            000000EC
+SCROLLCSR                         000000ED
+SCS                               00000000
+SENB                              00000003
+SENDB                             00000003
+SEVEN                             0000074D
+SHFDT0                            000002F9
+SHFDT1                            00000307
+SHIFTDATA                         000002F1
+SIX                               0000073A
+SMP                               00000007
+SPBRG                             00000099
+SPBRGH                            0000009A
+SPEN                              00000007
+SR0                               00000006
+SR1                               00000007
+SRCON                             0000019E
+SREN                              00000005
+SSPADD                            00000093
+SSPBUF                            00000013
+SSPCON                            00000014
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+SSPM3                             00000003
+SSPMSK                            00000093
+SSPOV                             00000006
+SSPSTAT                           00000094
+STATUS                            00000003
+STATUS_TEMP                       0000007E
+STPT0                             00000079
+STPT1                             0000007A
+STRA                              00000000
+STRB                              00000001
+STRC                              00000002
+STRD                              00000003
+STRSYNC                           00000004
+SWDTEN                            00000000
+SYNC                              00000004
+T0CS                              00000005
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 57
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1GINV                            00000007
+T1GSS                             00000001
+T1IE                              00000000
+T1IF                              00000000
+T1OSCEN                           00000003
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+T2IE                              00000001
+T2IF                              00000001
+TEMPRAM                           000000B0
+THREE                             000006E9
+TMR0                              00000001
+TMR1                              0000000E
+TMR1CS                            00000001
+TMR1GE                            00000006
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISA5                            00000005
+TRISB                             00000086
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+TRISC                             00000087
+TRISC0                            00000000
+TRISC1                            00000001
+TRISC2                            00000002
+TRISC3                            00000003
+TRISC4                            00000004
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 58
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TRISC5                            00000005
+TRISC6                            00000006
+TRISC7                            00000007
+TRMT                              00000001
+TUN0                              00000000
+TUN1                              00000001
+TUN2                              00000002
+TUN3                              00000003
+TUN4                              00000004
+TWO                               000006D6
+TX9                               00000006
+TX9D                              00000000
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+TXSTA                             00000098
+T_CHAR                            00000500
+T_CHARB                           00000600
+T_EIGHT                           00000654
+T_FIVE                            000005BF
+T_FOUR                            0000059C
+T_NINE                            00000677
+T_ONE                             00000533
+T_SEVEN                           00000631
+T_SIX                             0000060E
+T_THREE                           00000579
+T_TWO                             00000556
+T_ZERO                            00000510
+UA                                00000001
+ULPWUE                            00000005
+USEC                              000001ED
+VCFG                              00000006
+VDATA                             00000120
+VP6EN                             00000004
+VR0                               00000000
+VR1                               00000001
+VR2                               00000002
+VR3                               00000003
+VRCON                             00000118
+VRR                               00000005
+W                                 00000000
+WCF0RET                           0000092F
+WCF1RET                           0000094F
+WCOL                              00000007
+WDF02                             00000916
+WDF04                             0000091B
+WDF06                             00000920
+WDF07                             00000925
+WDF08                             0000092A
+WDF18                             00000944
+WDF1A                             00000949
+WDTCON                            00000097
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 59
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+WDTPS0                            00000001
+WDTPS1                            00000002
+WDTPS2                            00000003
+WDTPS3                            00000004
+WIDTH                             00000139
+WIDTHCHECKF0                      00000900
+WIDTHCHECKF1                      00000934
+WPU                               00000095
+WPU0                              00000000
+WPU1                              00000001
+WPU2                              00000002
+WPU4                              00000004
+WPU5                              00000005
+WPUA                              00000095
+WPUA0                             00000000
+WPUA1                             00000001
+WPUA2                             00000002
+WPUA4                             00000004
+WPUA5                             00000005
+WPUB                              00000115
+WPUB4                             00000004
+WPUB5                             00000005
+WPUB6                             00000006
+WPUB7                             00000007
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+WUE                               00000001
+W_TEMP                            0000007E
+Z                                 00000002
+ZERO                              000006B0
+_BOD_NSLEEP                       00003EFF
+_BOD_OFF                          00003CFF
+_BOD_ON                           00003FFF
+_BOD_SBODEN                       00003DFF
+_BOREN_NSLEEP                     00003EFF
+_BOREN_OFF                        00003CFF
+_BOREN_ON                         00003FFF
+_BOREN_SBODEN                     00003DFF
+_BOR_NSLEEP                       00003EFF
+_BOR_OFF                          00003CFF
+_BOR_ON                           00003FFF
+_BOR_SBODEN                       00003DFF
+_CONFIG                           00002007
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003F7F
+_CP_OFF                           00003FFF
+_CP_ON                            00003FBF
+_DEVID1                           00002006
+_EC_OSC                           00003FFB
+_EXTRC                            00003FFF
+_EXTRCIO                          00003FFE
+_EXTRC_OSC_CLKOUT                 00003FFF
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 60
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_EXTRC_OSC_NOCLKOUT               00003FFE
+_FCMEN_OFF                        000037FF
+_FCMEN_ON                         00003FFF
+_FOSC_EC                          00003FFB
+_FOSC_EXTRCCLK                    00003FFF
+_FOSC_EXTRCIO                     00003FFE
+_FOSC_HS                          00003FFA
+_FOSC_INTRCCLK                    00003FFD
+_FOSC_INTRCIO                     00003FFC
+_FOSC_LP                          00003FF8
+_FOSC_XT                          00003FF9
+_HS_OSC                           00003FFA
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_IESO_OFF                         00003BFF
+_IESO_ON                          00003FFF
+_INTOSC                           00003FFD
+_INTOSCIO                         00003FFC
+_INTRC_OSC_CLKOUT                 00003FFD
+_INTRC_OSC_NOCLKOUT               00003FFC
+_LP_OSC                           00003FF8
+_MCLRE_OFF                        00003FDF
+_MCLRE_ON                         00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FEF
+_WDTE_OFF                         00003FF7
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FF7
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FF9
+__16F690                          00000001
+__DEBUG                           1
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+0000 : X---XXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0080 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+00C0 : XXXXXXXXXXXXXXXX XXXXX----------- ---------------- ----------------
+0100 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0140 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0180 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+01C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+MPASM  5.51                     MODULEGPU.ASM   2-28-2020  17:54:40         PAGE 61
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+
+0200 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0240 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0280 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+02C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0300 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX X---------------
+0500 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0540 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0580 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+05C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XX-------------- ----------------
+0600 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0640 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0680 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+06C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXX----
+0700 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0740 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0780 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+07C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXX--------
+0900 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0940 : XXXXXXXXXXXXXXXX XXXX------------ ---------------- ----------------
+2000 : -------X-------- ---------------- ---------------- ----------------
+2100 : XXXX------------ ---------------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:  1581
+Program Memory Words Free:  2515
+
+
+Errors   :     0
+Warnings :   149 reported,     0 suppressed
+Messages :   135 reported,     0 suppressed
+
+

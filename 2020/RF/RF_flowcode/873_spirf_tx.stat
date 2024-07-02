@@ -1,0 +1,29 @@
+// SourceBoost Linker Function Resource Usage Dump
+
+#GLOBAL:"global",line = 0,ram = 40.1,rom = 0;
+__div_16_16(unsigned short,unsigned short):"E:\Prg\compiler.trunk\picantc\libc\div.c",line = 116,ram = 9.0,rom = 31;
+Wdt_Delay_Ms(unsigned char):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_Delay.c",line = 118,ram = 2.0,rom = 11;
+FCD_SPI_Legacy0_SPI_Send_Char(unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\RF_flowcode\873_spirf_tx.c",line = 384,ram = 1.0,rom = 4;
+FCM_print_datain_bin(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\RF_flowcode\873_spirf_tx.c",line = 889,ram = 6.0,rom = 97;
+FCD_SPI_Legacy0_SPI_Get_Char(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\RF_flowcode\873_spirf_tx.c",line = 405,ram = 2.0,rom = 11;
+FCD_LCDDisplay0_ClearLine(unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\RF_flowcode\873_spirf_tx.c",line = 794,ram = 3.0,rom = 23;
+FCD_LCDDisplay0_Cursor(unsigned char,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\RF_flowcode\873_spirf_tx.c",line = 639,ram = 2.0,rom = 30;
+FCD_LCDDisplay0_PrintString(unsigned char*,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\RF_flowcode\873_spirf_tx.c",line = 728,ram = 4.0,rom = 28;
+FCD_LCDDisplay0_PrintNumber(signed short):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\RF_flowcode\873_spirf_tx.c",line = 670,ram = 7.0,rom = 238;
+FCM_radio_set_pa(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\RF_flowcode\873_spirf_tx.c",line = 973,ram = 1.0,rom = 31;
+FCM_radio_writedata(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\RF_flowcode\873_spirf_tx.c",line = 1013,ram = 1.0,rom = 31;
+FCM_radio_setwriting_address(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\RF_flowcode\873_spirf_tx.c",line = 1084,ram = 1.0,rom = 81;
+FCM_radio_transmit(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\RF_flowcode\873_spirf_tx.c",line = 1404,ram = 1.0,rom = 53;
+FC_CAL_SPI_Master_Init_1(void):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_SPI.c",line = 455,ram = 0.0,rom = 19;
+FC_CAL_SPI_Master_Byte_1(unsigned char):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_SPI.c",line = 516,ram = 3.0,rom = 12;
+FCD_SPI_Legacy0_SPI_Init(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\RF_flowcode\873_spirf_tx.c",line = 361,ram = 0.0,rom = 11;
+FCD_LCDDisplay0_RawSend(unsigned char,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\RF_flowcode\873_spirf_tx.c",line = 519,ram = 3.0,rom = 65;
+FCD_LCDDisplay0_Start(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\RF_flowcode\873_spirf_tx.c",line = 569,ram = 0.0,rom = 85;
+FCD_LCDDisplay0_Clear(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\RF_flowcode\873_spirf_tx.c",line = 602,ram = 0.0,rom = 17;
+main(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\RF_flowcode\873_spirf_tx.c",line = 1463,ram = 1.0,rom = 51;
+interrupt(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\RF_flowcode\873_spirf_tx.c",line = 1554,ram = 0.0,rom = 11;
+delay_10us(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 14;
+delay_ms(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 44;
+_startup(void):"NoSourceFile",line = 0,ram = 0.0,rom = 44;
+#HEAP_BLOCK: 0, 160, 95;
+#HEAP_BLOCK: 1, 88, 39;

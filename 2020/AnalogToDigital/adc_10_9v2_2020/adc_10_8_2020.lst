@@ -1,0 +1,1731 @@
+MPASM  5.51                 ADC_10_8_2020.ASM   10-10-2020  15:07:10         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 ;**********************************************************************
+                      00002 ;                                                                     *
+                      00003 ;    filename:      adc_10_8_2020.asm                                 *
+                      00004 ;    date:          october 8,2020                                    *
+                      00005 ;    file version:  v1.0                                              *
+                      00006 ;                                                                     *
+                      00007 ;    author:        kenny neutron                                     *
+                      00008 ;    company:       ger-per engineering                               *
+                      00009 ;                                                                     * 
+                      00010 ;                                                                     *
+                      00011 ;**********************************************************************
+                      00012 
+                      00013         LIST            P=16F690                        ; list directive to define processor
+                      00014         #INCLUDE        <P16F690.INC>           ; processor specific variable definitions
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC16F690 processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2013 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+                      00756         LIST
+                      00015         #INCLUDE        <RGB_PATTERNS.INC>
+                      00001 
+Warning[205]: Found directive in column 1. (ORG)
+0100                  00002 ORG 0X100
+                      00003 ;=================================
+0100                  00004 PATTERN1
+                      00005 ;=================================
+                      00006 
+0100   21C8           00007         CALL    CLR_PWM
+0101   3000           00008         MOVLW   0X00
+0102   00AB           00009         MOVWF   RED_TEMP
+                      00010 
+                      00011         
+                      00012 
+0103   30FE           00013         MOVLW   0XFE
+0104   00B1           00014         MOVWF   COUNTER0
+0105                  00015 P1_A
+                      00016 
+0105   142E           00017         BSF     FLAGBIT,0       ;red
+0106   14AE           00018         BSF     FLAGBIT,1       ;green
+0107   152E           00019         BSF FLAGBIT,2   ;blue
+                      00020 
+0108   082B           00021         MOVFW   RED_TEMP
+0109   00A6           00022         MOVWF   RED_ADCL
+                      00023 
+010A   21CF           00024         CALL    DISPLAY
+Message[305]: Using default destination of 1 (file).
+010B   0AAB           00025         INCF    RED_TEMP
+010C   0BB1           00026         DECFSZ  COUNTER0,F
+010D   2905           00027         GOTO    P1_A
+MPASM  5.51                 ADC_10_8_2020.ASM   10-10-2020  15:07:10         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00028 
+010E   21C8           00029         CALL    CLR_PWM
+010F   30FF           00030         MOVLW   0XFF
+0110   00AB           00031         MOVWF   RED_TEMP
+                      00032 
+0111   30FE           00033         MOVLW   0XFE
+0112   00B1           00034         MOVWF   COUNTER0
+0113                  00035 P1_B
+                      00036 
+0113   142E           00037         BSF     FLAGBIT,0       ;red
+0114   14AE           00038         BSF     FLAGBIT,1       ;green
+0115   152E           00039         BSF FLAGBIT,2   ;blue
+                      00040 
+0116   082B           00041         MOVFW   RED_TEMP
+0117   00A6           00042         MOVWF   RED_ADCL
+                      00043 
+0118   21CF           00044         CALL    DISPLAY
+Message[305]: Using default destination of 1 (file).
+0119   03AB           00045         DECF    RED_TEMP
+011A   0BB1           00046         DECFSZ  COUNTER0,F
+011B   2913           00047         GOTO    P1_B
+                      00048 
+                      00049 
+011C   21C8           00050         CALL    CLR_PWM
+011D   3000           00051         MOVLW   0X00
+011E   00AC           00052         MOVWF   GRN_TEMP
+                      00053 
+011F   30FE           00054         MOVLW   0XFE
+0120   00B1           00055         MOVWF   COUNTER0
+0121                  00056 P1_C
+                      00057 
+0121   142E           00058         BSF     FLAGBIT,0       ;red
+0122   14AE           00059         BSF     FLAGBIT,1       ;green
+0123   152E           00060         BSF FLAGBIT,2   ;blue
+                      00061 
+0124   082C           00062         MOVFW   GRN_TEMP
+0125   00A8           00063         MOVWF   GRN_ADCL
+                      00064 
+0126   21CF           00065         CALL    DISPLAY
+Message[305]: Using default destination of 1 (file).
+0127   0AAC           00066         INCF    GRN_TEMP
+0128   0BB1           00067         DECFSZ  COUNTER0,F
+0129   2921           00068         GOTO    P1_C
+                      00069 
+012A   21C8           00070         CALL    CLR_PWM
+012B   30FF           00071         MOVLW   0XFF
+012C   00AC           00072         MOVWF   GRN_TEMP
+                      00073 
+012D   30FE           00074         MOVLW   0XFE
+012E   00B1           00075         MOVWF   COUNTER0
+012F                  00076 P1_D
+                      00077 
+012F   142E           00078         BSF     FLAGBIT,0       ;red
+MPASM  5.51                 ADC_10_8_2020.ASM   10-10-2020  15:07:10         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0130   14AE           00079         BSF     FLAGBIT,1       ;green
+0131   152E           00080         BSF FLAGBIT,2   ;blue
+                      00081 
+0132   082C           00082         MOVFW   GRN_TEMP
+0133   00A8           00083         MOVWF   GRN_ADCL
+                      00084 
+0134   21CF           00085         CALL    DISPLAY
+Message[305]: Using default destination of 1 (file).
+0135   03AC           00086         DECF    GRN_TEMP
+0136   0BB1           00087         DECFSZ  COUNTER0,F
+0137   292F           00088         GOTO    P1_D
+                      00089 
+                      00090 
+0138   21C8           00091         CALL    CLR_PWM
+0139   3000           00092         MOVLW   0X00
+013A   00AD           00093         MOVWF   BLU_TEMP
+                      00094 
+013B   30FE           00095         MOVLW   0XFE
+013C   00B1           00096         MOVWF   COUNTER0
+013D                  00097 P1_E
+                      00098 
+013D   142E           00099         BSF     FLAGBIT,0       ;red
+013E   14AE           00100         BSF     FLAGBIT,1       ;green
+013F   152E           00101         BSF FLAGBIT,2   ;blue
+                      00102 
+0140   082D           00103         MOVFW   BLU_TEMP
+0141   00AA           00104         MOVWF   BLU_ADCL
+                      00105 
+0142   21CF           00106         CALL    DISPLAY
+Message[305]: Using default destination of 1 (file).
+0143   0AAD           00107         INCF    BLU_TEMP
+0144   0BB1           00108         DECFSZ  COUNTER0,F
+0145   293D           00109         GOTO    P1_E
+                      00110 
+                      00111 ;       call    clr_pwm
+                      00112 ;       movlw   0xff
+                      00113 ;       movwf   blu_temp
+                      00114 ;
+                      00115 ;       movlw   0xfe
+                      00116 ;       movwf   counter0
+                      00117 ;p1_f
+                      00118 ;
+                      00119 ;       bsf     flagbit,0       ;red
+                      00120 ;       bsf     flagbit,1       ;green
+                      00121 ;       bsf flagbit,2   ;blue
+                      00122 ;
+                      00123 ;       movfw   blu_temp
+                      00124 ;       movwf   blu_adcL
+                      00125 ;
+                      00126 ;       call    display
+                      00127 ;       decf    blu_temp
+                      00128 ;       decfsz  counter0,f
+                      00129 ;       goto    p1_f
+MPASM  5.51                 ADC_10_8_2020.ASM   10-10-2020  15:07:10         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00130 ;
+                      00131 
+                      00132 
+Warning[203]: Found opcode in column 1. (RETURN)
+0146   0008           00133 RETURN
+                      00134 ;=================================
+                      00135 
+                      00136 
+                      00137 
+                      00138 ;=================================
+0147                  00139 PATTERN2
+                      00140 ;=================================
+0147   21C8           00141         CALL    CLR_PWM
+0148   3000           00142         MOVLW   0X00
+0149   00AB           00143         MOVWF   RED_TEMP
+014A   30FF           00144         MOVLW   0XFF
+014B   00AD           00145         MOVWF   BLU_TEMP
+                      00146 
+                      00147         
+                      00148 
+014C   30FE           00149         MOVLW   0XFE
+014D   00B1           00150         MOVWF   COUNTER0
+014E                  00151 P2_C
+                      00152 
+014E   142E           00153         BSF     FLAGBIT,0       ;red
+014F   14AE           00154         BSF     FLAGBIT,1       ;green
+0150   152E           00155         BSF FLAGBIT,2   ;blue
+                      00156 
+0151   082B           00157         MOVFW   RED_TEMP
+0152   00A6           00158         MOVWF   RED_ADCL
+0153   082D           00159         MOVFW   BLU_TEMP
+0154   00AA           00160         MOVWF   BLU_ADCL
+                      00161 
+0155   21CF           00162         CALL    DISPLAY
+Message[305]: Using default destination of 1 (file).
+0156   0AAB           00163         INCF    RED_TEMP
+Message[305]: Using default destination of 1 (file).
+0157   03AD           00164         DECF    BLU_TEMP
+0158   0BB1           00165         DECFSZ  COUNTER0,F
+0159   294E           00166         GOTO    P2_C
+                      00167 
+                      00168 
+015A   21C8           00169         CALL    CLR_PWM
+015B   30FF           00170         MOVLW   0XFF
+015C   00AB           00171         MOVWF   RED_TEMP
+015D   3000           00172         MOVLW   0X00
+015E   00AC           00173         MOVWF   GRN_TEMP
+                      00174 
+                      00175         
+                      00176 
+015F   30FE           00177         MOVLW   0XFE
+0160   00B1           00178         MOVWF   COUNTER0
+0161                  00179 P2_B
+MPASM  5.51                 ADC_10_8_2020.ASM   10-10-2020  15:07:10         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00180 
+0161   142E           00181         BSF     FLAGBIT,0       ;red
+0162   14AE           00182         BSF     FLAGBIT,1       ;green
+0163   152E           00183         BSF FLAGBIT,2   ;blue
+                      00184 
+0164   082B           00185         MOVFW   RED_TEMP
+0165   00A6           00186         MOVWF   RED_ADCL
+0166   082C           00187         MOVFW   GRN_TEMP
+0167   00A8           00188         MOVWF   GRN_ADCL
+                      00189 
+0168   21CF           00190         CALL    DISPLAY
+Message[305]: Using default destination of 1 (file).
+0169   03AB           00191         DECF    RED_TEMP
+Message[305]: Using default destination of 1 (file).
+016A   0AAC           00192         INCF    GRN_TEMP
+016B   0BB1           00193         DECFSZ  COUNTER0,F
+016C   2961           00194         GOTO    P2_B
+                      00195 
+                      00196 
+                      00197 
+016D   21C8           00198         CALL    CLR_PWM
+016E   3000           00199         MOVLW   0X00
+016F   00AB           00200         MOVWF   RED_TEMP
+0170   30FF           00201         MOVLW   0XFF
+0171   00AC           00202         MOVWF   GRN_TEMP
+                      00203 
+                      00204         
+                      00205 
+0172   30FE           00206         MOVLW   0XFE
+0173   00B1           00207         MOVWF   COUNTER0
+0174                  00208 P2_A
+                      00209 
+0174   142E           00210         BSF     FLAGBIT,0       ;red
+0175   14AE           00211         BSF     FLAGBIT,1       ;green
+0176   152E           00212         BSF FLAGBIT,2   ;blue
+                      00213 
+0177   082B           00214         MOVFW   RED_TEMP
+0178   00A6           00215         MOVWF   RED_ADCL
+0179   082C           00216         MOVFW   GRN_TEMP
+017A   00A8           00217         MOVWF   GRN_ADCL
+                      00218 
+017B   21CF           00219         CALL    DISPLAY
+Message[305]: Using default destination of 1 (file).
+017C   0AAB           00220         INCF    RED_TEMP
+Message[305]: Using default destination of 1 (file).
+017D   03AC           00221         DECF    GRN_TEMP
+017E   0BB1           00222         DECFSZ  COUNTER0,F
+017F   2974           00223         GOTO    P2_A
+                      00224 
+                      00225 
+                      00226 
+                      00227 
+                      00228 
+MPASM  5.51                 ADC_10_8_2020.ASM   10-10-2020  15:07:10         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00229 
+                      00230 
+                      00231 
+                      00232 
+0180   21C8           00233         CALL    CLR_PWM
+0181   30FF           00234         MOVLW   0XFF
+0182   00AB           00235         MOVWF   RED_TEMP
+0183   3000           00236         MOVLW   0X00
+0184   00AD           00237         MOVWF   BLU_TEMP
+                      00238 
+                      00239         
+                      00240 
+0185   30FE           00241         MOVLW   0XFE
+0186   00B1           00242         MOVWF   COUNTER0
+0187                  00243 P2_D
+                      00244 
+0187   142E           00245         BSF     FLAGBIT,0       ;red
+0188   14AE           00246         BSF     FLAGBIT,1       ;green
+0189   152E           00247         BSF FLAGBIT,2   ;blue
+                      00248 
+018A   082B           00249         MOVFW   RED_TEMP
+018B   00A6           00250         MOVWF   RED_ADCL
+018C   082D           00251         MOVFW   BLU_TEMP
+018D   00AA           00252         MOVWF   BLU_ADCL
+                      00253 
+018E   21CF           00254         CALL    DISPLAY
+Message[305]: Using default destination of 1 (file).
+018F   03AB           00255         DECF    RED_TEMP
+Message[305]: Using default destination of 1 (file).
+0190   0AAD           00256         INCF    BLU_TEMP
+0191   0BB1           00257         DECFSZ  COUNTER0,F
+0192   2987           00258         GOTO    P2_D
+                      00259 
+                      00260 
+                      00261 
+0193   21C8           00262         CALL    CLR_PWM
+0194   3000           00263         MOVLW   0X00
+0195   00AC           00264         MOVWF   GRN_TEMP
+0196   30FF           00265         MOVLW   0XFF
+0197   00AD           00266         MOVWF   BLU_TEMP
+                      00267 
+                      00268         
+                      00269 
+0198   30FE           00270         MOVLW   0XFE
+0199   00B1           00271         MOVWF   COUNTER0
+019A                  00272 P2_E
+                      00273 
+019A   142E           00274         BSF     FLAGBIT,0       ;red
+019B   14AE           00275         BSF     FLAGBIT,1       ;green
+019C   152E           00276         BSF FLAGBIT,2   ;blue
+                      00277 
+019D   082C           00278         MOVFW   GRN_TEMP
+019E   00A8           00279         MOVWF   GRN_ADCL
+MPASM  5.51                 ADC_10_8_2020.ASM   10-10-2020  15:07:10         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+019F   082D           00280         MOVFW   BLU_TEMP
+01A0   00AA           00281         MOVWF   BLU_ADCL
+                      00282 
+01A1   21CF           00283         CALL    DISPLAY
+Message[305]: Using default destination of 1 (file).
+01A2   0AAC           00284         INCF    GRN_TEMP
+Message[305]: Using default destination of 1 (file).
+01A3   03AD           00285         DECF    BLU_TEMP
+01A4   0BB1           00286         DECFSZ  COUNTER0,F
+01A5   299A           00287         GOTO    P2_E
+                      00288 
+                      00289 
+01A6   21C8           00290         CALL    CLR_PWM
+01A7   30FF           00291         MOVLW   0XFF
+01A8   00AC           00292         MOVWF   GRN_TEMP
+01A9   3000           00293         MOVLW   0X00
+01AA   00AD           00294         MOVWF   BLU_TEMP
+                      00295 
+                      00296         
+                      00297 
+01AB   30FE           00298         MOVLW   0XFE
+01AC   00B1           00299         MOVWF   COUNTER0
+01AD                  00300 P2_F
+                      00301 
+01AD   142E           00302         BSF     FLAGBIT,0       ;red
+01AE   14AE           00303         BSF     FLAGBIT,1       ;green
+01AF   152E           00304         BSF FLAGBIT,2   ;blue
+                      00305 
+01B0   082C           00306         MOVFW   GRN_TEMP
+01B1   00A8           00307         MOVWF   GRN_ADCL
+01B2   082D           00308         MOVFW   BLU_TEMP
+01B3   00AA           00309         MOVWF   BLU_ADCL
+                      00310 
+01B4   21CF           00311         CALL    DISPLAY
+Message[305]: Using default destination of 1 (file).
+01B5   03AC           00312         DECF    GRN_TEMP
+Message[305]: Using default destination of 1 (file).
+01B6   0AAD           00313         INCF    BLU_TEMP
+01B7   0BB1           00314         DECFSZ  COUNTER0,F
+01B8   29AD           00315         GOTO    P2_F
+                      00316 
+                      00317 
+                      00318 
+                      00319 
+01B9   21C8           00320         CALL    CLR_PWM
+01BA   30FF           00321         MOVLW   0XFF
+01BB   00AD           00322         MOVWF   BLU_TEMP
+                      00323 
+01BC   30FE           00324         MOVLW   0XFE
+01BD   00B1           00325         MOVWF   COUNTER0
+01BE                  00326 P1_F
+                      00327 
+01BE   142E           00328         BSF     FLAGBIT,0       ;red
+MPASM  5.51                 ADC_10_8_2020.ASM   10-10-2020  15:07:10         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+01BF   14AE           00329         BSF     FLAGBIT,1       ;green
+01C0   152E           00330         BSF FLAGBIT,2   ;blue
+                      00331 
+01C1   082D           00332         MOVFW   BLU_TEMP
+01C2   00AA           00333         MOVWF   BLU_ADCL
+                      00334 
+01C3   21CF           00335         CALL    DISPLAY
+Message[305]: Using default destination of 1 (file).
+01C4   03AD           00336         DECF    BLU_TEMP
+01C5   0BB1           00337         DECFSZ  COUNTER0,F
+01C6   29BE           00338         GOTO    P1_F
+                      00339 
+                      00340 
+                      00341 
+                      00342 
+Warning[203]: Found opcode in column 1. (RETURN)
+01C7   0008           00343 RETURN
+                      00344 ;=================================
+                      00345 
+                      00346 
+                      00347 
+                      00348 
+                      00349 
+                      00350 ;=================================
+01C8                  00351 CLR_PWM
+                      00352 
+01C8   3000           00353         MOVLW   0X00
+01C9   00A6           00354         MOVWF   RED_ADCL
+                      00355 
+01CA   3000           00356         MOVLW   0X00
+01CB   00A8           00357         MOVWF   GRN_ADCL
+                      00358 
+01CC   3000           00359         MOVLW   0X00
+01CD   00AA           00360         MOVWF   BLU_ADCL
+                      00361 
+Warning[203]: Found opcode in column 1. (RETURN)
+01CE   0008           00362 RETURN
+                      00363 ;=================================
+                      00364 
+                      00365 ;==========     display ==========
+01CF                  00366 DISPLAY
+01CF   30FF           00367         MOVLW   0XFF
+01D0   00B0           00368         MOVWF   PWM_COUNTERL
+                      00369 
+01D1                  00370 DP0
+                      00371 
+01D1   202E           00372         CALL    CON_RED
+01D2   203D           00373         CALL    CON_GRN
+01D3   204C           00374         CALL    CON_BLU
+                      00375 
+01D4   3010           00376         MOVLW   0X10
+01D5   205B           00377         CALL    DELAY_US
+01D6   0BB0           00378         DECFSZ  PWM_COUNTERL,F
+MPASM  5.51                 ADC_10_8_2020.ASM   10-10-2020  15:07:10         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+01D7   29D1           00379         GOTO    DP0
+                      00380 
+                      00381 
+Warning[203]: Found opcode in column 1. (RETURN)
+01D8   0008           00382 RETURN
+                      00383 ;=================================
+                      00384 
+Warning[205]: Found directive in column 1. (ORG)
+0200                  00385 ORG 0X200
+                      00386 ;=================================
+0200                  00387 PATTERN3
+                      00388 ;=================================
+0200   3000           00389         MOVLW   0X00
+0201   00AB           00390         MOVWF   RED_TEMP
+0202   3000           00391         MOVLW   0X00
+0203   00AC           00392         MOVWF   GRN_TEMP
+0204   3000           00393         MOVLW   0X00
+0205   00AD           00394         MOVWF   BLU_TEMP
+0206   226A           00395         CALL    DISPLAY_COLOR
+                      00396 
+0207   30FF           00397         MOVLW   0XFF
+0208   00AB           00398         MOVWF   RED_TEMP
+0209   3000           00399         MOVLW   0X00
+020A   00AC           00400         MOVWF   GRN_TEMP
+020B   3000           00401         MOVLW   0X00
+020C   00AD           00402         MOVWF   BLU_TEMP
+020D   226A           00403         CALL    DISPLAY_COLOR
+                      00404 
+020E   3000           00405         MOVLW   0X00
+020F   00AB           00406         MOVWF   RED_TEMP
+0210   30FF           00407         MOVLW   0XFF
+0211   00AC           00408         MOVWF   GRN_TEMP
+0212   3000           00409         MOVLW   0X00
+0213   00AD           00410         MOVWF   BLU_TEMP
+0214   226A           00411         CALL    DISPLAY_COLOR
+                      00412 
+0215   3000           00413         MOVLW   0X00
+0216   00AB           00414         MOVWF   RED_TEMP
+0217   3000           00415         MOVLW   0X00
+0218   00AC           00416         MOVWF   GRN_TEMP
+0219   30FF           00417         MOVLW   0XFF
+021A   00AD           00418         MOVWF   BLU_TEMP
+021B   226A           00419         CALL    DISPLAY_COLOR
+                      00420 
+021C   30FF           00421         MOVLW   0XFF
+021D   00AB           00422         MOVWF   RED_TEMP
+021E   30FF           00423         MOVLW   0XFF
+021F   00AC           00424         MOVWF   GRN_TEMP
+0220   30FF           00425         MOVLW   0XFF
+0221   00AD           00426         MOVWF   BLU_TEMP
+0222   226A           00427         CALL    DISPLAY_COLOR
+                      00428 
+0223   30E6           00429         MOVLW   D'230'
+MPASM  5.51                 ADC_10_8_2020.ASM   10-10-2020  15:07:10         PAGE 10
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0224   00AB           00430         MOVWF   RED_TEMP
+0225   3000           00431         MOVLW   D'0'
+0226   00AC           00432         MOVWF   GRN_TEMP
+0227   30B4           00433         MOVLW   D'180'
+0228   00AD           00434         MOVWF   BLU_TEMP
+0229   226A           00435         CALL    DISPLAY_COLOR
+                      00436 
+022A   30AA           00437         MOVLW   D'170'
+022B   00AB           00438         MOVWF   RED_TEMP
+022C   3000           00439         MOVLW   D'0'
+022D   00AC           00440         MOVWF   GRN_TEMP
+022E   30F0           00441         MOVLW   D'240'
+022F   00AD           00442         MOVWF   BLU_TEMP
+0230   226A           00443         CALL    DISPLAY_COLOR
+                      00444 
+                      00445 
+                      00446 
+0231   3031           00447         MOVLW   D'49'
+0232   00AB           00448         MOVWF   RED_TEMP
+0233   30C4           00449         MOVLW   D'196'
+0234   00AC           00450         MOVWF   GRN_TEMP
+0235   3071           00451         MOVLW   D'113'
+0236   00AD           00452         MOVWF   BLU_TEMP
+0237   226A           00453         CALL    DISPLAY_COLOR
+                      00454 
+0238   308E           00455         MOVLW   D'142'
+0239   00AB           00456         MOVWF   RED_TEMP
+023A   3018           00457         MOVLW   D'24'
+023B   00AC           00458         MOVWF   GRN_TEMP
+023C   30FA           00459         MOVLW   D'250'
+023D   00AD           00460         MOVWF   BLU_TEMP
+023E   226A           00461         CALL    DISPLAY_COLOR
+                      00462 
+023F   30EF           00463         MOVLW   D'239'
+0240   00AB           00464         MOVWF   RED_TEMP
+0241   3046           00465         MOVLW   D'70'
+0242   00AC           00466         MOVWF   GRN_TEMP
+0243   306E           00467         MOVLW   D'110'
+0244   00AD           00468         MOVWF   BLU_TEMP
+0245   226A           00469         CALL    DISPLAY_COLOR
+                      00470 
+0246   302D           00471         MOVLW   D'45'
+0247   00AB           00472         MOVWF   RED_TEMP
+0248   303C           00473         MOVLW   D'60'
+0249   00AC           00474         MOVWF   GRN_TEMP
+024A   3051           00475         MOVLW   D'81'
+024B   00AD           00476         MOVWF   BLU_TEMP
+024C   226A           00477         CALL    DISPLAY_COLOR
+                      00478 
+024D   309B           00479         MOVLW   D'155'
+024E   00AB           00480         MOVWF   RED_TEMP
+024F   3016           00481         MOVLW   D'22'
+0250   00AC           00482         MOVWF   GRN_TEMP
+MPASM  5.51                 ADC_10_8_2020.ASM   10-10-2020  15:07:10         PAGE 11
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0251   3071           00483         MOVLW   D'113'
+0252   00AD           00484         MOVWF   BLU_TEMP
+0253   226A           00485         CALL    DISPLAY_COLOR
+                      00486         
+0254   306C           00487         MOVLW   D'108'
+0255   00AB           00488         MOVWF   RED_TEMP
+0256   302A           00489         MOVLW   D'42'
+0257   00AC           00490         MOVWF   GRN_TEMP
+0258   30FB           00491         MOVLW   D'251'
+0259   00AD           00492         MOVWF   BLU_TEMP
+025A   226A           00493         CALL    DISPLAY_COLOR
+                      00494 
+025B   30FE           00495         MOVLW   D'254'
+025C   00AB           00496         MOVWF   RED_TEMP
+025D   303B           00497         MOVLW   D'59'
+025E   00AC           00498         MOVWF   GRN_TEMP
+025F   3012           00499         MOVLW   D'18'
+0260   00AD           00500         MOVWF   BLU_TEMP
+0261   226A           00501         CALL    DISPLAY_COLOR
+                      00502         
+                      00503         
+                      00504 
+0262   3000           00505         MOVLW   0X00
+0263   00AB           00506         MOVWF   RED_TEMP
+0264   3000           00507         MOVLW   0X00
+0265   00AC           00508         MOVWF   GRN_TEMP
+0266   3000           00509         MOVLW   0X00
+0267   00AD           00510         MOVWF   BLU_TEMP
+0268   226A           00511         CALL    DISPLAY_COLOR
+                      00512 
+Warning[203]: Found opcode in column 1. (RETURN)
+0269   0008           00513 RETURN
+                      00514 ;=================================
+                      00515 
+                      00516 
+                      00517 
+                      00518 ;=================================
+026A                  00519 DISPLAY_COLOR
+                      00520 ;=================================
+026A   21C8           00521         CALL    CLR_PWM
+                      00522 
+026B   0834           00523         MOVFW   T_SPEED
+026C   00B2           00524         MOVWF   COUNTER1
+                      00525 
+                      00526 
+026D                  00527 P3_A
+026D   142E           00528         BSF     FLAGBIT,0       ;red
+026E   14AE           00529         BSF     FLAGBIT,1       ;green
+026F   152E           00530         BSF FLAGBIT,2   ;blue
+                      00531 
+0270   082B           00532         MOVFW   RED_TEMP
+0271   00A6           00533         MOVWF   RED_ADCL
+0272   082C           00534         MOVFW   GRN_TEMP
+MPASM  5.51                 ADC_10_8_2020.ASM   10-10-2020  15:07:10         PAGE 12
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0273   00A8           00535         MOVWF   GRN_ADCL
+0274   082D           00536         MOVFW   BLU_TEMP
+0275   00AA           00537         MOVWF   BLU_ADCL
+                      00538 
+0276   21CF           00539         CALL    DISPLAY
+0277   0BB2           00540         DECFSZ  COUNTER1,F
+0278   2A6D           00541         GOTO    P3_A
+                      00542 
+                      00543 
+                      00544 
+Warning[203]: Found opcode in column 1. (RETURN)
+0279   0008           00545 RETURN
+                      00546 ;=================================
+                      00016         
+Warning[205]: Found directive in column 1. (__CONFIG)
+2007   3002           00017 __CONFIG    _CP_ON & _CPD_ON & _BOR_OFF & _PWRTE_ON & _WDT_OFF & _HS_OSC & _MCLRE_OFF & _FCMEN_OFF & _IE
+                            SO_OFF
+                      00018 
+                      00019 ; '__config' directive is used to embed configuration data within .asm file.
+                      00020 ; the labels following the directive are located in the respective .inc file.
+                      00021 ; see respective data sheet for additional information on configuration word.
+                      00022 
+                      00023 
+                      00024 
+                      00025 
+                      00026 
+                      00027 
+                      00028 ;***** variable definitions
+  0000007D            00029 W_TEMP          EQU     0X7D                    ; variable used for context saving
+  0000007E            00030 STATUS_TEMP     EQU     0X7E                    ; variable used for context saving
+  0000007F            00031 PCLATH_TEMP     EQU     0X7F                    ; variable used for context saving
+                      00032 
+                      00033         #DEFINE BANK0           BANKSEL PORTA
+                      00034         #DEFINE BANK1           BANKSEL ADRESL
+                      00035         #DEFINE BANK2           BANKSEL ANSELH
+                      00036 
+                      00037         #DEFINE RED_HI          BSF     PORTB,4
+                      00038         #DEFINE RED_LO          BCF     PORTB,4
+                      00039 
+                      00040         #DEFINE GRN_HI          BSF     PORTB,5
+                      00041         #DEFINE GRN_LO          BCF     PORTB,5
+                      00042 
+                      00043         #DEFINE BLU_HI          BSF     PORTB,6
+                      00044         #DEFINE BLU_LO          BCF     PORTB,6
+                      00045 
+                      00046                                                                           
+                      00047 
+                      00048 ;============================   bank    0       ===========================
+Warning[205]: Found directive in column 1. (CBLOCK)
+                      00049 CBLOCK 0X20
+                      00050 
+                      00051 
+Warning[210]: Extra ","
+MPASM  5.51                 ADC_10_8_2020.ASM   10-10-2020  15:07:10         PAGE 13
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+  00000020            00052                         DELAYUS, DELAYMS,  MILSEC, ;sec,delays, ;delay variables                
+  00000023            00053                         LOOP
+  00000024            00054                         PWM_LOOP
+                      00055 
+                      00056 
+  00000025            00057                         RED_ADCH
+  00000026            00058                         RED_ADCL
+  00000027            00059                         GRN_ADCH
+  00000028            00060                         GRN_ADCL
+  00000029            00061                         BLU_ADCH
+  0000002A            00062                         BLU_ADCL
+                      00063 
+  0000002B            00064                         RED_TEMP
+  0000002C            00065                         GRN_TEMP
+  0000002D            00066                         BLU_TEMP
+                      00067 
+  0000002E            00068                         FLAGBIT
+                      00069 
+                      00070 
+  0000002F            00071                         PWM_COUNTERH
+  00000030            00072                         PWM_COUNTERL
+                      00073 
+  00000031            00074                         COUNTER0
+  00000032            00075                         COUNTER1
+  00000033            00076                         COUNTER2
+                      00077 
+  00000034            00078                         T_SPEED         ;transistion speed
+Warning[205]: Found directive in column 1. (ENDC)
+                      00079 ENDC
+                      00080 ;======================================================================
+                      00081 
+                      00082 ;**********************************************************************
+0000                  00083         ORG             0X000                           ; processor reset vector
+0000   2811           00084         GOTO    INIT                            ; go to initialization
+                      00085 
+                      00086 
+0004                  00087         ORG             0X004                           ; interrupt vector location
+0004   00FD           00088         MOVWF           W_TEMP                  ; save off current w register contents
+0005   0803           00089         MOVF            STATUS,W                ; move status register into w register
+0006   00FE           00090         MOVWF           STATUS_TEMP             ; save off contents of status register
+0007   080A           00091         MOVF            PCLATH,W                ; move pclath register into w register
+0008   00FF           00092         MOVWF           PCLATH_TEMP             ; save off contents of pclath register
+                      00093 
+                      00094 
+                      00095         
+                      00096 
+0009   206F           00097         CALL            INTERRUPT
+                      00098 
+                      00099 
+                      00100 ; isr code can go here or be located as a call subroutine elsewhere
+                      00101 
+000A   087F           00102         MOVF            PCLATH_TEMP,W   ; retrieve copy of pclath register
+000B   008A           00103         MOVWF           PCLATH                  ; restore pre-isr pclath register contents      
+MPASM  5.51                 ADC_10_8_2020.ASM   10-10-2020  15:07:10         PAGE 14
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+000C   087E           00104         MOVF            STATUS_TEMP,W   ; retrieve copy of status register
+000D   0083           00105         MOVWF           STATUS                  ; restore pre-isr status register contents
+000E   0EFD           00106         SWAPF           W_TEMP,F
+000F   0E7D           00107         SWAPF           W_TEMP,W                ; restore pre-isr w register contents
+                      00108 
+                      00109 
+                      00110 ;       goto            main
+0010   0009           00111         RETFIE                                          ; return from interrupt
+                      00112 
+                      00113 
+                      00114 ;$$$$$$$$$$$$$$$ initialize $$$$$$$$$$$$$
+0011                  00115 INIT:
+                      00116         
+0011   1283 1703      00117         BANKSEL ANSEL
+0013   0103           00118         CLRW
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0014   009E           00119         MOVWF   ANSEL
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0015   009F           00120         MOVWF   ANSELH
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0016   161E           00121         BSF             ANSEL,4
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0017   169E           00122         BSF             ANSEL,5
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0018   171E           00123         BSF             ANSEL,6
+                      00124 
+0019   1683 1303      00125         BANKSEL TRISA
+                      00126 
+001B   3008           00127         MOVLW   0X08
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+001C   0085           00128         MOVWF   TRISA
+                      00129 
+001D   3000           00130         MOVLW   0X00
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+001E   0086           00131         MOVWF   TRISB
+                      00132 
+001F   30FF           00133         MOVLW   0XFF
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0020   0087           00134         MOVWF   TRISC
+                      00135 
+                      00136 
+                      00137 
+                      00138 
+                      00139 
+0021   1283 1303      00140         BANK0
+0023   0186           00141         CLRF    PORTB
+0024   1206           00142         RED_LO
+0025   1286           00143         GRN_LO
+0026   1306           00144         BLU_LO
+                      00145 
+                      00146 
+0027   3064           00147         MOVLW   D'100'
+0028   00B4           00148         MOVWF   T_SPEED
+MPASM  5.51                 ADC_10_8_2020.ASM   10-10-2020  15:07:10         PAGE 15
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[203]: Found opcode in column 1. (GOTO)
+0029   282A           00149 GOTO MAIN
+                      00150 ;$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+                      00151         
+                      00152 
+                      00153 ;########################################
+002A                  00154 MAIN
+002A   2100           00155         CALL    PATTERN1
+002B   2147           00156         CALL    PATTERN2
+002C   2200           00157         CALL    PATTERN3
+                      00158 
+Warning[203]: Found opcode in column 1. (GOTO)
+002D   282A           00159 GOTO    MAIN
+                      00160 ;########################################
+                      00161 
+                      00162 ;       bsf     flagbit,0       ;red
+                      00163 ;       bsf     flagbit,1       ;green
+                      00164 ;       bsf flagbit,2   ;blue
+                      00165 ;
+                      00166 ;
+                      00167 ;       movlw   0xff
+                      00168 ;       movwf   red_adcL
+                      00169 ;
+                      00170 ;       movlw   0xff
+                      00171 ;       movwf   grn_adcL
+                      00172 ;
+                      00173 ;       movlw   0xff
+                      00174 ;       movwf   blu_adcL
+                      00175 ;
+                      00176 ;       call    display
+                      00177 ;
+                      00178 
+                      00179 
+                      00180 
+                      00181 ;==========     red pwm ==========
+002E                  00182 CON_RED
+                      00183 
+002E   1C2E           00184         BTFSS   FLAGBIT,0
+002F   2834           00185         GOTO    RED0
+                      00186         
+0030   0826           00187         MOVFW   RED_ADCL
+0031   1D03           00188         BTFSS   STATUS,Z
+0032   2836           00189         GOTO    RED1
+0033   283B           00190         GOTO    RED_XX
+                      00191 
+0034                  00192 RED0
+0034   1206           00193         RED_LO
+0035   283C           00194         GOTO    RED_Y
+0036                  00195 RED1
+0036   1606           00196         RED_HI
+0037   2839           00197         GOTO    RED_X
+0038   0000           00198         NOP
+                      00199 
+MPASM  5.51                 ADC_10_8_2020.ASM   10-10-2020  15:07:10         PAGE 16
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0039                  00200 RED_X
+0039   0BA6           00201         DECFSZ  RED_ADCL,F
+003A   283C           00202         GOTO    RED_Y
+                      00203 
+003B                  00204 RED_XX
+003B   102E           00205         BCF             FLAGBIT,0
+                      00206 
+003C                  00207 RED_Y
+                      00208 
+Warning[203]: Found opcode in column 1. (RETURN)
+003C   0008           00209 RETURN
+                      00210 ;=================================
+                      00211 
+                      00212 
+                      00213 ;==========     grn pwm ==========
+003D                  00214 CON_GRN
+                      00215 
+003D   1CAE           00216         BTFSS   FLAGBIT,1
+003E   2843           00217         GOTO    GRN0
+                      00218         
+003F   0828           00219         MOVFW   GRN_ADCL
+0040   1D03           00220         BTFSS   STATUS,Z
+0041   2845           00221         GOTO    GRN1
+0042   284A           00222         GOTO    GRN_XX
+                      00223 
+0043                  00224 GRN0
+0043   1286           00225         GRN_LO
+0044   284B           00226         GOTO    GRN_Y
+0045                  00227 GRN1
+0045   1686           00228         GRN_HI
+0046   2848           00229         GOTO    GRN_X
+0047   0000           00230         NOP
+                      00231 
+0048                  00232 GRN_X
+0048   0BA8           00233         DECFSZ  GRN_ADCL,F
+0049   284B           00234         GOTO    GRN_Y
+                      00235 
+004A                  00236 GRN_XX
+004A   10AE           00237         BCF             FLAGBIT,1
+                      00238 
+004B                  00239 GRN_Y
+                      00240 
+Warning[203]: Found opcode in column 1. (RETURN)
+004B   0008           00241 RETURN
+                      00242 ;=================================
+                      00243 
+                      00244 
+                      00245 ;==========     blue pwm ==========
+004C                  00246 CON_BLU
+                      00247 
+004C   1D2E           00248         BTFSS   FLAGBIT,2
+004D   2852           00249         GOTO    BLU0
+                      00250         
+MPASM  5.51                 ADC_10_8_2020.ASM   10-10-2020  15:07:10         PAGE 17
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+004E   082A           00251         MOVFW   BLU_ADCL
+004F   1D03           00252         BTFSS   STATUS,Z
+0050   2854           00253         GOTO    BLU1
+0051   2859           00254         GOTO    BLU_XX
+                      00255 
+0052                  00256 BLU0
+0052   1306           00257         BLU_LO
+0053   285A           00258         GOTO    BLU_Y
+0054                  00259 BLU1
+0054   1706           00260         BLU_HI
+0055   2857           00261         GOTO    BLU_X
+0056   0000           00262         NOP
+                      00263 
+0057                  00264 BLU_X
+0057   0BAA           00265         DECFSZ  BLU_ADCL,F
+0058   285A           00266         GOTO    BLU_Y
+                      00267 
+0059                  00268 BLU_XX
+0059   112E           00269         BCF             FLAGBIT,2
+                      00270 
+005A                  00271 BLU_Y
+                      00272 
+Warning[203]: Found opcode in column 1. (RETURN)
+005A   0008           00273 RETURN
+                      00274 ;=================================
+                      00275 
+                      00276 
+                      00277 
+                      00278 
+                      00279 
+                      00280 ;==========     delay usec =========
+005B                  00281 DELAY_US
+                      00282 
+005B   00A0           00283         MOVWF   DELAYUS
+                      00284 
+005C                  00285 USEC
+                      00286 
+005C   0000           00287         NOP
+005D   0000           00288         NOP
+005E   0000           00289         NOP
+005F   0000           00290         NOP
+Warning[203]: Found opcode in column 1. (DECFSZ)
+0060   0BA0           00291 DECFSZ  DELAYUS,F
+                      00292 
+Warning[203]: Found opcode in column 1. (GOTO)
+0061   285C           00293 GOTO    USEC
+                      00294 
+Warning[203]: Found opcode in column 1. (RETURN)
+0062   0008           00295 RETURN
+                      00296 ;=================================
+                      00297 
+                      00298 
+                      00299 
+MPASM  5.51                 ADC_10_8_2020.ASM   10-10-2020  15:07:10         PAGE 18
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00300 ;=========== delay one ms ========
+0063                  00301 DELAY_ONEMS
+                      00302 
+0063   3005           00303         MOVLW   .5
+0064   00A3           00304         MOVWF   LOOP
+                      00305 
+0065                  00306 MSEC
+0065   30C8           00307         MOVLW   .200
+0066   205B           00308         CALL    DELAY_US
+0067   0BA3           00309         DECFSZ  LOOP,F
+0068   2865           00310         GOTO    MSEC
+                      00311 
+Warning[203]: Found opcode in column 1. (RETURN)
+0069   0008           00312 RETURN
+                      00313 ;==================================
+                      00314 
+                      00315 
+                      00316 ;=========== delay ms   ==========
+006A                  00317 DELAY_MS
+                      00318         
+006A   00A1           00319         MOVWF   DELAYMS
+006B                  00320 MSEC0
+006B   2063           00321         CALL    DELAY_ONEMS
+006C   0BA1           00322         DECFSZ  DELAYMS,F
+006D   286B           00323         GOTO    MSEC0
+Warning[203]: Found opcode in column 1. (RETURN)
+006E   0008           00324 RETURN
+                      00325 ;=================================
+                      00326 
+                      00327 ;=========== delay      one     second ===
+                      00328 ;delay_onesec
+                      00329 ;
+                      00330 ;       movlw   .5
+                      00331 ;       movwf   sec
+                      00332 ;sec0
+                      00333 ;       movlw   .200
+                      00334 ;       call    delay_ms
+                      00335 ;       decfsz  sec,f
+                      00336 ;       goto    sec0
+                      00337 ;return
+                      00338 ;;=================================
+                      00339 ;
+                      00340 ;;========== delay sec ============
+                      00341 ;delay_sec
+                      00342 ;
+                      00343 ;       movwf   delays
+                      00344 ;sec1
+                      00345 ;       call    delay_onesec
+                      00346 ;       decfsz  delays,f
+                      00347 ;       goto    sec1
+                      00348 ;return
+                      00349 ;;=================================
+                      00350 
+MPASM  5.51                 ADC_10_8_2020.ASM   10-10-2020  15:07:10         PAGE 19
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00351 
+                      00352 
+                      00353 
+                      00354 
+                      00355 
+                      00356 
+                      00357 
+                      00358 
+                      00359 
+                      00360 
+                      00361 
+                      00362 
+                      00363 
+                      00364 
+                      00365 
+                      00366 
+006F                  00367 INTERRUPT:
+006F   0000           00368         NOP
+                      00369         ;write interrupt code here
+                      00370 
+                      00371 
+                      00372 
+                      00373 
+                      00374 
+                      00375 
+Warning[203]: Found opcode in column 1. (RETURN)
+0070   0008           00376 RETURN
+                      00377 
+                      00378 
+                      00379 
+                      00380 
+2100                  00381         ORG     0X2100                          ; data eeprom location
+2100   0001 0002 0003 00382         DE      1,2,3,4                         ; define first four eeprom locations as 1, 2, 3, and 4
+       0004 
+                      00383 
+                      00384 
+                      00385 
+                      00386 
+                      00387         END                       ; directive 'end of program'
+MPASM  5.51                 ADC_10_8_2020.ASM   10-10-2020  15:07:10         PAGE 20
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ABDEN                             00000000
+ABDOVF                            00000007
+ADCON0                            0000001F
+ADCON1                            0000009F
+ADCS0                             00000004
+ADCS1                             00000005
+ADCS2                             00000006
+ADDEN                             00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+ANS0                              00000000
+ANS1                              00000001
+ANS10                             00000002
+ANS11                             00000003
+ANS2                              00000002
+ANS3                              00000003
+ANS4                              00000004
+ANS5                              00000005
+ANS6                              00000006
+ANS7                              00000007
+ANS8                              00000000
+ANS9                              00000001
+ANSEL                             0000011E
+ANSELH                            0000011F
+BANK0                             BANKSEL PORTA
+BANK1                             BANKSEL ADRESL
+BANK2                             BANKSEL ANSELH
+BAUDCTL                           0000009B
+BF                                00000000
+BLU0                              00000052
+BLU1                              00000054
+BLU_ADCH                          00000029
+BLU_ADCL                          0000002A
+BLU_HI                            BSF     PORTB,6
+BLU_LO                            BCF     PORTB,6
+BLU_TEMP                          0000002D
+BLU_X                             00000057
+BLU_XX                            00000059
+BLU_Y                             0000005A
+BRG0                              00000000
+BRG1                              00000001
+BRG10                             00000002
+BRG11                             00000003
+BRG12                             00000004
+BRG13                             00000005
+BRG14                             00000006
+BRG15                             00000007
+BRG16                             00000003
+BRG2                              00000002
+MPASM  5.51                 ADC_10_8_2020.ASM   10-10-2020  15:07:10         PAGE 21
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+BRG3                              00000003
+BRG4                              00000004
+BRG5                              00000005
+BRG6                              00000006
+BRG7                              00000007
+BRG8                              00000000
+BRG9                              00000001
+BRGH                              00000002
+C                                 00000000
+C1CH0                             00000000
+C1CH1                             00000001
+C1IE                              00000005
+C1IF                              00000005
+C1OE                              00000005
+C1ON                              00000007
+C1OUT                             00000006
+C1POL                             00000004
+C1R                               00000002
+C1SEN                             00000005
+C1VREN                            00000007
+C2CH0                             00000000
+C2CH1                             00000001
+C2IE                              00000006
+C2IF                              00000006
+C2OE                              00000005
+C2ON                              00000007
+C2OUT                             00000006
+C2POL                             00000004
+C2R                               00000002
+C2REN                             00000004
+C2SYNC                            00000000
+C2VREN                            00000006
+CCP1CON                           00000017
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCPR                              00000015
+CCPR1H                            00000016
+CCPR1L                            00000015
+CHS0                              00000002
+CHS1                              00000003
+CHS2                              00000004
+CHS3                              00000005
+CKE                               00000006
+CKP                               00000004
+CLR_PWM                           000001C8
+CM1CON0                           00000119
+CM2CON0                           0000011A
+CM2CON1                           0000011B
+CON_BLU                           0000004C
+MPASM  5.51                 ADC_10_8_2020.ASM   10-10-2020  15:07:10         PAGE 22
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CON_GRN                           0000003D
+CON_RED                           0000002E
+COUNTER0                          00000031
+COUNTER1                          00000032
+COUNTER2                          00000033
+CREN                              00000004
+CSRC                              00000007
+D                                 00000005
+DATA_ADDRESS                      00000005
+DC                                00000001
+DC1B0                             00000004
+DC1B1                             00000005
+DELAYMS                           00000021
+DELAYUS                           00000020
+DELAY_MS                          0000006A
+DELAY_ONEMS                       00000063
+DELAY_US                          0000005B
+DISPLAY                           000001CF
+DISPLAY_COLOR                     0000026A
+DP0                               000001D1
+D_A                               00000005
+D_NOT_A                           00000005
+ECCPAS                            0000001D
+ECCPAS0                           00000004
+ECCPAS1                           00000005
+ECCPAS2                           00000006
+ECCPASE                           00000007
+EEADR                             0000010D
+EEADRH                            0000010F
+EECON1                            0000018C
+EECON2                            0000018D
+EEDAT                             0000010C
+EEDATA                            0000010C
+EEDATH                            0000010E
+EEIE                              00000004
+EEIF                              00000004
+EEPGD                             00000007
+F                                 00000001
+FERR                              00000002
+FLAGBIT                           0000002E
+FSR                               00000004
+GIE                               00000007
+GO                                00000001
+GO_DONE                           00000001
+GO_NOT_DONE                       00000001
+GRN0                              00000043
+GRN1                              00000045
+GRN_ADCH                          00000027
+GRN_ADCL                          00000028
+GRN_HI                            BSF     PORTB,5
+GRN_LO                            BCF     PORTB,5
+GRN_TEMP                          0000002C
+GRN_X                             00000048
+MPASM  5.51                 ADC_10_8_2020.ASM   10-10-2020  15:07:10         PAGE 23
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+GRN_XX                            0000004A
+GRN_Y                             0000004B
+HTS                               00000002
+I2C_DATA                          00000005
+I2C_READ                          00000002
+I2C_START                         00000003
+I2C_STOP                          00000004
+INDF                              00000000
+INIT                              00000011
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTERRUPT                         0000006F
+INTF                              00000001
+IOC                               00000096
+IOC0                              00000000
+IOC1                              00000001
+IOC2                              00000002
+IOC3                              00000003
+IOC4                              00000004
+IOC5                              00000005
+IOCA                              00000096
+IOCA0                             00000000
+IOCA1                             00000001
+IOCA2                             00000002
+IOCA3                             00000003
+IOCA4                             00000004
+IOCA5                             00000005
+IOCB                              00000116
+IOCB4                             00000004
+IOCB5                             00000005
+IOCB6                             00000006
+IOCB7                             00000007
+IRCF0                             00000004
+IRCF1                             00000005
+IRCF2                             00000006
+IRP                               00000007
+LOOP                              00000023
+LTS                               00000001
+MAIN                              0000002A
+MC1OUT                            00000007
+MC2OUT                            00000006
+MILSEC                            00000022
+MSEC                              00000065
+MSEC0                             0000006B
+MSK                               00000093
+MSK0                              00000000
+MSK1                              00000001
+MSK2                              00000002
+MSK3                              00000003
+MSK4                              00000004
+MSK5                              00000005
+MSK6                              00000006
+MPASM  5.51                 ADC_10_8_2020.ASM   10-10-2020  15:07:10         PAGE 24
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+MSK7                              00000007
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
+NOT_BOR                           00000000
+NOT_DONE                          00000001
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_RABPU                         00000007
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+NOT_W                             00000002
+NOT_WRITE                         00000002
+OERR                              00000001
+OPTION_REG                        00000081
+OSCCON                            0000008F
+OSCTUNE                           00000090
+OSFIE                             00000007
+OSFIF                             00000007
+OSTS                              00000003
+P                                 00000004
+P1M0                              00000006
+P1M1                              00000007
+P1_A                              00000105
+P1_B                              00000113
+P1_C                              00000121
+P1_D                              0000012F
+P1_E                              0000013D
+P1_F                              000001BE
+P2_A                              00000174
+P2_B                              00000161
+P2_C                              0000014E
+P2_D                              00000187
+P2_E                              0000019A
+P2_F                              000001AD
+P3_A                              0000026D
+PATTERN1                          00000100
+PATTERN2                          00000147
+PATTERN3                          00000200
+PCL                               00000002
+PCLATH                            0000000A
+PCLATH_TEMP                       0000007F
+PCON                              0000008E
+PDC0                              00000000
+PDC1                              00000001
+PDC2                              00000002
+PDC3                              00000003
+PDC4                              00000004
+PDC5                              00000005
+PDC6                              00000006
+PEIE                              00000006
+PIE1                              0000008C
+PIE2                              0000008D
+PIR1                              0000000C
+MPASM  5.51                 ADC_10_8_2020.ASM   10-10-2020  15:07:10         PAGE 25
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PIR2                              0000000D
+PORTA                             00000005
+PORTB                             00000006
+PORTC                             00000007
+PR2                               00000092
+PRSEN                             00000007
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+PSSAC0                            00000002
+PSSAC1                            00000003
+PSSBD0                            00000000
+PSSBD1                            00000001
+PSTRCON                           0000019D
+PULSR                             00000002
+PULSS                             00000003
+PWM1CON                           0000001C
+PWM_COUNTERH                      0000002F
+PWM_COUNTERL                      00000030
+PWM_LOOP                          00000024
+R                                 00000002
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RA5                               00000005
+RABIE                             00000003
+RABIF                             00000000
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RC0                               00000000
+RC1                               00000001
+RC2                               00000002
+RC3                               00000003
+RC4                               00000004
+RC5                               00000005
+RC6                               00000006
+RC7                               00000007
+RCIDL                             00000006
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+RCSTA                             00000018
+RD                                00000000
+READ_WRITE                        00000002
+RED0                              00000034
+RED1                              00000036
+RED_ADCH                          00000025
+RED_ADCL                          00000026
+MPASM  5.51                 ADC_10_8_2020.ASM   10-10-2020  15:07:10         PAGE 26
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RED_HI                            BSF     PORTB,4
+RED_LO                            BCF     PORTB,4
+RED_TEMP                          0000002B
+RED_X                             00000039
+RED_XX                            0000003B
+RED_Y                             0000003C
+RP0                               00000005
+RP1                               00000006
+RX9                               00000006
+RX9D                              00000000
+R_NOT_W                           00000002
+R_W                               00000002
+S                                 00000003
+SBOREN                            00000004
+SCKP                              00000004
+SCS                               00000000
+SENB                              00000003
+SENDB                             00000003
+SMP                               00000007
+SPBRG                             00000099
+SPBRGH                            0000009A
+SPEN                              00000007
+SR0                               00000006
+SR1                               00000007
+SRCON                             0000019E
+SREN                              00000005
+SSPADD                            00000093
+SSPBUF                            00000013
+SSPCON                            00000014
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+SSPM3                             00000003
+SSPMSK                            00000093
+SSPOV                             00000006
+SSPSTAT                           00000094
+STATUS                            00000003
+STATUS_TEMP                       0000007E
+STRA                              00000000
+STRB                              00000001
+STRC                              00000002
+STRD                              00000003
+STRSYNC                           00000004
+SWDTEN                            00000000
+SYNC                              00000004
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+MPASM  5.51                 ADC_10_8_2020.ASM   10-10-2020  15:07:10         PAGE 27
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+T1CKPS1                           00000005
+T1CON                             00000010
+T1GINV                            00000007
+T1GSS                             00000001
+T1IE                              00000000
+T1IF                              00000000
+T1OSCEN                           00000003
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+T2IE                              00000001
+T2IF                              00000001
+TMR0                              00000001
+TMR1                              0000000E
+TMR1CS                            00000001
+TMR1GE                            00000006
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISA5                            00000005
+TRISB                             00000086
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+TRISC                             00000087
+TRISC0                            00000000
+TRISC1                            00000001
+TRISC2                            00000002
+TRISC3                            00000003
+TRISC4                            00000004
+TRISC5                            00000005
+TRISC6                            00000006
+TRISC7                            00000007
+TRMT                              00000001
+TUN0                              00000000
+TUN1                              00000001
+MPASM  5.51                 ADC_10_8_2020.ASM   10-10-2020  15:07:10         PAGE 28
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TUN2                              00000002
+TUN3                              00000003
+TUN4                              00000004
+TX9                               00000006
+TX9D                              00000000
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+TXSTA                             00000098
+T_SPEED                           00000034
+UA                                00000001
+ULPWUE                            00000005
+USEC                              0000005C
+VCFG                              00000006
+VP6EN                             00000004
+VR0                               00000000
+VR1                               00000001
+VR2                               00000002
+VR3                               00000003
+VRCON                             00000118
+VRR                               00000005
+W                                 00000000
+WCOL                              00000007
+WDTCON                            00000097
+WDTPS0                            00000001
+WDTPS1                            00000002
+WDTPS2                            00000003
+WDTPS3                            00000004
+WPU                               00000095
+WPU0                              00000000
+WPU1                              00000001
+WPU2                              00000002
+WPU4                              00000004
+WPU5                              00000005
+WPUA                              00000095
+WPUA0                             00000000
+WPUA1                             00000001
+WPUA2                             00000002
+WPUA4                             00000004
+WPUA5                             00000005
+WPUB                              00000115
+WPUB4                             00000004
+WPUB5                             00000005
+WPUB6                             00000006
+WPUB7                             00000007
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+WUE                               00000001
+W_TEMP                            0000007D
+Z                                 00000002
+_BOD_NSLEEP                       00003EFF
+MPASM  5.51                 ADC_10_8_2020.ASM   10-10-2020  15:07:10         PAGE 29
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_BOD_OFF                          00003CFF
+_BOD_ON                           00003FFF
+_BOD_SBODEN                       00003DFF
+_BOREN_NSLEEP                     00003EFF
+_BOREN_OFF                        00003CFF
+_BOREN_ON                         00003FFF
+_BOREN_SBODEN                     00003DFF
+_BOR_NSLEEP                       00003EFF
+_BOR_OFF                          00003CFF
+_BOR_ON                           00003FFF
+_BOR_SBODEN                       00003DFF
+_CONFIG                           00002007
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003F7F
+_CP_OFF                           00003FFF
+_CP_ON                            00003FBF
+_DEVID1                           00002006
+_EC_OSC                           00003FFB
+_EXTRC                            00003FFF
+_EXTRCIO                          00003FFE
+_EXTRC_OSC_CLKOUT                 00003FFF
+_EXTRC_OSC_NOCLKOUT               00003FFE
+_FCMEN_OFF                        000037FF
+_FCMEN_ON                         00003FFF
+_FOSC_EC                          00003FFB
+_FOSC_EXTRCCLK                    00003FFF
+_FOSC_EXTRCIO                     00003FFE
+_FOSC_HS                          00003FFA
+_FOSC_INTRCCLK                    00003FFD
+_FOSC_INTRCIO                     00003FFC
+_FOSC_LP                          00003FF8
+_FOSC_XT                          00003FF9
+_HS_OSC                           00003FFA
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_IESO_OFF                         00003BFF
+_IESO_ON                          00003FFF
+_INTOSC                           00003FFD
+_INTOSCIO                         00003FFC
+_INTRC_OSC_CLKOUT                 00003FFD
+_INTRC_OSC_NOCLKOUT               00003FFC
+_LP_OSC                           00003FF8
+_MCLRE_OFF                        00003FDF
+_MCLRE_ON                         00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FEF
+_WDTE_OFF                         00003FF7
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FF7
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FF9
+MPASM  5.51                 ADC_10_8_2020.ASM   10-10-2020  15:07:10         PAGE 30
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+__16F690                          00000001
+__DEBUG                           1
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+0000 : X---XXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX X---------------
+0100 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0140 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0180 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+01C0 : XXXXXXXXXXXXXXXX XXXXXXXXX------- ---------------- ----------------
+0200 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0240 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXX------
+2000 : -------X-------- ---------------- ---------------- ----------------
+2100 : XXXX------------ ---------------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:   449
+Program Memory Words Free:  3647
+
+
+Errors   :     0
+Warnings :    23 reported,     0 suppressed
+Messages :    26 reported,     0 suppressed
+
+

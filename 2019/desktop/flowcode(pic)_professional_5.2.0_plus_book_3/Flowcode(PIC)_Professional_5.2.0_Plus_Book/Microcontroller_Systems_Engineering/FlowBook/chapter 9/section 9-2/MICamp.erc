@@ -1,0 +1,13 @@
+EAGLE Version 4.16r2 Copyright (c) 1988-2006 CadSoft
+
+Electrical Rule Check for C:/EagleCAD/projects/005 MIC amp/MICamp.sch at 01-02-2008 21:16:26 
+
+WARNING: Sheet 1/1: POWER Pin IC3P V+ connected to N$3
+WARNING: Sheet 1/1: POWER Pin IC3P V- connected to GND
+WARNING: Sheet 1/1, Net N$3: missing Junction at (1.8 3.3)
+WARNING: Sheet 1/1, Net GND: missing Junction at (1.8 2.2)
+
+No board loaded - consistency has not been checked
+
+    0 errors
+    4 warnings

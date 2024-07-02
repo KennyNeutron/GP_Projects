@@ -1,0 +1,316 @@
+Warning[207] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 84 : Found label after column 1. (.)
+Warning[205] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 110 : Found directive in column 1. (BANKSEL)
+Warning[203] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 112 : Found opcode in column 1. (MOVLW)
+Warning[203] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 113 : Found opcode in column 1. (MOVWF)
+Message[302] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 113 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 115 : Found opcode in column 1. (MOVWF)
+Message[302] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 115 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 117 : Found opcode in column 1. (MOVLW)
+Warning[203] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 118 : Found opcode in column 1. (TRIS)
+Warning[224] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 118 : Use of this instruction is not recommended.
+Warning[205] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 120 : Found directive in column 1. (BANKSEL)
+Warning[203] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 122 : Found opcode in column 1. (CALL)
+Warning[203] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 126 : Found opcode in column 1. (MOVLW)
+Warning[203] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 127 : Found opcode in column 1. (MOVWF)
+Warning[203] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 128 : Found opcode in column 1. (MOVLW)
+Warning[203] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 129 : Found opcode in column 1. (MOVWF)
+Warning[203] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 134 : Found opcode in column 1. (GOTO)
+Warning[203] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 188 : Found opcode in column 1. (GOTO)
+Warning[211] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 195 : Extraneous arguments on the line.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 196 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 197 : Using default destination of 1 (file).
+Warning[211] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 204 : Extraneous arguments on the line.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 205 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 206 : Using default destination of 1 (file).
+Warning[211] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 213 : Extraneous arguments on the line.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 214 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 215 : Using default destination of 1 (file).
+Warning[211] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 222 : Extraneous arguments on the line.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 223 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 224 : Using default destination of 1 (file).
+Warning[211] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 231 : Extraneous arguments on the line.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 232 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 233 : Using default destination of 1 (file).
+Warning[211] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 240 : Extraneous arguments on the line.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 241 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 242 : Using default destination of 1 (file).
+Warning[211] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 249 : Extraneous arguments on the line.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 250 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 251 : Using default destination of 1 (file).
+Warning[211] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 259 : Extraneous arguments on the line.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 260 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 261 : Using default destination of 1 (file).
+Warning[211] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 268 : Extraneous arguments on the line.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 269 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 270 : Using default destination of 1 (file).
+Warning[211] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 277 : Extraneous arguments on the line.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 278 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 279 : Using default destination of 1 (file).
+Warning[211] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 286 : Extraneous arguments on the line.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 287 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 288 : Using default destination of 1 (file).
+Warning[211] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 295 : Extraneous arguments on the line.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 296 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 297 : Using default destination of 1 (file).
+Warning[211] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 304 : Extraneous arguments on the line.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 305 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 306 : Using default destination of 1 (file).
+Warning[211] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 313 : Extraneous arguments on the line.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 314 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 315 : Using default destination of 1 (file).
+Warning[211] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 322 : Extraneous arguments on the line.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 323 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 324 : Using default destination of 1 (file).
+Warning[211] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 331 : Extraneous arguments on the line.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 332 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 333 : Using default destination of 1 (file).
+Warning[203] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 338 : Found opcode in column 1. (RETURN)
+Message[306] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 350 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 352 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 354 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 356 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 358 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 360 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 362 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 364 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 366 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 368 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 370 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 372 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 374 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 376 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 378 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 380 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 382 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 384 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 386 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 388 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 390 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 392 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 394 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 396 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 398 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 400 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 402 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 404 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 406 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 408 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 410 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 412 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 414 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 416 : Using default destination of 1 (file).
+Warning[203] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 434 : Found opcode in column 1. (RETURN)
+Warning[203] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 503 : Found opcode in column 1. (RETURN)
+Warning[203] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 548 : Found opcode in column 1. (RETURN)
+Warning[203] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 593 : Found opcode in column 1. (DECFSZ)
+Warning[203] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 595 : Found opcode in column 1. (GOTO)
+Warning[203] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 597 : Found opcode in column 1. (RETURN)
+Warning[203] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 614 : Found opcode in column 1. (RETURN)
+Warning[203] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 626 : Found opcode in column 1. (RETURN)
+Warning[203] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 639 : Found opcode in column 1. (RETURN)
+Warning[203] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 650 : Found opcode in column 1. (RETURN)
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 677 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 678 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 679 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 685 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 686 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 687 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 693 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 694 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 695 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 701 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 702 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 703 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 709 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 710 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 711 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 717 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 718 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 719 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 725 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 726 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 727 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 734 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 735 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 736 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 742 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 743 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 744 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 750 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 751 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 752 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 758 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 759 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 760 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 766 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 767 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 768 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 774 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 775 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 776 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 782 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 783 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 784 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 790 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 791 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 792 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 798 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 799 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 800 : Using default destination of 1 (file).
+Warning[203] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 803 : Found opcode in column 1. (RETURN)
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 825 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 826 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 827 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 828 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 834 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 835 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 836 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 837 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 843 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 844 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 845 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 846 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 852 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 853 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 854 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 855 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 861 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 862 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 863 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 864 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 870 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 871 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 872 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 873 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 879 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 880 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 881 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 882 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 889 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 890 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 891 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 892 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 898 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 899 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 900 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 901 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 907 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 908 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 909 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 910 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 916 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 917 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 918 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 919 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 925 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 926 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 927 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 928 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 934 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 935 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 936 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 937 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 943 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 944 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 945 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 946 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 952 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 953 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 954 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 955 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 961 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 962 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 963 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 964 : Using default destination of 1 (file).
+Warning[203] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 966 : Found opcode in column 1. (RETURN)
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 988 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 989 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 990 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 991 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 992 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 998 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 999 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1000 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1001 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1002 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1008 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1009 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1010 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1011 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1012 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1018 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1019 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1020 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1021 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1022 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1028 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1029 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1030 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1031 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1032 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1038 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1039 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1040 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1041 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1042 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1048 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1049 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1050 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1051 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1052 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1059 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1060 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1061 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1062 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1063 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1069 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1070 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1071 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1072 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1073 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1079 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1080 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1081 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1082 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1083 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1089 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1090 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1091 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1092 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1093 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1099 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1100 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1101 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1102 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1103 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1109 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1110 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1111 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1112 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1113 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1119 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1120 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1121 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1122 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1123 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1129 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1130 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1131 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1132 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1133 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1139 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1140 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1141 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1142 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1143 : Using default destination of 1 (file).
+Warning[203] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1149 : Found opcode in column 1. (RETURN)
+Warning[207] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1195 : Found label after column 1. (ZERO)
+Warning[207] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1219 : Found label after column 1. (ONE)
+Warning[207] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1241 : Found label after column 1. (TWO)
+Warning[207] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1264 : Found label after column 1. (THREE)
+Warning[207] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1287 : Found label after column 1. (FOUR)
+Warning[207] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1309 : Found label after column 1. (FIVE)
+Warning[207] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1332 : Found label after column 1. (SIX)
+Warning[207] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1354 : Found label after column 1. (SEVEN)
+Warning[207] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1376 : Found label after column 1. (EIGHT)
+Warning[207] D:\KENNYNEUTRON\HUB12_LIBRARY\HUB12_LIBRARY3.ASM 1398 : Found label after column 1. (NINE)

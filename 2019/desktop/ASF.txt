@@ -1,0 +1,33 @@
+;;-----------------------
+;OE_OFF
+;REG_OFF
+;A_ON
+;B_ON
+;
+;MOVLW	.17
+;MOVWF	COUNT0
+;
+;MIN0
+;MOVLW	0XAA
+;MOVWF	SSPBUF
+;NOP
+;NOP
+;NOP
+;NOP
+;
+;
+;
+;REG_ON
+;
+;REG_OFF
+;DECFSZ	COUNT0,F
+;GOTO	MIN0
+;
+;
+;
+;OE_ON
+;MOVLW	.200
+;CALL	DELAY_US
+;OE_OFF
+;
+;;-----------------

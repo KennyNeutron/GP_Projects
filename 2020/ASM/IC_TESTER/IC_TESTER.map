@@ -1,0 +1,60 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Sat Jan 11 10:59:50 2020
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000004    program   0x000090
+ .config_2007_IC_TESTER.O       code   0x002007    program   0x000002
+                   .org_3       code   0x002100    program   0x000008
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x00004b      
+                            0x002007    0x002007      
+                            0x002100    0x002103      
+            78 out of 4359 program addresses used, program memory utilization is 1%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                 DELAY_MS   0x00003b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\ASM\IC_TESTER\IC_TESTER.ASM
+              DELAY_ONEMS   0x000034    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\ASM\IC_TESTER\IC_TESTER.ASM
+             DELAY_ONESEC   0x000040    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\ASM\IC_TESTER\IC_TESTER.ASM
+                DELAY_SEC   0x000047    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\ASM\IC_TESTER\IC_TESTER.ASM
+                 DELAY_US   0x00002c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\ASM\IC_TESTER\IC_TESTER.ASM
+                     INIT   0x000010    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\ASM\IC_TESTER\IC_TESTER.ASM
+                     MAIN   0x00001b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\ASM\IC_TESTER\IC_TESTER.ASM
+                     MSEC   0x000036    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\ASM\IC_TESTER\IC_TESTER.ASM
+                    MSEC0   0x00003c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\ASM\IC_TESTER\IC_TESTER.ASM
+                     SEC0   0x000042    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\ASM\IC_TESTER\IC_TESTER.ASM
+                     SEC1   0x000048    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\ASM\IC_TESTER\IC_TESTER.ASM
+                     USEC   0x00002d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\ASM\IC_TESTER\IC_TESTER.ASM
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     INIT   0x000010    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\ASM\IC_TESTER\IC_TESTER.ASM
+                     MAIN   0x00001b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\ASM\IC_TESTER\IC_TESTER.ASM
+                 DELAY_US   0x00002c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\ASM\IC_TESTER\IC_TESTER.ASM
+                     USEC   0x00002d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\ASM\IC_TESTER\IC_TESTER.ASM
+              DELAY_ONEMS   0x000034    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\ASM\IC_TESTER\IC_TESTER.ASM
+                     MSEC   0x000036    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\ASM\IC_TESTER\IC_TESTER.ASM
+                 DELAY_MS   0x00003b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\ASM\IC_TESTER\IC_TESTER.ASM
+                    MSEC0   0x00003c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\ASM\IC_TESTER\IC_TESTER.ASM
+             DELAY_ONESEC   0x000040    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\ASM\IC_TESTER\IC_TESTER.ASM
+                     SEC0   0x000042    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\ASM\IC_TESTER\IC_TESTER.ASM
+                DELAY_SEC   0x000047    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\ASM\IC_TESTER\IC_TESTER.ASM
+                     SEC1   0x000048    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\ASM\IC_TESTER\IC_TESTER.ASM
+
+

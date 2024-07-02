@@ -1,0 +1,426 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Tue Jul 30 16:59:53 2019
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000004    program   0x000172
+                   .org_3       code   0x000100    program   0x0001e2
+                   .org_4       code   0x000200    program   0x000122
+                   .org_5       code   0x000300    program   0x0001c0
+                   .org_6       code   0x000400    program   0x0001dc
+                   .org_7       code   0x000500    program   0x0001cc
+                   .org_8       code   0x000600    program   0x0001ce
+                   .org_9       code   0x000700    program   0x0001da
+                  .org_10       code   0x000800    program   0x00012c
+                  .org_11       code   0x000900    program   0x0001e2
+                  .org_12       code   0x000a00    program   0x0001f4
+                  .org_13       code   0x000b00    program   0x00009c
+.config_2007_HUB12_RTC5_WORKINGREADWRITE.O       code   0x002007    program   0x000002
+                  .org_14       code   0x002100    program   0x000008
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x0000bc      
+                            0x000100    0x0001f0      
+                            0x000200    0x000290      
+                            0x000300    0x0003df      
+                            0x000400    0x0004ed      
+                            0x000500    0x0005e5      
+                            0x000600    0x0006e6      
+                            0x000700    0x0007ec      
+                            0x000800    0x000895      
+                            0x000900    0x0009f0      
+                            0x000a00    0x000af9      
+                            0x000b00    0x000b4d      
+                            0x002007    0x002007      
+                            0x002100    0x002103      
+            2456 out of 4359 program addresses used, program memory utilization is 56%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                  ACKTEST   0x0009a9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     CHAR   0x0001a8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    CHARB   0x000200    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     CLR0   0x00016a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    CLRAM   0x000166    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                 CLR_IRAM   0x000170    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                DATALATCH   0x000120    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                 DELAY_MS   0x00010f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+              DELAY_ONEMS   0x000108    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+             DELAY_ONESEC   0x000114    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                DELAY_SEC   0x00011b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                 DELAY_US   0x000100    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  DISPLAY   0x000133    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    DMPF0   0x0004ba    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    DMPF2   0x0004c9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                DMP_FONT0   0x0004b8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                DMP_FONT2   0x0004c7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+         DSHIFT_DOWN_GRPA   0x000a00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+         DSHIFT_DOWN_GRPB   0x000a23    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+         DSHIFT_DOWN_GRPC   0x000a46    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+         DSHIFT_DOWN_GRPD   0x000a69    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     DSP0   0x000124    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     DUMP   0x000499    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    EIGHT   0x00026b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     FIVE   0x000232    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   FONT_0   0x0004a4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   FONT_1   0x0004c4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   FONT_2   0x0004da    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     FOUR   0x00021f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    GRP_A   0x00061c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    GRP_B   0x000670    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    GRP_C   0x0006b2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    GRP_D   0x0006e4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     HUB1   0x000043    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     HUB2   0x00007f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+              I2CDELAY_US   0x0009e9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  I2CMOSI   0x000961    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                 I2CMOSI0   0x000961    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                 I2CMOSI1   0x000966    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                 I2CMOSI2   0x00096c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+            I2CMOSI_DBIT0   0x000969    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+            I2CMOSI_DBIT1   0x00096b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   I2CRD0   0x000926    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   I2CRD1   0x00092b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   I2CRD2   0x000931    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+            I2CRD_MASTERA   0x00093f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+            I2CRD_MASTERN   0x000941    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+               I2CRD_SDA0   0x00092e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+               I2CRD_SDA1   0x000930    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  I2CREAD   0x000900    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                 I2CSTART   0x0009c7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  I2CSTOP   0x0009d8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  I2CUSEC   0x0009ec    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   I2CWR0   0x000955    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                 I2CWRITE   0x000947    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+              I2C_DAT2BCD   0x000980    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+              I2C_GETDATA   0x000993    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+            I2C_MASTERACK   0x0009ae    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+           I2C_MASTERNACK   0x0009b8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                I2C_SDAIN   0x000974    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+               I2C_SDAOUT   0x00097a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+             I2C_SLAVEACK   0x0009a2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    IDUMP   0x000792    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  IFONT_0   0x00079b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  IFONT_1   0x0007b3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  IFONT_2   0x0007cd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   IGRP_A   0x00051d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   IGRP_B   0x00056f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   IGRP_C   0x0005b1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   IGRP_D   0x0005e3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     INIT   0x000010    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  IPUTNUM   0x000800    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     IRM0   0x000176    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    ISB00   0x00085a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    ISB01   0x00085c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    ISBR0   0x000853    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    ISBR1   0x000856    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                ISB_BEGIN   0x000858    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    ISC00   0x000871    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    ISC01   0x000873    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    ISCR0   0x00086a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    ISCR1   0x00086d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                ISC_BEGIN   0x00086f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    ISD00   0x000888    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    ISD01   0x00088a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    ISDR0   0x000881    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    ISDR1   0x000884    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                ISD_BEGIN   0x000886    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   ISHFTL   0x00083f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                 ISHFTL00   0x000845    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  ISHIFTL   0x00083f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+             ISHIFTL_GRPA   0x00084f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+             ISHIFTL_GRPB   0x00084f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+             ISHIFTL_GRPC   0x000866    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+             ISHIFTL_GRPD   0x00087d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  ISHIFTR   0x000500    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+         ISHIFT_DOWN_GRPA   0x000a8c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+         ISHIFT_DOWN_GRPB   0x000ab3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+         ISHIFT_DOWN_GRPC   0x000b00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+         ISHIFT_DOWN_GRPD   0x000b27    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   ISRA00   0x000525    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   ISRA08   0x00054c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                ISRA08_R1   0x00054b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   ISRB00   0x000577    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   ISRB08   0x000596    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                ISRB08_R1   0x000595    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   ISRC00   0x0005b9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   ISRC08   0x0005d0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                ISRC08_R1   0x0005cf    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     MAIN   0x00002c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     MSEC   0x00010a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    MSEC0   0x000110    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     NINE   0x00027e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                      ONE   0x0001cb    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   PUTNUM   0x0007b8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                RTCUPDATE   0x000160    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SB00   0x00071d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SB01   0x00071f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SBR0   0x000716    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SBR1   0x000719    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                 SB_BEGIN   0x00071b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SC00   0x000736    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SC01   0x000738    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                SCL_PULSE   0x00099b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SCR0   0x00072f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SCR1   0x000732    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   SCRL_A   0x000ada    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   SCRL_B   0x000ae1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   SCRL_C   0x000ae8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   SCRL_D   0x000af1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                 SC_BEGIN   0x000734    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SD00   0x00074f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SD01   0x000751    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SDR0   0x000748    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SDR1   0x00074b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                 SD_BEGIN   0x00074d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SEC0   0x000116    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SEC1   0x00011c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    SEVEN   0x000258    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    SHFTL   0x000700    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  SHFTL00   0x000706    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+              SHIFTL_GRPA   0x000710    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+              SHIFTL_GRPB   0x000710    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+              SHIFTL_GRPC   0x000729    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+              SHIFTL_GRPD   0x000742    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   SHIFTR   0x000600    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                 SHIFT_YU   0x00075b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                SHIFT_YUB   0x000816    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                      SIX   0x000245    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SLB0   0x000182    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SLB1   0x000186    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SLB2   0x00018e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   SLICEB   0x000180    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   SLICET   0x000194    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SLT0   0x000196    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SLT1   0x00019a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SLT2   0x0001a2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    SRA00   0x000626    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    SRA08   0x00064d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                 SRA08_R1   0x00064c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    SRB00   0x000678    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    SRB08   0x000697    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                 SRB08_R1   0x000696    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    SRC00   0x0006ba    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    SRC08   0x0006d1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                 SRC08_R1   0x0006d0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    THREE   0x00020c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                      TWO   0x0001de    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   T_CHAR   0x000300    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  T_CHARB   0x000400    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  T_EIGHT   0x000452    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   T_FIVE   0x0003bd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   T_FOUR   0x00039a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   T_NINE   0x000475    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    T_ONE   0x000331    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  T_SEVEN   0x00042f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    T_SIX   0x00040c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  T_THREE   0x000377    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    T_TWO   0x000354    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   T_ZERO   0x00030e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     USEC   0x000101    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                      YU0   0x000762    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                      YU1   0x00081a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     ZERO   0x0001b6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     INIT   0x000010    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     MAIN   0x00002c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     HUB1   0x000043    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     HUB2   0x00007f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                 DELAY_US   0x000100    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     USEC   0x000101    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+              DELAY_ONEMS   0x000108    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     MSEC   0x00010a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                 DELAY_MS   0x00010f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    MSEC0   0x000110    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+             DELAY_ONESEC   0x000114    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SEC0   0x000116    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                DELAY_SEC   0x00011b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SEC1   0x00011c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                DATALATCH   0x000120    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     DSP0   0x000124    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  DISPLAY   0x000133    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                RTCUPDATE   0x000160    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    CLRAM   0x000166    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     CLR0   0x00016a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                 CLR_IRAM   0x000170    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     IRM0   0x000176    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   SLICEB   0x000180    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SLB0   0x000182    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SLB1   0x000186    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SLB2   0x00018e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   SLICET   0x000194    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SLT0   0x000196    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SLT1   0x00019a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SLT2   0x0001a2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     CHAR   0x0001a8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     ZERO   0x0001b6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                      ONE   0x0001cb    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                      TWO   0x0001de    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    CHARB   0x000200    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    THREE   0x00020c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     FOUR   0x00021f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     FIVE   0x000232    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                      SIX   0x000245    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    SEVEN   0x000258    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    EIGHT   0x00026b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     NINE   0x00027e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   T_CHAR   0x000300    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   T_ZERO   0x00030e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    T_ONE   0x000331    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    T_TWO   0x000354    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  T_THREE   0x000377    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   T_FOUR   0x00039a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   T_FIVE   0x0003bd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  T_CHARB   0x000400    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    T_SIX   0x00040c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  T_SEVEN   0x00042f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  T_EIGHT   0x000452    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   T_NINE   0x000475    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     DUMP   0x000499    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   FONT_0   0x0004a4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                DMP_FONT0   0x0004b8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    DMPF0   0x0004ba    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   FONT_1   0x0004c4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                DMP_FONT2   0x0004c7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    DMPF2   0x0004c9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   FONT_2   0x0004da    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  ISHIFTR   0x000500    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   IGRP_A   0x00051d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   ISRA00   0x000525    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                ISRA08_R1   0x00054b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   ISRA08   0x00054c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   IGRP_B   0x00056f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   ISRB00   0x000577    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                ISRB08_R1   0x000595    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   ISRB08   0x000596    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   IGRP_C   0x0005b1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   ISRC00   0x0005b9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                ISRC08_R1   0x0005cf    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   ISRC08   0x0005d0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   IGRP_D   0x0005e3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   SHIFTR   0x000600    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    GRP_A   0x00061c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    SRA00   0x000626    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                 SRA08_R1   0x00064c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    SRA08   0x00064d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    GRP_B   0x000670    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    SRB00   0x000678    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                 SRB08_R1   0x000696    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    SRB08   0x000697    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    GRP_C   0x0006b2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    SRC00   0x0006ba    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                 SRC08_R1   0x0006d0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    SRC08   0x0006d1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    GRP_D   0x0006e4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    SHFTL   0x000700    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  SHFTL00   0x000706    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+              SHIFTL_GRPB   0x000710    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+              SHIFTL_GRPA   0x000710    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SBR0   0x000716    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SBR1   0x000719    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                 SB_BEGIN   0x00071b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SB00   0x00071d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SB01   0x00071f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+              SHIFTL_GRPC   0x000729    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SCR0   0x00072f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SCR1   0x000732    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                 SC_BEGIN   0x000734    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SC00   0x000736    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SC01   0x000738    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+              SHIFTL_GRPD   0x000742    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SDR0   0x000748    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SDR1   0x00074b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                 SD_BEGIN   0x00074d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SD00   0x00074f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                     SD01   0x000751    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                 SHIFT_YU   0x00075b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                      YU0   0x000762    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    IDUMP   0x000792    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  IFONT_0   0x00079b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  IFONT_1   0x0007b3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   PUTNUM   0x0007b8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  IFONT_2   0x0007cd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  IPUTNUM   0x000800    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                SHIFT_YUB   0x000816    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                      YU1   0x00081a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   ISHFTL   0x00083f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  ISHIFTL   0x00083f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                 ISHFTL00   0x000845    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+             ISHIFTL_GRPA   0x00084f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+             ISHIFTL_GRPB   0x00084f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    ISBR0   0x000853    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    ISBR1   0x000856    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                ISB_BEGIN   0x000858    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    ISB00   0x00085a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    ISB01   0x00085c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+             ISHIFTL_GRPC   0x000866    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    ISCR0   0x00086a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    ISCR1   0x00086d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                ISC_BEGIN   0x00086f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    ISC00   0x000871    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    ISC01   0x000873    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+             ISHIFTL_GRPD   0x00087d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    ISDR0   0x000881    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    ISDR1   0x000884    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                ISD_BEGIN   0x000886    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    ISD00   0x000888    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                    ISD01   0x00088a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  I2CREAD   0x000900    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   I2CRD0   0x000926    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   I2CRD1   0x00092b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+               I2CRD_SDA0   0x00092e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+               I2CRD_SDA1   0x000930    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   I2CRD2   0x000931    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+            I2CRD_MASTERA   0x00093f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+            I2CRD_MASTERN   0x000941    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                 I2CWRITE   0x000947    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   I2CWR0   0x000955    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  I2CMOSI   0x000961    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                 I2CMOSI0   0x000961    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                 I2CMOSI1   0x000966    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+            I2CMOSI_DBIT0   0x000969    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+            I2CMOSI_DBIT1   0x00096b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                 I2CMOSI2   0x00096c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                I2C_SDAIN   0x000974    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+               I2C_SDAOUT   0x00097a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+              I2C_DAT2BCD   0x000980    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+              I2C_GETDATA   0x000993    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                SCL_PULSE   0x00099b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+             I2C_SLAVEACK   0x0009a2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  ACKTEST   0x0009a9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+            I2C_MASTERACK   0x0009ae    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+           I2C_MASTERNACK   0x0009b8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                 I2CSTART   0x0009c7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  I2CSTOP   0x0009d8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+              I2CDELAY_US   0x0009e9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                  I2CUSEC   0x0009ec    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+         DSHIFT_DOWN_GRPA   0x000a00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+         DSHIFT_DOWN_GRPB   0x000a23    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+         DSHIFT_DOWN_GRPC   0x000a46    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+         DSHIFT_DOWN_GRPD   0x000a69    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+         ISHIFT_DOWN_GRPA   0x000a8c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+         ISHIFT_DOWN_GRPB   0x000ab3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   SCRL_A   0x000ada    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   SCRL_B   0x000ae1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   SCRL_C   0x000ae8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+                   SCRL_D   0x000af1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+         ISHIFT_DOWN_GRPC   0x000b00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+         ISHIFT_DOWN_GRPD   0x000b27    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC5_WORKINGREADWRITE.ASM
+
+

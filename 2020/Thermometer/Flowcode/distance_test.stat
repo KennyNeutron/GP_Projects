@@ -1,0 +1,21 @@
+// SourceBoost Linker Function Resource Usage Dump
+
+#GLOBAL:"global",line = 0,ram = 39.2,rom = 0;
+__div_16_16(unsigned short,unsigned short):"E:\Prg\compiler.trunk\picantc\libc\div.c",line = 116,ram = 9.0,rom = 31;
+Wdt_Delay_Ms(unsigned char):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_Delay.c",line = 118,ram = 2.0,rom = 11;
+FCD_LCDDisplay0_RawSend(unsigned char,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\distance_test.c",line = 193,ram = 3.0,rom = 65;
+FCD_LCDDisplay0_Start(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\distance_test.c",line = 243,ram = 0.0,rom = 85;
+FCD_LCDDisplay0_Clear(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\distance_test.c",line = 276,ram = 0.0,rom = 17;
+FCD_LCDDisplay0_Cursor(unsigned char,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\distance_test.c",line = 313,ram = 2.0,rom = 30;
+FCD_LCDDisplay0_PrintNumber(signed short):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\distance_test.c",line = 344,ram = 7.0,rom = 238;
+FCD_LCDDisplay0_PrintString(unsigned char*,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\distance_test.c",line = 402,ram = 4.0,rom = 28;
+FCD_LCDDisplay0_ClearLine(unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\distance_test.c",line = 468,ram = 3.0,rom = 23;
+main(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\distance_test.c",line = 521,ram = 14.0,rom = 177;
+interrupt(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\distance_test.c",line = 664,ram = 0.0,rom = 11;
+delay_us(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 10;
+delay_10us(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 9;
+delay_ms(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 12;
+delay_s(unsigned char):"NoSourceFile",line = 0,ram = 1.0,rom = 15;
+_startup(void):"NoSourceFile",line = 0,ram = 0.0,rom = 46;
+#HEAP_BLOCK: 0, 160, 95;
+#HEAP_BLOCK: 1, 93, 34;

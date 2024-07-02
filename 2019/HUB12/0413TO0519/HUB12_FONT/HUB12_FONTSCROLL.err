@@ -1,0 +1,1152 @@
+Warning[207] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 97 : Found label after column 1. (.)
+Warning[205] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 126 : Found directive in column 1. (BANKSEL)
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 128 : Found opcode in column 1. (MOVLW)
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 129 : Found opcode in column 1. (MOVWF)
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 129 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 131 : Found opcode in column 1. (MOVWF)
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 131 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 133 : Found opcode in column 1. (MOVLW)
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 134 : Found opcode in column 1. (TRIS)
+Warning[224] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 134 : Use of this instruction is not recommended.
+Warning[205] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 136 : Found directive in column 1. (BANKSEL)
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 140 : Found opcode in column 1. (CALL)
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 141 : Found opcode in column 1. (CALL)
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 144 : Found opcode in column 1. (GOTO)
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 166 : Found opcode in column 1. (GOTO)
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 178 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 186 : Using default destination of 1 (file).
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 189 : Found opcode in column 1. (RETURN)
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 200 : Found opcode in column 1. (RETURN)
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 207 : Crossing page boundary -- ensure page bits are set.
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 211 : Found opcode in column 1. (RETURN)
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 236 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 238 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 241 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 243 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 246 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 248 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 250 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 252 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 254 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 256 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 258 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 260 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 262 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 264 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 266 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 268 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 270 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 272 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 274 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 276 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 278 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 280 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 282 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 284 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 286 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 288 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 290 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 292 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 294 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 296 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 298 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 300 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 302 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 304 : Using default destination of 1 (file).
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 308 : Found opcode in column 1. (RETURN)
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 315 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 317 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 319 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 321 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 323 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 325 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 327 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 329 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 331 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 333 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 335 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 337 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 339 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 341 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 343 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 345 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 347 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 349 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 361 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 363 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 366 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 368 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 370 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 372 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 374 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 376 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 378 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 380 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 382 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 384 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 386 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 388 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 390 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 392 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 394 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 396 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 398 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 400 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 402 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 404 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 406 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 408 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 410 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 412 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 414 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 416 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 418 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 420 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 422 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 424 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 426 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 428 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 430 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 432 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 434 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 436 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 438 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 440 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 442 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 444 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 446 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 448 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 450 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 452 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 454 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 456 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 458 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 460 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 462 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 464 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 466 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 468 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 470 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 472 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 474 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 476 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 478 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 480 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 482 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 484 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 486 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 488 : Using default destination of 1 (file).
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 490 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 492 : Using default destination of 1 (file).
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 496 : Found opcode in column 1. (RETURN)
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 705 : Found opcode in column 1. (RETURN)
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 750 : Found opcode in column 1. (RETURN)
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 796 : Found opcode in column 1. (DECFSZ)
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 798 : Found opcode in column 1. (GOTO)
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 800 : Found opcode in column 1. (RETURN)
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 817 : Found opcode in column 1. (RETURN)
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 829 : Found opcode in column 1. (RETURN)
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 842 : Found opcode in column 1. (RETURN)
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 853 : Found opcode in column 1. (RETURN)
+Warning[205] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1666 : Found directive in column 1. (ORG)
+Warning[211] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1714 : Extraneous arguments on the line.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1715 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1716 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1717 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1718 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1719 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1726 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1727 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1728 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1729 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1730 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1737 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1738 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1739 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1740 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1741 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1748 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1749 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1750 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1751 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1752 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1759 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1760 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1761 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1762 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1763 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1770 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1771 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1772 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1773 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1774 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1781 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1782 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1783 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1784 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1785 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1793 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1794 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1795 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1796 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1797 : Using default destination of 1 (file).
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1802 : Found opcode in column 1. (RETURN)
+Warning[211] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1804 : Extraneous arguments on the line.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1806 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1807 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1808 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1809 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1810 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1817 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1818 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1819 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1820 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1821 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1828 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1829 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1830 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1831 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1832 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1839 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1840 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1841 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1842 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1843 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1850 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1851 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1852 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1853 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1854 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1861 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1862 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1863 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1864 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1865 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1872 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1873 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1874 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1875 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1876 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1882 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1883 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1884 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1885 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1886 : Using default destination of 1 (file).
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1889 : Found opcode in column 1. (RETURN)
+Warning[211] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1908 : Extraneous arguments on the line.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1909 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1910 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1911 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1913 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1920 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1921 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1922 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1924 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1931 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1932 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1933 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1935 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1942 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1943 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1944 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1946 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1953 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1954 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1955 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1957 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1964 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1965 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1966 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1968 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1975 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1976 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1977 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1979 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1987 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1988 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1989 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1991 : Using default destination of 1 (file).
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1996 : Found opcode in column 1. (RETURN)
+Warning[211] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 1998 : Extraneous arguments on the line.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2000 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2001 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2002 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2004 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2011 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2012 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2013 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2015 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2022 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2023 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2024 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2026 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2033 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2034 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2035 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2037 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2044 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2045 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2046 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2048 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2055 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2056 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2057 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2059 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2066 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2067 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2068 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2070 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2076 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2077 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2078 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2080 : Using default destination of 1 (file).
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2083 : Found opcode in column 1. (RETURN)
+Warning[211] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2102 : Extraneous arguments on the line.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2103 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2104 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2107 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2114 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2115 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2118 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2125 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2126 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2129 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2136 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2137 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2140 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2147 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2148 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2151 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2158 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2159 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2162 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2169 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2170 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2173 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2181 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2182 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2185 : Using default destination of 1 (file).
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2190 : Found opcode in column 1. (RETURN)
+Warning[211] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2192 : Extraneous arguments on the line.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2194 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2195 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2198 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2205 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2206 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2209 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2216 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2217 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2220 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2227 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2228 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2231 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2238 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2239 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2242 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2249 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2250 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2253 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2260 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2261 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2264 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2270 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2271 : Using default destination of 1 (file).
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2274 : Using default destination of 1 (file).
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2277 : Found opcode in column 1. (RETURN)
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2284 : Found opcode in column 1. (RETURN)
+Warning[207] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2329 : Found label after column 1. (ZERO)
+Warning[207] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2353 : Found label after column 1. (ONE)
+Warning[207] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2375 : Found label after column 1. (TWO)
+Warning[207] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2398 : Found label after column 1. (THREE)
+Warning[207] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2421 : Found label after column 1. (FOUR)
+Warning[207] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2443 : Found label after column 1. (FIVE)
+Warning[207] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2466 : Found label after column 1. (SIX)
+Warning[207] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2488 : Found label after column 1. (SEVEN)
+Warning[207] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2510 : Found label after column 1. (EIGHT)
+Warning[207] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2532 : Found label after column 1. (NINE)
+Warning[207] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2584 : Found label after column 1. (L_ZERO)
+Warning[207] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2599 : Found label after column 1. (L_ONE)
+Warning[207] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2614 : Found label after column 1. (L_TWO)
+Warning[207] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2630 : Found label after column 1. (L_THREE)
+Warning[207] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2646 : Found label after column 1. (L_FOUR)
+Warning[207] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2661 : Found label after column 1. (L_FIVE)
+Warning[207] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2676 : Found label after column 1. (L_SIX)
+Warning[207] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2690 : Found label after column 1. (L_SEVEN)
+Warning[207] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2704 : Found label after column 1. (L_EIGHT)
+Warning[207] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2717 : Found label after column 1. (L_NINE)
+Warning[207] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2766 : Found label after column 1. (T_ZERO)
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2768 : Using default destination of 1 (file).
+Warning[207] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2788 : Found label after column 1. (T_ONE)
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2790 : Using default destination of 1 (file).
+Warning[207] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2810 : Found label after column 1. (T_TWO)
+Warning[207] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2832 : Found label after column 1. (T_THREE)
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2834 : Using default destination of 1 (file).
+Warning[207] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2854 : Found label after column 1. (T_FOUR)
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2856 : Using default destination of 1 (file).
+Warning[207] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2876 : Found label after column 1. (T_FIVE)
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2878 : Using default destination of 1 (file).
+Warning[205] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2899 : Found directive in column 1. (ORG)
+Warning[207] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2901 : Found label after column 1. (T_CHARB)
+Warning[207] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2928 : Found label after column 1. (T_SIX)
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2930 : Using default destination of 1 (file).
+Warning[207] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2951 : Found label after column 1. (T_SEVEN)
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2953 : Using default destination of 1 (file).
+Warning[207] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2973 : Found label after column 1. (T_EIGHT)
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2975 : Using default destination of 1 (file).
+Warning[207] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2995 : Found label after column 1. (T_NINE)
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 2997 : Using default destination of 1 (file).
+Warning[205] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3017 : Found directive in column 1. (ORG)
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3022 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3032 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3062 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3063 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3067 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3068 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3072 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3073 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3076 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3077 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3080 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3081 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3084 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3085 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3088 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3089 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3092 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3093 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3096 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3097 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3100 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3101 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3104 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3105 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3108 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3109 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3112 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3113 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3116 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3117 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3120 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3121 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3124 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3125 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3128 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3129 : Using default destination of 1 (file).
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3134 : Found opcode in column 1. (RETURN)
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3142 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3143 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3146 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3147 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3150 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3151 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3154 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3155 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3158 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3159 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3162 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3163 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3166 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3167 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3170 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3171 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3174 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3175 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3189 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3191 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3196 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3198 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3203 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3205 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3210 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3212 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3217 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3219 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3224 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3226 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3231 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3233 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3238 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3240 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3245 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3247 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3252 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3254 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3259 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3261 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3266 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3268 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3273 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3275 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3280 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3282 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3287 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3289 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3294 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3296 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3301 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3303 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3308 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3310 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3315 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3317 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3322 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3324 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3329 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3331 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3336 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3338 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3343 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3345 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3350 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3352 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3357 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3359 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3364 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3366 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3371 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3373 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3378 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3380 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3385 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3387 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3392 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3394 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3399 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3401 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3406 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3408 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3413 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3415 : Using default destination of 1 (file).
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3421 : Found opcode in column 1. (RETURN)
+Warning[205] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3426 : Found directive in column 1. (ORG)
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3438 : Crossing page boundary -- ensure page bits are set.
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3439 : Crossing page boundary -- ensure page bits are set.
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3455 : Found opcode in column 1. (RETURN)
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3513 : Found opcode in column 1. (RETURN)
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3518 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3522 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3523 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3525 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3526 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3528 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3529 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3531 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3532 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3534 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3535 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3537 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3538 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3540 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3541 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3543 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3544 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3546 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3547 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3549 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3550 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3552 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3553 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3555 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3556 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3558 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3559 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3561 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3562 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3564 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3565 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3621 : Found opcode in column 1. (RETURN)
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3626 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3630 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3631 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3633 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3634 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3636 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3637 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3639 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3640 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3642 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3643 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3645 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3646 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3648 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3649 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3651 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3652 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3654 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3655 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3657 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3658 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3660 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3661 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3663 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3664 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3666 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3667 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3669 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3670 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3672 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3673 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[205] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3677 : Found directive in column 1. (ORG)
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3728 : Found opcode in column 1. (RETURN)
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3733 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3737 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3738 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3740 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3741 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3743 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3744 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3746 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3747 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3749 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3750 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3752 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3753 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3755 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3756 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3758 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3759 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3761 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3762 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3764 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3765 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3767 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3768 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3770 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3771 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3773 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3774 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3776 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3777 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3779 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3780 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[205] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3784 : Found directive in column 1. (ORG)
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3806 : Crossing page boundary -- ensure page bits are set.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3824 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3832 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3837 : Crossing page boundary -- ensure page bits are set.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3843 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3848 : Crossing page boundary -- ensure page bits are set.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3865 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3880 : Crossing page boundary -- ensure page bits are set.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3886 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3894 : Found opcode in column 1. (RETURN)
+Warning[205] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3898 : Found directive in column 1. (ORG)
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3904 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3921 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[205] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3926 : Found directive in column 1. (BANKSEL)
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3927 : Crossing page boundary -- ensure page bits are set.
+Warning[205] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3928 : Found directive in column 1. (BANKSEL)
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3935 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3946 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3960 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3966 : Crossing page boundary -- ensure page bits are set.
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3967 : Crossing page boundary -- ensure page bits are set.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3979 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[306] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3991 : Crossing page boundary -- ensure page bits are set.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3996 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 3998 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4006 : Found opcode in column 1. (RETURN)
+Warning[205] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4012 : Found directive in column 1. (ORG)
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4015 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4049 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4050 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4053 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4055 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4056 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[211] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4061 : Extraneous arguments on the line.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4062 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4062 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4063 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4063 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4064 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4064 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4065 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4065 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4066 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4066 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4069 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4070 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4073 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4073 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4074 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4074 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4075 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4075 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4076 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4076 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4077 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4077 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4080 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4081 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4084 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4084 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4085 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4085 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4086 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4086 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4087 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4087 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4088 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4088 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4091 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4092 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4095 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4095 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4096 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4096 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4097 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4097 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4098 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4098 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4099 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4099 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4102 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4103 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4106 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4106 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4107 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4107 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4108 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4108 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4109 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4109 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4110 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4110 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4113 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4114 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4117 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4117 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4118 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4118 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4119 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4119 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4120 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4120 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4121 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4121 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4124 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4125 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4128 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4128 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4129 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4129 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4130 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4130 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4131 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4131 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4132 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4132 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4136 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4137 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4140 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4140 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4141 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4141 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4142 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4142 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4143 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4143 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4144 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4144 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4147 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4148 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4149 : Found opcode in column 1. (RETURN)
+Warning[211] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4151 : Extraneous arguments on the line.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4153 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4153 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4154 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4154 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4155 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4155 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4156 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4156 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4157 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4157 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4160 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4161 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4164 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4164 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4165 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4165 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4166 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4166 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4167 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4167 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4168 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4168 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4171 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4172 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4175 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4175 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4176 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4176 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4177 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4177 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4178 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4178 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4179 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4179 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4182 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4183 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4186 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4186 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4187 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4187 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4188 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4188 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4189 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4189 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4190 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4190 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4193 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4194 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4197 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4197 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4198 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4198 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4199 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4199 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4200 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4200 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4201 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4201 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4204 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4205 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4208 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4208 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4209 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4209 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4210 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4210 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4211 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4211 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4212 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4212 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4215 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4216 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4219 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4219 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4220 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4220 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4221 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4221 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4222 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4222 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4223 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4223 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4226 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4227 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4229 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4229 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4230 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4230 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4231 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4231 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4232 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4232 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4233 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4233 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4236 : Found opcode in column 1. (RETURN)
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4241 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4242 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4245 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4247 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4248 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[211] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4255 : Extraneous arguments on the line.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4256 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4256 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4257 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4257 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4258 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4258 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4260 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4260 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4263 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4264 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4267 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4267 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4268 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4268 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4269 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4269 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4271 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4271 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4274 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4275 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4278 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4278 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4279 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4279 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4280 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4280 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4282 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4282 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4285 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4286 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4289 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4289 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4290 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4290 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4291 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4291 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4293 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4293 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4296 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4297 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4300 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4300 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4301 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4301 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4302 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4302 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4304 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4304 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4307 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4308 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4311 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4311 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4312 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4312 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4313 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4313 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4315 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4315 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4318 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4319 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4322 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4322 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4323 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4323 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4324 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4324 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4326 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4326 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4330 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4331 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4334 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4334 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4335 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4335 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4336 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4336 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4338 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4338 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4341 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4342 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4343 : Found opcode in column 1. (RETURN)
+Warning[211] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4345 : Extraneous arguments on the line.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4347 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4347 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4348 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4348 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4349 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4349 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4351 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4351 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4354 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4355 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4358 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4358 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4359 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4359 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4360 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4360 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4362 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4362 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4365 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4366 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4369 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4369 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4370 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4370 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4371 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4371 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4373 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4373 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4376 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4377 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4380 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4380 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4381 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4381 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4382 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4382 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4384 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4384 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4387 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4388 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4391 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4391 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4392 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4392 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4393 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4393 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4395 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4395 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4398 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4399 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4402 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4402 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4403 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4403 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4404 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4404 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4406 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4406 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4409 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4410 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4413 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4413 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4414 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4414 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4415 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4415 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4417 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4417 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4420 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4421 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4423 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4423 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4424 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4424 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4425 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4425 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4427 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4427 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4430 : Found opcode in column 1. (RETURN)
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4435 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4436 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4439 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4441 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4442 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[211] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4449 : Extraneous arguments on the line.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4450 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4450 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4451 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4451 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4454 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4454 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4457 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4458 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4461 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4461 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4462 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4462 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4465 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4465 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4468 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4469 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4472 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4472 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4473 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4473 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4476 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4476 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4479 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4480 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4483 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4483 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4484 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4484 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4487 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4487 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4490 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4491 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4494 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4494 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4495 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4495 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4498 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4498 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4501 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4502 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4505 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4505 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4506 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4506 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4509 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4509 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4512 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4513 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4516 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4516 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4517 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4517 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4520 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4520 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4524 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4525 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4528 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4528 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4529 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4529 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4532 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4532 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4535 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4536 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4537 : Found opcode in column 1. (RETURN)
+Warning[211] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4539 : Extraneous arguments on the line.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4541 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4541 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4542 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4542 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4545 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4545 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4548 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4549 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4552 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4552 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4553 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4553 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4556 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4556 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4559 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4560 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4563 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4563 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4564 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4564 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4567 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4567 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4570 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4571 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4574 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4574 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4575 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4575 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4578 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4578 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4581 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4582 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4585 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4585 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4586 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4586 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4589 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4589 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4592 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4593 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4596 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4596 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4597 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4597 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4600 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4600 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4603 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4604 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4607 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4607 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4608 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4608 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4611 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4611 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4614 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4615 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4617 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4617 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4618 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4618 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4621 : Using default destination of 1 (file).
+Message[302] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4621 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4624 : Found opcode in column 1. (RETURN)
+Warning[203] D:\KENNYNEUTRON\HUB12\HUB12_FONT\HUB12_FONTSCROLL.ASM 4631 : Found opcode in column 1. (RETURN)

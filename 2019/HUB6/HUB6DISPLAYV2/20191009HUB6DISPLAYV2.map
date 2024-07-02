@@ -1,0 +1,186 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Fri Oct 11 13:47:38 2019
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000004    program   0x0003be
+                   .org_3       code   0x000800    program   0x0001b8
+                   .org_4       code   0x000900    program   0x000130
+.config_2007_20191009HUB6DISPLAYV2.O       code   0x002007    program   0x000002
+                   .org_5       code   0x002100    program   0x000008
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x0001e2      
+                            0x000800    0x0008db      
+                            0x000900    0x000997      
+                            0x002007    0x002007      
+                            0x002100    0x002103      
+            857 out of 4359 program addresses used, program memory utilization is 19%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     CLR0   0x000099    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                  CLR_RAM   0x000093    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                  COMMAND   0x000046    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+             CURSORX_TEST   0x00014f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                    CXT08   0x00015b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                   CXT08S   0x000169    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                    CXT16   0x00016c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                   CXT16S   0x00017a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                    CXT24   0x00017d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                   CXT24S   0x00018b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                    CXT32   0x00018e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                   CXT32S   0x00019c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                    CXT40   0x00019f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                   CXT40S   0x0001ad    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                    CXT48   0x0001b0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                   CXT48S   0x0001be    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                    CXT56   0x0001c1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                   CXT56S   0x0001cf    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                    CXT64   0x0001d2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                   CXT64S   0x0001e0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                DATAINRAM   0x000102    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                  DATAREG   0x00009f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                 DELAY_MS   0x00008e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+              DELAY_ONEMS   0x000087    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                 DELAY_US   0x00007f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     DIR0   0x000109    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     DIR1   0x00010e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     DIR2   0x000116    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+              DIR2_YELLOW   0x000126    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     DIR3   0x000133    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+              DIR3_YELLOW   0x000143    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                    DISP0   0x000039    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                  DISPLAY   0x000035    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     DMP0   0x0000fe    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+               DMP_FONT00   0x0000ee    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+               DMP_FONT01   0x0000f0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+               DMP_FONT02   0x0000f2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                      DR0   0x0000a3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                      DR1   0x0000b0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                      DR2   0x0000b7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                      DR3   0x0000be    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                      DR4   0x0000c5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                      DR5   0x0000cc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     DUMP   0x0000d5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                    DUMP0   0x0000e9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                   FONT02   0x000800    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                  FONT02B   0x000900    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+             FONT02_EIGHT   0x000954    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+              FONT02_FIVE   0x0008ba    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+              FONT02_FOUR   0x000898    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+              FONT02_NINE   0x000976    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+               FONT02_ONE   0x000832    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+             FONT02_SEVEN   0x000932    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+               FONT02_SIX   0x000910    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+             FONT02_THREE   0x000876    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+               FONT02_TWO   0x000854    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+              FONT02_ZERO   0x000810    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     G0HI   0x0000c4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     G0LO   0x0000c2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     G1HI   0x0000cb    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     G1LO   0x0000c9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     G2_0   0x000027    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     INIT   0x000010    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     MAIN   0x000030    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     MSEC   0x000089    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                    MSEC0   0x00008f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     R0HI   0x0000b6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     R0LO   0x0000b4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     R1HI   0x0000bd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     R1LO   0x0000bb    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     R2_0   0x000026    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                   UPPERH   0x0000e7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     USEC   0x000080    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     INIT   0x000010    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     R2_0   0x000026    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     G2_0   0x000027    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     MAIN   0x000030    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                  DISPLAY   0x000035    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                    DISP0   0x000039    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                  COMMAND   0x000046    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                 DELAY_US   0x00007f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     USEC   0x000080    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+              DELAY_ONEMS   0x000087    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     MSEC   0x000089    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                 DELAY_MS   0x00008e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                    MSEC0   0x00008f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                  CLR_RAM   0x000093    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     CLR0   0x000099    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                  DATAREG   0x00009f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                      DR0   0x0000a3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                      DR1   0x0000b0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     R0LO   0x0000b4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     R0HI   0x0000b6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                      DR2   0x0000b7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     R1LO   0x0000bb    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     R1HI   0x0000bd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                      DR3   0x0000be    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     G0LO   0x0000c2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     G0HI   0x0000c4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                      DR4   0x0000c5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     G1LO   0x0000c9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     G1HI   0x0000cb    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                      DR5   0x0000cc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     DUMP   0x0000d5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                   UPPERH   0x0000e7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                    DUMP0   0x0000e9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+               DMP_FONT00   0x0000ee    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+               DMP_FONT01   0x0000f0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+               DMP_FONT02   0x0000f2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     DMP0   0x0000fe    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                DATAINRAM   0x000102    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     DIR0   0x000109    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     DIR1   0x00010e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     DIR2   0x000116    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+              DIR2_YELLOW   0x000126    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                     DIR3   0x000133    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+              DIR3_YELLOW   0x000143    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+             CURSORX_TEST   0x00014f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                    CXT08   0x00015b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                   CXT08S   0x000169    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                    CXT16   0x00016c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                   CXT16S   0x00017a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                    CXT24   0x00017d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                   CXT24S   0x00018b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                    CXT32   0x00018e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                   CXT32S   0x00019c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                    CXT40   0x00019f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                   CXT40S   0x0001ad    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                    CXT48   0x0001b0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                   CXT48S   0x0001be    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                    CXT56   0x0001c1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                   CXT56S   0x0001cf    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                    CXT64   0x0001d2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                   CXT64S   0x0001e0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                   FONT02   0x000800    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+              FONT02_ZERO   0x000810    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+               FONT02_ONE   0x000832    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+               FONT02_TWO   0x000854    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+             FONT02_THREE   0x000876    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+              FONT02_FOUR   0x000898    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+              FONT02_FIVE   0x0008ba    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+                  FONT02B   0x000900    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+               FONT02_SIX   0x000910    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+             FONT02_SEVEN   0x000932    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+             FONT02_EIGHT   0x000954    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+              FONT02_NINE   0x000976    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB6DISPLAYV2\20191009HUB6DISPLAYV2.ASM
+
+

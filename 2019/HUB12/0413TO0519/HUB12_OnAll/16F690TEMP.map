@@ -1,0 +1,38 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Wed Apr 17 11:58:44 2019
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000004    program   0x000018
+.config_2007_16F690TEMP.O       code   0x002007    program   0x000002
+                   .org_3       code   0x002100    program   0x000008
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x00000f      
+                            0x002007    0x002007      
+                            0x002100    0x002103      
+            18 out of 4359 program addresses used, program memory utilization is 0%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     main   0x000010    program     static C:\Users\Acer-PC\Desktop\16F690TEMP.ASM
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     main   0x000010    program     static C:\Users\Acer-PC\Desktop\16F690TEMP.ASM
+
+

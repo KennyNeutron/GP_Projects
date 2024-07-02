@@ -1,0 +1,18 @@
+// SourceBoost Linker Function Resource Usage Dump
+
+#GLOBAL:"global",line = 0,ram = 36.0,rom = 0;
+Wdt_Delay_Ms(unsigned char):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_Delay.c",line = 118,ram = 2.0,rom = 11;
+FCD_LCDDisplay0_RawSend(unsigned char,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\dotHex\I2C\I2C.c",line = 307,ram = 3.0,rom = 65;
+FCD_LCDDisplay0_Start(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\dotHex\I2C\I2C.c",line = 357,ram = 0.0,rom = 85;
+FCD_LCDDisplay0_Clear(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\dotHex\I2C\I2C.c",line = 390,ram = 0.0,rom = 17;
+FCD_LCDDisplay0_Cursor(unsigned char,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\dotHex\I2C\I2C.c",line = 427,ram = 2.0,rom = 30;
+FCD_LCDDisplay0_PrintString(unsigned char*,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\dotHex\I2C\I2C.c",line = 516,ram = 4.0,rom = 28;
+FC_CAL_I2C_Master_Init_1(void):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_I2C.c",line = 301,ram = 0.0,rom = 5;
+FCD_I2C_Master0_MI2C_Init(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\dotHex\I2C\I2C.c",line = 634,ram = 0.0,rom = 2;
+main(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\dotHex\I2C\I2C.c",line = 970,ram = 12.0,rom = 40;
+interrupt(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\dotHex\I2C\I2C.c",line = 1010,ram = 0.0,rom = 11;
+delay_10us(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 5;
+delay_ms(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 12;
+_startup(void):"NoSourceFile",line = 0,ram = 0.0,rom = 42;
+#HEAP_BLOCK: 0, 160, 95;
+#HEAP_BLOCK: 1, 87, 40;

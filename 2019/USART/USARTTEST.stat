@@ -1,0 +1,21 @@
+// SourceBoost Linker Function Resource Usage Dump
+
+#GLOBAL:"global",line = 0,ram = 62.0,rom = 0;
+Wdt_msDelay(void):"C:\Program Files (x86)\Matrix Multimedia\Flowcode V4\FCD\internals.h",line = 1250,ram = 1.0,rom = 13;
+Wdt_Delay_Ms(signed short):"C:\Program Files (x86)\Matrix Multimedia\Flowcode V4\FCD\internals.h",line = 1272,ram = 5.0,rom = 19;
+FCD_LCDDisplay0_RawSend(unsigned char,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\USART\USARTTEST.c",line = 243,ram = 3.0,rom = 67;
+FCD_LCDDisplay0_Start(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\USART\USARTTEST.c",line = 292,ram = 0.0,rom = 78;
+FCD_LCDDisplay0_Clear(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\USART\USARTTEST.c",line = 325,ram = 0.0,rom = 17;
+FCD_LCDDisplay0_Cursor(unsigned char,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\USART\USARTTEST.c",line = 362,ram = 2.0,rom = 31;
+FCD_LCDDisplay0_PrintString(unsigned char*,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\USART\USARTTEST.c",line = 450,ram = 4.0,rom = 28;
+FCD_LCDDisplay0_ClearLine(unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\USART\USARTTEST.c",line = 527,ram = 3.0,rom = 23;
+FCD_RS2320_ReceiveRS232Char(signed short):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\USART\USARTTEST.c",line = 690,ram = 13.0,rom = 87;
+FCD_RS2320_ReceiveRS232String(unsigned char*,unsigned char,unsigned char,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\USART\USARTTEST.c",line = 931,ram = 9.0,rom = 53;
+main(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\USART\USARTTEST.c",line = 966,ram = 15.0,rom = 139;
+interrupt(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\USART\USARTTEST.c",line = 1158,ram = 0.0,rom = 11;
+delay_us(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 5;
+delay_10us(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 14;
+_startup(void):"NoSourceFile",line = 0,ram = 0.0,rom = 40;
+#HEAP_BLOCK: 0, 160, 80;
+#HEAP_BLOCK: 1, 288, 80;
+#HEAP_BLOCK: 2, 116, 11;

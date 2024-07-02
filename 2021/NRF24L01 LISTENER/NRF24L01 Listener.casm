@@ -1,0 +1,7305 @@
+;/////////////////////////////////////////////////////////////////////////////////
+;// Code Generator: BoostC Compiler - http://www.sourceboost.com
+;// Version       : 7.03
+;// License Type  : Pro License
+;// Limitations   : PIC12,PIC16 max code size:Unlimited, max RAM banks:Unlimited
+;/////////////////////////////////////////////////////////////////////////////////
+
+/*********************************************************************
+ *                  Flowcode CAL Delays File
+ *
+ * File: PIC_CAL_Delay.c
+ *
+ * (c) 2011 Matrix Multimedia Ltd.
+ * http://www.matrixmultimedia.com
+ *
+ * Software License Agreement
+ *
+ * The software supplied herewith by Matrix Multimedia Ltd (the
+ * “Company”) for its Flowcode graphical programming language is
+ * intended and supplied to you, the Company’s customer, for use
+ * solely and exclusively on the Company's products. The software
+ * is owned by the Company, and is protected under applicable
+ * copyright laws. All rights are reserved. Any use in violation
+ * of the foregoing restrictions may subject the user to criminal
+ * sanctions under applicable laws, as well as to civil liability
+ * for the breach of the terms and conditions of this licence.
+ *
+ * THIS SOFTWARE IS PROVIDED IN AN “AS IS” CONDITION. NO WARRANTIES,
+ * WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING, BUT NOT LIMITED
+ * TO, IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE APPLY TO THIS SOFTWARE. THE COMPANY SHALL NOT,
+ * IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL OR
+ * CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+ *
+ * Changelog:
+ *
+ *  date  | by | description
+ * -------+----+-----------------------------------------------------
+ * 010911 | BR | Created
+ *
+ *
+ *
+ */
+
+//Original Byte Delays
+void Wdt_Delay_S(char delay);
+void Wdt_Delay_Ms(char delay);
+
+//New Int Delays
+void FCI_DELAYINT_US(MX_UINT16 Delay);
+
+void FCI_DELAYINT_MS(MX_UINT16 Delay);
+void FCI_DELAYINTWDT_MS(MX_UINT16 Delay);
+
+void FCI_DELAYINT_S(MX_UINT16 Delay);
+void FCI_DELAYINTWDT_S(MX_UINT16 Delay);
+
+
+#ifdef HI_TECH_C
+
+	#define nop()	asm("NOP")
+
+	void delay_10us(char del);
+	void delay_us(char del);
+	void delay_ms(char del);
+	void delay_s(char del);
+
+	void delay_10us(char del)
+	{
+		char count;
+		for(count=0; count<10; count++)
+		{
+			delay_us(del);
+		}
+	}
+
+	void delay_us(char del)
+	{
+		while (del > 1)
+		{
+			__delay_us(1);
+			del = del - 1;
+		}
+	}
+
+	void delay_ms(char del)
+	{
+		while (del > 1)
+		{
+			__delay_ms(1);
+			del = del - 1;
+		}
+	}
+
+	void delay_s(char del)
+	{
+		char i;
+		for(i=0; i<del; i++)
+		{
+			delay_ms(250);
+			delay_ms(250);
+			delay_ms(250);
+			delay_ms(250);
+		}
+	}
+
+#endif
+
+void Wdt_Delay_S(char delay)
+{
+    char i;
+    short j;
+    for (i=0; i<delay; i++)
+    {
+        for (j=0; j<999; j++)
+        {
+            Wdt_Delay_Ms(1);
+        }
+    }
+}
+
+void Wdt_Delay_Ms(char delay)
+
+{
+    char i;
+    for (i=0; i<delay; i++)
+0090  01A2  	CLRF Wdt_Delay__0003E_1_i
+0091        label11
+0091  0821  	MOVF Wdt_Delay__0003E_arg_delay, W
+0092  0222  	SUBWF Wdt_Delay__0003E_1_i, W
+0093  1803  	BTFSC STATUS,C
+0099  0AA2  	INCF Wdt_Delay__0003E_1_i, F
+009A  2891  	GOTO	label11
+
+    {
+        MX_CLEAR_WATCHDOG;        //Clear Watchdog Timer
+0095  0064  	CLRWDT
+
+        delay_ms(1);
+0096  3001  	MOVLW 0x01
+0097  00A3  	MOVWF delay_ms_00000_arg_del
+0098  2015  	CALL delay_ms_00000
+
+    }
+}
+0094  0008  	RETURN
+
+
+
+void FCI_DELAYINT_US(MX_UINT16 Delay)
+{
+  	while (Delay > 255)
+  	{
+	  	delay_us(255);
+	  	Delay = Delay - 255;
+  	}
+  	if (Delay > 0)
+  		delay_us(Delay & 0xFF);
+}
+
+void FCI_DELAYINT_MS(MX_UINT16 Delay)
+{
+  	while (Delay > 255)
+  	{
+	  	delay_ms(255);
+	  	Delay = Delay - 255;
+  	}
+  	if (Delay > 0)
+  		delay_ms(Delay & 0xFF);
+}
+
+void FCI_DELAYINTWDT_MS(MX_UINT16 Delay)
+{
+  	while (Delay > 255)
+  	{
+	  	Wdt_Delay_Ms(255);
+	  	Delay = Delay - 255;
+  	}
+  	if (Delay > 0)
+  		Wdt_Delay_Ms(Delay & 0xFF);
+}
+
+void FCI_DELAYINT_S(MX_UINT16 Delay)
+{
+  	while (Delay > 255)
+  	{
+	  	delay_s(255);
+	  	Delay = Delay - 255;
+  	}
+  	if (Delay > 0)
+  		delay_s(Delay & 0xFF);
+}
+
+void FCI_DELAYINTWDT_S(MX_UINT16 Delay)
+{
+  	while (Delay > 255)
+  	{
+	  	Wdt_Delay_S(255);
+	  	Delay = Delay - 255;
+  	}
+  	if (Delay > 0)
+  		Wdt_Delay_S(Delay & 0xFF);
+}
+
+
+
+/*********************************************************************
+ *                  Flowcode CAL String File
+ *
+ * File: PIC_CAL_String.c
+ *
+ * (c) 2011 Matrix Multimedia Ltd.
+ * http://www.matrixmultimedia.com
+ *
+ * Software License Agreement
+ *
+ * The software supplied herewith by Matrix Multimedia Ltd (the
+ * “Company”) for its Flowcode graphical programming language is
+ * intended and supplied to you, the Company’s customer, for use
+ * solely and exclusively on the Company's products. The software
+ * is owned by the Company, and is protected under applicable
+ * copyright laws. All rights are reserved. Any use in violation
+ * of the foregoing restrictions may subject the user to criminal
+ * sanctions under applicable laws, as well as to civil liability
+ * for the breach of the terms and conditions of this licence.
+ *
+ * THIS SOFTWARE IS PROVIDED IN AN “AS IS” CONDITION. NO WARRANTIES,
+ * WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING, BUT NOT LIMITED
+ * TO, IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE APPLY TO THIS SOFTWARE. THE COMPANY SHALL NOT,
+ * IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL OR
+ * CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+ *
+ * Changelog:
+ *
+ *  date  | by | description
+ * -------+----+-----------------------------------------------------
+ * 010911 | BR | Created
+ * 150911 | JW | Added v5 string functions
+ * 270212 | BR | Fixed an issue with ToUpper where the 1st character was being returned as null
+ * 120312 | BR | Fixed an issue with some of the float functions not using CAL functions
+ */
+
+
+// Useful call for finding the length of an (uncorrupted) string
+#define FCI_GETLENGTH__x(str, max, idx)         for (idx = 0; idx < max; idx++) if (str[idx] == 0) break
+#define FCI_STRMOV__x(str, max, dst, dlen, ix)  for (ix = 0; ix < (max) && ix < (dlen) && str[ix] != '\0'; ix++) dst[ix] = str[ix]
+#define FCI_CONCATENATE(s0, l0, s1, l1, sd, ld) FCI_SHEAD(s0, l0, s1, l1, sd, ld)
+
+
+#ifndef MX_USES_UINT32
+	#define MX_USES_UINT32 0
+#endif
+#ifndef MX_USES_SINT32
+	#define MX_USES_SINT32 0
+#endif
+
+
+#if (MX_USES_UINT32 || MX_USES_SINT32)
+	#define MX_STRF_LONG
+	#define MX_ULONG MX_UINT32
+	#define MX_SLONG MX_SINT32
+#else
+	#define MX_ULONG MX_UINT16
+	#define MX_SLONG MX_SINT16
+#endif
+
+
+//String function definitions
+MX_UINT8 FCI_GETCHAR(MX_STRING sStr1, MX_UINT8 iStr1_len, MX_UINT8 iPos);
+MX_UINT8 FCI_GETLENGTH(MX_STRING sStr1, MX_UINT8 iStr1_len);
+MX_UINT8 FCI_MIDSTRING(MX_STRING sSrc, MX_UINT8 iSrc_len, MX_UINT8 iStart, MX_UINT8 iCount, MX_STRING sDst, MX_UINT8 iDst_len);
+MX_UINT8 FCI_LEFTSTRING(MX_STRING sSrc, MX_UINT8 iSrc_len, MX_UINT8 iCount, MX_STRING sDst, MX_UINT8 iDst_len);
+MX_UINT8 FCI_RIGHTSTRING(MX_STRING sSrc, MX_UINT8 iSrc_len, MX_UINT8 iCount, MX_STRING sDst, MX_UINT8 iDst_len);
+MX_UINT8 FCI_TOSTRING(MX_SLONG iSrc1, MX_STRING sDst, MX_UINT8 iDst_len);
+void FCI_TOLOWER(MX_STRING sSrc, MX_UINT8 iSrc_len, MX_STRING sDst, MX_UINT8 iDst_len);
+void FCI_TOUPPER(MX_STRING sSrc, MX_UINT8 iSrc_len, MX_STRING sDst, MX_UINT8 iDst_len);
+MX_UINT8 FCI_COMPARE(MX_STRING sSrc1, MX_UINT8 iSrc1_len, MX_STRING sSrc2, MX_UINT8 iSrc2_len, MX_UINT8 iNoCase);
+MX_UINT8 FCI_FLOAT_TO_STRING(MX_FLOAT Number, MX_UINT8 Precision, MX_STRING String, MX_UINT8 MSZ_String);
+MX_UINT8 FCI_NUMBER_TO_HEX(MX_ULONG Number, MX_STRING String, MX_UINT8 MSZ_String);
+MX_SINT32 FCI_STRING_TO_INT(MX_STRING String, MX_UINT8 MSZ_String);
+MX_FLOAT FCI_STRING_TO_FLOAT(MX_STRING String, MX_UINT8 MSZ_String);
+
+// Functions for contatenation
+MX_UINT8 FCI_STRREV(MX_STRING sSrc, MX_UINT8 iSrc_len, MX_STRING sDst, MX_UINT8 iDst_len);
+MX_UINT8 FCI_STRMOV(MX_STRING sSrc, MX_UINT8 iSrc_len, MX_STRING sDst, MX_UINT8 iDst_len);
+void FCI_SHEAD(MX_STRING sSrc1, MX_UINT8 iSrc1_len, MX_STRING sSrc2, MX_UINT8 iSrc2_len, MX_STRING sDst, MX_UINT8 iDst_len);
+void FCI_SCOPY(MX_STRING sSrc, MX_UINT8 iSrc_len, MX_STRING sDst, MX_UINT8 iDst_len);
+
+
+
+MX_UINT8 FCI_GETCHAR(MX_STRING sStr1, MX_UINT8 iStr1_len, MX_UINT8 iPos)
+{
+	MX_UINT8 tmp;
+	FCI_GETLENGTH__x(sStr1, iStr1_len, tmp);
+
+	if(iPos < tmp)
+		return sStr1[iPos];
+	return '\0';
+}
+
+MX_UINT8 FCI_GETLENGTH(MX_STRING sStr1, MX_UINT8 iStr1_len)
+{
+	MX_UINT8 tmp;
+	FCI_GETLENGTH__x(sStr1, iStr1_len, tmp);
+	return (tmp);
+}
+
+MX_UINT8 FCI_MIDSTRING(MX_STRING sSrc, MX_UINT8 iSrc_len, MX_UINT8 iStart, MX_UINT8 iCount, MX_STRING sDst, MX_UINT8 iDst_len)
+{
+	if (iDst_len == 0) return 0;
+	MX_UINT8 idx;
+	FCI_GETLENGTH__x(sSrc, iSrc_len, idx);	//find the length of the source string
+
+	if (iStart >= idx)
+	{
+		*sDst = '\0';						//starting position is beyond string length, so return a null string
+	}
+	else
+	{
+		if ((iStart + iCount) >= idx)		//Make sure the required length is not too big
+			iCount = idx - iStart;
+		if (iCount > (iDst_len))			//make sure the required length is not too big
+			iCount = (iDst_len);
+
+		sSrc += iStart;						//Move to the correct place in the source string
+
+		for (idx = 0; idx < iCount; idx++)	//Copy the contents of the source string
+		{
+			*sDst = *sSrc;
+			sDst++;
+			sSrc++;
+		}
+		if (idx < iDst_len)						//add terminating null (if we can)
+			*sDst = '\0';
+	}
+	return (idx);
+}
+
+MX_UINT8 FCI_LEFTSTRING(MX_STRING sSrc, MX_UINT8 iSrc_len, MX_UINT8 iCount, MX_STRING sDst, MX_UINT8 iDst_len)
+{
+	if (iDst_len == 0) return 0;
+	MX_UINT8 idx;
+	FCI_GETLENGTH__x(sSrc, iSrc_len, idx);	//find the length of the source string
+
+	if (iCount > idx)						//make sure the required length is not too big
+		iCount = idx;
+	if (iCount > (iDst_len))			//make sure the required length is not too big
+		iCount = (iDst_len);
+
+	for (idx = 0; idx < iCount; idx++)		//copy the required MX_UINT8acters
+	{
+		*sDst = *sSrc;
+		sDst++;
+		sSrc++;
+	}
+	if (idx < iDst_len)						//add terminating null (if we can)
+		*sDst = '\0';
+	return (idx);
+}
+
+MX_UINT8 FCI_RIGHTSTRING(MX_STRING sSrc, MX_UINT8 iSrc_len, MX_UINT8 iCount, MX_STRING sDst, MX_UINT8 iDst_len)
+{
+	if (iDst_len == 0) return 0;
+	MX_UINT8 idx;
+	MX_UINT8 delta;
+
+	FCI_GETLENGTH__x(sSrc, iSrc_len, idx);	//find the length of the source string
+
+	if (iCount > idx)						//make sure the required length is not too big
+		iCount = idx;
+	delta = idx - iCount;					//get the offset
+	if (iCount > (iDst_len))				//make sure the required length is not too big
+		iCount = (iDst_len);
+	sSrc += delta;							//Move to the correct place in the source string
+
+	for(idx = 0; idx < iCount; idx++)		//copy the required MX_UINT8acters
+	{
+		*sDst = *sSrc;
+		sDst++;
+		sSrc++;
+	}
+	if (idx < iDst_len)						//add terminating null (if we can)
+		*sDst = '\0';
+	return (idx);
+}
+
+MX_UINT8 FCI_TOSTRING(MX_SLONG iSrc1, MX_STRING sDst, MX_UINT8 iDst_len)
+{
+	if (iDst_len == 0) return 0;
+	MX_UINT8 tmp1;
+
+	#ifdef MX_STRF_LONG
+		unsigned long top = 1000000000; 	// Maximum power of 10 less than 4294967296
+	#else
+		unsigned short top = 10000; 		// Maximum power of 10 less than 65536
+	#endif
+
+	MX_UINT8 idx = 0;
+
+	//copy source 1 into destination:
+	//minus sign
+	if (iSrc1 < 0)
+	{
+		sDst[0] = '-';
+		idx++;
+		iSrc1 = -iSrc1;
+	}
+
+	tmp1 = 0;    // Nothing added yet
+	if (iSrc1 == 0) // Force showing zero
+	{
+		tmp1 = 1;
+		top = 1;
+	}
+	while (( idx < iDst_len) && (top > 0))
+	{
+		#ifdef MX_STRF_LONG
+		if (((unsigned long)iSrc1 >= top) || (tmp1))
+		#else
+		if (((unsigned)iSrc1 >= top) || (tmp1))
+		#endif
+		{
+			#ifdef MX_STRF_LONG
+			tmp1 = (unsigned long)iSrc1 / top;	// Top digit
+			#else
+			tmp1 = (unsigned)iSrc1 / top;	// Top digit
+			#endif
+			sDst[idx] = '0' + tmp1;			// Add digit to buffer
+			idx++;
+			iSrc1 -= tmp1 * top;			// Remove digit
+			tmp1 = 1;						// Add zeros now
+		}
+		top /= 10;							// Go to next digit
+	}
+
+	if (idx < iDst_len)						//add terminating null (if we can)
+		sDst[idx] = '\0';
+	return (idx);
+}
+
+
+
+void FCI_TOLOWER(MX_STRING sSrc, MX_UINT8 iSrc_len, MX_STRING sDst, MX_UINT8 iDst_len)
+{
+	if (iDst_len == 0) return;
+	MX_UINT8 idx;
+	MX_UINT8 ch;
+
+	if (iSrc_len < iDst_len) iSrc_len = iDst_len; // Bound so cant overflow dest
+	//copy source into destination and change to lower case
+	for (idx=0; idx<iSrc_len; idx++)
+	{
+		ch = sSrc[idx];
+		if ((ch >= 'A') && (ch <= 'Z'))
+		{
+			ch ^= 0x20;
+		}
+		sDst[idx] = ch;
+		if (ch == 0)
+		{
+			break;
+		}
+	}
+	if (idx < iDst_len)						//add terminating null (if we can)
+		sDst[idx] = '\0';
+}
+
+void FCI_TOUPPER(MX_STRING sSrc, MX_UINT8 iSrc_len, MX_STRING sDst, MX_UINT8 iDst_len)
+{
+	if (iDst_len == 0) return;
+	MX_UINT8 idx;
+	MX_UINT8 ch;
+
+	if (iSrc_len < iDst_len) iSrc_len = iDst_len; // Bound so cant overflow dest
+	//copy source into destination and change to upper case
+	for (idx=0; idx<iSrc_len; idx++)
+	{
+		ch = sSrc[idx];
+		if ((ch >= 'a') && (ch <= 'z'))
+		{
+			ch ^= 0x20;
+		}
+		sDst[idx] = ch;
+		if (ch == 0)
+		{
+			break;
+		}
+	}
+	if (idx < iDst_len)						//add terminating null (if we can)
+		sDst[idx] = '\0';
+}
+
+MX_UINT8 FCI_COMPARE(MX_STRING sSrc1, MX_UINT8 iSrc1_len, MX_STRING sSrc2, MX_UINT8 iSrc2_len, MX_UINT8 iNoCase)
+{
+	MX_UINT8 iRetVal = 0;
+	MX_UINT8 idx;
+	MX_UINT8 ch1, ch2;
+
+	for (idx=0; idx < iSrc1_len; idx++)	//compare a byte from the strings
+	{
+		if (idx < iSrc2_len)
+		{
+			ch1 = *sSrc1;
+			ch2 = *sSrc2;
+
+			if (iNoCase)
+			{
+				if ((ch1 >= 'a') && (ch1 <= 'z'))
+					ch1 = (ch1 & 0xDF);
+
+				if ((ch2 >= 'a') && (ch2 <= 'z'))
+					ch2 = (ch2 & 0xDF);
+
+			}
+
+			if (ch1 < ch2)
+			{
+				return(255);
+			}
+			else if (ch1 > ch2)
+			{
+				return(1);
+			}
+
+			sSrc1++;
+			sSrc2++;
+		}
+		else
+		{
+			if (*sSrc1 == 0)
+				return (0);				//end of source1 as well, so ok
+			else
+				return (1);				//reached the end of iSrc2, but still more of iSrc1
+		}
+	}
+
+	if (iSrc1_len == iSrc2_len)			//reached the end of iSrc1.  If we're also at the end of iSrc2, then return 0
+		return (0);
+	else
+	{
+		if (*sSrc2 == 0)
+			return (0);					//end of source1 as well, so ok
+		else
+			return (255);				//not at end of source2, so return -1
+	}
+}
+
+
+MX_UINT8 FCI_FLOAT_TO_STRING(MX_FLOAT Number, MX_UINT8 Precision, MX_STRING String, MX_UINT8 MSZ_String)
+{
+	MX_SINT16 whole;
+	MX_UINT8 str_length;
+	MX_UINT8 idx;
+	MX_UINT8 stringidx = 0;
+	MX_FLOAT real, temp;
+	MX_UINT8 old;
+	MX_UINT8 temp_string[10];
+
+	#ifdef _BOOSTC									//BoostC Floating Point
+
+		float_rounding_mode = 3;					//Always round to zero
+		whole = float32_to_int32(Number);			//Convert to whole integer
+		temp = float32_from_int32(whole);			//Convert whole number back to floating point
+
+		if (float32_ge(Number,0))
+		{
+			real = float32_sub(Number, temp);		//Subtract whole number from floating point number
+		}
+		else
+		{
+			if (whole == 0)							//Fix -0 bug
+			{
+				String[stringidx] = '-';
+				stringidx = stringidx + 1;
+			}
+
+			real = float32_sub(temp, Number);		//Subtract floating point number from whole number
+		}
+	#endif
+
+	#ifdef HI_TECH_C								//HiTECH Floating Point
+
+		whole = (int)Number;						//Convert to whole integer
+		temp = whole;								//Convert whole number back to floating point
+
+		if (Number >= 0)
+		{
+			real = Number - temp;					//Subtract whole number from floating point number
+		}
+		else
+		{
+			if (whole == 0)							//Fix -0 bug
+			{
+				String[stringidx] = '-';
+				stringidx = stringidx + 1;
+			}
+
+			real = temp - Number;					//Subtract floating point number from whole number
+		}
+	#endif
+
+	str_length = FCI_TOSTRING(whole, temp_string, 5);		//Convert integer numbers to strings
+
+	for (idx=0; idx<str_length; idx++)						//Copy whole part of number to string
+	{
+		if(stringidx < MSZ_String)
+		{
+			String[stringidx] = temp_string[idx];
+			stringidx = stringidx + 1;
+		}
+	}
+
+	if(stringidx < MSZ_String)						//Add decimal point to string
+	{
+		String[stringidx] = '.';
+		stringidx = stringidx + 1;
+	}
+
+	for (idx = 0; idx < Precision; idx++)			//Output Real Part Of Number
+	{
+		if (stringidx >= MSZ_String)
+			break;
+
+		#ifdef _BOOSTC								//BoostC Floating Point
+			real = float32_mul(real, 10);
+			whole = float32_to_int32(real);			//Convert to whole integer
+			temp = float32_from_int32(whole);		//Convert whole number back to floating point
+			real = float32_sub(real, temp);			//Subtract whole number from floating point number
+		#endif
+		#ifdef HI_TECH_C							//HiTECH Floating Point
+			real = real * 10;
+			whole = (int)real;						//Convert to whole integer
+			temp = whole;							//Convert whole number back to floating point
+			real = real - temp;						//Subtract whole number from floating point number
+		#endif
+
+		String[stringidx] = '0' + whole;
+		stringidx = stringidx + 1;
+	}
+
+	if(stringidx < MSZ_String)									//Add null termination to string
+	{
+		String[stringidx] = 0;
+	}
+
+	return stringidx;
+}
+
+
+
+
+
+
+
+
+
+
+
+MX_UINT8 FCI_NUMBER_TO_HEX(MX_ULONG Number, MX_STRING String, MX_UINT8 MSZ_String)
+{
+	MX_UINT8 stringidx;
+	MX_UINT8 idx = 0;
+	MX_UINT8 temp;
+	MX_UINT8 digit[8] = {0,0,0,0,0,0,0,0};
+
+	#ifdef MX_STRF_LONG
+		MX_UINT32 num = Number;
+	#else
+		MX_UINT16 num = Number;
+	#endif
+
+	//Check that output string is long enough to store result
+	if((Number > 0xFFFF) && (MSZ_String < 10))
+		return 0;
+
+	if((Number > 0xFF) && (MSZ_String < 6))
+		return 0;
+
+	if((Number <= 0xFF) && (MSZ_String < 4))
+		return 0;
+
+	//Initialise start of string with hexadecimal indicator
+	String[0] = '0';
+	String[1] = 'x';
+
+	//Calculate hex values
+	do
+	{
+		temp = num % 16;
+		num = num >> 4;
+
+		if(temp > 9)
+		{
+			temp = temp - 10;
+			digit[idx] = temp + 'A';
+		}
+		else
+			digit[idx] = temp + '0';
+
+		idx = idx + 1;
+	} while (num > 0);
+
+	//Copy Hex values over to output string
+	for (stringidx = 2; stringidx < (idx + 2); stringidx++)
+		String[stringidx] = digit[idx - (stringidx - 1)];
+
+	//Add null termination to string
+	if(stringidx < MSZ_String)
+	{
+		String[stringidx] = 0;
+	}
+
+	return stringidx;
+}
+
+
+MX_SINT32 FCI_STRING_TO_INT(MX_STRING String, MX_UINT8 MSZ_String)
+{
+	MX_UINT8 bNegative = 0;
+	MX_UINT8 idx = 0;
+	MX_SINT32 RetVal = 0;
+
+	//Is number negative
+	if(String[0] == '-')
+	{
+		bNegative = 1;
+		idx = 1;
+	}
+
+	//While string contains a valid number
+	while (idx < MSZ_String && String[idx] >= '0' && String[idx] <= '9')
+	{
+		//Pull MX_UINT8acter from string and add to running total
+		RetVal = (long) RetVal * 10;
+		RetVal = (long) RetVal + (String[idx] - '0');
+		idx = idx + 1;
+	}
+
+	if (bNegative)
+		RetVal = (long) 0 - RetVal;
+
+	return RetVal;
+}
+
+
+MX_FLOAT FCI_STRING_TO_FLOAT(MX_STRING String, MX_UINT8 MSZ_String)
+{
+	MX_FLOAT RetVal = 0;
+	MX_FLOAT real_divider = 1;
+	MX_UINT32 whole, real;			//Changed from INT 23/07/10
+	MX_UINT8 idx = 0;
+	MX_UINT8 idx2 = 0;
+	MX_UINT8 offset = 0;
+	MX_UINT8 bNegative = 0;
+	MX_UINT8 Comp_String[8];
+
+	//Is number negative
+	if(String[0] == '-')
+	{
+		bNegative = 1;
+		offset = 1;
+	}
+
+	//Scan for decimal point
+	for(idx=offset; idx<MSZ_String; idx++)
+	{
+		if(String[idx] == '.')
+			break;
+	}
+
+	//Convert whole portion of number from string
+	whole = FCI_STRING_TO_INT (String, idx);
+
+	//No decimal point found
+	if(idx == MSZ_String)
+	{
+		#ifdef _BOOSTC
+			RetVal = float32_from_int32(whole);
+		#endif
+		#ifdef HI_TECH_C
+			RetVal = (int)whole;
+		#endif
+		return RetVal;
+	}
+
+	//Collect real portion of number into new string
+	offset = idx + 1;
+	for(idx=offset; idx<MSZ_String; idx++)
+	{
+		if(String[idx] >= '0' && String[idx] <= '9')
+		{
+			Comp_String[idx - offset] = String[idx];
+			#ifdef _BOOSTC
+				real_divider = float32_mul(real_divider, 0.1);
+			#endif
+			#ifdef HI_TECH_C
+				real_divider = real_divider * 0.1;
+			#endif
+		}
+		else
+			break;
+	}
+
+	//Convert real portion of number from string
+	real = FCI_STRING_TO_INT (Comp_String, (idx - offset));
+
+	//Adjust weighting of values and combine into one float variable
+	#ifdef _BOOSTC
+
+		RetVal = float32_from_int32(real);
+		RetVal = float32_mul(RetVal, real_divider);
+		real_divider = float32_from_int32(whole);
+		RetVal = float32_add(RetVal, real_divider);
+
+		if (bNegative)
+			RetVal = float32_sub(0, RetVal);
+
+	#endif
+	#ifdef HI_TECH_C
+
+		RetVal = (MX_FLOAT)real;
+		RetVal = RetVal * real_divider;
+		real_divider = (MX_FLOAT)whole;
+		RetVal = RetVal + real_divider;
+
+		if (bNegative)
+			RetVal = 0 - RetVal;
+	#endif
+
+	return RetVal;
+}
+
+
+
+/*=----------------------------------------------------------------------=*\
+   Use :Move but do not null-terminate sSrc to sDst, max len iSrc_len
+       :This differs from FCI_STRMOV() in that the bytes are copied from the
+       :end of the string to the start
+       :Returns length of copy
+\*=----------------------------------------------------------------------=*/
+MX_UINT8 FCI_STRREV(MX_STRING sSrc, MX_UINT8 iSrc_len, MX_STRING sDst, MX_UINT8 iDst_len)
+{
+  MX_UINT8 ix, len;
+  FCI_GETLENGTH__x(sSrc, iSrc_len, len);
+  if (len > iDst_len)
+  {
+    len = iDst_len;
+  }
+  ix = len;
+  while (ix > 0)
+  {
+    ix--;
+    sDst[ix] = sSrc[ix];
+  }
+  // No null terminate
+  // Return length of string
+  return len;
+}
+
+
+/*=----------------------------------------------------------------------=*\
+   Use :Move but do not null-terminate sSrc to sDst, max len iSrc_len
+       :Returns length of copy
+\*=----------------------------------------------------------------------=*/
+MX_UINT8 FCI_STRMOV(MX_STRING sSrc, MX_UINT8 iSrc_len, MX_STRING sDst, MX_UINT8 iDst_len)
+{
+  MX_UINT8 ix;
+  ix = 0;
+  while (ix < iSrc_len && ix < iDst_len && sSrc[ix] != '\0')
+  {
+    sDst[ix] = sSrc[ix];
+    ix++;
+  }
+  // No null terminate
+  // Return length of string
+  return ix;
+}
+
+/*=----------------------------------------------------------------------=*\
+   Use :Concatenate sDst = (sSrc1 + sSrc2)
+       :sDst is only null terminated if the concat doesnt overflow
+       :
+\*=----------------------------------------------------------------------=*/
+void FCI_SHEAD(MX_STRING sSrc1, MX_UINT8 iSrc1_len, MX_STRING sSrc2, MX_UINT8 iSrc2_len, MX_STRING sDst, MX_UINT8 iDst_len)
+{
+  MX_UINT8 len, strt;
+
+  len = 0;
+  if (sSrc2 == sDst)
+  {
+    FCI_GETLENGTH__x(sSrc1, iSrc1_len, strt);
+    if (strt < iDst_len)
+    {
+      // Copy second, in reverse
+      // len = FCI_STRREV(sSrc2, iSrc2_len, sDst + strt, iDst_len - strt);
+      FCI_GETLENGTH__x(sSrc2, iSrc2_len, len);
+      if (len > (iDst_len - strt))
+      {
+        len = (iDst_len - strt); // Length of string to copy to
+      }
+      iSrc2_len = strt + len; // Use no longer needed var as an offset
+      strt = len;
+      while (strt > 0)
+      {
+        strt--;
+        iSrc2_len--;
+        sDst[iSrc2_len] = sSrc2[strt];
+      }
+      // Move first
+      FCI_STRMOV__x(sSrc1, iSrc1_len, sDst, iDst_len, strt);
+      len += strt;
+    }
+    else
+    {
+      // Copy first
+      FCI_STRMOV__x(sSrc1, iSrc1_len, sDst, iDst_len, len);
+    }
+  }
+  else
+  {
+    // Copy first
+    FCI_STRMOV__x(sSrc1, iSrc1_len, sDst, iDst_len, len);
+    // Copy second
+    if (len < iDst_len)
+    {
+      sSrc1 = sDst + len; // make temp copies in no longer used variables
+      iSrc1_len = iDst_len - len;
+      FCI_STRMOV__x(sSrc2, iSrc2_len, sSrc1, iSrc1_len, strt);
+      len += strt;
+    }
+  }
+  // Terminate (only if can)
+  if (len < iDst_len)
+  {
+    sDst[len] = '\0';
+  }
+}
+
+
+/*=----------------------------------------------------------------------=*\
+   Use :Copy and null-terminate sSrc to sDst, max len iSrc_len
+       :sDst is only null terminated if the concat doesnt overflow
+       :
+\*=----------------------------------------------------------------------=*/
+void FCI_SCOPY(MX_STRING sSrc, MX_UINT8 iSrc_len, MX_STRING sDst, MX_UINT8 iDst_len)
+
+{
+  MX_UINT8 len;
+
+  // Move first
+  FCI_STRMOV__x(sSrc, iSrc_len, sDst, iDst_len, len);
+08E5  1683  	BSF STATUS, RP0
+08E6  01A8  	CLRF FCI_SCOPY_00000_1_len
+08E7        label76
+08E7  1283  	BCF STATUS, RP0
+08E8  087D  	MOVF FCI_SCOPY_00000_arg_iSrc_len, W
+08E9  1683  	BSF STATUS, RP0
+08EA  0228  	SUBWF FCI_SCOPY_00000_1_len, W
+08EB  1803  	BTFSC STATUS,C
+08EC  2915  	GOTO	label77
+08ED  1283  	BCF STATUS, RP0
+08EE  087E  	MOVF FCI_SCOPY_00000_arg_iDst_len, W
+08EF  1683  	BSF STATUS, RP0
+08F0  0228  	SUBWF FCI_SCOPY_00000_1_len, W
+08F1  1803  	BTFSC STATUS,C
+08F2  2915  	GOTO	label77
+08F3  1383  	BCF STATUS,IRP
+08F4  1283  	BCF STATUS, RP0
+08F5  187C  	BTFSC FCI_SCOPY_00000_arg_sSrc+D'1',0
+08F6  1783  	BSF STATUS,IRP
+08F7  087B  	MOVF FCI_SCOPY_00000_arg_sSrc, W
+08F8  1683  	BSF STATUS, RP0
+08F9  0728  	ADDWF FCI_SCOPY_00000_1_len, W
+08FA  0084  	MOVWF FSR
+08FB  0880  	MOVF INDF, F
+08FC  1903  	BTFSC STATUS,Z
+08FD  2915  	GOTO	label77
+08FE  1383  	BCF STATUS,IRP
+08FF  1283  	BCF STATUS, RP0
+0900  187C  	BTFSC FCI_SCOPY_00000_arg_sSrc+D'1',0
+0901  1783  	BSF STATUS,IRP
+0902  087B  	MOVF FCI_SCOPY_00000_arg_sSrc, W
+0903  0084  	MOVWF FSR
+0904  1683  	BSF STATUS, RP0
+0905  0828  	MOVF FCI_SCOPY_00000_1_len, W
+0906  00A9  	MOVWF CompTempVar2156
+0907  0829  	MOVF CompTempVar2156, W
+0908  0784  	ADDWF FSR, F
+0909  0800  	MOVF INDF, W
+090A  00AA  	MOVWF CompTempVar2157
+090B  1383  	BCF STATUS,IRP
+090C  1827  	BTFSC FCI_SCOPY_00000_arg_sDst+D'1',0
+090D  1783  	BSF STATUS,IRP
+090E  0826  	MOVF FCI_SCOPY_00000_arg_sDst, W
+090F  0728  	ADDWF FCI_SCOPY_00000_1_len, W
+0910  0084  	MOVWF FSR
+0911  082A  	MOVF CompTempVar2157, W
+0912  0080  	MOVWF INDF
+0913  0AA8  	INCF FCI_SCOPY_00000_1_len, F
+0914  28E7  	GOTO	label76
+0915        label77
+
+  // Terminate (only if can)
+  if (len < iDst_len)
+0915  1283  	BCF STATUS, RP0
+0916  087E  	MOVF FCI_SCOPY_00000_arg_iDst_len, W
+0917  1683  	BSF STATUS, RP0
+0918  0228  	SUBWF FCI_SCOPY_00000_1_len, W
+0919  1803  	BTFSC STATUS,C
+
+  {
+    sDst[len] = '\0';
+091B  1383  	BCF STATUS,IRP
+091C  1827  	BTFSC FCI_SCOPY_00000_arg_sDst+D'1',0
+091D  1783  	BSF STATUS,IRP
+091E  0826  	MOVF FCI_SCOPY_00000_arg_sDst, W
+091F  0728  	ADDWF FCI_SCOPY_00000_1_len, W
+0920  0084  	MOVWF FSR
+0921  3000  	MOVLW 0x00
+0922  0080  	MOVWF INDF
+
+  }
+}
+091A  0008  	RETURN
+0923  0008  	RETURN
+
+
+
+
+
+//************************************************************************************
+//**  
+//**  File name:     C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24L01 LISTENER\NRF24L01 Listener.c
+//**  Title:         
+//**  Description:   
+//**  
+//**  Generated by:  Flowcode v5.2.0.0
+//**  Date:          Friday, April 16, 2021 15:09:29
+//**  Licence:       Professional
+//**  Registered to: xyz
+//**  Licence key:   WUK7B9
+//**  
+//**  
+//**  http://www.matrixmultimedia.com
+//**  
+//************************************************************************************
+
+
+#define MX_PIC
+
+#define MX_USES_UINT8 1
+#define MX_USES_SINT16 1
+#define MX_USES_CHAR 2
+#define MX_USES_FLOAT 0
+#define MX_USES_SINT32 0
+#define MX_USES_BOOL 1
+#define MX_USES_UINT16 0
+#define MX_USES_UINT32 0
+//Defines for microcontroller
+#define P16F873A
+#define FC_CAL_PIC
+#define MX_ADC
+#define MX_ADC_TYPE_1
+#define MX_ADC_BITS_10
+#define MX_EE
+#define MX_EE_TYPE2
+#define MX_EE_SIZE 128
+#define MX_SPI_1
+#define MX_SPI_1_MISO_PORT portc
+#define MX_SPI_1_MISO_TRIS trisc
+#define MX_SPI_1_MISO_PIN 4
+#define MX_SPI_1_MOSI_PORT portc
+#define MX_SPI_1_MOSI_TRIS trisc
+#define MX_SPI_1_MOSI_PIN 5
+#define MX_SPI_1_CLK_PORT portc
+#define MX_SPI_1_CLK_TRIS trisc
+#define MX_SPI_1_CLK_PIN 3
+#define MX_SPI_1_SS_PORT portc
+#define MX_SPI_1_SS_TRIS trisc
+#define MX_UART_1
+#define MX_UART_1_TX_PORT portc
+#define MX_UART_1_TX_TRIS trisc
+#define MX_UART_1_TX_PIN 6
+#define MX_UART_1_RX_PORT portc
+#define MX_UART_1_RX_TRIS trisc
+#define MX_UART_1_RX_PIN 7
+#define MX_I2C
+#define MX_MI2C
+#define MX_I2C_1
+#define MX_I2C_1_SDA_PORT portc
+#define MX_I2C_1_SDA_TRIS trisc
+#define MX_I2C_1_SDA_PIN 4
+#define MX_I2C_1_SCL_PORT portc
+#define MX_I2C_1_SCL_TRIS trisc
+#define MX_I2C_1_SCL_PIN 3
+#define MX_PWM
+#define MX_PWM_CNT 2
+#define MX_PWM_PSCA1
+#define MX_PWM_PSCA4
+#define MX_PWM_PSCA16
+#define MX_PWM_1_PORT portc
+#define MX_PWM_1_TRIS trisc
+#define MX_PWM_1_PIN 2
+#define MX_PWM_2_PORT portc
+#define MX_PWM_2_TRIS trisc
+#define MX_PWM_2_PIN 1
+
+//Functions
+#define MX_CLK_SPEED 20000000
+#ifdef _BOOSTC
+#include <system.h>
+#endif
+#ifdef HI_TECH_C
+#include <pic.h>
+#endif
+
+//Configuration data
+#ifdef _BOOSTC
+#pragma DATA 0x2007, 0x3f3a
+#endif
+#ifdef HI_TECH_C
+__CONFIG(0x3f3a);
+#endif
+
+//Internal functions
+#include "C:\Program Files (x86)\Flowcode\v5\FCD\internals.c"
+
+//Macro function declarations
+void FCM_spi_data_write();
+void FCM_spi_data_read();
+void FCM_nrf_reg_read();
+void FCM_nrf_reg_write();
+void FCM_nrf_FUNCTION_test();
+void FCM_display_test();
+void FCM_rcv_macro();
+void FCM_rcv_init();
+void FCM_setup_nrf_address();
+void FCM_read_addr();
+void FCM_nrf_clr_status();
+void FCM_check_fifo_status();
+void FCM_read_payload();
+void FCM_nrf_flush_fifo();
+
+
+//Variable declarations
+#define FCSZ_PAYLOAD 32
+#define FCSZ_NRF_ADDRESS 5
+#define FCV_FALSE (0)
+#define FCV_TRUE (1)
+MX_UINT8 FCV_NRF_REG06;
+MX_CHAR FCV_PAYLOAD[FCSZ_PAYLOAD];
+MX_BOOL FCV_SW_TEST = (0);
+0AEC  106A  	BCF gbl_FCV_SW_TEST,0
+
+MX_UINT8 FCV_ARRAY_SUB = (0x0);
+0AED  01EB  	CLRF gbl_FCV_ARRAY_SUB
+
+MX_BOOL FCV_START_FLAG = (0);
+0AEE  10EA  	BCF gbl_FCV_START_FLAG,1
+
+MX_SINT16 FCV_FUNCTION_TEST_VAR = (0);
+0AEF  01DE  	CLRF gbl_FCV_FUNCTION_TEST_VAR
+0AF0  01DF  	CLRF gbl_FCV_FUNCTION_TEST_VAR+D'1'
+
+MX_CHAR FCV_NRF_ADDRESS[FCSZ_NRF_ADDRESS] = (" ");
+0AF1  3020  	MOVLW 0x20
+0AF2  00C0  	MOVWF gbl_FCV_NRF_ADDRESS
+0AF3  01C1  	CLRF gbl_FCV_NRF_ADDRESS+D'1'
+
+MX_UINT8 FCV_SPI_WRT_DATA = (0x0);
+0AF4  01EC  	CLRF gbl_FCV_SPI_WRT_DATA
+
+MX_BOOL FCV_SW_RXTX = (0);
+0AF5  116A  	BCF gbl_FCV_SW_RXTX,2
+
+MX_UINT8 FCV_NRF_REG00 = (0x0);
+0AF6  01ED  	CLRF gbl_FCV_NRF_REG00
+
+MX_UINT8 FCV_REG_TO_WRITE = (0x0);
+0AF7  01EE  	CLRF gbl_FCV_REG_TO_WRITE
+
+MX_UINT8 FCV_NRF_REG01 = (0x0);
+0AF8  01EF  	CLRF gbl_FCV_NRF_REG01
+
+MX_UINT8 FCV_NRF_REG02;
+MX_UINT8 FCV_PAYLOAD_SIZE = (0x0);
+0AF9  01F1  	CLRF gbl_FCV_PAYLOAD_SIZE
+
+MX_UINT8 FCV_NRF_REG03 = (0x0);
+0AFA  01F2  	CLRF gbl_FCV_NRF_REG03
+
+MX_UINT8 FCV_FIFO_STATUS_REG = (0x0);
+0AFB  01F3  	CLRF gbl_FCV_FIFO_STATUS_REG
+
+MX_UINT8 FCV_LOOP_COUNT = (0x0);
+0AFC  01F4  	CLRF gbl_FCV_LOOP_COUNT
+
+MX_UINT8 FCV_SPI_RCV_DATA = (0x0);
+0AFD  01F5  	CLRF gbl_FCV_SPI_RCV_DATA
+
+MX_UINT8 FCV_NRF_REG04 = (0x0);
+0AFE  01F6  	CLRF gbl_FCV_NRF_REG04
+
+MX_UINT8 FCV_REG_TO_READ = (0x0);
+0AFF  01F7  	CLRF gbl_FCV_REG_TO_READ
+
+MX_UINT8 FCV_NRF_REG05 = (0x0);
+0B00  01F8  	CLRF gbl_FCV_NRF_REG05
+
+
+MX_UINT8 FCLV_LOOP1;
+MX_UINT8 FCLV_LOOP2;
+
+
+
+//LCDDisplay(0): //Defines:
+
+/**** Macro Substitutions ****
+a = Unique Component Reference Number
+b = D1 Port Letter
+c = D2 Port Letter
+d = D3 Port Letter
+e = D4 Port Letter
+f = RS Port Letter
+g = E Port Letter
+h = Data 1_Pin
+i = Data 2 Pin
+j = Data 3 Pin
+k = Data 4 Pin
+l = RS Pin
+m = Enable Pin
+n = Row Count
+o = Column Count
+******************************/
+
+	//component connections
+	#define LCD_1__PORT0    portb
+	#define LCD_1__PORT1    portb
+	#define LCD_1__PORT2    portb
+	#define LCD_1__PORT3    portb
+	#define LCD_1__PORT4    portb
+	#define LCD_1__PORT5    portb
+	#define LCD_1__TRIS0    trisb
+	#define LCD_1__TRIS1    trisb
+	#define LCD_1__TRIS2    trisb
+	#define LCD_1__TRIS3    trisb
+	#define LCD_1__TRIS4    trisb
+	#define LCD_1__TRIS5    trisb
+	#define LCD_1__BIT0    	2
+	#define LCD_1__BIT1    	3
+	#define LCD_1__BIT2    	4
+	#define LCD_1__BIT3    	5
+	#define LCD_1__RS      	0
+	#define LCD_1__E       	1
+	#define LCD_1__ROWCNT	4
+	#define LCD_1__COLCNT	16
+
+	#ifdef _BOOSTC
+	  #define LCD_1__DELAY   delay_10us(10)
+	#endif
+	#ifdef _C2C_
+	  #define LCD_1__DELAY   delay_us(100)
+	#endif
+	#ifdef HI_TECH_C
+	  #define LCD_1__DELAY   __delay_us(120)
+	#endif
+	#ifndef LCD_1__DELAY
+	  #define LCD_1__DELAY   delay_us(100)
+	#endif
+
+
+
+
+//LCDDisplay(0): //Macro function declarations
+
+void FCD_LCDDisplay0_RawSend(MX_UINT8 in, MX_UINT8 mask);
+void FCD_LCDDisplay0_Start();
+void FCD_LCDDisplay0_Clear();
+void FCD_LCDDisplay0_PrintASCII(MX_UINT8 Character);
+void FCD_LCDDisplay0_Command(MX_UINT8 in);
+void FCD_LCDDisplay0_Cursor(MX_UINT8 x, MX_UINT8 y);
+void FCD_LCDDisplay0_PrintNumber(MX_SINT16 Number);
+void FCD_LCDDisplay0_PrintString(MX_STRING String, MX_UINT8 MSZ_String);
+void FCD_LCDDisplay0_ScrollDisplay(MX_UINT8 Direction, MX_UINT8 Num_Positions);
+void FCD_LCDDisplay0_ClearLine(MX_UINT8 Line);
+void FCD_LCDDisplay0_RAM_Write(MX_UINT8 nIdx, MX_UINT8 d0, MX_UINT8 d1, MX_UINT8 d2, MX_UINT8 d3, MX_UINT8 d4, MX_UINT8 d5, MX_UINT8 d6, MX_UINT8 d7);
+
+
+//SPI_Legacy(0): //Defines:
+
+/**** Macro Substitutions ****
+a = Unique Ref
+b = SPI Channel
+c = MOSI Pin
+d = MOSI Port
+e = MISO Pin
+f = MISO Port
+g = SCK Pin
+h = SCK Port
+i = Clock Polarity + Clock Phase + Data Sample Phase
+j = SPI Prescaler
+k = SPI Postscaler
+l = DAC Enable Pin
+m = DAC Enable Port
+n = FRAM Enable Pin
+o = FRAM Enable Port
+******************************/
+
+//MX_SPI_BMODE - Bus Mode - Bit0=CPOL, Bit1=CPHA, Bit2=CSMP
+//CPOL - Clock Polarity - Idle State of the clock 0=0, 1=1
+//CPHA - Clock Phase - Clock Edge 0=leading edge, 1=trailing edge
+//CSMP - Input Data Bit Sample Phase
+
+
+//Definitions for CS control lines
+#define SPI_2_MX_SPI_LEGACY_DAC_PIN		0
+#define SPI_2_MX_SPI_LEGACY_DAC_PORT		porta
+#define SPI_2_MX_SPI_LEGACY_DAC_TRIS		trisa
+#define SPI_2_MX_SPI_LEGACY_FRAM_PIN		0
+#define SPI_2_MX_SPI_LEGACY_FRAM_PORT		porta
+#define SPI_2_MX_SPI_LEGACY_FRAM_TRIS		trisa
+
+
+//Definitions for SPI slot allocation
+#ifndef	MX_SPI_REF1
+	#define MX_SPI_REF1
+	#define SPI_2_MX_SPI_UREF			1
+	#define MX_SPI_CHANNEL_1		1
+	#define MX_SPI_MOSI_PIN_1		-1
+	#define MX_SPI_MOSI_PORT_1		port0
+	#define MX_SPI_MOSI_TRIS_1		tris0
+	#define MX_SPI_MISO_PIN_1		-1
+	#define MX_SPI_MISO_PORT_1		port0
+	#define MX_SPI_MISO_TRIS_1		tris0
+	#define MX_SPI_SCK_PIN_1		-1
+	#define MX_SPI_SCK_PORT_1		port0
+	#define MX_SPI_SCK_TRIS_1		tris0
+	#define MX_SPI_CS_PIN_1			0
+	#define MX_SPI_CS_PORT_1		0
+	#define MX_SPI_BMODE_1			6
+	#define MX_SPI_PR_SCALE_1		16
+	#define MX_SPI_PO_SCALE_1		0
+	#define MX_SPI_INT_1			0
+#else
+ #ifndef	MX_SPI_REF2
+	#define MX_SPI_REF2
+	#define SPI_2_MX_SPI_UREF			2
+	#define MX_SPI_CHANNEL_2		1
+	#define MX_SPI_MOSI_PIN_2		-1
+	#define MX_SPI_MOSI_PORT_2		port0
+	#define MX_SPI_MOSI_TRIS_2		tris0
+	#define MX_SPI_MISO_PIN_2		-1
+	#define MX_SPI_MISO_PORT_2		port0
+	#define MX_SPI_MISO_TRIS_2		tris0
+	#define MX_SPI_SCK_PIN_2		-1
+	#define MX_SPI_SCK_PORT_2		port0
+	#define MX_SPI_SCK_TRIS_2		tris0
+	#define MX_SPI_CS_PIN_2			0
+	#define MX_SPI_CS_PORT_2		0
+	#define MX_SPI_BMODE_2			6
+	#define MX_SPI_PR_SCALE_2		16
+	#define MX_SPI_PO_SCALE_2		0
+	#define MX_SPI_INT_2			0
+ #else
+  #ifndef	MX_SPI_REF3
+	#define MX_SPI_REF3
+	#define SPI_2_MX_SPI_UREF			3
+	#define MX_SPI_CHANNEL_3		1
+	#define MX_SPI_MOSI_PIN_3		-1
+	#define MX_SPI_MOSI_PORT_3		port0
+	#define MX_SPI_MOSI_TRIS_3		tris0
+	#define MX_SPI_MISO_PIN_3		-1
+	#define MX_SPI_MISO_PORT_3		port0
+	#define MX_SPI_MISO_TRIS_3		tris0
+	#define MX_SPI_SCK_PIN_3		-1
+	#define MX_SPI_SCK_PORT_3		port0
+	#define MX_SPI_SCK_TRIS_3		tris0
+	#define MX_SPI_CS_PIN_3			0
+	#define MX_SPI_CS_PORT_3		0
+	#define MX_SPI_BMODE_3			6
+	#define MX_SPI_PR_SCALE_3		16
+	#define MX_SPI_PO_SCALE_3		0
+	#define MX_SPI_INT_3			0
+  #else
+   #ifndef	MX_SPI_REF4
+	#define MX_SPI_REF4
+	#define SPI_2_MX_SPI_UREF			4
+	#define MX_SPI_CHANNEL_4		1
+	#define MX_SPI_MOSI_PIN_4		-1
+	#define MX_SPI_MOSI_PORT_4		port0
+	#define MX_SPI_MOSI_TRIS_4		tris0
+	#define MX_SPI_MISO_PIN_4		-1
+	#define MX_SPI_MISO_PORT_4		port0
+	#define MX_SPI_MISO_TRIS_4		tris0
+	#define MX_SPI_SCK_PIN_4		-1
+	#define MX_SPI_SCK_PORT_4		port0
+	#define MX_SPI_SCK_TRIS_4		tris0
+	#define MX_SPI_CS_PIN_4			0
+	#define MX_SPI_CS_PORT_4		0
+	#define MX_SPI_BMODE_4			6
+	#define MX_SPI_PR_SCALE_4		16
+	#define MX_SPI_PO_SCALE_4		0
+	#define MX_SPI_INT_4			0
+   #endif
+  #endif
+ #endif
+#endif
+
+#define SPI_2_SPI_Master_Init		CAL_APPEND(FC_CAL_SPI_Master_Init_, SPI_2_MX_SPI_UREF)
+#define SPI_2_SPI_Master_Uninit	CAL_APPEND(FC_CAL_SPI_Master_Uninit_, SPI_2_MX_SPI_UREF)
+#define SPI_2_SPI_Master_Byte		CAL_APPEND(FC_CAL_SPI_Master_Byte_, SPI_2_MX_SPI_UREF)
+
+extern void SPI_2_SPI_Master_Init ();
+extern void SPI_2_SPI_Master_Uninit ();
+extern MX_UINT8 SPI_2_SPI_Master_Byte (MX_UINT8 DataOut);
+
+//FRAM commands
+#define FRAM_WREN  	6
+#define FRAM_WRDI  	4
+#define FRAM_RDSR  	5
+#define FRAM_WRSR  	1
+#define FRAM_READ  	3
+#define FRAM_WRITE 	2
+
+
+
+
+//SPI_Legacy(0): //Macro function declarations
+
+void FCD_SPI_Legacy0_SPI_Init();
+void FCD_SPI_Legacy0_SPI_Uninit();
+void FCD_SPI_Legacy0_SPI_Send_Char(MX_UINT8 Char);
+void FCD_SPI_Legacy0_SPI_Send_String(MX_STRING String, MX_UINT8 MSZ_String);
+MX_UINT8 FCD_SPI_Legacy0_SPI_Get_Char();
+void FCD_SPI_Legacy0_SPI_Get_String(MX_CHAR* FCR_RETVAL, MX_UINT8 FCR_RETVAL_SIZE, MX_UINT8 NumBytes);
+void FCD_SPI_Legacy0_DAC_Send_Char(MX_UINT8 Char);
+void FCD_SPI_Legacy0_NVM_Send_Char(MX_UINT8 hi_addr, MX_UINT8 lo_addr, MX_UINT8 Char);
+MX_UINT8 FCD_SPI_Legacy0_NVM_Get_Char(MX_UINT8 hi_addr, MX_UINT8 lo_addr);
+MX_UINT8 FCD_SPI_Legacy0_FramOutput(MX_UINT8 Char);
+void FCD_SPI_Legacy0_EnableFRAM();
+void FCD_SPI_Legacy0_DisableFRAM();
+
+
+
+//LCDDisplay(0): //Macro implementations
+
+
+void FCD_LCDDisplay0_RawSend(MX_UINT8 in, MX_UINT8 mask)
+
+{
+	
+		MX_UINT8 pt;
+
+		FC_CAL_Bit_Low(LCD_1__PORT0, LCD_1__BIT0);
+00CB  1283  	BCF STATUS, RP0
+00CC  1106  	BCF gbl_portb,2
+
+		FC_CAL_Bit_Low(LCD_1__PORT1, LCD_1__BIT1);
+00CD  1186  	BCF gbl_portb,3
+
+		FC_CAL_Bit_Low(LCD_1__PORT2, LCD_1__BIT2);
+00CE  1206  	BCF gbl_portb,4
+
+		FC_CAL_Bit_Low(LCD_1__PORT3, LCD_1__BIT3);
+00CF  1286  	BCF gbl_portb,5
+
+		FC_CAL_Bit_Low(LCD_1__PORT4, LCD_1__RS);
+00D0  1006  	BCF gbl_portb,0
+
+		FC_CAL_Bit_Low(LCD_1__PORT5, LCD_1__E);
+00D1  1086  	BCF gbl_portb,1
+
+		pt = ((in >> 4) & 0x0f);
+00D2  1683  	BSF STATUS, RP0
+00D3  0E33  	SWAPF FCD_LCDDis_00066_arg_in, W
+00D4  390F  	ANDLW 0x0F
+00D5  00B5  	MOVWF FCD_LCDDis_00066_1_pt
+00D6  300F  	MOVLW 0x0F
+00D7  05B5  	ANDWF FCD_LCDDis_00066_1_pt, F
+
+		if (pt & 0x01)
+00D8  1C35  	BTFSS FCD_LCDDis_00066_1_pt,0
+00D9  28DC  	GOTO	label12
+
+		    FC_CAL_Bit_High(LCD_1__PORT0, LCD_1__BIT0);
+00DA  1283  	BCF STATUS, RP0
+00DB  1506  	BSF gbl_portb,2
+
+		if (pt & 0x02)
+00DC  1683  	BSF STATUS, RP0
+00DD  1CB5  	BTFSS FCD_LCDDis_00066_1_pt,1
+00DE  28E1  	GOTO	label13
+
+		    FC_CAL_Bit_High(LCD_1__PORT1, LCD_1__BIT1);
+00DF  1283  	BCF STATUS, RP0
+00E0  1586  	BSF gbl_portb,3
+
+		if (pt & 0x04)
+00E1  1683  	BSF STATUS, RP0
+00E2  1D35  	BTFSS FCD_LCDDis_00066_1_pt,2
+00E3  28E6  	GOTO	label14
+
+		    FC_CAL_Bit_High(LCD_1__PORT2, LCD_1__BIT2);
+00E4  1283  	BCF STATUS, RP0
+00E5  1606  	BSF gbl_portb,4
+
+		if (pt & 0x08)
+00E6  1683  	BSF STATUS, RP0
+00E7  1DB5  	BTFSS FCD_LCDDis_00066_1_pt,3
+00E8  28EB  	GOTO	label15
+
+		    FC_CAL_Bit_High(LCD_1__PORT3, LCD_1__BIT3);
+00E9  1283  	BCF STATUS, RP0
+00EA  1686  	BSF gbl_portb,5
+
+		if (mask)
+00EB  1683  	BSF STATUS, RP0
+00EC  08B4  	MOVF FCD_LCDDis_00066_arg_mask, F
+00ED  1903  	BTFSC STATUS,Z
+00EE  28F1  	GOTO	label16
+
+		    FC_CAL_Bit_High(LCD_1__PORT4, LCD_1__RS);
+00EF  1283  	BCF STATUS, RP0
+00F0  1406  	BSF gbl_portb,0
+
+		LCD_1__DELAY;
+00F1  300A  	MOVLW 0x0A
+00F2  1683  	BSF STATUS, RP0
+00F3  00B6  	MOVWF delay_10us_00000_arg_del
+00F4  2041  	CALL delay_10us_00000
+
+		FC_CAL_Bit_High (LCD_1__PORT5, LCD_1__E);
+00F5  1283  	BCF STATUS, RP0
+00F6  1486  	BSF gbl_portb,1
+
+		LCD_1__DELAY;
+00F7  300A  	MOVLW 0x0A
+00F8  1683  	BSF STATUS, RP0
+00F9  00B6  	MOVWF delay_10us_00000_arg_del
+00FA  2041  	CALL delay_10us_00000
+
+		FC_CAL_Bit_Low (LCD_1__PORT5, LCD_1__E);
+00FB  1283  	BCF STATUS, RP0
+00FC  1086  	BCF gbl_portb,1
+
+		pt = (in & 0x0f);
+00FD  300F  	MOVLW 0x0F
+00FE  1683  	BSF STATUS, RP0
+00FF  0533  	ANDWF FCD_LCDDis_00066_arg_in, W
+0100  00B5  	MOVWF FCD_LCDDis_00066_1_pt
+
+		LCD_1__DELAY;
+0101  300A  	MOVLW 0x0A
+0102  00B6  	MOVWF delay_10us_00000_arg_del
+0103  2041  	CALL delay_10us_00000
+
+		FC_CAL_Bit_Low(LCD_1__PORT0, LCD_1__BIT0);
+0104  1283  	BCF STATUS, RP0
+0105  1106  	BCF gbl_portb,2
+
+		FC_CAL_Bit_Low(LCD_1__PORT1, LCD_1__BIT1);
+0106  1186  	BCF gbl_portb,3
+
+		FC_CAL_Bit_Low(LCD_1__PORT2, LCD_1__BIT2);
+0107  1206  	BCF gbl_portb,4
+
+		FC_CAL_Bit_Low(LCD_1__PORT3, LCD_1__BIT3);
+0108  1286  	BCF gbl_portb,5
+
+		FC_CAL_Bit_Low(LCD_1__PORT4, LCD_1__RS);
+0109  1006  	BCF gbl_portb,0
+
+		FC_CAL_Bit_Low(LCD_1__PORT5, LCD_1__E);
+010A  1086  	BCF gbl_portb,1
+
+		if (pt & 0x01)
+010B  1683  	BSF STATUS, RP0
+010C  1C35  	BTFSS FCD_LCDDis_00066_1_pt,0
+010D  2910  	GOTO	label17
+
+		    FC_CAL_Bit_High(LCD_1__PORT0, LCD_1__BIT0);
+010E  1283  	BCF STATUS, RP0
+010F  1506  	BSF gbl_portb,2
+
+		if (pt & 0x02)
+0110  1683  	BSF STATUS, RP0
+0111  1CB5  	BTFSS FCD_LCDDis_00066_1_pt,1
+0112  2915  	GOTO	label18
+
+		    FC_CAL_Bit_High(LCD_1__PORT1, LCD_1__BIT1);
+0113  1283  	BCF STATUS, RP0
+0114  1586  	BSF gbl_portb,3
+
+		if (pt & 0x04)
+0115  1683  	BSF STATUS, RP0
+0116  1D35  	BTFSS FCD_LCDDis_00066_1_pt,2
+0117  291A  	GOTO	label19
+
+		    FC_CAL_Bit_High(LCD_1__PORT2, LCD_1__BIT2);
+0118  1283  	BCF STATUS, RP0
+0119  1606  	BSF gbl_portb,4
+
+		if (pt & 0x08)
+011A  1683  	BSF STATUS, RP0
+011B  1DB5  	BTFSS FCD_LCDDis_00066_1_pt,3
+011C  291F  	GOTO	label20
+
+		    FC_CAL_Bit_High(LCD_1__PORT3, LCD_1__BIT3);
+011D  1283  	BCF STATUS, RP0
+011E  1686  	BSF gbl_portb,5
+
+		if (mask)
+011F  1683  	BSF STATUS, RP0
+0120  08B4  	MOVF FCD_LCDDis_00066_arg_mask, F
+0121  1903  	BTFSC STATUS,Z
+0122  2925  	GOTO	label21
+
+		    FC_CAL_Bit_High(LCD_1__PORT4, LCD_1__RS);
+0123  1283  	BCF STATUS, RP0
+0124  1406  	BSF gbl_portb,0
+
+		LCD_1__DELAY;
+0125  300A  	MOVLW 0x0A
+0126  1683  	BSF STATUS, RP0
+0127  00B6  	MOVWF delay_10us_00000_arg_del
+0128  2041  	CALL delay_10us_00000
+
+		FC_CAL_Bit_High (LCD_1__PORT5, LCD_1__E);
+0129  1283  	BCF STATUS, RP0
+012A  1486  	BSF gbl_portb,1
+
+		LCD_1__DELAY;
+012B  300A  	MOVLW 0x0A
+012C  1683  	BSF STATUS, RP0
+012D  00B6  	MOVWF delay_10us_00000_arg_del
+012E  2041  	CALL delay_10us_00000
+
+		FC_CAL_Bit_Low (LCD_1__PORT5, LCD_1__E);
+012F  1283  	BCF STATUS, RP0
+0130  1086  	BCF gbl_portb,1
+
+		LCD_1__DELAY;
+0131  300A  	MOVLW 0x0A
+0132  1683  	BSF STATUS, RP0
+0133  00B6  	MOVWF delay_10us_00000_arg_del
+0134  2041  	CALL delay_10us_00000
+
+
+}
+0135  0008  	RETURN
+
+
+void FCD_LCDDisplay0_Start()
+
+{
+	
+		FC_CAL_Bit_Low_DDR(LCD_1__PORT0, LCD_1__TRIS0, LCD_1__BIT0);
+0930  1683  	BSF STATUS, RP0
+0931  1303  	BCF STATUS, RP1
+0932  1106  	BCF gbl_trisb,2
+0933  1283  	BCF STATUS, RP0
+0934  1106  	BCF gbl_portb,2
+
+		FC_CAL_Bit_Low_DDR(LCD_1__PORT1, LCD_1__TRIS1, LCD_1__BIT1);
+0935  1683  	BSF STATUS, RP0
+0936  1186  	BCF gbl_trisb,3
+0937  1283  	BCF STATUS, RP0
+0938  1186  	BCF gbl_portb,3
+
+		FC_CAL_Bit_Low_DDR(LCD_1__PORT2, LCD_1__TRIS2, LCD_1__BIT2);
+0939  1683  	BSF STATUS, RP0
+093A  1206  	BCF gbl_trisb,4
+093B  1283  	BCF STATUS, RP0
+093C  1206  	BCF gbl_portb,4
+
+		FC_CAL_Bit_Low_DDR(LCD_1__PORT3, LCD_1__TRIS3, LCD_1__BIT3);
+093D  1683  	BSF STATUS, RP0
+093E  1286  	BCF gbl_trisb,5
+093F  1283  	BCF STATUS, RP0
+0940  1286  	BCF gbl_portb,5
+
+		FC_CAL_Bit_Low_DDR(LCD_1__PORT4, LCD_1__TRIS4, LCD_1__RS);
+0941  1683  	BSF STATUS, RP0
+0942  1006  	BCF gbl_trisb,0
+0943  1283  	BCF STATUS, RP0
+0944  1006  	BCF gbl_portb,0
+
+		FC_CAL_Bit_Low_DDR(LCD_1__PORT5, LCD_1__TRIS5, LCD_1__E);
+0945  1683  	BSF STATUS, RP0
+0946  1086  	BCF gbl_trisb,1
+0947  1283  	BCF STATUS, RP0
+0948  1086  	BCF gbl_portb,1
+
+
+		Wdt_Delay_Ms(12);
+0949  300C  	MOVLW 0x0C
+094A  1683  	BSF STATUS, RP0
+094B  00A1  	MOVWF Wdt_Delay__0003E_arg_delay
+094C  118A  	BCF PCLATH,3
+094D  2090  	CALL Wdt_Delay__0003E
+
+
+		FCD_LCDDisplay0_RawSend(0x33, 0);
+094E  3033  	MOVLW 0x33
+094F  00B3  	MOVWF FCD_LCDDis_00066_arg_in
+0950  01B4  	CLRF FCD_LCDDis_00066_arg_mask
+0951  20CB  	CALL FCD_LCDDis_00066
+
+		Wdt_Delay_Ms(2);
+0952  3002  	MOVLW 0x02
+0953  00A1  	MOVWF Wdt_Delay__0003E_arg_delay
+0954  2090  	CALL Wdt_Delay__0003E
+
+		FCD_LCDDisplay0_RawSend(0x33, 0);
+0955  3033  	MOVLW 0x33
+0956  00B3  	MOVWF FCD_LCDDis_00066_arg_in
+0957  01B4  	CLRF FCD_LCDDis_00066_arg_mask
+0958  20CB  	CALL FCD_LCDDis_00066
+
+		Wdt_Delay_Ms(2);
+0959  3002  	MOVLW 0x02
+095A  00A1  	MOVWF Wdt_Delay__0003E_arg_delay
+095B  2090  	CALL Wdt_Delay__0003E
+
+		FCD_LCDDisplay0_RawSend(0x32, 0);
+095C  3032  	MOVLW 0x32
+095D  00B3  	MOVWF FCD_LCDDis_00066_arg_in
+095E  01B4  	CLRF FCD_LCDDis_00066_arg_mask
+095F  20CB  	CALL FCD_LCDDis_00066
+
+		Wdt_Delay_Ms(2);
+0960  3002  	MOVLW 0x02
+0961  00A1  	MOVWF Wdt_Delay__0003E_arg_delay
+0962  2090  	CALL Wdt_Delay__0003E
+
+		FCD_LCDDisplay0_RawSend(0x2c, 0);
+0963  302C  	MOVLW 0x2C
+0964  00B3  	MOVWF FCD_LCDDis_00066_arg_in
+0965  01B4  	CLRF FCD_LCDDis_00066_arg_mask
+0966  20CB  	CALL FCD_LCDDis_00066
+
+		Wdt_Delay_Ms(2);
+0967  3002  	MOVLW 0x02
+0968  00A1  	MOVWF Wdt_Delay__0003E_arg_delay
+0969  2090  	CALL Wdt_Delay__0003E
+
+		FCD_LCDDisplay0_RawSend(0x06, 0);
+096A  3006  	MOVLW 0x06
+096B  00B3  	MOVWF FCD_LCDDis_00066_arg_in
+096C  01B4  	CLRF FCD_LCDDis_00066_arg_mask
+096D  20CB  	CALL FCD_LCDDis_00066
+
+		Wdt_Delay_Ms(2);
+096E  3002  	MOVLW 0x02
+096F  00A1  	MOVWF Wdt_Delay__0003E_arg_delay
+0970  2090  	CALL Wdt_Delay__0003E
+
+		FCD_LCDDisplay0_RawSend(0x0c, 0);
+0971  300C  	MOVLW 0x0C
+0972  00B3  	MOVWF FCD_LCDDis_00066_arg_in
+0973  01B4  	CLRF FCD_LCDDis_00066_arg_mask
+0974  20CB  	CALL FCD_LCDDis_00066
+
+		Wdt_Delay_Ms(2);
+0975  3002  	MOVLW 0x02
+0976  00A1  	MOVWF Wdt_Delay__0003E_arg_delay
+0977  2090  	CALL Wdt_Delay__0003E
+
+
+		//clear the display
+		FCD_LCDDisplay0_RawSend(0x01, 0);
+0978  3001  	MOVLW 0x01
+0979  00B3  	MOVWF FCD_LCDDis_00066_arg_in
+097A  01B4  	CLRF FCD_LCDDis_00066_arg_mask
+097B  20CB  	CALL FCD_LCDDis_00066
+
+		Wdt_Delay_Ms(2);
+097C  3002  	MOVLW 0x02
+097D  00A1  	MOVWF Wdt_Delay__0003E_arg_delay
+097E  2090  	CALL Wdt_Delay__0003E
+
+		FCD_LCDDisplay0_RawSend(0x02, 0);
+097F  3002  	MOVLW 0x02
+0980  00B3  	MOVWF FCD_LCDDis_00066_arg_in
+0981  01B4  	CLRF FCD_LCDDis_00066_arg_mask
+0982  20CB  	CALL FCD_LCDDis_00066
+
+		Wdt_Delay_Ms(2);
+0983  3002  	MOVLW 0x02
+0984  00A1  	MOVWF Wdt_Delay__0003E_arg_delay
+0985  2090  	CALL Wdt_Delay__0003E
+
+
+}
+0986  0008  	RETURN
+
+
+void FCD_LCDDisplay0_Clear()
+
+{
+	
+		FCD_LCDDisplay0_RawSend(0x01, 0);
+04F6  3001  	MOVLW 0x01
+04F7  1683  	BSF STATUS, RP0
+04F8  1303  	BCF STATUS, RP1
+04F9  00B3  	MOVWF FCD_LCDDis_00066_arg_in
+04FA  01B4  	CLRF FCD_LCDDis_00066_arg_mask
+04FB  20CB  	CALL FCD_LCDDis_00066
+
+		Wdt_Delay_Ms(2);
+04FC  3002  	MOVLW 0x02
+04FD  00A1  	MOVWF Wdt_Delay__0003E_arg_delay
+04FE  2090  	CALL Wdt_Delay__0003E
+
+		FCD_LCDDisplay0_RawSend(0x02, 0);
+04FF  3002  	MOVLW 0x02
+0500  00B3  	MOVWF FCD_LCDDis_00066_arg_in
+0501  01B4  	CLRF FCD_LCDDis_00066_arg_mask
+0502  20CB  	CALL FCD_LCDDis_00066
+
+		Wdt_Delay_Ms(2);
+0503  3002  	MOVLW 0x02
+0504  00A1  	MOVWF Wdt_Delay__0003E_arg_delay
+0505  2090  	CALL Wdt_Delay__0003E
+
+
+}
+0506  0008  	RETURN
+
+
+void FCD_LCDDisplay0_PrintASCII(MX_UINT8 Character)
+{
+	
+		FCD_LCDDisplay0_RawSend(Character, 0x10);
+
+}
+
+void FCD_LCDDisplay0_Command(MX_UINT8 in)
+{
+	
+		FCD_LCDDisplay0_RawSend(in, 0);
+		Wdt_Delay_Ms(2);
+
+}
+
+void FCD_LCDDisplay0_Cursor(MX_UINT8 x, MX_UINT8 y)
+
+{
+	
+	  #if (LCD_1__ROWCNT == 1)
+	    y=0x80;
+	  #endif
+
+	  #if (LCD_1__ROWCNT == 2)
+		if (y==0)
+			y=0x80;
+		else
+			y=0xc0;
+	  #endif
+
+	  #if (LCD_1__ROWCNT == 4)
+		if (y==0)
+0347  08A0  	MOVF FCD_LCDDis_00059_arg_y, F
+0348  1D03  	BTFSS STATUS,Z
+0349  2B4D  	GOTO	label44
+034D        label44
+
+			y=0x80;
+034A  3080  	MOVLW 0x80
+034B  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+
+		else if (y==1)
+034C  2B5C  	GOTO	label47
+034D  0320  	DECF FCD_LCDDis_00059_arg_y, W
+034E  1D03  	BTFSS STATUS,Z
+034F  2B53  	GOTO	label45
+0353        label45
+
+			y=0xc0;
+0350  30C0  	MOVLW 0xC0
+0351  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+
+
+		#if (LCD_1__COLCNT == 16)
+			else if (y==2)
+0352  2B5C  	GOTO	label47
+0353  0820  	MOVF FCD_LCDDis_00059_arg_y, W
+0354  3A02  	XORLW 0x02
+0355  1D03  	BTFSS STATUS,Z
+0356  2B5A  	GOTO	label46
+035A        label46
+
+				y=0x90;
+0357  3090  	MOVLW 0x90
+0358  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+
+			else
+0359  2B5C  	GOTO	label47
+035C        label47
+
+				y=0xd0;
+035A  30D0  	MOVLW 0xD0
+035B  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+
+		#endif
+
+		#if (LCD_1__COLCNT == 20)
+			else if (y==2)
+				y=0x94;
+			else
+				y=0xd4;
+		#endif
+	  #endif
+
+		FCD_LCDDisplay0_RawSend(y+x, 0);
+035C  1283  	BCF STATUS, RP0
+035D  087E  	MOVF FCD_LCDDis_00059_arg_x, W
+035E  1683  	BSF STATUS, RP0
+035F  0720  	ADDWF FCD_LCDDis_00059_arg_y, W
+0360  00B3  	MOVWF FCD_LCDDis_00066_arg_in
+0361  01B4  	CLRF FCD_LCDDis_00066_arg_mask
+0362  20CB  	CALL FCD_LCDDis_00066
+
+		Wdt_Delay_Ms(2);
+0363  3002  	MOVLW 0x02
+0364  00A1  	MOVWF Wdt_Delay__0003E_arg_delay
+0365  2090  	CALL Wdt_Delay__0003E
+
+
+}
+0366  0008  	RETURN
+
+
+void FCD_LCDDisplay0_PrintNumber(MX_SINT16 Number)
+
+{
+	
+		MX_SINT16 tmp_int;
+		MX_UINT8 tmp_byte;
+
+		if (Number < 0)
+0202  1FFC  	BTFSS FCD_LCDDis_0005C_arg_Number+D'1',7
+0203  2A17  	GOTO	label22
+0217        label22
+
+		{
+			FCD_LCDDisplay0_RawSend('-', 0x10);
+0204  302D  	MOVLW 0x2D
+0205  1683  	BSF STATUS, RP0
+0206  00B3  	MOVWF FCD_LCDDis_00066_arg_in
+0207  3010  	MOVLW 0x10
+0208  00B4  	MOVWF FCD_LCDDis_00066_arg_mask
+0209  20CB  	CALL FCD_LCDDis_00066
+
+			Number = 0 - Number;
+020A  1283  	BCF STATUS, RP0
+020B  087B  	MOVF FCD_LCDDis_0005C_arg_Number, W
+020C  3C00  	SUBLW 0x00
+020D  1683  	BSF STATUS, RP0
+020E  00A1  	MOVWF CompTempVar2220
+020F  1283  	BCF STATUS, RP0
+0210  09FC  	COMF FCD_LCDDis_0005C_arg_Number+D'1', F
+0211  1803  	BTFSC STATUS,C
+0212  0AFC  	INCF FCD_LCDDis_0005C_arg_Number+D'1', F
+0213  1683  	BSF STATUS, RP0
+0214  0821  	MOVF CompTempVar2220, W
+0215  1283  	BCF STATUS, RP0
+0216  00FB  	MOVWF FCD_LCDDis_0005C_arg_Number
+
+		}
+
+		tmp_int = Number;
+0217  087B  	MOVF FCD_LCDDis_0005C_arg_Number, W
+0218  00FD  	MOVWF FCD_LCDDis_0005C_1_tmp_int
+0219  087C  	MOVF FCD_LCDDis_0005C_arg_Number+D'1', W
+021A  00FE  	MOVWF FCD_LCDDis_0005C_1_tmp_int+D'1'
+
+		if (Number >= 10000)
+021B  3027  	MOVLW 0x27
+021C  027C  	SUBWF FCD_LCDDis_0005C_arg_Number+D'1', W
+021D  1D03  	BTFSS STATUS,Z
+021E  2A21  	GOTO	label23
+021F  3010  	MOVLW 0x10
+0220  027B  	SUBWF FCD_LCDDis_0005C_arg_Number, W
+0221        label23
+0221  1C03  	BTFSS STATUS,C
+0222  2A59  	GOTO	label27
+0223  1BFC  	BTFSC FCD_LCDDis_0005C_arg_Number+D'1',7
+0224  2A59  	GOTO	label27
+
+		{
+			tmp_byte = tmp_int / 10000;
+0225  1683  	BSF STATUS, RP0
+0226  01A5  	CLRF CompTempVar2223
+0227  1283  	BCF STATUS, RP0
+0228  087D  	MOVF FCD_LCDDis_0005C_1_tmp_int, W
+0229  1683  	BSF STATUS, RP0
+022A  00A1  	MOVWF __div_16_1_00003_arg_a
+022B  1283  	BCF STATUS, RP0
+022C  087E  	MOVF FCD_LCDDis_0005C_1_tmp_int+D'1', W
+022D  1683  	BSF STATUS, RP0
+022E  00A2  	MOVWF __div_16_1_00003_arg_a+D'1'
+022F  1283  	BCF STATUS, RP0
+0230  1FFE  	BTFSS FCD_LCDDis_0005C_1_tmp_int+D'1',7
+0231  2A39  	GOTO	label24
+0232  1683  	BSF STATUS, RP0
+0233  09A1  	COMF __div_16_1_00003_arg_a, F
+0234  09A2  	COMF __div_16_1_00003_arg_a+D'1', F
+0235  0AA1  	INCF __div_16_1_00003_arg_a, F
+0236  1903  	BTFSC STATUS,Z
+0237  0AA2  	INCF __div_16_1_00003_arg_a+D'1', F
+0238  0AA5  	INCF CompTempVar2223, F
+0239        label24
+0239  3010  	MOVLW 0x10
+023A  1683  	BSF STATUS, RP0
+023B  00A3  	MOVWF __div_16_1_00003_arg_b
+023C  3027  	MOVLW 0x27
+023D  00A4  	MOVWF __div_16_1_00003_arg_b+D'1'
+023E  2071  	CALL __div_16_1_00003
+023F  082A  	MOVF CompTempVarRet214, W
+0240  00A0  	MOVWF FCD_LCDDis_0005C_1_tmp_byte
+0241  1C25  	BTFSS CompTempVar2223,0
+0242  2A45  	GOTO	label25
+0243  09A0  	COMF FCD_LCDDis_0005C_1_tmp_byte, F
+0244  0AA0  	INCF FCD_LCDDis_0005C_1_tmp_byte, F
+0245        label25
+
+			FCD_LCDDisplay0_RawSend('0' + tmp_byte, 0x10);
+0245  0820  	MOVF FCD_LCDDis_0005C_1_tmp_byte, W
+0246  3E30  	ADDLW 0x30
+0247  00B3  	MOVWF FCD_LCDDis_00066_arg_in
+0248  3010  	MOVLW 0x10
+0249  00B4  	MOVWF FCD_LCDDis_00066_arg_mask
+024A  20CB  	CALL FCD_LCDDis_00066
+
+
+			while (tmp_byte > 0)
+024B        label26
+024B  0820  	MOVF FCD_LCDDis_0005C_1_tmp_byte, W
+024C  3C00  	SUBLW 0x00
+024D  1803  	BTFSC STATUS,C
+024E  2A59  	GOTO	label27
+0258  2A4B  	GOTO	label26
+0259        label27
+
+			{
+				tmp_int = tmp_int - 10000;
+024F  3010  	MOVLW 0x10
+0250  1283  	BCF STATUS, RP0
+0251  02FD  	SUBWF FCD_LCDDis_0005C_1_tmp_int, F
+0252  3027  	MOVLW 0x27
+0253  1C03  	BTFSS STATUS,C
+0254  3028  	MOVLW 0x28
+0255  02FE  	SUBWF FCD_LCDDis_0005C_1_tmp_int+D'1', F
+
+				tmp_byte--;
+0256  1683  	BSF STATUS, RP0
+0257  03A0  	DECF FCD_LCDDis_0005C_1_tmp_byte, F
+
+			}
+		}
+		if (Number >= 1000)
+0259  3003  	MOVLW 0x03
+025A  1283  	BCF STATUS, RP0
+025B  027C  	SUBWF FCD_LCDDis_0005C_arg_Number+D'1', W
+025C  1D03  	BTFSS STATUS,Z
+025D  2A60  	GOTO	label28
+025E  30E8  	MOVLW 0xE8
+025F  027B  	SUBWF FCD_LCDDis_0005C_arg_Number, W
+0260        label28
+0260  1C03  	BTFSS STATUS,C
+0261  2A9A  	GOTO	label32
+0262  1BFC  	BTFSC FCD_LCDDis_0005C_arg_Number+D'1',7
+0263  2A9A  	GOTO	label32
+
+		{
+			tmp_byte = tmp_int / 1000;
+0264  1683  	BSF STATUS, RP0
+0265  01A6  	CLRF CompTempVar2227
+0266  1283  	BCF STATUS, RP0
+0267  087D  	MOVF FCD_LCDDis_0005C_1_tmp_int, W
+0268  1683  	BSF STATUS, RP0
+0269  00A1  	MOVWF __div_16_1_00003_arg_a
+026A  1283  	BCF STATUS, RP0
+026B  087E  	MOVF FCD_LCDDis_0005C_1_tmp_int+D'1', W
+026C  1683  	BSF STATUS, RP0
+026D  00A2  	MOVWF __div_16_1_00003_arg_a+D'1'
+026E  1283  	BCF STATUS, RP0
+026F  1FFE  	BTFSS FCD_LCDDis_0005C_1_tmp_int+D'1',7
+0270  2A78  	GOTO	label29
+0271  1683  	BSF STATUS, RP0
+0272  09A1  	COMF __div_16_1_00003_arg_a, F
+0273  09A2  	COMF __div_16_1_00003_arg_a+D'1', F
+0274  0AA1  	INCF __div_16_1_00003_arg_a, F
+0275  1903  	BTFSC STATUS,Z
+0276  0AA2  	INCF __div_16_1_00003_arg_a+D'1', F
+0277  0AA6  	INCF CompTempVar2227, F
+0278        label29
+0278  30E8  	MOVLW 0xE8
+0279  1683  	BSF STATUS, RP0
+027A  00A3  	MOVWF __div_16_1_00003_arg_b
+027B  3003  	MOVLW 0x03
+027C  00A4  	MOVWF __div_16_1_00003_arg_b+D'1'
+027D  2071  	CALL __div_16_1_00003
+027E  082A  	MOVF CompTempVarRet214, W
+027F  00A5  	MOVWF CompTempVar2226
+0280  1C26  	BTFSS CompTempVar2227,0
+0281  2A84  	GOTO	label30
+0282  09A5  	COMF CompTempVar2226, F
+0283  0AA5  	INCF CompTempVar2226, F
+0284        label30
+0284  0825  	MOVF CompTempVar2226, W
+0285  00A0  	MOVWF FCD_LCDDis_0005C_1_tmp_byte
+
+			FCD_LCDDisplay0_RawSend('0' + tmp_byte, 0x10);
+0286  0820  	MOVF FCD_LCDDis_0005C_1_tmp_byte, W
+0287  3E30  	ADDLW 0x30
+0288  00B3  	MOVWF FCD_LCDDis_00066_arg_in
+0289  3010  	MOVLW 0x10
+028A  00B4  	MOVWF FCD_LCDDis_00066_arg_mask
+028B  20CB  	CALL FCD_LCDDis_00066
+
+
+			while (tmp_byte > 0)
+028C        label31
+028C  0820  	MOVF FCD_LCDDis_0005C_1_tmp_byte, W
+028D  3C00  	SUBLW 0x00
+028E  1803  	BTFSC STATUS,C
+028F  2A9A  	GOTO	label32
+0299  2A8C  	GOTO	label31
+029A        label32
+
+			{
+				tmp_int = tmp_int - 1000;
+0290  30E8  	MOVLW 0xE8
+0291  1283  	BCF STATUS, RP0
+0292  02FD  	SUBWF FCD_LCDDis_0005C_1_tmp_int, F
+0293  3003  	MOVLW 0x03
+0294  1C03  	BTFSS STATUS,C
+0295  3004  	MOVLW 0x04
+0296  02FE  	SUBWF FCD_LCDDis_0005C_1_tmp_int+D'1', F
+
+				tmp_byte--;
+0297  1683  	BSF STATUS, RP0
+0298  03A0  	DECF FCD_LCDDis_0005C_1_tmp_byte, F
+
+			}
+		}
+		if (Number >= 100)
+029A  1283  	BCF STATUS, RP0
+029B  087C  	MOVF FCD_LCDDis_0005C_arg_Number+D'1', W
+029C  3A80  	XORLW 0x80
+029D  1683  	BSF STATUS, RP0
+029E  00A1  	MOVWF CompTempVar2230
+029F  3080  	MOVLW 0x80
+02A0  0221  	SUBWF CompTempVar2230, W
+02A1  1D03  	BTFSS STATUS,Z
+02A2  2AA6  	GOTO	label33
+02A3  3064  	MOVLW 0x64
+02A4  1283  	BCF STATUS, RP0
+02A5  027B  	SUBWF FCD_LCDDis_0005C_arg_Number, W
+02A6        label33
+02A6  1C03  	BTFSS STATUS,C
+02A7  2ADC  	GOTO	label37
+
+		{
+			tmp_byte = tmp_int / 100;
+02A8  1683  	BSF STATUS, RP0
+02A9  01A6  	CLRF CompTempVar2232
+02AA  1283  	BCF STATUS, RP0
+02AB  087D  	MOVF FCD_LCDDis_0005C_1_tmp_int, W
+02AC  1683  	BSF STATUS, RP0
+02AD  00A1  	MOVWF __div_16_1_00003_arg_a
+02AE  1283  	BCF STATUS, RP0
+02AF  087E  	MOVF FCD_LCDDis_0005C_1_tmp_int+D'1', W
+02B0  1683  	BSF STATUS, RP0
+02B1  00A2  	MOVWF __div_16_1_00003_arg_a+D'1'
+02B2  1283  	BCF STATUS, RP0
+02B3  1FFE  	BTFSS FCD_LCDDis_0005C_1_tmp_int+D'1',7
+02B4  2ABC  	GOTO	label34
+02B5  1683  	BSF STATUS, RP0
+02B6  09A1  	COMF __div_16_1_00003_arg_a, F
+02B7  09A2  	COMF __div_16_1_00003_arg_a+D'1', F
+02B8  0AA1  	INCF __div_16_1_00003_arg_a, F
+02B9  1903  	BTFSC STATUS,Z
+02BA  0AA2  	INCF __div_16_1_00003_arg_a+D'1', F
+02BB  0AA6  	INCF CompTempVar2232, F
+02BC        label34
+02BC  3064  	MOVLW 0x64
+02BD  1683  	BSF STATUS, RP0
+02BE  00A3  	MOVWF __div_16_1_00003_arg_b
+02BF  01A4  	CLRF __div_16_1_00003_arg_b+D'1'
+02C0  2071  	CALL __div_16_1_00003
+02C1  082A  	MOVF CompTempVarRet214, W
+02C2  00A5  	MOVWF CompTempVar2231
+02C3  1C26  	BTFSS CompTempVar2232,0
+02C4  2AC7  	GOTO	label35
+02C5  09A5  	COMF CompTempVar2231, F
+02C6  0AA5  	INCF CompTempVar2231, F
+02C7        label35
+02C7  0825  	MOVF CompTempVar2231, W
+02C8  00A0  	MOVWF FCD_LCDDis_0005C_1_tmp_byte
+
+			FCD_LCDDisplay0_RawSend('0' + tmp_byte, 0x10);
+02C9  0820  	MOVF FCD_LCDDis_0005C_1_tmp_byte, W
+02CA  3E30  	ADDLW 0x30
+02CB  00B3  	MOVWF FCD_LCDDis_00066_arg_in
+02CC  3010  	MOVLW 0x10
+02CD  00B4  	MOVWF FCD_LCDDis_00066_arg_mask
+02CE  20CB  	CALL FCD_LCDDis_00066
+
+
+			while (tmp_byte > 0)
+02CF        label36
+02CF  0820  	MOVF FCD_LCDDis_0005C_1_tmp_byte, W
+02D0  3C00  	SUBLW 0x00
+02D1  1803  	BTFSC STATUS,C
+02D2  2ADC  	GOTO	label37
+02DB  2ACF  	GOTO	label36
+02DC        label37
+
+			{
+				tmp_int = tmp_int - 100;
+02D3  3064  	MOVLW 0x64
+02D4  1283  	BCF STATUS, RP0
+02D5  02FD  	SUBWF FCD_LCDDis_0005C_1_tmp_int, F
+02D6  08FE  	MOVF FCD_LCDDis_0005C_1_tmp_int+D'1', F
+02D7  1C03  	BTFSS STATUS,C
+02D8  03FE  	DECF FCD_LCDDis_0005C_1_tmp_int+D'1', F
+
+				tmp_byte--;
+02D9  1683  	BSF STATUS, RP0
+02DA  03A0  	DECF FCD_LCDDis_0005C_1_tmp_byte, F
+
+			}
+		}
+		if (Number >= 10)
+02DC  1283  	BCF STATUS, RP0
+02DD  087C  	MOVF FCD_LCDDis_0005C_arg_Number+D'1', W
+02DE  3A80  	XORLW 0x80
+02DF  1683  	BSF STATUS, RP0
+02E0  00A1  	MOVWF CompTempVar2235
+02E1  3080  	MOVLW 0x80
+02E2  0221  	SUBWF CompTempVar2235, W
+02E3  1D03  	BTFSS STATUS,Z
+02E4  2AE8  	GOTO	label38
+02E5  300A  	MOVLW 0x0A
+02E6  1283  	BCF STATUS, RP0
+02E7  027B  	SUBWF FCD_LCDDis_0005C_arg_Number, W
+02E8        label38
+02E8  1C03  	BTFSS STATUS,C
+02E9  2B1E  	GOTO	label42
+
+		{
+			tmp_byte = tmp_int / 10;
+02EA  1683  	BSF STATUS, RP0
+02EB  01A6  	CLRF CompTempVar2237
+02EC  1283  	BCF STATUS, RP0
+02ED  087D  	MOVF FCD_LCDDis_0005C_1_tmp_int, W
+02EE  1683  	BSF STATUS, RP0
+02EF  00A1  	MOVWF __div_16_1_00003_arg_a
+02F0  1283  	BCF STATUS, RP0
+02F1  087E  	MOVF FCD_LCDDis_0005C_1_tmp_int+D'1', W
+02F2  1683  	BSF STATUS, RP0
+02F3  00A2  	MOVWF __div_16_1_00003_arg_a+D'1'
+02F4  1283  	BCF STATUS, RP0
+02F5  1FFE  	BTFSS FCD_LCDDis_0005C_1_tmp_int+D'1',7
+02F6  2AFE  	GOTO	label39
+02F7  1683  	BSF STATUS, RP0
+02F8  09A1  	COMF __div_16_1_00003_arg_a, F
+02F9  09A2  	COMF __div_16_1_00003_arg_a+D'1', F
+02FA  0AA1  	INCF __div_16_1_00003_arg_a, F
+02FB  1903  	BTFSC STATUS,Z
+02FC  0AA2  	INCF __div_16_1_00003_arg_a+D'1', F
+02FD  0AA6  	INCF CompTempVar2237, F
+02FE        label39
+02FE  300A  	MOVLW 0x0A
+02FF  1683  	BSF STATUS, RP0
+0300  00A3  	MOVWF __div_16_1_00003_arg_b
+0301  01A4  	CLRF __div_16_1_00003_arg_b+D'1'
+0302  2071  	CALL __div_16_1_00003
+0303  082A  	MOVF CompTempVarRet214, W
+0304  00A5  	MOVWF CompTempVar2236
+0305  1C26  	BTFSS CompTempVar2237,0
+0306  2B09  	GOTO	label40
+0307  09A5  	COMF CompTempVar2236, F
+0308  0AA5  	INCF CompTempVar2236, F
+0309        label40
+0309  0825  	MOVF CompTempVar2236, W
+030A  00A0  	MOVWF FCD_LCDDis_0005C_1_tmp_byte
+
+			FCD_LCDDisplay0_RawSend('0' + tmp_byte, 0x10);
+030B  0820  	MOVF FCD_LCDDis_0005C_1_tmp_byte, W
+030C  3E30  	ADDLW 0x30
+030D  00B3  	MOVWF FCD_LCDDis_00066_arg_in
+030E  3010  	MOVLW 0x10
+030F  00B4  	MOVWF FCD_LCDDis_00066_arg_mask
+0310  20CB  	CALL FCD_LCDDis_00066
+
+
+			while (tmp_byte > 0)
+0311        label41
+0311  0820  	MOVF FCD_LCDDis_0005C_1_tmp_byte, W
+0312  3C00  	SUBLW 0x00
+0313  1803  	BTFSC STATUS,C
+0314  2B1E  	GOTO	label42
+031D  2B11  	GOTO	label41
+031E        label42
+
+			{
+				tmp_int = tmp_int - 10;
+0315  300A  	MOVLW 0x0A
+0316  1283  	BCF STATUS, RP0
+0317  02FD  	SUBWF FCD_LCDDis_0005C_1_tmp_int, F
+0318  08FE  	MOVF FCD_LCDDis_0005C_1_tmp_int+D'1', F
+0319  1C03  	BTFSS STATUS,C
+031A  03FE  	DECF FCD_LCDDis_0005C_1_tmp_int+D'1', F
+
+				tmp_byte--;
+031B  1683  	BSF STATUS, RP0
+031C  03A0  	DECF FCD_LCDDis_0005C_1_tmp_byte, F
+
+			}
+		}
+		FCD_LCDDisplay0_RawSend('0' + tmp_int, 0x10);
+031E  1283  	BCF STATUS, RP0
+031F  087D  	MOVF FCD_LCDDis_0005C_1_tmp_int, W
+0320  3E30  	ADDLW 0x30
+0321  1683  	BSF STATUS, RP0
+0322  00B3  	MOVWF FCD_LCDDis_00066_arg_in
+0323  3010  	MOVLW 0x10
+0324  00B4  	MOVWF FCD_LCDDis_00066_arg_mask
+0325  20CB  	CALL FCD_LCDDis_00066
+
+
+}
+0326  0008  	RETURN
+
+
+void FCD_LCDDisplay0_PrintString(MX_STRING String, MX_UINT8 MSZ_String)
+
+{
+	
+		MX_UINT8 idx = 0;
+0327  01B2  	CLRF FCD_LCDDis_0005A_1_idx
+
+
+		for (idx=0; idx<MSZ_String; idx++)
+0328  01B2  	CLRF FCD_LCDDis_0005A_1_idx
+0329        label43
+0329  0831  	MOVF FCD_LCDDis_0005A_arg_MSZ_String, W
+032A  0232  	SUBWF FCD_LCDDis_0005A_1_idx, W
+032B  1803  	BTFSC STATUS,C
+0345  0AB2  	INCF FCD_LCDDis_0005A_1_idx, F
+0346  2B29  	GOTO	label43
+
+		{
+			if (String[idx] == 0)
+032D  1383  	BCF STATUS,IRP
+032E  1283  	BCF STATUS, RP0
+032F  187C  	BTFSC FCD_LCDDis_0005A_arg_String+D'1',0
+0330  1783  	BSF STATUS,IRP
+0331  087B  	MOVF FCD_LCDDis_0005A_arg_String, W
+0332  1683  	BSF STATUS, RP0
+0333  0732  	ADDWF FCD_LCDDis_0005A_1_idx, W
+0334  0084  	MOVWF FSR
+0335  0880  	MOVF INDF, F
+0336  1903  	BTFSC STATUS,Z
+
+			{
+				break;
+
+			}
+			FCD_LCDDisplay0_RawSend(String[idx], 0x10);
+0338  1383  	BCF STATUS,IRP
+0339  1283  	BCF STATUS, RP0
+033A  187C  	BTFSC FCD_LCDDis_0005A_arg_String+D'1',0
+033B  1783  	BSF STATUS,IRP
+033C  087B  	MOVF FCD_LCDDis_0005A_arg_String, W
+033D  1683  	BSF STATUS, RP0
+033E  0732  	ADDWF FCD_LCDDis_0005A_1_idx, W
+033F  0084  	MOVWF FSR
+0340  0800  	MOVF INDF, W
+0341  00B3  	MOVWF FCD_LCDDis_00066_arg_in
+0342  3010  	MOVLW 0x10
+0343  00B4  	MOVWF FCD_LCDDis_00066_arg_mask
+0344  20CB  	CALL FCD_LCDDis_00066
+
+		}
+
+}
+032C  0008  	RETURN
+0337  0008  	RETURN
+
+
+void FCD_LCDDisplay0_ScrollDisplay(MX_UINT8 Direction, MX_UINT8 Num_Positions)
+{
+	
+		MX_UINT8 cmd = 0;
+		MX_UINT8 count;
+
+		//Choose the direction
+		switch (Direction)
+		{
+			case 0:
+			case 'l':
+			case 'L':
+
+				cmd = 0x18;
+				break;
+
+			case 1:
+			case 'r':
+			case 'R':
+
+				cmd = 0x1C;
+				break;
+
+			default:
+				break;
+		}
+
+		//If direction accepted then scroll the specified amount
+		if (cmd)
+		{
+			for (count = 0; count < Num_Positions; count++)
+				FCD_LCDDisplay0_Command(cmd);
+		}
+
+}
+
+void FCD_LCDDisplay0_ClearLine(MX_UINT8 Line)
+
+{
+	
+		MX_UINT8 count;
+		MX_UINT8 rowcount;
+
+		//Define number of columns per line
+		#if (LCD_1__ROWCNT == 1)
+			rowcount=80;
+		#endif
+
+		#if (LCD_1__ROWCNT == 2)
+			rowcount=40;
+		#endif
+
+		#if (LCD_1__ROWCNT == 4)
+			#if (LCD_1__COLCNT == 16)
+				rowcount=16;
+04DA  3010  	MOVLW 0x10
+04DB  00FD  	MOVWF FCD_LCDDis_00062_1_rowcount
+
+			#endif
+			#if (LCD_1__COLCNT == 20)
+				rowcount=20;
+			#endif
+		#endif
+
+		//Start at beginning of the line
+		FCD_LCDDisplay0_Cursor (0, Line);
+04DC  01FE  	CLRF FCD_LCDDis_00059_arg_x
+04DD  087B  	MOVF FCD_LCDDis_00062_arg_Line, W
+04DE  1683  	BSF STATUS, RP0
+04DF  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+04E0  2347  	CALL FCD_LCDDis_00059
+
+
+		//Send out spaces to clear line
+		for (count = 0; count < rowcount; count++)
+04E1  1283  	BCF STATUS, RP0
+04E2  01FC  	CLRF FCD_LCDDis_00062_1_count
+04E3        label51
+04E3  087D  	MOVF FCD_LCDDis_00062_1_rowcount, W
+04E4  027C  	SUBWF FCD_LCDDis_00062_1_count, W
+04E5  1803  	BTFSC STATUS,C
+04E6  2CF0  	GOTO	label52
+04ED  1283  	BCF STATUS, RP0
+04EE  0AFC  	INCF FCD_LCDDis_00062_1_count, F
+04EF  2CE3  	GOTO	label51
+04F0        label52
+
+			FCD_LCDDisplay0_RawSend(' ', 0x10);
+04E7  3020  	MOVLW 0x20
+04E8  1683  	BSF STATUS, RP0
+04E9  00B3  	MOVWF FCD_LCDDis_00066_arg_in
+04EA  3010  	MOVLW 0x10
+04EB  00B4  	MOVWF FCD_LCDDis_00066_arg_mask
+04EC  20CB  	CALL FCD_LCDDis_00066
+
+
+		//Move back to the beginning of the line.
+		FCD_LCDDisplay0_Cursor (0, Line);
+04F0  01FE  	CLRF FCD_LCDDis_00059_arg_x
+04F1  087B  	MOVF FCD_LCDDis_00062_arg_Line, W
+04F2  1683  	BSF STATUS, RP0
+04F3  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+04F4  2347  	CALL FCD_LCDDis_00059
+
+
+}
+04F5  0008  	RETURN
+
+
+void FCD_LCDDisplay0_RAM_Write(MX_UINT8 nIdx, MX_UINT8 d0, MX_UINT8 d1, MX_UINT8 d2, MX_UINT8 d3, MX_UINT8 d4, MX_UINT8 d5, MX_UINT8 d6, MX_UINT8 d7)
+{
+	   //set CGRAM address
+
+	   FCD_LCDDisplay0_RawSend(64 + (nIdx << 3), 0);
+	   delay_ms(2);
+
+	   //write CGRAM data
+	   FCD_LCDDisplay0_RawSend(d0, 0x10);
+	   FCD_LCDDisplay0_RawSend(d1, 0x10);
+	   FCD_LCDDisplay0_RawSend(d2, 0x10);
+	   FCD_LCDDisplay0_RawSend(d3, 0x10);
+	   FCD_LCDDisplay0_RawSend(d4, 0x10);
+	   FCD_LCDDisplay0_RawSend(d5, 0x10);
+	   FCD_LCDDisplay0_RawSend(d6, 0x10);
+	   FCD_LCDDisplay0_RawSend(d7, 0x10);
+
+	   //Clear the display
+	   FCD_LCDDisplay0_RawSend(0x01, 0);
+	   delay_ms(2);
+	   FCD_LCDDisplay0_RawSend(0x02, 0);
+	   delay_ms(2);
+
+}
+
+
+
+//SPI_Legacy(0): //Macro implementations
+
+
+void FCD_SPI_Legacy0_SPI_Init()
+
+{
+	
+		//Disable SPI Devices
+		FC_CAL_Bit_High_DDR(SPI_2_MX_SPI_LEGACY_DAC_PORT, SPI_2_MX_SPI_LEGACY_DAC_TRIS, SPI_2_MX_SPI_LEGACY_DAC_PIN);
+0924  1683  	BSF STATUS, RP0
+0925  1303  	BCF STATUS, RP1
+0926  1005  	BCF gbl_trisa,0
+0927  1283  	BCF STATUS, RP0
+0928  1405  	BSF gbl_porta,0
+
+		FC_CAL_Bit_High_DDR(SPI_2_MX_SPI_LEGACY_FRAM_PORT, SPI_2_MX_SPI_LEGACY_FRAM_TRIS, SPI_2_MX_SPI_LEGACY_FRAM_PIN);
+0929  1683  	BSF STATUS, RP0
+092A  1005  	BCF gbl_trisa,0
+092B  1283  	BCF STATUS, RP0
+092C  1405  	BSF gbl_porta,0
+
+
+		//Init SPI
+		SPI_2_SPI_Master_Init();		//Call initialise function
+092D  118A  	BCF PCLATH,3
+092E  2367  	CALL FC_CAL_SPI_0006D
+
+
+}
+092F  0008  	RETURN
+
+
+void FCD_SPI_Legacy0_SPI_Uninit()
+{
+	
+		//Convert SPI Device Control Lines To Inputs
+		FC_CAL_Bit_In_DDR(SPI_2_MX_SPI_LEGACY_DAC_PORT, SPI_2_MX_SPI_LEGACY_DAC_TRIS, SPI_2_MX_SPI_LEGACY_DAC_PIN);
+		FC_CAL_Bit_In_DDR(SPI_2_MX_SPI_LEGACY_FRAM_PORT, SPI_2_MX_SPI_LEGACY_FRAM_TRIS, SPI_2_MX_SPI_LEGACY_FRAM_PIN);
+
+		//Uninit SPI
+		SPI_2_SPI_Master_Uninit();		//Call uninitialise function
+
+}
+
+void FCD_SPI_Legacy0_SPI_Send_Char(MX_UINT8 Char)
+
+{
+	
+		SPI_2_SPI_Master_Byte(Char);
+006D  087C  	MOVF FCD_SPI_Le_00052_arg_Char, W
+006E  00FD  	MOVWF FC_CAL_SPI_0006F_arg_DataOut
+006F  2060  	CALL FC_CAL_SPI_0006F
+
+
+}
+0070  0008  	RETURN
+
+
+void FCD_SPI_Legacy0_SPI_Send_String(MX_STRING String, MX_UINT8 MSZ_String)
+{
+	
+		MX_UINT8 idx;
+		for(idx = 0; idx < MSZ_String; idx++)
+		{
+			if (String[idx] == 0)				//End of string data?
+				break;
+
+			SPI_2_SPI_Master_Byte(String[idx]);
+		}
+
+}
+
+MX_UINT8 FCD_SPI_Legacy0_SPI_Get_Char()
+
+{
+	
+		MX_UINT8 retVal = 0;
+00BF  1283  	BCF STATUS, RP0
+00C0  1303  	BCF STATUS, RP1
+00C1  01FC  	CLRF FCD_SPI_Le_00054_1_retVal
+
+
+		retVal = SPI_2_SPI_Master_Byte(0xFF);
+00C2  30FF  	MOVLW 0xFF
+00C3  00FD  	MOVWF FC_CAL_SPI_0006F_arg_DataOut
+00C4  2060  	CALL FC_CAL_SPI_0006F
+00C5  0820  	MOVF CompTempVarRet2327, W
+00C6  1283  	BCF STATUS, RP0
+00C7  00FC  	MOVWF FCD_SPI_Le_00054_1_retVal
+
+
+		return (retVal);
+00C8  087C  	MOVF FCD_SPI_Le_00054_1_retVal, W
+00C9  00FD  	MOVWF CompTempVarRet2190
+
+
+}
+00CA  0008  	RETURN
+
+
+void FCD_SPI_Legacy0_SPI_Get_String(MX_CHAR* FCR_RETVAL, MX_UINT8 FCR_RETVAL_SIZE, MX_UINT8 NumBytes)
+{
+		MX_UINT8 idx;
+
+		if (NumBytes > FCR_RETVAL_SIZE)
+			NumBytes = FCR_RETVAL_SIZE;
+
+		for (idx = 0; idx < NumBytes; idx++)
+		{
+			FCR_RETVAL[idx] = SPI_2_SPI_Master_Byte(0xFF);		//Collect incoming data byte
+		}
+
+		if (idx < FCR_RETVAL_SIZE)
+			FCR_RETVAL[idx] = 0;					//Terminate string if string variable is longer then expected data
+
+}
+
+void FCD_SPI_Legacy0_DAC_Send_Char(MX_UINT8 Char)
+{
+	
+		MX_UINT8 dac_val;
+
+		FC_CAL_Bit_Low(SPI_2_MX_SPI_LEGACY_DAC_PORT, SPI_2_MX_SPI_LEGACY_DAC_PIN);		//enable dac
+
+		dac_val = (Char & 0xF0) >> 4;
+		SPI_2_SPI_Master_Byte(dac_val);
+
+		dac_val = (Char & 0x0F) << 4;
+		SPI_2_SPI_Master_Byte(dac_val);
+
+		FC_CAL_Bit_High(SPI_2_MX_SPI_LEGACY_DAC_PORT, SPI_2_MX_SPI_LEGACY_DAC_PIN);		//disable dac
+
+}
+
+void FCD_SPI_Legacy0_NVM_Send_Char(MX_UINT8 hi_addr, MX_UINT8 lo_addr, MX_UINT8 Char)
+{
+	
+		//enable writes
+		FCD_SPI_Legacy0_EnableFRAM();
+		FCD_SPI_Legacy0_FramOutput(FRAM_WREN);
+		FCD_SPI_Legacy0_DisableFRAM();
+
+		//send write-fram command, address and data
+		FCD_SPI_Legacy0_EnableFRAM();
+		FCD_SPI_Legacy0_FramOutput(FRAM_WRITE);
+		FCD_SPI_Legacy0_FramOutput(hi_addr);
+		FCD_SPI_Legacy0_FramOutput(lo_addr);
+		FCD_SPI_Legacy0_FramOutput(Char);
+		FCD_SPI_Legacy0_DisableFRAM();
+
+}
+
+MX_UINT8 FCD_SPI_Legacy0_NVM_Get_Char(MX_UINT8 hi_addr, MX_UINT8 lo_addr)
+{
+	
+		MX_UINT8 retVal;
+
+		FCD_SPI_Legacy0_EnableFRAM();
+
+		//send read-fram command and address
+		FCD_SPI_Legacy0_FramOutput(FRAM_READ);
+		FCD_SPI_Legacy0_FramOutput(hi_addr);
+		FCD_SPI_Legacy0_FramOutput(lo_addr);
+
+		//read the data
+		retVal = FCD_SPI_Legacy0_FramOutput(0x5A);  	//don't care byte of 0x5A
+
+		FCD_SPI_Legacy0_DisableFRAM();
+
+		return(retVal);
+
+}
+
+MX_UINT8 FCD_SPI_Legacy0_FramOutput(MX_UINT8 Char)
+{
+	
+		MX_UINT8 retVal = 0;
+		retVal = SPI_2_SPI_Master_Byte(Char);
+		return (retVal);
+
+}
+
+void FCD_SPI_Legacy0_EnableFRAM()
+{
+	
+		FC_CAL_Bit_Low(SPI_2_MX_SPI_LEGACY_FRAM_PORT, SPI_2_MX_SPI_LEGACY_FRAM_PIN);
+
+}
+
+void FCD_SPI_Legacy0_DisableFRAM()
+{
+	
+		FC_CAL_Bit_High(SPI_2_MX_SPI_LEGACY_FRAM_PORT, SPI_2_MX_SPI_LEGACY_FRAM_PIN);
+
+}
+
+#include "C:\Program Files (x86)\Flowcode\v5\CAL\includes.c"
+
+//Macro implementations
+
+
+void FCM_spi_data_write()
+
+{
+
+	//CSN
+	//Output: 0 -> C2
+	trisc = trisc & 0xFB;
+009B  30FB  	MOVLW 0xFB
+009C  1683  	BSF STATUS, RP0
+009D  1303  	BCF STATUS, RP1
+009E  0507  	ANDWF gbl_trisc, W
+009F  0087  	MOVWF gbl_trisc
+
+	if ((0))
+		portc = (portc & 0xFB) | 0x04;
+	else
+		portc = portc & 0xFB;
+00A0  30FB  	MOVLW 0xFB
+00A1  1283  	BCF STATUS, RP0
+00A2  0507  	ANDWF gbl_portc, W
+00A3  0087  	MOVWF gbl_portc
+
+
+	//Delay
+	//Delay: 5 us
+	delay_us(5);
+00A4  3005  	MOVLW 0x05
+00A5  00FC  	MOVWF delay_us_00000_arg_del
+00A6  2010  	CALL delay_us_00000
+
+
+	//Calculation
+	//Calculation:
+	//  reg_to_write = reg_to_write + 0x20
+	FCV_REG_TO_WRITE = FCV_REG_TO_WRITE + 0x20;
+00A7  3020  	MOVLW 0x20
+00A8  076E  	ADDWF gbl_FCV_REG_TO_WRITE, W
+00A9  00EE  	MOVWF gbl_FCV_REG_TO_WRITE
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(reg_to_write)
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_REG_TO_WRITE);
+00AA  086E  	MOVF gbl_FCV_REG_TO_WRITE, W
+00AB  00FC  	MOVWF FCD_SPI_Le_00052_arg_Char
+00AC  206D  	CALL FCD_SPI_Le_00052
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(spi_wrt_data)
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_SPI_WRT_DATA);
+00AD  1283  	BCF STATUS, RP0
+00AE  086C  	MOVF gbl_FCV_SPI_WRT_DATA, W
+00AF  00FC  	MOVWF FCD_SPI_Le_00052_arg_Char
+00B0  206D  	CALL FCD_SPI_Le_00052
+
+
+	//CSN
+	//Output: 1 -> C2
+	trisc = trisc & 0xFB;
+00B1  30FB  	MOVLW 0xFB
+00B2  0507  	ANDWF gbl_trisc, W
+00B3  0087  	MOVWF gbl_trisc
+
+	if ((1))
+		portc = (portc & 0xFB) | 0x04;
+00B4  30FB  	MOVLW 0xFB
+00B5  1283  	BCF STATUS, RP0
+00B6  0507  	ANDWF gbl_portc, W
+00B7  00FB  	MOVWF CompTempVar2188
+00B8  3004  	MOVLW 0x04
+00B9  047B  	IORWF CompTempVar2188, W
+00BA  0087  	MOVWF gbl_portc
+
+	else
+		portc = portc & 0xFB;
+
+	//Delay
+	//Delay: 5 us
+	delay_us(5);
+00BB  3005  	MOVLW 0x05
+00BC  00FC  	MOVWF delay_us_00000_arg_del
+00BD  2010  	CALL delay_us_00000
+
+
+}
+00BE  0008  	RETURN
+
+
+
+void FCM_spi_data_read()
+
+{
+
+	//CSN
+	//Output: 0 -> C2
+	trisc = trisc & 0xFB;
+0136  30FB  	MOVLW 0xFB
+0137  1683  	BSF STATUS, RP0
+0138  1303  	BCF STATUS, RP1
+0139  0507  	ANDWF gbl_trisc, W
+013A  0087  	MOVWF gbl_trisc
+
+	if ((0))
+		portc = (portc & 0xFB) | 0x04;
+	else
+		portc = portc & 0xFB;
+013B  30FB  	MOVLW 0xFB
+013C  1283  	BCF STATUS, RP0
+013D  0507  	ANDWF gbl_portc, W
+013E  0087  	MOVWF gbl_portc
+
+
+	//Delay
+	//Delay: 5 us
+	delay_us(5);
+013F  3005  	MOVLW 0x05
+0140  00FC  	MOVWF delay_us_00000_arg_del
+0141  2010  	CALL delay_us_00000
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(reg_to_read)
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_REG_TO_READ);
+0142  0877  	MOVF gbl_FCV_REG_TO_READ, W
+0143  00FC  	MOVWF FCD_SPI_Le_00052_arg_Char
+0144  206D  	CALL FCD_SPI_Le_00052
+
+
+	//Call Component Macro
+	//Call Component Macro: spi_rcv_data=SPI_Get_Char()
+	FCV_SPI_RCV_DATA = FCD_SPI_Legacy0_SPI_Get_Char();
+0145  20BF  	CALL FCD_SPI_Le_00054
+0146  087D  	MOVF CompTempVarRet2190, W
+0147  00F5  	MOVWF gbl_FCV_SPI_RCV_DATA
+
+
+	//CSN
+	//Output: 1 -> C2
+	trisc = trisc & 0xFB;
+0148  30FB  	MOVLW 0xFB
+0149  1683  	BSF STATUS, RP0
+014A  0507  	ANDWF gbl_trisc, W
+014B  0087  	MOVWF gbl_trisc
+
+	if ((1))
+		portc = (portc & 0xFB) | 0x04;
+014C  30FB  	MOVLW 0xFB
+014D  1283  	BCF STATUS, RP0
+014E  0507  	ANDWF gbl_portc, W
+014F  00FB  	MOVWF CompTempVar2189
+0150  3004  	MOVLW 0x04
+0151  047B  	IORWF CompTempVar2189, W
+0152  0087  	MOVWF gbl_portc
+
+	else
+		portc = portc & 0xFB;
+
+	//Delay
+	//Delay: 5 us
+	delay_us(5);
+0153  3005  	MOVLW 0x05
+0154  00FC  	MOVWF delay_us_00000_arg_del
+0155  2010  	CALL delay_us_00000
+
+
+}
+0156  0008  	RETURN
+
+
+
+void FCM_nrf_reg_read()
+{
+
+	//Calculation
+	//Calculation:
+	//  reg_to_read = 0x00
+	FCV_REG_TO_READ = 0x00;
+
+	//Call Macro
+	//Call Macro: spi_data_read()
+	FCM_spi_data_read();
+
+}
+
+
+void FCM_nrf_reg_write()
+{
+
+	//Calculation
+	//Calculation:
+	//  reg_to_write = 0
+	//  spi_wrt_data = 53
+	FCV_REG_TO_WRITE = 0;
+	FCV_SPI_WRT_DATA = 53;
+
+	//Call Macro
+	//Call Macro: spi_data_write()
+	FCM_spi_data_write();
+
+}
+
+
+void FCM_nrf_FUNCTION_test()
+
+{
+
+	//Comment:
+	//READ nrf_reg_map_00
+
+	//Calculation
+	//Calculation:
+	//  reg_to_read = 0x00
+	FCV_REG_TO_READ = 0x00;
+0820  1283  	BCF STATUS, RP0
+0821  1303  	BCF STATUS, RP1
+0822  01F7  	CLRF gbl_FCV_REG_TO_READ
+
+
+	//Call Macro
+	//Call Macro: spi_data_read()
+	FCM_spi_data_read();
+0823  118A  	BCF PCLATH,3
+0824  2136  	CALL FCM_spi_da_00053
+
+
+	//Calculation
+	//Calculation:
+	//  nrf_reg00 = spi_rcv_data
+	FCV_NRF_REG00 = FCV_SPI_RCV_DATA;
+0825  0875  	MOVF gbl_FCV_SPI_RCV_DATA, W
+0826  00ED  	MOVWF gbl_FCV_NRF_REG00
+
+
+	//Comment:
+	//READ nrf_reg_map_01
+
+	//Calculation
+	//Calculation:
+	//  reg_to_read = 0x01
+	FCV_REG_TO_READ = 0x01;
+0827  3001  	MOVLW 0x01
+0828  00F7  	MOVWF gbl_FCV_REG_TO_READ
+
+
+	//Call Macro
+	//Call Macro: spi_data_read()
+	FCM_spi_data_read();
+0829  2136  	CALL FCM_spi_da_00053
+
+
+	//Calculation
+	//Calculation:
+	//  nrf_reg01 = spi_rcv_data
+	FCV_NRF_REG01 = FCV_SPI_RCV_DATA;
+082A  0875  	MOVF gbl_FCV_SPI_RCV_DATA, W
+082B  00EF  	MOVWF gbl_FCV_NRF_REG01
+
+
+	//Comment:
+	//READ nrf_reg_map_02
+
+	//Calculation
+	//Calculation:
+	//  reg_to_read = 0x02
+	FCV_REG_TO_READ = 0x02;
+082C  3002  	MOVLW 0x02
+082D  00F7  	MOVWF gbl_FCV_REG_TO_READ
+
+
+	//Call Macro
+	//Call Macro: spi_data_read()
+	FCM_spi_data_read();
+082E  2136  	CALL FCM_spi_da_00053
+
+
+	//Calculation
+	//Calculation:
+	//  nrf_reg02 = spi_rcv_data
+	FCV_NRF_REG02 = FCV_SPI_RCV_DATA;
+082F  0875  	MOVF gbl_FCV_SPI_RCV_DATA, W
+0830  00F0  	MOVWF gbl_FCV_NRF_REG02
+
+
+	//Comment:
+	//READ nrf_reg_map_03
+
+	//Calculation
+	//Calculation:
+	//  reg_to_read = 0x03
+	FCV_REG_TO_READ = 0x03;
+0831  3003  	MOVLW 0x03
+0832  00F7  	MOVWF gbl_FCV_REG_TO_READ
+
+
+	//Call Macro
+	//Call Macro: spi_data_read()
+	FCM_spi_data_read();
+0833  2136  	CALL FCM_spi_da_00053
+
+
+	//Calculation
+	//Calculation:
+	//  nrf_reg03 = spi_rcv_data
+	FCV_NRF_REG03 = FCV_SPI_RCV_DATA;
+0834  0875  	MOVF gbl_FCV_SPI_RCV_DATA, W
+0835  00F2  	MOVWF gbl_FCV_NRF_REG03
+
+
+	//Comment:
+	//READ nrf_reg_map_04
+
+	//Calculation
+	//Calculation:
+	//  reg_to_read = 0x04
+	FCV_REG_TO_READ = 0x04;
+0836  3004  	MOVLW 0x04
+0837  00F7  	MOVWF gbl_FCV_REG_TO_READ
+
+
+	//Call Macro
+	//Call Macro: spi_data_read()
+	FCM_spi_data_read();
+0838  2136  	CALL FCM_spi_da_00053
+
+
+	//Calculation
+	//Calculation:
+	//  nrf_reg04 = spi_rcv_data
+	FCV_NRF_REG04 = FCV_SPI_RCV_DATA;
+0839  0875  	MOVF gbl_FCV_SPI_RCV_DATA, W
+083A  00F6  	MOVWF gbl_FCV_NRF_REG04
+
+
+	//Comment:
+	//READ nrf_reg_map_05
+
+	//Calculation
+	//Calculation:
+	//  reg_to_read = 0x05
+	FCV_REG_TO_READ = 0x05;
+083B  3005  	MOVLW 0x05
+083C  00F7  	MOVWF gbl_FCV_REG_TO_READ
+
+
+	//Call Macro
+	//Call Macro: spi_data_read()
+	FCM_spi_data_read();
+083D  2136  	CALL FCM_spi_da_00053
+
+
+	//Calculation
+	//Calculation:
+	//  nrf_reg05 = spi_rcv_data
+	FCV_NRF_REG05 = FCV_SPI_RCV_DATA;
+083E  0875  	MOVF gbl_FCV_SPI_RCV_DATA, W
+083F  00F8  	MOVWF gbl_FCV_NRF_REG05
+
+
+	//Comment:
+	//READ nrf_reg_map_06
+
+	//Calculation
+	//Calculation:
+	//  reg_to_read = 0x06
+	FCV_REG_TO_READ = 0x06;
+0840  3006  	MOVLW 0x06
+0841  00F7  	MOVWF gbl_FCV_REG_TO_READ
+
+
+	//Call Macro
+	//Call Macro: spi_data_read()
+	FCM_spi_data_read();
+0842  2136  	CALL FCM_spi_da_00053
+
+
+	//Calculation
+	//Calculation:
+	//  nrf_reg06 = spi_rcv_data
+	FCV_NRF_REG06 = FCV_SPI_RCV_DATA;
+0843  0875  	MOVF gbl_FCV_SPI_RCV_DATA, W
+0844  00E9  	MOVWF gbl_FCV_NRF_REG06
+
+
+	//Call Component Macro
+	//Call Component Macro: Clear()
+	FCD_LCDDisplay0_Clear();
+0845  24F6  	CALL FCD_LCDDis_00058
+
+
+	//Call Component Macro
+	//Call Component Macro: Cursor(0, 0)
+	FCD_LCDDisplay0_Cursor(0, 0);
+0846  1283  	BCF STATUS, RP0
+0847  01FE  	CLRF FCD_LCDDis_00059_arg_x
+0848  1683  	BSF STATUS, RP0
+0849  01A0  	CLRF FCD_LCDDis_00059_arg_y
+084A  2347  	CALL FCD_LCDDis_00059
+
+
+	//Call Component Macro
+	//Call Component Macro: PrintString("MODULE TESTING")
+	FCD_LCDDisplay0_PrintString("MODULE TESTING", 14);
+084B  3020  	MOVLW 0x20
+084C  00A6  	MOVWF CompTempVar2191+D'6'
+084D  3044  	MOVLW 0x44
+084E  00A2  	MOVWF CompTempVar2191+D'2'
+084F  3045  	MOVLW 0x45
+0850  00A5  	MOVWF CompTempVar2191+D'5'
+0851  00A8  	MOVWF CompTempVar2191+D'8'
+0852  3047  	MOVLW 0x47
+0853  00AD  	MOVWF CompTempVar2191+D'13'
+0854  3049  	MOVLW 0x49
+0855  00AB  	MOVWF CompTempVar2191+D'11'
+0856  304C  	MOVLW 0x4C
+0857  00A4  	MOVWF CompTempVar2191+D'4'
+0858  304D  	MOVLW 0x4D
+0859  00A0  	MOVWF CompTempVar2191
+085A  304E  	MOVLW 0x4E
+085B  00AC  	MOVWF CompTempVar2191+D'12'
+085C  304F  	MOVLW 0x4F
+085D  00A1  	MOVWF CompTempVar2191+D'1'
+085E  3053  	MOVLW 0x53
+085F  00A9  	MOVWF CompTempVar2191+D'9'
+0860  3054  	MOVLW 0x54
+0861  00A7  	MOVWF CompTempVar2191+D'7'
+0862  00AA  	MOVWF CompTempVar2191+D'10'
+0863  3055  	MOVLW 0x55
+0864  00A3  	MOVWF CompTempVar2191+D'3'
+0865  01AE  	CLRF CompTempVar2191+D'14'
+0866  3000  	MOVLW HIGH(CompTempVar2191+D'0')
+0867  1283  	BCF STATUS, RP0
+0868  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+0869  30A0  	MOVLW LOW(CompTempVar2191+D'0')
+086A  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+086B  300E  	MOVLW 0x0E
+086C  1683  	BSF STATUS, RP0
+086D  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+086E  2327  	CALL FCD_LCDDis_0005A
+
+
+	//Call Component Macro
+	//Call Component Macro: Cursor(0, 1)
+	FCD_LCDDisplay0_Cursor(0, 1);
+086F  1283  	BCF STATUS, RP0
+0870  01FE  	CLRF FCD_LCDDis_00059_arg_x
+0871  3001  	MOVLW 0x01
+0872  1683  	BSF STATUS, RP0
+0873  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+0874  2347  	CALL FCD_LCDDis_00059
+
+
+	//Loop
+	//Loop: Loop 5 times
+	for (FCLV_LOOP1=0; FCLV_LOOP1<5; FCLV_LOOP1++)
+0875  1283  	BCF STATUS, RP0
+0876  01F9  	CLRF gbl_FCLV_LOOP1
+0877        label72
+0877  3005  	MOVLW 0x05
+0878  0279  	SUBWF gbl_FCLV_LOOP1, W
+0879  158A  	BSF PCLATH,3
+087A  1803  	BTFSC STATUS,C
+087B  28B0  	GOTO	label75
+08AE  0AF9  	INCF gbl_FCLV_LOOP1, F
+08AF  2877  	GOTO	label72
+08B0        label75
+
+	{
+
+		//Call Component Macro
+		//Call Component Macro: PrintString(".")
+		FCD_LCDDisplay0_PrintString(".", 1);
+087C  302E  	MOVLW 0x2E
+087D  00FD  	MOVWF CompTempVar2193
+087E  01FE  	CLRF CompTempVar2193+D'1'
+087F  3000  	MOVLW HIGH(CompTempVar2193+D'0')
+0880  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+0881  307D  	MOVLW LOW(CompTempVar2193+D'0')
+0882  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+0883  3001  	MOVLW 0x01
+0884  1683  	BSF STATUS, RP0
+0885  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+0886  118A  	BCF PCLATH,3
+0887  2327  	CALL FCD_LCDDis_0005A
+
+
+		//Loop
+		//Loop: Loop 5 times
+		for (FCLV_LOOP2=0; FCLV_LOOP2<5; FCLV_LOOP2++)
+0888  1283  	BCF STATUS, RP0
+0889  01FA  	CLRF gbl_FCLV_LOOP2
+088A        label73
+088A  3005  	MOVLW 0x05
+088B  027A  	SUBWF gbl_FCLV_LOOP2, W
+088C  158A  	BSF PCLATH,3
+088D  1803  	BTFSC STATUS,C
+088E  28AE  	GOTO	label74
+08AA  1283  	BCF STATUS, RP0
+08AB  0AFA  	INCF gbl_FCLV_LOOP2, F
+08AC  158A  	BSF PCLATH,3
+08AD  288A  	GOTO	label73
+08AE        label74
+
+		{
+
+			//Output
+			//Output: 0 -> C0
+			trisc = trisc & 0xFE;
+088F  30FE  	MOVLW 0xFE
+0890  1683  	BSF STATUS, RP0
+0891  0507  	ANDWF gbl_trisc, W
+0892  0087  	MOVWF gbl_trisc
+
+			if ((0))
+				portc = (portc & 0xFE) | 0x01;
+			else
+				portc = portc & 0xFE;
+0893  30FE  	MOVLW 0xFE
+0894  1283  	BCF STATUS, RP0
+0895  0507  	ANDWF gbl_portc, W
+0896  0087  	MOVWF gbl_portc
+
+
+			//Delay
+			//Delay: 100 ms
+			delay_ms(100);
+0897  3064  	MOVLW 0x64
+0898  1683  	BSF STATUS, RP0
+0899  00A3  	MOVWF delay_ms_00000_arg_del
+089A  118A  	BCF PCLATH,3
+089B  2015  	CALL delay_ms_00000
+
+
+			//Output
+			//Output: 1 -> C0
+			trisc = trisc & 0xFE;
+089C  30FE  	MOVLW 0xFE
+089D  0507  	ANDWF gbl_trisc, W
+089E  0087  	MOVWF gbl_trisc
+
+			if ((1))
+				portc = (portc & 0xFE) | 0x01;
+089F  30FE  	MOVLW 0xFE
+08A0  1283  	BCF STATUS, RP0
+08A1  0507  	ANDWF gbl_portc, W
+08A2  00FB  	MOVWF CompTempVar2195
+08A3  3001  	MOVLW 0x01
+08A4  047B  	IORWF CompTempVar2195, W
+08A5  0087  	MOVWF gbl_portc
+
+			else
+				portc = portc & 0xFE;
+
+			//Delay
+			//Delay: 100 ms
+			delay_ms(100);
+08A6  3064  	MOVLW 0x64
+08A7  1683  	BSF STATUS, RP0
+08A8  00A3  	MOVWF delay_ms_00000_arg_del
+08A9  2015  	CALL delay_ms_00000
+
+
+
+		}
+
+
+	}
+
+	//Output
+	//Output: 0 -> C0
+	trisc = trisc & 0xFE;
+08B0  30FE  	MOVLW 0xFE
+08B1  1683  	BSF STATUS, RP0
+08B2  0507  	ANDWF gbl_trisc, W
+08B3  0087  	MOVWF gbl_trisc
+
+	if ((0))
+		portc = (portc & 0xFE) | 0x01;
+	else
+		portc = portc & 0xFE;
+08B4  30FE  	MOVLW 0xFE
+08B5  1283  	BCF STATUS, RP0
+08B6  0507  	ANDWF gbl_portc, W
+08B7  0087  	MOVWF gbl_portc
+
+
+	//Call Component Macro
+	//Call Component Macro: Clear()
+	FCD_LCDDisplay0_Clear();
+08B8  118A  	BCF PCLATH,3
+08B9  24F6  	CALL FCD_LCDDis_00058
+
+
+	//Call Component Macro
+	//Call Component Macro: Cursor(0, 0)
+	FCD_LCDDisplay0_Cursor(0, 0);
+08BA  1283  	BCF STATUS, RP0
+08BB  01FE  	CLRF FCD_LCDDis_00059_arg_x
+08BC  1683  	BSF STATUS, RP0
+08BD  01A0  	CLRF FCD_LCDDis_00059_arg_y
+08BE  2347  	CALL FCD_LCDDis_00059
+
+
+	//Call Component Macro
+	//Call Component Macro: PrintString("TESTING IS DONE!")
+	FCD_LCDDisplay0_PrintString("TESTING IS DONE!", 16);
+08BF  3020  	MOVLW 0x20
+08C0  00A7  	MOVWF CompTempVar2196+D'7'
+08C1  00AA  	MOVWF CompTempVar2196+D'10'
+08C2  3021  	MOVLW 0x21
+08C3  00AF  	MOVWF CompTempVar2196+D'15'
+08C4  3044  	MOVLW 0x44
+08C5  00AB  	MOVWF CompTempVar2196+D'11'
+08C6  3045  	MOVLW 0x45
+08C7  00A1  	MOVWF CompTempVar2196+D'1'
+08C8  00AE  	MOVWF CompTempVar2196+D'14'
+08C9  3047  	MOVLW 0x47
+08CA  00A6  	MOVWF CompTempVar2196+D'6'
+08CB  3049  	MOVLW 0x49
+08CC  00A4  	MOVWF CompTempVar2196+D'4'
+08CD  00A8  	MOVWF CompTempVar2196+D'8'
+08CE  304E  	MOVLW 0x4E
+08CF  00A5  	MOVWF CompTempVar2196+D'5'
+08D0  00AD  	MOVWF CompTempVar2196+D'13'
+08D1  304F  	MOVLW 0x4F
+08D2  00AC  	MOVWF CompTempVar2196+D'12'
+08D3  3053  	MOVLW 0x53
+08D4  00A2  	MOVWF CompTempVar2196+D'2'
+08D5  00A9  	MOVWF CompTempVar2196+D'9'
+08D6  3054  	MOVLW 0x54
+08D7  00A0  	MOVWF CompTempVar2196
+08D8  00A3  	MOVWF CompTempVar2196+D'3'
+08D9  01B0  	CLRF CompTempVar2196+D'16'
+08DA  3000  	MOVLW HIGH(CompTempVar2196+D'0')
+08DB  1283  	BCF STATUS, RP0
+08DC  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+08DD  30A0  	MOVLW LOW(CompTempVar2196+D'0')
+08DE  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+08DF  3010  	MOVLW 0x10
+08E0  1683  	BSF STATUS, RP0
+08E1  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+08E2  2327  	CALL FCD_LCDDis_0005A
+
+
+	//Call Macro
+	//Call Macro: display_test()
+	FCM_display_test();
+08E3  240D  	CALL FCM_displa_0005B
+
+
+}
+08E4  0008  	RETURN
+
+
+
+void FCM_display_test()
+
+{
+
+	//Call Component Macro
+	//Call Component Macro: Cursor(0, 1)
+	FCD_LCDDisplay0_Cursor(0, 1);
+040D  1283  	BCF STATUS, RP0
+040E  1303  	BCF STATUS, RP1
+040F  01FE  	CLRF FCD_LCDDis_00059_arg_x
+0410  3001  	MOVLW 0x01
+0411  1683  	BSF STATUS, RP0
+0412  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+0413  2347  	CALL FCD_LCDDis_00059
+
+
+	//Call Component Macro
+	//Call Component Macro: PrintNumber(nrf_reg00)
+	FCD_LCDDisplay0_PrintNumber(FCV_NRF_REG00);
+0414  1283  	BCF STATUS, RP0
+0415  086D  	MOVF gbl_FCV_NRF_REG00, W
+0416  00FB  	MOVWF FCD_LCDDis_0005C_arg_Number
+0417  01FC  	CLRF FCD_LCDDis_0005C_arg_Number+D'1'
+0418  2202  	CALL FCD_LCDDis_0005C
+
+
+	//Call Component Macro
+	//Call Component Macro: Cursor(4, 1)
+	FCD_LCDDisplay0_Cursor(4, 1);
+0419  3004  	MOVLW 0x04
+041A  1283  	BCF STATUS, RP0
+041B  00FE  	MOVWF FCD_LCDDis_00059_arg_x
+041C  3001  	MOVLW 0x01
+041D  1683  	BSF STATUS, RP0
+041E  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+041F  2347  	CALL FCD_LCDDis_00059
+
+
+	//Call Component Macro
+	//Call Component Macro: PrintNumber(nrf_reg01)
+	FCD_LCDDisplay0_PrintNumber(FCV_NRF_REG01);
+0420  1283  	BCF STATUS, RP0
+0421  086F  	MOVF gbl_FCV_NRF_REG01, W
+0422  00FB  	MOVWF FCD_LCDDis_0005C_arg_Number
+0423  01FC  	CLRF FCD_LCDDis_0005C_arg_Number+D'1'
+0424  2202  	CALL FCD_LCDDis_0005C
+
+
+	//Call Component Macro
+	//Call Component Macro: Cursor(8, 1)
+	FCD_LCDDisplay0_Cursor(8, 1);
+0425  3008  	MOVLW 0x08
+0426  1283  	BCF STATUS, RP0
+0427  00FE  	MOVWF FCD_LCDDis_00059_arg_x
+0428  3001  	MOVLW 0x01
+0429  1683  	BSF STATUS, RP0
+042A  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+042B  2347  	CALL FCD_LCDDis_00059
+
+
+	//Call Component Macro
+	//Call Component Macro: PrintNumber(nrf_reg02)
+	FCD_LCDDisplay0_PrintNumber(FCV_NRF_REG02);
+042C  1283  	BCF STATUS, RP0
+042D  0870  	MOVF gbl_FCV_NRF_REG02, W
+042E  00FB  	MOVWF FCD_LCDDis_0005C_arg_Number
+042F  01FC  	CLRF FCD_LCDDis_0005C_arg_Number+D'1'
+0430  2202  	CALL FCD_LCDDis_0005C
+
+
+	//Call Component Macro
+	//Call Component Macro: Cursor(0, 2)
+	FCD_LCDDisplay0_Cursor(0, 2);
+0431  1283  	BCF STATUS, RP0
+0432  01FE  	CLRF FCD_LCDDis_00059_arg_x
+0433  3002  	MOVLW 0x02
+0434  1683  	BSF STATUS, RP0
+0435  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+0436  2347  	CALL FCD_LCDDis_00059
+
+
+	//Call Component Macro
+	//Call Component Macro: PrintNumber(nrf_reg03)
+	FCD_LCDDisplay0_PrintNumber(FCV_NRF_REG03);
+0437  1283  	BCF STATUS, RP0
+0438  0872  	MOVF gbl_FCV_NRF_REG03, W
+0439  00FB  	MOVWF FCD_LCDDis_0005C_arg_Number
+043A  01FC  	CLRF FCD_LCDDis_0005C_arg_Number+D'1'
+043B  2202  	CALL FCD_LCDDis_0005C
+
+
+	//Call Component Macro
+	//Call Component Macro: Cursor(4, 2)
+	FCD_LCDDisplay0_Cursor(4, 2);
+043C  3004  	MOVLW 0x04
+043D  1283  	BCF STATUS, RP0
+043E  00FE  	MOVWF FCD_LCDDis_00059_arg_x
+043F  3002  	MOVLW 0x02
+0440  1683  	BSF STATUS, RP0
+0441  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+0442  2347  	CALL FCD_LCDDis_00059
+
+
+	//Call Component Macro
+	//Call Component Macro: PrintNumber(nrf_reg04)
+	FCD_LCDDisplay0_PrintNumber(FCV_NRF_REG04);
+0443  1283  	BCF STATUS, RP0
+0444  0876  	MOVF gbl_FCV_NRF_REG04, W
+0445  00FB  	MOVWF FCD_LCDDis_0005C_arg_Number
+0446  01FC  	CLRF FCD_LCDDis_0005C_arg_Number+D'1'
+0447  2202  	CALL FCD_LCDDis_0005C
+
+
+	//Call Component Macro
+	//Call Component Macro: Cursor(8, 2)
+	FCD_LCDDisplay0_Cursor(8, 2);
+0448  3008  	MOVLW 0x08
+0449  1283  	BCF STATUS, RP0
+044A  00FE  	MOVWF FCD_LCDDis_00059_arg_x
+044B  3002  	MOVLW 0x02
+044C  1683  	BSF STATUS, RP0
+044D  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+044E  2347  	CALL FCD_LCDDis_00059
+
+
+	//Call Component Macro
+	//Call Component Macro: PrintNumber(nrf_reg05)
+	FCD_LCDDisplay0_PrintNumber(FCV_NRF_REG05);
+044F  1283  	BCF STATUS, RP0
+0450  0878  	MOVF gbl_FCV_NRF_REG05, W
+0451  00FB  	MOVWF FCD_LCDDis_0005C_arg_Number
+0452  01FC  	CLRF FCD_LCDDis_0005C_arg_Number+D'1'
+0453  2202  	CALL FCD_LCDDis_0005C
+
+
+	//Call Component Macro
+	//Call Component Macro: Cursor(0, 3)
+	FCD_LCDDisplay0_Cursor(0, 3);
+0454  1283  	BCF STATUS, RP0
+0455  01FE  	CLRF FCD_LCDDis_00059_arg_x
+0456  3003  	MOVLW 0x03
+0457  1683  	BSF STATUS, RP0
+0458  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+0459  2347  	CALL FCD_LCDDis_00059
+
+
+	//Call Component Macro
+	//Call Component Macro: PrintNumber(nrf_reg06)
+	FCD_LCDDisplay0_PrintNumber(FCV_NRF_REG06);
+045A  1283  	BCF STATUS, RP0
+045B  0869  	MOVF gbl_FCV_NRF_REG06, W
+045C  00FB  	MOVWF FCD_LCDDis_0005C_arg_Number
+045D  01FC  	CLRF FCD_LCDDis_0005C_arg_Number+D'1'
+045E  2202  	CALL FCD_LCDDis_0005C
+
+
+	//Calculation
+	//Calculation:
+	//  function_test_var = nrf_reg00 + nrf_reg01 + nrf_reg02 + nrf_reg03 + nrf_reg04 + nrf_reg05 + nrf_reg06
+	FCV_FUNCTION_TEST_VAR = FCV_NRF_REG00 + FCV_NRF_REG01 + FCV_NRF_REG02 + FCV_NRF_REG03 + FCV_NRF_REG04 + FCV_NRF_REG05 + FCV_NRF_REG06;
+045F  1283  	BCF STATUS, RP0
+0460  01DF  	CLRF gbl_FCV_FUNCTION_TEST_VAR+D'1'
+0461  086F  	MOVF gbl_FCV_NRF_REG01, W
+0462  076D  	ADDWF gbl_FCV_NRF_REG00, W
+0463  00DE  	MOVWF gbl_FCV_FUNCTION_TEST_VAR
+0464  1803  	BTFSC STATUS,C
+0465  0ADF  	INCF gbl_FCV_FUNCTION_TEST_VAR+D'1', F
+0466  0870  	MOVF gbl_FCV_NRF_REG02, W
+0467  07DE  	ADDWF gbl_FCV_FUNCTION_TEST_VAR, F
+0468  1803  	BTFSC STATUS,C
+0469  0ADF  	INCF gbl_FCV_FUNCTION_TEST_VAR+D'1', F
+046A  0872  	MOVF gbl_FCV_NRF_REG03, W
+046B  07DE  	ADDWF gbl_FCV_FUNCTION_TEST_VAR, F
+046C  1803  	BTFSC STATUS,C
+046D  0ADF  	INCF gbl_FCV_FUNCTION_TEST_VAR+D'1', F
+046E  0876  	MOVF gbl_FCV_NRF_REG04, W
+046F  07DE  	ADDWF gbl_FCV_FUNCTION_TEST_VAR, F
+0470  1803  	BTFSC STATUS,C
+0471  0ADF  	INCF gbl_FCV_FUNCTION_TEST_VAR+D'1', F
+0472  0878  	MOVF gbl_FCV_NRF_REG05, W
+0473  07DE  	ADDWF gbl_FCV_FUNCTION_TEST_VAR, F
+0474  1803  	BTFSC STATUS,C
+0475  0ADF  	INCF gbl_FCV_FUNCTION_TEST_VAR+D'1', F
+0476  0869  	MOVF gbl_FCV_NRF_REG06, W
+0477  07DE  	ADDWF gbl_FCV_FUNCTION_TEST_VAR, F
+0478  1803  	BTFSC STATUS,C
+0479  0ADF  	INCF gbl_FCV_FUNCTION_TEST_VAR+D'1', F
+
+
+	//Call Component Macro
+	//Call Component Macro: Cursor(4, 3)
+	FCD_LCDDisplay0_Cursor(4, 3);
+047A  3004  	MOVLW 0x04
+047B  00FE  	MOVWF FCD_LCDDis_00059_arg_x
+047C  3003  	MOVLW 0x03
+047D  1683  	BSF STATUS, RP0
+047E  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+047F  2347  	CALL FCD_LCDDis_00059
+
+
+	//Decision
+	//Decision: function_test_var = 97?
+	if (FCV_FUNCTION_TEST_VAR == 97)
+0480  3061  	MOVLW 0x61
+0481  1283  	BCF STATUS, RP0
+0482  065E  	XORWF gbl_FCV_FUNCTION_TEST_VAR, W
+0483  1903  	BTFSC STATUS,Z
+0484  085F  	MOVF gbl_FCV_FUNCTION_TEST_VAR+D'1', W
+0485  1D03  	BTFSS STATUS,Z
+0486  2CAC  	GOTO	label50
+04AC        label50
+
+	{
+
+		//Call Component Macro
+		//Call Component Macro: PrintString("PASSED!!!")
+		FCD_LCDDisplay0_PrintString("PASSED!!!", 9);
+0487  3050  	MOVLW 0x50
+0488  1683  	BSF STATUS, RP0
+0489  00A0  	MOVWF CompTempVar2214
+048A  3041  	MOVLW 0x41
+048B  00A1  	MOVWF CompTempVar2214+D'1'
+048C  3053  	MOVLW 0x53
+048D  00A2  	MOVWF CompTempVar2214+D'2'
+048E  00A3  	MOVWF CompTempVar2214+D'3'
+048F  3045  	MOVLW 0x45
+0490  00A4  	MOVWF CompTempVar2214+D'4'
+0491  3044  	MOVLW 0x44
+0492  00A5  	MOVWF CompTempVar2214+D'5'
+0493  3021  	MOVLW 0x21
+0494  00A6  	MOVWF CompTempVar2214+D'6'
+0495  00A7  	MOVWF CompTempVar2214+D'7'
+0496  00A8  	MOVWF CompTempVar2214+D'8'
+0497  01A9  	CLRF CompTempVar2214+D'9'
+0498  3000  	MOVLW HIGH(CompTempVar2214+D'0')
+0499  1283  	BCF STATUS, RP0
+049A  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+049B  30A0  	MOVLW LOW(CompTempVar2214+D'0')
+049C  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+049D  3009  	MOVLW 0x09
+049E  1683  	BSF STATUS, RP0
+049F  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+04A0  2327  	CALL FCD_LCDDis_0005A
+
+
+		//Output
+		//Output: 1 -> A5
+		trisa = trisa & 0xDF;
+04A1  30DF  	MOVLW 0xDF
+04A2  0505  	ANDWF gbl_trisa, W
+04A3  0085  	MOVWF gbl_trisa
+
+		if ((1))
+			porta = (porta & 0xDF) | 0x20;
+04A4  30DF  	MOVLW 0xDF
+04A5  1283  	BCF STATUS, RP0
+04A6  0505  	ANDWF gbl_porta, W
+04A7  00FB  	MOVWF CompTempVar2216
+04A8  3020  	MOVLW 0x20
+04A9  047B  	IORWF CompTempVar2216, W
+04AA  0085  	MOVWF gbl_porta
+
+		else
+			porta = porta & 0xDF;
+
+	} else {
+
+		//Call Component Macro
+		//Call Component Macro: PrintString("FAILED!!!")
+		FCD_LCDDisplay0_PrintString("FAILED!!!", 9);
+04AC  3046  	MOVLW 0x46
+04AD  1683  	BSF STATUS, RP0
+04AE  00A0  	MOVWF CompTempVar2217
+04AF  3041  	MOVLW 0x41
+04B0  00A1  	MOVWF CompTempVar2217+D'1'
+04B1  3049  	MOVLW 0x49
+04B2  00A2  	MOVWF CompTempVar2217+D'2'
+04B3  304C  	MOVLW 0x4C
+04B4  00A3  	MOVWF CompTempVar2217+D'3'
+04B5  3045  	MOVLW 0x45
+04B6  00A4  	MOVWF CompTempVar2217+D'4'
+04B7  3044  	MOVLW 0x44
+04B8  00A5  	MOVWF CompTempVar2217+D'5'
+04B9  3021  	MOVLW 0x21
+04BA  00A6  	MOVWF CompTempVar2217+D'6'
+04BB  00A7  	MOVWF CompTempVar2217+D'7'
+04BC  00A8  	MOVWF CompTempVar2217+D'8'
+04BD  01A9  	CLRF CompTempVar2217+D'9'
+04BE  3000  	MOVLW HIGH(CompTempVar2217+D'0')
+04BF  1283  	BCF STATUS, RP0
+04C0  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+04C1  30A0  	MOVLW LOW(CompTempVar2217+D'0')
+04C2  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+04C3  3009  	MOVLW 0x09
+04C4  1683  	BSF STATUS, RP0
+04C5  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+04C6  2327  	CALL FCD_LCDDis_0005A
+
+
+		//Output
+		//Output: 1 -> C0
+		trisc = trisc & 0xFE;
+04C7  30FE  	MOVLW 0xFE
+04C8  0507  	ANDWF gbl_trisc, W
+04C9  0087  	MOVWF gbl_trisc
+
+		if ((1))
+			portc = (portc & 0xFE) | 0x01;
+04CA  30FE  	MOVLW 0xFE
+04CB  1283  	BCF STATUS, RP0
+04CC  0507  	ANDWF gbl_portc, W
+04CD  00FB  	MOVWF CompTempVar2219
+04CE  3001  	MOVLW 0x01
+04CF  047B  	IORWF CompTempVar2219, W
+04D0  0087  	MOVWF gbl_portc
+
+		else
+			portc = portc & 0xFE;
+
+	}
+
+}
+04AB  0008  	RETURN
+04D1  0008  	RETURN
+
+
+
+void FCM_rcv_macro()
+
+{
+
+	//Call Macro
+	//Call Macro: rcv_init()
+	FCM_rcv_init();
+0507  23E1  	CALL FCM_rcv_in_0005E
+
+
+	//Call Macro
+	//Call Macro: read_addr()
+	FCM_read_addr();
+0508  23B1  	CALL FCM_read_a_0005F
+
+
+	//Call Component Macro
+	//Call Component Macro: Cursor(6, 1)
+	FCD_LCDDisplay0_Cursor(6, 1);
+0509  3006  	MOVLW 0x06
+050A  00FE  	MOVWF FCD_LCDDis_00059_arg_x
+050B  3001  	MOVLW 0x01
+050C  1683  	BSF STATUS, RP0
+050D  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+050E  2347  	CALL FCD_LCDDis_00059
+
+
+	//Call Component Macro
+	//Call Component Macro: PrintString(NRF_ADDRESS)
+	FCD_LCDDisplay0_PrintString(FCV_NRF_ADDRESS, FCSZ_NRF_ADDRESS);
+050F  3000  	MOVLW HIGH(gbl_FCV_NRF_ADDRESS+D'0')
+0510  1283  	BCF STATUS, RP0
+0511  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+0512  3040  	MOVLW LOW(gbl_FCV_NRF_ADDRESS+D'0')
+0513  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+0514  3005  	MOVLW 0x05
+0515  1683  	BSF STATUS, RP0
+0516  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+0517  2327  	CALL FCD_LCDDis_0005A
+
+
+	//Calculation
+	//Calculation:
+	//  start_flag = 0
+	FCV_START_FLAG = 0;
+0518  1283  	BCF STATUS, RP0
+0519  10EA  	BCF gbl_FCV_START_FLAG,1
+
+
+	//Loop
+	//Loop: While 1
+	while (1)
+051A        label53
+081E  118A  	BCF PCLATH,3
+081F  2D1A  	GOTO	label53
+
+	{
+
+		//Call Macro
+		//Call Macro: check_fifo_status()
+		FCM_check_fifo_status();
+051A  24D2  	CALL FCM_check__00060
+
+
+		//Decision
+		//Decision: fifo_status_reg = 18?
+		if (FCV_FIFO_STATUS_REG == 18)
+051B  0873  	MOVF gbl_FCV_FIFO_STATUS_REG, W
+051C  3A12  	XORLW 0x12
+051D  158A  	BSF PCLATH,3
+051E  1D03  	BTFSS STATUS,Z
+051F  2816  	GOTO	label71
+0649        label62
+0813        label70
+0816        label71
+
+		{
+
+			//Output
+			//Output: 1 -> A5
+			trisa = trisa & 0xDF;
+0520  30DF  	MOVLW 0xDF
+0521  1683  	BSF STATUS, RP0
+0522  0505  	ANDWF gbl_trisa, W
+0523  0085  	MOVWF gbl_trisa
+
+			if ((1))
+				porta = (porta & 0xDF) | 0x20;
+0524  30DF  	MOVLW 0xDF
+0525  1283  	BCF STATUS, RP0
+0526  0505  	ANDWF gbl_porta, W
+0527  00FB  	MOVWF CompTempVar2243
+0528  3020  	MOVLW 0x20
+0529  047B  	IORWF CompTempVar2243, W
+052A  0085  	MOVWF gbl_porta
+
+			else
+				porta = porta & 0xDF;
+
+			//Call Macro
+			//Call Macro: read_payload()
+			FCM_read_payload();
+052B  118A  	BCF PCLATH,3
+052C  237A  	CALL FCM_read_p_00061
+
+
+			//Call Component Macro
+			//Call Component Macro: ClearLine(2)
+			FCD_LCDDisplay0_ClearLine(2);
+052D  3002  	MOVLW 0x02
+052E  00FB  	MOVWF FCD_LCDDis_00062_arg_Line
+052F  24DA  	CALL FCD_LCDDis_00062
+
+
+			//Call Component Macro
+			//Call Component Macro: ClearLine(3)
+			FCD_LCDDisplay0_ClearLine(3);
+0530  3003  	MOVLW 0x03
+0531  1283  	BCF STATUS, RP0
+0532  00FB  	MOVWF FCD_LCDDis_00062_arg_Line
+0533  24DA  	CALL FCD_LCDDis_00062
+
+
+			//Switch
+			//Switch: payload[0]?
+			switch (FCV_PAYLOAD[0])
+054B  2E49  	GOTO	label62
+
+			{
+				case 'a':
+0534  1283  	BCF STATUS, RP0
+0535  0820  	MOVF gbl_FCV_PAYLOAD, W
+0536  3A61  	XORLW 0x61
+0537  1903  	BTFSC STATUS,Z
+0538  2D4C  	GOTO	label54
+054C        label54
+
+				{
+					//Call Component Macro
+					//Call Component Macro: Cursor(0, 3)
+					FCD_LCDDisplay0_Cursor(0, 3);
+054C  01FE  	CLRF FCD_LCDDis_00059_arg_x
+054D  3003  	MOVLW 0x03
+054E  1683  	BSF STATUS, RP0
+054F  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+0550  2347  	CALL FCD_LCDDis_00059
+
+
+					//Call Component Macro
+					//Call Component Macro: PrintString("HOME_FOUL")
+					FCD_LCDDisplay0_PrintString("HOME_FOUL", 9);
+0551  3045  	MOVLW 0x45
+0552  00A3  	MOVWF CompTempVar2244+D'3'
+0553  3046  	MOVLW 0x46
+0554  00A5  	MOVWF CompTempVar2244+D'5'
+0555  3048  	MOVLW 0x48
+0556  00A0  	MOVWF CompTempVar2244
+0557  304C  	MOVLW 0x4C
+0558  00A8  	MOVWF CompTempVar2244+D'8'
+0559  304D  	MOVLW 0x4D
+055A  00A2  	MOVWF CompTempVar2244+D'2'
+055B  304F  	MOVLW 0x4F
+055C  00A1  	MOVWF CompTempVar2244+D'1'
+055D  00A6  	MOVWF CompTempVar2244+D'6'
+055E  3055  	MOVLW 0x55
+055F  00A7  	MOVWF CompTempVar2244+D'7'
+0560  305F  	MOVLW 0x5F
+0561  00A4  	MOVWF CompTempVar2244+D'4'
+0562  01A9  	CLRF CompTempVar2244+D'9'
+0563  3000  	MOVLW HIGH(CompTempVar2244+D'0')
+0564  1283  	BCF STATUS, RP0
+0565  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+0566  30A0  	MOVLW LOW(CompTempVar2244+D'0')
+0567  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+0568  3009  	MOVLW 0x09
+0569  1683  	BSF STATUS, RP0
+056A  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+056B  2327  	CALL FCD_LCDDis_0005A
+
+
+					break;
+056C  2E49  	GOTO	label62
+
+				}
+				case 'b':
+0539  3A03  	XORLW 0x03
+053A  1903  	BTFSC STATUS,Z
+053B  2D6D  	GOTO	label55
+056D        label55
+
+				{
+					//Call Component Macro
+					//Call Component Macro: Cursor(0, 3)
+					FCD_LCDDisplay0_Cursor(0, 3);
+056D  01FE  	CLRF FCD_LCDDis_00059_arg_x
+056E  3003  	MOVLW 0x03
+056F  1683  	BSF STATUS, RP0
+0570  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+0571  2347  	CALL FCD_LCDDis_00059
+
+
+					//Call Component Macro
+					//Call Component Macro: PrintString("HOME_SCORE")
+					FCD_LCDDisplay0_PrintString("HOME_SCORE", 10);
+0572  3043  	MOVLW 0x43
+0573  00A6  	MOVWF CompTempVar2246+D'6'
+0574  3045  	MOVLW 0x45
+0575  00A3  	MOVWF CompTempVar2246+D'3'
+0576  00A9  	MOVWF CompTempVar2246+D'9'
+0577  3048  	MOVLW 0x48
+0578  00A0  	MOVWF CompTempVar2246
+0579  304D  	MOVLW 0x4D
+057A  00A2  	MOVWF CompTempVar2246+D'2'
+057B  304F  	MOVLW 0x4F
+057C  00A1  	MOVWF CompTempVar2246+D'1'
+057D  00A7  	MOVWF CompTempVar2246+D'7'
+057E  3052  	MOVLW 0x52
+057F  00A8  	MOVWF CompTempVar2246+D'8'
+0580  3053  	MOVLW 0x53
+0581  00A5  	MOVWF CompTempVar2246+D'5'
+0582  305F  	MOVLW 0x5F
+0583  00A4  	MOVWF CompTempVar2246+D'4'
+0584  01AA  	CLRF CompTempVar2246+D'10'
+0585  3000  	MOVLW HIGH(CompTempVar2246+D'0')
+0586  1283  	BCF STATUS, RP0
+0587  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+0588  30A0  	MOVLW LOW(CompTempVar2246+D'0')
+0589  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+058A  300A  	MOVLW 0x0A
+058B  1683  	BSF STATUS, RP0
+058C  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+058D  2327  	CALL FCD_LCDDis_0005A
+
+
+					break;
+058E  2E49  	GOTO	label62
+
+				}
+				case 'c':
+053C  3A01  	XORLW 0x01
+053D  1903  	BTFSC STATUS,Z
+053E  2D8F  	GOTO	label56
+058F        label56
+
+				{
+					//Call Component Macro
+					//Call Component Macro: Cursor(0, 3)
+					FCD_LCDDisplay0_Cursor(0, 3);
+058F  01FE  	CLRF FCD_LCDDis_00059_arg_x
+0590  3003  	MOVLW 0x03
+0591  1683  	BSF STATUS, RP0
+0592  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+0593  2347  	CALL FCD_LCDDis_00059
+
+
+					//Call Component Macro
+					//Call Component Macro: PrintString("RESET_24SC")
+					FCD_LCDDisplay0_PrintString("RESET_24SC", 10);
+0594  3032  	MOVLW 0x32
+0595  00A6  	MOVWF CompTempVar2248+D'6'
+0596  3034  	MOVLW 0x34
+0597  00A7  	MOVWF CompTempVar2248+D'7'
+0598  3043  	MOVLW 0x43
+0599  00A9  	MOVWF CompTempVar2248+D'9'
+059A  3045  	MOVLW 0x45
+059B  00A1  	MOVWF CompTempVar2248+D'1'
+059C  00A3  	MOVWF CompTempVar2248+D'3'
+059D  3052  	MOVLW 0x52
+059E  00A0  	MOVWF CompTempVar2248
+059F  3053  	MOVLW 0x53
+05A0  00A2  	MOVWF CompTempVar2248+D'2'
+05A1  00A8  	MOVWF CompTempVar2248+D'8'
+05A2  3054  	MOVLW 0x54
+05A3  00A4  	MOVWF CompTempVar2248+D'4'
+05A4  305F  	MOVLW 0x5F
+05A5  00A5  	MOVWF CompTempVar2248+D'5'
+05A6  01AA  	CLRF CompTempVar2248+D'10'
+05A7  3000  	MOVLW HIGH(CompTempVar2248+D'0')
+05A8  1283  	BCF STATUS, RP0
+05A9  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+05AA  30A0  	MOVLW LOW(CompTempVar2248+D'0')
+05AB  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+05AC  300A  	MOVLW 0x0A
+05AD  1683  	BSF STATUS, RP0
+05AE  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+05AF  2327  	CALL FCD_LCDDis_0005A
+
+
+					break;
+05B0  2E49  	GOTO	label62
+
+				}
+				case 'd':
+053F  3A07  	XORLW 0x07
+0540  1903  	BTFSC STATUS,Z
+0541  2DB1  	GOTO	label57
+05B1        label57
+
+				{
+					//Decision
+					//Decision: start_flag = 0?
+					if (FCV_START_FLAG == 0)
+05B1  18EA  	BTFSC gbl_FCV_START_FLAG,1
+05B2  2DCE  	GOTO	label58
+05CE        label58
+
+					{
+
+						//Call Component Macro
+						//Call Component Macro: Cursor(0, 3)
+						FCD_LCDDisplay0_Cursor(0, 3);
+05B3  01FE  	CLRF FCD_LCDDis_00059_arg_x
+05B4  3003  	MOVLW 0x03
+05B5  1683  	BSF STATUS, RP0
+05B6  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+05B7  2347  	CALL FCD_LCDDis_00059
+
+
+						//Call Component Macro
+						//Call Component Macro: PrintString("START")
+						FCD_LCDDisplay0_PrintString("START", 5);
+05B8  3041  	MOVLW 0x41
+05B9  00A2  	MOVWF CompTempVar2250+D'2'
+05BA  3052  	MOVLW 0x52
+05BB  00A3  	MOVWF CompTempVar2250+D'3'
+05BC  3053  	MOVLW 0x53
+05BD  00A0  	MOVWF CompTempVar2250
+05BE  3054  	MOVLW 0x54
+05BF  00A1  	MOVWF CompTempVar2250+D'1'
+05C0  00A4  	MOVWF CompTempVar2250+D'4'
+05C1  01A5  	CLRF CompTempVar2250+D'5'
+05C2  3000  	MOVLW HIGH(CompTempVar2250+D'0')
+05C3  1283  	BCF STATUS, RP0
+05C4  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+05C5  30A0  	MOVLW LOW(CompTempVar2250+D'0')
+05C6  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+05C7  3005  	MOVLW 0x05
+05C8  1683  	BSF STATUS, RP0
+05C9  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+05CA  2327  	CALL FCD_LCDDis_0005A
+
+
+						//Calculation
+						//Calculation:
+						//  start_flag = 1
+						FCV_START_FLAG = 1;
+05CB  1283  	BCF STATUS, RP0
+05CC  14EA  	BSF gbl_FCV_START_FLAG,1
+
+
+					} else {
+05CD  2E49  	GOTO	label62
+
+
+						//Call Component Macro
+						//Call Component Macro: Cursor(0, 3)
+						FCD_LCDDisplay0_Cursor(0, 3);
+05CE  01FE  	CLRF FCD_LCDDis_00059_arg_x
+05CF  3003  	MOVLW 0x03
+05D0  1683  	BSF STATUS, RP0
+05D1  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+05D2  2347  	CALL FCD_LCDDis_00059
+
+
+						//Call Component Macro
+						//Call Component Macro: PrintString("STOP")
+						FCD_LCDDisplay0_PrintString("STOP", 4);
+05D3  3053  	MOVLW 0x53
+05D4  00A0  	MOVWF CompTempVar2252
+05D5  3054  	MOVLW 0x54
+05D6  00A1  	MOVWF CompTempVar2252+D'1'
+05D7  304F  	MOVLW 0x4F
+05D8  00A2  	MOVWF CompTempVar2252+D'2'
+05D9  3050  	MOVLW 0x50
+05DA  00A3  	MOVWF CompTempVar2252+D'3'
+05DB  01A4  	CLRF CompTempVar2252+D'4'
+05DC  3000  	MOVLW HIGH(CompTempVar2252+D'0')
+05DD  1283  	BCF STATUS, RP0
+05DE  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+05DF  30A0  	MOVLW LOW(CompTempVar2252+D'0')
+05E0  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+05E1  3004  	MOVLW 0x04
+05E2  1683  	BSF STATUS, RP0
+05E3  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+05E4  2327  	CALL FCD_LCDDis_0005A
+
+
+						//Calculation
+						//Calculation:
+						//  start_flag = 0
+						FCV_START_FLAG = 0;
+05E5  1283  	BCF STATUS, RP0
+05E6  10EA  	BCF gbl_FCV_START_FLAG,1
+
+
+					}
+
+					break;
+05E7  2E49  	GOTO	label62
+
+				}
+				case 'e':
+0542  3A01  	XORLW 0x01
+0543  1903  	BTFSC STATUS,Z
+0544  2DE8  	GOTO	label59
+05E8        label59
+
+				{
+					//Call Component Macro
+					//Call Component Macro: Cursor(0, 3)
+					FCD_LCDDisplay0_Cursor(0, 3);
+05E8  01FE  	CLRF FCD_LCDDis_00059_arg_x
+05E9  3003  	MOVLW 0x03
+05EA  1683  	BSF STATUS, RP0
+05EB  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+05EC  2347  	CALL FCD_LCDDis_00059
+
+
+					//Call Component Macro
+					//Call Component Macro: PrintString("GUEST_SCORE")
+					FCD_LCDDisplay0_PrintString("GUEST_SCORE", 11);
+05ED  3043  	MOVLW 0x43
+05EE  00A7  	MOVWF CompTempVar2254+D'7'
+05EF  3045  	MOVLW 0x45
+05F0  00A2  	MOVWF CompTempVar2254+D'2'
+05F1  00AA  	MOVWF CompTempVar2254+D'10'
+05F2  3047  	MOVLW 0x47
+05F3  00A0  	MOVWF CompTempVar2254
+05F4  304F  	MOVLW 0x4F
+05F5  00A8  	MOVWF CompTempVar2254+D'8'
+05F6  3052  	MOVLW 0x52
+05F7  00A9  	MOVWF CompTempVar2254+D'9'
+05F8  3053  	MOVLW 0x53
+05F9  00A3  	MOVWF CompTempVar2254+D'3'
+05FA  00A6  	MOVWF CompTempVar2254+D'6'
+05FB  3054  	MOVLW 0x54
+05FC  00A4  	MOVWF CompTempVar2254+D'4'
+05FD  3055  	MOVLW 0x55
+05FE  00A1  	MOVWF CompTempVar2254+D'1'
+05FF  305F  	MOVLW 0x5F
+0600  00A5  	MOVWF CompTempVar2254+D'5'
+0601  01AB  	CLRF CompTempVar2254+D'11'
+0602  3000  	MOVLW HIGH(CompTempVar2254+D'0')
+0603  1283  	BCF STATUS, RP0
+0604  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+0605  30A0  	MOVLW LOW(CompTempVar2254+D'0')
+0606  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+0607  300B  	MOVLW 0x0B
+0608  1683  	BSF STATUS, RP0
+0609  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+060A  2327  	CALL FCD_LCDDis_0005A
+
+
+					break;
+060B  2E49  	GOTO	label62
+
+				}
+				case 'f':
+0545  3A03  	XORLW 0x03
+0546  1903  	BTFSC STATUS,Z
+0547  2E0C  	GOTO	label60
+060C        label60
+
+				{
+					//Call Component Macro
+					//Call Component Macro: Cursor(0, 3)
+					FCD_LCDDisplay0_Cursor(0, 3);
+060C  01FE  	CLRF FCD_LCDDis_00059_arg_x
+060D  3003  	MOVLW 0x03
+060E  1683  	BSF STATUS, RP0
+060F  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+0610  2347  	CALL FCD_LCDDis_00059
+
+
+					//Call Component Macro
+					//Call Component Macro: PrintString("GUEST_FOUL")
+					FCD_LCDDisplay0_PrintString("GUEST_FOUL", 10);
+0611  3045  	MOVLW 0x45
+0612  00A2  	MOVWF CompTempVar2256+D'2'
+0613  3046  	MOVLW 0x46
+0614  00A6  	MOVWF CompTempVar2256+D'6'
+0615  3047  	MOVLW 0x47
+0616  00A0  	MOVWF CompTempVar2256
+0617  304C  	MOVLW 0x4C
+0618  00A9  	MOVWF CompTempVar2256+D'9'
+0619  304F  	MOVLW 0x4F
+061A  00A7  	MOVWF CompTempVar2256+D'7'
+061B  3053  	MOVLW 0x53
+061C  00A3  	MOVWF CompTempVar2256+D'3'
+061D  3054  	MOVLW 0x54
+061E  00A4  	MOVWF CompTempVar2256+D'4'
+061F  3055  	MOVLW 0x55
+0620  00A1  	MOVWF CompTempVar2256+D'1'
+0621  00A8  	MOVWF CompTempVar2256+D'8'
+0622  305F  	MOVLW 0x5F
+0623  00A5  	MOVWF CompTempVar2256+D'5'
+0624  01AA  	CLRF CompTempVar2256+D'10'
+0625  3000  	MOVLW HIGH(CompTempVar2256+D'0')
+0626  1283  	BCF STATUS, RP0
+0627  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+0628  30A0  	MOVLW LOW(CompTempVar2256+D'0')
+0629  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+062A  300A  	MOVLW 0x0A
+062B  1683  	BSF STATUS, RP0
+062C  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+062D  2327  	CALL FCD_LCDDis_0005A
+
+
+					break;
+062E  2E49  	GOTO	label62
+
+				}
+				case 'g':
+0548  3A01  	XORLW 0x01
+0549  1903  	BTFSC STATUS,Z
+054A  2E2F  	GOTO	label61
+062F        label61
+
+				{
+					//Call Component Macro
+					//Call Component Macro: Cursor(0, 3)
+					FCD_LCDDisplay0_Cursor(0, 3);
+062F  01FE  	CLRF FCD_LCDDis_00059_arg_x
+0630  3003  	MOVLW 0x03
+0631  1683  	BSF STATUS, RP0
+0632  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+0633  2347  	CALL FCD_LCDDis_00059
+
+
+					//Call Component Macro
+					//Call Component Macro: PrintString("BUZZER")
+					FCD_LCDDisplay0_PrintString("BUZZER", 6);
+0634  3042  	MOVLW 0x42
+0635  00A0  	MOVWF CompTempVar2258
+0636  3055  	MOVLW 0x55
+0637  00A1  	MOVWF CompTempVar2258+D'1'
+0638  305A  	MOVLW 0x5A
+0639  00A2  	MOVWF CompTempVar2258+D'2'
+063A  00A3  	MOVWF CompTempVar2258+D'3'
+063B  3045  	MOVLW 0x45
+063C  00A4  	MOVWF CompTempVar2258+D'4'
+063D  3052  	MOVLW 0x52
+063E  00A5  	MOVWF CompTempVar2258+D'5'
+063F  01A6  	CLRF CompTempVar2258+D'6'
+0640  3000  	MOVLW HIGH(CompTempVar2258+D'0')
+0641  1283  	BCF STATUS, RP0
+0642  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+0643  30A0  	MOVLW LOW(CompTempVar2258+D'0')
+0644  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+0645  3006  	MOVLW 0x06
+0646  1683  	BSF STATUS, RP0
+0647  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+0648  2327  	CALL FCD_LCDDis_0005A
+
+
+					break;
+
+				}
+				// default:
+
+			}
+
+			//Switch
+			//Switch: payload[0]?
+			switch (FCV_PAYLOAD[0])
+0660  158A  	BSF PCLATH,3
+0661  2813  	GOTO	label70
+
+			{
+				case 'A':
+0649  1283  	BCF STATUS, RP0
+064A  0820  	MOVF gbl_FCV_PAYLOAD, W
+064B  3A41  	XORLW 0x41
+064C  1903  	BTFSC STATUS,Z
+064D  2E62  	GOTO	label63
+0662        label63
+
+				{
+					//Call Component Macro
+					//Call Component Macro: Cursor(0, 2)
+					FCD_LCDDisplay0_Cursor(0, 2);
+0662  01FE  	CLRF FCD_LCDDis_00059_arg_x
+0663  3002  	MOVLW 0x02
+0664  1683  	BSF STATUS, RP0
+0665  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+0666  2347  	CALL FCD_LCDDis_00059
+
+
+					//Call Component Macro
+					//Call Component Macro: PrintString("SHIFT+")
+					FCD_LCDDisplay0_PrintString("SHIFT+", 6);
+0667  3053  	MOVLW 0x53
+0668  00A0  	MOVWF CompTempVar2260
+0669  3048  	MOVLW 0x48
+066A  00A1  	MOVWF CompTempVar2260+D'1'
+066B  3049  	MOVLW 0x49
+066C  00A2  	MOVWF CompTempVar2260+D'2'
+066D  3046  	MOVLW 0x46
+066E  00A3  	MOVWF CompTempVar2260+D'3'
+066F  3054  	MOVLW 0x54
+0670  00A4  	MOVWF CompTempVar2260+D'4'
+0671  302B  	MOVLW 0x2B
+0672  00A5  	MOVWF CompTempVar2260+D'5'
+0673  01A6  	CLRF CompTempVar2260+D'6'
+0674  3000  	MOVLW HIGH(CompTempVar2260+D'0')
+0675  1283  	BCF STATUS, RP0
+0676  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+0677  30A0  	MOVLW LOW(CompTempVar2260+D'0')
+0678  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+0679  3006  	MOVLW 0x06
+067A  1683  	BSF STATUS, RP0
+067B  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+067C  2327  	CALL FCD_LCDDis_0005A
+
+
+					//Call Component Macro
+					//Call Component Macro: Cursor(0, 3)
+					FCD_LCDDisplay0_Cursor(0, 3);
+067D  1283  	BCF STATUS, RP0
+067E  01FE  	CLRF FCD_LCDDis_00059_arg_x
+067F  3003  	MOVLW 0x03
+0680  1683  	BSF STATUS, RP0
+0681  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+0682  2347  	CALL FCD_LCDDis_00059
+
+
+					//Call Component Macro
+					//Call Component Macro: PrintString("HOME_FOUL")
+					FCD_LCDDisplay0_PrintString("HOME_FOUL", 9);
+0683  3045  	MOVLW 0x45
+0684  00A3  	MOVWF CompTempVar2262+D'3'
+0685  3046  	MOVLW 0x46
+0686  00A5  	MOVWF CompTempVar2262+D'5'
+0687  3048  	MOVLW 0x48
+0688  00A0  	MOVWF CompTempVar2262
+0689  304C  	MOVLW 0x4C
+068A  00A8  	MOVWF CompTempVar2262+D'8'
+068B  304D  	MOVLW 0x4D
+068C  00A2  	MOVWF CompTempVar2262+D'2'
+068D  304F  	MOVLW 0x4F
+068E  00A1  	MOVWF CompTempVar2262+D'1'
+068F  00A6  	MOVWF CompTempVar2262+D'6'
+0690  3055  	MOVLW 0x55
+0691  00A7  	MOVWF CompTempVar2262+D'7'
+0692  305F  	MOVLW 0x5F
+0693  00A4  	MOVWF CompTempVar2262+D'4'
+0694  01A9  	CLRF CompTempVar2262+D'9'
+0695  3000  	MOVLW HIGH(CompTempVar2262+D'0')
+0696  1283  	BCF STATUS, RP0
+0697  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+0698  30A0  	MOVLW LOW(CompTempVar2262+D'0')
+0699  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+069A  3009  	MOVLW 0x09
+069B  1683  	BSF STATUS, RP0
+069C  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+069D  2327  	CALL FCD_LCDDis_0005A
+
+
+					break;
+069E  158A  	BSF PCLATH,3
+069F  2813  	GOTO	label70
+
+				}
+				case 'B':
+064E  3A03  	XORLW 0x03
+064F  1903  	BTFSC STATUS,Z
+0650  2EA0  	GOTO	label64
+06A0        label64
+
+				{
+					//Call Component Macro
+					//Call Component Macro: Cursor(0, 2)
+					FCD_LCDDisplay0_Cursor(0, 2);
+06A0  01FE  	CLRF FCD_LCDDis_00059_arg_x
+06A1  3002  	MOVLW 0x02
+06A2  1683  	BSF STATUS, RP0
+06A3  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+06A4  2347  	CALL FCD_LCDDis_00059
+
+
+					//Call Component Macro
+					//Call Component Macro: PrintString("SHIFT+")
+					FCD_LCDDisplay0_PrintString("SHIFT+", 6);
+06A5  3053  	MOVLW 0x53
+06A6  00A0  	MOVWF CompTempVar2264
+06A7  3048  	MOVLW 0x48
+06A8  00A1  	MOVWF CompTempVar2264+D'1'
+06A9  3049  	MOVLW 0x49
+06AA  00A2  	MOVWF CompTempVar2264+D'2'
+06AB  3046  	MOVLW 0x46
+06AC  00A3  	MOVWF CompTempVar2264+D'3'
+06AD  3054  	MOVLW 0x54
+06AE  00A4  	MOVWF CompTempVar2264+D'4'
+06AF  302B  	MOVLW 0x2B
+06B0  00A5  	MOVWF CompTempVar2264+D'5'
+06B1  01A6  	CLRF CompTempVar2264+D'6'
+06B2  3000  	MOVLW HIGH(CompTempVar2264+D'0')
+06B3  1283  	BCF STATUS, RP0
+06B4  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+06B5  30A0  	MOVLW LOW(CompTempVar2264+D'0')
+06B6  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+06B7  3006  	MOVLW 0x06
+06B8  1683  	BSF STATUS, RP0
+06B9  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+06BA  2327  	CALL FCD_LCDDis_0005A
+
+
+					//Call Component Macro
+					//Call Component Macro: Cursor(0, 3)
+					FCD_LCDDisplay0_Cursor(0, 3);
+06BB  1283  	BCF STATUS, RP0
+06BC  01FE  	CLRF FCD_LCDDis_00059_arg_x
+06BD  3003  	MOVLW 0x03
+06BE  1683  	BSF STATUS, RP0
+06BF  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+06C0  2347  	CALL FCD_LCDDis_00059
+
+
+					//Call Component Macro
+					//Call Component Macro: PrintString("HOME_SCORE")
+					FCD_LCDDisplay0_PrintString("HOME_SCORE", 10);
+06C1  3043  	MOVLW 0x43
+06C2  00A6  	MOVWF CompTempVar2266+D'6'
+06C3  3045  	MOVLW 0x45
+06C4  00A3  	MOVWF CompTempVar2266+D'3'
+06C5  00A9  	MOVWF CompTempVar2266+D'9'
+06C6  3048  	MOVLW 0x48
+06C7  00A0  	MOVWF CompTempVar2266
+06C8  304D  	MOVLW 0x4D
+06C9  00A2  	MOVWF CompTempVar2266+D'2'
+06CA  304F  	MOVLW 0x4F
+06CB  00A1  	MOVWF CompTempVar2266+D'1'
+06CC  00A7  	MOVWF CompTempVar2266+D'7'
+06CD  3052  	MOVLW 0x52
+06CE  00A8  	MOVWF CompTempVar2266+D'8'
+06CF  3053  	MOVLW 0x53
+06D0  00A5  	MOVWF CompTempVar2266+D'5'
+06D1  305F  	MOVLW 0x5F
+06D2  00A4  	MOVWF CompTempVar2266+D'4'
+06D3  01AA  	CLRF CompTempVar2266+D'10'
+06D4  3000  	MOVLW HIGH(CompTempVar2266+D'0')
+06D5  1283  	BCF STATUS, RP0
+06D6  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+06D7  30A0  	MOVLW LOW(CompTempVar2266+D'0')
+06D8  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+06D9  300A  	MOVLW 0x0A
+06DA  1683  	BSF STATUS, RP0
+06DB  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+06DC  2327  	CALL FCD_LCDDis_0005A
+
+
+					break;
+06DD  158A  	BSF PCLATH,3
+06DE  2813  	GOTO	label70
+
+				}
+				case 'C':
+0651  3A01  	XORLW 0x01
+0652  1903  	BTFSC STATUS,Z
+0653  2EDF  	GOTO	label65
+06DF        label65
+
+				{
+					//Call Component Macro
+					//Call Component Macro: Cursor(0, 2)
+					FCD_LCDDisplay0_Cursor(0, 2);
+06DF  01FE  	CLRF FCD_LCDDis_00059_arg_x
+06E0  3002  	MOVLW 0x02
+06E1  1683  	BSF STATUS, RP0
+06E2  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+06E3  2347  	CALL FCD_LCDDis_00059
+
+
+					//Call Component Macro
+					//Call Component Macro: PrintString("SHIFT+")
+					FCD_LCDDisplay0_PrintString("SHIFT+", 6);
+06E4  3053  	MOVLW 0x53
+06E5  00A0  	MOVWF CompTempVar2268
+06E6  3048  	MOVLW 0x48
+06E7  00A1  	MOVWF CompTempVar2268+D'1'
+06E8  3049  	MOVLW 0x49
+06E9  00A2  	MOVWF CompTempVar2268+D'2'
+06EA  3046  	MOVLW 0x46
+06EB  00A3  	MOVWF CompTempVar2268+D'3'
+06EC  3054  	MOVLW 0x54
+06ED  00A4  	MOVWF CompTempVar2268+D'4'
+06EE  302B  	MOVLW 0x2B
+06EF  00A5  	MOVWF CompTempVar2268+D'5'
+06F0  01A6  	CLRF CompTempVar2268+D'6'
+06F1  3000  	MOVLW HIGH(CompTempVar2268+D'0')
+06F2  1283  	BCF STATUS, RP0
+06F3  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+06F4  30A0  	MOVLW LOW(CompTempVar2268+D'0')
+06F5  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+06F6  3006  	MOVLW 0x06
+06F7  1683  	BSF STATUS, RP0
+06F8  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+06F9  2327  	CALL FCD_LCDDis_0005A
+
+
+					//Call Component Macro
+					//Call Component Macro: Cursor(0, 3)
+					FCD_LCDDisplay0_Cursor(0, 3);
+06FA  1283  	BCF STATUS, RP0
+06FB  01FE  	CLRF FCD_LCDDis_00059_arg_x
+06FC  3003  	MOVLW 0x03
+06FD  1683  	BSF STATUS, RP0
+06FE  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+06FF  2347  	CALL FCD_LCDDis_00059
+
+
+					//Call Component Macro
+					//Call Component Macro: PrintString("RESET_24SC")
+					FCD_LCDDisplay0_PrintString("RESET_24SC", 10);
+0700  3032  	MOVLW 0x32
+0701  00A6  	MOVWF CompTempVar2270+D'6'
+0702  3034  	MOVLW 0x34
+0703  00A7  	MOVWF CompTempVar2270+D'7'
+0704  3043  	MOVLW 0x43
+0705  00A9  	MOVWF CompTempVar2270+D'9'
+0706  3045  	MOVLW 0x45
+0707  00A1  	MOVWF CompTempVar2270+D'1'
+0708  00A3  	MOVWF CompTempVar2270+D'3'
+0709  3052  	MOVLW 0x52
+070A  00A0  	MOVWF CompTempVar2270
+070B  3053  	MOVLW 0x53
+070C  00A2  	MOVWF CompTempVar2270+D'2'
+070D  00A8  	MOVWF CompTempVar2270+D'8'
+070E  3054  	MOVLW 0x54
+070F  00A4  	MOVWF CompTempVar2270+D'4'
+0710  305F  	MOVLW 0x5F
+0711  00A5  	MOVWF CompTempVar2270+D'5'
+0712  01AA  	CLRF CompTempVar2270+D'10'
+0713  3000  	MOVLW HIGH(CompTempVar2270+D'0')
+0714  1283  	BCF STATUS, RP0
+0715  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+0716  30A0  	MOVLW LOW(CompTempVar2270+D'0')
+0717  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+0718  300A  	MOVLW 0x0A
+0719  1683  	BSF STATUS, RP0
+071A  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+071B  2327  	CALL FCD_LCDDis_0005A
+
+
+					break;
+071C  158A  	BSF PCLATH,3
+071D  2813  	GOTO	label70
+
+				}
+				case 'D':
+0654  3A07  	XORLW 0x07
+0655  1903  	BTFSC STATUS,Z
+0656  2F1E  	GOTO	label66
+071E        label66
+
+				{
+					//Call Component Macro
+					//Call Component Macro: Cursor(0, 2)
+					FCD_LCDDisplay0_Cursor(0, 2);
+071E  01FE  	CLRF FCD_LCDDis_00059_arg_x
+071F  3002  	MOVLW 0x02
+0720  1683  	BSF STATUS, RP0
+0721  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+0722  2347  	CALL FCD_LCDDis_00059
+
+
+					//Call Component Macro
+					//Call Component Macro: PrintString("SHIFT+")
+					FCD_LCDDisplay0_PrintString("SHIFT+", 6);
+0723  3053  	MOVLW 0x53
+0724  00A0  	MOVWF CompTempVar2272
+0725  3048  	MOVLW 0x48
+0726  00A1  	MOVWF CompTempVar2272+D'1'
+0727  3049  	MOVLW 0x49
+0728  00A2  	MOVWF CompTempVar2272+D'2'
+0729  3046  	MOVLW 0x46
+072A  00A3  	MOVWF CompTempVar2272+D'3'
+072B  3054  	MOVLW 0x54
+072C  00A4  	MOVWF CompTempVar2272+D'4'
+072D  302B  	MOVLW 0x2B
+072E  00A5  	MOVWF CompTempVar2272+D'5'
+072F  01A6  	CLRF CompTempVar2272+D'6'
+0730  3000  	MOVLW HIGH(CompTempVar2272+D'0')
+0731  1283  	BCF STATUS, RP0
+0732  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+0733  30A0  	MOVLW LOW(CompTempVar2272+D'0')
+0734  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+0735  3006  	MOVLW 0x06
+0736  1683  	BSF STATUS, RP0
+0737  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+0738  2327  	CALL FCD_LCDDis_0005A
+
+
+					//Call Component Macro
+					//Call Component Macro: Cursor(0, 3)
+					FCD_LCDDisplay0_Cursor(0, 3);
+0739  1283  	BCF STATUS, RP0
+073A  01FE  	CLRF FCD_LCDDis_00059_arg_x
+073B  3003  	MOVLW 0x03
+073C  1683  	BSF STATUS, RP0
+073D  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+073E  2347  	CALL FCD_LCDDis_00059
+
+
+					//Call Component Macro
+					//Call Component Macro: PrintString("START/STOP")
+					FCD_LCDDisplay0_PrintString("START/STOP", 10);
+073F  302F  	MOVLW 0x2F
+0740  00A5  	MOVWF CompTempVar2274+D'5'
+0741  3041  	MOVLW 0x41
+0742  00A2  	MOVWF CompTempVar2274+D'2'
+0743  304F  	MOVLW 0x4F
+0744  00A8  	MOVWF CompTempVar2274+D'8'
+0745  3050  	MOVLW 0x50
+0746  00A9  	MOVWF CompTempVar2274+D'9'
+0747  3052  	MOVLW 0x52
+0748  00A3  	MOVWF CompTempVar2274+D'3'
+0749  3053  	MOVLW 0x53
+074A  00A0  	MOVWF CompTempVar2274
+074B  00A6  	MOVWF CompTempVar2274+D'6'
+074C  3054  	MOVLW 0x54
+074D  00A1  	MOVWF CompTempVar2274+D'1'
+074E  00A4  	MOVWF CompTempVar2274+D'4'
+074F  00A7  	MOVWF CompTempVar2274+D'7'
+0750  01AA  	CLRF CompTempVar2274+D'10'
+0751  3000  	MOVLW HIGH(CompTempVar2274+D'0')
+0752  1283  	BCF STATUS, RP0
+0753  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+0754  30A0  	MOVLW LOW(CompTempVar2274+D'0')
+0755  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+0756  300A  	MOVLW 0x0A
+0757  1683  	BSF STATUS, RP0
+0758  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+0759  2327  	CALL FCD_LCDDis_0005A
+
+
+					break;
+075A  158A  	BSF PCLATH,3
+075B  2813  	GOTO	label70
+
+				}
+				case 'E':
+0657  3A01  	XORLW 0x01
+0658  1903  	BTFSC STATUS,Z
+0659  2F5C  	GOTO	label67
+075C        label67
+
+				{
+					//Call Component Macro
+					//Call Component Macro: Cursor(0, 2)
+					FCD_LCDDisplay0_Cursor(0, 2);
+075C  01FE  	CLRF FCD_LCDDis_00059_arg_x
+075D  3002  	MOVLW 0x02
+075E  1683  	BSF STATUS, RP0
+075F  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+0760  2347  	CALL FCD_LCDDis_00059
+
+
+					//Call Component Macro
+					//Call Component Macro: PrintString("SHIFT+")
+					FCD_LCDDisplay0_PrintString("SHIFT+", 6);
+0761  3053  	MOVLW 0x53
+0762  00A0  	MOVWF CompTempVar2276
+0763  3048  	MOVLW 0x48
+0764  00A1  	MOVWF CompTempVar2276+D'1'
+0765  3049  	MOVLW 0x49
+0766  00A2  	MOVWF CompTempVar2276+D'2'
+0767  3046  	MOVLW 0x46
+0768  00A3  	MOVWF CompTempVar2276+D'3'
+0769  3054  	MOVLW 0x54
+076A  00A4  	MOVWF CompTempVar2276+D'4'
+076B  302B  	MOVLW 0x2B
+076C  00A5  	MOVWF CompTempVar2276+D'5'
+076D  01A6  	CLRF CompTempVar2276+D'6'
+076E  3000  	MOVLW HIGH(CompTempVar2276+D'0')
+076F  1283  	BCF STATUS, RP0
+0770  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+0771  30A0  	MOVLW LOW(CompTempVar2276+D'0')
+0772  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+0773  3006  	MOVLW 0x06
+0774  1683  	BSF STATUS, RP0
+0775  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+0776  2327  	CALL FCD_LCDDis_0005A
+
+
+					//Call Component Macro
+					//Call Component Macro: Cursor(0, 3)
+					FCD_LCDDisplay0_Cursor(0, 3);
+0777  1283  	BCF STATUS, RP0
+0778  01FE  	CLRF FCD_LCDDis_00059_arg_x
+0779  3003  	MOVLW 0x03
+077A  1683  	BSF STATUS, RP0
+077B  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+077C  2347  	CALL FCD_LCDDis_00059
+
+
+					//Call Component Macro
+					//Call Component Macro: PrintString("GUEST_SCORE")
+					FCD_LCDDisplay0_PrintString("GUEST_SCORE", 11);
+077D  3043  	MOVLW 0x43
+077E  00A7  	MOVWF CompTempVar2278+D'7'
+077F  3045  	MOVLW 0x45
+0780  00A2  	MOVWF CompTempVar2278+D'2'
+0781  00AA  	MOVWF CompTempVar2278+D'10'
+0782  3047  	MOVLW 0x47
+0783  00A0  	MOVWF CompTempVar2278
+0784  304F  	MOVLW 0x4F
+0785  00A8  	MOVWF CompTempVar2278+D'8'
+0786  3052  	MOVLW 0x52
+0787  00A9  	MOVWF CompTempVar2278+D'9'
+0788  3053  	MOVLW 0x53
+0789  00A3  	MOVWF CompTempVar2278+D'3'
+078A  00A6  	MOVWF CompTempVar2278+D'6'
+078B  3054  	MOVLW 0x54
+078C  00A4  	MOVWF CompTempVar2278+D'4'
+078D  3055  	MOVLW 0x55
+078E  00A1  	MOVWF CompTempVar2278+D'1'
+078F  305F  	MOVLW 0x5F
+0790  00A5  	MOVWF CompTempVar2278+D'5'
+0791  01AB  	CLRF CompTempVar2278+D'11'
+0792  3000  	MOVLW HIGH(CompTempVar2278+D'0')
+0793  1283  	BCF STATUS, RP0
+0794  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+0795  30A0  	MOVLW LOW(CompTempVar2278+D'0')
+0796  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+0797  300B  	MOVLW 0x0B
+0798  1683  	BSF STATUS, RP0
+0799  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+079A  2327  	CALL FCD_LCDDis_0005A
+
+
+					break;
+079B  158A  	BSF PCLATH,3
+079C  2813  	GOTO	label70
+
+				}
+				case 'F':
+065A  3A03  	XORLW 0x03
+065B  1903  	BTFSC STATUS,Z
+065C  2F9D  	GOTO	label68
+079D        label68
+
+				{
+					//Call Component Macro
+					//Call Component Macro: Cursor(0, 2)
+					FCD_LCDDisplay0_Cursor(0, 2);
+079D  01FE  	CLRF FCD_LCDDis_00059_arg_x
+079E  3002  	MOVLW 0x02
+079F  1683  	BSF STATUS, RP0
+07A0  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+07A1  2347  	CALL FCD_LCDDis_00059
+
+
+					//Call Component Macro
+					//Call Component Macro: PrintString("SHIFT+")
+					FCD_LCDDisplay0_PrintString("SHIFT+", 6);
+07A2  3053  	MOVLW 0x53
+07A3  00A0  	MOVWF CompTempVar2280
+07A4  3048  	MOVLW 0x48
+07A5  00A1  	MOVWF CompTempVar2280+D'1'
+07A6  3049  	MOVLW 0x49
+07A7  00A2  	MOVWF CompTempVar2280+D'2'
+07A8  3046  	MOVLW 0x46
+07A9  00A3  	MOVWF CompTempVar2280+D'3'
+07AA  3054  	MOVLW 0x54
+07AB  00A4  	MOVWF CompTempVar2280+D'4'
+07AC  302B  	MOVLW 0x2B
+07AD  00A5  	MOVWF CompTempVar2280+D'5'
+07AE  01A6  	CLRF CompTempVar2280+D'6'
+07AF  3000  	MOVLW HIGH(CompTempVar2280+D'0')
+07B0  1283  	BCF STATUS, RP0
+07B1  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+07B2  30A0  	MOVLW LOW(CompTempVar2280+D'0')
+07B3  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+07B4  3006  	MOVLW 0x06
+07B5  1683  	BSF STATUS, RP0
+07B6  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+07B7  2327  	CALL FCD_LCDDis_0005A
+
+
+					//Call Component Macro
+					//Call Component Macro: Cursor(0, 3)
+					FCD_LCDDisplay0_Cursor(0, 3);
+07B8  1283  	BCF STATUS, RP0
+07B9  01FE  	CLRF FCD_LCDDis_00059_arg_x
+07BA  3003  	MOVLW 0x03
+07BB  1683  	BSF STATUS, RP0
+07BC  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+07BD  2347  	CALL FCD_LCDDis_00059
+
+
+					//Call Component Macro
+					//Call Component Macro: PrintString("GUEST_FOUL")
+					FCD_LCDDisplay0_PrintString("GUEST_FOUL", 10);
+07BE  3045  	MOVLW 0x45
+07BF  00A2  	MOVWF CompTempVar2282+D'2'
+07C0  3046  	MOVLW 0x46
+07C1  00A6  	MOVWF CompTempVar2282+D'6'
+07C2  3047  	MOVLW 0x47
+07C3  00A0  	MOVWF CompTempVar2282
+07C4  304C  	MOVLW 0x4C
+07C5  00A9  	MOVWF CompTempVar2282+D'9'
+07C6  304F  	MOVLW 0x4F
+07C7  00A7  	MOVWF CompTempVar2282+D'7'
+07C8  3053  	MOVLW 0x53
+07C9  00A3  	MOVWF CompTempVar2282+D'3'
+07CA  3054  	MOVLW 0x54
+07CB  00A4  	MOVWF CompTempVar2282+D'4'
+07CC  3055  	MOVLW 0x55
+07CD  00A1  	MOVWF CompTempVar2282+D'1'
+07CE  00A8  	MOVWF CompTempVar2282+D'8'
+07CF  305F  	MOVLW 0x5F
+07D0  00A5  	MOVWF CompTempVar2282+D'5'
+07D1  01AA  	CLRF CompTempVar2282+D'10'
+07D2  3000  	MOVLW HIGH(CompTempVar2282+D'0')
+07D3  1283  	BCF STATUS, RP0
+07D4  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+07D5  30A0  	MOVLW LOW(CompTempVar2282+D'0')
+07D6  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+07D7  300A  	MOVLW 0x0A
+07D8  1683  	BSF STATUS, RP0
+07D9  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+07DA  2327  	CALL FCD_LCDDis_0005A
+
+
+					break;
+07DB  158A  	BSF PCLATH,3
+07DC  2813  	GOTO	label70
+
+				}
+				case 'G':
+065D  3A01  	XORLW 0x01
+065E  1903  	BTFSC STATUS,Z
+065F  2FDD  	GOTO	label69
+07DD        label69
+
+				{
+					//Call Component Macro
+					//Call Component Macro: Cursor(0, 2)
+					FCD_LCDDisplay0_Cursor(0, 2);
+07DD  01FE  	CLRF FCD_LCDDis_00059_arg_x
+07DE  3002  	MOVLW 0x02
+07DF  1683  	BSF STATUS, RP0
+07E0  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+07E1  2347  	CALL FCD_LCDDis_00059
+
+
+					//Call Component Macro
+					//Call Component Macro: PrintString("SHIFT+")
+					FCD_LCDDisplay0_PrintString("SHIFT+", 6);
+07E2  3053  	MOVLW 0x53
+07E3  00A0  	MOVWF CompTempVar2284
+07E4  3048  	MOVLW 0x48
+07E5  00A1  	MOVWF CompTempVar2284+D'1'
+07E6  3049  	MOVLW 0x49
+07E7  00A2  	MOVWF CompTempVar2284+D'2'
+07E8  3046  	MOVLW 0x46
+07E9  00A3  	MOVWF CompTempVar2284+D'3'
+07EA  3054  	MOVLW 0x54
+07EB  00A4  	MOVWF CompTempVar2284+D'4'
+07EC  302B  	MOVLW 0x2B
+07ED  00A5  	MOVWF CompTempVar2284+D'5'
+07EE  01A6  	CLRF CompTempVar2284+D'6'
+07EF  3000  	MOVLW HIGH(CompTempVar2284+D'0')
+07F0  1283  	BCF STATUS, RP0
+07F1  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+07F2  30A0  	MOVLW LOW(CompTempVar2284+D'0')
+07F3  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+07F4  3006  	MOVLW 0x06
+07F5  1683  	BSF STATUS, RP0
+07F6  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+07F7  2327  	CALL FCD_LCDDis_0005A
+
+
+					//Call Component Macro
+					//Call Component Macro: Cursor(0, 3)
+					FCD_LCDDisplay0_Cursor(0, 3);
+07F8  1283  	BCF STATUS, RP0
+07F9  01FE  	CLRF FCD_LCDDis_00059_arg_x
+07FA  3003  	MOVLW 0x03
+07FB  1683  	BSF STATUS, RP0
+07FC  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+07FD  2347  	CALL FCD_LCDDis_00059
+
+
+					//Call Component Macro
+					//Call Component Macro: PrintString("BUZZER")
+					FCD_LCDDisplay0_PrintString("BUZZER", 6);
+07FE  3042  	MOVLW 0x42
+07FF  00A0  	MOVWF CompTempVar2286
+0800  3055  	MOVLW 0x55
+0801  00A1  	MOVWF CompTempVar2286+D'1'
+0802  305A  	MOVLW 0x5A
+0803  00A2  	MOVWF CompTempVar2286+D'2'
+0804  00A3  	MOVWF CompTempVar2286+D'3'
+0805  3045  	MOVLW 0x45
+0806  00A4  	MOVWF CompTempVar2286+D'4'
+0807  3052  	MOVLW 0x52
+0808  00A5  	MOVWF CompTempVar2286+D'5'
+0809  01A6  	CLRF CompTempVar2286+D'6'
+080A  3000  	MOVLW HIGH(CompTempVar2286+D'0')
+080B  1283  	BCF STATUS, RP0
+080C  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+080D  30A0  	MOVLW LOW(CompTempVar2286+D'0')
+080E  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+080F  3006  	MOVLW 0x06
+0810  1683  	BSF STATUS, RP0
+0811  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+0812  2327  	CALL FCD_LCDDis_0005A
+
+
+					break;
+
+				}
+				// default:
+
+			}
+
+			//Call Macro
+			//Call Macro: nrf_flush_fifo()
+			FCM_nrf_flush_fifo();
+0813  118A  	BCF PCLATH,3
+0814  21C2  	CALL FCM_nrf_fl_00063
+
+
+		} else {
+0815  2D1A  	GOTO	label53
+
+
+			//Output
+			//Output: 0 -> A5
+			trisa = trisa & 0xDF;
+0816  30DF  	MOVLW 0xDF
+0817  1683  	BSF STATUS, RP0
+0818  0505  	ANDWF gbl_trisa, W
+0819  0085  	MOVWF gbl_trisa
+
+			if ((0))
+				porta = (porta & 0xDF) | 0x20;
+			else
+				porta = porta & 0xDF;
+081A  30DF  	MOVLW 0xDF
+081B  1283  	BCF STATUS, RP0
+081C  0505  	ANDWF gbl_porta, W
+081D  0085  	MOVWF gbl_porta
+
+
+		}
+
+
+	}
+
+}
+
+
+
+void FCM_rcv_init()
+
+{
+
+	//Calculation
+	//Calculation:
+	//  reg_to_write = 0x00
+	//  spi_wrt_data = 0x0F
+	FCV_REG_TO_WRITE = 0x00;
+03E1  1283  	BCF STATUS, RP0
+03E2  1303  	BCF STATUS, RP1
+03E3  01EE  	CLRF gbl_FCV_REG_TO_WRITE
+
+	FCV_SPI_WRT_DATA = 0x0F;
+03E4  300F  	MOVLW 0x0F
+03E5  00EC  	MOVWF gbl_FCV_SPI_WRT_DATA
+
+
+	//Call Macro
+	//Call Macro: spi_data_write()
+	FCM_spi_data_write();
+03E6  209B  	CALL FCM_spi_da_00051
+
+
+	//Calculation
+	//Calculation:
+	//  reg_to_write = 0x01
+	//  spi_wrt_data = 0x3F
+	FCV_REG_TO_WRITE = 0x01;
+03E7  3001  	MOVLW 0x01
+03E8  00EE  	MOVWF gbl_FCV_REG_TO_WRITE
+
+	FCV_SPI_WRT_DATA = 0x3F;
+03E9  303F  	MOVLW 0x3F
+03EA  00EC  	MOVWF gbl_FCV_SPI_WRT_DATA
+
+
+	//Call Macro
+	//Call Macro: spi_data_write()
+	FCM_spi_data_write();
+03EB  209B  	CALL FCM_spi_da_00051
+
+
+	//Calculation
+	//Calculation:
+	//  reg_to_write = 0x02
+	//  spi_wrt_data = 0x03
+	FCV_REG_TO_WRITE = 0x02;
+03EC  3002  	MOVLW 0x02
+03ED  00EE  	MOVWF gbl_FCV_REG_TO_WRITE
+
+	FCV_SPI_WRT_DATA = 0x03;
+03EE  3003  	MOVLW 0x03
+03EF  00EC  	MOVWF gbl_FCV_SPI_WRT_DATA
+
+
+	//Call Macro
+	//Call Macro: spi_data_write()
+	FCM_spi_data_write();
+03F0  209B  	CALL FCM_spi_da_00051
+
+
+	//Calculation
+	//Calculation:
+	//  reg_to_write = 0x03
+	//  spi_wrt_data = 0x03
+	FCV_REG_TO_WRITE = 0x03;
+03F1  3003  	MOVLW 0x03
+03F2  00EE  	MOVWF gbl_FCV_REG_TO_WRITE
+
+	FCV_SPI_WRT_DATA = 0x03;
+03F3  00EC  	MOVWF gbl_FCV_SPI_WRT_DATA
+
+
+	//Call Macro
+	//Call Macro: spi_data_write()
+	FCM_spi_data_write();
+03F4  209B  	CALL FCM_spi_da_00051
+
+
+	//Calculation
+	//Calculation:
+	//  reg_to_write = 0x04
+	//  spi_wrt_data = 0x5F
+	FCV_REG_TO_WRITE = 0x04;
+03F5  3004  	MOVLW 0x04
+03F6  00EE  	MOVWF gbl_FCV_REG_TO_WRITE
+
+	FCV_SPI_WRT_DATA = 0x5F;
+03F7  305F  	MOVLW 0x5F
+03F8  00EC  	MOVWF gbl_FCV_SPI_WRT_DATA
+
+
+	//Call Macro
+	//Call Macro: spi_data_write()
+	FCM_spi_data_write();
+03F9  209B  	CALL FCM_spi_da_00051
+
+
+	//Calculation
+	//Calculation:
+	//  reg_to_write = 0x05
+	//  spi_wrt_data = 0x4C
+	FCV_REG_TO_WRITE = 0x05;
+03FA  3005  	MOVLW 0x05
+03FB  00EE  	MOVWF gbl_FCV_REG_TO_WRITE
+
+	FCV_SPI_WRT_DATA = 0x4C;
+03FC  304C  	MOVLW 0x4C
+03FD  00EC  	MOVWF gbl_FCV_SPI_WRT_DATA
+
+
+	//Call Macro
+	//Call Macro: spi_data_write()
+	FCM_spi_data_write();
+03FE  209B  	CALL FCM_spi_da_00051
+
+
+	//Calculation
+	//Calculation:
+	//  reg_to_write = 0x06
+	//  spi_wrt_data = 0x27
+	FCV_REG_TO_WRITE = 0x06;
+03FF  3006  	MOVLW 0x06
+0400  00EE  	MOVWF gbl_FCV_REG_TO_WRITE
+
+	FCV_SPI_WRT_DATA = 0x27;
+0401  3027  	MOVLW 0x27
+0402  00EC  	MOVWF gbl_FCV_SPI_WRT_DATA
+
+
+	//Call Macro
+	//Call Macro: spi_data_write()
+	FCM_spi_data_write();
+0403  209B  	CALL FCM_spi_da_00051
+
+
+	//Calculation
+	//Calculation:
+	//  reg_to_write = 0x11
+	//  spi_wrt_data = payload_size
+	FCV_REG_TO_WRITE = 0x11;
+0404  3011  	MOVLW 0x11
+0405  00EE  	MOVWF gbl_FCV_REG_TO_WRITE
+
+	FCV_SPI_WRT_DATA = FCV_PAYLOAD_SIZE;
+0406  0871  	MOVF gbl_FCV_PAYLOAD_SIZE, W
+0407  00EC  	MOVWF gbl_FCV_SPI_WRT_DATA
+
+
+	//Call Macro
+	//Call Macro: spi_data_write()
+	FCM_spi_data_write();
+0408  209B  	CALL FCM_spi_da_00051
+
+
+	//Call Macro
+	//Call Macro: setup_nrf_address()
+	FCM_setup_nrf_address();
+0409  2157  	CALL FCM_setup__00064
+
+
+	//Call Macro
+	//Call Macro: nrf_clr_status()
+	FCM_nrf_clr_status();
+040A  21FA  	CALL FCM_nrf_cl_00065
+
+
+	//Call Macro
+	//Call Macro: nrf_flush_fifo()
+	FCM_nrf_flush_fifo();
+040B  21C2  	CALL FCM_nrf_fl_00063
+
+
+}
+040C  0008  	RETURN
+
+
+
+void FCM_setup_nrf_address()
+
+{
+
+	//Comment:
+	//RX ADDRESS
+
+	//Calculation
+	//Calculation:
+	//  reg_to_write = 0x0A
+	FCV_REG_TO_WRITE = 0x0A;
+0157  300A  	MOVLW 0x0A
+0158  1283  	BCF STATUS, RP0
+0159  1303  	BCF STATUS, RP1
+015A  00EE  	MOVWF gbl_FCV_REG_TO_WRITE
+
+
+	//CSN
+	//Output: 0 -> C2
+	trisc = trisc & 0xFB;
+015B  30FB  	MOVLW 0xFB
+015C  1683  	BSF STATUS, RP0
+015D  0507  	ANDWF gbl_trisc, W
+015E  0087  	MOVWF gbl_trisc
+
+	if ((0))
+		portc = (portc & 0xFB) | 0x04;
+	else
+		portc = portc & 0xFB;
+015F  30FB  	MOVLW 0xFB
+0160  1283  	BCF STATUS, RP0
+0161  0507  	ANDWF gbl_portc, W
+0162  0087  	MOVWF gbl_portc
+
+
+	//Delay
+	//Delay: 5 us
+	delay_us(5);
+0163  3005  	MOVLW 0x05
+0164  00FC  	MOVWF delay_us_00000_arg_del
+0165  2010  	CALL delay_us_00000
+
+
+	//Calculation
+	//Calculation:
+	//  reg_to_write = reg_to_write + 0x20
+	FCV_REG_TO_WRITE = FCV_REG_TO_WRITE + 0x20;
+0166  3020  	MOVLW 0x20
+0167  076E  	ADDWF gbl_FCV_REG_TO_WRITE, W
+0168  00EE  	MOVWF gbl_FCV_REG_TO_WRITE
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(reg_to_write)
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_REG_TO_WRITE);
+0169  086E  	MOVF gbl_FCV_REG_TO_WRITE, W
+016A  00FC  	MOVWF FCD_SPI_Le_00052_arg_Char
+016B  206D  	CALL FCD_SPI_Le_00052
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(NRF_ADDRESS[0])
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_NRF_ADDRESS[0]);
+016C  1283  	BCF STATUS, RP0
+016D  0840  	MOVF gbl_FCV_NRF_ADDRESS, W
+016E  00FC  	MOVWF FCD_SPI_Le_00052_arg_Char
+016F  206D  	CALL FCD_SPI_Le_00052
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(NRF_ADDRESS[1])
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_NRF_ADDRESS[1]);
+0170  1283  	BCF STATUS, RP0
+0171  0841  	MOVF gbl_FCV_NRF_ADDRESS+D'1', W
+0172  00FC  	MOVWF FCD_SPI_Le_00052_arg_Char
+0173  206D  	CALL FCD_SPI_Le_00052
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(NRF_ADDRESS[2])
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_NRF_ADDRESS[2]);
+0174  1283  	BCF STATUS, RP0
+0175  0842  	MOVF gbl_FCV_NRF_ADDRESS+D'2', W
+0176  00FC  	MOVWF FCD_SPI_Le_00052_arg_Char
+0177  206D  	CALL FCD_SPI_Le_00052
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(NRF_ADDRESS[3])
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_NRF_ADDRESS[3]);
+0178  1283  	BCF STATUS, RP0
+0179  0843  	MOVF gbl_FCV_NRF_ADDRESS+D'3', W
+017A  00FC  	MOVWF FCD_SPI_Le_00052_arg_Char
+017B  206D  	CALL FCD_SPI_Le_00052
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(NRF_ADDRESS[4])
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_NRF_ADDRESS[4]);
+017C  1283  	BCF STATUS, RP0
+017D  0844  	MOVF gbl_FCV_NRF_ADDRESS+D'4', W
+017E  00FC  	MOVWF FCD_SPI_Le_00052_arg_Char
+017F  206D  	CALL FCD_SPI_Le_00052
+
+
+	//CSN
+	//Output: 1 -> C2
+	trisc = trisc & 0xFB;
+0180  30FB  	MOVLW 0xFB
+0181  0507  	ANDWF gbl_trisc, W
+0182  0087  	MOVWF gbl_trisc
+
+	if ((1))
+		portc = (portc & 0xFB) | 0x04;
+0183  30FB  	MOVLW 0xFB
+0184  1283  	BCF STATUS, RP0
+0185  0507  	ANDWF gbl_portc, W
+0186  00FB  	MOVWF CompTempVar2310
+0187  3004  	MOVLW 0x04
+0188  047B  	IORWF CompTempVar2310, W
+0189  0087  	MOVWF gbl_portc
+
+	else
+		portc = portc & 0xFB;
+
+	//Delay
+	//Delay: 5 us
+	delay_us(5);
+018A  3005  	MOVLW 0x05
+018B  00FC  	MOVWF delay_us_00000_arg_del
+018C  2010  	CALL delay_us_00000
+
+
+	//Comment:
+	//RX ADDRESS
+
+	//Calculation
+	//Calculation:
+	//  reg_to_write = 0x10
+	FCV_REG_TO_WRITE = 0x10;
+018D  3010  	MOVLW 0x10
+018E  00EE  	MOVWF gbl_FCV_REG_TO_WRITE
+
+
+	//CSN
+	//Output: 0 -> C2
+	trisc = trisc & 0xFB;
+018F  30FB  	MOVLW 0xFB
+0190  1683  	BSF STATUS, RP0
+0191  0507  	ANDWF gbl_trisc, W
+0192  0087  	MOVWF gbl_trisc
+
+	if ((0))
+		portc = (portc & 0xFB) | 0x04;
+	else
+		portc = portc & 0xFB;
+0193  30FB  	MOVLW 0xFB
+0194  1283  	BCF STATUS, RP0
+0195  0507  	ANDWF gbl_portc, W
+0196  0087  	MOVWF gbl_portc
+
+
+	//Delay
+	//Delay: 5 us
+	delay_us(5);
+0197  3005  	MOVLW 0x05
+0198  00FC  	MOVWF delay_us_00000_arg_del
+0199  2010  	CALL delay_us_00000
+
+
+	//Calculation
+	//Calculation:
+	//  reg_to_write = reg_to_write + 0x20
+	FCV_REG_TO_WRITE = FCV_REG_TO_WRITE + 0x20;
+019A  3020  	MOVLW 0x20
+019B  076E  	ADDWF gbl_FCV_REG_TO_WRITE, W
+019C  00EE  	MOVWF gbl_FCV_REG_TO_WRITE
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(reg_to_write)
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_REG_TO_WRITE);
+019D  086E  	MOVF gbl_FCV_REG_TO_WRITE, W
+019E  00FC  	MOVWF FCD_SPI_Le_00052_arg_Char
+019F  206D  	CALL FCD_SPI_Le_00052
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(NRF_ADDRESS[0])
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_NRF_ADDRESS[0]);
+01A0  1283  	BCF STATUS, RP0
+01A1  0840  	MOVF gbl_FCV_NRF_ADDRESS, W
+01A2  00FC  	MOVWF FCD_SPI_Le_00052_arg_Char
+01A3  206D  	CALL FCD_SPI_Le_00052
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(NRF_ADDRESS[1])
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_NRF_ADDRESS[1]);
+01A4  1283  	BCF STATUS, RP0
+01A5  0841  	MOVF gbl_FCV_NRF_ADDRESS+D'1', W
+01A6  00FC  	MOVWF FCD_SPI_Le_00052_arg_Char
+01A7  206D  	CALL FCD_SPI_Le_00052
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(NRF_ADDRESS[2])
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_NRF_ADDRESS[2]);
+01A8  1283  	BCF STATUS, RP0
+01A9  0842  	MOVF gbl_FCV_NRF_ADDRESS+D'2', W
+01AA  00FC  	MOVWF FCD_SPI_Le_00052_arg_Char
+01AB  206D  	CALL FCD_SPI_Le_00052
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(NRF_ADDRESS[3])
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_NRF_ADDRESS[3]);
+01AC  1283  	BCF STATUS, RP0
+01AD  0843  	MOVF gbl_FCV_NRF_ADDRESS+D'3', W
+01AE  00FC  	MOVWF FCD_SPI_Le_00052_arg_Char
+01AF  206D  	CALL FCD_SPI_Le_00052
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(NRF_ADDRESS[4])
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_NRF_ADDRESS[4]);
+01B0  1283  	BCF STATUS, RP0
+01B1  0844  	MOVF gbl_FCV_NRF_ADDRESS+D'4', W
+01B2  00FC  	MOVWF FCD_SPI_Le_00052_arg_Char
+01B3  206D  	CALL FCD_SPI_Le_00052
+
+
+	//CSN
+	//Output: 1 -> C2
+	trisc = trisc & 0xFB;
+01B4  30FB  	MOVLW 0xFB
+01B5  0507  	ANDWF gbl_trisc, W
+01B6  0087  	MOVWF gbl_trisc
+
+	if ((1))
+		portc = (portc & 0xFB) | 0x04;
+01B7  30FB  	MOVLW 0xFB
+01B8  1283  	BCF STATUS, RP0
+01B9  0507  	ANDWF gbl_portc, W
+01BA  00FB  	MOVWF CompTempVar2321
+01BB  3004  	MOVLW 0x04
+01BC  047B  	IORWF CompTempVar2321, W
+01BD  0087  	MOVWF gbl_portc
+
+	else
+		portc = portc & 0xFB;
+
+	//Delay
+	//Delay: 5 us
+	delay_us(5);
+01BE  3005  	MOVLW 0x05
+01BF  00FC  	MOVWF delay_us_00000_arg_del
+01C0  2010  	CALL delay_us_00000
+
+
+}
+01C1  0008  	RETURN
+
+
+
+void FCM_read_addr()
+
+{
+
+	//Calculation
+	//Calculation:
+	//  reg_to_read = 0x10
+	FCV_REG_TO_READ = 0x10;
+03B1  3010  	MOVLW 0x10
+03B2  1283  	BCF STATUS, RP0
+03B3  1303  	BCF STATUS, RP1
+03B4  00F7  	MOVWF gbl_FCV_REG_TO_READ
+
+
+	//CSN
+	//Output: 0 -> C2
+	trisc = trisc & 0xFB;
+03B5  30FB  	MOVLW 0xFB
+03B6  1683  	BSF STATUS, RP0
+03B7  0507  	ANDWF gbl_trisc, W
+03B8  0087  	MOVWF gbl_trisc
+
+	if ((0))
+		portc = (portc & 0xFB) | 0x04;
+	else
+		portc = portc & 0xFB;
+03B9  30FB  	MOVLW 0xFB
+03BA  1283  	BCF STATUS, RP0
+03BB  0507  	ANDWF gbl_portc, W
+03BC  0087  	MOVWF gbl_portc
+
+
+	//Delay
+	//Delay: 5 us
+	delay_us(5);
+03BD  3005  	MOVLW 0x05
+03BE  00FC  	MOVWF delay_us_00000_arg_del
+03BF  2010  	CALL delay_us_00000
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(reg_to_read)
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_REG_TO_READ);
+03C0  0877  	MOVF gbl_FCV_REG_TO_READ, W
+03C1  00FC  	MOVWF FCD_SPI_Le_00052_arg_Char
+03C2  206D  	CALL FCD_SPI_Le_00052
+
+
+	//Call Component Macro
+	//Call Component Macro: NRF_ADDRESS[0]=SPI_Get_Char()
+	FCV_NRF_ADDRESS[0] = FCD_SPI_Legacy0_SPI_Get_Char();
+03C3  20BF  	CALL FCD_SPI_Le_00054
+03C4  087D  	MOVF CompTempVarRet2190, W
+03C5  00C0  	MOVWF gbl_FCV_NRF_ADDRESS
+
+
+	//Call Component Macro
+	//Call Component Macro: NRF_ADDRESS[1]=SPI_Get_Char()
+	FCV_NRF_ADDRESS[1] = FCD_SPI_Legacy0_SPI_Get_Char();
+03C6  20BF  	CALL FCD_SPI_Le_00054
+03C7  087D  	MOVF CompTempVarRet2190, W
+03C8  00C1  	MOVWF gbl_FCV_NRF_ADDRESS+D'1'
+
+
+	//Call Component Macro
+	//Call Component Macro: NRF_ADDRESS[2]=SPI_Get_Char()
+	FCV_NRF_ADDRESS[2] = FCD_SPI_Legacy0_SPI_Get_Char();
+03C9  20BF  	CALL FCD_SPI_Le_00054
+03CA  087D  	MOVF CompTempVarRet2190, W
+03CB  00C2  	MOVWF gbl_FCV_NRF_ADDRESS+D'2'
+
+
+	//Call Component Macro
+	//Call Component Macro: NRF_ADDRESS[3]=SPI_Get_Char()
+	FCV_NRF_ADDRESS[3] = FCD_SPI_Legacy0_SPI_Get_Char();
+03CC  20BF  	CALL FCD_SPI_Le_00054
+03CD  087D  	MOVF CompTempVarRet2190, W
+03CE  00C3  	MOVWF gbl_FCV_NRF_ADDRESS+D'3'
+
+
+	//Call Component Macro
+	//Call Component Macro: NRF_ADDRESS[4]=SPI_Get_Char()
+	FCV_NRF_ADDRESS[4] = FCD_SPI_Legacy0_SPI_Get_Char();
+03CF  20BF  	CALL FCD_SPI_Le_00054
+03D0  087D  	MOVF CompTempVarRet2190, W
+03D1  00C4  	MOVWF gbl_FCV_NRF_ADDRESS+D'4'
+
+
+	//CSN
+	//Output: 1 -> C2
+	trisc = trisc & 0xFB;
+03D2  30FB  	MOVLW 0xFB
+03D3  1683  	BSF STATUS, RP0
+03D4  0507  	ANDWF gbl_trisc, W
+03D5  0087  	MOVWF gbl_trisc
+
+	if ((1))
+		portc = (portc & 0xFB) | 0x04;
+03D6  30FB  	MOVLW 0xFB
+03D7  1283  	BCF STATUS, RP0
+03D8  0507  	ANDWF gbl_portc, W
+03D9  00FB  	MOVWF CompTempVar2293
+03DA  3004  	MOVLW 0x04
+03DB  047B  	IORWF CompTempVar2293, W
+03DC  0087  	MOVWF gbl_portc
+
+	else
+		portc = portc & 0xFB;
+
+	//Delay
+	//Delay: 5 us
+	delay_us(5);
+03DD  3005  	MOVLW 0x05
+03DE  00FC  	MOVWF delay_us_00000_arg_del
+03DF  2010  	CALL delay_us_00000
+
+
+}
+03E0  0008  	RETURN
+
+
+
+void FCM_nrf_clr_status()
+
+{
+
+	//Calculation
+	//Calculation:
+	//  reg_to_write = 0x07
+	//  spi_wrt_data = 0xFF
+	FCV_REG_TO_WRITE = 0x07;
+01FA  3007  	MOVLW 0x07
+01FB  1283  	BCF STATUS, RP0
+01FC  1303  	BCF STATUS, RP1
+01FD  00EE  	MOVWF gbl_FCV_REG_TO_WRITE
+
+	FCV_SPI_WRT_DATA = 0xFF;
+01FE  30FF  	MOVLW 0xFF
+01FF  00EC  	MOVWF gbl_FCV_SPI_WRT_DATA
+
+
+	//Call Macro
+	//Call Macro: spi_data_write()
+	FCM_spi_data_write();
+0200  209B  	CALL FCM_spi_da_00051
+
+
+}
+0201  0008  	RETURN
+
+
+
+void FCM_check_fifo_status()
+
+{
+
+	//Calculation
+	//Calculation:
+	//  reg_to_read = 0x17
+	FCV_REG_TO_READ = 0x17;
+04D2  3017  	MOVLW 0x17
+04D3  1283  	BCF STATUS, RP0
+04D4  1303  	BCF STATUS, RP1
+04D5  00F7  	MOVWF gbl_FCV_REG_TO_READ
+
+
+	//Call Macro
+	//Call Macro: spi_data_read()
+	FCM_spi_data_read();
+04D6  2136  	CALL FCM_spi_da_00053
+
+
+	//Calculation
+	//Calculation:
+	//  fifo_status_reg = spi_rcv_data
+	FCV_FIFO_STATUS_REG = FCV_SPI_RCV_DATA;
+04D7  0875  	MOVF gbl_FCV_SPI_RCV_DATA, W
+04D8  00F3  	MOVWF gbl_FCV_FIFO_STATUS_REG
+
+
+}
+04D9  0008  	RETURN
+
+
+
+void FCM_read_payload()
+
+{
+
+	//CSN
+	//Output: 0 -> C2
+	trisc = trisc & 0xFB;
+037A  30FB  	MOVLW 0xFB
+037B  1683  	BSF STATUS, RP0
+037C  1303  	BCF STATUS, RP1
+037D  0507  	ANDWF gbl_trisc, W
+037E  0087  	MOVWF gbl_trisc
+
+	if ((0))
+		portc = (portc & 0xFB) | 0x04;
+	else
+		portc = portc & 0xFB;
+037F  30FB  	MOVLW 0xFB
+0380  1283  	BCF STATUS, RP0
+0381  0507  	ANDWF gbl_portc, W
+0382  0087  	MOVWF gbl_portc
+
+
+	//Delay
+	//Delay: 5 us
+	delay_us(5);
+0383  3005  	MOVLW 0x05
+0384  00FC  	MOVWF delay_us_00000_arg_del
+0385  2010  	CALL delay_us_00000
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(0x61)
+	FCD_SPI_Legacy0_SPI_Send_Char(0x61);
+0386  3061  	MOVLW 0x61
+0387  00FC  	MOVWF FCD_SPI_Le_00052_arg_Char
+0388  206D  	CALL FCD_SPI_Le_00052
+
+
+	//Calculation
+	//Calculation:
+	//  loop_count = payload_size
+	//  array_sub = 0
+	FCV_LOOP_COUNT = FCV_PAYLOAD_SIZE;
+0389  1283  	BCF STATUS, RP0
+038A  0871  	MOVF gbl_FCV_PAYLOAD_SIZE, W
+038B  00F4  	MOVWF gbl_FCV_LOOP_COUNT
+
+	FCV_ARRAY_SUB = 0;
+038C  01EB  	CLRF gbl_FCV_ARRAY_SUB
+
+
+	//Loop
+	//Loop: While loop_count = 0
+	while (!(FCV_LOOP_COUNT == 0))
+038D        label48
+038D  01FB  	CLRF CompTempVar2295
+038E  0AFB  	INCF CompTempVar2295, F
+038F  08F4  	MOVF gbl_FCV_LOOP_COUNT, F
+0390  1D03  	BTFSS STATUS,Z
+0391  107B  	BCF CompTempVar2295,0
+0392  08FB  	MOVF CompTempVar2295, F
+0393  1D03  	BTFSS STATUS,Z
+0394  2BA2  	GOTO	label49
+03A1  2B8D  	GOTO	label48
+03A2        label49
+
+	{
+
+		//Call Component Macro
+		//Call Component Macro: payload[array_sub]=SPI_Get_Char()
+		FCV_PAYLOAD[FCV_ARRAY_SUB] = FCD_SPI_Legacy0_SPI_Get_Char();
+0395  20BF  	CALL FCD_SPI_Le_00054
+0396  1383  	BCF	STATUS,IRP
+0397  3020  	MOVLW LOW(gbl_FCV_PAYLOAD+D'0')
+0398  0084  	MOVWF FSR
+0399  086B  	MOVF gbl_FCV_ARRAY_SUB, W
+039A  0784  	ADDWF FSR, F
+039B  087D  	MOVF CompTempVarRet2190, W
+039C  0080  	MOVWF INDF
+
+
+		//Calculation
+		//Calculation:
+		//  loop_count = loop_count - 1
+		//  array_sub = array_sub + 1
+		FCV_LOOP_COUNT = FCV_LOOP_COUNT - 1;
+039D  0374  	DECF gbl_FCV_LOOP_COUNT, W
+039E  00F4  	MOVWF gbl_FCV_LOOP_COUNT
+
+		FCV_ARRAY_SUB = FCV_ARRAY_SUB + 1;
+039F  0A6B  	INCF gbl_FCV_ARRAY_SUB, W
+03A0  00EB  	MOVWF gbl_FCV_ARRAY_SUB
+
+
+
+	}
+
+	//CSN
+	//Output: 1 -> C2
+	trisc = trisc & 0xFB;
+03A2  30FB  	MOVLW 0xFB
+03A3  1683  	BSF STATUS, RP0
+03A4  0507  	ANDWF gbl_trisc, W
+03A5  0087  	MOVWF gbl_trisc
+
+	if ((1))
+		portc = (portc & 0xFB) | 0x04;
+03A6  30FB  	MOVLW 0xFB
+03A7  1283  	BCF STATUS, RP0
+03A8  0507  	ANDWF gbl_portc, W
+03A9  00FC  	MOVWF CompTempVar2297
+03AA  3004  	MOVLW 0x04
+03AB  047C  	IORWF CompTempVar2297, W
+03AC  0087  	MOVWF gbl_portc
+
+	else
+		portc = portc & 0xFB;
+
+	//Delay
+	//Delay: 5 us
+	delay_us(5);
+03AD  3005  	MOVLW 0x05
+03AE  00FC  	MOVWF delay_us_00000_arg_del
+03AF  2010  	CALL delay_us_00000
+
+
+}
+03B0  0008  	RETURN
+
+
+
+void FCM_nrf_flush_fifo()
+
+{
+
+	//CSN
+	//Output: 0 -> C2
+	trisc = trisc & 0xFB;
+01C2  30FB  	MOVLW 0xFB
+01C3  1683  	BSF STATUS, RP0
+01C4  1303  	BCF STATUS, RP1
+01C5  0507  	ANDWF gbl_trisc, W
+01C6  0087  	MOVWF gbl_trisc
+
+	if ((0))
+		portc = (portc & 0xFB) | 0x04;
+	else
+		portc = portc & 0xFB;
+01C7  30FB  	MOVLW 0xFB
+01C8  1283  	BCF STATUS, RP0
+01C9  0507  	ANDWF gbl_portc, W
+01CA  0087  	MOVWF gbl_portc
+
+
+	//Delay
+	//Delay: 5 us
+	delay_us(5);
+01CB  3005  	MOVLW 0x05
+01CC  00FC  	MOVWF delay_us_00000_arg_del
+01CD  2010  	CALL delay_us_00000
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(0xE1)
+	FCD_SPI_Legacy0_SPI_Send_Char(0xE1);
+01CE  30E1  	MOVLW 0xE1
+01CF  00FC  	MOVWF FCD_SPI_Le_00052_arg_Char
+01D0  206D  	CALL FCD_SPI_Le_00052
+
+
+	//CSN
+	//Output: 1 -> C2
+	trisc = trisc & 0xFB;
+01D1  30FB  	MOVLW 0xFB
+01D2  0507  	ANDWF gbl_trisc, W
+01D3  0087  	MOVWF gbl_trisc
+
+	if ((1))
+		portc = (portc & 0xFB) | 0x04;
+01D4  30FB  	MOVLW 0xFB
+01D5  1283  	BCF STATUS, RP0
+01D6  0507  	ANDWF gbl_portc, W
+01D7  00FB  	MOVWF CompTempVar2298
+01D8  3004  	MOVLW 0x04
+01D9  047B  	IORWF CompTempVar2298, W
+01DA  0087  	MOVWF gbl_portc
+
+	else
+		portc = portc & 0xFB;
+
+	//Delay
+	//Delay: 5 us
+	delay_us(5);
+01DB  3005  	MOVLW 0x05
+01DC  00FC  	MOVWF delay_us_00000_arg_del
+01DD  2010  	CALL delay_us_00000
+
+
+	//CSN
+	//Output: 0 -> C2
+	trisc = trisc & 0xFB;
+01DE  30FB  	MOVLW 0xFB
+01DF  1683  	BSF STATUS, RP0
+01E0  0507  	ANDWF gbl_trisc, W
+01E1  0087  	MOVWF gbl_trisc
+
+	if ((0))
+		portc = (portc & 0xFB) | 0x04;
+	else
+		portc = portc & 0xFB;
+01E2  30FB  	MOVLW 0xFB
+01E3  1283  	BCF STATUS, RP0
+01E4  0507  	ANDWF gbl_portc, W
+01E5  0087  	MOVWF gbl_portc
+
+
+	//Delay
+	//Delay: 5 us
+	delay_us(5);
+01E6  3005  	MOVLW 0x05
+01E7  00FC  	MOVWF delay_us_00000_arg_del
+01E8  2010  	CALL delay_us_00000
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(0xE2)
+	FCD_SPI_Legacy0_SPI_Send_Char(0xE2);
+01E9  30E2  	MOVLW 0xE2
+01EA  00FC  	MOVWF FCD_SPI_Le_00052_arg_Char
+01EB  206D  	CALL FCD_SPI_Le_00052
+
+
+	//CSN
+	//Output: 1 -> C2
+	trisc = trisc & 0xFB;
+01EC  30FB  	MOVLW 0xFB
+01ED  0507  	ANDWF gbl_trisc, W
+01EE  0087  	MOVWF gbl_trisc
+
+	if ((1))
+		portc = (portc & 0xFB) | 0x04;
+01EF  30FB  	MOVLW 0xFB
+01F0  1283  	BCF STATUS, RP0
+01F1  0507  	ANDWF gbl_portc, W
+01F2  00FB  	MOVWF CompTempVar2299
+01F3  3004  	MOVLW 0x04
+01F4  047B  	IORWF CompTempVar2299, W
+01F5  0087  	MOVWF gbl_portc
+
+	else
+		portc = portc & 0xFB;
+
+	//Delay
+	//Delay: 5 us
+	delay_us(5);
+01F6  3005  	MOVLW 0x05
+01F7  00FC  	MOVWF delay_us_00000_arg_del
+01F8  2010  	CALL delay_us_00000
+
+
+}
+01F9  0008  	RETURN
+
+
+
+
+void main()
+
+{
+	//Initialization
+	adcon1 = 0x07;
+0987  3007  	MOVLW 0x07
+0988  1683  	BSF STATUS, RP0
+0989  1303  	BCF STATUS, RP1
+098A  009F  	MOVWF gbl_adcon1
+
+
+
+	//Interrupt initialization code
+	option_reg = 0xC0;
+098B  30C0  	MOVLW 0xC0
+098C  0081  	MOVWF gbl_option_reg
+
+
+
+	//CE
+	//Output: 0 -> C1
+	trisc = trisc & 0xFD;
+098D  30FD  	MOVLW 0xFD
+098E  0507  	ANDWF gbl_trisc, W
+098F  0087  	MOVWF gbl_trisc
+
+	if ((0))
+		portc = (portc & 0xFD) | 0x02;
+	else
+		portc = portc & 0xFD;
+0990  30FD  	MOVLW 0xFD
+0991  1283  	BCF STATUS, RP0
+0992  0507  	ANDWF gbl_portc, W
+0993  0087  	MOVWF gbl_portc
+
+
+	//CSN
+	//Output: 1 -> C2
+	trisc = trisc & 0xFB;
+0994  30FB  	MOVLW 0xFB
+0995  1683  	BSF STATUS, RP0
+0996  0507  	ANDWF gbl_trisc, W
+0997  0087  	MOVWF gbl_trisc
+
+	if ((1))
+		portc = (portc & 0xFB) | 0x04;
+0998  30FB  	MOVLW 0xFB
+0999  1283  	BCF STATUS, RP0
+099A  0507  	ANDWF gbl_portc, W
+099B  00FB  	MOVWF CompTempVar2339
+099C  3004  	MOVLW 0x04
+099D  047B  	IORWF CompTempVar2339, W
+099E  0087  	MOVWF gbl_portc
+
+	else
+		portc = portc & 0xFB;
+
+	//Call Component Macro
+	//Call Component Macro: Start()
+	FCD_LCDDisplay0_Start();
+099F  2130  	CALL FCD_LCDDis_00067
+
+
+	//Call Component Macro
+	//Call Component Macro: Clear()
+	FCD_LCDDisplay0_Clear();
+09A0  24F6  	CALL FCD_LCDDis_00058
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Init()
+	FCD_SPI_Legacy0_SPI_Init();
+09A1  158A  	BSF PCLATH,3
+09A2  2124  	CALL FCD_SPI_Le_00070
+
+
+	//Calculation
+	//Calculation:
+	//  NRF_ADDRESS = "GBP00"
+	//  payload_size = 1
+	FCI_SCOPY("GBP00",5, FCV_NRF_ADDRESS,FCSZ_NRF_ADDRESS);
+09A3  3047  	MOVLW 0x47
+09A4  1683  	BSF STATUS, RP0
+09A5  00A0  	MOVWF CompTempVar2340
+09A6  3042  	MOVLW 0x42
+09A7  00A1  	MOVWF CompTempVar2340+D'1'
+09A8  3050  	MOVLW 0x50
+09A9  00A2  	MOVWF CompTempVar2340+D'2'
+09AA  3030  	MOVLW 0x30
+09AB  00A3  	MOVWF CompTempVar2340+D'3'
+09AC  00A4  	MOVWF CompTempVar2340+D'4'
+09AD  01A5  	CLRF CompTempVar2340+D'5'
+09AE  3000  	MOVLW HIGH(CompTempVar2340+D'0')
+09AF  1283  	BCF STATUS, RP0
+09B0  00FC  	MOVWF FCI_SCOPY_00000_arg_sSrc+D'1'
+09B1  30A0  	MOVLW LOW(CompTempVar2340+D'0')
+09B2  00FB  	MOVWF FCI_SCOPY_00000_arg_sSrc
+09B3  3005  	MOVLW 0x05
+09B4  00FD  	MOVWF FCI_SCOPY_00000_arg_iSrc_len
+09B5  3000  	MOVLW HIGH(gbl_FCV_NRF_ADDRESS+D'0')
+09B6  1683  	BSF STATUS, RP0
+09B7  00A7  	MOVWF FCI_SCOPY_00000_arg_sDst+D'1'
+09B8  3040  	MOVLW LOW(gbl_FCV_NRF_ADDRESS+D'0')
+09B9  00A6  	MOVWF FCI_SCOPY_00000_arg_sDst
+09BA  3005  	MOVLW 0x05
+09BB  1283  	BCF STATUS, RP0
+09BC  00FE  	MOVWF FCI_SCOPY_00000_arg_iDst_len
+09BD  158A  	BSF PCLATH,3
+09BE  20E5  	CALL FCI_SCOPY_00000
+
+	FCV_PAYLOAD_SIZE = 1;
+09BF  3001  	MOVLW 0x01
+09C0  1283  	BCF STATUS, RP0
+09C1  00F1  	MOVWF gbl_FCV_PAYLOAD_SIZE
+
+
+	//Loop
+	//Loop: While 1
+	while (1)
+	{
+
+		//CE
+		//Output: 1 -> C1
+		trisc = trisc & 0xFD;
+09C2  30FD  	MOVLW 0xFD
+09C3  1683  	BSF STATUS, RP0
+09C4  0507  	ANDWF gbl_trisc, W
+09C5  0087  	MOVWF gbl_trisc
+
+		if ((1))
+			portc = (portc & 0xFD) | 0x02;
+09C6  30FD  	MOVLW 0xFD
+09C7  1283  	BCF STATUS, RP0
+09C8  0507  	ANDWF gbl_portc, W
+09C9  00FB  	MOVWF CompTempVar2343
+09CA  3002  	MOVLW 0x02
+09CB  047B  	IORWF CompTempVar2343, W
+09CC  0087  	MOVWF gbl_portc
+
+		else
+			portc = portc & 0xFD;
+
+		//Call Component Macro
+		//Call Component Macro: Cursor(0, 0)
+		FCD_LCDDisplay0_Cursor(0, 0);
+09CD  01FE  	CLRF FCD_LCDDis_00059_arg_x
+09CE  1683  	BSF STATUS, RP0
+09CF  01A0  	CLRF FCD_LCDDis_00059_arg_y
+09D0  118A  	BCF PCLATH,3
+09D1  2347  	CALL FCD_LCDDis_00059
+
+
+		//Call Component Macro
+		//Call Component Macro: PrintString("GER-PER")
+		FCD_LCDDisplay0_PrintString("GER-PER", 7);
+09D2  302D  	MOVLW 0x2D
+09D3  00A3  	MOVWF CompTempVar2344+D'3'
+09D4  3045  	MOVLW 0x45
+09D5  00A1  	MOVWF CompTempVar2344+D'1'
+09D6  00A5  	MOVWF CompTempVar2344+D'5'
+09D7  3047  	MOVLW 0x47
+09D8  00A0  	MOVWF CompTempVar2344
+09D9  3050  	MOVLW 0x50
+09DA  00A4  	MOVWF CompTempVar2344+D'4'
+09DB  3052  	MOVLW 0x52
+09DC  00A2  	MOVWF CompTempVar2344+D'2'
+09DD  00A6  	MOVWF CompTempVar2344+D'6'
+09DE  01A7  	CLRF CompTempVar2344+D'7'
+09DF  3000  	MOVLW HIGH(CompTempVar2344+D'0')
+09E0  1283  	BCF STATUS, RP0
+09E1  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+09E2  30A0  	MOVLW LOW(CompTempVar2344+D'0')
+09E3  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+09E4  3007  	MOVLW 0x07
+09E5  1683  	BSF STATUS, RP0
+09E6  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+09E7  2327  	CALL FCD_LCDDis_0005A
+
+
+		//Call Component Macro
+		//Call Component Macro: Cursor(0, 1)
+		FCD_LCDDisplay0_Cursor(0, 1);
+09E8  1283  	BCF STATUS, RP0
+09E9  01FE  	CLRF FCD_LCDDis_00059_arg_x
+09EA  3001  	MOVLW 0x01
+09EB  1683  	BSF STATUS, RP0
+09EC  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+09ED  2347  	CALL FCD_LCDDis_00059
+
+
+		//Call Component Macro
+		//Call Component Macro: PrintString("ENGINEERING")
+		FCD_LCDDisplay0_PrintString("ENGINEERING", 11);
+09EE  3045  	MOVLW 0x45
+09EF  00A0  	MOVWF CompTempVar2346
+09F0  00A5  	MOVWF CompTempVar2346+D'5'
+09F1  00A6  	MOVWF CompTempVar2346+D'6'
+09F2  3047  	MOVLW 0x47
+09F3  00A2  	MOVWF CompTempVar2346+D'2'
+09F4  00AA  	MOVWF CompTempVar2346+D'10'
+09F5  3049  	MOVLW 0x49
+09F6  00A3  	MOVWF CompTempVar2346+D'3'
+09F7  00A8  	MOVWF CompTempVar2346+D'8'
+09F8  304E  	MOVLW 0x4E
+09F9  00A1  	MOVWF CompTempVar2346+D'1'
+09FA  00A4  	MOVWF CompTempVar2346+D'4'
+09FB  00A9  	MOVWF CompTempVar2346+D'9'
+09FC  3052  	MOVLW 0x52
+09FD  00A7  	MOVWF CompTempVar2346+D'7'
+09FE  01AB  	CLRF CompTempVar2346+D'11'
+09FF  3000  	MOVLW HIGH(CompTempVar2346+D'0')
+0A00  1283  	BCF STATUS, RP0
+0A01  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+0A02  30A0  	MOVLW LOW(CompTempVar2346+D'0')
+0A03  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+0A04  300B  	MOVLW 0x0B
+0A05  1683  	BSF STATUS, RP0
+0A06  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+0A07  2327  	CALL FCD_LCDDis_0005A
+
+
+		//Call Component Macro
+		//Call Component Macro: Cursor(0, 3)
+		FCD_LCDDisplay0_Cursor(0, 3);
+0A08  1283  	BCF STATUS, RP0
+0A09  01FE  	CLRF FCD_LCDDis_00059_arg_x
+0A0A  3003  	MOVLW 0x03
+0A0B  1683  	BSF STATUS, RP0
+0A0C  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+0A0D  2347  	CALL FCD_LCDDis_00059
+
+
+		//Call Component Macro
+		//Call Component Macro: PrintString("NRF TESTER")
+		FCD_LCDDisplay0_PrintString("NRF TESTER", 10);
+0A0E  3020  	MOVLW 0x20
+0A0F  00A3  	MOVWF CompTempVar2348+D'3'
+0A10  3045  	MOVLW 0x45
+0A11  00A5  	MOVWF CompTempVar2348+D'5'
+0A12  00A8  	MOVWF CompTempVar2348+D'8'
+0A13  3046  	MOVLW 0x46
+0A14  00A2  	MOVWF CompTempVar2348+D'2'
+0A15  304E  	MOVLW 0x4E
+0A16  00A0  	MOVWF CompTempVar2348
+0A17  3052  	MOVLW 0x52
+0A18  00A1  	MOVWF CompTempVar2348+D'1'
+0A19  00A9  	MOVWF CompTempVar2348+D'9'
+0A1A  3053  	MOVLW 0x53
+0A1B  00A6  	MOVWF CompTempVar2348+D'6'
+0A1C  3054  	MOVLW 0x54
+0A1D  00A4  	MOVWF CompTempVar2348+D'4'
+0A1E  00A7  	MOVWF CompTempVar2348+D'7'
+0A1F  01AA  	CLRF CompTempVar2348+D'10'
+0A20  3000  	MOVLW HIGH(CompTempVar2348+D'0')
+0A21  1283  	BCF STATUS, RP0
+0A22  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+0A23  30A0  	MOVLW LOW(CompTempVar2348+D'0')
+0A24  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+0A25  300A  	MOVLW 0x0A
+0A26  1683  	BSF STATUS, RP0
+0A27  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+0A28  2327  	CALL FCD_LCDDis_0005A
+
+
+		//Delay
+		//Delay: 2 s
+		delay_s(2);
+0A29  3002  	MOVLW 0x02
+0A2A  1283  	BCF STATUS, RP0
+0A2B  00FB  	MOVWF delay_s_00000_arg_del
+0A2C  204F  	CALL delay_s_00000
+
+
+		//Input
+		//Input: A0 -> sw_test
+		trisa = trisa | 0x01;
+0A2D  3001  	MOVLW 0x01
+0A2E  1683  	BSF STATUS, RP0
+0A2F  0405  	IORWF gbl_trisa, W
+0A30  0085  	MOVWF gbl_trisa
+
+		FCV_SW_TEST = ((porta & 0x01) == 0x01);
+0A31  3001  	MOVLW 0x01
+0A32  1283  	BCF STATUS, RP0
+0A33  0505  	ANDWF gbl_porta, W
+0A34  00FB  	MOVWF CompTempVar2350
+0A35  01FC  	CLRF CompTempVar2351
+0A36  037B  	DECF CompTempVar2350, W
+0A37  1903  	BTFSC STATUS,Z
+0A38  0AFC  	INCF CompTempVar2351, F
+0A39  106A  	BCF gbl_FCV_SW_TEST,0
+0A3A  087C  	MOVF CompTempVar2351, W
+0A3B  1D03  	BTFSS STATUS,Z
+0A3C  146A  	BSF gbl_FCV_SW_TEST,0
+
+
+		//Decision
+		//Decision: sw_test = 0?
+		if (FCV_SW_TEST == 0)
+0A3D  158A  	BSF PCLATH,3
+0A3E  186A  	BTFSC gbl_FCV_SW_TEST,0
+0A3F  2A43  	GOTO	label79
+0A43        label79
+
+		{
+
+			//Call Macro
+			//Call Macro: nrf_FUNCTION_test()
+			FCM_nrf_FUNCTION_test();
+0A40  2020  	CALL FCM_nrf_FU_00057
+
+
+			//Loop
+			//Loop: While 1
+			while (1)
+0A41        label78
+0A41  158A  	BSF PCLATH,3
+0A42  2A41  	GOTO	label78
+
+			{
+
+
+			}
+
+		} else {
+
+			//Input
+			//Input: A3 -> sw_rxtx
+			trisa = trisa | 0x08;
+0A43  3008  	MOVLW 0x08
+0A44  1683  	BSF STATUS, RP0
+0A45  0405  	IORWF gbl_trisa, W
+0A46  0085  	MOVWF gbl_trisa
+
+			FCV_SW_RXTX = ((porta & 0x08) == 0x08);
+0A47  3008  	MOVLW 0x08
+0A48  1283  	BCF STATUS, RP0
+0A49  0505  	ANDWF gbl_porta, W
+0A4A  00FB  	MOVWF CompTempVar2352
+0A4B  01FC  	CLRF CompTempVar2353
+0A4C  3008  	MOVLW 0x08
+0A4D  027B  	SUBWF CompTempVar2352, W
+0A4E  1903  	BTFSC STATUS,Z
+0A4F  0AFC  	INCF CompTempVar2353, F
+0A50  116A  	BCF gbl_FCV_SW_RXTX,2
+0A51  087C  	MOVF CompTempVar2353, W
+0A52  1D03  	BTFSS STATUS,Z
+0A53  156A  	BSF gbl_FCV_SW_RXTX,2
+
+
+			//Decision
+			//Decision: sw_rxtx = 0?
+			if (FCV_SW_RXTX == 0)
+0A54  196A  	BTFSC gbl_FCV_SW_RXTX,2
+0A55  2A99  	GOTO	label80
+0A99        label80
+
+			{
+
+				//Call Component Macro
+				//Call Component Macro: Clear()
+				FCD_LCDDisplay0_Clear();
+0A56  118A  	BCF PCLATH,3
+0A57  24F6  	CALL FCD_LCDDis_00058
+
+
+				//Call Component Macro
+				//Call Component Macro: Cursor(0, 0)
+				FCD_LCDDisplay0_Cursor(0, 0);
+0A58  1283  	BCF STATUS, RP0
+0A59  01FE  	CLRF FCD_LCDDis_00059_arg_x
+0A5A  1683  	BSF STATUS, RP0
+0A5B  01A0  	CLRF FCD_LCDDis_00059_arg_y
+0A5C  2347  	CALL FCD_LCDDis_00059
+
+
+				//Call Component Macro
+				//Call Component Macro: PrintString("RECIEVER MODE")
+				FCD_LCDDisplay0_PrintString("RECIEVER MODE", 13);
+0A5D  3020  	MOVLW 0x20
+0A5E  00A8  	MOVWF CompTempVar2354+D'8'
+0A5F  3043  	MOVLW 0x43
+0A60  00A2  	MOVWF CompTempVar2354+D'2'
+0A61  3044  	MOVLW 0x44
+0A62  00AB  	MOVWF CompTempVar2354+D'11'
+0A63  3045  	MOVLW 0x45
+0A64  00A1  	MOVWF CompTempVar2354+D'1'
+0A65  00A4  	MOVWF CompTempVar2354+D'4'
+0A66  00A6  	MOVWF CompTempVar2354+D'6'
+0A67  00AC  	MOVWF CompTempVar2354+D'12'
+0A68  3049  	MOVLW 0x49
+0A69  00A3  	MOVWF CompTempVar2354+D'3'
+0A6A  304D  	MOVLW 0x4D
+0A6B  00A9  	MOVWF CompTempVar2354+D'9'
+0A6C  304F  	MOVLW 0x4F
+0A6D  00AA  	MOVWF CompTempVar2354+D'10'
+0A6E  3052  	MOVLW 0x52
+0A6F  00A0  	MOVWF CompTempVar2354
+0A70  00A7  	MOVWF CompTempVar2354+D'7'
+0A71  3056  	MOVLW 0x56
+0A72  00A5  	MOVWF CompTempVar2354+D'5'
+0A73  01AD  	CLRF CompTempVar2354+D'13'
+0A74  3000  	MOVLW HIGH(CompTempVar2354+D'0')
+0A75  1283  	BCF STATUS, RP0
+0A76  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+0A77  30A0  	MOVLW LOW(CompTempVar2354+D'0')
+0A78  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+0A79  300D  	MOVLW 0x0D
+0A7A  1683  	BSF STATUS, RP0
+0A7B  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+0A7C  2327  	CALL FCD_LCDDis_0005A
+
+
+				//Call Component Macro
+				//Call Component Macro: Cursor(0, 1)
+				FCD_LCDDisplay0_Cursor(0, 1);
+0A7D  1283  	BCF STATUS, RP0
+0A7E  01FE  	CLRF FCD_LCDDis_00059_arg_x
+0A7F  3001  	MOVLW 0x01
+0A80  1683  	BSF STATUS, RP0
+0A81  00A0  	MOVWF FCD_LCDDis_00059_arg_y
+0A82  2347  	CALL FCD_LCDDis_00059
+
+
+				//Call Component Macro
+				//Call Component Macro: PrintString("ADDR=")
+				FCD_LCDDisplay0_PrintString("ADDR=", 5);
+0A83  3041  	MOVLW 0x41
+0A84  00A0  	MOVWF CompTempVar2356
+0A85  3044  	MOVLW 0x44
+0A86  00A1  	MOVWF CompTempVar2356+D'1'
+0A87  00A2  	MOVWF CompTempVar2356+D'2'
+0A88  3052  	MOVLW 0x52
+0A89  00A3  	MOVWF CompTempVar2356+D'3'
+0A8A  303D  	MOVLW 0x3D
+0A8B  00A4  	MOVWF CompTempVar2356+D'4'
+0A8C  01A5  	CLRF CompTempVar2356+D'5'
+0A8D  3000  	MOVLW HIGH(CompTempVar2356+D'0')
+0A8E  1283  	BCF STATUS, RP0
+0A8F  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+0A90  30A0  	MOVLW LOW(CompTempVar2356+D'0')
+0A91  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+0A92  3005  	MOVLW 0x05
+0A93  1683  	BSF STATUS, RP0
+0A94  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+0A95  2327  	CALL FCD_LCDDis_0005A
+
+
+				//Call Macro
+				//Call Macro: rcv_macro()
+				FCM_rcv_macro();
+0A96  2507  	CALL FCM_rcv_ma_0005D
+
+
+			} else {
+0A97  158A  	BSF PCLATH,3
+0A98  2AC5  	GOTO	label81
+0AC5        label81
+
+
+				//Call Component Macro
+				//Call Component Macro: Clear()
+				FCD_LCDDisplay0_Clear();
+0A99  118A  	BCF PCLATH,3
+0A9A  24F6  	CALL FCD_LCDDis_00058
+
+
+				//Call Component Macro
+				//Call Component Macro: Cursor(0, 0)
+				FCD_LCDDisplay0_Cursor(0, 0);
+0A9B  1283  	BCF STATUS, RP0
+0A9C  01FE  	CLRF FCD_LCDDis_00059_arg_x
+0A9D  1683  	BSF STATUS, RP0
+0A9E  01A0  	CLRF FCD_LCDDis_00059_arg_y
+0A9F  2347  	CALL FCD_LCDDis_00059
+
+
+				//Call Component Macro
+				//Call Component Macro: PrintString("TRANSMITTER MODE")
+				FCD_LCDDisplay0_PrintString("TRANSMITTER MODE", 16);
+0AA0  3020  	MOVLW 0x20
+0AA1  00AB  	MOVWF CompTempVar2358+D'11'
+0AA2  3041  	MOVLW 0x41
+0AA3  00A2  	MOVWF CompTempVar2358+D'2'
+0AA4  3044  	MOVLW 0x44
+0AA5  00AE  	MOVWF CompTempVar2358+D'14'
+0AA6  3045  	MOVLW 0x45
+0AA7  00A9  	MOVWF CompTempVar2358+D'9'
+0AA8  00AF  	MOVWF CompTempVar2358+D'15'
+0AA9  3049  	MOVLW 0x49
+0AAA  00A6  	MOVWF CompTempVar2358+D'6'
+0AAB  304D  	MOVLW 0x4D
+0AAC  00A5  	MOVWF CompTempVar2358+D'5'
+0AAD  00AC  	MOVWF CompTempVar2358+D'12'
+0AAE  304E  	MOVLW 0x4E
+0AAF  00A3  	MOVWF CompTempVar2358+D'3'
+0AB0  304F  	MOVLW 0x4F
+0AB1  00AD  	MOVWF CompTempVar2358+D'13'
+0AB2  3052  	MOVLW 0x52
+0AB3  00A1  	MOVWF CompTempVar2358+D'1'
+0AB4  00AA  	MOVWF CompTempVar2358+D'10'
+0AB5  3053  	MOVLW 0x53
+0AB6  00A4  	MOVWF CompTempVar2358+D'4'
+0AB7  3054  	MOVLW 0x54
+0AB8  00A0  	MOVWF CompTempVar2358
+0AB9  00A7  	MOVWF CompTempVar2358+D'7'
+0ABA  00A8  	MOVWF CompTempVar2358+D'8'
+0ABB  01B0  	CLRF CompTempVar2358+D'16'
+0ABC  3000  	MOVLW HIGH(CompTempVar2358+D'0')
+0ABD  1283  	BCF STATUS, RP0
+0ABE  00FC  	MOVWF FCD_LCDDis_0005A_arg_String+D'1'
+0ABF  30A0  	MOVLW LOW(CompTempVar2358+D'0')
+0AC0  00FB  	MOVWF FCD_LCDDis_0005A_arg_String
+0AC1  3010  	MOVLW 0x10
+0AC2  1683  	BSF STATUS, RP0
+0AC3  00B1  	MOVWF FCD_LCDDis_0005A_arg_MSZ_String
+0AC4  2327  	CALL FCD_LCDDis_0005A
+
+
+			}
+
+		}
+
+		//Loop
+		//Loop: While 1
+		while (1)
+0AC5  158A  	BSF PCLATH,3
+0AC6  2AC5  	GOTO	label81
+
+		{
+
+
+		}
+
+
+	}
+
+	mainendloop: goto mainendloop;
+}
+
+
+void MX_INTERRUPT_MACRO(void)
+
+{
+}
+0B04  1283  	BCF STATUS, RP0
+0B05  1303  	BCF STATUS, RP1
+0B06  0E5B  	SWAPF Int1BContext+D'2', W
+0B07  0084  	MOVWF FSR
+0B08  0E5A  	SWAPF Int1BContext+D'1', W
+0B09  008A  	MOVWF PCLATH
+0B0A  0E59  	SWAPF Int1BContext, W
+0B0B  0083  	MOVWF STATUS
+0B0C  0EFF  	SWAPF Int1Context, F
+0B0D  0E7F  	SWAPF Int1Context, W
+0B0E  0009  	RETFIE
+
+
+
+
+
+/*********************************************************************
+ *                  Flowcode CAL SPI File
+ *
+ * File: PIC_CAL_SPI.c
+ *
+ * (c) 2011 Matrix Multimedia Ltd.
+ * http://www.matrixmultimedia.com
+ *
+ * Software License Agreement
+ *
+ * The software supplied herewith by Matrix Multimedia Ltd (the
+ * “Company”) for its Flowcode graphical programming language is
+ * intended and supplied to you, the Company’s customer, for use
+ * solely and exclusively on the Company's products. The software
+ * is owned by the Company, and is protected under applicable
+ * copyright laws. All rights are reserved. Any use in violation
+ * of the foregoing restrictions may subject the user to criminal
+ * sanctions under applicable laws, as well as to civil liability
+ * for the breach of the terms and conditions of this licence.
+ *
+ * THIS SOFTWARE IS PROVIDED IN AN “AS IS” CONDITION. NO WARRANTIES,
+ * WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING, BUT NOT LIMITED
+ * TO, IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE APPLY TO THIS SOFTWARE. THE COMPANY SHALL NOT,
+ * IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL OR
+ * CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+ *
+ * Changelog:
+ *
+ *  date  | by | description
+ * -------+----+-----------------------------------------------------
+ * 010911 | BR | Created
+ * 150911 | BR | Updated variables with typedef alternatives
+ * 011211 | BR | Converted to new dynamic defines mechanism
+ *
+ */
+
+
+//When using hardware SPI channels override port and pin conns with FCD conn definitions
+//Only overwrite CS pin defines when using SPI in slave mode on a hardware channel
+//Also sort out postscale and prescale options for hardware channels
+#ifdef MX_SPI_REF1
+	#if MX_SPI_CHANNEL_1 > 0
+		#undef MX_SPI_MOSI_PIN_1
+		#undef MX_SPI_MOSI_PORT_1
+		#undef MX_SPI_MOSI_TRIS_1
+		#undef MX_SPI_MISO_PIN_1
+		#undef MX_SPI_MISO_PORT_1
+		#undef MX_SPI_MISO_TRIS_1
+		#undef MX_SPI_SCK_PIN_1
+		#undef MX_SPI_SCK_PORT_1
+		#undef MX_SPI_SCK_TRIS_1
+		#undef MX_SPI_CS_PIN_1
+		#undef MX_SPI_CS_PORT_1
+		#undef MX_SPI_CS_TRIS_1
+
+		#if MX_SPI_PR_SCALE_1 == 4
+			#undef MX_SPI_PR_SCALE_1
+			#define MX_SPI_PR_SCALE_1	0
+		#endif
+		#if MX_SPI_PR_SCALE_1 == 16
+			#undef MX_SPI_PR_SCALE_1
+			#define MX_SPI_PR_SCALE_1	1
+		#endif
+		#if MX_SPI_PR_SCALE_1 == 64
+			#undef MX_SPI_PR_SCALE_1
+			#define MX_SPI_PR_SCALE_1	2
+		#endif
+	#endif
+	#if MX_SPI_CHANNEL_1 == 1
+		#define MX_SPI_MOSI_PIN_1		MX_SPI_1_MOSI_PIN
+		#define MX_SPI_MOSI_PORT_1		MX_SPI_1_MOSI_PORT
+		#define MX_SPI_MOSI_TRIS_1		MX_SPI_1_MOSI_TRIS
+		#define MX_SPI_MISO_PIN_1		MX_SPI_1_MISO_PIN
+		#define MX_SPI_MISO_PORT_1		MX_SPI_1_MISO_PORT
+		#define MX_SPI_MISO_TRIS_1		MX_SPI_1_MISO_TRIS
+		#define MX_SPI_SCK_PIN_1		MX_SPI_1_CLK_PIN
+		#define MX_SPI_SCK_PORT_1		MX_SPI_1_CLK_PORT
+		#define MX_SPI_SCK_TRIS_1		MX_SPI_1_CLK_TRIS
+		#define MX_SPI_CS_PIN_1			MX_SPI_1_SS_PIN
+		#define MX_SPI_CS_PORT_1		MX_SPI_1_SS_PORT
+		#define MX_SPI_CS_TRIS_1		MX_SPI_1_SS_TRIS
+	#endif
+	#if MX_SPI_CHANNEL_1 == 2
+		#define MX_SPI_MOSI_PIN_1		MX_SPI_2_MOSI_PIN
+		#define MX_SPI_MOSI_PORT_1		MX_SPI_2_MOSI_PORT
+		#define MX_SPI_MOSI_TRIS_1		MX_SPI_2_MOSI_TRIS
+		#define MX_SPI_MISO_PIN_1		MX_SPI_2_MISO_PIN
+		#define MX_SPI_MISO_PORT_1		MX_SPI_2_MISO_PORT
+		#define MX_SPI_MISO_TRIS_1		MX_SPI_2_MISO_TRIS
+		#define MX_SPI_SCK_PIN_1		MX_SPI_2_CLK_PIN
+		#define MX_SPI_SCK_PORT_1		MX_SPI_2_CLK_PORT
+		#define MX_SPI_SCK_TRIS_1		MX_SPI_2_CLK_TRIS
+		#define MX_SPI_CS_PIN_1			MX_SPI_2_SS_PIN
+		#define MX_SPI_CS_PORT_1		MX_SPI_2_SS_PORT
+		#define MX_SPI_CS_TRIS_1		MX_SPI_2_SS_TRIS
+	#endif
+	#if MX_SPI_CHANNEL_1 == 3
+		#define MX_SPI_MOSI_PIN_1		MX_SPI_3_MOSI_PIN
+		#define MX_SPI_MOSI_PORT_1		MX_SPI_3_MOSI_PORT
+		#define MX_SPI_MOSI_TRIS_1		MX_SPI_3_MOSI_TRIS
+		#define MX_SPI_MISO_PIN_1		MX_SPI_3_MISO_PIN
+		#define MX_SPI_MISO_PORT_1		MX_SPI_3_MISO_PORT
+		#define MX_SPI_MISO_TRIS_1		MX_SPI_3_MISO_TRIS
+		#define MX_SPI_SCK_PIN_1		MX_SPI_3_CLK_PIN
+		#define MX_SPI_SCK_PORT_1		MX_SPI_3_CLK_PORT
+		#define MX_SPI_SCK_TRIS_1		MX_SPI_3_CLK_TRIS
+		#define MX_SPI_CS_PIN_1			MX_SPI_3_SS_PIN
+		#define MX_SPI_CS_PORT_1		MX_SPI_3_SS_PORT
+		#define MX_SPI_CS_TRIS_1		MX_SPI_3_SS_TRIS
+	#endif
+	#if MX_SPI_CHANNEL_1 == 4
+		#define MX_SPI_MOSI_PIN_1		MX_SPI_4_MOSI_PIN
+		#define MX_SPI_MOSI_PORT_1		MX_SPI_4_MOSI_PORT
+		#define MX_SPI_MOSI_TRIS_1		MX_SPI_4_MOSI_TRIS
+		#define MX_SPI_MISO_PIN_1		MX_SPI_4_MISO_PIN
+		#define MX_SPI_MISO_PORT_1		MX_SPI_4_MISO_PORT
+		#define MX_SPI_MISO_TRIS_1		MX_SPI_4_MISO_TRIS
+		#define MX_SPI_SCK_PIN_1		MX_SPI_4_CLK_PIN
+		#define MX_SPI_SCK_PORT_1		MX_SPI_4_CLK_PORT
+		#define MX_SPI_SCK_TRIS_1		MX_SPI_4_CLK_TRIS
+		#define MX_SPI_CS_PIN_1			MX_SPI_4_SS_PIN
+		#define MX_SPI_CS_PORT_1		MX_SPI_4_SS_PORT
+		#define MX_SPI_CS_TRIS_1		MX_SPI_4_SS_TRIS
+	#endif
+#endif
+#ifdef MX_SPI_REF2
+	#if MX_SPI_CHANNEL_2 > 0
+		#undef MX_SPI_MOSI_PIN_2
+		#undef MX_SPI_MOSI_PORT_2
+		#undef MX_SPI_MOSI_TRIS_2
+		#undef MX_SPI_MISO_PIN_2
+		#undef MX_SPI_MISO_PORT_2
+		#undef MX_SPI_MISO_TRIS_2
+		#undef MX_SPI_SCK_PIN_2
+		#undef MX_SPI_SCK_PORT_2
+		#undef MX_SPI_SCK_TRIS_2
+		#undef MX_SPI_CS_PIN_2
+		#undef MX_SPI_CS_PORT_2
+		#undef MX_SPI_CS_TRIS_2
+
+		#if MX_SPI_PR_SCALE_2 == 4
+			#undef MX_SPI_PR_SCALE_2
+			#define MX_SPI_PR_SCALE_2	0
+		#endif
+		#if MX_SPI_PR_SCALE_2 == 16
+			#undef MX_SPI_PR_SCALE_2
+			#define MX_SPI_PR_SCALE_2	1
+		#endif
+		#if MX_SPI_PR_SCALE_2 == 64
+			#undef MX_SPI_PR_SCALE_2
+			#define MX_SPI_PR_SCALE_2	2
+		#endif
+	#endif
+	#if MX_SPI_CHANNEL_2 == 1
+		#define MX_SPI_MOSI_PIN_2		MX_SPI_1_MOSI_PIN
+		#define MX_SPI_MOSI_PORT_2		MX_SPI_1_MOSI_PORT
+		#define MX_SPI_MOSI_TRIS_2		MX_SPI_1_MOSI_TRIS
+		#define MX_SPI_MISO_PIN_2		MX_SPI_1_MISO_PIN
+		#define MX_SPI_MISO_PORT_2		MX_SPI_1_MISO_PORT
+		#define MX_SPI_MISO_TRIS_2		MX_SPI_1_MISO_TRIS
+		#define MX_SPI_SCK_PIN_2		MX_SPI_1_CLK_PIN
+		#define MX_SPI_SCK_PORT_2		MX_SPI_1_CLK_PORT
+		#define MX_SPI_SCK_TRIS_2		MX_SPI_1_CLK_TRIS
+		#define MX_SPI_CS_PIN_2			MX_SPI_1_SS_PIN
+		#define MX_SPI_CS_PORT_2		MX_SPI_1_SS_PORT
+		#define MX_SPI_CS_TRIS_2		MX_SPI_1_SS_TRIS
+	#endif
+	#if MX_SPI_CHANNEL_2 == 2
+		#define MX_SPI_MOSI_PIN_2		MX_SPI_2_MOSI_PIN
+		#define MX_SPI_MOSI_PORT_2		MX_SPI_2_MOSI_PORT
+		#define MX_SPI_MOSI_TRIS_2		MX_SPI_2_MOSI_TRIS
+		#define MX_SPI_MISO_PIN_2		MX_SPI_2_MISO_PIN
+		#define MX_SPI_MISO_PORT_2		MX_SPI_2_MISO_PORT
+		#define MX_SPI_MISO_TRIS_2		MX_SPI_2_MISO_TRIS
+		#define MX_SPI_SCK_PIN_2		MX_SPI_2_CLK_PIN
+		#define MX_SPI_SCK_PORT_2		MX_SPI_2_CLK_PORT
+		#define MX_SPI_SCK_TRIS_2		MX_SPI_2_CLK_TRIS
+		#define MX_SPI_CS_PIN_2			MX_SPI_2_SS_PIN
+		#define MX_SPI_CS_PORT_2		MX_SPI_2_SS_PORT
+		#define MX_SPI_CS_TRIS_2		MX_SPI_2_SS_TRIS
+	#endif
+	#if MX_SPI_CHANNEL_2 == 3
+		#define MX_SPI_MOSI_PIN_2		MX_SPI_3_MOSI_PIN
+		#define MX_SPI_MOSI_PORT_2		MX_SPI_3_MOSI_PORT
+		#define MX_SPI_MOSI_TRIS_2		MX_SPI_3_MOSI_TRIS
+		#define MX_SPI_MISO_PIN_2		MX_SPI_3_MISO_PIN
+		#define MX_SPI_MISO_PORT_2		MX_SPI_3_MISO_PORT
+		#define MX_SPI_MISO_TRIS_2		MX_SPI_3_MISO_TRIS
+		#define MX_SPI_SCK_PIN_2		MX_SPI_3_CLK_PIN
+		#define MX_SPI_SCK_PORT_2		MX_SPI_3_CLK_PORT
+		#define MX_SPI_SCK_TRIS_2		MX_SPI_3_CLK_TRIS
+		#define MX_SPI_CS_PIN_2			MX_SPI_3_SS_PIN
+		#define MX_SPI_CS_PORT_2		MX_SPI_3_SS_PORT
+		#define MX_SPI_CS_TRIS_2		MX_SPI_3_SS_TRIS
+	#endif
+	#if MX_SPI_CHANNEL_2 == 4
+		#define MX_SPI_MOSI_PIN_2		MX_SPI_4_MOSI_PIN
+		#define MX_SPI_MOSI_PORT_2		MX_SPI_4_MOSI_PORT
+		#define MX_SPI_MOSI_TRIS_2		MX_SPI_4_MOSI_TRIS
+		#define MX_SPI_MISO_PIN_2		MX_SPI_4_MISO_PIN
+		#define MX_SPI_MISO_PORT_2		MX_SPI_4_MISO_PORT
+		#define MX_SPI_MISO_TRIS_2		MX_SPI_4_MISO_TRIS
+		#define MX_SPI_SCK_PIN_2		MX_SPI_4_CLK_PIN
+		#define MX_SPI_SCK_PORT_2		MX_SPI_4_CLK_PORT
+		#define MX_SPI_SCK_TRIS_2		MX_SPI_4_CLK_TRIS
+		#define MX_SPI_CS_PIN_2			MX_SPI_4_SS_PIN
+		#define MX_SPI_CS_PORT_2		MX_SPI_4_SS_PORT
+		#define MX_SPI_CS_TRIS_2		MX_SPI_4_SS_TRIS
+	#endif
+#endif
+#ifdef MX_SPI_REF3
+	#if MX_SPI_CHANNEL_3 > 0
+		#undef MX_SPI_MOSI_PIN_3
+		#undef MX_SPI_MOSI_PORT_3
+		#undef MX_SPI_MOSI_TRIS_3
+		#undef MX_SPI_MISO_PIN_3
+		#undef MX_SPI_MISO_PORT_3
+		#undef MX_SPI_MISO_TRIS_3
+		#undef MX_SPI_SCK_PIN_3
+		#undef MX_SPI_SCK_PORT_3
+		#undef MX_SPI_SCK_TRIS_3
+		#undef MX_SPI_CS_PIN_3
+		#undef MX_SPI_CS_PORT_3
+		#undef MX_SPI_CS_TRIS_3
+
+		#if MX_SPI_PR_SCALE_3 == 4
+			#undef MX_SPI_PR_SCALE_3
+			#define MX_SPI_PR_SCALE_3	0
+		#endif
+		#if MX_SPI_PR_SCALE_3 == 16
+			#undef MX_SPI_PR_SCALE_3
+			#define MX_SPI_PR_SCALE_3	1
+		#endif
+		#if MX_SPI_PR_SCALE_3 == 64
+			#undef MX_SPI_PR_SCALE_3
+			#define MX_SPI_PR_SCALE_3	2
+		#endif
+	#endif
+	#if MX_SPI_CHANNEL_3 == 1
+		#define MX_SPI_MOSI_PIN_3		MX_SPI_1_MOSI_PIN
+		#define MX_SPI_MOSI_PORT_3		MX_SPI_1_MOSI_PORT
+		#define MX_SPI_MOSI_TRIS_3		MX_SPI_1_MOSI_TRIS
+		#define MX_SPI_MISO_PIN_3		MX_SPI_1_MISO_PIN
+		#define MX_SPI_MISO_PORT_3		MX_SPI_1_MISO_PORT
+		#define MX_SPI_MISO_TRIS_3		MX_SPI_1_MISO_TRIS
+		#define MX_SPI_SCK_PIN_3		MX_SPI_1_CLK_PIN
+		#define MX_SPI_SCK_PORT_3		MX_SPI_1_CLK_PORT
+		#define MX_SPI_SCK_TRIS_3		MX_SPI_1_CLK_TRIS
+		#define MX_SPI_CS_PIN_3			MX_SPI_1_SS_PIN
+		#define MX_SPI_CS_PORT_3		MX_SPI_1_SS_PORT
+		#define MX_SPI_CS_TRIS_3		MX_SPI_1_SS_TRIS
+	#endif
+	#if MX_SPI_CHANNEL_3 == 2
+		#define MX_SPI_MOSI_PIN_3		MX_SPI_2_MOSI_PIN
+		#define MX_SPI_MOSI_PORT_3		MX_SPI_2_MOSI_PORT
+		#define MX_SPI_MOSI_TRIS_3		MX_SPI_2_MOSI_TRIS
+		#define MX_SPI_MISO_PIN_3		MX_SPI_2_MISO_PIN
+		#define MX_SPI_MISO_PORT_3		MX_SPI_2_MISO_PORT
+		#define MX_SPI_MISO_TRIS_3		MX_SPI_2_MISO_TRIS
+		#define MX_SPI_SCK_PIN_3		MX_SPI_2_CLK_PIN
+		#define MX_SPI_SCK_PORT_3		MX_SPI_2_CLK_PORT
+		#define MX_SPI_SCK_TRIS_3		MX_SPI_2_CLK_TRIS
+		#define MX_SPI_CS_PIN_3			MX_SPI_2_SS_PIN
+		#define MX_SPI_CS_PORT_3		MX_SPI_2_SS_PORT
+		#define MX_SPI_CS_TRIS_3		MX_SPI_2_SS_TRIS
+	#endif
+	#if MX_SPI_CHANNEL_3 == 3
+		#define MX_SPI_MOSI_PIN_3		MX_SPI_3_MOSI_PIN
+		#define MX_SPI_MOSI_PORT_3		MX_SPI_3_MOSI_PORT
+		#define MX_SPI_MOSI_TRIS_3		MX_SPI_3_MOSI_TRIS
+		#define MX_SPI_MISO_PIN_3		MX_SPI_3_MISO_PIN
+		#define MX_SPI_MISO_PORT_3		MX_SPI_3_MISO_PORT
+		#define MX_SPI_MISO_TRIS_3		MX_SPI_3_MISO_TRIS
+		#define MX_SPI_SCK_PIN_3		MX_SPI_3_CLK_PIN
+		#define MX_SPI_SCK_PORT_3		MX_SPI_3_CLK_PORT
+		#define MX_SPI_SCK_TRIS_3		MX_SPI_3_CLK_TRIS
+		#define MX_SPI_CS_PIN_3			MX_SPI_3_SS_PIN
+		#define MX_SPI_CS_PORT_3		MX_SPI_3_SS_PORT
+		#define MX_SPI_CS_TRIS_3		MX_SPI_3_SS_TRIS
+	#endif
+	#if MX_SPI_CHANNEL_3 == 4
+		#define MX_SPI_MOSI_PIN_3		MX_SPI_4_MOSI_PIN
+		#define MX_SPI_MOSI_PORT_3		MX_SPI_4_MOSI_PORT
+		#define MX_SPI_MOSI_TRIS_3		MX_SPI_4_MOSI_TRIS
+		#define MX_SPI_MISO_PIN_3		MX_SPI_4_MISO_PIN
+		#define MX_SPI_MISO_PORT_3		MX_SPI_4_MISO_PORT
+		#define MX_SPI_MISO_TRIS_3		MX_SPI_4_MISO_TRIS
+		#define MX_SPI_SCK_PIN_3		MX_SPI_4_CLK_PIN
+		#define MX_SPI_SCK_PORT_3		MX_SPI_4_CLK_PORT
+		#define MX_SPI_SCK_TRIS_3		MX_SPI_4_CLK_TRIS
+		#define MX_SPI_CS_PIN_3			MX_SPI_4_SS_PIN
+		#define MX_SPI_CS_PORT_3		MX_SPI_4_SS_PORT
+		#define MX_SPI_CS_TRIS_3		MX_SPI_4_SS_TRIS
+	#endif
+#endif
+#ifdef MX_SPI_REF4
+	#if MX_SPI_CHANNEL_4 > 0
+		#undef MX_SPI_MOSI_PIN_4
+		#undef MX_SPI_MOSI_PORT_4
+		#undef MX_SPI_MOSI_TRIS_4
+		#undef MX_SPI_MISO_PIN_4
+		#undef MX_SPI_MISO_PORT_4
+		#undef MX_SPI_MISO_TRIS_4
+		#undef MX_SPI_SCK_PIN_4
+		#undef MX_SPI_SCK_PORT_4
+		#undef MX_SPI_SCK_TRIS_4
+		#undef MX_SPI_CS_PIN_4
+		#undef MX_SPI_CS_PORT_4
+		#undef MX_SPI_CS_TRIS_4
+
+		#if MX_SPI_PR_SCALE_4 == 4
+			#undef MX_SPI_PR_SCALE_4
+			#define MX_SPI_PR_SCALE_4	0
+		#endif
+		#if MX_SPI_PR_SCALE_4 == 16
+			#undef MX_SPI_PR_SCALE_4
+			#define MX_SPI_PR_SCALE_4	1
+		#endif
+		#if MX_SPI_PR_SCALE_4 == 64
+			#undef MX_SPI_PR_SCALE_4
+			#define MX_SPI_PR_SCALE_4	2
+		#endif
+	#endif
+	#if MX_SPI_CHANNEL_4 == 1
+		#define MX_SPI_MOSI_PIN_4		MX_SPI_1_MOSI_PIN
+		#define MX_SPI_MOSI_PORT_4		MX_SPI_1_MOSI_PORT
+		#define MX_SPI_MOSI_TRIS_4		MX_SPI_1_MOSI_TRIS
+		#define MX_SPI_MISO_PIN_4		MX_SPI_1_MISO_PIN
+		#define MX_SPI_MISO_PORT_4		MX_SPI_1_MISO_PORT
+		#define MX_SPI_MISO_TRIS_4		MX_SPI_1_MISO_TRIS
+		#define MX_SPI_SCK_PIN_4		MX_SPI_1_CLK_PIN
+		#define MX_SPI_SCK_PORT_4		MX_SPI_1_CLK_PORT
+		#define MX_SPI_SCK_TRIS_4		MX_SPI_1_CLK_TRIS
+		#define MX_SPI_CS_PIN_4			MX_SPI_1_SS_PIN
+		#define MX_SPI_CS_PORT_4		MX_SPI_1_SS_PORT
+		#define MX_SPI_CS_TRIS_4		MX_SPI_1_SS_TRIS
+	#endif
+	#if MX_SPI_CHANNEL_4 == 2
+		#define MX_SPI_MOSI_PIN_4		MX_SPI_2_MOSI_PIN
+		#define MX_SPI_MOSI_PORT_4		MX_SPI_2_MOSI_PORT
+		#define MX_SPI_MOSI_TRIS_4		MX_SPI_2_MOSI_TRIS
+		#define MX_SPI_MISO_PIN_4		MX_SPI_2_MISO_PIN
+		#define MX_SPI_MISO_PORT_4		MX_SPI_2_MISO_PORT
+		#define MX_SPI_MISO_TRIS_4		MX_SPI_2_MISO_TRIS
+		#define MX_SPI_SCK_PIN_4		MX_SPI_2_CLK_PIN
+		#define MX_SPI_SCK_PORT_4		MX_SPI_2_CLK_PORT
+		#define MX_SPI_SCK_TRIS_4		MX_SPI_2_CLK_TRIS
+		#define MX_SPI_CS_PIN_4			MX_SPI_2_SS_PIN
+		#define MX_SPI_CS_PORT_4		MX_SPI_2_SS_PORT
+		#define MX_SPI_CS_TRIS_4		MX_SPI_2_SS_TRIS
+	#endif
+	#if MX_SPI_CHANNEL_4 == 3
+		#define MX_SPI_MOSI_PIN_4		MX_SPI_3_MOSI_PIN
+		#define MX_SPI_MOSI_PORT_4		MX_SPI_3_MOSI_PORT
+		#define MX_SPI_MOSI_TRIS_4		MX_SPI_3_MOSI_TRIS
+		#define MX_SPI_MISO_PIN_4		MX_SPI_3_MISO_PIN
+		#define MX_SPI_MISO_PORT_4		MX_SPI_3_MISO_PORT
+		#define MX_SPI_MISO_TRIS_4		MX_SPI_3_MISO_TRIS
+		#define MX_SPI_SCK_PIN_4		MX_SPI_3_CLK_PIN
+		#define MX_SPI_SCK_PORT_4		MX_SPI_3_CLK_PORT
+		#define MX_SPI_SCK_TRIS_4		MX_SPI_3_CLK_TRIS
+		#define MX_SPI_CS_PIN_4			MX_SPI_3_SS_PIN
+		#define MX_SPI_CS_PORT_4		MX_SPI_3_SS_PORT
+		#define MX_SPI_CS_TRIS_4		MX_SPI_3_SS_TRIS
+	#endif
+	#if MX_SPI_CHANNEL_4 == 4
+		#define MX_SPI_MOSI_PIN_4		MX_SPI_4_MOSI_PIN
+		#define MX_SPI_MOSI_PORT_4		MX_SPI_4_MOSI_PORT
+		#define MX_SPI_MOSI_TRIS_4		MX_SPI_4_MOSI_TRIS
+		#define MX_SPI_MISO_PIN_4		MX_SPI_4_MISO_PIN
+		#define MX_SPI_MISO_PORT_4		MX_SPI_4_MISO_PORT
+		#define MX_SPI_MISO_TRIS_4		MX_SPI_4_MISO_TRIS
+		#define MX_SPI_SCK_PIN_4		MX_SPI_4_CLK_PIN
+		#define MX_SPI_SCK_PORT_4		MX_SPI_4_CLK_PORT
+		#define MX_SPI_SCK_TRIS_4		MX_SPI_4_CLK_TRIS
+		#define MX_SPI_CS_PIN_4			MX_SPI_4_SS_PIN
+		#define MX_SPI_CS_PORT_4		MX_SPI_4_SS_PORT
+		#define MX_SPI_CS_TRIS_4		MX_SPI_4_SS_TRIS
+	#endif
+#endif
+
+#define MX_SPI_CHANNEL_X		CAL_APPEND(MX_SPI_CHANNEL_, MX_SPI_NUM)
+#define MX_SPI_MOSI_PIN_X		CAL_APPEND(MX_SPI_MOSI_PIN_, MX_SPI_NUM)
+#define MX_SPI_MOSI_PORT_X		CAL_APPEND(MX_SPI_MOSI_PORT_, MX_SPI_NUM)
+#define MX_SPI_MOSI_TRIS_X		CAL_APPEND(MX_SPI_MOSI_TRIS_, MX_SPI_NUM)
+#define MX_SPI_MISO_PIN_X		CAL_APPEND(MX_SPI_MISO_PIN_, MX_SPI_NUM)
+#define MX_SPI_MISO_PORT_X		CAL_APPEND(MX_SPI_MISO_PORT_, MX_SPI_NUM)
+#define MX_SPI_MISO_TRIS_X		CAL_APPEND(MX_SPI_MISO_TRIS_, MX_SPI_NUM)
+#define MX_SPI_SCK_PIN_X		CAL_APPEND(MX_SPI_SCK_PIN_, MX_SPI_NUM)
+#define MX_SPI_SCK_PORT_X		CAL_APPEND(MX_SPI_SCK_PORT_, MX_SPI_NUM)
+#define MX_SPI_SCK_TRIS_X		CAL_APPEND(MX_SPI_SCK_TRIS_, MX_SPI_NUM)
+#define MX_SPI_CS_PIN_X			CAL_APPEND(MX_SPI_CS_PIN_, MX_SPI_NUM)
+#define MX_SPI_CS_PORT_X		CAL_APPEND(MX_SPI_CS_PORT_, MX_SPI_NUM)
+#define MX_SPI_CS_TRIS_X		CAL_APPEND(MX_SPI_CS_TRIS_, MX_SPI_NUM)
+#define MX_SPI_BMODE_X			CAL_APPEND(MX_SPI_BMODE_, MX_SPI_NUM)
+#define MX_SPI_PR_SCALE_X		CAL_APPEND(MX_SPI_PR_SCALE_, MX_SPI_NUM)
+#define MX_SPI_PO_SCALE_X		CAL_APPEND(MX_SPI_PO_SCALE_, MX_SPI_NUM)
+#define MX_SPI_INT_X			CAL_APPEND(MX_SPI_INT_, MX_SPI_NUM)
+
+
+//Function Prototypes
+CALFUNCTION(void, FC_CAL_SPI_Master_Init_, (void));
+CALFUNCTION(void, FC_CAL_SPI_Master_Uninit_, (void));
+CALFUNCTION(MX_UINT8, FC_CAL_SPI_Master_Byte_, (MX_UINT8 DataOut));
+
+CALFUNCTION(void, FC_CAL_SPI_Slave_Init_, (void));
+CALFUNCTION(void, FC_CAL_SPI_Slave_Uninit_, (void));
+CALFUNCTION(void, FC_CAL_SPI_Slave_SetTxData_, (MX_UINT8 Data));
+CALFUNCTION(MX_UINT8, FC_CAL_SPI_Slave_GetRxData_, (void));
+
+
+#if (MX_SPI_CHANNEL_X == 0)
+  #ifndef MX_SPI_SW_DEL
+    #define MX_SPI_SW_DEL
+	MX_UINT8 SPI_SW_DELAY = 1;
+  #endif
+#endif
+
+
+//Bus Mode - Bit0=CPOL, Bit1=CPHA, Bit2=CSMP
+//CPOL - Clock Polarity - Idle State of the clock 0=0, 1=1
+//CPHA - Clock Phase - Clock Edge 0=leading edge, 1=trailing edge
+//CSMP - Input Data Bit Sample Phase
+//CRAT - SPI Clock Rate 0=1/4, 1=1/16, 2=1/64
+
+
+//Ensure SSPCON register is defined correctly
+#ifndef SSPCON
+  #ifdef SSPCON1
+	#define sspcon	sspcon1
+  #else
+	#ifdef SSP1CON1
+		#define sspcon	ssp1con1
+	#endif
+  #endif
+#endif
+#ifndef SSPBUF
+  #ifdef SSP1BUF
+	#define sspbuf	ssp1buf
+  #endif
+#endif
+
+#ifndef SSP2CON
+	#ifdef SSP2CON1
+		#define ssp2con	ssp2con1
+	#endif
+#endif
+
+
+
+
+CALFUNCTION(void, FC_CAL_SPI_Master_Init_, (void))
+
+{
+	FC_CAL_Bit_High_DDR (MX_SPI_MOSI_PORT_X, MX_SPI_MOSI_TRIS_X, MX_SPI_MOSI_PIN_X);		// MOSI pin is default high
+0367  1683  	BSF STATUS, RP0
+0368  1303  	BCF STATUS, RP1
+0369  1287  	BCF gbl_trisc,5
+036A  1283  	BCF STATUS, RP0
+036B  1687  	BSF gbl_portc,5
+
+	FC_CAL_Bit_In_DDR   (MX_SPI_MISO_PORT_X, MX_SPI_MISO_TRIS_X, MX_SPI_MISO_PIN_X);		// MISO pin is a input
+036C  1683  	BSF STATUS, RP0
+036D  1607  	BSF gbl_trisc,4
+
+
+	#if (MX_SPI_BMODE_X & 0x02)
+		FC_CAL_Bit_Low_DDR  (MX_SPI_SCK_PORT_X, MX_SPI_SCK_TRIS_X, MX_SPI_SCK_PIN_X);		// Clock pin is default low
+036E  1187  	BCF gbl_trisc,3
+036F  1283  	BCF STATUS, RP0
+0370  1187  	BCF gbl_portc,3
+
+	#else
+		FC_CAL_Bit_High_DDR (MX_SPI_SCK_PORT_X, MX_SPI_SCK_TRIS_X, MX_SPI_SCK_PIN_X);		// Clock pin is default high
+	#endif
+
+	#if (MX_SPI_CHANNEL_X == 1)
+	 #ifndef MX_SPI_1
+	 	#error "SPI channel 1 not available on this device"
+	 #else
+		sspcon 		 = MX_SPI_PR_SCALE_X & 0x03;			//Assign Clock Prescaler
+0371  3001  	MOVLW 0x01
+0372  0094  	MOVWF gbl_sspcon
+
+		sspcon.CKP 	 = MX_SPI_BMODE_X & 0x01;				//Assign Clock Polarity
+0373  1214  	BCF gbl_sspcon,4
+
+		sspstat.CKE  = (MX_SPI_BMODE_X & 0x02) >> 1;		//Assign Clock Phase
+0374  1683  	BSF STATUS, RP0
+0375  1714  	BSF gbl_sspstat,6
+
+		sspstat.SMP  = (MX_SPI_BMODE_X & 0x04) >> 2;		//Assign Input Data Phase
+0376  1794  	BSF gbl_sspstat,7
+
+		sspcon.SSPEN = 1;									//Activate SPI Peripheral
+0377  1283  	BCF STATUS, RP0
+0378  1694  	BSF gbl_sspcon,5
+
+	 #endif
+	#endif
+
+	#if (MX_SPI_CHANNEL_X == 2)
+	 #ifndef MX_SPI_2
+	 	#error "SPI channel 2 not available on this device"
+	 #else
+
+	  #ifdef MX_SPI_2_REMAPPABLE
+		RPINR21 = 3; 										//MISO - RB0 - RP3
+		RPOR4 = 9;											//MOSI - RB1 - RP4
+		RPOR5 = 10;											//SCK  - RB2 - RP5
+	  #endif
+
+		ssp2con 	  = MX_SPI_PR_SCALE_X & 0x03;		//Assign Clock Prescaler
+		ssp2con.CKP   = MX_SPI_BMODE_X & 0x01;			//Assign Clock Polarity
+		ssp2stat.CKE  = (MX_SPI_BMODE_X & 0x02) >> 1;	//Assign Clock Phase
+		ssp2stat.SMP  = (MX_SPI_BMODE_X & 0x04) >> 2;	//Assign Input Data Phase
+		ssp2con.SSPEN = 1;									//Activate SPI Peripheral
+	 #endif
+	#endif
+}
+0379  0008  	RETURN
+
+
+
+CALFUNCTION(void, FC_CAL_SPI_Master_Uninit_, (void))
+{
+	#if (MX_SPI_CHANNEL_X == 1)
+		sspcon = 0;
+	#endif
+
+	#if (MX_SPI_CHANNEL_X == 2)
+		ssp2con = 0;
+    #endif
+
+	//Reset Pins to Inputs
+	FC_CAL_Bit_In_DDR (MX_SPI_MOSI_PORT_X, MX_SPI_MOSI_TRIS_X, MX_SPI_MOSI_PIN_X);
+	FC_CAL_Bit_In_DDR (MX_SPI_MISO_PORT_X, MX_SPI_MISO_TRIS_X, MX_SPI_MISO_PIN_X);
+	FC_CAL_Bit_In_DDR (MX_SPI_SCK_PORT_X, MX_SPI_SCK_TRIS_X, MX_SPI_SCK_PIN_X);
+}
+
+
+CALFUNCTION(MX_UINT8, FC_CAL_SPI_Master_Byte_, (MX_UINT8 DataOut))
+
+{
+	MX_UINT8 retVal = 0;
+0060  01FE  	CLRF FC_CAL_SPI_0006F_1_retVal
+
+
+	#if (MX_SPI_CHANNEL_X == 0)
+		SPI_SW_DELAY = MX_SPI_PR_SCALE_X;
+
+		MX_UINT8 idx;
+		for (idx = 0; idx < 8; idx++)
+		{
+			retVal = retVal << 1;
+
+			#if ((MX_SPI_BMODE_X & 0x02) == 0x00)									//CKE = 0; Set SCK active before data
+				#if ((MX_SPI_BMODE_X & 0x01) == 0x00)								//CKP = 0
+					FC_CAL_Bit_High(MX_SPI_SCK_PORT_X, MX_SPI_SCK_PIN_X);
+				#else
+					FC_CAL_Bit_Low(MX_SPI_SCK_PORT_X, MX_SPI_SCK_PIN_X);
+				#endif
+			#endif
+
+			if (DataOut & 0x80)														//Test Data bit
+				FC_CAL_Bit_High(MX_SPI_MOSI_PORT_X, MX_SPI_MOSI_PIN_X);				//Set SDO bit
+			else
+				FC_CAL_Bit_Low (MX_SPI_MOSI_PORT_X, MX_SPI_MOSI_PIN_X);				//Clear SDO bit
+
+			delay_us(SPI_SW_DELAY);
+
+			#if ((MX_SPI_BMODE_X & 0x02) == 0x02)									//CKE = 1; Set SCK active after data
+				#if ((MX_SPI_BMODE_X & 0x01) == 0x00)								//CKP = 0
+					FC_CAL_Bit_High(MX_SPI_SCK_PORT_X, MX_SPI_SCK_PIN_X);
+				#else
+					FC_CAL_Bit_Low(MX_SPI_SCK_PORT_X, MX_SPI_SCK_PIN_X);
+				#endif
+			#else																	//CKE = 0; Set SCK idle after data
+				#if ((MX_SPI_BMODE_X & 0x01) == 0x00)								//CKP = 0
+					FC_CAL_Bit_Low(MX_SPI_SCK_PORT_X, MX_SPI_SCK_PIN_X);
+				#else
+					FC_CAL_Bit_High(MX_SPI_SCK_PORT_X, MX_SPI_SCK_PIN_X);
+				#endif
+			#endif
+
+			#if ((MX_SPI_BMODE_X & 0x04) == 0)										//Sample at the middle of period
+				if(FC_CAL_Bit_In(MX_SPI_MISO_PORT_X, MX_SPI_MISO_PIN_X))
+					retVal = retVal | 0x01;
+				else
+					retVal = retVal & 0xFE;
+			#endif
+
+			delay_us(SPI_SW_DELAY);
+
+			#if ((MX_SPI_BMODE_X & 0x02) == 0x02)									//CKE = 1; Set SCK idle to complete cycle																	//CKE = 0; Set SCK idle after data
+				#if ((MX_SPI_BMODE_X & 0x01) == 0x00)								//CKP = 0
+					FC_CAL_Bit_Low(MX_SPI_SCK_PORT_X, MX_SPI_SCK_PIN_X);
+				#else
+					FC_CAL_Bit_High(MX_SPI_SCK_PORT_X, MX_SPI_SCK_PIN_X);
+				#endif
+			#endif
+
+			#if ((MX_SPI_BMODE_X & 0x04) == 0x04)									//Sample at the end of period
+				if(FC_CAL_Bit_In(MX_SPI_MISO_PORT_X, MX_SPI_MISO_PIN_X))
+					retVal = retVal | 0x01;
+				else
+					retVal = retVal & 0xFE;
+			#endif
+
+			DataOut = DataOut << 1;							//Move to next data bit
+		}
+    #endif
+
+	#if (MX_SPI_CHANNEL_X == 1)
+		sspbuf = DataOut;					//Send outgoing byte
+0061  087D  	MOVF FC_CAL_SPI_0006F_arg_DataOut, W
+0062  0093  	MOVWF gbl_sspbuf
+
+		while ((sspstat & 0x01) == 0);		//Wait until sspbuf is empty
+0063        label7
+0063  1683  	BSF STATUS, RP0
+0064  1C14  	BTFSS gbl_sspstat,0
+0065  2863  	GOTO	label7
+
+		retVal = sspbuf;					//Collect incoming byte
+0066  1283  	BCF STATUS, RP0
+0067  0813  	MOVF gbl_sspbuf, W
+0068  00FE  	MOVWF FC_CAL_SPI_0006F_1_retVal
+
+	#endif
+
+	#if (MX_SPI_CHANNEL_X == 2)
+		ssp2buf = DataOut;					//Send outgoing byte
+		while ((ssp2stat & 0x01) == 0);		//Wait until sspbuf is empty
+		retVal = ssp2buf;					//Collect incoming byte
+	#endif
+
+	return (retVal);
+0069  087E  	MOVF FC_CAL_SPI_0006F_1_retVal, W
+006A  1683  	BSF STATUS, RP0
+006B  00A0  	MOVWF CompTempVarRet2327
+
+}
+006C  0008  	RETURN
+
+
+
+
+
+
+CALFUNCTION(void, FC_CAL_SPI_Slave_Init_, (void))
+{
+
+}
+
+CALFUNCTION(void, FC_CAL_SPI_Slave_Uninit_, (void))
+{
+
+}
+
+CALFUNCTION(void, FC_CAL_SPI_Slave_SetTxData_, (MX_UINT8 Data))
+{
+
+}
+
+CALFUNCTION(MX_UINT8, FC_CAL_SPI_Slave_GetRxData_, (void))
+{
+
+}
+
+
+
+////////////////////////////////////////
+// Code with no source :-)
+////////////////////////////////////////
+0000  158A  	BSF PCLATH,3
+0001  2AC7  	GOTO	_startup
+
+0004  00FF  	MOVWF Int1Context
+0005  0E03  	SWAPF STATUS, W
+0006  1283  	BCF STATUS, RP0
+0007  1303  	BCF STATUS, RP1
+0008  00D9  	MOVWF Int1BContext
+0009  0E0A  	SWAPF PCLATH, W
+000A  00DA  	MOVWF Int1BContext+D'1'
+000B  0E04  	SWAPF FSR, W
+000C  00DB  	MOVWF Int1BContext+D'2'
+000D  158A  	BSF PCLATH,3
+000E  120A  	BCF PCLATH,4
+000F  2B04  	GOTO	interrupt
+0010        delay_us_00000
+0010        ; { delay_us ; function begin
+0010        label1
+0010  0000  	NOP
+0011  0000  	NOP
+0012  0BFC  	DECFSZ delay_us_00000_arg_del, F
+0013  2810  	GOTO	label1
+0014  0008  	RETURN
+0015        ; } delay_us function end
+
+0015        delay_ms_00000
+0015        ; { delay_ms ; function begin
+0015  08A3  	MOVF delay_ms_00000_arg_del, F
+0016  1D03  	BTFSS STATUS,Z
+0017  2819  	GOTO	label2
+0018  0008  	RETURN
+0019        label2
+0019  30F9  	MOVLW 0xF9
+001A        label3
+001A  0000  	NOP
+001B  0000  	NOP
+001C  0000  	NOP
+001D  0000  	NOP
+001E  0000  	NOP
+001F  0000  	NOP
+0020  0000  	NOP
+0021  0000  	NOP
+0022  0000  	NOP
+0023  0000  	NOP
+0024  0000  	NOP
+0025  0000  	NOP
+0026  0000  	NOP
+0027  0000  	NOP
+0028  0000  	NOP
+0029  0000  	NOP
+002A  3EFF  	ADDLW 0xFF
+002B  1D03  	BTFSS STATUS,Z
+002C  281A  	GOTO	label3
+002D  0000  	NOP
+002E  0000  	NOP
+002F  0000  	NOP
+0030  0000  	NOP
+0031  0000  	NOP
+0032  0000  	NOP
+0033  0000  	NOP
+0034  0000  	NOP
+0035  0000  	NOP
+0036  0000  	NOP
+0037  0000  	NOP
+0038  0000  	NOP
+0039  0000  	NOP
+003A  0000  	NOP
+003B  0000  	NOP
+003C  0000  	NOP
+003D  0000  	NOP
+003E  0BA3  	DECFSZ delay_ms_00000_arg_del, F
+003F  2819  	GOTO	label2
+0040  0008  	RETURN
+0041        ; } delay_ms function end
+
+0041        delay_10us_00000
+0041        ; { delay_10us ; function begin
+0041  08B6  	MOVF delay_10us_00000_arg_del, F
+0042  1D03  	BTFSS STATUS,Z
+0043  2845  	GOTO	label4
+0044  0008  	RETURN
+0045        label4
+0045  3009  	MOVLW 0x09
+0046        label5
+0046  0000  	NOP
+0047  3EFF  	ADDLW 0xFF
+0048  1D03  	BTFSS STATUS,Z
+0049  2846  	GOTO	label5
+004A  0000  	NOP
+004B  0000  	NOP
+004C  0BB6  	DECFSZ delay_10us_00000_arg_del, F
+004D  2845  	GOTO	label4
+004E  0008  	RETURN
+004F        ; } delay_10us function end
+
+004F        delay_s_00000
+004F        ; { delay_s ; function begin
+004F        label6
+004F  30FA  	MOVLW 0xFA
+0050  1683  	BSF STATUS, RP0
+0051  00A3  	MOVWF delay_ms_00000_arg_del
+0052  2015  	CALL delay_ms_00000
+0053  30FA  	MOVLW 0xFA
+0054  00A3  	MOVWF delay_ms_00000_arg_del
+0055  2015  	CALL delay_ms_00000
+0056  30FA  	MOVLW 0xFA
+0057  00A3  	MOVWF delay_ms_00000_arg_del
+0058  2015  	CALL delay_ms_00000
+0059  30FA  	MOVLW 0xFA
+005A  00A3  	MOVWF delay_ms_00000_arg_del
+005B  2015  	CALL delay_ms_00000
+005C  1283  	BCF STATUS, RP0
+005D  0BFB  	DECFSZ delay_s_00000_arg_del, F
+005E  284F  	GOTO	label6
+005F  0008  	RETURN
+0060        ; } delay_s function end
+
+
+0071        __div_16_1_00003
+0071        ; { __div_16_16 ; function begin
+0071  01A7  	CLRF __div_16_1_00003_1_r
+0072  01A8  	CLRF __div_16_1_00003_1_r+D'1'
+0073  01AA  	CLRF CompTempVarRet214
+0074  01AB  	CLRF CompTempVarRet214+D'1'
+0075  01A9  	CLRF __div_16_1_00003_1_i
+0076        label8
+0076  1A29  	BTFSC __div_16_1_00003_1_i,4
+0077  0008  	RETURN
+0078  1003  	BCF STATUS,C
+0079  0DAA  	RLF CompTempVarRet214, F
+007A  0DAB  	RLF CompTempVarRet214+D'1', F
+007B  0DA1  	RLF __div_16_1_00003_arg_a, F
+007C  0DA2  	RLF __div_16_1_00003_arg_a+D'1', F
+007D  0DA7  	RLF __div_16_1_00003_1_r, F
+007E  0DA8  	RLF __div_16_1_00003_1_r+D'1', F
+007F  0824  	MOVF __div_16_1_00003_arg_b+D'1', W
+0080  0228  	SUBWF __div_16_1_00003_1_r+D'1', W
+0081  1D03  	BTFSS STATUS,Z
+0082  2885  	GOTO	label9
+0083  0823  	MOVF __div_16_1_00003_arg_b, W
+0084  0227  	SUBWF __div_16_1_00003_1_r, W
+0085        label9
+0085  1C03  	BTFSS STATUS,C
+0086  288E  	GOTO	label10
+0087  0823  	MOVF __div_16_1_00003_arg_b, W
+0088  02A7  	SUBWF __div_16_1_00003_1_r, F
+0089  0824  	MOVF __div_16_1_00003_arg_b+D'1', W
+008A  1C03  	BTFSS STATUS,C
+008B  03A8  	DECF __div_16_1_00003_1_r+D'1', F
+008C  02A8  	SUBWF __div_16_1_00003_1_r+D'1', F
+008D  142A  	BSF CompTempVarRet214,0
+008E        label10
+008E  0AA9  	INCF __div_16_1_00003_1_i, F
+008F  2876  	GOTO	label8
+0090        ; } __div_16_16 function end
+
+
+0AC7        _startup
+0AC7  30D5  	MOVLW 0xD5
+0AC8  1283  	BCF STATUS, RP0
+0AC9  1303  	BCF STATUS, RP1
+0ACA  00C5  	MOVWF gbl_14_LSR
+0ACB  30C4  	MOVLW 0xC4
+0ACC  00C6  	MOVWF gbl_14_LSR+D'1'
+0ACD  30BB  	MOVLW 0xBB
+0ACE  00C7  	MOVWF gbl_14_LSR+D'2'
+0ACF  30DC  	MOVLW 0xDC
+0AD0  00C8  	MOVWF gbl_14_LSR+D'3'
+0AD1  01C9  	CLRF gbl_15_gbl_aSig
+0AD2  01CA  	CLRF gbl_15_gbl_aSig+D'1'
+0AD3  01CB  	CLRF gbl_15_gbl_aSig+D'2'
+0AD4  01CC  	CLRF gbl_15_gbl_aSig+D'3'
+0AD5  01CD  	CLRF gbl_15_gbl_bSig
+0AD6  01CE  	CLRF gbl_15_gbl_bSig+D'1'
+0AD7  01CF  	CLRF gbl_15_gbl_bSig+D'2'
+0AD8  01D0  	CLRF gbl_15_gbl_bSig+D'3'
+0AD9  01D1  	CLRF gbl_15_gbl_zSig
+0ADA  01D2  	CLRF gbl_15_gbl_zSig+D'1'
+0ADB  01D3  	CLRF gbl_15_gbl_zSig+D'2'
+0ADC  01D4  	CLRF gbl_15_gbl_zSig+D'3'
+0ADD  01E3  	CLRF gbl_15_gbl_aExp
+0ADE  01E4  	CLRF gbl_15_gbl_bExp
+0ADF  01DC  	CLRF gbl_15_gbl_zExp
+0AE0  01DD  	CLRF gbl_15_gbl_zExp+D'1'
+0AE1  01E5  	CLRF gbl_15_gbl_aSign
+0AE2  01E6  	CLRF gbl_15_gbl_bSign
+0AE3  01E7  	CLRF gbl_15_gbl_zSign
+0AE4  01E8  	CLRF gbl_15_gbl_zSigZero
+0AE5  01D5  	CLRF gbl_15_gbl_ret
+0AE6  01D6  	CLRF gbl_15_gbl_ret+D'1'
+0AE7  01D7  	CLRF gbl_15_gbl_ret+D'2'
+0AE8  01D8  	CLRF gbl_15_gbl_ret+D'3'
+0AE9  01E1  	CLRF gbl_float_rounding_mode
+0AEA  01E2  	CLRF gbl_float_exception_flags
+0AEB  01E0  	CLRF gbl_float_detect_tininess
+
+0B01  158A  	BSF PCLATH,3
+0B02  120A  	BCF PCLATH,4
+0B03  2987  	GOTO	main
+
+2007  3F3A  	DW 0x3F3A

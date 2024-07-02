@@ -1,0 +1,948 @@
+MPASM  5.51                NRF24L01_LIBKN.INC   9-25-2020  18:07:39         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 ;######################################################################
+                      00002 ;       Radio Frequency Module based on NRF24l01LIBRARY                   #
+                      00003 ;   for PIC Microcontrollers                                                                            
+                              #
+                      00004 ;                                                                                                       
+                                                              #
+                      00005 ;       by:     Kenny Neutron                                                                           
+                                      #
+                      00006 ;       file:   nrf24l01_libkn.inc                                                                      
+                                      #
+                      00007 ;       vsn:    v08.14.20                                                                               
+                                              #
+                      00008 ;######################################################################
+                      00009 
+                      00010 
+                      00011 
+                      00012 
+                      00013 
+                      00014 
+                      00015 
+                      00016 
+                      00017         #DEFINE CE_HI           BSF PORTC,3
+                      00018         #DEFINE CE_LO           BCF     PORTC,3
+                      00019 
+                      00020         #DEFINE CSN_HI          BSF     PORTC,6
+                      00021         #DEFINE CSN_LO          BCF     PORTC,6
+                      00022 
+                      00023         #DEFINE CLK_HI          BSF     PORTB,6
+                      00024         #DEFINE CLK_LO          BCF     PORTB,6
+                      00025 
+                      00026         #DEFINE MOSI_HI         BSF     PORTC,7
+                      00027         #DEFINE MOSI_LO         BCF     PORTC,7
+                      00028 
+                      00029         #DEFINE TDS_HI          BSF PORTC,5
+                      00030         #DEFINE TDS_LO          BCF     PORTC,5
+                      00031 
+                      00032         #DEFINE RDR_HI          BSF     PORTC,4
+                      00033         #DEFINE RDR_LO          BCF     PORTC,4
+                      00034 
+                      00035 
+                      00036 ;============================   bank    0       ===========================
+Warning[205]: Found directive in column 1. (CBLOCK)
+                      00037 CBLOCK 0X20
+  00000020            00038                         NRF_REG00       ;config                         configuration
+  00000021            00039                         NRF_REG01       ;en_aa                          enable auto-acknowledgement
+  00000022            00040                         NRF_REG02       ;en_rxaddr                      enable rx address
+  00000023            00041                         NRF_REG03       ;setup_aw                       enable address width
+  00000024            00042                         NRF_REG04       ;setup_retr                     setup auto-retransmission
+  00000025            00043                         NRF_REG05       ;rf_ch                          rf channel
+  00000026            00044                         NRF_REG06       ;rf_seup                        rf setup register
+  00000027            00045                         NRF_REG07       ;nrf status                     nrf status register
+  00000028            00046                         RX_ADDR_P00     ;reg0a-0                        rx address pipe0 byte0
+  00000029            00047                         RX_ADDR_P01     ;reg0a-1                        rx address pipe0 byte1
+MPASM  5.51                NRF24L01_LIBKN.INC   9-25-2020  18:07:39         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+  0000002A            00048                         RX_ADDR_P02     ;reg0a-2                        rx address pipe0 byte2
+  0000002B            00049                         RX_ADDR_P03     ;reg0a-3                        rx address pipe0 byte3
+  0000002C            00050                         RX_ADDR_P04     ;reg0a-4                        rx address pipe0 byte4
+                      00051                         
+  0000002D            00052                         TX_ADDR_B0      ;reg10-0                        tx address byte0
+  0000002E            00053                         TX_ADDR_B1      ;reg10-1                        tx address byte1
+  0000002F            00054                         TX_ADDR_B2      ;reg10-2                        tx address byte2
+  00000030            00055                         TX_ADDR_B3      ;reg10-3                        tx address byte3
+  00000031            00056                         TX_ADDR_B4      ;reg10-4                        tx address byte4
+                      00057 
+  00000032            00058                         NRF_REG11       ;rx_pw_p0                       rx payload width in pipe0
+                      00059 
+  00000033            00060                         NRF_REG17       ;fifo_status
+                      00061 
+  00000034            00062                         TXPAYLOAD:.16                                   ;tx payload array, max payloadsi
+                            ze= 16B
+                      00063 
+  00000044            00064                         RXPAYLOAD:.16                                   ;rx payload array, max payloadsi
+                            ze= 16B
+                      00065 
+  00000054            00066                         PAYLOADSIZE                                             ;payload size
+                      00067 
+  00000055            00068                         REG_TOWRITE,REG_TOREAD                  ;reg address to write/read
+                      00069 
+  00000057            00070                         DATA_TOWRITE,DATA_TOREAD                ;data to/from reg specified 
+                      00071                                                                                         ;by reg_toread/r
+                            eg_towrite
+                      00072                                                                                 
+                      00073                         
+  00000059            00074                         SPI_DATA0,SPI_DATA1                             ;spi_data0(out)  spi_data1(in)
+  0000005B            00075                         CLK_LOOP                                                ;spi clk counter
+                      00076                         
+  0000005C            00077                         PL_LOOP                                                 ;payload counter
+                      00078 
+  0000005D            00079                         NRF_DLOOP                                               ;local delay loop
+  0000005E            00080                         NRF_DELAYUS,NRF_DELAYMS                 ;local delay variables
+                      00081                         
+                      00082 
+Warning[205]: Found directive in column 1. (ENDC)
+                      00083 ENDC
+                      00084 ;======================================================================
+                      00085 
+                      00086 
+Warning[205]: Found directive in column 1. (ORG)
+                      00087 ORG 0X100
+                      00088 
+0100                  00089 NRF_SEND_PAYLOAD
+0100   300E           00090         MOVLW   0X0E
+Error[113]  : Symbol not previously defined (PCLATH)
+0101   0080           00091         MOVWF   PCLATH
+                      00092 
+0102   2???           00093         CALL    RADIO_SEND_DATA
+0103   3001           00094         MOVLW   0X01
+MPASM  5.51                NRF24L01_LIBKN.INC   9-25-2020  18:07:39         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Error[113]  : Symbol not previously defined (PCLATH)
+0104   0080           00095         MOVWF   PCLATH
+Warning[203]: Found opcode in column 1. (RETURN)
+0105   0008           00096 RETURN
+                      00097 
+0106                  00098 NRF_GET_PAYLOAD
+0106   300E           00099         MOVLW   0X0E
+Error[113]  : Symbol not previously defined (PCLATH)
+0107   0080           00100         MOVWF   PCLATH
+0108   2???           00101         CALL    RADIO_RECV_DATA
+0109   3001           00102         MOVLW   0X01
+Error[113]  : Symbol not previously defined (PCLATH)
+010A   0080           00103         MOVWF   PCLATH
+Warning[203]: Found opcode in column 1. (RETURN)
+010B   0008           00104 RETURN
+                      00105 
+                      00106 
+010C                  00107 NRF_TX_MODE
+010C   300E           00108         MOVLW   0X0E
+Error[113]  : Symbol not previously defined (PCLATH)
+010D   0080           00109         MOVWF   PCLATH
+010E   2???           00110         CALL    RADIO_TX_INIT
+010F   3001           00111         MOVLW   0X01
+Error[113]  : Symbol not previously defined (PCLATH)
+0110   0080           00112         MOVWF   PCLATH  
+Warning[203]: Found opcode in column 1. (RETURN)
+0111   0008           00113 RETURN
+                      00114 
+0112                  00115 NRF_RX_MODE
+0112   300E           00116         MOVLW   0X0E
+Error[113]  : Symbol not previously defined (PCLATH)
+0113   0080           00117         MOVWF   PCLATH
+0114   2???           00118         CALL    RADIO_RX_INIT
+0115   3001           00119         MOVLW   0X01
+Error[113]  : Symbol not previously defined (PCLATH)
+0116   0080           00120         MOVWF   PCLATH  
+Warning[203]: Found opcode in column 1. (RETURN)
+0117   0008           00121 RETURN
+                      00122 
+                      00123 
+                      00124 
+                      00125 
+                      00126 
+                      00127 
+                      00128 
+Warning[205]: Found directive in column 1. (ORG)
+                      00129 ORG 0XED0
+                      00130 ;========== nrf send payload =========
+0ED0                  00131 RADIO_SEND_DATA
+                      00132 
+0ED0   0854           00133         MOVFW   PAYLOADSIZE
+0ED1   00DC           00134         MOVWF   PL_LOOP
+                      00135 
+MPASM  5.51                NRF24L01_LIBKN.INC   9-25-2020  18:07:39         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00136 
+Error[113]  : Symbol not previously defined (PORTC)
+0ED2   1300           00137         CSN_LO
+                      00138         
+0ED3   30A0           00139         MOVLW   0XA0
+0ED4   00D9           00140         MOVWF   SPI_DATA0
+0ED5   2???           00141         CALL    SPI_SENDBYTE
+                      00142 
+0ED6   3034           00143         MOVLW   0X34
+Error[113]  : Symbol not previously defined (FSR)
+0ED7   0080           00144         MOVWF   FSR
+                      00145 
+                      00146 
+0ED8                  00147 RSD0
+Error[113]  : Symbol not previously defined (INDF)
+0ED8   0800           00148         MOVFW   INDF
+0ED9   00D9           00149         MOVWF   SPI_DATA0
+0EDA   2???           00150         CALL    SPI_SENDBYTE
+                      00151 
+Message[305]: Using default destination of 1 (file).
+Error[113]  : Symbol not previously defined (FSR)
+0EDB   0A80           00152         INCF    FSR
+                      00153 
+0EDC   0BDC           00154         DECFSZ  PL_LOOP,F
+0EDD   2???           00155         GOTO    RSD0
+                      00156 
+Error[113]  : Symbol not previously defined (PORTC)
+0EDE   1700           00157         CSN_HI
+                      00158 
+0EDF   0000           00159         NOP
+0EE0   0000           00160         NOP
+                      00161 
+Error[113]  : Symbol not previously defined (PORTC)
+0EE1   1580           00162         CE_HI
+                      00163         
+0EE2   3005           00164         MOVLW   0X05
+0EE3   2???           00165         CALL    NRF_DELAY_MS
+                      00166 
+                      00167 
+Error[113]  : Symbol not previously defined (PORTC)
+0EE4   1180           00168         CE_LO
+                      00169 
+0EE5   2???           00170         CALL    RADIO_CHECKSTATUS
+0EE6   1EA7           00171         BTFSS   NRF_REG07,5
+0EE7   2???           00172         GOTO    TXDS0
+0EE8   2???           00173         GOTO    TXDS1
+                      00174 
+0EE9                  00175 TXDS0
+Error[113]  : Symbol not previously defined (PORTC)
+0EE9   1280           00176         TDS_LO
+0EEA   2???           00177         GOTO    RSD1
+                      00178 
+0EEB                  00179 TXDS1
+MPASM  5.51                NRF24L01_LIBKN.INC   9-25-2020  18:07:39         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Error[113]  : Symbol not previously defined (PORTC)
+0EEB   1680           00180         TDS_HI
+0EEC   2???           00181         GOTO    RSD1
+                      00182 
+0EED   0000           00183         NOP     
+                      00184 
+0EEE                  00185 RSD1
+0EEE   2???           00186         CALL    RADIO_CLRSTATUS
+                      00187 
+                      00188 
+Warning[203]: Found opcode in column 1. (RETURN)
+0EEF   0008           00189 RETURN
+                      00190 ;=====================================
+                      00191 
+                      00192 
+                      00193 
+                      00194 ;======== nrf recieve payload ========
+0EF0                  00195 RADIO_RECV_DATA
+0EF0   2???           00196         CALL    RADIO_CHECKFIFO
+                      00197 
+0EF1   1833           00198         BTFSC   NRF_REG17,0
+0EF2   2???           00199         GOTO    RXDR0
+0EF3   2???           00200         GOTO    RXDR1
+                      00201 
+0EF4                  00202 RXDR0
+                      00203 
+                      00204 ;       call    radio_flushfifo
+                      00205 
+0EF4   2???           00206         GOTO    RRD0
+                      00207 
+0EF5                  00208 RXDR1
+Error[113]  : Symbol not previously defined (PORTC)
+0EF5   1600           00209         RDR_HI
+0EF6   2???           00210         CALL    RADIO_READ_RXFIFO
+                      00211 
+0EF7   2???           00212         CALL    RADIO_CLRSTATUS
+                      00213 
+0EF8   2???           00214         CALL    RADIO_FLUSHFIFO
+                      00215 
+0EF9   2???           00216         GOTO    RRD0
+                      00217 
+0EFA                  00218 RRD0
+0EFA   0000           00219         NOP
+Error[113]  : Symbol not previously defined (PORTC)
+0EFB   1200           00220                 RDR_LO  
+Warning[203]: Found opcode in column 1. (RETURN)
+0EFC   0008           00221 RETURN
+                      00222 ;=====================================
+                      00223 
+                      00224 
+                      00225 
+                      00226         
+                      00227 
+MPASM  5.51                NRF24L01_LIBKN.INC   9-25-2020  18:07:39         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0EFD                  00228 RADIO_CHECKFIFO
+0EFD   3017           00229         MOVLW   0X17
+0EFE   00D6           00230         MOVWF   REG_TOREAD
+0EFF   2???           00231         CALL    CMD_REGREAD
+                      00232         
+0F00   0858           00233         MOVFW   DATA_TOREAD
+0F01   00B3           00234         MOVWF   NRF_REG17
+Warning[203]: Found opcode in column 1. (RETURN)
+0F02   0008           00235 RETURN
+                      00236 
+                      00237 
+                      00238 
+                      00239 
+                      00240         
+                      00241 ;========== nrf_read_rxfifo ==========
+0F03                  00242 RADIO_READ_RXFIFO
+0F03   3044           00243         MOVLW   0X44
+Error[113]  : Symbol not previously defined (FSR)
+0F04   0080           00244         MOVWF   FSR
+0F05   0854           00245         MOVFW   PAYLOADSIZE
+0F06   00DC           00246         MOVWF   PL_LOOP
+                      00247 
+Error[113]  : Symbol not previously defined (PORTC)
+0F07   1300           00248         CSN_LO
+0F08   3061           00249         MOVLW   0X61
+0F09   00D9           00250         MOVWF   SPI_DATA0
+0F0A   2???           00251         CALL    SPI_SENDBYTE
+                      00252 
+0F0B                  00253 RFF0
+0F0B   2???           00254         CALL    SPI_RECVBYTE
+0F0C   085A           00255         MOVFW   SPI_DATA1
+Error[113]  : Symbol not previously defined (INDF)
+0F0D   0080           00256         MOVWF   INDF
+Message[305]: Using default destination of 1 (file).
+Error[113]  : Symbol not previously defined (FSR)
+0F0E   0A80           00257         INCF    FSR
+0F0F   0BDC           00258         DECFSZ  PL_LOOP,F
+0F10   2???           00259         GOTO    RFF0
+                      00260 
+Warning[203]: Found opcode in column 1. (RETURN)
+0F11   0008           00261 RETURN
+                      00262 ;=====================================
+                      00263 
+                      00264 ;========== nrf clear status =========
+0F12                  00265 RADIO_CLRSTATUS
+0F12   3007           00266         MOVLW   0X07
+0F13   00D5           00267         MOVWF   REG_TOWRITE
+0F14   30FF           00268         MOVLW   0XFF
+0F15   00D7           00269         MOVWF   DATA_TOWRITE
+0F16   2???           00270         CALL    CMD_REGWRITE
+                      00271 
+Warning[203]: Found opcode in column 1. (RETURN)
+0F17   0008           00272 RETURN
+MPASM  5.51                NRF24L01_LIBKN.INC   9-25-2020  18:07:39         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00273 ;=====================================
+                      00274 
+                      00275 ;========== nrf check status =========
+0F18                  00276 RADIO_CHECKSTATUS
+0F18   3007           00277         MOVLW   0X07
+0F19   00D6           00278         MOVWF   REG_TOREAD
+0F1A   2???           00279         CALL    CMD_REGREAD
+                      00280         
+0F1B   0858           00281         MOVFW   DATA_TOREAD
+0F1C   00A7           00282         MOVWF   NRF_REG07
+Warning[203]: Found opcode in column 1. (RETURN)
+0F1D   0008           00283 RETURN
+                      00284 ;=====================================
+                      00285 
+                      00286 
+                      00287 
+                      00288 ;============ nrf clr fifo ===========
+0F1E                  00289 RADIO_FLUSHFIFO
+Error[113]  : Symbol not previously defined (PORTC)
+0F1E   1300           00290         CSN_LO
+0F1F   30E1           00291         MOVLW   0XE1
+0F20   00D9           00292         MOVWF   SPI_DATA0
+0F21   2???           00293         CALL    SPI_SENDBYTE
+Error[113]  : Symbol not previously defined (PORTC)
+0F22   1700           00294         CSN_HI
+0F23   0000           00295         NOP
+0F24   0000           00296         NOP
+0F25   0000           00297         NOP
+0F26   0000           00298         NOP
+                      00299         
+Error[113]  : Symbol not previously defined (PORTC)
+0F27   1300           00300         CSN_LO
+                      00301 
+0F28   30E2           00302         MOVLW   0XE2
+0F29   00D9           00303         MOVWF   SPI_DATA0
+0F2A   2???           00304         CALL    SPI_SENDBYTE
+Error[113]  : Symbol not previously defined (PORTC)
+0F2B   1700           00305         CSN_HI
+Warning[203]: Found opcode in column 1. (RETURN)
+0F2C   0008           00306 RETURN
+                      00307 ;=====================================
+                      00308 
+                      00309 
+                      00310 ;============ init tx mode ===========
+0F2D                  00311 RADIO_TX_INIT
+Error[113]  : Symbol not previously defined (PORTC)
+0F2D   1580           00312         CE_HI
+Error[113]  : Symbol not previously defined (PORTC)
+0F2E   1700           00313         CSN_HI
+Error[113]  : Symbol not previously defined (PORTB)
+0F2F   1300           00314         CLK_LO
+Error[113]  : Symbol not previously defined (PORTC)
+0F30   1780           00315         MOSI_HI
+MPASM  5.51                NRF24L01_LIBKN.INC   9-25-2020  18:07:39         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00316 
+0F31   3010           00317         MOVLW   .16
+0F32   00D4           00318         MOVWF   PAYLOADSIZE
+                      00319 
+0F33   300E           00320         MOVLW   0X0E
+0F34   00A0           00321         MOVWF   NRF_REG00
+                      00322 
+0F35   2???           00323         CALL    RADIO_SETSETTINGS
+Error[113]  : Symbol not previously defined (PORTC)
+0F36   1180           00324         CE_LO
+Warning[203]: Found opcode in column 1. (RETURN)
+0F37   0008           00325 RETURN
+                      00326 
+                      00327 ;============ init rx mode ===========
+0F38                  00328 RADIO_RX_INIT
+Error[113]  : Symbol not previously defined (PORTC)
+0F38   1580           00329         CE_HI
+Error[113]  : Symbol not previously defined (PORTC)
+0F39   1700           00330         CSN_HI
+Error[113]  : Symbol not previously defined (PORTB)
+0F3A   1300           00331         CLK_LO
+Error[113]  : Symbol not previously defined (PORTC)
+0F3B   1780           00332         MOSI_HI
+                      00333 
+0F3C   3010           00334         MOVLW   .16
+0F3D   00D4           00335         MOVWF   PAYLOADSIZE
+                      00336 
+0F3E   300F           00337         MOVLW   0X0F
+0F3F   00A0           00338         MOVWF   NRF_REG00
+                      00339 
+0F40   2???           00340         CALL    RADIO_SETSETTINGS
+Error[113]  : Symbol not previously defined (PORTC)
+0F41   1580           00341         CE_HI
+Warning[203]: Found opcode in column 1. (RETURN)
+0F42   0008           00342 RETURN
+                      00343 ;=====================================
+                      00344 
+                      00345 
+                      00346 
+                      00347 ;========== set nrf settings =========
+0F43                  00348 RADIO_SETSETTINGS
+0F43   303F           00349         MOVLW   0X3F
+0F44   00A1           00350         MOVWF   NRF_REG01
+                      00351 
+0F45   3003           00352         MOVLW   0X03
+0F46   00A2           00353         MOVWF   NRF_REG02
+                      00354         
+0F47   3003           00355         MOVLW   0X03
+0F48   00A3           00356         MOVWF   NRF_REG03
+                      00357 
+0F49   305F           00358         MOVLW   0X5F
+0F4A   00A4           00359         MOVWF   NRF_REG04
+                      00360 
+MPASM  5.51                NRF24L01_LIBKN.INC   9-25-2020  18:07:39         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0F4B   304C           00361         MOVLW   0X4C
+0F4C   00A5           00362         MOVWF   NRF_REG05
+                      00363 
+0F4D   3027           00364         MOVLW   0X27
+0F4E   00A6           00365         MOVWF   NRF_REG06
+                      00366 
+                      00367 
+0F4F   3000           00368         MOVLW   0X00
+0F50   00D5           00369         MOVWF   REG_TOWRITE
+0F51   0820           00370         MOVFW   NRF_REG00
+0F52   00D7           00371         MOVWF   DATA_TOWRITE
+0F53   2???           00372         CALL    CMD_REGWRITE
+                      00373 
+0F54   3001           00374         MOVLW   0X01
+0F55   00D5           00375         MOVWF   REG_TOWRITE
+0F56   0821           00376         MOVFW   NRF_REG01
+0F57   00D7           00377         MOVWF   DATA_TOWRITE
+0F58   2???           00378         CALL    CMD_REGWRITE
+                      00379 
+0F59   3002           00380         MOVLW   0X02
+0F5A   00D5           00381         MOVWF   REG_TOWRITE
+0F5B   0822           00382         MOVFW   NRF_REG02
+0F5C   00D7           00383         MOVWF   DATA_TOWRITE
+0F5D   2???           00384         CALL    CMD_REGWRITE
+                      00385 
+0F5E   3003           00386         MOVLW   0X03
+0F5F   00D5           00387         MOVWF   REG_TOWRITE
+0F60   0823           00388         MOVFW   NRF_REG03
+0F61   00D7           00389         MOVWF   DATA_TOWRITE
+0F62   2???           00390         CALL    CMD_REGWRITE
+                      00391 
+0F63   3004           00392         MOVLW   0X04
+0F64   00D5           00393         MOVWF   REG_TOWRITE
+0F65   0824           00394         MOVFW   NRF_REG04
+0F66   00D7           00395         MOVWF   DATA_TOWRITE
+0F67   2???           00396         CALL    CMD_REGWRITE
+                      00397 
+0F68   3005           00398         MOVLW   0X05
+0F69   00D5           00399         MOVWF   REG_TOWRITE
+0F6A   0825           00400         MOVFW   NRF_REG05
+0F6B   00D7           00401         MOVWF   DATA_TOWRITE
+0F6C   2???           00402         CALL    CMD_REGWRITE
+                      00403 
+0F6D   3006           00404         MOVLW   0X06
+0F6E   00D5           00405         MOVWF   REG_TOWRITE
+0F6F   0826           00406         MOVFW   NRF_REG06
+0F70   00D7           00407         MOVWF   DATA_TOWRITE
+0F71   2???           00408         CALL    CMD_REGWRITE
+                      00409 
+0F72   3011           00410         MOVLW   0X11
+0F73   00D5           00411         MOVWF   REG_TOWRITE
+0F74   0854           00412         MOVFW   PAYLOADSIZE
+0F75   00D7           00413         MOVWF   DATA_TOWRITE
+MPASM  5.51                NRF24L01_LIBKN.INC   9-25-2020  18:07:39         PAGE 10
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0F76   2???           00414         CALL    CMD_REGWRITE
+                      00415 
+0F77   2???           00416         CALL    SET_TX_ADDRESS
+0F78   2???           00417         CALL    SET_RX_ADDRESS
+                      00418 
+0F79   2???           00419         CALL    RADIO_CLRSTATUS
+0F7A   2???           00420         CALL    RADIO_FLUSHFIFO
+Warning[203]: Found opcode in column 1. (RETURN)
+0F7B   0008           00421 RETURN
+                      00422 ;=====================================
+                      00423 
+                      00424 ;========== set tx address ===========
+0F7C                  00425 SET_TX_ADDRESS
+Error[113]  : Symbol not previously defined (PORTC)
+0F7C   1300           00426         CSN_LO
+                      00427 
+0F7D   3030           00428         MOVLW   B'00110000'
+0F7E   00D9           00429         MOVWF   SPI_DATA0
+0F7F   2???           00430         CALL    SPI_SENDBYTE
+                      00431 
+0F80   082D           00432         MOVFW   TX_ADDR_B0
+0F81   00D9           00433         MOVWF   SPI_DATA0
+0F82   2???           00434         CALL    SPI_SENDBYTE
+                      00435 
+0F83   082E           00436         MOVFW   TX_ADDR_B1
+0F84   00D9           00437         MOVWF   SPI_DATA0
+0F85   2???           00438         CALL    SPI_SENDBYTE
+                      00439 
+0F86   082F           00440         MOVFW   TX_ADDR_B2
+0F87   00D9           00441         MOVWF   SPI_DATA0
+0F88   2???           00442         CALL    SPI_SENDBYTE
+                      00443 
+0F89   0830           00444         MOVFW   TX_ADDR_B3
+0F8A   00D9           00445         MOVWF   SPI_DATA0
+0F8B   2???           00446         CALL    SPI_SENDBYTE
+                      00447 
+0F8C   0831           00448         MOVFW   TX_ADDR_B4
+0F8D   00D9           00449         MOVWF   SPI_DATA0
+0F8E   2???           00450         CALL    SPI_SENDBYTE
+                      00451 
+Error[113]  : Symbol not previously defined (PORTC)
+0F8F   1700           00452         CSN_HI
+Warning[203]: Found opcode in column 1. (RETURN)
+0F90   0008           00453 RETURN
+                      00454 ;=====================================
+                      00455 
+                      00456 ;========== set rx address ===========
+0F91                  00457 SET_RX_ADDRESS
+Error[113]  : Symbol not previously defined (PORTC)
+0F91   1300           00458         CSN_LO
+0F92   302A           00459         MOVLW   B'00101010'
+0F93   00D9           00460         MOVWF   SPI_DATA0
+0F94   2???           00461         CALL    SPI_SENDBYTE
+MPASM  5.51                NRF24L01_LIBKN.INC   9-25-2020  18:07:39         PAGE 11
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00462         
+0F95   0828           00463         MOVFW   RX_ADDR_P00
+0F96   00D9           00464         MOVWF   SPI_DATA0
+0F97   2???           00465         CALL    SPI_SENDBYTE
+                      00466 
+0F98   0829           00467         MOVFW   RX_ADDR_P01
+0F99   00D9           00468         MOVWF   SPI_DATA0
+0F9A   2???           00469         CALL    SPI_SENDBYTE
+                      00470 
+0F9B   082A           00471         MOVFW   RX_ADDR_P02
+0F9C   00D9           00472         MOVWF   SPI_DATA0
+0F9D   2???           00473         CALL    SPI_SENDBYTE
+                      00474         
+0F9E   082B           00475         MOVFW   RX_ADDR_P03
+0F9F   00D9           00476         MOVWF   SPI_DATA0
+0FA0   2???           00477         CALL    SPI_SENDBYTE
+                      00478 
+0FA1   082C           00479         MOVFW   RX_ADDR_P04
+0FA2   00D9           00480         MOVWF   SPI_DATA0
+0FA3   2???           00481         CALL    SPI_SENDBYTE
+                      00482 
+Error[113]  : Symbol not previously defined (PORTC)
+0FA4   1700           00483         CSN_HI
+Warning[203]: Found opcode in column 1. (RETURN)
+0FA5   0008           00484 RETURN
+                      00485 ;=====================================
+                      00486 
+                      00487 ;======== write nrf register =========
+0FA6                  00488 CMD_REGWRITE
+Error[113]  : Symbol not previously defined (PORTC)
+0FA6   1300           00489         CSN_LO
+                      00490 
+0FA7   16D5           00491         BSF             REG_TOWRITE,5
+0FA8   0855           00492         MOVFW   REG_TOWRITE
+                      00493 
+0FA9   00D9           00494         MOVWF   SPI_DATA0
+0FAA   2???           00495         CALL    SPI_SENDBYTE
+                      00496 
+0FAB   0857           00497         MOVFW   DATA_TOWRITE
+                      00498 
+0FAC   00D9           00499         MOVWF   SPI_DATA0
+0FAD   2???           00500         CALL    SPI_SENDBYTE
+                      00501 
+Error[113]  : Symbol not previously defined (PORTC)
+0FAE   1700           00502         CSN_HI
+Warning[203]: Found opcode in column 1. (RETURN)
+0FAF   0008           00503 RETURN
+                      00504 ;=====================================
+                      00505 
+                      00506 
+                      00507 ;======== read nrf register ==========
+0FB0                  00508 CMD_REGREAD
+Error[113]  : Symbol not previously defined (PORTC)
+MPASM  5.51                NRF24L01_LIBKN.INC   9-25-2020  18:07:39         PAGE 12
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0FB0   1300           00509         CSN_LO
+                      00510 
+0FB1   12D6           00511         BCF             REG_TOREAD,5
+0FB2   0856           00512         MOVFW   REG_TOREAD
+                      00513         
+0FB3   00D9           00514         MOVWF   SPI_DATA0
+0FB4   2???           00515         CALL    SPI_SENDBYTE
+                      00516 
+0FB5   2???           00517         CALL    SPI_RECVBYTE
+                      00518 
+Error[113]  : Symbol not previously defined (PORTC)
+0FB6   1700           00519         CSN_HI
+                      00520 
+Warning[203]: Found opcode in column 1. (RETURN)
+0FB7   0008           00521 RETURN
+                      00522 ;=====================================
+                      00523 
+                      00524 
+                      00525 ;========== spi send byte ============
+0FB8                  00526 SPI_SENDBYTE
+                      00527 
+0FB8   3008           00528         MOVLW   8
+0FB9   00DB           00529         MOVWF   CLK_LOOP
+0FBA                  00530 SSB0
+Message[305]: Using default destination of 1 (file).
+0FBA   0DD9           00531         RLF             SPI_DATA0
+                      00532 
+Error[113]  : Symbol not previously defined (STATUS)
+Error[113]  : Symbol not previously defined (C)
+0FBB   1C00           00533         BTFSS   STATUS,C
+0FBC   2???           00534         GOTO    SSB_MOSI0
+0FBD   2???           00535         GOTO    SSB_MOSI1
+                      00536 
+0FBE                  00537 SSB_MOSI1
+Error[113]  : Symbol not previously defined (PORTC)
+0FBE   1780           00538         MOSI_HI
+0FBF   2???           00539         GOTO    SSB1
+                      00540 
+0FC0                  00541 SSB_MOSI0
+Error[113]  : Symbol not previously defined (PORTC)
+0FC0   1380           00542         MOSI_LO
+0FC1   2???           00543         GOTO    SSB1
+Warning[203]: Found opcode in column 1. (NOP)
+0FC2   0000           00544 NOP
+                      00545 
+0FC3                  00546 SSB1
+Error[113]  : Symbol not previously defined (PORTB)
+0FC3   1700           00547         CLK_HI
+Error[113]  : Symbol not previously defined (PORTB)
+0FC4   1300           00548         CLK_LO
+                      00549 
+0FC5   0BDB           00550         DECFSZ  CLK_LOOP,F
+0FC6   2???           00551         GOTO    SSB0
+MPASM  5.51                NRF24L01_LIBKN.INC   9-25-2020  18:07:39         PAGE 13
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00552 
+Error[113]  : Symbol not previously defined (PORTB)
+0FC7   1300           00553         CLK_LO
+Warning[203]: Found opcode in column 1. (RETURN)
+0FC8   0008           00554 RETURN
+                      00555 ;=====================================
+                      00556 
+                      00557 
+                      00558 ;========== spi recieve byte =========
+0FC9                  00559 SPI_RECVBYTE
+0FC9   01DA           00560         CLRF    SPI_DATA1
+0FCA   01D8           00561         CLRF    DATA_TOREAD
+                      00562 
+0FCB   3008           00563         MOVLW   8
+0FCC   00DB           00564         MOVWF   CLK_LOOP
+                      00565 
+0FCD                  00566 SRB0
+Error[113]  : Symbol not previously defined (PORTB)
+0FCD   1E00           00567         BTFSS   PORTB,4
+0FCE   2???           00568         GOTO    SRB_MISO0
+0FCF   2???           00569         GOTO    SRB_MISO1
+                      00570 
+0FD0                  00571 SRB_MISO1
+0FD0   1403           00572         SETC
+0FD1   2???           00573         GOTO    SRB1
+                      00574 
+0FD2                  00575 SRB_MISO0
+0FD2   1003           00576         CLRC
+0FD3   2???           00577         GOTO    SRB1
+                      00578 
+0FD4                  00579 SRB1
+Message[305]: Using default destination of 1 (file).
+0FD4   0DDA           00580         RLF     SPI_DATA1
+                      00581 
+Error[113]  : Symbol not previously defined (PORTB)
+0FD5   1700           00582         CLK_HI
+Error[113]  : Symbol not previously defined (PORTB)
+0FD6   1300           00583         CLK_LO
+                      00584 
+0FD7   0BDB           00585         DECFSZ  CLK_LOOP,F
+0FD8   2???           00586         GOTO    SRB0
+                      00587 
+0FD9   085A           00588         MOVFW   SPI_DATA1
+0FDA   00D8           00589         MOVWF   DATA_TOREAD
+                      00590 
+Error[113]  : Symbol not previously defined (PORTB)
+0FDB   1300           00591         CLK_LO
+Warning[203]: Found opcode in column 1. (RETURN)
+0FDC   0008           00592 RETURN
+                      00593 ;=====================================
+                      00594 
+                      00595 
+                      00596         
+MPASM  5.51                NRF24L01_LIBKN.INC   9-25-2020  18:07:39         PAGE 14
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00597         
+                      00598 
+                      00599 
+                      00600 ;==========     delay usec =========
+0FDD                  00601 NRF_DELAY_US
+                      00602 
+0FDD   00DE           00603         MOVWF   NRF_DELAYUS
+                      00604 
+0FDE                  00605 NRF_USEC
+                      00606 
+0FDE   0000           00607         NOP
+0FDF   0000           00608         NOP
+0FE0   0000           00609         NOP
+0FE1   0000           00610         NOP
+0FE2   0BDE           00611         DECFSZ  NRF_DELAYUS,F
+                      00612 
+0FE3   2???           00613         GOTO    NRF_USEC
+                      00614 
+Warning[203]: Found opcode in column 1. (RETURN)
+0FE4   0008           00615 RETURN
+                      00616 ;=================================
+                      00617 
+                      00618 
+                      00619 
+                      00620 ;=========== delay one ms ========
+0FE5                  00621 NRF_DELAY_ONEMS
+                      00622 
+0FE5   3005           00623         MOVLW   .5
+0FE6   00DD           00624         MOVWF   NRF_DLOOP
+                      00625 
+0FE7                  00626 NRF_MSEC
+0FE7   30C8           00627         MOVLW   .200
+0FE8   2???           00628         CALL    NRF_DELAY_US
+0FE9   0BDD           00629         DECFSZ  NRF_DLOOP,F
+0FEA   2???           00630         GOTO    NRF_MSEC
+                      00631 
+Warning[203]: Found opcode in column 1. (RETURN)
+0FEB   0008           00632 RETURN
+                      00633 ;==================================
+                      00634 
+                      00635 
+                      00636 ;=========== delay ms   ==========
+0FEC                  00637 NRF_DELAY_MS
+                      00638         
+0FEC   00DF           00639         MOVWF   NRF_DELAYMS
+0FED                  00640 NRF_MSEC0
+0FED   2???           00641         CALL    NRF_DELAY_ONEMS
+0FEE   0BDF           00642         DECFSZ  NRF_DELAYMS,F
+0FEF   2???           00643         GOTO    NRF_MSEC0
+Warning[203]: Found opcode in column 1. (RETURN)
+0FF0   0008           00644 RETURN
+                      00645 ;=================================
+                      00646 
+MPASM  5.51                NRF24L01_LIBKN.INC   9-25-2020  18:07:39         PAGE 15
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00647 
+                      00648 
+                      00649 
+                      00650 
+                      00651 
+                      00652 
+                      00653 
+Error[129]  : Expected (END)
+MPASM  5.51                NRF24L01_LIBKN.INC   9-25-2020  18:07:39         PAGE 16
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CE_HI                             BSF PORTC,3
+CE_LO                             BCF     PORTC,3
+CLK_HI                            BSF     PORTB,6
+CLK_LO                            BCF     PORTB,6
+CLK_LOOP                          0000005B
+CMD_REGREAD                       00000FB0
+CMD_REGWRITE                      00000FA6
+CSN_HI                            BSF     PORTC,6
+CSN_LO                            BCF     PORTC,6
+DATA_TOREAD                       00000058
+DATA_TOWRITE                      00000057
+MOSI_HI                           BSF     PORTC,7
+MOSI_LO                           BCF     PORTC,7
+NRF_DELAYMS                       0000005F
+NRF_DELAYUS                       0000005E
+NRF_DELAY_MS                      00000FEC
+NRF_DELAY_ONEMS                   00000FE5
+NRF_DELAY_US                      00000FDD
+NRF_DLOOP                         0000005D
+NRF_GET_PAYLOAD                   00000106
+NRF_MSEC                          00000FE7
+NRF_MSEC0                         00000FED
+NRF_REG00                         00000020
+NRF_REG01                         00000021
+NRF_REG02                         00000022
+NRF_REG03                         00000023
+NRF_REG04                         00000024
+NRF_REG05                         00000025
+NRF_REG06                         00000026
+NRF_REG07                         00000027
+NRF_REG11                         00000032
+NRF_REG17                         00000033
+NRF_RX_MODE                       00000112
+NRF_SEND_PAYLOAD                  00000100
+NRF_TX_MODE                       0000010C
+NRF_USEC                          00000FDE
+PAYLOADSIZE                       00000054
+PL_LOOP                           0000005C
+RADIO_CHECKFIFO                   00000EFD
+RADIO_CHECKSTATUS                 00000F18
+RADIO_CLRSTATUS                   00000F12
+RADIO_FLUSHFIFO                   00000F1E
+RADIO_READ_RXFIFO                 00000F03
+RADIO_RECV_DATA                   00000EF0
+RADIO_RX_INIT                     00000F38
+RADIO_SEND_DATA                   00000ED0
+RADIO_SETSETTINGS                 00000F43
+RADIO_TX_INIT                     00000F2D
+RDR_HI                            BSF     PORTC,4
+RDR_LO                            BCF     PORTC,4
+REG_TOREAD                        00000056
+REG_TOWRITE                       00000055
+RFF0                              00000F0B
+MPASM  5.51                NRF24L01_LIBKN.INC   9-25-2020  18:07:39         PAGE 17
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RRD0                              00000EFA
+RSD0                              00000ED8
+RSD1                              00000EEE
+RXDR0                             00000EF4
+RXDR1                             00000EF5
+RXPAYLOAD                         00000044
+RX_ADDR_P00                       00000028
+RX_ADDR_P01                       00000029
+RX_ADDR_P02                       0000002A
+RX_ADDR_P03                       0000002B
+RX_ADDR_P04                       0000002C
+SET_RX_ADDRESS                    00000F91
+SET_TX_ADDRESS                    00000F7C
+SPI_DATA0                         00000059
+SPI_DATA1                         0000005A
+SPI_RECVBYTE                      00000FC9
+SPI_SENDBYTE                      00000FB8
+SRB0                              00000FCD
+SRB1                              00000FD4
+SRB_MISO0                         00000FD2
+SRB_MISO1                         00000FD0
+SSB0                              00000FBA
+SSB1                              00000FC3
+SSB_MOSI0                         00000FC0
+SSB_MOSI1                         00000FBE
+TDS_HI                            BSF PORTC,5
+TDS_LO                            BCF     PORTC,5
+TXDS0                             00000EE9
+TXDS1                             00000EEB
+TXPAYLOAD                         00000034
+TX_ADDR_B0                        0000002D
+TX_ADDR_B1                        0000002E
+TX_ADDR_B2                        0000002F
+TX_ADDR_B3                        00000030
+TX_ADDR_B4                        00000031
+__16F690                          00000001
+__DEBUG                           1
+
+Errors   :    57
+Warnings :    28 reported,     0 suppressed
+Messages :     4 reported,     0 suppressed
+
+

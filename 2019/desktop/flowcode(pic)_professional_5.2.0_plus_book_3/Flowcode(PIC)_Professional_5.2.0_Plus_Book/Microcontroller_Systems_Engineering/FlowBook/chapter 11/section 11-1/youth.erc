@@ -1,0 +1,16 @@
+EAGLE Version 4.16r2 Copyright (c) 1988-2006 CadSoft
+
+Electrical Rule Check for C:/EagleCAD/projects/006 youth deterrent/youth.sch at 16-05-2008 14:42:47 
+
+WARNING: Sheet 1/1: POWER Pin IC1 VDD connected to N$4
+WARNING: Sheet 1/1: POWER Pin IC1 VSS connected to N$3
+ERROR: Sheet 1/1: unconnected INPUT Pin: IC1 GP3
+WARNING: Sheet 1/1: Nets N$3 and N$2 too close at (1.2 2)
+WARNING: Sheet 1/1: Nets N$3 and N$2 too close at (1.2 2)
+WARNING: Sheet 1/1: Nets N$5 and N$3 too close at (2.8 3.4)
+WARNING: Sheet 1/1, Net N$5: wire overlaps pin at (2.75 3.4)
+
+No board loaded - consistency has not been checked
+
+    1 errors
+    6 warnings

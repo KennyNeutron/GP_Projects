@@ -1,0 +1,1377 @@
+;**********************************************************************
+;   This file is a basic code template for assembly code generation   *
+;   on the PIC16F690. This file contains the basic code               *
+;   building blocks to build upon.                                    *  
+;                                                                     *
+;   Refer to the MPASM User's Guide for additional information on     *
+;   features of the assembler (Document DS33014).                     *
+;                                                                     *
+;   Refer to the respective PIC data sheet for additional             *
+;   information on the instruction set.                               *
+;                                                                     *
+;**********************************************************************
+;                                                                     *
+;    Filename:	    xxx.asm                                           *
+;    Date:                                                            *
+;    File Version:                                                    *
+;                                                                     *
+;    Author:                                                          *
+;    Company:                                                         *
+;                                                                     * 
+;                                                                     *
+;**********************************************************************
+;                                                                     *
+;    Files Required: P16F690.INC                                      *
+;                                                                     *
+;**********************************************************************
+;                                                                     *
+;    Notes:                                                           *
+;                                                                     *
+;**********************************************************************
+
+
+	list		p=16f690		; list directive to define processor
+	#include	<P16F690.inc>		; processor specific variable definitions
+	
+	__CONFIG    _CP_OFF & _CPD_OFF & _BOR_OFF & _PWRTE_ON & _WDT_OFF & _HS_OSC & _MCLRE_OFF & _FCMEN_OFF & _IESO_OFF
+
+
+; '__CONFIG' directive is used to embed configuration data within .asm file.
+; The labels following the directive are located in the respective .inc file.
+; See respective data sheet for additional information on configuration word.
+
+
+
+
+
+
+;***** VARIABLE DEFINITIONS
+w_temp		EQU	0x7D			; variable used for context saving
+status_temp	EQU	0x7E			; variable used for context saving
+pclath_temp	EQU	0x7F			; variable used for context saving
+	
+
+	;#DEFINE C0_ON		BSF PORTC,	0	PORTC0=====>HI
+	;#DEFINE C0_OFF		BCF PORTC,	0	PORTC0=====>LO
+
+	#DEFINE	A_ON		BSF	PORTC,	0
+	#DEFINE	A_OFF		BCF	PORTC,	0
+	
+	#DEFINE	B_ON		BSF	PORTC,	1
+	#DEFINE	B_OFF		BCF	PORTC,	1
+
+	#DEFINE	DAT_ON		BSF	PORTC,	2
+	#DEFINE	DAT_OFF		BCF	PORTC,	2
+
+	#DEFINE	CLK_ON		BSF	PORTC,	7
+	#DEFINE	CLK_OFF		BCF	PORTC,	7
+	
+	#DEFINE	REG_ON		BSF	PORTC,	4
+	#DEFINE	REG_OFF		BCF	PORTC,	4
+	
+	#DEFINE	OE_ON		BSF	PORTC,	5
+	#DEFINE	OE_OFF		BCF	PORTC,	5
+	
+	CBLOCK 0x20
+
+			DELAYUS, DELAYMS, DELAYS, MILSEC, SEC	;DELAY VARIABLES
+			;=======================================================
+			
+			COUNT0,	COUNT1,	COUNT2,	COUNT3
+			
+			VAR0
+			SAMBIT, CARR
+			DRAM : .64, POINTER
+			COUNT4
+			SHCNT
+			CURSOR
+			TESTER
+		
+			NUMBER,BTCOUNT,ROW,WIDTH,PT,PT2
+			TENS,ONES
+			PTN,PON
+
+		
+	ENDC
+;**********************************************************************	
+	ORG		0x000			; processor reset vector
+
+	.  	goto	INIT		 ; go to beginning of program
+
+	ORG		0x004			; interrupt vector location
+	movwf		w_temp			; save off current W register contents
+	movf		STATUS,w		; move status register into W register
+	movwf		status_temp		; save off contents of STATUS register
+	movf		PCLATH,w		; move pclath register into W register
+	movwf		pclath_temp		; save off contents of PCLATH register
+
+
+; isr code can go here or be located as a call subroutine elsewhere
+
+	movf		pclath_temp,w		; retrieve copy of PCLATH registerz`
+	movwf		PCLATH			; restore pre-isr PCLATH register contents	
+	movf		status_temp,w		; retrieve copy of STATUS register
+	movwf		STATUS			; restore pre-isr STATUS register contents
+	swapf		w_temp,f
+	swapf		w_temp,w		; restore pre-isr W register contents
+	retfie					; return from interrupt
+
+
+;$$$$$$$$$$$$$$$$$$$$$	INITIALIZE	$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+;DECLARE PORTC AS OUTPUT HERE:
+INIT
+BANKSEL	ANSEL
+MOVLW	B'00000000'
+MOVWF	ANSEL
+MOVWF	ANSELH
+MOVLW	B'00000000'
+TRIS	PORTC
+BANKSEL	PORTA
+CALL	CLRAM
+
+MOVLW	.0
+MOVWF	ONES
+MOVLW	.0
+MOVWF	TENS
+MOVLW	.10
+MOVWF	PTN
+MOVLW	.10
+MOVWF	PON
+
+
+
+GOTO	MAIN
+;$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+
+
+
+
+;#######################	MAIN	##############################
+MAIN
+
+
+
+
+MAN0
+	MOVFW	ONES
+	MOVWF	NUMBER
+	CALL	NUMB0
+
+	MOVFW	WIDTH
+	MOVWF	CURSOR
+	CALL	SHIFT
+	
+	MOVFW	TENS
+	MOVWF	NUMBER
+	CALL	NUMB0
+	
+	CALL	DISP
+
+	INCF	ONES
+	DECFSZ	PON,F
+	GOTO	MAN0
+
+
+	MOVLW	.10
+	MOVWF	PON
+
+	MOVLW	0
+	MOVWF	ONES
+
+	INCF	TENS
+	DECFSZ	PTN
+
+	GOTO	MAN0
+
+	MOVLW	.10
+	MOVWF	PTN
+
+	MOVLW	.0
+	MOVWF	TENS
+
+
+
+	
+
+
+
+
+
+
+
+
+GOTO MAIN
+;###############################################################
+
+
+
+
+
+
+
+;##################### PLACE 'NUM' DATA ON DRAM #################
+NUMB0
+	MOVLW	5F
+	MOVWF	ROW
+
+	MOVLW	.0
+	MOVWF	BTCOUNT
+
+	MOVLW	.4
+	MOVWF	PT
+
+	MOVLW	.4
+	MOVWF	PT2
+
+	MOVFW	ROW
+	MOVWF	FSR
+
+NUMB1
+	
+	MOVFW	NUMBER
+	ADDWF	PCL, F
+
+	GOTO	NUM_0
+
+	GOTO	NUM_1
+
+	GOTO	NUM_2
+
+	GOTO	NUM_3
+
+	GOTO	NUM_4
+
+	GOTO	NUM_5
+
+	GOTO	NUM_6
+
+	GOTO	NUM_7
+
+	GOTO	NUM_8
+
+	GOTO	NUM_9
+
+
+
+NUM_0
+	MOVLW	.8
+	MOVWF	WIDTH
+	MOVLW	.8
+	MOVWF	PCLATH
+	CALL	ZERO
+
+	MOVWF		INDF
+	MOVLW		INDF
+	MOVLW	.0
+	MOVWF	PCLATH
+	GOTO	CONT
+
+
+NUM_1
+	MOVLW	.8
+	MOVWF	WIDTH
+	MOVLW	.8
+	MOVWF	PCLATH
+	CALL	ONE
+
+	MOVWF		INDF
+	MOVLW		INDF
+	MOVLW	.0
+	MOVWF	PCLATH
+	GOTO	CONT
+
+
+NUM_2
+	MOVLW	.8
+	MOVWF	WIDTH
+	MOVLW	.8
+	MOVWF	PCLATH
+	CALL	TWO
+
+	MOVWF		INDF
+	MOVLW		INDF
+	MOVLW	.0
+	MOVWF	PCLATH
+	GOTO	CONT
+
+
+NUM_3
+	MOVLW	.8
+	MOVWF	WIDTH
+	MOVLW	.8
+	MOVWF	PCLATH
+	CALL	THREE
+
+	MOVWF		INDF
+	MOVLW		INDF
+	MOVLW	.0
+	MOVWF	PCLATH
+	GOTO	CONT
+
+NUM_4
+	MOVLW	.8
+	MOVWF	WIDTH
+	MOVLW	.8
+	MOVWF	PCLATH
+	CALL	FOUR
+
+	MOVWF	INDF
+	MOVLW	INDF
+	MOVLW	.0
+	MOVWF	PCLATH
+	GOTO	CONT
+
+
+NUM_5
+	MOVLW	.8
+	MOVWF	WIDTH
+	MOVLW	.8
+	MOVWF	PCLATH
+	CALL	FIVE
+
+	MOVWF		INDF
+	MOVLW		INDF
+	MOVLW	.0
+	MOVWF	PCLATH
+	GOTO	CONT
+
+
+NUM_6
+	MOVLW	.8
+	MOVWF	WIDTH
+	MOVLW	.8
+	MOVWF	PCLATH
+	CALL	SIX
+
+	MOVWF		INDF
+	MOVLW		INDF
+	MOVLW	.0
+	MOVWF	PCLATH
+	GOTO	CONT
+
+
+NUM_7
+	MOVLW	.8
+	MOVWF	WIDTH
+	MOVLW	.8
+	MOVWF	PCLATH
+	CALL	SEVEN
+
+	MOVWF		INDF
+	MOVLW		INDF
+	MOVLW	.0
+	MOVWF	PCLATH
+	GOTO	CONT
+
+
+NUM_8
+	MOVLW	.8
+	MOVWF	WIDTH
+	MOVLW	.8
+	MOVWF	PCLATH
+	CALL	EIGHT
+
+	MOVWF		INDF
+	MOVLW		INDF
+	MOVLW	.0
+	MOVWF	PCLATH
+	GOTO	CONT
+
+
+NUM_9
+	MOVLW	.8
+	MOVWF	WIDTH
+	MOVLW	.8
+	MOVWF	PCLATH
+
+	CALL	NINE
+
+	MOVWF		INDF
+	MOVLW		INDF
+	MOVLW	.0
+	MOVWF	PCLATH
+	GOTO	CONT
+	
+
+
+CONT
+	MOVLW	10
+	SUBWF	ROW,F
+	INCF	BTCOUNT
+	
+	MOVFW	ROW
+	MOVWF	FSR
+	
+	DECFSZ	PT
+	GOTO	NUMB1
+	MOVLW	3F
+	ADDWF	ROW,F
+	MOVFW	ROW
+	MOVWF	FSR
+
+	MOVLW	.4
+	MOVWF	PT
+	DECFSZ	PT2
+	GOTO	NUMB1
+
+RETURN
+;##############################################
+
+
+
+
+
+;-------------------
+DISP
+	MOVLW	.100
+	MOVWF	COUNT4
+MN0
+	CALL	DISPLAY
+	DECFSZ	COUNT4,F
+	GOTO	MN0
+	OE_OFF
+RETURN
+;-------------------
+
+;#########################	DISPLAY	####################
+DISPLAY
+
+DP0
+	MOVLW		.16
+	MOVWF		POINTER
+	MOVLW		.44
+	MOVWF		FSR
+
+DSP0
+	CALL		DATALATCH
+	INCF		FSR, F
+	DECFSZ		POINTER, F
+	GOTO		DSP0
+
+	A_ON
+	B_ON
+	OE_ON
+	CALL		DELAY_ONEMS
+
+
+	MOVLW		.16
+	MOVWF		POINTER
+
+DSP1
+	CALL		DATALATCH
+	INCF		FSR, F
+	DECFSZ		POINTER, F
+	GOTO		DSP1
+
+	A_OFF
+	B_ON
+	OE_ON
+	CALL		DELAY_ONEMS
+
+	MOVLW		.16
+	MOVWF		POINTER
+
+DSP2
+	CALL		DATALATCH
+	INCF		FSR, F
+	DECFSZ		POINTER, F
+	GOTO		DSP2
+
+	A_ON
+	B_OFF
+	OE_ON
+	CALL		DELAY_ONEMS
+
+	MOVLW		.16
+	MOVWF		POINTER
+
+DSP3
+	CALL		DATALATCH
+	INCF		FSR, F
+	DECFSZ		POINTER, F
+	GOTO		DSP3
+
+	A_OFF
+	B_OFF
+	OE_ON
+	CALL		DELAY_ONEMS
+
+
+
+
+	RETURN
+;###############################################################
+
+
+;============	DATA	LATCH	================================
+DATALATCH
+	CLK_OFF
+	REG_OFF
+	OE_OFF
+	MOVF		INDF,W
+	MOVWF		VAR0
+	MOVLW	.8
+	MOVWF	COUNT0
+
+DL0
+	RLF VAR0,F	; Rotate "Var" one place to the left
+	BTFSS STATUS,C	; Is carry 1?
+	GOTO	D0
+	GOTO	D1
+
+D0
+	DAT_OFF
+	GOTO DL1
+D1
+	DAT_ON
+	GOTO DL1
+	
+DL1
+	CLK_ON
+	CLK_OFF
+	DECFSZ	COUNT0,F
+	GOTO	DL0
+	REG_ON
+	REG_OFF	
+	
+
+RETURN
+;===============================================================
+
+
+
+
+
+
+;=======================	CLEAR	RAM		====================
+CLRAM
+	MOVLW		.64
+	MOVWF		POINTER
+	MOVLW		DRAM
+	MOVWF		FSR
+
+DRM0
+	MOVLW		0XFF
+	MOVWF		INDF
+	MOVLW		INDF
+	
+	CALL		DATALATCH
+	INCF		FSR, F
+	DECFSZ		POINTER, F
+	GOTO		DRM0
+	 
+	RETURN
+;===============================================================
+
+
+
+
+
+
+
+;==========	DELAY USEC =========
+DELAY_US
+
+	MOVWF	DELAYUS
+
+USEC
+
+	NOP
+	NOP
+	NOP
+	NOP
+DECFSZ	DELAYUS,F
+
+GOTO	USEC
+
+RETURN
+;=================================
+
+
+
+;=========== DELAY ONE MS ========
+DELAY_ONEMS
+
+	MOVLW	.5
+	MOVWF	MILSEC
+
+MSEC
+	MOVLW	.200
+	CALL	DELAY_US
+	DECFSZ	MILSEC,F
+	GOTO	MSEC
+
+RETURN
+;==================================
+
+
+;=========== DELAY MS	===========
+DELAY_MS
+	
+	MOVWF	DELAYMS
+MSEC0
+	CALL	DELAY_ONEMS
+	DECFSZ	DELAYMS,F
+	GOTO	MSEC0
+RETURN
+;==================================
+
+;=========== DELAY	ONE	SECOND ====
+DELAY_ONESEC
+
+	MOVLW	.5
+	MOVWF	SEC
+SEC0
+	MOVLW	.200
+	CALL	DELAY_MS
+	DECFSZ	SEC,F
+	GOTO	SEC0
+RETURN
+;==================================
+
+;==========	DELAY SEC =============
+DELAY_SEC
+
+	MOVWF	DELAYS
+SEC1
+	CALL	DELAY_ONESEC
+	DECFSZ	DELAYS,F
+	GOTO	SEC1
+RETURN
+;==================================
+
+
+;################## DRAM SHIFT ################
+SHIFT
+
+	MOVLW	.8
+	MOVWF	TESTER
+
+	MOVF	CURSOR,W
+	SUBWF	TESTER,W
+	BTFSC	STATUS,Z
+	GOTO	CSR_ET7
+
+	BTFSC	STATUS,C
+	GOTO	CSR_LT7
+	GOTO	CSR_GT7
+
+
+	
+
+CSR_LT7	;CURSOR LESS THAN DEC7
+CSR_ET7	;CURSOR	EQUAL	DEC7
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT00
+	RRF		DRAM + 33
+	RRF		DRAM + 37
+	DECFSZ	SHCNT
+	GOTO	SHT00
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT01
+	RRF		DRAM + 23
+	RRF		DRAM + 27
+	DECFSZ	SHCNT
+	GOTO	SHT01
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT02
+	RRF		DRAM + 13
+	RRF		DRAM + 17
+	DECFSZ	SHCNT
+	GOTO	SHT02
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT03
+	RRF		DRAM + 03
+	RRF		DRAM + 07
+	DECFSZ	SHCNT
+	GOTO	SHT03
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT04
+	RRF		DRAM + 32
+	RRF		DRAM + 36
+	DECFSZ	SHCNT
+	GOTO	SHT04
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT05
+	RRF		DRAM + 22
+	RRF		DRAM + 26
+	DECFSZ	SHCNT
+	GOTO	SHT05
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT06
+	RRF		DRAM + 12
+	RRF		DRAM + 16
+	DECFSZ	SHCNT
+	GOTO	SHT06
+
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT07
+	RRF		DRAM + 02
+	RRF		DRAM + 06
+	DECFSZ	SHCNT
+	GOTO	SHT07
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT08
+	RRF		DRAM + 31
+	RRF		DRAM + 35
+	DECFSZ	SHCNT
+	GOTO	SHT08
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT09
+	RRF		DRAM + 21
+	RRF		DRAM + 25
+	DECFSZ	SHCNT
+	GOTO	SHT09
+	
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT0A
+	RRF		DRAM + 11
+	RRF		DRAM + 15
+	DECFSZ	SHCNT
+	GOTO	SHT0A
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT0B
+	RRF		DRAM + 01
+	RRF		DRAM + 05
+	DECFSZ	SHCNT
+	GOTO	SHT0B
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT0C
+	RRF		DRAM + 30
+	RRF		DRAM + 34
+	DECFSZ	SHCNT
+	GOTO	SHT0C
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT0D
+	RRF		DRAM + 20
+	RRF		DRAM + 24
+	DECFSZ	SHCNT
+	GOTO	SHT0D
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT0E
+	RRF		DRAM + 10
+	RRF		DRAM + 14
+	DECFSZ	SHCNT
+	GOTO	SHT0E
+	
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT0F
+	RRF		DRAM + 00
+	RRF		DRAM + 04
+	DECFSZ	SHCNT
+	GOTO	SHT0F
+
+RETURN
+
+CSR_GT7	;CURSOR GREATER THAN DEC7
+	
+	MOVLW	.16
+	MOVWF	TESTER
+
+	MOVF	CURSOR,W
+	SUBWF	TESTER,W
+	BTFSC	STATUS,Z
+	GOTO	CSR_ETF
+
+	BTFSC	STATUS,C
+	GOTO	CSR_LTF
+	GOTO	CSR_GTF	
+
+CSR_LTF		;CURSOR LESS THAN 0XF
+CSR_ETF		;CURSOR	EQUALS	0XF
+	
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT10
+	RRF		DRAM + 33
+	RRF		DRAM + 37
+	RRF		DRAM + 3B
+	DECFSZ	SHCNT
+	GOTO	SHT10
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT11
+	RRF		DRAM + 23
+	RRF		DRAM + 27
+	RRF		DRAM + 2B
+	DECFSZ	SHCNT
+	GOTO	SHT11
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT12
+	RRF		DRAM + 13
+	RRF		DRAM + 17
+	RRF		DRAM + 1B
+	DECFSZ	SHCNT
+	GOTO	SHT12
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT13
+	RRF		DRAM + 03
+	RRF		DRAM + 07
+	RRF		DRAM + 0B
+	DECFSZ	SHCNT
+	GOTO	SHT13
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT14
+	RRF		DRAM + 32
+	RRF		DRAM + 36
+	RRF		DRAM + 3A
+	DECFSZ	SHCNT
+	GOTO	SHT14
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT15
+	RRF		DRAM + 22
+	RRF		DRAM + 26
+	RRF		DRAM + 2A
+	DECFSZ	SHCNT
+	GOTO	SHT15
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT16
+	RRF		DRAM + 12
+	RRF		DRAM + 16
+	RRF		DRAM + 1A
+	DECFSZ	SHCNT
+	GOTO	SHT16
+
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT17
+	RRF		DRAM + 02
+	RRF		DRAM + 06
+	RRF		DRAM + 0A
+	DECFSZ	SHCNT
+	GOTO	SHT17
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT18
+	RRF		DRAM + 31
+	RRF		DRAM + 35
+	RRF		DRAM + 39
+	DECFSZ	SHCNT
+	GOTO	SHT18
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT19
+	RRF		DRAM + 21
+	RRF		DRAM + 25
+	RRF		DRAM + 29
+	DECFSZ	SHCNT
+	GOTO	SHT19
+	
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT1A
+	RRF		DRAM + 11
+	RRF		DRAM + 15
+	RRF		DRAM + 19
+	DECFSZ	SHCNT
+	GOTO	SHT1A
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT1B
+	RRF		DRAM + 01
+	RRF		DRAM + 05
+	RRF		DRAM + 09
+	DECFSZ	SHCNT
+	GOTO	SHT1B
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT1C
+	RRF		DRAM + 30
+	RRF		DRAM + 34
+	RRF		DRAM + 38
+	DECFSZ	SHCNT
+	GOTO	SHT1C
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT1D
+	RRF		DRAM + 20
+	RRF		DRAM + 24
+	RRF		DRAM + 28
+	DECFSZ	SHCNT
+	GOTO	SHT1D
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT1E
+	RRF		DRAM + 10
+	RRF		DRAM + 14
+	RRF		DRAM + 18
+	DECFSZ	SHCNT
+	GOTO	SHT1E
+	
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT1F
+	RRF		DRAM + 00
+	RRF		DRAM + 04
+	RRF		DRAM + 08
+	DECFSZ	SHCNT
+	GOTO	SHT1F
+RETURN
+
+CSR_GTF ; CURSOR GREATER THAN 0XF
+
+	MOVLW	.25
+	MOVWF	TESTER
+
+	MOVF	CURSOR,W
+	SUBWF	TESTER,W
+	BTFSC	STATUS,Z
+	GOTO	CSR_ETF8
+
+	BTFSC	STATUS,C
+	GOTO	CSR_LTF8
+	GOTO	CSR_GTF8	
+
+CSR_LTF8		;CURSOR LESS THAN 0X18
+CSR_ETF8		;CURSOR	EQUALS	0X18
+	
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT20
+	RRF		DRAM + 33
+	RRF		DRAM + 37
+	RRF		DRAM + 3B
+	RRF		DRAM + 3F
+	DECFSZ	SHCNT
+	GOTO	SHT20
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT21
+	RRF		DRAM + 23
+	RRF		DRAM + 27
+	RRF		DRAM + 2B
+	RRF		DRAM + 2F
+	DECFSZ	SHCNT
+	GOTO	SHT21
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT22
+	RRF		DRAM + 13
+	RRF		DRAM + 17
+	RRF		DRAM + 1B
+	RRF		DRAM + 1F
+	DECFSZ	SHCNT
+	GOTO	SHT22
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT23
+	RRF		DRAM + 03
+	RRF		DRAM + 07
+	RRF		DRAM + 0B
+	RRF		DRAM + 0F
+	DECFSZ	SHCNT
+	GOTO	SHT23
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT24
+	RRF		DRAM + 32
+	RRF		DRAM + 36
+	RRF		DRAM + 3A
+	RRF		DRAM + 3E
+	DECFSZ	SHCNT
+	GOTO	SHT24
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT25
+	RRF		DRAM + 22
+	RRF		DRAM + 26
+	RRF		DRAM + 2A
+	RRF		DRAM + 2E
+	DECFSZ	SHCNT
+	GOTO	SHT25
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT26
+	RRF		DRAM + 12
+	RRF		DRAM + 16
+	RRF		DRAM + 1A
+	RRF		DRAM + 1E
+	DECFSZ	SHCNT
+	GOTO	SHT26
+
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT27
+	RRF		DRAM + 02
+	RRF		DRAM + 06
+	RRF		DRAM + 0A
+	RRF		DRAM + 0E
+	DECFSZ	SHCNT
+	GOTO	SHT27
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT28
+	RRF		DRAM + 31
+	RRF		DRAM + 35
+	RRF		DRAM + 39
+	RRF		DRAM + 3D
+	DECFSZ	SHCNT
+	GOTO	SHT28
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT29
+	RRF		DRAM + 21
+	RRF		DRAM + 25
+	RRF		DRAM + 29
+	RRF		DRAM + 2D
+	DECFSZ	SHCNT
+	GOTO	SHT29
+	
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT2A
+	RRF		DRAM + 11
+	RRF		DRAM + 15
+	RRF		DRAM + 19
+	RRF		DRAM + 1D
+	DECFSZ	SHCNT
+	GOTO	SHT2A
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT2B
+	RRF		DRAM + 01
+	RRF		DRAM + 05
+	RRF		DRAM + 09
+	RRF		DRAM + 0D
+	DECFSZ	SHCNT
+	GOTO	SHT2B
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT2C
+	RRF		DRAM + 30
+	RRF		DRAM + 34
+	RRF		DRAM + 38
+	RRF		DRAM + 3C
+	DECFSZ	SHCNT
+	GOTO	SHT2C
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT2D
+	RRF		DRAM + 20
+	RRF		DRAM + 24
+	RRF		DRAM + 28
+	RRF		DRAM + 2C
+	DECFSZ	SHCNT
+	GOTO	SHT2D
+
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT2E
+	RRF		DRAM + 10
+	RRF		DRAM + 14
+	RRF		DRAM + 18
+	RRF		DRAM + 1C
+	DECFSZ	SHCNT
+	GOTO	SHT2E
+	
+	MOVF	CURSOR,0
+	MOVWF	SHCNT
+SHT2F
+	RRF		DRAM + 00
+	RRF		DRAM + 04
+	RRF		DRAM + 08
+	RRF		DRAM + 0C
+	DECFSZ	SHCNT
+	GOTO	SHT2F
+	
+CSR_GTF8 ;CURSOR IS GREATER THAN DEC24
+
+
+RETURN
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+TABLE
+	ORG 0X800
+
+	ZERO
+			MOVFW	BTCOUNT
+			ADDWF	PCL, F
+
+			DT	B'11000111'
+			DT	B'10000011'
+			DT	B'00010001'
+			DT	B'00111001'
+			DT	B'00111001'
+			DT	B'00111001'
+			DT	B'00111001'
+			DT	B'00111001'
+			DT	B'00111001'
+			DT	B'00111001'
+			DT	B'00111001'
+			DT	B'00111001'
+			DT	B'00111001'
+			DT	B'00010001'
+			DT	B'10000011'
+			DT	B'11000111'
+
+	ONE
+			MOVFW	BTCOUNT
+			ADDWF	PCL, F
+			DT	B'11001111'
+			DT	B'11001111'
+			DT	B'10001111'
+			DT	B'00001111'
+			DT	B'01001111'
+			DT	B'11001111'
+			DT	B'11001111'
+			DT	B'11001111'
+			DT	B'11001111'
+			DT	B'11001111'
+			DT	B'11001111'
+			DT	B'11001111'
+			DT	B'11001111'
+			DT	B'11001111'
+			DT	B'00000011'
+			DT	B'00000011'
+
+	TWO
+			MOVFW	BTCOUNT
+			ADDWF	PCL, F
+			DT	B'10000111'
+			DT	B'00000011'
+			DT	B'00110001'
+			DT	B'11111001'
+			DT	B'11111001'
+			DT	B'11111001'
+			DT	B'11111001'
+			DT	B'11110001'
+			DT	B'10000011'
+			DT	B'00000111'
+			DT	B'00111111'
+			DT	B'00111101'
+			DT	B'00111001'
+			DT	B'00111001'
+			DT	B'00000001'
+			DT	B'00000001'
+				
+
+	THREE
+			MOVFW	BTCOUNT
+			ADDWF	PCL, F
+			DT	B'10000111'
+			DT	B'00000011'
+			DT	B'00110001'
+			DT	B'11111001'
+			DT	B'11111001'
+			DT	B'11111001'
+			DT	B'11110001'
+			DT	B'11000011'
+			DT	B'11000011'
+			DT	B'11110001'
+			DT	B'11111001'
+			DT	B'11111001'
+			DT	B'11111001'
+			DT	B'00110001'
+			DT	B'00000011'
+			DT	B'10000111'
+			
+
+	FOUR
+			MOVFW	BTCOUNT
+			ADDWF	PCL, F
+			DT	B'11111101'
+			DT	B'11111001'
+			DT	B'11101001'
+			DT	B'11001001'
+			DT	B'11001001'
+			DT	B'11001001'
+			DT	B'10011001'
+			DT	B'00111001'
+			DT	B'00000001'
+			DT	B'00000001'
+			DT	B'11111001'
+			DT	B'11111001'
+			DT	B'11111001'
+			DT	B'11111001'
+			DT	B'11111001'
+			DT	B'11111011'
+
+	FIVE
+			MOVFW	BTCOUNT
+			ADDWF	PCL, F
+			DT	B'00000001'
+			DT	B'00000001'
+			DT	B'00111001'
+			DT	B'00111011'
+			DT	B'00111111'
+			DT	B'00111111'
+			DT	B'00111111'
+			DT	B'00000111'
+			DT	B'00000011'
+			DT	B'11110001'
+			DT	B'11111001'
+			DT	B'11111001'
+			DT	B'11111001'
+			DT	B'11110001'
+			DT	B'00000011'
+			DT	B'00000111'
+
+
+	SIX
+			MOVFW	BTCOUNT
+			ADDWF	PCL, F
+			DT	B'11000111'
+			DT	B'10000011'
+			DT	B'00011001'
+			DT	B'00111101'
+			DT	B'00111111'
+			DT	B'00111111'
+			DT	B'00111111'
+			DT	B'00100111'
+			DT	B'00000011'
+			DT	B'00010001'
+			DT	B'00111001'
+			DT	B'00111001'
+			DT	B'00111001'
+			DT	B'00010001'
+			DT	B'10000011'
+			DT	B'11000111'
+
+	SEVEN	
+			MOVFW	BTCOUNT
+			ADDWF	PCL, F	
+			DT	B'00000001'
+			DT	B'00000001'
+			DT	B'00111001'
+			DT	B'00111001'
+			DT	B'11111001'
+			DT	B'11111001'
+			DT	B'11111001'
+			DT	B'11110011'
+			DT	B'11100111'
+			DT	B'11001111'
+			DT	B'11001111'
+			DT	B'11001111'
+			DT	B'11001111'
+			DT	B'11001111'
+			DT	B'11001111'
+			DT	B'11001111'
+				
+	EIGHT
+			MOVFW	BTCOUNT
+			ADDWF	PCL, F
+			DT	B'11000111'
+			DT	B'10000011'
+			DT	B'00010001'
+			DT	B'00111001'
+			DT	B'00111001'
+			DT	B'00111001'
+			DT	B'10010011'
+			DT	B'11000111'
+			DT	B'10000011'
+			DT	B'00010001'
+			DT	B'00111001'
+			DT	B'00111001'
+			DT	B'00111001'
+			DT	B'00010001'
+			DT	B'10000011'
+			DT	B'11000111'
+
+	NINE
+			MOVFW	BTCOUNT
+			ADDWF	PCL, F
+			DT	B'11000111'
+			DT	B'10000011'
+			DT	B'00010001'
+			DT	B'00111001'
+			DT	B'00111001'
+			DT	B'00111001'
+			DT	B'00010001'
+			DT	B'10000001'
+			DT	B'11001001'
+			DT	B'11111001'
+			DT	B'11111001'
+			DT	B'11111001'
+			DT	B'00111001'
+			DT	B'00111001'
+			DT	B'10000011'
+			DT	B'11000111'
+
+	
+
+
+
+	ORG	0x2100				; data EEPROM location
+	DE	1,2,3,4				; define first four EEPROM locations as 1, 2, 3, and 4
+
+
+
+
+	END                       ; directive 'end of program'
+

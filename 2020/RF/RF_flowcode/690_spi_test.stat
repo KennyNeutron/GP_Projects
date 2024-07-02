@@ -1,0 +1,14 @@
+// SourceBoost Linker Function Resource Usage Dump
+
+#GLOBAL:"global",line = 0,ram = 55.0,rom = 0;
+FC_CAL_SPI_Master_Init_1(void):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_SPI.c",line = 455,ram = 0.0,rom = 19;
+FC_CAL_SPI_Master_Byte_1(unsigned char):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_SPI.c",line = 516,ram = 3.0,rom = 12;
+FCD_SPI_Legacy0_SPI_Init(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\RF_flowcode\690_spi_test.c",line = 270,ram = 0.0,rom = 11;
+FCD_SPI_Legacy0_SPI_Send_Char(unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\RF_flowcode\690_spi_test.c",line = 293,ram = 1.0,rom = 4;
+main(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\RF_flowcode\690_spi_test.c",line = 427,ram = 1.0,rom = 38;
+interrupt(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\RF_flowcode\690_spi_test.c",line = 480,ram = 0.0,rom = 11;
+delay_us(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 5;
+_startup(void):"NoSourceFile",line = 0,ram = 0.0,rom = 41;
+#HEAP_BLOCK: 0, 160, 95;
+#HEAP_BLOCK: 1, 288, 80;
+#HEAP_BLOCK: 2, 90, 22;

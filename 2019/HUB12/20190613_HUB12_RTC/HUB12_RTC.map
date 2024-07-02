@@ -1,0 +1,386 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Fri Jun 21 15:16:15 2019
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000004    program   0x000168
+                   .org_3       code   0x000100    program   0x0001ee
+                   .org_4       code   0x000200    program   0x000122
+                   .org_5       code   0x000300    program   0x0001c0
+                   .org_6       code   0x000400    program   0x0001dc
+                   .org_7       code   0x000500    program   0x0001cc
+                   .org_8       code   0x000600    program   0x0001ca
+                   .org_9       code   0x000700    program   0x0001ca
+                  .org_10       code   0x000800    program   0x00012c
+                  .org_11       code   0x000a00    program   0x0001f4
+                  .org_12       code   0x000b00    program   0x00009c
+ .config_2007_HUB12_RTC.O       code   0x002007    program   0x000002
+                  .org_13       code   0x002100    program   0x000008
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x0000b7      
+                            0x000100    0x0001f6      
+                            0x000200    0x000290      
+                            0x000300    0x0003df      
+                            0x000400    0x0004ed      
+                            0x000500    0x0005e5      
+                            0x000600    0x0006e4      
+                            0x000700    0x0007e4      
+                            0x000800    0x000895      
+                            0x000a00    0x000af9      
+                            0x000b00    0x000b4d      
+                            0x002007    0x002007      
+                            0x002100    0x002103      
+            2206 out of 4359 program addresses used, program memory utilization is 50%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     CHAR   0x0001ae    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    CHARB   0x000200    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     CLR0   0x000170    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    CLRAM   0x00016c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                 CLR_IRAM   0x000176    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     DAT0   0x000066    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                DATALATCH   0x000128    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                 DAT_TEST   0x00008e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                 DELAY_MS   0x00010f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+              DELAY_ONEMS   0x000108    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+             DELAY_ONESEC   0x000114    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                DELAY_SEC   0x00011b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                 DELAY_US   0x000100    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     DISP   0x000120    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    DISP0   0x000122    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                  DISPLAY   0x00013b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    DMPF0   0x0004ba    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    DMPF2   0x0004c9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                DMP_FONT0   0x0004b8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                DMP_FONT2   0x0004c7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+         DSHIFT_DOWN_GRPA   0x000a00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+         DSHIFT_DOWN_GRPB   0x000a23    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+         DSHIFT_DOWN_GRPC   0x000a46    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+         DSHIFT_DOWN_GRPD   0x000a69    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     DSP0   0x00012c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    DTEST   0x000062    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                  DTRCONT   0x000067    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     DUMP   0x000499    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    EIGHT   0x00026b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     FIVE   0x000232    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   FONT_0   0x0004a4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   FONT_1   0x0004c4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   FONT_2   0x0004da    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     FOUR   0x00021f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    GRP_A   0x00061c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    GRP_B   0x00066e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    GRP_C   0x0006b0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    GRP_D   0x0006e2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   I2CDTR   0x00005b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                  I2CREAD   0x00002e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                 I2CSTART   0x000073    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                  I2CSTOP   0x0000a8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+            I2C_MASTERACK   0x000095    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+             I2C_SLAVEACK   0x000084    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    IDUMP   0x00078a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                  IFONT_0   0x000793    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                  IFONT_1   0x0007ab    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                  IFONT_2   0x0007c5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   IGRP_A   0x00051d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   IGRP_B   0x00056f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   IGRP_C   0x0005b1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   IGRP_D   0x0005e3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     INIT   0x000010    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                  IPUTNUM   0x000800    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     IRM0   0x00017c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    ISB00   0x00085a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    ISB01   0x00085c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    ISBR0   0x000853    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    ISBR1   0x000856    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                ISB_BEGIN   0x000858    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    ISC00   0x000871    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    ISC01   0x000873    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    ISCR0   0x00086a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    ISCR1   0x00086d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                ISC_BEGIN   0x00086f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    ISD00   0x000888    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    ISD01   0x00088a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    ISDR0   0x000881    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    ISDR1   0x000884    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                ISD_BEGIN   0x000886    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   ISHFTL   0x00083f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                 ISHFTL00   0x000845    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                  ISHIFTL   0x00083f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+             ISHIFTL_GRPA   0x00084f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+             ISHIFTL_GRPB   0x00084f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+             ISHIFTL_GRPC   0x000866    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+             ISHIFTL_GRPD   0x00087d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                  ISHIFTR   0x000500    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+         ISHIFT_DOWN_GRPA   0x000a8c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+         ISHIFT_DOWN_GRPB   0x000ab3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+         ISHIFT_DOWN_GRPC   0x000b00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+         ISHIFT_DOWN_GRPD   0x000b27    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   ISRA00   0x000525    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   ISRA08   0x00054c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                ISRA08_R1   0x00054b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   ISRB00   0x000577    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   ISRB08   0x000596    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                ISRB08_R1   0x000595    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   ISRC00   0x0005b9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   ISRC08   0x0005d0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                ISRC08_R1   0x0005cf    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     MAIN   0x00002c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     MSEC   0x00010a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    MSEC0   0x000110    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     NINE   0x00027e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                      ONE   0x0001d1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   PUTNUM   0x0007b0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SB00   0x000719    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SB01   0x00071b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SBR0   0x000712    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SBR1   0x000715    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                 SB_BEGIN   0x000717    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SC00   0x000730    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SC01   0x000732    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                SCL_PULSE   0x00006c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SCR0   0x000729    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SCR1   0x00072c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   SCRL_A   0x000ada    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   SCRL_B   0x000ae1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   SCRL_C   0x000ae8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   SCRL_D   0x000af1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                 SC_BEGIN   0x00072e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SD00   0x000747    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SD01   0x000749    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SDR0   0x000740    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SDR1   0x000743    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                 SD_BEGIN   0x000745    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SEC0   0x000116    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SEC1   0x00011c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    SEVEN   0x000258    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    SHFTL   0x000700    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                  SHFTL00   0x000704    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+              SHIFTL_GRPA   0x00070e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+              SHIFTL_GRPB   0x00070e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+              SHIFTL_GRPC   0x000725    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+              SHIFTL_GRPD   0x00073c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   SHIFTR   0x000600    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                 SHIFT_YU   0x000753    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                SHIFT_YUB   0x000816    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                      SIX   0x000245    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SLB0   0x000188    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SLB1   0x00018c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SLB2   0x000194    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   SLICEB   0x000186    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   SLICET   0x00019a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SLT0   0x00019c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SLT1   0x0001a0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SLT2   0x0001a8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    SRA00   0x000624    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    SRA08   0x00064b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                 SRA08_R1   0x00064a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    SRB00   0x000676    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    SRB08   0x000695    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                 SRB08_R1   0x000694    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    SRC00   0x0006b8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    SRC08   0x0006cf    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                 SRC08_R1   0x0006ce    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    THREE   0x00020c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                      TWO   0x0001e4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   T_CHAR   0x000300    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                  T_CHARB   0x000400    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                  T_EIGHT   0x000452    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   T_FIVE   0x0003bd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   T_FOUR   0x00039a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   T_NINE   0x000475    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    T_ONE   0x000331    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                  T_SEVEN   0x00042f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    T_SIX   0x00040c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                  T_THREE   0x000377    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    T_TWO   0x000354    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   T_ZERO   0x00030e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     USEC   0x000101    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                      YU0   0x00075a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                      YU1   0x00081a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     ZERO   0x0001bc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     INIT   0x000010    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     MAIN   0x00002c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                  I2CREAD   0x00002e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   I2CDTR   0x00005b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    DTEST   0x000062    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     DAT0   0x000066    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                  DTRCONT   0x000067    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                SCL_PULSE   0x00006c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                 I2CSTART   0x000073    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+             I2C_SLAVEACK   0x000084    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                 DAT_TEST   0x00008e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+            I2C_MASTERACK   0x000095    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                  I2CSTOP   0x0000a8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                 DELAY_US   0x000100    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     USEC   0x000101    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+              DELAY_ONEMS   0x000108    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     MSEC   0x00010a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                 DELAY_MS   0x00010f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    MSEC0   0x000110    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+             DELAY_ONESEC   0x000114    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SEC0   0x000116    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                DELAY_SEC   0x00011b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SEC1   0x00011c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     DISP   0x000120    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    DISP0   0x000122    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                DATALATCH   0x000128    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     DSP0   0x00012c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                  DISPLAY   0x00013b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    CLRAM   0x00016c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     CLR0   0x000170    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                 CLR_IRAM   0x000176    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     IRM0   0x00017c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   SLICEB   0x000186    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SLB0   0x000188    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SLB1   0x00018c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SLB2   0x000194    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   SLICET   0x00019a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SLT0   0x00019c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SLT1   0x0001a0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SLT2   0x0001a8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     CHAR   0x0001ae    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     ZERO   0x0001bc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                      ONE   0x0001d1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                      TWO   0x0001e4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    CHARB   0x000200    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    THREE   0x00020c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     FOUR   0x00021f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     FIVE   0x000232    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                      SIX   0x000245    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    SEVEN   0x000258    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    EIGHT   0x00026b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     NINE   0x00027e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   T_CHAR   0x000300    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   T_ZERO   0x00030e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    T_ONE   0x000331    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    T_TWO   0x000354    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                  T_THREE   0x000377    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   T_FOUR   0x00039a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   T_FIVE   0x0003bd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                  T_CHARB   0x000400    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    T_SIX   0x00040c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                  T_SEVEN   0x00042f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                  T_EIGHT   0x000452    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   T_NINE   0x000475    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     DUMP   0x000499    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   FONT_0   0x0004a4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                DMP_FONT0   0x0004b8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    DMPF0   0x0004ba    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   FONT_1   0x0004c4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                DMP_FONT2   0x0004c7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    DMPF2   0x0004c9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   FONT_2   0x0004da    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                  ISHIFTR   0x000500    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   IGRP_A   0x00051d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   ISRA00   0x000525    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                ISRA08_R1   0x00054b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   ISRA08   0x00054c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   IGRP_B   0x00056f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   ISRB00   0x000577    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                ISRB08_R1   0x000595    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   ISRB08   0x000596    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   IGRP_C   0x0005b1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   ISRC00   0x0005b9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                ISRC08_R1   0x0005cf    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   ISRC08   0x0005d0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   IGRP_D   0x0005e3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   SHIFTR   0x000600    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    GRP_A   0x00061c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    SRA00   0x000624    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                 SRA08_R1   0x00064a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    SRA08   0x00064b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    GRP_B   0x00066e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    SRB00   0x000676    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                 SRB08_R1   0x000694    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    SRB08   0x000695    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    GRP_C   0x0006b0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    SRC00   0x0006b8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                 SRC08_R1   0x0006ce    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    SRC08   0x0006cf    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    GRP_D   0x0006e2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    SHFTL   0x000700    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                  SHFTL00   0x000704    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+              SHIFTL_GRPB   0x00070e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+              SHIFTL_GRPA   0x00070e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SBR0   0x000712    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SBR1   0x000715    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                 SB_BEGIN   0x000717    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SB00   0x000719    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SB01   0x00071b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+              SHIFTL_GRPC   0x000725    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SCR0   0x000729    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SCR1   0x00072c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                 SC_BEGIN   0x00072e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SC00   0x000730    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SC01   0x000732    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+              SHIFTL_GRPD   0x00073c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SDR0   0x000740    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SDR1   0x000743    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                 SD_BEGIN   0x000745    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SD00   0x000747    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                     SD01   0x000749    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                 SHIFT_YU   0x000753    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                      YU0   0x00075a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    IDUMP   0x00078a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                  IFONT_0   0x000793    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                  IFONT_1   0x0007ab    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   PUTNUM   0x0007b0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                  IFONT_2   0x0007c5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                  IPUTNUM   0x000800    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                SHIFT_YUB   0x000816    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                      YU1   0x00081a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                  ISHIFTL   0x00083f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   ISHFTL   0x00083f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                 ISHFTL00   0x000845    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+             ISHIFTL_GRPB   0x00084f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+             ISHIFTL_GRPA   0x00084f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    ISBR0   0x000853    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    ISBR1   0x000856    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                ISB_BEGIN   0x000858    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    ISB00   0x00085a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    ISB01   0x00085c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+             ISHIFTL_GRPC   0x000866    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    ISCR0   0x00086a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    ISCR1   0x00086d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                ISC_BEGIN   0x00086f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    ISC00   0x000871    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    ISC01   0x000873    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+             ISHIFTL_GRPD   0x00087d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    ISDR0   0x000881    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    ISDR1   0x000884    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                ISD_BEGIN   0x000886    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    ISD00   0x000888    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                    ISD01   0x00088a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+         DSHIFT_DOWN_GRPA   0x000a00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+         DSHIFT_DOWN_GRPB   0x000a23    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+         DSHIFT_DOWN_GRPC   0x000a46    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+         DSHIFT_DOWN_GRPD   0x000a69    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+         ISHIFT_DOWN_GRPA   0x000a8c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+         ISHIFT_DOWN_GRPB   0x000ab3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   SCRL_A   0x000ada    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   SCRL_B   0x000ae1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   SCRL_C   0x000ae8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+                   SCRL_D   0x000af1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+         ISHIFT_DOWN_GRPC   0x000b00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+         ISHIFT_DOWN_GRPD   0x000b27    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190613_HUB12_RTC\HUB12_RTC.ASM
+
+

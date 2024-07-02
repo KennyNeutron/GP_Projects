@@ -1,0 +1,220 @@
+;/////////////////////////////////////////////////////////////////////////////////
+;// Code Generator: BoostC Compiler - http://www.sourceboost.com
+;// Version       : 7.03
+;// License Type  : Pro License
+;// Limitations   : PIC12,PIC16 max code size:Unlimited, max RAM banks:Unlimited
+;/////////////////////////////////////////////////////////////////////////////////
+
+
+Map File
+
+Program Memory usage
+====================
+
+Address  Length   Unique Name      Name
+-------  ------   -----------      ----
+00000000:00000004 _resetvector     _resetvector  
+00000004:0000000C _interruptVector _interruptVector  
+00000010:0000000C delay_ms_00000   delay_ms(unsigned char)  
+0000001C:0000000A delay_us_00000   delay_us(unsigned char)  
+00000026:0000000F delay_s_00000    delay_s(unsigned char)  
+00000035:00000003 FC_CAL_PWM_0006B FC_CAL_PWM_Set_Duty_8Bit_1(unsigned char)  
+00000038:00000015 FC_CAL_I2C_00079 FC_CAL_I2C_Master_RX_Byte_1(unsigned char)  
+0000004D:0000000F FC_CAL_I2C_00078 FC_CAL_I2C_Master_TX_Byte_1(unsigned char)  
+0000005C:0000000C FC_CAL_I2C_00077 FC_CAL_I2C_Master_Stop_1(void)  
+00000068:00000008 FC_CAL_I2C_00076 FC_CAL_I2C_Master_Restart_1(void)  
+00000070:00000008 FC_CAL_I2C_00075 FC_CAL_I2C_Master_Start_1(void)  
+00000078:00000022 FCM_scan_o_00051 FCM_scan_off(void)  
+0000009A:00000025 FCM_scan4_00000  FCM_scan4(void)  
+000000BF:00000025 FCM_scan3_00000  FCM_scan3(void)  
+000000E4:00000025 FCM_scan2_00000  FCM_scan2(void)  
+00000109:00000025 FCM_scan1_00000  FCM_scan1(void)  
+0000012E:00000006 FCD_LED1_L_00058 FCD_LED1_LEDOff(void)  
+00000134:00000006 FCD_LED0_L_00055 FCD_LED0_LEDOff(void)  
+0000013A:00000039 __rem_32_3_00002 __rem_32_32(unsigned long,unsigned long)  
+00000173:00000011 __div_8_8_00000  __div_8_8(unsigned char,unsigned char)  
+00000184:00000039 __div_32_3_00001 __div_32_32(unsigned long,unsigned long)  
+000001BD:00000026 FC_CAL_EE__0007E FC_CAL_EE_Write(unsigned short,unsigned char)  
+000001E3:0000005E FCM_seg_pa_00052 FCM_seg_pattern(void)  
+00000241:00000003 FCM_lights_0005F FCM_lights_off(void)  
+00000244:0000002E FCM_displa_00063 FCM_display_repeat(void)  
+00000272:00000004 FCD_PWM0_S_00061 FCD_PWM0_SetDutyCycle(unsigned char)  
+00000276:00000006 FCD_LED0_L_00057 FCD_LED0_LEDOn(void)  
+0000027C:00000002 FCD_I2C_Ma_0005E FCD_I2C_Master0_MI2C_Stop(void)  
+0000027E:00000006 FCD_I2C_Ma_0005D FCD_I2C_Master0_MI2C_Receive_Byte(unsigned char)  
+00000284:00000002 FCD_I2C_Ma_0005C FCD_I2C_Master0_MI2C_Restart(void)  
+00000286:00000006 FCD_I2C_Ma_0005B FCD_I2C_Master0_MI2C_Transmit_Byte(unsigned char)  
+0000028C:00000002 FCD_I2C_Ma_0005A FCD_I2C_Master0_MI2C_Start(void)  
+0000028E:0000004F FC_CAL_UAR_00083 FC_CAL_UART_Receive_1(unsigned char)  
+000002DD:00000008 FC_CAL_UAR_00082 FC_CAL_UART_Send_1(unsigned short)  
+000002E5:00000020 FC_CAL_PWM_0006C FC_CAL_PWM_Change_Period_1(unsigned char,unsigned short)  
+00000305:00000008 FC_CAL_PWM_00069 FC_CAL_PWM_Enable_Channel_1(void)  
+0000030D:0000000F FC_CAL_I2C_00073 FC_CAL_I2C_Master_Init_1(void)  
+0000031C:0000000E FC_CAL_EE__0007D FC_CAL_EE_Read(unsigned short)  
+0000032A:00000052 FCM_repeat_00000 FCM_repeat(void)  
+0000037C:0000002D FCM_i2c_co_00059 FCM_i2c_comm(void)  
+000003A9:00000003 FCM_failed_00000 FCM_failed(void)  
+000003AC:000000A1 FCM_displa_00066 FCM_display_temp_calib(void)  
+0000044D:000000A1 FCM_displa_00053 FCM_display_temp(void)  
+000004EE:00000104 FCM_calc_00000   FCM_calc(void)  
+000005F2:00000030 FCM_all_in_00054 FCM_all_input(void)  
+00000622:00000006 FCD_LED1_L_00056 FCD_LED1_LEDOn(void)  
+00000628:0000000C FCD_EEPROM_00067 FCD_EEPROM0_WriteEEPROM(unsigned short,unsigned short)  
+00000634:0000000F FC_CAL_UAR_00081 FC_CAL_UART_Init_1(void)  
+00000643:00000003 FCM_pass_00000   FCM_pass(void)  
+00000646:00000018 FCM_get_te_00062 FCM_get_temp(void)  
+0000065E:0000000E FCM_displa_00064 FCM_display_fail(void)  
+0000066C:000000D9 FCM_calibr_00065 FCM_calibrate(void)  
+00000745:0000000B FCM_beep_o_00060 FCM_beep_once(void)  
+00000750:0000000B FCD_RS2320_00088 FCD_RS2320_ReceiveRS232Char(unsigned char)  
+0000075B:0000001B FCD_RS2320_00087 FCD_RS2320_SendRS232String(unsigned char*,unsigned char)  
+00000776:0000000A FCD_PWM0_E_0006E FCD_PWM0_Enable(void)  
+00000780:00000002 FCD_I2C_Ma_0007A FCD_I2C_Master0_MI2C_Init(void)  
+00000782:00000009 FCD_EEPROM_00080 FCD_EEPROM0_EEPROMRead(unsigned short)  
+0000078B:00000184 main             main(void)  
+0000090F:00000050 _startup_00000   _startup(void)  
+0000095F:0000000B interrupt        interrupt(void)  
+0000096A:00000696 *Unused Block 
+
+Register usage
+==============
+
+Address  Bit Lengh Bit Mask   Unique Name                      Name
+-------  --------- --------   -----------                      ----
+00000000:00000008             gbl_indf                         indf
+00000001:00000008             gbl_tmr0                         tmr0
+00000002:00000008             gbl_pcl                          pcl
+00000003:00000008             gbl_status                       status
+00000004:00000008             gbl_fsr                          fsr
+00000005:00000008             gbl_porta                        porta
+00000006:00000008             gbl_portb                        portb
+00000007:00000008             gbl_portc                        portc
+0000000A:00000008             gbl_pclath                       pclath
+0000000B:00000008             gbl_intcon                       intcon
+0000000C:00000008             gbl_pir1                         pir1
+0000000D:00000008             gbl_pir2                         pir2
+0000000E:00000008             gbl_tmr1l                        tmr1l
+0000000F:00000008             gbl_tmr1h                        tmr1h
+00000010:00000008             gbl_t1con                        t1con
+00000011:00000008             gbl_tmr2                         tmr2
+00000012:00000008             gbl_t2con                        t2con
+00000013:00000008             gbl_sspbuf                       sspbuf
+00000014:00000008             gbl_sspcon                       sspcon
+00000015:00000008             gbl_ccpr1l                       ccpr1l
+00000016:00000008             gbl_ccpr1h                       ccpr1h
+00000017:00000008             gbl_ccp1con                      ccp1con
+00000018:00000008             gbl_rcsta                        rcsta
+00000019:00000008             gbl_txreg                        txreg
+0000001A:00000008             gbl_rcreg                        rcreg
+0000001B:00000008             gbl_ccpr2l                       ccpr2l
+0000001C:00000008             gbl_ccpr2h                       ccpr2h
+0000001D:00000008             gbl_ccp2con                      ccp2con
+0000001E:00000008             gbl_adresh                       adresh
+0000001F:00000008             gbl_adcon0                       adcon0
+00000020:00000020             gbl_14_LSR                       LSR
+00000024:00000020             gbl_15_gbl_aSig                  gbl_aSig
+00000028:00000020             gbl_15_gbl_bSig                  gbl_bSig
+0000002C:00000020             gbl_15_gbl_zSig                  gbl_zSig
+00000030:00000020             gbl_15_gbl_ret                   gbl_ret
+00000034:00000020             gbl_FCV_RAW                      FCV_RAW
+00000038:00000020             gbl_FCV_TEMP_C                   FCV_TEMP_C
+0000003C:00000018             Int1BContext                     Int1BContext
+0000003F:00000010             gbl_15_gbl_zExp                  gbl_zExp
+00000041:00000010             gbl_FCV_TEMP_CDP                 FCV_TEMP_CDP
+00000043:00000010             gbl_FCV_CALIB_SUBTRACTOR         FCV_CALIB_SUBTRACTOR
+00000045:00000010             gbl_FCV_SAVE_CALIB0              FCV_SAVE_CALIB0
+00000047:00000010             gbl_FCV_CALIB_OFFSET             FCV_CALIB_OFFSET
+00000049:00000008             gbl_float_detect_tininess        float_detect_tininess
+0000004A:00000008             gbl_float_rounding_mode          float_rounding_mode
+0000004B:00000008             gbl_float_exception_flags        float_exception_flags
+0000004C:00000008             gbl_15_gbl_aExp                  gbl_aExp
+0000004D:00000008             gbl_15_gbl_bExp                  gbl_bExp
+0000004E:00000008             gbl_15_gbl_aSign                 gbl_aSign
+0000004F:00000008             gbl_15_gbl_bSign                 gbl_bSign
+00000050:00000008             gbl_15_gbl_zSign                 gbl_zSign
+00000051:00000008             gbl_15_gbl_zSigZero              gbl_zSigZero
+00000052:00000008             gbl_FCV_TEMP_TENS                FCV_TEMP_TENS
+00000053:00000008             gbl_FCV_D_BYTE                   FCV_D_BYTE
+00000054:00000008             gbl_FCV_DATA0                    FCV_DATA0
+00000055:00000008             gbl_FCV_DATA1                    FCV_DATA1
+00000056:00000008             gbl_FCV_RET_BYTE                 FCV_RET_BYTE
+00000057:00000008             gbl_FCV_DP2                      FCV_DP2
+00000058:00000008             gbl_FCV_DATA2                    FCV_DATA2
+00000059:00000008             gbl_FCV_RESET_COUNTER            FCV_RESET_COUNTER
+0000005A:00000008             gbl_FCV_TEMP_DEC                 FCV_TEMP_DEC
+0000005B:00000001  0b00001000 gbl_FCV_SWG                      FCV_SWG
+0000005C:00000008             gbl_FCV_TEMP_ONES                FCV_TEMP_ONES
+0000005D:00000008             gbl_FCV_LSB                      FCV_LSB
+0000005E:00000008             gbl_FCV_RT_BYTE                  FCV_RT_BYTE
+0000005F:00000008             gbl_FCV_PROX_COUNTER             FCV_PROX_COUNTER
+00000060:00000008             gbl_FCV_MSB                      FCV_MSB
+00000061:00000008             gbl_FCV_DIGIT                    FCV_DIGIT
+00000062:00000008             gbl_FCV_SWR                      FCV_SWR
+00000063:00000008             gbl_FCV_I2C_RX                   FCV_I2C_RX
+00000064:00000008             gbl_FCV_CALIB_FACTOR             FCV_CALIB_FACTOR
+00000065:00000008             gbl_FCV_CALIB_COUNT              FCV_CALIB_COUNT
+00000066:00000008             gbl_FCV_DATA_PREV                FCV_DATA_PREV
+00000067:00000008             gbl_FCV_SW_CALIB                 FCV_SW_CALIB
+00000068:00000008             gbl_FCV_SAVE_CALIB1              FCV_SAVE_CALIB1
+00000069:00000008             gbl_FCV_DATA_DIFF                FCV_DATA_DIFF
+0000006A:00000008             gbl_FCLV_LOOP1                   FCLV_LOOP1
+0000006B:00000008             gbl_FCLV_LOOP2                   FCLV_LOOP2
+0000006C:00000008             gbl_FCLV_LOOP3                   FCLV_LOOP3
+0000006D:00000008             gbl_FCLV_LOOP4                   FCLV_LOOP4
+0000006E:00000008             gbl_FCLV_LOOP5                   FCLV_LOOP5
+0000006F:00000008             gbl_FCLV_LOOP6                   FCLV_LOOP6
+00000070:00000008             gbl_FCLV_LOOP7                   FCLV_LOOP7
+00000071:00000008             gbl_FCLV_LOOP8                   FCLV_LOOP8
+00000072:00000008             gbl_FCLV_LOOP9                   FCLV_LOOP9
+00000073:00000008             gbl_FCLV_LOOP10                  FCLV_LOOP10
+00000074:00000008             gbl_FCLV_LOOP11                  FCLV_LOOP11
+00000075:00000008             CompTempVar2315                 
+00000076:00000008             CompTempVar2316                 
+00000077:00000008             CompTempVar2317                 
+00000078:00000008             CompTempVar2318                 
+00000079:00000008             delay_s_00000_arg_del            del
+0000007A:00000008             FC_CAL_UAR_00083_1_delay1        delay1
+0000007B:00000008             FC_CAL_UAR_00083_1_regcheck      regcheck
+0000007C:00000008             FCD_RS2320_00087_arg_MSZ_String  MSZ_String
+0000007D:00000008             delay_ms_00000_arg_del           del
+0000007E:00000008             FC_CAL_UAR_00083_1_dummy         dummy
+0000007F:00000008             Int1Context                      Int1Context
+00000081:00000008             gbl_option_reg                   option_reg
+00000085:00000008             gbl_trisa                        trisa
+00000086:00000008             gbl_trisb                        trisb
+00000087:00000008             gbl_trisc                        trisc
+0000008C:00000008             gbl_pie1                         pie1
+0000008D:00000008             gbl_pie2                         pie2
+0000008E:00000008             gbl_pcon                         pcon
+00000091:00000008             gbl_sspcon2                      sspcon2
+00000092:00000008             gbl_pr2                          pr2
+00000093:00000008             gbl_sspadd                       sspadd
+00000094:00000008             gbl_sspstat                      sspstat
+00000098:00000008             gbl_txsta                        txsta
+00000099:00000008             gbl_spbrg                        spbrg
+0000009C:00000008             gbl_cmcon                        cmcon
+0000009D:00000008             gbl_cvrcon                       cvrcon
+0000009E:00000008             gbl_adresl                       adresl
+0000009F:00000008             gbl_adcon1                       adcon1
+000000A0:00000008             delay_us_00000_arg_del           del
+000000A2:00000010             FC_CAL_EE__0007E_arg_Address     Address
+000000A4:00000008             FC_CAL_EE__0007E_arg_Data        Data
+000000A5:00000008             FC_CAL_EE__0007E_1_bInterr_0007F bInterruptsEnabled
+000000A8:00000008             CompTempVar2276                 
+000000AC:00000008             __rem_32_3_00002_1_i             i
+000000AD:00000020             CompTempVarRet212                $ret
+000000B0:00000008             __div_32_3_00001_1_i             i
+000000B1:00000020             CompTempVarRet210                $ret
+0000010C:00000008             gbl_eedata                       eedata
+0000010D:00000008             gbl_eeadr                        eeadr
+0000010E:00000008             gbl_eedath                       eedath
+0000010F:00000008             gbl_eeadrh                       eeadrh
+0000018C:00000008             gbl_eecon1                       eecon1
+0000018D:00000008             gbl_eecon2                       eecon2
+
+
+Memory Usage Report
+===================
+RAM available:192 bytes, used:118 bytes (61.5%), free:74 bytes (38.5%), 
+Heap size:74 bytes, Heap max single alloc:73 bytes
+ROM available:4096 words, used:2410 words (58.9%), free:1686 words (41.1%)

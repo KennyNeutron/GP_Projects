@@ -1,0 +1,71 @@
+;
+;
+;
+;
+;;#################	CUTTING CHARACTERS FROM BOT ##################
+;SLICEB
+;	MOVLW		0X1F
+;	MOVWF		FSR
+;
+;SLB0
+;	MOVLW		.4
+;	MOVWF		POINTER
+;			
+;	MOVLW		0XD
+;	ADDWF		FSR
+;
+;SLB1
+;	MOVLW		0XFF
+;	MOVWF		INDF
+;	MOVLW		INDF
+;
+;	MOVLW		0X10
+;	ADDWF		FSR
+;	DECFSZ		TALL,F
+;	GOTO		SLB2
+;	RETURN		;EXIT IF ZERO
+;
+;SLB2
+;	DECFSZ		POINTER,F
+;	GOTO		SLB1
+;	MOVLW		0X4C
+;	SUBWF		FSR
+;	GOTO		SLB0
+;
+;RETURN
+;;#################################################################
+;
+;
+;
+;;#################	CUTTING CHARACTERS FROM TOP ##################
+;SLICET
+;	MOVLW		0X6C
+;	MOVWF		FSR
+;	
+;SLT0
+;	MOVLW		.4
+;	MOVWF		POINTER
+;	MOVLW		0XD
+;	SUBWF		FSR
+;
+;SLT1
+;	MOVLW		0XFF
+;	MOVWF		INDF
+;	MOVLW		INDF
+;	
+;	MOVLW		0X10
+;	SUBWF		FSR
+;	DECFSZ		TALL,F
+;	GOTO		SLT2
+;	RETURN		;EXIT IF ZERO
+;
+;SLT2
+;	DECFSZ		POINTER,F
+;	GOTO		SLT1
+;	MOVLW		0X4C
+;	ADDWF		FSR
+;	GOTO		SLT0
+;	
+;
+;RETURN
+;;#################################################################

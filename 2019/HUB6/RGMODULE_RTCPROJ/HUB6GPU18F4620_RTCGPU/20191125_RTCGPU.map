@@ -1,0 +1,1133 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Fri Feb 14 10:25:46 2020
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_2       code   0x000000    program   0x000004
+                   .org_3       code   0x000008    program   0x000002
+                   .org_4       code   0x000018    program   0x0009ce
+                   .org_7       code   0x000c00    program   0x0000e2
+                   .org_8       code   0x000d00    program   0x0000e0
+                   .org_9       code   0x000e00    program   0x0000f2
+                  .org_10       code   0x000f00    program   0x0000f2
+                  .org_11       code   0x001000    program   0x0000e4
+                  .org_12       code   0x001100    program   0x0000e4
+                  .org_13       code   0x001200    program   0x0000e4
+                  .org_14       code   0x001300    program   0x0000e4
+                  .org_15       code   0x001400    program   0x0000e4
+                  .org_16       code   0x001500    program   0x0000e4
+                  .org_17       code   0x001600    program   0x0000e4
+                  .org_18       code   0x001700    program   0x0000e4
+                  .org_19       code   0x001800    program   0x0000e4
+                  .org_20       code   0x001900    program   0x0000e4
+                  .org_21       code   0x001a00    program   0x0000e4
+                  .org_22       code   0x001b00    program   0x0000e4
+                  .org_23       code   0x001c00    program   0x0000e4
+                  .org_24       code   0x001d00    program   0x0000e4
+                  .org_25       code   0x001e00    program   0x0000e4
+                  .org_26       code   0x001f00    program   0x0000e4
+                  .org_27       code   0x002000    program   0x0000e4
+                  .org_28       code   0x002100    program   0x0000e4
+                  .org_29       code   0x002200    program   0x0000e4
+                  .org_30       code   0x002300    program   0x0000e4
+                  .org_31       code   0x002400    program   0x0000e4
+                  .org_32       code   0x002500    program   0x0000e4
+                  .org_33       code   0x002600    program   0x0000e4
+                  .org_34       code   0x002700    program   0x0000e4
+                  .org_35       code   0x002800    program   0x0000e4
+                  .org_36       code   0x002900    program   0x0000e4
+                  .org_37       code   0x002a00    program   0x0000e4
+                  .org_38       code   0x002b00    program   0x0000e4
+                  .org_39       code   0x002c00    program   0x0000e4
+                  .org_40       code   0x002d00    program   0x0000e4
+                  .org_41       code   0x002e00    program   0x0000e4
+                  .org_42       code   0x002f00    program   0x0000e4
+                  .org_43       code   0x003000    program   0x0000e4
+                  .org_44       code   0x003100    program   0x0000e4
+                  .org_45       code   0x003200    program   0x0000e4
+                  .org_46       code   0x003300    program   0x0000e4
+                  .org_47       code   0x003400    program   0x0000e4
+                  .org_48       code   0x003500    program   0x0000e4
+                  .org_49       code   0x003600    program   0x0000e4
+                  .org_50       code   0x003700    program   0x0000e4
+                  .org_51       code   0x003800    program   0x0000e4
+                  .org_52       code   0x003900    program   0x0000e4
+                  .org_53       code   0x003a00    program   0x0000e4
+                  .org_54       code   0x003b00    program   0x0000e4
+                  .org_55       code   0x003c00    program   0x0000e4
+                  .org_56       code   0x003d00    program   0x0000e4
+                  .org_57       code   0x003e00    program   0x0000ea
+                  .org_58       code   0x003f00    program   0x0000e4
+                  .org_59       code   0x004000    program   0x0000ea
+                  .org_60       code   0x004100    program   0x0000e4
+                  .org_61       code   0x004200    program   0x0000e4
+                  .org_62       code   0x004300    program   0x0000e4
+                  .org_63       code   0x004400    program   0x000072
+                  .org_64       code   0x004500    program   0x000072
+                  .org_65       code   0x004600    program   0x000072
+                  .org_66       code   0x004700    program   0x000072
+                  .org_67       code   0x004800    program   0x000072
+                  .org_68       code   0x004900    program   0x000072
+                  .org_69       code   0x004a00    program   0x000072
+                  .org_70       code   0x004b00    program   0x000072
+                  .org_71       code   0x004c00    program   0x000072
+                  .org_72       code   0x004d00    program   0x000072
+                  .org_73       code   0x004e00    program   0x000072
+                  .org_74       code   0x004f00    program   0x000072
+                  .org_75       code   0x005000    program   0x000072
+                  .org_76       code   0x005100    program   0x000072
+                  .org_77       code   0x005200    program   0x000072
+                  .org_78       code   0x005300    program   0x000072
+                  .org_79       code   0x005400    program   0x000072
+                  .org_80       code   0x005500    program   0x000072
+                  .org_81       code   0x005600    program   0x000072
+                  .org_82       code   0x005700    program   0x000072
+                  .org_83       code   0x005800    program   0x0000e4
+                  .org_84       code   0x005900    program   0x0000e4
+                  .org_85       code   0x005a00    program   0x0000e4
+                  .org_86       code   0x005b00    program   0x0000e4
+                  .org_87       code   0x005c00    program   0x0000e4
+                  .org_88       code   0x005d00    program   0x0000e4
+                  .org_89       code   0x005e00    program   0x0000e4
+                  .org_90       code   0x005f00    program   0x0000e4
+                  .org_91       code   0x006000    program   0x0000e4
+                  .org_92       code   0x006100    program   0x0000e4
+                  .org_93       code   0x006200    program   0x0000e4
+                  .org_94       code   0x006300    program   0x0000e4
+                  .org_95       code   0x006400    program   0x000072
+                  .org_96       code   0x006500    program   0x000072
+                  .org_97       code   0x007000    program   0x0000e8
+                  .org_98       code   0x007100    program   0x0000aa
+                  .org_99       code   0x007200    program   0x0000dc
+                 .org_100       code   0x007300    program   0x0000fa
+                 .org_101       code   0x007400    program   0x0000c8
+                 .org_102       code   0x008000    program   0x0000f2
+                 .org_103       code   0x009000    program   0x00008c
+                   .org_5       code   0x00a000    program   0x000394
+                   .org_6       code   0x00b000    program   0x000488
+.config_300001_20191125_RTCGPU.O    romdata   0x300001    program   0x000001
+.config_300002_20191125_RTCGPU.O    romdata   0x300002    program   0x000001
+.config_300003_20191125_RTCGPU.O    romdata   0x300003    program   0x000001
+.config_300005_20191125_RTCGPU.O    romdata   0x300005    program   0x000001
+.config_300006_20191125_RTCGPU.O    romdata   0x300006    program   0x000001
+.config_300008_20191125_RTCGPU.O    romdata   0x300008    program   0x000001
+.config_300009_20191125_RTCGPU.O    romdata   0x300009    program   0x000001
+.config_30000A_20191125_RTCGPU.O    romdata   0x30000a    program   0x000001
+.config_30000B_20191125_RTCGPU.O    romdata   0x30000b    program   0x000001
+.config_30000C_20191125_RTCGPU.O    romdata   0x30000c    program   0x000001
+.config_30000D_20191125_RTCGPU.O    romdata   0x30000d    program   0x000001
+                   .org_1       code   0xf00000    program   0x000000
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000003      
+                            0x000008    0x000009      
+                            0x000018    0x0009e5      
+                            0x000c00    0x000ce1      
+                            0x000d00    0x000ddf      
+                            0x000e00    0x000ef1      
+                            0x000f00    0x000ff1      
+                            0x001000    0x0010e3      
+                            0x001100    0x0011e3      
+                            0x001200    0x0012e3      
+                            0x001300    0x0013e3      
+                            0x001400    0x0014e3      
+                            0x001500    0x0015e3      
+                            0x001600    0x0016e3      
+                            0x001700    0x0017e3      
+                            0x001800    0x0018e3      
+                            0x001900    0x0019e3      
+                            0x001a00    0x001ae3      
+                            0x001b00    0x001be3      
+                            0x001c00    0x001ce3      
+                            0x001d00    0x001de3      
+                            0x001e00    0x001ee3      
+                            0x001f00    0x001fe3      
+                            0x002000    0x0020e3      
+                            0x002100    0x0021e3      
+                            0x002200    0x0022e3      
+                            0x002300    0x0023e3      
+                            0x002400    0x0024e3      
+                            0x002500    0x0025e3      
+                            0x002600    0x0026e3      
+                            0x002700    0x0027e3      
+                            0x002800    0x0028e3      
+                            0x002900    0x0029e3      
+                            0x002a00    0x002ae3      
+                            0x002b00    0x002be3      
+                            0x002c00    0x002ce3      
+                            0x002d00    0x002de3      
+                            0x002e00    0x002ee3      
+                            0x002f00    0x002fe3      
+                            0x003000    0x0030e3      
+                            0x003100    0x0031e3      
+                            0x003200    0x0032e3      
+                            0x003300    0x0033e3      
+                            0x003400    0x0034e3      
+                            0x003500    0x0035e3      
+                            0x003600    0x0036e3      
+                            0x003700    0x0037e3      
+                            0x003800    0x0038e3      
+                            0x003900    0x0039e3      
+                            0x003a00    0x003ae3      
+                            0x003b00    0x003be3      
+                            0x003c00    0x003ce3      
+                            0x003d00    0x003de3      
+                            0x003e00    0x003ee9      
+                            0x003f00    0x003fe3      
+                            0x004000    0x0040e9      
+                            0x004100    0x0041e3      
+                            0x004200    0x0042e3      
+                            0x004300    0x0043e3      
+                            0x004400    0x004471      
+                            0x004500    0x004571      
+                            0x004600    0x004671      
+                            0x004700    0x004771      
+                            0x004800    0x004871      
+                            0x004900    0x004971      
+                            0x004a00    0x004a71      
+                            0x004b00    0x004b71      
+                            0x004c00    0x004c71      
+                            0x004d00    0x004d71      
+                            0x004e00    0x004e71      
+                            0x004f00    0x004f71      
+                            0x005000    0x005071      
+                            0x005100    0x005171      
+                            0x005200    0x005271      
+                            0x005300    0x005371      
+                            0x005400    0x005471      
+                            0x005500    0x005571      
+                            0x005600    0x005671      
+                            0x005700    0x005771      
+                            0x005800    0x0058e3      
+                            0x005900    0x0059e3      
+                            0x005a00    0x005ae3      
+                            0x005b00    0x005be3      
+                            0x005c00    0x005ce3      
+                            0x005d00    0x005de3      
+                            0x005e00    0x005ee3      
+                            0x005f00    0x005fe3      
+                            0x006000    0x0060e3      
+                            0x006100    0x0061e3      
+                            0x006200    0x0062e3      
+                            0x006300    0x0063e3      
+                            0x006400    0x006471      
+                            0x006500    0x006571      
+                            0x007000    0x0070e7      
+                            0x007100    0x0071a9      
+                            0x007200    0x0072db      
+                            0x007300    0x0073f9      
+                            0x007400    0x0074c7      
+                            0x008000    0x0080f1      
+                            0x009000    0x00908b      
+                            0x00a000    0x00a393      
+                            0x00b000    0x00b487      
+                            0x300001    0x300003      
+                            0x300005    0x300006      
+                            0x300008    0x30000d      
+            24103 out of 66584 program addresses used, program memory utilization is 36%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     BRD0   0x00b0f8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     BRD1   0x00b10c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     BRH0   0x00b0c6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     BRH1   0x00b0da    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     BRM0   0x00b094    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     BRM1   0x00b0a8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    BRMO0   0x00b12a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    BRMO1   0x00b13e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     BRS0   0x00b062    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     BRS1   0x00b076    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    BRYO0   0x00b15c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    BRYO1   0x00b170    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  BR_DATE   0x00b0e6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  BR_HOUR   0x00b0b4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   BR_MIN   0x00b082    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   BR_MON   0x00b118    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          BR_SAVEANDWRITE   0x00b17c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   BR_SEC   0x00b050    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  BR_YEAR   0x00b14a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     BUT0   0x00b026    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     BUT1   0x00b03e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     BUT2   0x00b040    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+           BUTTON_ROUTINE   0x00b000    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 BUT_CONT   0x00b04a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     CLR0   0x0003d8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  CLR_RAM   0x0003c8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     CMD0   0x000382    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    CMD64   0x000398    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     CMDD   0x000392    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  CMDG127   0x0003a6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 CMDG127C   0x0003b2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  CMD_SUB   0x000324    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 CMD_SUB0   0x000348    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 CMD_SUB1   0x000358    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 CMD_SUB2   0x000364    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  COMMAND   0x000176    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             CURSORX_TEST   0x00093a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     CX08   0x000942    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     CX16   0x000954    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     CX24   0x00096a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     CX32   0x000980    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     CX40   0x000996    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     CX48   0x0009ac    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     CX56   0x0009c2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     CX64   0x0009d6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   CXGE16   0x000962    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   CXGE24   0x000978    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   CXGE32   0x00098e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   CXGE40   0x0009a4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   CXGE48   0x0009ba    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   CXGE56   0x0009d0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    CXGE8   0x00094c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                DATAINRAM   0x000576    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  DATAREG   0x0003f6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               DATAREGSUB   0x000406    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+  DATATRANS_CMD_TO_EEPROM   0x00903c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+  DATATRANS_EEPROM_TO_CMD   0x009000    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   DATEN0   0x00b3be    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             DATEN0_T_DEC   0x00b3d8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             DATEN0_T_INC   0x00b3d0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   DATET0   0x00b39a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             DATET0_T_DEC   0x00b3b4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             DATET0_T_INC   0x00b3a6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   DATET3   0x00b3e0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               DATET3_DEC   0x00b3fc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               DATET3_INC   0x00b3f2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               DATE_O_CON   0x00b386    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DDISP   0x0000f8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 DELAY_MS   0x00a364    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              DELAY_ONEMS   0x00a352    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             DELAY_ONESEC   0x00a372    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                DELAY_SEC   0x00a384    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 DELAY_US   0x00a340    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     DIR0   0x00058e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     DIR1   0x0005a8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DIR2A   0x000638    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DIR2B   0x000662    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   DIR2BA   0x000676    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DIR2C   0x0006a8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   DIR2CA   0x0006bc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              DIR2_YELLOW   0x0005d6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DIR3A   0x00063a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DIR3B   0x000678    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DIR3C   0x0006be    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DIR4A   0x0006d8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DIR4B   0x0006ee    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DIR4C   0x000706    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     DIR5   0x00070c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DIR6A   0x00073e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DIR6B   0x000768    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   DIR6BA   0x00077c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DIR6C   0x0007ae    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   DIR6CA   0x0007c2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DIR7A   0x000740    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DIR7B   0x00077e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DIR7C   0x0007c4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     DIRC   0x000580    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  DIR_SUB   0x000606    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 DIR_SUB0   0x000618    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 DIR_SUB1   0x00071e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     DISP   0x0000f4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DISP0   0x00010c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  DISPLAY   0x000104    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            DISPLAY_NOSET   0x000138    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              DISPLAY_SET   0x00013e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             DISPLAY_SETT   0x00014a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               DISPL_DATE   0x0001d4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               DISPL_HOUR   0x00023c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                DISPL_MIN   0x000294    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                DISPL_MON   0x000194    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                DISPL_SEC   0x000202    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               DISPL_YEAR   0x0002e0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              DISPL_YEAR1   0x000302    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   DISPS0   0x000154    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     DMP0   0x00050e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DMP04   0x000540    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DMP06   0x00056c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               DMP_FONT02   0x0004c4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+           DMP_FONT02CONT   0x0004d2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               DMP_FONT04   0x000518    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+           DMP_FONT04CONT   0x00052c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               DMP_FONT06   0x00054a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+           DMP_FONT06CONT   0x000558    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 DOC_CONT   0x00b392    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                      DR0   0x00040a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                      DR1   0x000424    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                      DR2   0x000438    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                      DR3   0x00044c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                      DR4   0x000460    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                      DR5   0x000474    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               DTR_CMDEE0   0x00904c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               DTR_CMDEE1   0x00905a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               DTR_EECMD0   0x009010    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               DTR_EECMD1   0x009026    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+           DTR_EECMD_EXIT   0x009034    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     DUMP   0x00048a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   EEDWR0   0x009082    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          EEPROM_DATAREAD   0x00903a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         EEPROM_DATAWRITE   0x00906c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  FONT02H   0x000c00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_A   0x001000    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_B   0x001200    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_C   0x001400    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02H_CAP_COLON   0x005c00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02H_CAP_COMMA   0x006000    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_D   0x001600    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02H_CAP_DASH   0x005a00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          FONT02H_CAP_DOT   0x006200    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_E   0x001800    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02H_CAP_EIGHT   0x005400    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02H_CAP_ENYE   0x005800    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_F   0x001a00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02H_CAP_FIVE   0x004e00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02H_CAP_FOUR   0x004c00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_G   0x001c00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_H   0x001e00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_I   0x002000    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_J   0x002200    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_K   0x002400    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_L   0x002600    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_M   0x002800    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_N   0x002a00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02H_CAP_NINE   0x005600    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_O   0x002c00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          FONT02H_CAP_ONE   0x004600    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_P   0x002e00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_Q   0x003000    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_R   0x003200    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_S   0x003400    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+    FONT02H_CAP_SEMICOLON   0x005e00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02H_CAP_SEVEN   0x005200    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          FONT02H_CAP_SIX   0x005000    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02H_CAP_SPACE   0x006400    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_T   0x003600    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02H_CAP_THREE   0x004a00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          FONT02H_CAP_TWO   0x004800    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_U   0x003800    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_V   0x003a00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_W   0x003c00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_X   0x003e00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_Y   0x004000    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_Z   0x004200    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02H_CAP_ZERO   0x004400    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             FONT02H_ISL4   0x000e24    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02H_LOWERCASE   0x000e00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+       FONT02H_LOWERCASE0   0x000e3a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_A   0x001072    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_B   0x001272    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_C   0x001472    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02H_LOW_COLON   0x005c72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02H_LOW_COMMA   0x006072    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_D   0x001672    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02H_LOW_DASH   0x005a72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          FONT02H_LOW_DOT   0x006272    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_E   0x001872    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02H_LOW_ENYE   0x005872    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_F   0x001a72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_G   0x001c72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_H   0x001e72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_I   0x002072    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_J   0x002272    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_K   0x002472    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_L   0x002672    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_M   0x002872    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_N   0x002a72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_O   0x002c72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_P   0x002e72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_Q   0x003072    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_R   0x003272    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_S   0x003472    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+    FONT02H_LOW_SEMICOLON   0x005e72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_T   0x003672    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_U   0x003872    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_V   0x003a72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_W   0x003c72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_X   0x003e78    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_Y   0x004078    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_Z   0x004272    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02H_NUMH_IS4   0x000e2c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02H_NUMH_IS5   0x000e34    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  FONT02L   0x000d00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_A   0x001100    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_B   0x001300    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_C   0x001500    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02L_CAP_COLON   0x005d00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02L_CAP_COMMA   0x006100    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_D   0x001700    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02L_CAP_DASH   0x005b00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          FONT02L_CAP_DOT   0x006300    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_E   0x001900    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02L_CAP_EIGHT   0x005500    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02L_CAP_ENYE   0x005900    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_F   0x001b00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02L_CAP_FIVE   0x004f00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02L_CAP_FOUR   0x004d00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_G   0x001d00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_H   0x001f00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_I   0x002100    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_J   0x002300    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_K   0x002500    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_L   0x002700    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_M   0x002900    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_N   0x002b00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02L_CAP_NINE   0x005700    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_O   0x002d00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          FONT02L_CAP_ONE   0x004700    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_P   0x002f00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_Q   0x003100    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_R   0x003300    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_S   0x003572    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+    FONT02L_CAP_SEMICOLON   0x005f00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02L_CAP_SEVEN   0x005300    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          FONT02L_CAP_SIX   0x005100    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02L_CAP_SPACE   0x006500    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_T   0x003700    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02L_CAP_THREE   0x004b00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          FONT02L_CAP_TWO   0x004900    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_U   0x003900    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_V   0x003b00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_W   0x003d00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_X   0x003f00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_Y   0x004100    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_Z   0x004300    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02L_CAP_ZERO   0x004500    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             FONT02L_ISL4   0x000f24    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02L_LOWERCASE   0x000f00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+       FONT02L_LOWERCASE0   0x000f3a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_A   0x001172    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_B   0x001372    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_C   0x001572    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02L_LOW_COLON   0x005d72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02L_LOW_COMMA   0x006172    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_D   0x001772    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02L_LOW_DASH   0x005b72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          FONT02L_LOW_DOT   0x006372    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_E   0x001972    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02L_LOW_ENYE   0x005972    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_F   0x001b72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_G   0x001d72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_H   0x001f72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_I   0x002172    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_J   0x002372    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_K   0x002572    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_L   0x002772    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_M   0x002972    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_N   0x002b72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_O   0x002d72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_P   0x002f72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_Q   0x003172    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_R   0x003372    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_S   0x003500    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+    FONT02L_LOW_SEMICOLON   0x005f72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_T   0x003772    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_U   0x003972    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_V   0x003b72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_W   0x003d72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_X   0x003f72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_Y   0x004172    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_Z   0x004372    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02L_NUMH_IS4   0x000f2c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02L_NUMH_IS5   0x000f34    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  FONT04H   0x007000    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT04H_EIGHT   0x007166    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             FONT04H_FIVE   0x007100    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             FONT04H_FOUR   0x0070c6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             FONT04H_NINE   0x007188    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              FONT04H_ONE   0x007060    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT04H_SEVEN   0x007144    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              FONT04H_SIX   0x007122    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT04H_THREE   0x0070a4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              FONT04H_TWO   0x007082    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             FONT04H_ZERO   0x00703e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  FONT06H   0x007200    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             FONT06H_DASH   0x007464    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              FONT06H_DOT   0x007496    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT06H_EIGHT   0x007400    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             FONT06H_FIVE   0x007364    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             FONT06H_FOUR   0x007332    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             FONT06H_NINE   0x007432    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              FONT06H_ONE   0x007278    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT06H_SEVEN   0x0073c8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              FONT06H_SIX   0x007396    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT06H_THREE   0x007300    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              FONT06H_TWO   0x0072aa    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             FONT06H_ZERO   0x007246    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     G0HI   0x00045e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     G0LO   0x000458    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     G1HI   0x000472    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     G1LO   0x00046c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     HBCD   0x000376    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     HBHX   0x00082a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  HBHX240   0x00084e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  HBHX248   0x00086c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     HBLX   0x0008e2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  HBLX240   0x000906    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  HBLX248   0x000924    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  HIGHINT   0x000032    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              HOUR01_CONT   0x00b32e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   HOURT0   0x00b312    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  HOURT01   0x00b31e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  HOURT02   0x00b33c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   HOURT1   0x00b344    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               HOURT1_CLR   0x00b356    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              HOURT1_CONT   0x00b362    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               HOURT1_SET   0x00b35c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               HOUR_O_CON   0x00b308    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               HOUR_O_DEC   0x00b37c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               HOUR_O_INC   0x00b374    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    HTHPX   0x000812    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               HTH_CXGT40   0x0007dc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               HTH_CXGT48   0x0007ee    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               HTH_CXGT55   0x000800    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    HTLPX   0x0008ca    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               HTL_CXGT40   0x000894    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               HTL_CXGT48   0x0008a6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               HTL_CXGT55   0x0008b8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             HUBCHECKDUMP   0x00036e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                HUBH_EXIT   0x00081c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                HUBL_EXIT   0x0008d4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 HUBTESTH   0x0007ca    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 HUBTESTL   0x000882    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                I2CSDA_HI   0x00a214    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                I2CSDA_LO   0x00a20e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 I2C_CLKP   0x00a0ec    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              I2C_DATA0B0   0x00a240    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              I2C_DATA0B1   0x00a246    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               I2C_DATAIN   0x00a1f8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              I2C_DATAOUT   0x00a230    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          I2C_DATATOCLOCK   0x00a25e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   I2C_DI   0x00a204    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               I2C_DICONT   0x00a21c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  I2C_DO0   0x00a234    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  I2C_DO1   0x00a24e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 I2C_MACK   0x00a132    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                I2C_MNACK   0x00a11c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 I2C_READ   0x00a1bc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              I2C_ROUTINE   0x00a000    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  I2C_SA0   0x00a106    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 I2C_SACK   0x00a0fe    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          I2C_SET_ROUTINE   0x00a06e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                I2C_START   0x00a0b4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 I2C_STOP   0x00a0d0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                I2C_WRADD   0x00a186    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                I2C_WRITE   0x00a14a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     INIT   0x000034    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     MAIN   0x0000ac    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     MAN0   0x0000ba    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     MAN1   0x0000d2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     MAN2   0x0000d8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     MAN3   0x0000e6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                MIN_O_CON   0x00b2c0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                MIN_O_DEC   0x00b2de    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                MIN_O_INC   0x00b2d2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                MIN_T_CON   0x00b2ea    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                MIN_T_DEC   0x00b302    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                MIN_T_INC   0x00b2fc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               MON01_CONT   0x00b42c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    MONT0   0x00b410    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   MONT01   0x00b41c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   MONT02   0x00b43a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    MONT1   0x00b442    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                MON_O_CON   0x00b406    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                MON_O_DEC   0x00b45c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                MON_O_INC   0x00b454    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     MSEC   0x00a356    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    MSEC0   0x00a366    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          NOSKIPSEMICOLON   0x000276    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     R0HI   0x000436    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     R0LO   0x000430    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     R1HI   0x00044a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     R1LO   0x000444    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     SEC0   0x00a376    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     SEC1   0x00a386    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                SEC_O_CON   0x00b278    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                SEC_O_DEC   0x00b296    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                SEC_O_INC   0x00b28a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                SEC_T_CON   0x00b2a2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                SEC_T_DEC   0x00b2ba    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                SEC_T_INC   0x00b2b4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 SETDATE0   0x00b0ec    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 SETDATE1   0x00b102    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 SETHOUR0   0x00b0ba    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 SETHOUR1   0x00b0d0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  SETMIN0   0x00b088    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  SETMIN1   0x00b09e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  SETMON0   0x00b11e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  SETMON1   0x00b134    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  SETSEC0   0x00b056    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  SETSEC1   0x00b06c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 SETYEAR0   0x00b150    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 SETYEAR1   0x00b166    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            SKIPSEMICOLON   0x000286    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          SKIP_DISPL_DATE   0x0001f4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          SKIP_DISPL_HOUR   0x000268    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+           SKIP_DISPL_MIN   0x0002bc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+           SKIP_DISPL_MON   0x0001b6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+           SKIP_DISPL_SEC   0x000226    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          SKIP_DISPL_YEAR   0x000322    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     USEC   0x00a342    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              WIDTH_CHECK   0x008000    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                YEAR_CON0   0x00b478    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                YEAR_CON1   0x00b480    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               YEAR_O_CON   0x00b466    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                  HIGHINT   0x000032    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     INIT   0x000034    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     MAIN   0x0000ac    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     MAN0   0x0000ba    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     MAN1   0x0000d2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     MAN2   0x0000d8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     MAN3   0x0000e6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     DISP   0x0000f4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DDISP   0x0000f8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  DISPLAY   0x000104    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DISP0   0x00010c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            DISPLAY_NOSET   0x000138    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              DISPLAY_SET   0x00013e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             DISPLAY_SETT   0x00014a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   DISPS0   0x000154    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  COMMAND   0x000176    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                DISPL_MON   0x000194    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+           SKIP_DISPL_MON   0x0001b6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               DISPL_DATE   0x0001d4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          SKIP_DISPL_DATE   0x0001f4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                DISPL_SEC   0x000202    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+           SKIP_DISPL_SEC   0x000226    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               DISPL_HOUR   0x00023c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          SKIP_DISPL_HOUR   0x000268    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          NOSKIPSEMICOLON   0x000276    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            SKIPSEMICOLON   0x000286    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                DISPL_MIN   0x000294    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+           SKIP_DISPL_MIN   0x0002bc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               DISPL_YEAR   0x0002e0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              DISPL_YEAR1   0x000302    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          SKIP_DISPL_YEAR   0x000322    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  CMD_SUB   0x000324    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 CMD_SUB0   0x000348    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 CMD_SUB1   0x000358    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 CMD_SUB2   0x000364    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             HUBCHECKDUMP   0x00036e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     HBCD   0x000376    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     CMD0   0x000382    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     CMDD   0x000392    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    CMD64   0x000398    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  CMDG127   0x0003a6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 CMDG127C   0x0003b2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  CLR_RAM   0x0003c8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     CLR0   0x0003d8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  DATAREG   0x0003f6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               DATAREGSUB   0x000406    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                      DR0   0x00040a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                      DR1   0x000424    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     R0LO   0x000430    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     R0HI   0x000436    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                      DR2   0x000438    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     R1LO   0x000444    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     R1HI   0x00044a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                      DR3   0x00044c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     G0LO   0x000458    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     G0HI   0x00045e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                      DR4   0x000460    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     G1LO   0x00046c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     G1HI   0x000472    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                      DR5   0x000474    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     DUMP   0x00048a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               DMP_FONT02   0x0004c4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+           DMP_FONT02CONT   0x0004d2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     DMP0   0x00050e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               DMP_FONT04   0x000518    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+           DMP_FONT04CONT   0x00052c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DMP04   0x000540    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               DMP_FONT06   0x00054a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+           DMP_FONT06CONT   0x000558    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DMP06   0x00056c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                DATAINRAM   0x000576    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     DIRC   0x000580    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     DIR0   0x00058e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     DIR1   0x0005a8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              DIR2_YELLOW   0x0005d6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  DIR_SUB   0x000606    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 DIR_SUB0   0x000618    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DIR2A   0x000638    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DIR3A   0x00063a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DIR2B   0x000662    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   DIR2BA   0x000676    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DIR3B   0x000678    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DIR2C   0x0006a8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   DIR2CA   0x0006bc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DIR3C   0x0006be    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DIR4A   0x0006d8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DIR4B   0x0006ee    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DIR4C   0x000706    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     DIR5   0x00070c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 DIR_SUB1   0x00071e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DIR6A   0x00073e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DIR7A   0x000740    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DIR6B   0x000768    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   DIR6BA   0x00077c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DIR7B   0x00077e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DIR6C   0x0007ae    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   DIR6CA   0x0007c2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    DIR7C   0x0007c4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 HUBTESTH   0x0007ca    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               HTH_CXGT40   0x0007dc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               HTH_CXGT48   0x0007ee    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               HTH_CXGT55   0x000800    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    HTHPX   0x000812    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                HUBH_EXIT   0x00081c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     HBHX   0x00082a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  HBHX240   0x00084e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  HBHX248   0x00086c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 HUBTESTL   0x000882    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               HTL_CXGT40   0x000894    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               HTL_CXGT48   0x0008a6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               HTL_CXGT55   0x0008b8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    HTLPX   0x0008ca    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                HUBL_EXIT   0x0008d4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     HBLX   0x0008e2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  HBLX240   0x000906    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  HBLX248   0x000924    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             CURSORX_TEST   0x00093a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     CX08   0x000942    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    CXGE8   0x00094c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     CX16   0x000954    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   CXGE16   0x000962    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     CX24   0x00096a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   CXGE24   0x000978    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     CX32   0x000980    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   CXGE32   0x00098e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     CX40   0x000996    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   CXGE40   0x0009a4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     CX48   0x0009ac    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   CXGE48   0x0009ba    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     CX56   0x0009c2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   CXGE56   0x0009d0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     CX64   0x0009d6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  FONT02H   0x000c00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  FONT02L   0x000d00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02H_LOWERCASE   0x000e00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             FONT02H_ISL4   0x000e24    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02H_NUMH_IS4   0x000e2c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02H_NUMH_IS5   0x000e34    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+       FONT02H_LOWERCASE0   0x000e3a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02L_LOWERCASE   0x000f00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             FONT02L_ISL4   0x000f24    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02L_NUMH_IS4   0x000f2c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02L_NUMH_IS5   0x000f34    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+       FONT02L_LOWERCASE0   0x000f3a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_A   0x001000    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_A   0x001072    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_A   0x001100    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_A   0x001172    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_B   0x001200    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_B   0x001272    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_B   0x001300    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_B   0x001372    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_C   0x001400    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_C   0x001472    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_C   0x001500    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_C   0x001572    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_D   0x001600    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_D   0x001672    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_D   0x001700    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_D   0x001772    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_E   0x001800    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_E   0x001872    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_E   0x001900    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_E   0x001972    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_F   0x001a00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_F   0x001a72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_F   0x001b00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_F   0x001b72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_G   0x001c00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_G   0x001c72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_G   0x001d00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_G   0x001d72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_H   0x001e00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_H   0x001e72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_H   0x001f00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_H   0x001f72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_I   0x002000    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_I   0x002072    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_I   0x002100    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_I   0x002172    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_J   0x002200    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_J   0x002272    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_J   0x002300    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_J   0x002372    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_K   0x002400    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_K   0x002472    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_K   0x002500    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_K   0x002572    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_L   0x002600    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_L   0x002672    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_L   0x002700    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_L   0x002772    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_M   0x002800    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_M   0x002872    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_M   0x002900    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_M   0x002972    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_N   0x002a00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_N   0x002a72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_N   0x002b00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_N   0x002b72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_O   0x002c00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_O   0x002c72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_O   0x002d00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_O   0x002d72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_P   0x002e00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_P   0x002e72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_P   0x002f00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_P   0x002f72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_Q   0x003000    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_Q   0x003072    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_Q   0x003100    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_Q   0x003172    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_R   0x003200    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_R   0x003272    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_R   0x003300    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_R   0x003372    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_S   0x003400    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_S   0x003472    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_S   0x003500    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_S   0x003572    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_T   0x003600    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_T   0x003672    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_T   0x003700    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_T   0x003772    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_U   0x003800    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_U   0x003872    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_U   0x003900    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_U   0x003972    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_V   0x003a00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_V   0x003a72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_V   0x003b00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_V   0x003b72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_W   0x003c00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_W   0x003c72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_W   0x003d00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_W   0x003d72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_X   0x003e00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_X   0x003e78    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_X   0x003f00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_X   0x003f72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_Y   0x004000    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_Y   0x004078    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_Y   0x004100    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_Y   0x004172    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_CAP_Z   0x004200    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02H_LOW_Z   0x004272    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_CAP_Z   0x004300    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT02L_LOW_Z   0x004372    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02H_CAP_ZERO   0x004400    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02L_CAP_ZERO   0x004500    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          FONT02H_CAP_ONE   0x004600    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          FONT02L_CAP_ONE   0x004700    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          FONT02H_CAP_TWO   0x004800    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          FONT02L_CAP_TWO   0x004900    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02H_CAP_THREE   0x004a00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02L_CAP_THREE   0x004b00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02H_CAP_FOUR   0x004c00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02L_CAP_FOUR   0x004d00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02H_CAP_FIVE   0x004e00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02L_CAP_FIVE   0x004f00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          FONT02H_CAP_SIX   0x005000    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          FONT02L_CAP_SIX   0x005100    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02H_CAP_SEVEN   0x005200    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02L_CAP_SEVEN   0x005300    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02H_CAP_EIGHT   0x005400    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02L_CAP_EIGHT   0x005500    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02H_CAP_NINE   0x005600    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02L_CAP_NINE   0x005700    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02H_CAP_ENYE   0x005800    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02H_LOW_ENYE   0x005872    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02L_CAP_ENYE   0x005900    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02L_LOW_ENYE   0x005972    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02H_CAP_DASH   0x005a00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02H_LOW_DASH   0x005a72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02L_CAP_DASH   0x005b00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         FONT02L_LOW_DASH   0x005b72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02H_CAP_COLON   0x005c00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02H_LOW_COLON   0x005c72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02L_CAP_COLON   0x005d00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02L_LOW_COLON   0x005d72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+    FONT02H_CAP_SEMICOLON   0x005e00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+    FONT02H_LOW_SEMICOLON   0x005e72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+    FONT02L_CAP_SEMICOLON   0x005f00    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+    FONT02L_LOW_SEMICOLON   0x005f72    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02H_CAP_COMMA   0x006000    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02H_LOW_COMMA   0x006072    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02L_CAP_COMMA   0x006100    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02L_LOW_COMMA   0x006172    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          FONT02H_CAP_DOT   0x006200    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          FONT02H_LOW_DOT   0x006272    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          FONT02L_CAP_DOT   0x006300    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          FONT02L_LOW_DOT   0x006372    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02H_CAP_SPACE   0x006400    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+        FONT02L_CAP_SPACE   0x006500    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  FONT04H   0x007000    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             FONT04H_ZERO   0x00703e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              FONT04H_ONE   0x007060    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              FONT04H_TWO   0x007082    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT04H_THREE   0x0070a4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             FONT04H_FOUR   0x0070c6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             FONT04H_FIVE   0x007100    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              FONT04H_SIX   0x007122    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT04H_SEVEN   0x007144    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT04H_EIGHT   0x007166    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             FONT04H_NINE   0x007188    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  FONT06H   0x007200    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             FONT06H_ZERO   0x007246    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              FONT06H_ONE   0x007278    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              FONT06H_TWO   0x0072aa    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT06H_THREE   0x007300    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             FONT06H_FOUR   0x007332    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             FONT06H_FIVE   0x007364    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              FONT06H_SIX   0x007396    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT06H_SEVEN   0x0073c8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+            FONT06H_EIGHT   0x007400    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             FONT06H_NINE   0x007432    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             FONT06H_DASH   0x007464    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              FONT06H_DOT   0x007496    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              WIDTH_CHECK   0x008000    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+  DATATRANS_EEPROM_TO_CMD   0x009000    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               DTR_EECMD0   0x009010    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               DTR_EECMD1   0x009026    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+           DTR_EECMD_EXIT   0x009034    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          EEPROM_DATAREAD   0x00903a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+  DATATRANS_CMD_TO_EEPROM   0x00903c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               DTR_CMDEE0   0x00904c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               DTR_CMDEE1   0x00905a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+         EEPROM_DATAWRITE   0x00906c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   EEDWR0   0x009082    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              I2C_ROUTINE   0x00a000    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          I2C_SET_ROUTINE   0x00a06e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                I2C_START   0x00a0b4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 I2C_STOP   0x00a0d0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 I2C_CLKP   0x00a0ec    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 I2C_SACK   0x00a0fe    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  I2C_SA0   0x00a106    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                I2C_MNACK   0x00a11c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 I2C_MACK   0x00a132    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                I2C_WRITE   0x00a14a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                I2C_WRADD   0x00a186    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 I2C_READ   0x00a1bc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               I2C_DATAIN   0x00a1f8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   I2C_DI   0x00a204    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                I2CSDA_LO   0x00a20e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                I2CSDA_HI   0x00a214    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               I2C_DICONT   0x00a21c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              I2C_DATAOUT   0x00a230    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  I2C_DO0   0x00a234    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              I2C_DATA0B0   0x00a240    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              I2C_DATA0B1   0x00a246    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  I2C_DO1   0x00a24e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          I2C_DATATOCLOCK   0x00a25e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 DELAY_US   0x00a340    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     USEC   0x00a342    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              DELAY_ONEMS   0x00a352    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     MSEC   0x00a356    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 DELAY_MS   0x00a364    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    MSEC0   0x00a366    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             DELAY_ONESEC   0x00a372    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     SEC0   0x00a376    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                DELAY_SEC   0x00a384    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     SEC1   0x00a386    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+           BUTTON_ROUTINE   0x00b000    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     BUT0   0x00b026    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     BUT1   0x00b03e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     BUT2   0x00b040    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 BUT_CONT   0x00b04a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   BR_SEC   0x00b050    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  SETSEC0   0x00b056    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     BRS0   0x00b062    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  SETSEC1   0x00b06c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     BRS1   0x00b076    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   BR_MIN   0x00b082    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  SETMIN0   0x00b088    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     BRM0   0x00b094    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  SETMIN1   0x00b09e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     BRM1   0x00b0a8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  BR_HOUR   0x00b0b4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 SETHOUR0   0x00b0ba    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     BRH0   0x00b0c6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 SETHOUR1   0x00b0d0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     BRH1   0x00b0da    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  BR_DATE   0x00b0e6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 SETDATE0   0x00b0ec    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     BRD0   0x00b0f8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 SETDATE1   0x00b102    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                     BRD1   0x00b10c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   BR_MON   0x00b118    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  SETMON0   0x00b11e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    BRMO0   0x00b12a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  SETMON1   0x00b134    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    BRMO1   0x00b13e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  BR_YEAR   0x00b14a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 SETYEAR0   0x00b150    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    BRYO0   0x00b15c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 SETYEAR1   0x00b166    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    BRYO1   0x00b170    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+          BR_SAVEANDWRITE   0x00b17c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                SEC_O_CON   0x00b278    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                SEC_O_INC   0x00b28a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                SEC_O_DEC   0x00b296    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                SEC_T_CON   0x00b2a2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                SEC_T_INC   0x00b2b4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                SEC_T_DEC   0x00b2ba    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                MIN_O_CON   0x00b2c0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                MIN_O_INC   0x00b2d2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                MIN_O_DEC   0x00b2de    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                MIN_T_CON   0x00b2ea    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                MIN_T_INC   0x00b2fc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                MIN_T_DEC   0x00b302    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               HOUR_O_CON   0x00b308    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   HOURT0   0x00b312    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  HOURT01   0x00b31e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              HOUR01_CONT   0x00b32e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                  HOURT02   0x00b33c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   HOURT1   0x00b344    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               HOURT1_CLR   0x00b356    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               HOURT1_SET   0x00b35c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+              HOURT1_CONT   0x00b362    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               HOUR_O_INC   0x00b374    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               HOUR_O_DEC   0x00b37c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               DATE_O_CON   0x00b386    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                 DOC_CONT   0x00b392    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   DATET0   0x00b39a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             DATET0_T_INC   0x00b3a6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             DATET0_T_DEC   0x00b3b4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   DATEN0   0x00b3be    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             DATEN0_T_INC   0x00b3d0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+             DATEN0_T_DEC   0x00b3d8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   DATET3   0x00b3e0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               DATET3_INC   0x00b3f2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               DATET3_DEC   0x00b3fc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                MON_O_CON   0x00b406    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    MONT0   0x00b410    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   MONT01   0x00b41c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               MON01_CONT   0x00b42c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                   MONT02   0x00b43a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                    MONT1   0x00b442    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                MON_O_INC   0x00b454    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                MON_O_DEC   0x00b45c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+               YEAR_O_CON   0x00b466    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                YEAR_CON0   0x00b478    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+                YEAR_CON1   0x00b480    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\RGMODULE_RTCPROJ\HUB6GPU18F4620_RTCGPU\20191125_RTCGPU.ASM
+
+

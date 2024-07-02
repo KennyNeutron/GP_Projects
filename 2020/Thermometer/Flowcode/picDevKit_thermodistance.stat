@@ -1,0 +1,28 @@
+// SourceBoost Linker Function Resource Usage Dump
+
+#GLOBAL:"global",line = 0,ram = 62.2,rom = 0;
+__div_16_16(unsigned short,unsigned short):"E:\Prg\compiler.trunk\picantc\libc\div.c",line = 116,ram = 9.0,rom = 31;
+float32_from_int32(signed long):"E:\Prg\compiler.trunk\picantc\libc\softfloat\softfloat\softfloat.c",line = 870,ram = 12.0,rom = 85;
+NormaliseFloat32NA(void):"E:\Prg\compiler.trunk\picantc\libc\softfloat\softfloat\softfloat-macros",line = 989,ram = 0.0,rom = 24;
+roundFloat32NA(void):"E:\Prg\compiler.trunk\picantc\libc\softfloat\softfloat\softfloat.c",line = 515,ram = 14.0,rom = 284;
+packFloat32NA(void):"E:\Prg\compiler.trunk\picantc\libc\softfloat\softfloat\softfloat.c",line = 305,ram = 0.0,rom = 25;
+float32_to_int32(?):"E:\Prg\compiler.trunk\picantc\libc\softfloat\softfloat\softfloat.c",line = 945,ram = 24.0,rom = 365;
+float32_mul(?,?):"E:\Prg\compiler.trunk\picantc\libc\softfloat\softfloat\softfloat.c",line = 1452,ram = 21.4,rom = 324;
+mul32To32sticky(void):"E:\Prg\compiler.trunk\picantc\libc\softfloat\softfloat\softfloat-macros",line = 554,ram = 6.0,rom = 93;
+float32_lt(?,?):"E:\Prg\compiler.trunk\picantc\libc\softfloat\softfloat\softfloat.c",line = 1948,ram = 36.0,rom = 281;
+Wdt_Delay_Ms(unsigned char):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_Delay.c",line = 118,ram = 2.0,rom = 11;
+FCM_get_distance(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\picDevKit_thermodistance.c",line = 540,ram = 4.0,rom = 247;
+FCD_LCDDisplay0_ClearLine(unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\picDevKit_thermodistance.c",line = 486,ram = 3.0,rom = 23;
+FCD_LCDDisplay0_Cursor(unsigned char,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\picDevKit_thermodistance.c",line = 331,ram = 2.0,rom = 30;
+FCD_LCDDisplay0_PrintString(unsigned char*,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\picDevKit_thermodistance.c",line = 420,ram = 4.0,rom = 28;
+FCD_LCDDisplay0_PrintNumber(signed short):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\picDevKit_thermodistance.c",line = 362,ram = 7.0,rom = 238;
+FCD_LCDDisplay0_RawSend(unsigned char,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\picDevKit_thermodistance.c",line = 211,ram = 3.0,rom = 65;
+FCD_LCDDisplay0_Start(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\picDevKit_thermodistance.c",line = 261,ram = 0.0,rom = 86;
+FCD_LCDDisplay0_Clear(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\picDevKit_thermodistance.c",line = 294,ram = 0.0,rom = 18;
+main(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\picDevKit_thermodistance.c",line = 685,ram = 0.0,rom = 19;
+interrupt(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\picDevKit_thermodistance.c",line = 722,ram = 0.0,rom = 11;
+delay_us(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 5;
+delay_10us(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 14;
+delay_ms(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 44;
+_startup(void):"NoSourceFile",line = 0,ram = 0.0,rom = 71;
+#HEAP_BLOCK: 0, 164, 91;

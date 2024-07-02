@@ -1,0 +1,11 @@
+// SourceBoost Linker Function Resource Usage Dump
+
+#GLOBAL:"global",line = 0,ram = 35.3,rom = 0;
+FCM_INIT(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\FC\IC_TESTER.c",line = 118,ram = 0.0,rom = 50;
+main(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\FC\IC_TESTER.c",line = 171,ram = 2.0,rom = 149;
+interrupt(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\FC\IC_TESTER.c",line = 350,ram = 0.0,rom = 11;
+delay_ms(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 44;
+_startup(void):"NoSourceFile",line = 0,ram = 0.0,rom = 43;
+#HEAP_BLOCK: 0, 160, 95;
+#HEAP_BLOCK: 1, 288, 80;
+#HEAP_BLOCK: 2, 69, 43;

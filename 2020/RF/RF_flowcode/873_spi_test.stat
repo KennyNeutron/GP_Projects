@@ -1,0 +1,21 @@
+// SourceBoost Linker Function Resource Usage Dump
+
+#GLOBAL:"global",line = 0,ram = 43.2,rom = 0;
+Wdt_Delay_Ms(unsigned char):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_Delay.c",line = 118,ram = 2.0,rom = 11;
+FCM_own_spi(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\RF_flowcode\873_spi_test.c",line = 543,ram = 2.0,rom = 400;
+FCM_rf_begin(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\RF_flowcode\873_spi_test.c",line = 844,ram = 0.0,rom = 11;
+FCM_set_writing_pipe0(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\RF_flowcode\873_spi_test.c",line = 873,ram = 0.0,rom = 15;
+FCM_rf_setpa(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\RF_flowcode\873_spi_test.c",line = 915,ram = 0.0,rom = 9;
+FCM_radio_writepayload(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\RF_flowcode\873_spi_test.c",line = 999,ram = 0.0,rom = 9;
+FCM_tx_flush(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\RF_flowcode\873_spi_test.c",line = 1023,ram = 0.0,rom = 6;
+FCD_LCDDisplay0_RawSend(unsigned char,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\RF_flowcode\873_spi_test.c",line = 214,ram = 3.0,rom = 65;
+FCD_LCDDisplay0_Start(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\RF_flowcode\873_spi_test.c",line = 264,ram = 0.0,rom = 85;
+FCD_LCDDisplay0_Clear(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\RF_flowcode\873_spi_test.c",line = 297,ram = 0.0,rom = 17;
+main(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\RF_flowcode\873_spi_test.c",line = 1036,ram = 1.0,rom = 60;
+interrupt(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\RF_flowcode\873_spi_test.c",line = 1124,ram = 0.0,rom = 11;
+delay_us(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 5;
+delay_10us(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 14;
+delay_ms(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 44;
+_startup(void):"NoSourceFile",line = 0,ram = 0.0,rom = 54;
+#HEAP_BLOCK: 0, 160, 95;
+#HEAP_BLOCK: 1, 79, 48;

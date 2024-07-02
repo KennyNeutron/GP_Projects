@@ -1,0 +1,52 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Tue Aug 13 18:50:31 2019
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000004    program   0x00018e
+.config_2007_MODULECPU_SPITX.O       code   0x002007    program   0x000002
+                   .org_3       code   0x002100    program   0x000008
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x0000ca      
+                            0x002007    0x002007      
+                            0x002100    0x002103      
+            205 out of 4359 program addresses used, program memory utilization is 4%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                    DBIT0   0x00009e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI_CPU\MODULECPU_SPITX.ASM
+                    DBIT1   0x0000a0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI_CPU\MODULECPU_SPITX.ASM
+                     INIT   0x000010    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI_CPU\MODULECPU_SPITX.ASM
+                INTRDELAY   0x0000af    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI_CPU\MODULECPU_SPITX.ASM
+                     MAIN   0x000024    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI_CPU\MODULECPU_SPITX.ASM
+              MATRIX_INIT   0x000091    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI_CPU\MODULECPU_SPITX.ASM
+                    SPITX   0x000097    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI_CPU\MODULECPU_SPITX.ASM
+                      ST0   0x00009a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI_CPU\MODULECPU_SPITX.ASM
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     INIT   0x000010    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI_CPU\MODULECPU_SPITX.ASM
+                     MAIN   0x000024    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI_CPU\MODULECPU_SPITX.ASM
+              MATRIX_INIT   0x000091    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI_CPU\MODULECPU_SPITX.ASM
+                    SPITX   0x000097    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI_CPU\MODULECPU_SPITX.ASM
+                      ST0   0x00009a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI_CPU\MODULECPU_SPITX.ASM
+                    DBIT0   0x00009e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI_CPU\MODULECPU_SPITX.ASM
+                    DBIT1   0x0000a0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI_CPU\MODULECPU_SPITX.ASM
+                INTRDELAY   0x0000af    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI_CPU\MODULECPU_SPITX.ASM
+
+

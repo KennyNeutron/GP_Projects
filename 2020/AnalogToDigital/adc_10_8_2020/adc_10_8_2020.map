@@ -1,0 +1,64 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Thu Oct 08 18:41:30 2020
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000004    program   0x000104
+.config_2007_ADC_10_8_2020.O       code   0x002007    program   0x000002
+                   .org_3       code   0x002100    program   0x000008
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x000085      
+                            0x002007    0x002007      
+                            0x002100    0x002103      
+            136 out of 4359 program addresses used, program memory utilization is 3%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                 DELAY_MS   0x00007f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_8_2020\adc_10_8_2020.asm
+              DELAY_ONEMS   0x000078    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_8_2020\adc_10_8_2020.asm
+                 DELAY_US   0x000070    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_8_2020\adc_10_8_2020.asm
+                 FULL_OFF   0x00006e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_8_2020\adc_10_8_2020.asm
+                  FULL_ON   0x00006c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_8_2020\adc_10_8_2020.asm
+                     INIT   0x000011    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_8_2020\adc_10_8_2020.asm
+                INTERRUPT   0x000084    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_8_2020\adc_10_8_2020.asm
+                     MAIN   0x00002d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_8_2020\adc_10_8_2020.asm
+                  MN0_END   0x000057    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_8_2020\adc_10_8_2020.asm
+                   MN0_ST   0x00004f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_8_2020\adc_10_8_2020.asm
+                      MN1   0x000063    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_8_2020\adc_10_8_2020.asm
+                     MSEC   0x00007a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_8_2020\adc_10_8_2020.asm
+                    MSEC0   0x000080    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_8_2020\adc_10_8_2020.asm
+                     USEC   0x000071    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_8_2020\adc_10_8_2020.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     INIT   0x000011    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_8_2020\adc_10_8_2020.asm
+                     MAIN   0x00002d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_8_2020\adc_10_8_2020.asm
+                   MN0_ST   0x00004f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_8_2020\adc_10_8_2020.asm
+                  MN0_END   0x000057    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_8_2020\adc_10_8_2020.asm
+                      MN1   0x000063    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_8_2020\adc_10_8_2020.asm
+                  FULL_ON   0x00006c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_8_2020\adc_10_8_2020.asm
+                 FULL_OFF   0x00006e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_8_2020\adc_10_8_2020.asm
+                 DELAY_US   0x000070    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_8_2020\adc_10_8_2020.asm
+                     USEC   0x000071    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_8_2020\adc_10_8_2020.asm
+              DELAY_ONEMS   0x000078    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_8_2020\adc_10_8_2020.asm
+                     MSEC   0x00007a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_8_2020\adc_10_8_2020.asm
+                 DELAY_MS   0x00007f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_8_2020\adc_10_8_2020.asm
+                    MSEC0   0x000080    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_8_2020\adc_10_8_2020.asm
+                INTERRUPT   0x000084    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_8_2020\adc_10_8_2020.asm
+
+

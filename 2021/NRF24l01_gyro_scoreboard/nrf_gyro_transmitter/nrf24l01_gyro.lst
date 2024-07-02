@@ -1,0 +1,1808 @@
+MPASM  5.51                 NRF24L01_GYRO.ASM   4-17-2021  14:19:50         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 ;**********************************************************************
+                      00002 ;                                                                     *
+                      00003 ;    filename:      nrf24l01_gyro.asm                                 *
+                      00004 ;    date:          august 30,2020                                    *
+                      00005 ;    file version:  v1.0                                              *
+                      00006 ;                                                                     *
+                      00007 ;    author:        Kenny Neutron                                     *
+                      00008 ;    company:       Ger-Per Engineering                               *
+                      00009 ;                                                                     * 
+                      00010 ;                                                                     *
+                      00011 ;**********************************************************************
+                      00012 
+                      00013         LIST            P=16F690                        ; list directive to define processor
+                      00014         #INCLUDE        <P16F690.INC>           ; processor specific variable definitions
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC16F690 processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2013 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+                      00756         LIST
+                      00015         
+Warning[205]: Found directive in column 1. (__CONFIG)
+2007   3002           00016 __CONFIG    _CP_ON & _CPD_ON & _BOR_OFF & _PWRTE_ON & _WDT_OFF & _HS_OSC & _MCLRE_OFF & _FCMEN_OFF & _IE
+                            SO_OFF
+                      00017 
+                      00018 ; '__config' directive is used to embed configuration data within .asm file.
+                      00019 ; the labels following the directive are located in the respective .inc file.
+                      00020 ; see respective data sheet for additional information on configuration word.
+                      00021 
+                      00022 
+                      00023 
+                      00024 
+                      00025 
+                      00026 
+                      00027 ;***** variable definitions
+  0000007D            00028 W_TEMP          EQU     0X7D                    ; variable used for context saving
+  0000007E            00029 STATUS_TEMP     EQU     0X7E                    ; variable used for context saving
+  0000007F            00030 PCLATH_TEMP     EQU     0X7F                    ; variable used for context saving
+                      00031 
+                      00032         #DEFINE BANK0           BANKSEL PORTA
+                      00033         #DEFINE BANK1           BANKSEL ADRESL
+                      00034         #DEFINE BANK2           BANKSEL ANSELH
+                      00035 
+                      00036         #DEFINE TDS_HI          NOP             ;bsf    porta,0
+                      00037         #DEFINE TDS_LO          NOP             ;bcf    porta,0
+                      00038 
+                      00039         #DEFINE RDR_HI          NOP             ;bsf    porta,1
+                      00040         #DEFINE RDR_LO          NOP             ;bcf    porta,1
+                      00041 
+                      00042         #DEFINE CE_HI           BSF PORTA,1
+MPASM  5.51                 NRF24L01_GYRO.ASM   4-17-2021  14:19:50         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00043         #DEFINE CE_LO           BCF     PORTA,1
+                      00044 
+                      00045         #DEFINE CSN_HI          BSF     PORTA,0
+                      00046         #DEFINE CSN_LO          BCF     PORTA,0
+                      00047 
+                      00048         #DEFINE CLK_HI          BSF     PORTB,4
+                      00049         #DEFINE CLK_LO          BCF     PORTB,4
+                      00050 
+                      00051         #DEFINE MOSI_HI         BSF     PORTA,2
+                      00052         #DEFINE MOSI_LO         BCF     PORTA,2    
+                      00053 
+                      00054         #DEFINE VIB_ON          BSF     PORTB,5
+                      00055         #DEFINE VIB_OFF         BCF     PORTB,5                                                         
+                                                
+                      00056 
+                      00057 ;============================   bank    0       ===========================
+Warning[205]: Found directive in column 1. (CBLOCK)
+                      00058 CBLOCK 0X20
+  00000020            00059                         NRF_REG00       ;config                         configuration
+  00000021            00060                         NRF_REG01       ;en_aa                          enable auto-acknowledgement
+  00000022            00061                         NRF_REG02       ;en_rxaddr                      enable rx address
+  00000023            00062                         NRF_REG03       ;setup_aw                       enable address width
+  00000024            00063                         NRF_REG04       ;setup_retr                     setup auto-retransmission
+  00000025            00064                         NRF_REG05       ;rf_ch                          rf channel
+  00000026            00065                         NRF_REG06       ;rf_seup                        rf setup register
+  00000027            00066                         NRF_REG07       ;nrf status                     nrf status register
+  00000028            00067                         RX_ADDR_P00     ;reg0a-0                        rx address pipe0 byte0
+  00000029            00068                         RX_ADDR_P01     ;reg0a-1                        rx address pipe0 byte1
+  0000002A            00069                         RX_ADDR_P02     ;reg0a-2                        rx address pipe0 byte2
+  0000002B            00070                         RX_ADDR_P03     ;reg0a-3                        rx address pipe0 byte3
+  0000002C            00071                         RX_ADDR_P04     ;reg0a-4                        rx address pipe0 byte4
+                      00072                         
+  0000002D            00073                         TX_ADDR_B0      ;reg10-0                        tx address byte0
+  0000002E            00074                         TX_ADDR_B1      ;reg10-1                        tx address byte1
+  0000002F            00075                         TX_ADDR_B2      ;reg10-2                        tx address byte2
+  00000030            00076                         TX_ADDR_B3      ;reg10-3                        tx address byte3
+  00000031            00077                         TX_ADDR_B4      ;reg10-4                        tx address byte4
+                      00078 
+  00000032            00079                         NRF_REG11       ;rx_pw_p0                       rx payload width in pipe0
+                      00080 
+  00000033            00081                         NRF_REG17       ;fifo_status
+                      00082 
+                      00083 
+                      00084 
+                      00085 
+                      00086 
+  00000034            00087                         PAYLOADSIZE                                             ;payload size
+                      00088 
+  00000035            00089                         REG_TOWRITE,REG_TOREAD                  ;reg address to write/read
+                      00090 
+  00000037            00091                         DATA_TOWRITE,DATA_TOREAD                ;data to/from reg specified 
+                      00092                                                                                         ;by reg_toread/r
+                            eg_towrite
+MPASM  5.51                 NRF24L01_GYRO.ASM   4-17-2021  14:19:50         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00093                                                                                 
+                      00094                         
+  00000039            00095                         SPI_DATA0,SPI_DATA1                             ;spi_data0(out)  spi_data1(in)
+  0000003B            00096                         CLK_LOOP                                                ;spi clk counter
+                      00097                         
+  0000003C            00098                         PL_LOOP                                                 ;payload counter
+                      00099 
+  0000003D            00100                         NRF_DLOOP                                               ;local delay loop
+  0000003E            00101                         NRF_DELAYUS,NRF_DELAYMS                 ;local delay variables
+                      00102 
+  00000040            00103                         PORTC_TEMP
+                      00104 
+  00000041            00105                         BUZZ_LOOP
+                      00106 
+                      00107 
+Warning[205]: Found directive in column 1. (ENDC)
+                      00108 ENDC
+                      00109 ;======================================================================
+                      00110 
+                      00111 ;============================   bank    0       ===========================
+Warning[205]: Found directive in column 1. (CBLOCK)
+                      00112 CBLOCK 0XA0
+  000000A0            00113         NRF_PAYLOAD:.32         ;=> nrf payload 32 bytes max
+                      00114 
+  000000C0            00115         UART_PAYLOAD:.32        ;=> uart payload 32 bytes max
+  000000E0            00116         NRF_PLTEMP
+                      00117 
+                      00118 
+                      00119 
+Warning[205]: Found directive in column 1. (ENDC)
+                      00120 ENDC
+                      00121 ;======================================================================
+                      00122 
+                      00123 ;**********************************************************************
+0000                  00124         ORG             0X000                           ; processor reset vector
+0000   2811           00125         GOTO    INIT                            ; go to initialization
+                      00126 
+                      00127 
+0004                  00128         ORG             0X004                           ; interrupt vector location
+0004   00FD           00129         MOVWF           W_TEMP                  ; save off current w register contents
+0005   0803           00130         MOVF            STATUS,W                ; move status register into w register
+0006   00FE           00131         MOVWF           STATUS_TEMP             ; save off contents of status register
+0007   080A           00132         MOVF            PCLATH,W                ; move pclath register into w register
+0008   00FF           00133         MOVWF           PCLATH_TEMP             ; save off contents of pclath register
+                      00134 
+                      00135 
+                      00136         
+                      00137 
+0009   206A           00138         CALL            INTERRUPT
+                      00139 
+                      00140 
+                      00141 ; isr code can go here or be located as a call subroutine elsewhere
+                      00142 
+MPASM  5.51                 NRF24L01_GYRO.ASM   4-17-2021  14:19:50         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+000A   087F           00143         MOVF            PCLATH_TEMP,W   ; retrieve copy of pclath register
+000B   008A           00144         MOVWF           PCLATH                  ; restore pre-isr pclath register contents      
+000C   087E           00145         MOVF            STATUS_TEMP,W   ; retrieve copy of status register
+000D   0083           00146         MOVWF           STATUS                  ; restore pre-isr status register contents
+000E   0EFD           00147         SWAPF           W_TEMP,F
+000F   0E7D           00148         SWAPF           W_TEMP,W                ; restore pre-isr w register contents
+                      00149 
+                      00150 
+                      00151 ;       goto            main
+0010   0009           00152         RETFIE                                          ; return from interrupt
+                      00153 
+                      00154 
+                      00155 ;$$$$$$$$$$$$$$$ initialize $$$$$$$$$$$$$
+0011                  00156 INIT:
+0011   1283 1703      00157         BANKSEL ANSEL
+0013   0103           00158         CLRW
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0014   009E           00159         MOVWF   ANSEL
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0015   009F           00160         MOVWF   ANSELH
+                      00161 
+0016   1683 1303      00162         BANKSEL TRISA
+                      00163 
+0018   3008           00164         MOVLW   0X08
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0019   0085           00165         MOVWF   TRISA
+                      00166 
+001A   3040           00167         MOVLW   0X40
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+001B   0086           00168         MOVWF   TRISB
+                      00169 
+001C   30FF           00170         MOVLW   0XFF
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+001D   0087           00171         MOVWF   TRISC
+                      00172 
+                      00173 
+001E   1283 1303      00174         BANK0
+0020   0807           00175         MOVFW   PORTC
+0021   00C0           00176         MOVWF   PORTC_TEMP
+                      00177 
+0022   0186           00178         CLRF    PORTB
+                      00179         
+                      00180 
+                      00181 
+Warning[205]: Found directive in column 1. (BANKSEL)
+0023   1683 1303      00182 BANK1
+0025   3068           00183         MOVLW   'h'
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0026   00A0           00184         MOVWF   NRF_PAYLOAD+00
+                      00185 
+                      00186 
+Warning[205]: Found directive in column 1. (BANKSEL)
+0027   1283 1303      00187 BANK0
+MPASM  5.51                 NRF24L01_GYRO.ASM   4-17-2021  14:19:50         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0029   3047           00188         MOVLW   'G'
+002A   00A8           00189         MOVWF   RX_ADDR_P00
+002B   3042           00190         MOVLW   'B'
+002C   00A9           00191         MOVWF   RX_ADDR_P01
+002D   3050           00192         MOVLW   'P'
+002E   00AA           00193         MOVWF   RX_ADDR_P02
+002F   3030           00194         MOVLW   '0'
+0030   00AB           00195         MOVWF   RX_ADDR_P03
+0031   3030           00196         MOVLW   '0'
+0032   00AC           00197         MOVWF   RX_ADDR_P04
+                      00198 
+0033   3047           00199         MOVLW   'G'
+0034   00AD           00200         MOVWF   TX_ADDR_B0
+0035   3042           00201         MOVLW   'B'
+0036   00AE           00202         MOVWF   TX_ADDR_B1
+0037   3050           00203         MOVLW   'P'
+0038   00AF           00204         MOVWF   TX_ADDR_B2
+0039   3030           00205         MOVLW   '0'
+003A   00B0           00206         MOVWF   TX_ADDR_B3
+003B   3030           00207         MOVLW   '0'
+003C   00B1           00208         MOVWF   TX_ADDR_B4
+                      00209 
+003D   3001           00210         MOVLW   .1
+003E   00B4           00211         MOVWF   PAYLOADSIZE
+                      00212 
+                      00213 
+                      00214 
+003F   300F           00215         MOVLW   0X0F
+0040   008A           00216         MOVWF   PCLATH
+0041   3000           00217         MOVLW   0X00
+0042   00B5           00218         MOVWF   REG_TOWRITE
+0043   300E           00219         MOVLW   0X0E
+0044   00B7           00220         MOVWF   DATA_TOWRITE
+Message[306]: Crossing page boundary -- ensure page bits are set.
+0045   2792           00221         CALL    CMD_REGWRITE
+                      00222 
+                      00223 
+Message[306]: Crossing page boundary -- ensure page bits are set.
+0046   272D           00224         CALL    RADIO_BEGIN
+0047   018A           00225         CLRF    PCLATH
+                      00226 
+                      00227 ;       movlw   b'11010000'
+                      00228 ;       movwf   intcon
+                      00229 
+Warning[203]: Found opcode in column 1. (GOTO)
+0048   2849           00230 GOTO MAIN
+                      00231 ;$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+                      00232         
+                      00233 
+                      00234 ;########################################
+0049                  00235 MAIN
+                      00236 
+0049   1283 1303      00237         BANK0
+MPASM  5.51                 NRF24L01_GYRO.ASM   4-17-2021  14:19:50         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00238 
+004B   18C0           00239         BTFSC   PORTC_TEMP,1
+004C   2088           00240         CALL    BUTTON_C1
+                      00241 
+004D   1840           00242         BTFSC   PORTC_TEMP,0
+004E   208F           00243         CALL    BUTTON_C2
+                      00244 
+004F   1AC0           00245         BTFSC   PORTC_TEMP,5
+0050   2096           00246         CALL    BUTTON_C3
+                      00247 
+0051   1A40           00248         BTFSC   PORTC_TEMP,4
+0052   209D           00249         CALL    BUTTON_C4
+                      00250 
+0053   19C0           00251         BTFSC   PORTC_TEMP,3
+0054   20A4           00252         CALL    BUTTON_C5
+                      00253 
+0055   1B40           00254         BTFSC   PORTC_TEMP,6
+0056   20AB           00255         CALL    BUTTON_C6
+                      00256 
+                      00257         ;btfsc  portc_temp,7
+                      00258         ;call   button_c7
+                      00259 
+0057   1BC0           00260         BTFSC   PORTC_TEMP,7
+0058   206C           00261         CALL    PRESS_BUZZER
+                      00262 
+0059   1940           00263         BTFSC   PORTC_TEMP,2
+005A   2081           00264         CALL    BUTTON_SHIFT
+                      00265 
+                      00266 
+                      00267 
+                      00268 
+005B   300E           00269         MOVLW   0X0E
+005C   008A           00270         MOVWF   PCLATH
+Message[306]: Crossing page boundary -- ensure page bits are set.
+005D   26A0           00271         CALL    NRF_SEND_PAYLOAD
+Message[306]: Crossing page boundary -- ensure page bits are set.
+005E   26A0           00272         CALL    NRF_SEND_PAYLOAD
+005F   018A           00273         CLRF    PCLATH
+                      00274 
+0060   1686           00275         VIB_ON
+0061   300F           00276         MOVLW   0X0F
+0062   008A           00277         MOVWF   PCLATH
+                      00278 
+0063   303C           00279         MOVLW   .60
+Message[306]: Crossing page boundary -- ensure page bits are set.
+0064   27D8           00280         CALL    NRF_DELAY_MS
+0065   018A           00281         CLRF    PCLATH
+                      00282 
+0066   1286           00283         VIB_OFF
+                      00284 
+                      00285 
+                      00286 
+0067   0064           00287         CLRWDT  
+MPASM  5.51                 NRF24L01_GYRO.ASM   4-17-2021  14:19:50         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0068   0063           00288         SLEEP
+                      00289 
+                      00290 
+Warning[203]: Found opcode in column 1. (GOTO)
+0069   2849           00291 GOTO MAIN
+                      00292 ;########################################
+                      00293 
+                      00294 
+006A                  00295 INTERRUPT:
+006A   0000           00296         NOP
+                      00297         ;write interrupt code here
+                      00298 
+                      00299 
+                      00300 
+                      00301 
+                      00302 
+                      00303 
+Warning[203]: Found opcode in column 1. (RETURN)
+006B   0008           00304 RETURN
+                      00305 
+                      00306 
+                      00307 
+                      00308 
+                      00309 
+006C                  00310 PRESS_BUZZER
+006C   30E6           00311         MOVLW   .230
+006D   00C1           00312         MOVWF   BUZZ_LOOP
+                      00313 
+006E                  00314 PBZ0
+006E   1683 1303      00315         BANK1
+0070   3067           00316         MOVLW   'g'
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0071   00A0           00317         MOVWF   NRF_PAYLOAD+00
+0072   1283 1303      00318         BANK0
+0074   1940           00319         BTFSC   PORTC_TEMP,2
+0075   2081           00320         CALL    BUTTON_SHIFT
+                      00321 
+0076   300E           00322         MOVLW   0X0E
+0077   008A           00323         MOVWF   PCLATH
+Message[306]: Crossing page boundary -- ensure page bits are set.
+0078   26A0           00324         CALL    NRF_SEND_PAYLOAD
+Message[306]: Crossing page boundary -- ensure page bits are set.
+0079   26A0           00325         CALL    NRF_SEND_PAYLOAD
+Message[306]: Crossing page boundary -- ensure page bits are set.
+007A   26A0           00326         CALL    NRF_SEND_PAYLOAD
+007B   018A           00327         CLRF    PCLATH
+                      00328 
+007C   0BC1           00329         DECFSZ  BUZZ_LOOP,F
+007D   286E           00330         GOTO    PBZ0
+                      00331         
+007E   0064           00332         CLRWDT  
+007F   0063           00333         SLEEP
+Warning[203]: Found opcode in column 1. (RETURN)
+MPASM  5.51                 NRF24L01_GYRO.ASM   4-17-2021  14:19:50         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0080   0008           00334 RETURN
+                      00335 
+                      00336 
+0081                  00337 BUTTON_SHIFT
+0081   1683 1303      00338         BANK1
+0083   3020           00339         MOVLW   0X20
+Message[305]: Using default destination of 1 (file).
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0084   02A0           00340         SUBWF   NRF_PAYLOAD+00
+0085   1283 1303      00341         BANK0
+Warning[203]: Found opcode in column 1. (RETURN)
+0087   0008           00342 RETURN
+                      00343 
+0088                  00344 BUTTON_C1
+0088   1683 1303      00345         BANK1
+008A   3061           00346         MOVLW   'a'
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+008B   00A0           00347         MOVWF   NRF_PAYLOAD+00
+008C   1283 1303      00348         BANK0
+Warning[203]: Found opcode in column 1. (RETURN)
+008E   0008           00349 RETURN
+                      00350 
+008F                  00351 BUTTON_C2
+008F   1683 1303      00352         BANK1
+0091   3062           00353         MOVLW   'b'
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0092   00A0           00354         MOVWF   NRF_PAYLOAD+00
+0093   1283 1303      00355         BANK0
+Warning[203]: Found opcode in column 1. (RETURN)
+0095   0008           00356 RETURN
+                      00357 
+0096                  00358 BUTTON_C3
+0096   1683 1303      00359         BANK1
+0098   3063           00360         MOVLW   'c'
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0099   00A0           00361         MOVWF   NRF_PAYLOAD+00
+009A   1283 1303      00362         BANK0
+Warning[203]: Found opcode in column 1. (RETURN)
+009C   0008           00363 RETURN
+                      00364 
+009D                  00365 BUTTON_C4
+009D   1683 1303      00366         BANK1
+009F   3064           00367         MOVLW   'd'
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+00A0   00A0           00368         MOVWF   NRF_PAYLOAD+00
+00A1   1283 1303      00369         BANK0
+Warning[203]: Found opcode in column 1. (RETURN)
+00A3   0008           00370 RETURN
+                      00371 
+00A4                  00372 BUTTON_C5
+00A4   1683 1303      00373         BANK1
+00A6   3065           00374         MOVLW   'e'
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+MPASM  5.51                 NRF24L01_GYRO.ASM   4-17-2021  14:19:50         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00A7   00A0           00375         MOVWF   NRF_PAYLOAD+00
+00A8   1283 1303      00376         BANK0
+Warning[203]: Found opcode in column 1. (RETURN)
+00AA   0008           00377 RETURN
+                      00378 
+00AB                  00379 BUTTON_C6
+00AB   1683 1303      00380         BANK1
+00AD   3066           00381         MOVLW   'f'
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+00AE   00A0           00382         MOVWF   NRF_PAYLOAD+00
+00AF   1283 1303      00383         BANK0
+Warning[203]: Found opcode in column 1. (RETURN)
+00B1   0008           00384 RETURN
+                      00385 
+00B2                  00386 BUTTON_C7
+00B2   1683 1303      00387         BANK1
+00B4   3067           00388         MOVLW   'g'
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+00B5   00A0           00389         MOVWF   NRF_PAYLOAD+00
+00B6   1283 1303      00390         BANK0
+Warning[203]: Found opcode in column 1. (RETURN)
+00B8   0008           00391 RETURN
+                      00392 
+                      00393 
+                      00394 
+                      00395 
+                      00396 
+                      00397 
+                      00398 
+                      00399 
+                      00400 
+                      00401 
+                      00402 
+                      00403 
+                      00404 
+                      00405 
+                      00406 
+                      00407 
+                      00408 
+                      00409 
+                      00410 
+                      00411 
+                      00412 
+                      00413 
+                      00414 
+                      00415 
+                      00416 
+                      00417 
+                      00418 
+                      00419 
+                      00420 
+                      00421 
+                      00422 
+MPASM  5.51                 NRF24L01_GYRO.ASM   4-17-2021  14:19:50         PAGE 10
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00423 
+                      00424 
+Warning[205]: Found directive in column 1. (ORG)
+0EA0                  00425 ORG 0XEA0
+                      00426 
+0EA0                  00427 NRF_SEND_PAYLOAD
+                      00428 
+                      00429 
+0EA0   26D0           00430         CALL    RADIO_SEND_DATA
+                      00431 
+Warning[203]: Found opcode in column 1. (RETURN)
+0EA1   0008           00432 RETURN
+                      00433 
+0EA2                  00434 NRF_GET_PAYLOAD
+0EA2   300E           00435         MOVLW   0X0E
+0EA3   008A           00436         MOVWF   PCLATH
+0EA4   26F0           00437         CALL    RADIO_RECV_DATA
+0EA5   3001           00438         MOVLW   0X01
+0EA6   008A           00439         MOVWF   PCLATH
+Warning[203]: Found opcode in column 1. (RETURN)
+0EA7   0008           00440 RETURN
+                      00441 
+                      00442 
+                      00443 
+                      00444 
+                      00445 
+                      00446 
+                      00447 
+Warning[205]: Found directive in column 1. (ORG)
+0ED0                  00448 ORG 0XED0
+                      00449 ;========== nrf send payload =========
+0ED0                  00450 RADIO_SEND_DATA
+                      00451 
+0ED0   0834           00452         MOVFW   PAYLOADSIZE
+0ED1   00BC           00453         MOVWF   PL_LOOP
+                      00454 
+                      00455 
+                      00456 
+0ED2   1005           00457         CSN_LO  
+                      00458 
+0ED3   30A0           00459         MOVLW   0XA0
+0ED4   00B9           00460         MOVWF   SPI_DATA0
+0ED5   27A4           00461         CALL    SPI_SENDBYTE
+                      00462 
+0ED6   30A0           00463         MOVLW   0XA0
+0ED7   0084           00464         MOVWF   FSR
+                      00465 
+                      00466 
+0ED8                  00467 RSD0
+0ED8   0800           00468         MOVFW   INDF
+0ED9   00B9           00469         MOVWF   SPI_DATA0
+0EDA   27A4           00470         CALL    SPI_SENDBYTE
+                      00471 
+MPASM  5.51                 NRF24L01_GYRO.ASM   4-17-2021  14:19:50         PAGE 11
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Message[305]: Using default destination of 1 (file).
+0EDB   0A84           00472         INCF    FSR
+                      00473 
+0EDC   0BBC           00474         DECFSZ  PL_LOOP,F
+0EDD   2ED8           00475         GOTO    RSD0
+                      00476 
+0EDE   1405           00477         CSN_HI
+                      00478 
+0EDF   0000           00479         NOP
+0EE0   0000           00480         NOP
+                      00481 
+0EE1   1485           00482         CE_HI
+                      00483         
+0EE2   3005           00484         MOVLW   0X05
+0EE3   27D8           00485         CALL    NRF_DELAY_MS
+                      00486 
+                      00487 
+0EE4   1085           00488         CE_LO
+                      00489 
+0EE5   2718           00490         CALL    RADIO_CHECKSTATUS
+0EE6   1EA7           00491         BTFSS   NRF_REG07,5
+0EE7   2EE9           00492         GOTO    TXDS0
+0EE8   2EEB           00493         GOTO    TXDS1
+                      00494 
+0EE9                  00495 TXDS0
+0EE9   0000           00496         TDS_LO
+0EEA   2EEE           00497         GOTO    RSD1
+                      00498 
+0EEB                  00499 TXDS1
+0EEB   0000           00500         TDS_HI
+0EEC   2EEE           00501         GOTO    RSD1
+                      00502 
+0EED   0000           00503         NOP     
+                      00504 
+0EEE                  00505 RSD1
+0EEE   2712           00506         CALL    RADIO_CLRSTATUS
+                      00507 
+                      00508 
+Warning[203]: Found opcode in column 1. (RETURN)
+0EEF   0008           00509 RETURN
+                      00510 ;=====================================
+                      00511 
+                      00512 
+                      00513 
+                      00514 ;======== nrf recieve payload ========
+0EF0                  00515 RADIO_RECV_DATA
+0EF0   26FD           00516         CALL    RADIO_CHECKFIFO
+                      00517 
+0EF1   1833           00518         BTFSC   NRF_REG17,0
+0EF2   2EF4           00519         GOTO    RXDR0
+0EF3   2EF5           00520         GOTO    RXDR1
+                      00521 
+0EF4                  00522 RXDR0
+MPASM  5.51                 NRF24L01_GYRO.ASM   4-17-2021  14:19:50         PAGE 12
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00523 
+                      00524 ;       call    radio_flushfifo
+                      00525 
+0EF4   2EFA           00526         GOTO    RRD0
+                      00527 
+0EF5                  00528 RXDR1
+0EF5   0000           00529         RDR_HI
+0EF6   2703           00530         CALL    RADIO_READ_RXFIFO
+                      00531 
+0EF7   2712           00532         CALL    RADIO_CLRSTATUS
+                      00533 
+0EF8   271E           00534         CALL    RADIO_FLUSHFIFO
+                      00535 
+0EF9   2EFA           00536         GOTO    RRD0
+                      00537 
+0EFA                  00538 RRD0
+0EFA   0000           00539         NOP
+0EFB   0000           00540                 RDR_LO  
+Warning[203]: Found opcode in column 1. (RETURN)
+0EFC   0008           00541 RETURN
+                      00542 ;=====================================
+                      00543 
+                      00544 
+                      00545 
+                      00546         
+                      00547 
+0EFD                  00548 RADIO_CHECKFIFO
+0EFD   3017           00549         MOVLW   0X17
+0EFE   00B6           00550         MOVWF   REG_TOREAD
+0EFF   279C           00551         CALL    CMD_REGREAD
+                      00552         
+0F00   0838           00553         MOVFW   DATA_TOREAD
+0F01   00B3           00554         MOVWF   NRF_REG17
+Warning[203]: Found opcode in column 1. (RETURN)
+0F02   0008           00555 RETURN
+                      00556 
+                      00557 
+                      00558 
+                      00559 
+                      00560         
+                      00561 ;========== nrf_read_rxfifo ==========
+0F03                  00562 RADIO_READ_RXFIFO
+0F03   3044           00563         MOVLW   0X44
+0F04   0084           00564         MOVWF   FSR
+0F05   0834           00565         MOVFW   PAYLOADSIZE
+0F06   00BC           00566         MOVWF   PL_LOOP
+                      00567 
+0F07   1005           00568         CSN_LO
+0F08   3061           00569         MOVLW   0X61
+0F09   00B9           00570         MOVWF   SPI_DATA0
+0F0A   27A4           00571         CALL    SPI_SENDBYTE
+                      00572 
+0F0B                  00573 RFF0
+MPASM  5.51                 NRF24L01_GYRO.ASM   4-17-2021  14:19:50         PAGE 13
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0F0B   27B5           00574         CALL    SPI_RECVBYTE
+0F0C   083A           00575         MOVFW   SPI_DATA1
+0F0D   0080           00576         MOVWF   INDF
+Message[305]: Using default destination of 1 (file).
+0F0E   0A84           00577         INCF    FSR
+0F0F   0BBC           00578         DECFSZ  PL_LOOP,F
+0F10   2F0B           00579         GOTO    RFF0
+                      00580 
+Warning[203]: Found opcode in column 1. (RETURN)
+0F11   0008           00581 RETURN
+                      00582 ;=====================================
+                      00583 
+                      00584 ;========== nrf clear status =========
+0F12                  00585 RADIO_CLRSTATUS
+0F12   3007           00586         MOVLW   0X07
+0F13   00B5           00587         MOVWF   REG_TOWRITE
+0F14   30FF           00588         MOVLW   0XFF
+0F15   00B7           00589         MOVWF   DATA_TOWRITE
+0F16   2792           00590         CALL    CMD_REGWRITE
+                      00591 
+Warning[203]: Found opcode in column 1. (RETURN)
+0F17   0008           00592 RETURN
+                      00593 ;=====================================
+                      00594 
+                      00595 ;========== nrf check status =========
+0F18                  00596 RADIO_CHECKSTATUS
+0F18   3007           00597         MOVLW   0X07
+0F19   00B6           00598         MOVWF   REG_TOREAD
+0F1A   279C           00599         CALL    CMD_REGREAD
+                      00600         
+0F1B   0838           00601         MOVFW   DATA_TOREAD
+0F1C   00A7           00602         MOVWF   NRF_REG07
+Warning[203]: Found opcode in column 1. (RETURN)
+0F1D   0008           00603 RETURN
+                      00604 ;=====================================
+                      00605 
+                      00606 
+                      00607 
+                      00608 ;============ nrf clr fifo ===========
+0F1E                  00609 RADIO_FLUSHFIFO
+0F1E   1005           00610         CSN_LO
+0F1F   30E1           00611         MOVLW   0XE1
+0F20   00B9           00612         MOVWF   SPI_DATA0
+0F21   27A4           00613         CALL    SPI_SENDBYTE
+0F22   1405           00614         CSN_HI
+0F23   0000           00615         NOP
+0F24   0000           00616         NOP
+0F25   0000           00617         NOP
+0F26   0000           00618         NOP
+                      00619         
+0F27   1005           00620         CSN_LO
+                      00621 
+0F28   30E2           00622         MOVLW   0XE2
+MPASM  5.51                 NRF24L01_GYRO.ASM   4-17-2021  14:19:50         PAGE 14
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0F29   00B9           00623         MOVWF   SPI_DATA0
+0F2A   27A4           00624         CALL    SPI_SENDBYTE
+0F2B   1405           00625         CSN_HI
+Warning[203]: Found opcode in column 1. (RETURN)
+0F2C   0008           00626 RETURN
+                      00627 ;=====================================
+                      00628 
+                      00629 
+                      00630 
+                      00631 
+                      00632 
+                      00633 
+                      00634 ;========== set nrf settings =========
+0F2D                  00635 RADIO_BEGIN
+0F2D   300E           00636         MOVLW   0X0E
+0F2E   00A0           00637         MOVWF   NRF_REG00
+                      00638 
+0F2F   303F           00639         MOVLW   0X3F
+0F30   00A1           00640         MOVWF   NRF_REG01
+                      00641 
+0F31   3003           00642         MOVLW   0X03
+0F32   00A2           00643         MOVWF   NRF_REG02
+                      00644         
+0F33   3003           00645         MOVLW   0X03
+0F34   00A3           00646         MOVWF   NRF_REG03
+                      00647 
+0F35   305F           00648         MOVLW   0X5F
+0F36   00A4           00649         MOVWF   NRF_REG04
+                      00650 
+0F37   304C           00651         MOVLW   0X4C
+0F38   00A5           00652         MOVWF   NRF_REG05
+                      00653 
+0F39   3027           00654         MOVLW   0X27
+0F3A   00A6           00655         MOVWF   NRF_REG06
+                      00656 
+                      00657 
+0F3B   3000           00658         MOVLW   0X00
+0F3C   00B5           00659         MOVWF   REG_TOWRITE
+0F3D   0820           00660         MOVFW   NRF_REG00
+0F3E   00B7           00661         MOVWF   DATA_TOWRITE
+0F3F   2792           00662         CALL    CMD_REGWRITE
+                      00663 
+0F40   3001           00664         MOVLW   0X01
+0F41   00B5           00665         MOVWF   REG_TOWRITE
+0F42   0821           00666         MOVFW   NRF_REG01
+0F43   00B7           00667         MOVWF   DATA_TOWRITE
+0F44   2792           00668         CALL    CMD_REGWRITE
+                      00669 
+0F45   3002           00670         MOVLW   0X02
+0F46   00B5           00671         MOVWF   REG_TOWRITE
+0F47   0822           00672         MOVFW   NRF_REG02
+0F48   00B7           00673         MOVWF   DATA_TOWRITE
+0F49   2792           00674         CALL    CMD_REGWRITE
+MPASM  5.51                 NRF24L01_GYRO.ASM   4-17-2021  14:19:50         PAGE 15
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00675 
+0F4A   3003           00676         MOVLW   0X03
+0F4B   00B5           00677         MOVWF   REG_TOWRITE
+0F4C   0823           00678         MOVFW   NRF_REG03
+0F4D   00B7           00679         MOVWF   DATA_TOWRITE
+0F4E   2792           00680         CALL    CMD_REGWRITE
+                      00681 
+0F4F   3004           00682         MOVLW   0X04
+0F50   00B5           00683         MOVWF   REG_TOWRITE
+0F51   0824           00684         MOVFW   NRF_REG04
+0F52   00B7           00685         MOVWF   DATA_TOWRITE
+0F53   2792           00686         CALL    CMD_REGWRITE
+                      00687 
+0F54   3005           00688         MOVLW   0X05
+0F55   00B5           00689         MOVWF   REG_TOWRITE
+0F56   0825           00690         MOVFW   NRF_REG05
+0F57   00B7           00691         MOVWF   DATA_TOWRITE
+0F58   2792           00692         CALL    CMD_REGWRITE
+                      00693 
+0F59   3006           00694         MOVLW   0X06
+0F5A   00B5           00695         MOVWF   REG_TOWRITE
+0F5B   0826           00696         MOVFW   NRF_REG06
+0F5C   00B7           00697         MOVWF   DATA_TOWRITE
+0F5D   2792           00698         CALL    CMD_REGWRITE
+                      00699 
+0F5E   3011           00700         MOVLW   0X11
+0F5F   00B5           00701         MOVWF   REG_TOWRITE
+0F60   0834           00702         MOVFW   PAYLOADSIZE
+0F61   00B7           00703         MOVWF   DATA_TOWRITE
+0F62   2792           00704         CALL    CMD_REGWRITE
+                      00705 
+0F63   2768           00706         CALL    SET_TX_ADDRESS
+0F64   277D           00707         CALL    SET_RX_ADDRESS
+                      00708 
+0F65   2712           00709         CALL    RADIO_CLRSTATUS
+0F66   271E           00710         CALL    RADIO_FLUSHFIFO
+Warning[203]: Found opcode in column 1. (RETURN)
+0F67   0008           00711 RETURN
+                      00712 ;=====================================
+                      00713 
+                      00714 ;========== set tx address ===========
+0F68                  00715 SET_TX_ADDRESS
+0F68   1005           00716         CSN_LO
+                      00717 
+0F69   3030           00718         MOVLW   B'00110000'
+0F6A   00B9           00719         MOVWF   SPI_DATA0
+0F6B   27A4           00720         CALL    SPI_SENDBYTE
+                      00721 
+0F6C   082D           00722         MOVFW   TX_ADDR_B0
+0F6D   00B9           00723         MOVWF   SPI_DATA0
+0F6E   27A4           00724         CALL    SPI_SENDBYTE
+                      00725 
+0F6F   082E           00726         MOVFW   TX_ADDR_B1
+MPASM  5.51                 NRF24L01_GYRO.ASM   4-17-2021  14:19:50         PAGE 16
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0F70   00B9           00727         MOVWF   SPI_DATA0
+0F71   27A4           00728         CALL    SPI_SENDBYTE
+                      00729 
+0F72   082F           00730         MOVFW   TX_ADDR_B2
+0F73   00B9           00731         MOVWF   SPI_DATA0
+0F74   27A4           00732         CALL    SPI_SENDBYTE
+                      00733 
+0F75   0830           00734         MOVFW   TX_ADDR_B3
+0F76   00B9           00735         MOVWF   SPI_DATA0
+0F77   27A4           00736         CALL    SPI_SENDBYTE
+                      00737 
+0F78   0831           00738         MOVFW   TX_ADDR_B4
+0F79   00B9           00739         MOVWF   SPI_DATA0
+0F7A   27A4           00740         CALL    SPI_SENDBYTE
+                      00741 
+0F7B   1405           00742         CSN_HI
+Warning[203]: Found opcode in column 1. (RETURN)
+0F7C   0008           00743 RETURN
+                      00744 ;=====================================
+                      00745 
+                      00746 ;========== set rx address ===========
+0F7D                  00747 SET_RX_ADDRESS
+0F7D   1005           00748         CSN_LO
+0F7E   302A           00749         MOVLW   B'00101010'
+0F7F   00B9           00750         MOVWF   SPI_DATA0
+0F80   27A4           00751         CALL    SPI_SENDBYTE
+                      00752         
+0F81   0828           00753         MOVFW   RX_ADDR_P00
+0F82   00B9           00754         MOVWF   SPI_DATA0
+0F83   27A4           00755         CALL    SPI_SENDBYTE
+                      00756 
+0F84   0829           00757         MOVFW   RX_ADDR_P01
+0F85   00B9           00758         MOVWF   SPI_DATA0
+0F86   27A4           00759         CALL    SPI_SENDBYTE
+                      00760 
+0F87   082A           00761         MOVFW   RX_ADDR_P02
+0F88   00B9           00762         MOVWF   SPI_DATA0
+0F89   27A4           00763         CALL    SPI_SENDBYTE
+                      00764         
+0F8A   082B           00765         MOVFW   RX_ADDR_P03
+0F8B   00B9           00766         MOVWF   SPI_DATA0
+0F8C   27A4           00767         CALL    SPI_SENDBYTE
+                      00768 
+0F8D   082C           00769         MOVFW   RX_ADDR_P04
+0F8E   00B9           00770         MOVWF   SPI_DATA0
+0F8F   27A4           00771         CALL    SPI_SENDBYTE
+                      00772 
+0F90   1405           00773         CSN_HI
+Warning[203]: Found opcode in column 1. (RETURN)
+0F91   0008           00774 RETURN
+                      00775 ;=====================================
+                      00776 
+                      00777 ;======== write nrf register =========
+MPASM  5.51                 NRF24L01_GYRO.ASM   4-17-2021  14:19:50         PAGE 17
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0F92                  00778 CMD_REGWRITE
+0F92   1005           00779         CSN_LO
+                      00780 
+0F93   16B5           00781         BSF             REG_TOWRITE,5
+0F94   0835           00782         MOVFW   REG_TOWRITE
+                      00783 
+0F95   00B9           00784         MOVWF   SPI_DATA0
+0F96   27A4           00785         CALL    SPI_SENDBYTE
+                      00786 
+0F97   0837           00787         MOVFW   DATA_TOWRITE
+                      00788 
+0F98   00B9           00789         MOVWF   SPI_DATA0
+0F99   27A4           00790         CALL    SPI_SENDBYTE
+                      00791 
+0F9A   1405           00792         CSN_HI
+Warning[203]: Found opcode in column 1. (RETURN)
+0F9B   0008           00793 RETURN
+                      00794 ;=====================================
+                      00795 
+                      00796 
+                      00797 ;======== read nrf register ==========
+0F9C                  00798 CMD_REGREAD
+0F9C   1005           00799         CSN_LO
+                      00800 
+0F9D   12B6           00801         BCF             REG_TOREAD,5
+0F9E   0836           00802         MOVFW   REG_TOREAD
+                      00803         
+0F9F   00B9           00804         MOVWF   SPI_DATA0
+0FA0   27A4           00805         CALL    SPI_SENDBYTE
+                      00806 
+0FA1   27B5           00807         CALL    SPI_RECVBYTE
+                      00808 
+0FA2   1405           00809         CSN_HI
+                      00810 
+Warning[203]: Found opcode in column 1. (RETURN)
+0FA3   0008           00811 RETURN
+                      00812 ;=====================================
+                      00813 
+                      00814 
+                      00815 ;========== spi send byte ============
+0FA4                  00816 SPI_SENDBYTE
+                      00817 
+0FA4   3008           00818         MOVLW   8
+0FA5   00BB           00819         MOVWF   CLK_LOOP
+0FA6                  00820 SSB0
+Message[305]: Using default destination of 1 (file).
+0FA6   0DB9           00821         RLF             SPI_DATA0
+                      00822 
+0FA7   1C03           00823         BTFSS   STATUS,C
+0FA8   2FAC           00824         GOTO    SSB_MOSI0
+0FA9   2FAA           00825         GOTO    SSB_MOSI1
+                      00826 
+0FAA                  00827 SSB_MOSI1
+MPASM  5.51                 NRF24L01_GYRO.ASM   4-17-2021  14:19:50         PAGE 18
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0FAA   1505           00828         MOSI_HI
+0FAB   2FAF           00829         GOTO    SSB1
+                      00830 
+0FAC                  00831 SSB_MOSI0
+0FAC   1105           00832         MOSI_LO
+0FAD   2FAF           00833         GOTO    SSB1
+Warning[203]: Found opcode in column 1. (NOP)
+0FAE   0000           00834 NOP
+                      00835 
+0FAF                  00836 SSB1
+0FAF   1606           00837         CLK_HI
+0FB0   1206           00838         CLK_LO
+                      00839 
+0FB1   0BBB           00840         DECFSZ  CLK_LOOP,F
+0FB2   2FA6           00841         GOTO    SSB0
+                      00842 
+0FB3   1206           00843         CLK_LO
+Warning[203]: Found opcode in column 1. (RETURN)
+0FB4   0008           00844 RETURN
+                      00845 ;=====================================
+                      00846 
+                      00847 
+                      00848 ;========== spi recieve byte =========
+0FB5                  00849 SPI_RECVBYTE
+0FB5   01BA           00850         CLRF    SPI_DATA1
+0FB6   01B8           00851         CLRF    DATA_TOREAD
+                      00852 
+0FB7   3008           00853         MOVLW   8
+0FB8   00BB           00854         MOVWF   CLK_LOOP
+                      00855 
+0FB9                  00856 SRB0
+0FB9   1F06           00857         BTFSS   PORTB,6
+0FBA   2FBE           00858         GOTO    SRB_MISO0
+0FBB   2FBC           00859         GOTO    SRB_MISO1
+                      00860 
+0FBC                  00861 SRB_MISO1
+0FBC   1403           00862         SETC
+0FBD   2FC0           00863         GOTO    SRB1
+                      00864 
+0FBE                  00865 SRB_MISO0
+0FBE   1003           00866         CLRC
+0FBF   2FC0           00867         GOTO    SRB1
+                      00868 
+0FC0                  00869 SRB1
+Message[305]: Using default destination of 1 (file).
+0FC0   0DBA           00870         RLF     SPI_DATA1
+                      00871 
+0FC1   1606           00872         CLK_HI
+0FC2   1206           00873         CLK_LO
+                      00874 
+0FC3   0BBB           00875         DECFSZ  CLK_LOOP,F
+0FC4   2FB9           00876         GOTO    SRB0
+                      00877 
+MPASM  5.51                 NRF24L01_GYRO.ASM   4-17-2021  14:19:50         PAGE 19
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0FC5   083A           00878         MOVFW   SPI_DATA1
+0FC6   00B8           00879         MOVWF   DATA_TOREAD
+                      00880 
+0FC7   1206           00881         CLK_LO
+Warning[203]: Found opcode in column 1. (RETURN)
+0FC8   0008           00882 RETURN
+                      00883 ;=====================================
+                      00884 
+                      00885 
+                      00886         
+                      00887         
+                      00888 
+                      00889 
+                      00890 ;==========     delay usec =========
+0FC9                  00891 NRF_DELAY_US
+                      00892 
+0FC9   00BE           00893         MOVWF   NRF_DELAYUS
+                      00894 
+0FCA                  00895 NRF_USEC
+                      00896 
+0FCA   0000           00897         NOP
+0FCB   0000           00898         NOP
+0FCC   0000           00899         NOP
+0FCD   0000           00900         NOP
+0FCE   0BBE           00901         DECFSZ  NRF_DELAYUS,F
+                      00902 
+0FCF   2FCA           00903         GOTO    NRF_USEC
+                      00904 
+Warning[203]: Found opcode in column 1. (RETURN)
+0FD0   0008           00905 RETURN
+                      00906 ;=================================
+                      00907 
+                      00908 
+                      00909 
+                      00910 ;=========== delay one ms ========
+0FD1                  00911 NRF_DELAY_ONEMS
+                      00912 
+0FD1   3005           00913         MOVLW   .5
+0FD2   00BD           00914         MOVWF   NRF_DLOOP
+                      00915 
+0FD3                  00916 NRF_MSEC
+0FD3   30C8           00917         MOVLW   .200
+0FD4   27C9           00918         CALL    NRF_DELAY_US
+0FD5   0BBD           00919         DECFSZ  NRF_DLOOP,F
+0FD6   2FD3           00920         GOTO    NRF_MSEC
+                      00921 
+Warning[203]: Found opcode in column 1. (RETURN)
+0FD7   0008           00922 RETURN
+                      00923 ;==================================
+                      00924 
+                      00925 
+                      00926 ;=========== delay ms   ==========
+0FD8                  00927 NRF_DELAY_MS
+MPASM  5.51                 NRF24L01_GYRO.ASM   4-17-2021  14:19:50         PAGE 20
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00928         
+0FD8   00BF           00929         MOVWF   NRF_DELAYMS
+0FD9                  00930 NRF_MSEC0
+0FD9   27D1           00931         CALL    NRF_DELAY_ONEMS
+0FDA   0BBF           00932         DECFSZ  NRF_DELAYMS,F
+0FDB   2FD9           00933         GOTO    NRF_MSEC0
+Warning[203]: Found opcode in column 1. (RETURN)
+0FDC   0008           00934 RETURN
+                      00935 ;=================================
+                      00936 
+                      00937 
+                      00938 
+                      00939 
+                      00940 
+2100                  00941         ORG     0X2100                          ; data eeprom location
+2100   0001 0002 0003 00942         DE      1,2,3,4                         ; define first four eeprom locations as 1, 2, 3, and 4
+       0004 
+                      00943 
+                      00944 
+                      00945 
+                      00946 
+                      00947         END                       ; directive 'end of program'
+MPASM  5.51                 NRF24L01_GYRO.ASM   4-17-2021  14:19:50         PAGE 21
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ABDEN                             00000000
+ABDOVF                            00000007
+ADCON0                            0000001F
+ADCON1                            0000009F
+ADCS0                             00000004
+ADCS1                             00000005
+ADCS2                             00000006
+ADDEN                             00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+ANS0                              00000000
+ANS1                              00000001
+ANS10                             00000002
+ANS11                             00000003
+ANS2                              00000002
+ANS3                              00000003
+ANS4                              00000004
+ANS5                              00000005
+ANS6                              00000006
+ANS7                              00000007
+ANS8                              00000000
+ANS9                              00000001
+ANSEL                             0000011E
+ANSELH                            0000011F
+BANK0                             BANKSEL PORTA
+BANK1                             BANKSEL ADRESL
+BANK2                             BANKSEL ANSELH
+BAUDCTL                           0000009B
+BF                                00000000
+BRG0                              00000000
+BRG1                              00000001
+BRG10                             00000002
+BRG11                             00000003
+BRG12                             00000004
+BRG13                             00000005
+BRG14                             00000006
+BRG15                             00000007
+BRG16                             00000003
+BRG2                              00000002
+BRG3                              00000003
+BRG4                              00000004
+BRG5                              00000005
+BRG6                              00000006
+BRG7                              00000007
+BRG8                              00000000
+BRG9                              00000001
+BRGH                              00000002
+BUTTON_C1                         00000088
+BUTTON_C2                         0000008F
+MPASM  5.51                 NRF24L01_GYRO.ASM   4-17-2021  14:19:50         PAGE 22
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+BUTTON_C3                         00000096
+BUTTON_C4                         0000009D
+BUTTON_C5                         000000A4
+BUTTON_C6                         000000AB
+BUTTON_C7                         000000B2
+BUTTON_SHIFT                      00000081
+BUZZ_LOOP                         00000041
+C                                 00000000
+C1CH0                             00000000
+C1CH1                             00000001
+C1IE                              00000005
+C1IF                              00000005
+C1OE                              00000005
+C1ON                              00000007
+C1OUT                             00000006
+C1POL                             00000004
+C1R                               00000002
+C1SEN                             00000005
+C1VREN                            00000007
+C2CH0                             00000000
+C2CH1                             00000001
+C2IE                              00000006
+C2IF                              00000006
+C2OE                              00000005
+C2ON                              00000007
+C2OUT                             00000006
+C2POL                             00000004
+C2R                               00000002
+C2REN                             00000004
+C2SYNC                            00000000
+C2VREN                            00000006
+CCP1CON                           00000017
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCPR                              00000015
+CCPR1H                            00000016
+CCPR1L                            00000015
+CE_HI                             BSF PORTA,1
+CE_LO                             BCF     PORTA,1
+CHS0                              00000002
+CHS1                              00000003
+CHS2                              00000004
+CHS3                              00000005
+CKE                               00000006
+CKP                               00000004
+CLK_HI                            BSF     PORTB,4
+CLK_LO                            BCF     PORTB,4
+CLK_LOOP                          0000003B
+CM1CON0                           00000119
+MPASM  5.51                 NRF24L01_GYRO.ASM   4-17-2021  14:19:50         PAGE 23
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CM2CON0                           0000011A
+CM2CON1                           0000011B
+CMD_REGREAD                       00000F9C
+CMD_REGWRITE                      00000F92
+CREN                              00000004
+CSN_HI                            BSF     PORTA,0
+CSN_LO                            BCF     PORTA,0
+CSRC                              00000007
+D                                 00000005
+DATA_ADDRESS                      00000005
+DATA_TOREAD                       00000038
+DATA_TOWRITE                      00000037
+DC                                00000001
+DC1B0                             00000004
+DC1B1                             00000005
+D_A                               00000005
+D_NOT_A                           00000005
+ECCPAS                            0000001D
+ECCPAS0                           00000004
+ECCPAS1                           00000005
+ECCPAS2                           00000006
+ECCPASE                           00000007
+EEADR                             0000010D
+EEADRH                            0000010F
+EECON1                            0000018C
+EECON2                            0000018D
+EEDAT                             0000010C
+EEDATA                            0000010C
+EEDATH                            0000010E
+EEIE                              00000004
+EEIF                              00000004
+EEPGD                             00000007
+F                                 00000001
+FERR                              00000002
+FSR                               00000004
+GIE                               00000007
+GO                                00000001
+GO_DONE                           00000001
+GO_NOT_DONE                       00000001
+HTS                               00000002
+I2C_DATA                          00000005
+I2C_READ                          00000002
+I2C_START                         00000003
+I2C_STOP                          00000004
+INDF                              00000000
+INIT                              00000011
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTERRUPT                         0000006A
+INTF                              00000001
+IOC                               00000096
+IOC0                              00000000
+MPASM  5.51                 NRF24L01_GYRO.ASM   4-17-2021  14:19:50         PAGE 24
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+IOC1                              00000001
+IOC2                              00000002
+IOC3                              00000003
+IOC4                              00000004
+IOC5                              00000005
+IOCA                              00000096
+IOCA0                             00000000
+IOCA1                             00000001
+IOCA2                             00000002
+IOCA3                             00000003
+IOCA4                             00000004
+IOCA5                             00000005
+IOCB                              00000116
+IOCB4                             00000004
+IOCB5                             00000005
+IOCB6                             00000006
+IOCB7                             00000007
+IRCF0                             00000004
+IRCF1                             00000005
+IRCF2                             00000006
+IRP                               00000007
+LTS                               00000001
+MAIN                              00000049
+MC1OUT                            00000007
+MC2OUT                            00000006
+MOSI_HI                           BSF     PORTA,2
+MOSI_LO                           BCF     PORTA,2
+MSK                               00000093
+MSK0                              00000000
+MSK1                              00000001
+MSK2                              00000002
+MSK3                              00000003
+MSK4                              00000004
+MSK5                              00000005
+MSK6                              00000006
+MSK7                              00000007
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
+NOT_BOR                           00000000
+NOT_DONE                          00000001
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_RABPU                         00000007
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+NOT_W                             00000002
+NOT_WRITE                         00000002
+NRF_DELAYMS                       0000003F
+NRF_DELAYUS                       0000003E
+NRF_DELAY_MS                      00000FD8
+NRF_DELAY_ONEMS                   00000FD1
+NRF_DELAY_US                      00000FC9
+NRF_DLOOP                         0000003D
+MPASM  5.51                 NRF24L01_GYRO.ASM   4-17-2021  14:19:50         PAGE 25
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+NRF_GET_PAYLOAD                   00000EA2
+NRF_MSEC                          00000FD3
+NRF_MSEC0                         00000FD9
+NRF_PAYLOAD                       000000A0
+NRF_PLTEMP                        000000E0
+NRF_REG00                         00000020
+NRF_REG01                         00000021
+NRF_REG02                         00000022
+NRF_REG03                         00000023
+NRF_REG04                         00000024
+NRF_REG05                         00000025
+NRF_REG06                         00000026
+NRF_REG07                         00000027
+NRF_REG11                         00000032
+NRF_REG17                         00000033
+NRF_SEND_PAYLOAD                  00000EA0
+NRF_USEC                          00000FCA
+OERR                              00000001
+OPTION_REG                        00000081
+OSCCON                            0000008F
+OSCTUNE                           00000090
+OSFIE                             00000007
+OSFIF                             00000007
+OSTS                              00000003
+P                                 00000004
+P1M0                              00000006
+P1M1                              00000007
+PAYLOADSIZE                       00000034
+PBZ0                              0000006E
+PCL                               00000002
+PCLATH                            0000000A
+PCLATH_TEMP                       0000007F
+PCON                              0000008E
+PDC0                              00000000
+PDC1                              00000001
+PDC2                              00000002
+PDC3                              00000003
+PDC4                              00000004
+PDC5                              00000005
+PDC6                              00000006
+PEIE                              00000006
+PIE1                              0000008C
+PIE2                              0000008D
+PIR1                              0000000C
+PIR2                              0000000D
+PL_LOOP                           0000003C
+PORTA                             00000005
+PORTB                             00000006
+PORTC                             00000007
+PORTC_TEMP                        00000040
+PR2                               00000092
+PRESS_BUZZER                      0000006C
+PRSEN                             00000007
+MPASM  5.51                 NRF24L01_GYRO.ASM   4-17-2021  14:19:50         PAGE 26
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+PSSAC0                            00000002
+PSSAC1                            00000003
+PSSBD0                            00000000
+PSSBD1                            00000001
+PSTRCON                           0000019D
+PULSR                             00000002
+PULSS                             00000003
+PWM1CON                           0000001C
+R                                 00000002
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RA5                               00000005
+RABIE                             00000003
+RABIF                             00000000
+RADIO_BEGIN                       00000F2D
+RADIO_CHECKFIFO                   00000EFD
+RADIO_CHECKSTATUS                 00000F18
+RADIO_CLRSTATUS                   00000F12
+RADIO_FLUSHFIFO                   00000F1E
+RADIO_READ_RXFIFO                 00000F03
+RADIO_RECV_DATA                   00000EF0
+RADIO_SEND_DATA                   00000ED0
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RC0                               00000000
+RC1                               00000001
+RC2                               00000002
+RC3                               00000003
+RC4                               00000004
+RC5                               00000005
+RC6                               00000006
+RC7                               00000007
+RCIDL                             00000006
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+RCSTA                             00000018
+RD                                00000000
+RDR_HI                            NOP
+RDR_LO                            NOP
+READ_WRITE                        00000002
+REG_TOREAD                        00000036
+REG_TOWRITE                       00000035
+RFF0                              00000F0B
+MPASM  5.51                 NRF24L01_GYRO.ASM   4-17-2021  14:19:50         PAGE 27
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RP0                               00000005
+RP1                               00000006
+RRD0                              00000EFA
+RSD0                              00000ED8
+RSD1                              00000EEE
+RX9                               00000006
+RX9D                              00000000
+RXDR0                             00000EF4
+RXDR1                             00000EF5
+RX_ADDR_P00                       00000028
+RX_ADDR_P01                       00000029
+RX_ADDR_P02                       0000002A
+RX_ADDR_P03                       0000002B
+RX_ADDR_P04                       0000002C
+R_NOT_W                           00000002
+R_W                               00000002
+S                                 00000003
+SBOREN                            00000004
+SCKP                              00000004
+SCS                               00000000
+SENB                              00000003
+SENDB                             00000003
+SET_RX_ADDRESS                    00000F7D
+SET_TX_ADDRESS                    00000F68
+SMP                               00000007
+SPBRG                             00000099
+SPBRGH                            0000009A
+SPEN                              00000007
+SPI_DATA0                         00000039
+SPI_DATA1                         0000003A
+SPI_RECVBYTE                      00000FB5
+SPI_SENDBYTE                      00000FA4
+SR0                               00000006
+SR1                               00000007
+SRB0                              00000FB9
+SRB1                              00000FC0
+SRB_MISO0                         00000FBE
+SRB_MISO1                         00000FBC
+SRCON                             0000019E
+SREN                              00000005
+SSB0                              00000FA6
+SSB1                              00000FAF
+SSB_MOSI0                         00000FAC
+SSB_MOSI1                         00000FAA
+SSPADD                            00000093
+SSPBUF                            00000013
+SSPCON                            00000014
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+MPASM  5.51                 NRF24L01_GYRO.ASM   4-17-2021  14:19:50         PAGE 28
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+SSPM3                             00000003
+SSPMSK                            00000093
+SSPOV                             00000006
+SSPSTAT                           00000094
+STATUS                            00000003
+STATUS_TEMP                       0000007E
+STRA                              00000000
+STRB                              00000001
+STRC                              00000002
+STRD                              00000003
+STRSYNC                           00000004
+SWDTEN                            00000000
+SYNC                              00000004
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1GINV                            00000007
+T1GSS                             00000001
+T1IE                              00000000
+T1IF                              00000000
+T1OSCEN                           00000003
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+T2IE                              00000001
+T2IF                              00000001
+TDS_HI                            NOP
+TDS_LO                            NOP
+TMR0                              00000001
+TMR1                              0000000E
+TMR1CS                            00000001
+TMR1GE                            00000006
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+MPASM  5.51                 NRF24L01_GYRO.ASM   4-17-2021  14:19:50         PAGE 29
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TRISA3                            00000003
+TRISA4                            00000004
+TRISA5                            00000005
+TRISB                             00000086
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+TRISC                             00000087
+TRISC0                            00000000
+TRISC1                            00000001
+TRISC2                            00000002
+TRISC3                            00000003
+TRISC4                            00000004
+TRISC5                            00000005
+TRISC6                            00000006
+TRISC7                            00000007
+TRMT                              00000001
+TUN0                              00000000
+TUN1                              00000001
+TUN2                              00000002
+TUN3                              00000003
+TUN4                              00000004
+TX9                               00000006
+TX9D                              00000000
+TXDS0                             00000EE9
+TXDS1                             00000EEB
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+TXSTA                             00000098
+TX_ADDR_B0                        0000002D
+TX_ADDR_B1                        0000002E
+TX_ADDR_B2                        0000002F
+TX_ADDR_B3                        00000030
+TX_ADDR_B4                        00000031
+UA                                00000001
+UART_PAYLOAD                      000000C0
+ULPWUE                            00000005
+VCFG                              00000006
+VIB_OFF                           BCF     PORTB,5
+VIB_ON                            BSF     PORTB,5
+VP6EN                             00000004
+VR0                               00000000
+VR1                               00000001
+VR2                               00000002
+VR3                               00000003
+VRCON                             00000118
+VRR                               00000005
+W                                 00000000
+WCOL                              00000007
+WDTCON                            00000097
+MPASM  5.51                 NRF24L01_GYRO.ASM   4-17-2021  14:19:50         PAGE 30
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+WDTPS0                            00000001
+WDTPS1                            00000002
+WDTPS2                            00000003
+WDTPS3                            00000004
+WPU                               00000095
+WPU0                              00000000
+WPU1                              00000001
+WPU2                              00000002
+WPU4                              00000004
+WPU5                              00000005
+WPUA                              00000095
+WPUA0                             00000000
+WPUA1                             00000001
+WPUA2                             00000002
+WPUA4                             00000004
+WPUA5                             00000005
+WPUB                              00000115
+WPUB4                             00000004
+WPUB5                             00000005
+WPUB6                             00000006
+WPUB7                             00000007
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+WUE                               00000001
+W_TEMP                            0000007D
+Z                                 00000002
+_BOD_NSLEEP                       00003EFF
+_BOD_OFF                          00003CFF
+_BOD_ON                           00003FFF
+_BOD_SBODEN                       00003DFF
+_BOREN_NSLEEP                     00003EFF
+_BOREN_OFF                        00003CFF
+_BOREN_ON                         00003FFF
+_BOREN_SBODEN                     00003DFF
+_BOR_NSLEEP                       00003EFF
+_BOR_OFF                          00003CFF
+_BOR_ON                           00003FFF
+_BOR_SBODEN                       00003DFF
+_CONFIG                           00002007
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003F7F
+_CP_OFF                           00003FFF
+_CP_ON                            00003FBF
+_DEVID1                           00002006
+_EC_OSC                           00003FFB
+_EXTRC                            00003FFF
+_EXTRCIO                          00003FFE
+_EXTRC_OSC_CLKOUT                 00003FFF
+_EXTRC_OSC_NOCLKOUT               00003FFE
+_FCMEN_OFF                        000037FF
+_FCMEN_ON                         00003FFF
+_FOSC_EC                          00003FFB
+MPASM  5.51                 NRF24L01_GYRO.ASM   4-17-2021  14:19:50         PAGE 31
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_FOSC_EXTRCCLK                    00003FFF
+_FOSC_EXTRCIO                     00003FFE
+_FOSC_HS                          00003FFA
+_FOSC_INTRCCLK                    00003FFD
+_FOSC_INTRCIO                     00003FFC
+_FOSC_LP                          00003FF8
+_FOSC_XT                          00003FF9
+_HS_OSC                           00003FFA
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_IESO_OFF                         00003BFF
+_IESO_ON                          00003FFF
+_INTOSC                           00003FFD
+_INTOSCIO                         00003FFC
+_INTRC_OSC_CLKOUT                 00003FFD
+_INTRC_OSC_NOCLKOUT               00003FFC
+_LP_OSC                           00003FF8
+_MCLRE_OFF                        00003FDF
+_MCLRE_ON                         00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FEF
+_WDTE_OFF                         00003FF7
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FF7
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FF9
+__16F690                          00000001
+__DEBUG                           1
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+0000 : X---XXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0080 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXX-------
+0E80 : ---------------- ---------------- XXXXXXXX-------- ----------------
+0EC0 : ---------------- XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0F00 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0F40 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0F80 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0FC0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXX--- ---------------- ----------------
+2000 : -------X-------- ---------------- ---------------- ----------------
+2100 : XXXX------------ ---------------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:   459
+Program Memory Words Free:  3637
+
+MPASM  5.51                 NRF24L01_GYRO.ASM   4-17-2021  14:19:50         PAGE 32
+
+
+
+
+
+
+Errors   :     0
+Warnings :    41 reported,     0 suppressed
+Messages :    28 reported,     0 suppressed
+
+

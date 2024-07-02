@@ -1,0 +1,76 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Tue Dec 03 19:06:43 2019
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000004    program   0x00010e
+.config_2007_20191109_HUB6CPU16F690V1.O       code   0x002007    program   0x000002
+                   .org_3       code   0x002100    program   0x000008
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x00008a      
+                            0x002007    0x002007      
+                            0x002100    0x002103      
+            141 out of 4359 program addresses used, program memory utilization is 3%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+            DATA_GPU_SEND   0x00003c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                   DATIS0   0x000049    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                   DATIS1   0x00004b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                 DELAY_MS   0x00006f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+              DELAY_ONEMS   0x000068    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+             DELAY_ONESEC   0x000074    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                DELAY_SEC   0x00007b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                 DELAY_US   0x000060    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                 DGS_EXIT   0x00005e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                     INIT   0x000011    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                INTERRUPT   0x000080    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                     MAIN   0x000039    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                      MN0   0x000045    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                      MN1   0x00004e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                     MSEC   0x00006a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                    MSEC0   0x000070    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                 QUIT_INT   0x000089    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                     SEC0   0x000076    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                     SEC1   0x00007c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                     USEC   0x000061    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     INIT   0x000011    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                     MAIN   0x000039    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+            DATA_GPU_SEND   0x00003c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                      MN0   0x000045    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                   DATIS0   0x000049    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                   DATIS1   0x00004b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                      MN1   0x00004e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                 DGS_EXIT   0x00005e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                 DELAY_US   0x000060    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                     USEC   0x000061    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+              DELAY_ONEMS   0x000068    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                     MSEC   0x00006a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                 DELAY_MS   0x00006f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                    MSEC0   0x000070    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+             DELAY_ONESEC   0x000074    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                     SEC0   0x000076    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                DELAY_SEC   0x00007b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                     SEC1   0x00007c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                INTERRUPT   0x000080    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+                 QUIT_INT   0x000089    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CPU16F690\20191109_HUB6CPU16F690V1.ASM
+
+

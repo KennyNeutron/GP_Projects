@@ -1,0 +1,29 @@
+// SourceBoost Linker Function Resource Usage Dump
+
+#GLOBAL:"global",line = 0,ram = 113.4,rom = 0;
+__mul_8u_8u(unsigned char,unsigned char):"E:\Prg\compiler.trunk\picantc\libc\mul.c",line = 96,ram = 7.0,rom = 22;
+Wdt_Delay_Ms(unsigned char):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_Delay.c",line = 118,ram = 2.0,rom = 11;
+FCD_RS2320_SendRS232Char(signed short):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\FC\RGLED_CONTROLLER.c",line = 432,ram = 2.0,rom = 6;
+FCM_clr_char(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\FC\RGLED_CONTROLLER.c",line = 1049,ram = 0.0,rom = 21;
+FCM_print_char_onlcd(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\FC\RGLED_CONTROLLER.c",line = 1079,ram = 1.0,rom = 148;
+FCD_LCDDisplay0_Cursor(unsigned char,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\FC\RGLED_CONTROLLER.c",line = 620,ram = 2.0,rom = 30;
+FCD_LCDDisplay0_PrintASCII(unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\FC\RGLED_CONTROLLER.c",line = 593,ram = 1.0,rom = 6;
+FCM_keypad_con(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\FC\RGLED_CONTROLLER.c",line = 1231,ram = 11.0,rom = 562;
+FCD_KeyPad0_GetKeypadNumber(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\FC\RGLED_CONTROLLER.c",line = 829,ram = 8.0,rom = 171;
+FCD_LCDDisplay0_Clear(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\FC\RGLED_CONTROLLER.c",line = 583,ram = 0.0,rom = 17;
+FCD_LCDDisplay0_PrintString(unsigned char*,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\FC\RGLED_CONTROLLER.c",line = 709,ram = 4.0,rom = 28;
+FCM_sendtocpu(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\FC\RGLED_CONTROLLER.c",line = 1785,ram = 1.0,rom = 226;
+FCM_clr_color(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\FC\RGLED_CONTROLLER.c",line = 1703,ram = 0.0,rom = 21;
+FC_CAL_UART_Init_1(void):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_UART.c",line = 490,ram = 0.0,rom = 15;
+FC_CAL_UART_Send_1(unsigned short):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_UART.c",line = 616,ram = 0.0,rom = 8;
+FCD_LCDDisplay0_RawSend(unsigned char,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\FC\RGLED_CONTROLLER.c",line = 500,ram = 3.0,rom = 107;
+FCD_LCDDisplay0_Start(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\FC\RGLED_CONTROLLER.c",line = 550,ram = 0.0,rom = 86;
+main(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\FC\RGLED_CONTROLLER.c",line = 2077,ram = 0.0,rom = 74;
+interrupt(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\FC\RGLED_CONTROLLER.c",line = 2217,ram = 0.0,rom = 9;
+delay_us(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 5;
+delay_10us(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 14;
+delay_ms(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 44;
+__rom_get(unsigned char,unsigned char):"NoSourceFile",line = 0,ram = 4.0,rom = 77;
+_startup(void):"NoSourceFile",line = 0,ram = 0.0,rom = 57;
+#HEAP_BLOCK: 0, 288, 80;
+#HEAP_BLOCK: 1, 198, 42;

@@ -1,0 +1,70 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Tue Nov 19 13:26:09 2019
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000004    program   0x0000e6
+.config_2007_20191114_HUB6CONTROLLER.O       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x000076      
+                            0x002007    0x002007      
+            117 out of 4359 program addresses used, program memory utilization is 2%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                       D0   0x000052    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+                       D1   0x000050    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+                    DELAY   0x00004e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+                 DELAY_MS   0x000066    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+              DELAY_ONEMS   0x00005f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+             DELAY_ONESEC   0x00006b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+                DELAY_SEC   0x000072    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+                 DELAY_US   0x000057    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+                     INIT   0x000010    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+                     MAIN   0x000026    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+                     MSEC   0x000061    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+                    MSEC0   0x000067    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+                     SEC0   0x00006d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+                     SEC1   0x000073    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+        TRANSMIT_CONT2CPU   0x000047    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+                  TRANSWT   0x000048    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+                     USEC   0x000058    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+                   WTHERE   0x000049    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     INIT   0x000010    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+                     MAIN   0x000026    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+        TRANSMIT_CONT2CPU   0x000047    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+                  TRANSWT   0x000048    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+                   WTHERE   0x000049    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+                    DELAY   0x00004e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+                       D1   0x000050    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+                       D0   0x000052    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+                 DELAY_US   0x000057    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+                     USEC   0x000058    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+              DELAY_ONEMS   0x00005f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+                     MSEC   0x000061    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+                 DELAY_MS   0x000066    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+                    MSEC0   0x000067    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+             DELAY_ONESEC   0x00006b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+                     SEC0   0x00006d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+                DELAY_SEC   0x000072    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+                     SEC1   0x000073    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\MAIN PROGRAMS\HUB6CONTROLLER16F690\20191114_HUB6CONTROLLER.ASM
+
+

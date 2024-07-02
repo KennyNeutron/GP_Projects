@@ -1,0 +1,15 @@
+// SourceBoost Linker Function Resource Usage Dump
+
+#GLOBAL:"global",line = 0,ram = 35.0,rom = 0;
+Wdt_Delay_Ms(unsigned char):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_Delay.c",line = 118,ram = 2.0,rom = 22;
+FCD_LCDDisplay0_RawSend(unsigned char,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\EDICE\cont2020test2.c",line = 273,ram = 3.0,rom = 142;
+FCD_LCDDisplay0_Start(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\EDICE\cont2020test2.c",line = 323,ram = 0.0,rom = 178;
+FCD_LCDDisplay0_Clear(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\EDICE\cont2020test2.c",line = 356,ram = 0.0,rom = 38;
+FCD_LCDDisplay0_Cursor(unsigned char,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\EDICE\cont2020test2.c",line = 393,ram = 2.0,rom = 58;
+FCD_LCDDisplay0_PrintString(unsigned char*,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\EDICE\cont2020test2.c",line = 482,ram = 4.0,rom = 52;
+main(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\EDICE\cont2020test2.c",line = 600,ram = 13.0,rom = 88;
+interrupt(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\EDICE\cont2020test2.c",line = 638,ram = 0.0,rom = 34;
+delay_10us(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 18;
+delay_ms(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 24;
+_startup(void):"NoSourceFile",line = 0,ram = 0.0,rom = 74;
+#HEAP_BLOCK: 0, 57, 1991;

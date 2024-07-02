@@ -1,0 +1,1028 @@
+MPASM  5.51    2020 COMM CONTROLLER TOUCH.ASM   2-21-2020  10:11:47         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 ;**********************************************************************
+                      00002 ;                                                                     *
+                      00003 ;    filename:      hub6controller.asm                                *
+                      00004 ;    date:              2019.11.14                                        *
+                      00005 ;    file version:                                                    *
+                      00006 ;                                                                     *
+                      00007 ;    author:        kennyneutron                                      *
+                      00008 ;    company:       ger-per engineering                               *
+                      00009 ;                                                                     * 
+                      00010 ;                                                                     *
+                      00011 ;**********************************************************************
+                      00012 ;                                                                     *
+                      00013 ;    files required: p16f690.inc                                      *
+                      00014 ;                                                                     *
+                      00015 ;**********************************************************************
+                      00016 ;                                                                     *
+                      00017 ;    notes:                                                           *
+                      00018 ;                                                                     *
+                      00019 ;**********************************************************************
+                      00020 
+                      00021 
+                      00022 
+                      00023         LIST            P=16F690                ; list directive to define processor
+                      00024         #INCLUDE        <P16F690.INC>           ; processor specific variable definitions
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC16F690 processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2013 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+                      00756         LIST
+                      00025         
+2007   30C2           00026         __CONFIG    _CP_OFF & _CPD_OFF & _BOR_OFF & _PWRTE_ON & _WDT_OFF & _HS_OSC & _MCLRE_OFF & _FCMEN
+                            _OFF & _IESO_OFF
+                      00027 
+                      00028 ; '__config' directive is used to embed configuration data within .asm file.
+                      00029 ; the labels following the directive are located in the respective .inc file.
+                      00030 ; see respective data sheet for additional information on configuration word.
+                      00031 
+                      00032 
+                      00033 
+                      00034 
+                      00035 
+                      00036 
+                      00037 ;***** variable definitions
+  0000007D            00038 W_TEMP          EQU     0X7D                    ; variable used for context saving
+  0000007E            00039 STATUS_TEMP     EQU     0X7E                    ; variable used for context saving
+  0000007F            00040 PCLATH_TEMP     EQU     0X7F                    ; variable used for context saving
+  00000020            00041 TXREG_T EQU 0X20
+  00000021            00042 CNT0 EQU 0X21
+  00000022            00043 CNT1 EQU 0X22
+MPASM  5.51    2020 COMM CONTROLLER TOUCH.ASM   2-21-2020  10:11:47         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00044         #DEFINE BANK0           BANKSEL PORTA
+                      00045         #DEFINE BANK1           BANKSEL ADRESL
+                      00046         #DEFINE BANK2           BANKSEL ANSELH
+                      00047 
+                      00048         #DEFINE CLK_ON          BSF     PORTC,4
+                      00049         #DEFINE CLK_OFF         BCF PORTC,4
+                      00050 
+                      00051         #DEFINE LAT_ON          BCF     PORTC,3
+                      00052         #DEFINE LAT_OFF         BSF     PORTC,3
+                      00053 
+                      00054         #DEFINE SCL_ON          BSF     PORTC,0
+                      00055         #DEFINE SCL_OFF         BCF     PORTC,0
+                      00056 
+                      00057 
+                      00058 ;============================   bank    0       ===========================
+Warning[205]: Found directive in column 1. (CBLOCK)
+                      00059 CBLOCK 0X20
+                      00060                         ;dram: .80
+  00000020            00061                         LOOP,LOOP2
+Warning[210]: Extra ","
+  00000022            00062                         DELAYUS, DELAYMS,  MILSEC, SEC,DELAYS,  ;delay variables
+                      00063                         ;=======================================================
+  00000027            00064                         DMDATA0,DMDATA1,DATAINDM
+  0000002A            00065                         SCAN
+Warning[205]: Found directive in column 1. (ENDC)
+                      00066 ENDC
+                      00067 ;======================================================================
+                      00068 
+                      00069 
+                      00070 ;**********************************************************************
+0000                  00071         ORG             0X000                   ; processor reset vector
+0000   2810           00072         GOTO    INIT                    ; go to beginning of program
+                      00073 
+                      00074 
+0004                  00075         ORG             0X004                           ; interrupt vector location
+0004   00FD           00076         MOVWF           W_TEMP                  ; save off current w register contents
+0005   0803           00077         MOVF            STATUS,W                ; move status register into w register
+0006   00FE           00078         MOVWF           STATUS_TEMP             ; save off contents of status register
+0007   080A           00079         MOVF            PCLATH,W                ; move pclath register into w register
+0008   00FF           00080         MOVWF           PCLATH_TEMP             ; save off contents of pclath register
+                      00081 
+                      00082 ; isr code can go here or be located as a call subroutine elsewhere
+                      00083 
+0009   087F           00084         MOVF            PCLATH_TEMP,W   ; retrieve copy of pclath register
+000A   008A           00085         MOVWF           PCLATH                  ; restore pre-isr pclath register contents      
+000B   087E           00086         MOVF            STATUS_TEMP,W   ; retrieve copy of status register
+000C   0083           00087         MOVWF           STATUS                  ; restore pre-isr status register contents
+000D   0EFD           00088         SWAPF           W_TEMP,F
+000E   0E7D           00089         SWAPF           W_TEMP,W                ; restore pre-isr w register contents
+000F   0009           00090         RETFIE                                          ; return from interrupt
+                      00091 
+                      00092 
+0010                  00093 INIT
+MPASM  5.51    2020 COMM CONTROLLER TOUCH.ASM   2-21-2020  10:11:47         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[205]: Found directive in column 1. (BANKSEL)
+0010   1283 1703      00094 BANKSEL ANSEL
+Warning[203]: Found opcode in column 1. (CLRW)
+0012   0103           00095 CLRW
+Warning[203]: Found opcode in column 1. (MOVWF)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0013   009E           00096 MOVWF   ANSEL
+Warning[203]: Found opcode in column 1. (MOVWF)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0014   009F           00097 MOVWF   ANSELH
+                      00098 
+                      00099 
+                      00100 
+0015   1683 1303      00101         BANK1
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0017   0187           00102         CLRF    TRISC
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0018   0186           00103         CLRF    TRISB
+                      00104 
+                      00105 
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0019   1487           00106         BSF             TRISC,1
+                      00107 
+                      00108         
+001A   1283 1303      00109         BANK0
+001C   3000           00110         MOVLW   0
+001D   00A7           00111         MOVWF   DMDATA0
+001E   00A8           00112         MOVWF   DMDATA1
+                      00113 
+001F   2046           00114         CALL    PUTDATA
+0020   1007           00115         SCL_OFF
+                      00116 
+                      00117 
+                      00118 ;########################## main ##########################
+0021                  00119 MAIN
+0021   0000           00120         NOP
+0022   3000           00121         MOVLW   0
+0023   00A7           00122         MOVWF   DMDATA0
+0024   00A8           00123         MOVWF   DMDATA1
+                      00124 
+0025   2046           00125         CALL    PUTDATA
+0026                  00126 MN0
+                      00127 
+                      00128 
+0026   1407           00129         SCL_ON
+0027   3064           00130         MOVLW   .100
+0028   2070           00131         CALL    DELAY_US
+                      00132 
+                      00133 
+0029   1007           00134         SCL_OFF
+002A   300A           00135         MOVLW   .10
+002B   2070           00136         CALL    DELAY_US
+                      00137 
+MPASM  5.51    2020 COMM CONTROLLER TOUCH.ASM   2-21-2020  10:11:47         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+002C   1C87           00138         BTFSS   PORTC,1
+002D   2826           00139         GOTO    MN0
+                      00140 
+                      00141 
+Warning[203]: Found opcode in column 1. (CALL)
+002E   203F           00142 CALL    SI_CLKPULSE
+                      00143 
+                      00144 ;scanning the touch pads
+                      00145 
+002F   3010           00146         MOVLW   .16
+0030   00A1           00147         MOVWF   LOOP2
+0031   3000           00148         MOVLW   0
+0032   00AA           00149         MOVWF   SCAN    
+0033                  00150 MN1
+0033   203F           00151         CALL    SI_CLKPULSE
+Message[305]: Using default destination of 1 (file).
+0034   0AAA           00152         INCF    SCAN
+0035   1C87           00153         BTFSS   PORTC,1
+0036   2838           00154         GOTO    MN10
+0037   283A           00155         GOTO    MN11
+                      00156 
+0038                  00157 MN10
+0038   082A           00158         MOVFW   SCAN
+0039   00A7           00159         MOVWF   DMDATA0
+003A                  00160 MN11
+                      00161 
+003A   0BA1           00162         DECFSZ  LOOP2,F
+003B   2833           00163         GOTO    MN1
+003C   2046           00164         CALL    PUTDATA
+003D   2078           00165         CALL    DELAY_ONEMS
+                      00166                 
+                      00167         
+                      00168 
+Warning[203]: Found opcode in column 1. (GOTO)
+003E   2821           00169 GOTO MAIN
+                      00170 ;##########################################################
+                      00171 
+                      00172 
+                      00173 
+                      00174 
+                      00175 
+                      00176 ;========= serial clk pulse ==========
+003F                  00177 SI_CLKPULSE
+                      00178 
+003F   1407           00179         BSF             PORTC,0
+0040   3014           00180         MOVLW   .20
+0041   2070           00181         CALL    DELAY_US
+                      00182 
+0042   1007           00183         BCF             PORTC,0
+0043   3014           00184         MOVLW   .20
+0044   2070           00185         CALL    DELAY_US
+                      00186 
+Warning[203]: Found opcode in column 1. (RETURN)
+MPASM  5.51    2020 COMM CONTROLLER TOUCH.ASM   2-21-2020  10:11:47         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0045   0008           00187 RETURN
+                      00188 ;=====================================
+                      00189 
+                      00190 
+                      00191 
+                      00192 ;++++++++++++++++++++ dm 135 subroutines ++++++++++++++++++
+                      00193 
+                      00194 ;============= put data in dm 135 ==========
+0046                  00195 PUTDATA
+                      00196 
+0046   3008           00197         MOVLW   8
+0047   00A0           00198         MOVWF   LOOP
+0048   0827           00199         MOVFW   DMDATA0
+0049   00A9           00200         MOVWF   DATAINDM
+                      00201 
+004A                  00202 PD0
+Message[305]: Using default destination of 1 (file).
+004A   0CA9           00203         RRF             DATAINDM
+004B   1803           00204         BTFSC   STATUS,C
+004C   2850           00205         GOTO    PD01
+004D   284E           00206         GOTO    PD00
+                      00207 
+004E                  00208 PD00
+004E   1287           00209         BCF             PORTC,5
+004F   2851           00210         GOTO    PD1
+                      00211 
+0050                  00212 PD01
+0050   1687           00213         BSF             PORTC,5
+                      00214 
+0051                  00215 PD1
+0051   2069           00216         CALL    CLK_PULSE
+                      00217 
+0052   0BA0           00218         DECFSZ  LOOP,F
+0053   284A           00219         GOTO    PD0
+                      00220 
+0054   3008           00221         MOVLW   8
+0055   00A0           00222         MOVWF   LOOP
+0056   0828           00223         MOVFW   DMDATA1
+0057   00A9           00224         MOVWF   DATAINDM
+                      00225 
+0058                  00226 PD2
+Message[305]: Using default destination of 1 (file).
+0058   0CA9           00227         RRF             DATAINDM
+0059   1803           00228         BTFSC   STATUS,C
+005A   285E           00229         GOTO    PD11
+005B   285C           00230         GOTO    PD10
+                      00231 
+005C                  00232 PD10
+005C   1287           00233         BCF             PORTC,5
+005D   285F           00234         GOTO    PD3
+                      00235 
+005E                  00236 PD11
+005E   1687           00237         BSF             PORTC,5
+MPASM  5.51    2020 COMM CONTROLLER TOUCH.ASM   2-21-2020  10:11:47         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00238 
+005F                  00239 PD3
+005F   2069           00240         CALL    CLK_PULSE
+                      00241         
+0060   0BA0           00242         DECFSZ  LOOP,F
+0061   2858           00243         GOTO    PD2
+                      00244 
+0062   1187           00245         LAT_ON
+0063   3003           00246         MOVLW   .3
+0064   2070           00247         CALL    DELAY_US
+                      00248 
+0065   1587           00249         LAT_OFF 
+0066   3003           00250         MOVLW   .3
+0067   2070           00251         CALL    DELAY_US
+                      00252 
+Warning[203]: Found opcode in column 1. (RETURN)
+0068   0008           00253 RETURN
+                      00254 ;===========================================
+                      00255 
+                      00256 
+                      00257 ;====== dm 135 clk pulse =======
+0069                  00258 CLK_PULSE
+0069   1607           00259         CLK_ON
+006A   3003           00260         MOVLW   .3
+006B   2070           00261         CALL    DELAY_US
+006C   1207           00262         CLK_OFF
+006D   3003           00263         MOVLW   .3
+006E   2070           00264         CALL    DELAY_US
+                      00265 
+                      00266 
+                      00267 
+Warning[203]: Found opcode in column 1. (RETURN)
+006F   0008           00268 RETURN
+                      00269 ;===============================
+                      00270 ;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                      00271 
+                      00272 
+                      00273 
+                      00274 
+                      00275 ;==========     delay usec =========
+0070                  00276 DELAY_US
+                      00277 
+0070   00A2           00278         MOVWF   DELAYUS
+                      00279 
+0071                  00280 USEC
+                      00281 
+0071   0000           00282         NOP
+0072   0000           00283         NOP
+0073   0000           00284         NOP
+0074   0000           00285         NOP
+Warning[203]: Found opcode in column 1. (DECFSZ)
+0075   0BA2           00286 DECFSZ  DELAYUS,F
+                      00287 
+MPASM  5.51    2020 COMM CONTROLLER TOUCH.ASM   2-21-2020  10:11:47         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[203]: Found opcode in column 1. (GOTO)
+0076   2871           00288 GOTO    USEC
+                      00289 
+Warning[203]: Found opcode in column 1. (RETURN)
+0077   0008           00290 RETURN
+                      00291 ;=================================
+                      00292 
+                      00293 
+                      00294 
+                      00295 ;=========== delay one ms ========
+0078                  00296 DELAY_ONEMS
+                      00297 
+0078   3005           00298         MOVLW   .5
+0079   00A0           00299         MOVWF   LOOP
+                      00300 
+007A                  00301 MSEC
+007A   30C8           00302         MOVLW   .200
+007B   2070           00303         CALL    DELAY_US
+007C   0BA0           00304         DECFSZ  LOOP,F
+007D   287A           00305         GOTO    MSEC
+                      00306 
+Warning[203]: Found opcode in column 1. (RETURN)
+007E   0008           00307 RETURN
+                      00308 ;==================================
+                      00309 
+                      00310 
+                      00311 ;=========== delay ms   ==========
+007F                  00312 DELAY_MS
+                      00313         
+007F   00A3           00314         MOVWF   DELAYMS
+0080                  00315 MSEC0
+0080   2078           00316         CALL    DELAY_ONEMS
+0081   0BA3           00317         DECFSZ  DELAYMS,F
+0082   2880           00318         GOTO    MSEC0
+Warning[203]: Found opcode in column 1. (RETURN)
+0083   0008           00319 RETURN
+                      00320 ;=================================
+                      00321 
+                      00322 ;=========== delay      one     second ===
+0084                  00323 DELAY_ONESEC
+                      00324 
+0084   3005           00325         MOVLW   .5
+0085   00A5           00326         MOVWF   SEC
+0086                  00327 SEC0
+0086   30C8           00328         MOVLW   .200
+0087   207F           00329         CALL    DELAY_MS
+0088   0BA5           00330         DECFSZ  SEC,F
+0089   2886           00331         GOTO    SEC0
+Warning[203]: Found opcode in column 1. (RETURN)
+008A   0008           00332 RETURN
+                      00333 ;=================================
+                      00334 
+                      00335 ;========== delay sec ============
+MPASM  5.51    2020 COMM CONTROLLER TOUCH.ASM   2-21-2020  10:11:47         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+008B                  00336 DELAY_SEC
+                      00337 
+008B   00A6           00338         MOVWF   DELAYS
+008C                  00339 SEC1
+008C   2084           00340         CALL    DELAY_ONESEC
+008D   0BA6           00341         DECFSZ  DELAYS,F
+008E   288C           00342         GOTO    SEC1
+Warning[203]: Found opcode in column 1. (RETURN)
+008F   0008           00343 RETURN
+                      00344 ;=================================
+                      00345 
+                      00346 
+                      00347 
+                      00348 
+                      00349 
+                      00350 
+                      00351 
+                      00352 
+                      00353 
+                      00354 
+                      00355 
+                      00356 
+                      00357 
+                      00358         END
+MPASM  5.51    2020 COMM CONTROLLER TOUCH.ASM   2-21-2020  10:11:47         PAGE  9
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ABDEN                             00000000
+ABDOVF                            00000007
+ADCON0                            0000001F
+ADCON1                            0000009F
+ADCS0                             00000004
+ADCS1                             00000005
+ADCS2                             00000006
+ADDEN                             00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+ANS0                              00000000
+ANS1                              00000001
+ANS10                             00000002
+ANS11                             00000003
+ANS2                              00000002
+ANS3                              00000003
+ANS4                              00000004
+ANS5                              00000005
+ANS6                              00000006
+ANS7                              00000007
+ANS8                              00000000
+ANS9                              00000001
+ANSEL                             0000011E
+ANSELH                            0000011F
+BANK0                             BANKSEL PORTA
+BANK1                             BANKSEL ADRESL
+BANK2                             BANKSEL ANSELH
+BAUDCTL                           0000009B
+BF                                00000000
+BRG0                              00000000
+BRG1                              00000001
+BRG10                             00000002
+BRG11                             00000003
+BRG12                             00000004
+BRG13                             00000005
+BRG14                             00000006
+BRG15                             00000007
+BRG16                             00000003
+BRG2                              00000002
+BRG3                              00000003
+BRG4                              00000004
+BRG5                              00000005
+BRG6                              00000006
+BRG7                              00000007
+BRG8                              00000000
+BRG9                              00000001
+BRGH                              00000002
+C                                 00000000
+C1CH0                             00000000
+MPASM  5.51    2020 COMM CONTROLLER TOUCH.ASM   2-21-2020  10:11:47         PAGE 10
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+C1CH1                             00000001
+C1IE                              00000005
+C1IF                              00000005
+C1OE                              00000005
+C1ON                              00000007
+C1OUT                             00000006
+C1POL                             00000004
+C1R                               00000002
+C1SEN                             00000005
+C1VREN                            00000007
+C2CH0                             00000000
+C2CH1                             00000001
+C2IE                              00000006
+C2IF                              00000006
+C2OE                              00000005
+C2ON                              00000007
+C2OUT                             00000006
+C2POL                             00000004
+C2R                               00000002
+C2REN                             00000004
+C2SYNC                            00000000
+C2VREN                            00000006
+CCP1CON                           00000017
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCPR                              00000015
+CCPR1H                            00000016
+CCPR1L                            00000015
+CHS0                              00000002
+CHS1                              00000003
+CHS2                              00000004
+CHS3                              00000005
+CKE                               00000006
+CKP                               00000004
+CLK_OFF                           BCF PORTC,4
+CLK_ON                            BSF     PORTC,4
+CLK_PULSE                         00000069
+CM1CON0                           00000119
+CM2CON0                           0000011A
+CM2CON1                           0000011B
+CNT0                              00000021
+CNT1                              00000022
+CREN                              00000004
+CSRC                              00000007
+D                                 00000005
+DATAINDM                          00000029
+DATA_ADDRESS                      00000005
+DC                                00000001
+DC1B0                             00000004
+MPASM  5.51    2020 COMM CONTROLLER TOUCH.ASM   2-21-2020  10:11:47         PAGE 11
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+DC1B1                             00000005
+DELAYMS                           00000023
+DELAYS                            00000026
+DELAYUS                           00000022
+DELAY_MS                          0000007F
+DELAY_ONEMS                       00000078
+DELAY_ONESEC                      00000084
+DELAY_SEC                         0000008B
+DELAY_US                          00000070
+DMDATA0                           00000027
+DMDATA1                           00000028
+D_A                               00000005
+D_NOT_A                           00000005
+ECCPAS                            0000001D
+ECCPAS0                           00000004
+ECCPAS1                           00000005
+ECCPAS2                           00000006
+ECCPASE                           00000007
+EEADR                             0000010D
+EEADRH                            0000010F
+EECON1                            0000018C
+EECON2                            0000018D
+EEDAT                             0000010C
+EEDATA                            0000010C
+EEDATH                            0000010E
+EEIE                              00000004
+EEIF                              00000004
+EEPGD                             00000007
+F                                 00000001
+FERR                              00000002
+FSR                               00000004
+GIE                               00000007
+GO                                00000001
+GO_DONE                           00000001
+GO_NOT_DONE                       00000001
+HTS                               00000002
+I2C_DATA                          00000005
+I2C_READ                          00000002
+I2C_START                         00000003
+I2C_STOP                          00000004
+INDF                              00000000
+INIT                              00000010
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IOC                               00000096
+IOC0                              00000000
+IOC1                              00000001
+IOC2                              00000002
+IOC3                              00000003
+IOC4                              00000004
+IOC5                              00000005
+MPASM  5.51    2020 COMM CONTROLLER TOUCH.ASM   2-21-2020  10:11:47         PAGE 12
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+IOCA                              00000096
+IOCA0                             00000000
+IOCA1                             00000001
+IOCA2                             00000002
+IOCA3                             00000003
+IOCA4                             00000004
+IOCA5                             00000005
+IOCB                              00000116
+IOCB4                             00000004
+IOCB5                             00000005
+IOCB6                             00000006
+IOCB7                             00000007
+IRCF0                             00000004
+IRCF1                             00000005
+IRCF2                             00000006
+IRP                               00000007
+LAT_OFF                           BSF     PORTC,3
+LAT_ON                            BCF     PORTC,3
+LOOP                              00000020
+LOOP2                             00000021
+LTS                               00000001
+MAIN                              00000021
+MC1OUT                            00000007
+MC2OUT                            00000006
+MILSEC                            00000024
+MN0                               00000026
+MN1                               00000033
+MN10                              00000038
+MN11                              0000003A
+MSEC                              0000007A
+MSEC0                             00000080
+MSK                               00000093
+MSK0                              00000000
+MSK1                              00000001
+MSK2                              00000002
+MSK3                              00000003
+MSK4                              00000004
+MSK5                              00000005
+MSK6                              00000006
+MSK7                              00000007
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
+NOT_BOR                           00000000
+NOT_DONE                          00000001
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_RABPU                         00000007
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+NOT_W                             00000002
+NOT_WRITE                         00000002
+OERR                              00000001
+OPTION_REG                        00000081
+MPASM  5.51    2020 COMM CONTROLLER TOUCH.ASM   2-21-2020  10:11:47         PAGE 13
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+OSCCON                            0000008F
+OSCTUNE                           00000090
+OSFIE                             00000007
+OSFIF                             00000007
+OSTS                              00000003
+P                                 00000004
+P1M0                              00000006
+P1M1                              00000007
+PCL                               00000002
+PCLATH                            0000000A
+PCLATH_TEMP                       0000007F
+PCON                              0000008E
+PD0                               0000004A
+PD00                              0000004E
+PD01                              00000050
+PD1                               00000051
+PD10                              0000005C
+PD11                              0000005E
+PD2                               00000058
+PD3                               0000005F
+PDC0                              00000000
+PDC1                              00000001
+PDC2                              00000002
+PDC3                              00000003
+PDC4                              00000004
+PDC5                              00000005
+PDC6                              00000006
+PEIE                              00000006
+PIE1                              0000008C
+PIE2                              0000008D
+PIR1                              0000000C
+PIR2                              0000000D
+PORTA                             00000005
+PORTB                             00000006
+PORTC                             00000007
+PR2                               00000092
+PRSEN                             00000007
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+PSSAC0                            00000002
+PSSAC1                            00000003
+PSSBD0                            00000000
+PSSBD1                            00000001
+PSTRCON                           0000019D
+PULSR                             00000002
+PULSS                             00000003
+PUTDATA                           00000046
+PWM1CON                           0000001C
+R                                 00000002
+RA0                               00000000
+RA1                               00000001
+MPASM  5.51    2020 COMM CONTROLLER TOUCH.ASM   2-21-2020  10:11:47         PAGE 14
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RA5                               00000005
+RABIE                             00000003
+RABIF                             00000000
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RC0                               00000000
+RC1                               00000001
+RC2                               00000002
+RC3                               00000003
+RC4                               00000004
+RC5                               00000005
+RC6                               00000006
+RC7                               00000007
+RCIDL                             00000006
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+RCSTA                             00000018
+RD                                00000000
+READ_WRITE                        00000002
+RP0                               00000005
+RP1                               00000006
+RX9                               00000006
+RX9D                              00000000
+R_NOT_W                           00000002
+R_W                               00000002
+S                                 00000003
+SBOREN                            00000004
+SCAN                              0000002A
+SCKP                              00000004
+SCL_OFF                           BCF     PORTC,0
+SCL_ON                            BSF     PORTC,0
+SCS                               00000000
+SEC                               00000025
+SEC0                              00000086
+SEC1                              0000008C
+SENB                              00000003
+SENDB                             00000003
+SI_CLKPULSE                       0000003F
+SMP                               00000007
+SPBRG                             00000099
+SPBRGH                            0000009A
+SPEN                              00000007
+SR0                               00000006
+SR1                               00000007
+SRCON                             0000019E
+SREN                              00000005
+SSPADD                            00000093
+MPASM  5.51    2020 COMM CONTROLLER TOUCH.ASM   2-21-2020  10:11:47         PAGE 15
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+SSPBUF                            00000013
+SSPCON                            00000014
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+SSPM3                             00000003
+SSPMSK                            00000093
+SSPOV                             00000006
+SSPSTAT                           00000094
+STATUS                            00000003
+STATUS_TEMP                       0000007E
+STRA                              00000000
+STRB                              00000001
+STRC                              00000002
+STRD                              00000003
+STRSYNC                           00000004
+SWDTEN                            00000000
+SYNC                              00000004
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1GINV                            00000007
+T1GSS                             00000001
+T1IE                              00000000
+T1IF                              00000000
+T1OSCEN                           00000003
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+T2IE                              00000001
+T2IF                              00000001
+TMR0                              00000001
+TMR1                              0000000E
+TMR1CS                            00000001
+TMR1GE                            00000006
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+MPASM  5.51    2020 COMM CONTROLLER TOUCH.ASM   2-21-2020  10:11:47         PAGE 16
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISA5                            00000005
+TRISB                             00000086
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+TRISC                             00000087
+TRISC0                            00000000
+TRISC1                            00000001
+TRISC2                            00000002
+TRISC3                            00000003
+TRISC4                            00000004
+TRISC5                            00000005
+TRISC6                            00000006
+TRISC7                            00000007
+TRMT                              00000001
+TUN0                              00000000
+TUN1                              00000001
+TUN2                              00000002
+TUN3                              00000003
+TUN4                              00000004
+TX9                               00000006
+TX9D                              00000000
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+TXREG_T                           00000020
+TXSTA                             00000098
+UA                                00000001
+ULPWUE                            00000005
+USEC                              00000071
+VCFG                              00000006
+VP6EN                             00000004
+VR0                               00000000
+VR1                               00000001
+VR2                               00000002
+VR3                               00000003
+VRCON                             00000118
+VRR                               00000005
+W                                 00000000
+WCOL                              00000007
+WDTCON                            00000097
+WDTPS0                            00000001
+WDTPS1                            00000002
+MPASM  5.51    2020 COMM CONTROLLER TOUCH.ASM   2-21-2020  10:11:47         PAGE 17
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+WDTPS2                            00000003
+WDTPS3                            00000004
+WPU                               00000095
+WPU0                              00000000
+WPU1                              00000001
+WPU2                              00000002
+WPU4                              00000004
+WPU5                              00000005
+WPUA                              00000095
+WPUA0                             00000000
+WPUA1                             00000001
+WPUA2                             00000002
+WPUA4                             00000004
+WPUA5                             00000005
+WPUB                              00000115
+WPUB4                             00000004
+WPUB5                             00000005
+WPUB6                             00000006
+WPUB7                             00000007
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+WUE                               00000001
+W_TEMP                            0000007D
+Z                                 00000002
+_BOD_NSLEEP                       00003EFF
+_BOD_OFF                          00003CFF
+_BOD_ON                           00003FFF
+_BOD_SBODEN                       00003DFF
+_BOREN_NSLEEP                     00003EFF
+_BOREN_OFF                        00003CFF
+_BOREN_ON                         00003FFF
+_BOREN_SBODEN                     00003DFF
+_BOR_NSLEEP                       00003EFF
+_BOR_OFF                          00003CFF
+_BOR_ON                           00003FFF
+_BOR_SBODEN                       00003DFF
+_CONFIG                           00002007
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003F7F
+_CP_OFF                           00003FFF
+_CP_ON                            00003FBF
+_DEVID1                           00002006
+_EC_OSC                           00003FFB
+_EXTRC                            00003FFF
+_EXTRCIO                          00003FFE
+_EXTRC_OSC_CLKOUT                 00003FFF
+_EXTRC_OSC_NOCLKOUT               00003FFE
+_FCMEN_OFF                        000037FF
+_FCMEN_ON                         00003FFF
+_FOSC_EC                          00003FFB
+_FOSC_EXTRCCLK                    00003FFF
+_FOSC_EXTRCIO                     00003FFE
+MPASM  5.51    2020 COMM CONTROLLER TOUCH.ASM   2-21-2020  10:11:47         PAGE 18
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_FOSC_HS                          00003FFA
+_FOSC_INTRCCLK                    00003FFD
+_FOSC_INTRCIO                     00003FFC
+_FOSC_LP                          00003FF8
+_FOSC_XT                          00003FF9
+_HS_OSC                           00003FFA
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_IESO_OFF                         00003BFF
+_IESO_ON                          00003FFF
+_INTOSC                           00003FFD
+_INTOSCIO                         00003FFC
+_INTRC_OSC_CLKOUT                 00003FFD
+_INTRC_OSC_NOCLKOUT               00003FFC
+_LP_OSC                           00003FF8
+_MCLRE_OFF                        00003FDF
+_MCLRE_ON                         00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FEF
+_WDTE_OFF                         00003FF7
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FF7
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FF9
+__16F690                          00000001
+__DEBUG                           1
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+0000 : X---XXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0080 : XXXXXXXXXXXXXXXX ---------------- ---------------- ----------------
+2000 : -------X-------- ---------------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:   141
+Program Memory Words Free:  3955
+
+
+Errors   :     0
+Warnings :    19 reported,     0 suppressed
+Messages :     8 reported,     0 suppressed
+
+

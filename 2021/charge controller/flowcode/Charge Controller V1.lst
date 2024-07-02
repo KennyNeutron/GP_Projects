@@ -1,0 +1,4001 @@
+;/////////////////////////////////////////////////////////////////////////////////
+;// Code Generator: BoostC Compiler - http://www.sourceboost.com
+;// Version       : 7.03
+;// License Type  : Pro License
+;// Limitations   : PIC12,PIC16 max code size:Unlimited, max RAM banks:Unlimited
+;/////////////////////////////////////////////////////////////////////////////////
+
+	ORG 0x00000000
+0000  158A  	BSF PCLATH,3
+0001  2DDF  	GOTO	_startup
+	ORG 0x00000004
+0004  00FF  	MOVWF Int1Context
+0005  0E03  	SWAPF STATUS, W
+0006  1283  	BCF STATUS, RP0
+0007  1303  	BCF STATUS, RP1
+0008  00BD  	MOVWF Int1BContext
+0009  0E0A  	SWAPF PCLATH, W
+000A  00BE  	MOVWF Int1BContext+D'1'
+000B  0E04  	SWAPF FSR, W
+000C  00BF  	MOVWF Int1BContext+D'2'
+000D  158A  	BSF PCLATH,3
+000E  120A  	BCF PCLATH,4
+000F  2E09  	GOTO	interrupt
+	ORG 0x00000010
+0010        delay_ms_00000
+0010        ; { delay_ms ; function begin
+0010  08D8  	MOVF delay_ms_00000_arg_del, F
+0011  1D03  	BTFSS STATUS,Z
+0012  2814  	GOTO	label1
+0013  0008  	RETURN
+0014        label1
+0014  30F9  	MOVLW 0xF9
+0015        label2
+0015  0000  	NOP
+0016  0000  	NOP
+0017  0000  	NOP
+0018  0000  	NOP
+0019  0000  	NOP
+001A  0000  	NOP
+001B  0000  	NOP
+001C  0000  	NOP
+001D  0000  	NOP
+001E  0000  	NOP
+001F  0000  	NOP
+0020  0000  	NOP
+0021  0000  	NOP
+0022  0000  	NOP
+0023  0000  	NOP
+0024  0000  	NOP
+0025  3EFF  	ADDLW 0xFF
+0026  1D03  	BTFSS STATUS,Z
+0027  2815  	GOTO	label2
+0028  0000  	NOP
+0029  0000  	NOP
+002A  0000  	NOP
+002B  0000  	NOP
+002C  0000  	NOP
+002D  0000  	NOP
+002E  0000  	NOP
+002F  0000  	NOP
+0030  0000  	NOP
+0031  0000  	NOP
+0032  0000  	NOP
+0033  0000  	NOP
+0034  0000  	NOP
+0035  0000  	NOP
+0036  0000  	NOP
+0037  0000  	NOP
+0038  0000  	NOP
+0039  0BD8  	DECFSZ delay_ms_00000_arg_del, F
+003A  2814  	GOTO	label1
+003B  0008  	RETURN
+003C        ; } delay_ms function end
+
+	ORG 0x0000003C
+003C        delay_10us_00000
+003C        ; { delay_10us ; function begin
+003C  08DB  	MOVF delay_10us_00000_arg_del, F
+003D  1D03  	BTFSS STATUS,Z
+003E  2840  	GOTO	label3
+003F  0008  	RETURN
+0040        label3
+0040  3009  	MOVLW 0x09
+0041        label4
+0041  0000  	NOP
+0042  3EFF  	ADDLW 0xFF
+0043  1D03  	BTFSS STATUS,Z
+0044  2841  	GOTO	label4
+0045  0000  	NOP
+0046  0000  	NOP
+0047  0BDB  	DECFSZ delay_10us_00000_arg_del, F
+0048  2840  	GOTO	label3
+0049  0008  	RETURN
+004A        ; } delay_10us function end
+
+	ORG 0x0000004A
+004A        delay_us_00000
+004A        ; { delay_us ; function begin
+004A        label5
+004A  0000  	NOP
+004B  0000  	NOP
+004C  0BE3  	DECFSZ delay_us_00000_arg_del, F
+004D  284A  	GOTO	label5
+004E  0008  	RETURN
+004F        ; } delay_us function end
+
+	ORG 0x0000004F
+004F        shift32Rig_0002B
+004F        ; { shift32RightJammingbSig ; function begin
+004F  08FD  	MOVF shift32Rig_0002B_arg_shiftCount, F
+0050  1D03  	BTFSS STATUS,Z
+0051  2855  	GOTO	label6
+0052  08FE  	MOVF shift32Rig_0002B_arg_shiftCount+D'1', F
+0053  1903  	BTFSC STATUS,Z
+0054  0008  	RETURN
+0055        label6
+0055  3020  	MOVLW 0x20
+0056  027D  	SUBWF shift32Rig_0002B_arg_shiftCount, W
+0057  087E  	MOVF shift32Rig_0002B_arg_shiftCount+D'1', W
+0058  1803  	BTFSC STATUS,C
+0059  286C  	GOTO	label8
+005A  1D03  	BTFSS STATUS,Z
+005B  286C  	GOTO	label8
+005C  1279  	BCF shift32Rig_0002B_3_stickyBit,4
+005D  087D  	MOVF shift32Rig_0002B_arg_shiftCount, W
+005E  00FC  	MOVWF shift32Rig_0002B_3_count
+005F        label7
+005F  182D  	BTFSC gbl_15_gbl_bSig,0
+0060  1679  	BSF shift32Rig_0002B_3_stickyBit,4
+0061  1003  	BCF STATUS,C
+0062  0CB0  	RRF gbl_15_gbl_bSig+D'3', F
+0063  0CAF  	RRF gbl_15_gbl_bSig+D'2', F
+0064  0CAE  	RRF gbl_15_gbl_bSig+D'1', F
+0065  0CAD  	RRF gbl_15_gbl_bSig, F
+0066  03FC  	DECF shift32Rig_0002B_3_count, F
+0067  1D03  	BTFSS STATUS,Z
+0068  285F  	GOTO	label7
+0069  1A79  	BTFSC shift32Rig_0002B_3_stickyBit,4
+006A  142D  	BSF gbl_15_gbl_bSig,0
+006B  0008  	RETURN
+006C        label8
+006C  082D  	MOVF gbl_15_gbl_bSig, W
+006D  042E  	IORWF gbl_15_gbl_bSig+D'1', W
+006E  042F  	IORWF gbl_15_gbl_bSig+D'2', W
+006F  0430  	IORWF gbl_15_gbl_bSig+D'3', W
+0070  39FF  	ANDLW 0xFF
+0071  1903  	BTFSC STATUS,Z
+0072  0008  	RETURN
+0073  3001  	MOVLW 0x01
+0074  00AD  	MOVWF gbl_15_gbl_bSig
+0075  01AE  	CLRF gbl_15_gbl_bSig+D'1'
+0076  01AF  	CLRF gbl_15_gbl_bSig+D'2'
+0077  01B0  	CLRF gbl_15_gbl_bSig+D'3'
+0078  0008  	RETURN
+0079        ; } shift32RightJammingbSig function end
+
+	ORG 0x00000079
+0079        roundFloat_0001A
+0079        ; { roundFloat32NA ; function begin
+0079  1283  	BCF STATUS, RP0
+007A  1303  	BCF STATUS, RP1
+007B  01FE  	CLRF roundFloat_0001A_1_roundNe_0001B
+007C  3040  	MOVLW 0x40
+007D  1683  	BSF STATUS, RP0
+007E  00A8  	MOVWF roundFloat_0001A_1_roundIn_0001C
+007F  1283  	BCF STATUS, RP0
+0080  08C7  	MOVF gbl_float_rounding_mode, F
+0081  1D03  	BTFSS STATUS,Z
+0082  2885  	GOTO	label9
+0083  3001  	MOVLW 0x01
+0084  00FE  	MOVWF roundFloat_0001A_1_roundNe_0001B
+0085        label9
+0085  08FE  	MOVF roundFloat_0001A_1_roundNe_0001B, F
+0086  1D03  	BTFSS STATUS,Z
+0087  28A2  	GOTO	label12
+0088  0847  	MOVF gbl_float_rounding_mode, W
+0089  3A03  	XORLW 0x03
+008A  1D03  	BTFSS STATUS,Z
+008B  288F  	GOTO	label10
+008C  1683  	BSF STATUS, RP0
+008D  01A8  	CLRF roundFloat_0001A_1_roundIn_0001C
+008E  28A2  	GOTO	label12
+008F        label10
+008F  307F  	MOVLW 0x7F
+0090  1683  	BSF STATUS, RP0
+0091  00A8  	MOVWF roundFloat_0001A_1_roundIn_0001C
+0092  1283  	BCF STATUS, RP0
+0093  08CD  	MOVF gbl_15_gbl_zSign, F
+0094  1903  	BTFSC STATUS,Z
+0095  289D  	GOTO	label11
+0096  0847  	MOVF gbl_float_rounding_mode, W
+0097  3A02  	XORLW 0x02
+0098  1D03  	BTFSS STATUS,Z
+0099  28A2  	GOTO	label12
+009A  1683  	BSF STATUS, RP0
+009B  01A8  	CLRF roundFloat_0001A_1_roundIn_0001C
+009C  28A2  	GOTO	label12
+009D        label11
+009D  0347  	DECF gbl_float_rounding_mode, W
+009E  1D03  	BTFSS STATUS,Z
+009F  28A2  	GOTO	label12
+00A0  1683  	BSF STATUS, RP0
+00A1  01A8  	CLRF roundFloat_0001A_1_roundIn_0001C
+00A2        label12
+00A2  1283  	BCF STATUS, RP0
+00A3  0831  	MOVF gbl_15_gbl_zSig, W
+00A4  1683  	BSF STATUS, RP0
+00A5  00AB  	MOVWF roundFloat_0001A_1_zSigPlusRound
+00A6  1283  	BCF STATUS, RP0
+00A7  0832  	MOVF gbl_15_gbl_zSig+D'1', W
+00A8  1683  	BSF STATUS, RP0
+00A9  00AC  	MOVWF roundFloat_0001A_1_zSigPlusRound+D'1'
+00AA  1283  	BCF STATUS, RP0
+00AB  0833  	MOVF gbl_15_gbl_zSig+D'2', W
+00AC  1683  	BSF STATUS, RP0
+00AD  00AD  	MOVWF roundFloat_0001A_1_zSigPlusRound+D'2'
+00AE  1283  	BCF STATUS, RP0
+00AF  0834  	MOVF gbl_15_gbl_zSig+D'3', W
+00B0  1683  	BSF STATUS, RP0
+00B1  00AE  	MOVWF roundFloat_0001A_1_zSigPlusRound+D'3'
+00B2  0828  	MOVF roundFloat_0001A_1_roundIn_0001C, W
+00B3  00AF  	MOVWF CompTempVar683
+00B4  01B0  	CLRF CompTempVar683+D'1'
+00B5  01B1  	CLRF CompTempVar683+D'2'
+00B6  01B2  	CLRF CompTempVar683+D'3'
+00B7  1FA8  	BTFSS roundFloat_0001A_1_roundIn_0001C,7
+00B8  28BC  	GOTO	label13
+00B9  03B0  	DECF CompTempVar683+D'1', F
+00BA  03B1  	DECF CompTempVar683+D'2', F
+00BB  03B2  	DECF CompTempVar683+D'3', F
+00BC        label13
+00BC  082F  	MOVF CompTempVar683, W
+00BD  07AB  	ADDWF roundFloat_0001A_1_zSigPlusRound, F
+00BE  0830  	MOVF CompTempVar683+D'1', W
+00BF  1803  	BTFSC STATUS,C
+00C0  0F30  	INCFSZ CompTempVar683+D'1', W
+00C1  07AC  	ADDWF roundFloat_0001A_1_zSigPlusRound+D'1', F
+00C2  0831  	MOVF CompTempVar683+D'2', W
+00C3  1803  	BTFSC STATUS,C
+00C4  0F31  	INCFSZ CompTempVar683+D'2', W
+00C5  07AD  	ADDWF roundFloat_0001A_1_zSigPlusRound+D'2', F
+00C6  0832  	MOVF CompTempVar683+D'3', W
+00C7  1803  	BTFSC STATUS,C
+00C8  0F32  	INCFSZ CompTempVar683+D'3', W
+00C9  07AE  	ADDWF roundFloat_0001A_1_zSigPlusRound+D'3', F
+00CA  307F  	MOVLW 0x7F
+00CB  1283  	BCF STATUS, RP0
+00CC  0531  	ANDWF gbl_15_gbl_zSig, W
+00CD  1683  	BSF STATUS, RP0
+00CE  00A9  	MOVWF roundFloat_0001A_1_roundBits
+00CF  3000  	MOVLW 0x00
+00D0  1283  	BCF STATUS, RP0
+00D1  0241  	SUBWF gbl_15_gbl_zExp+D'1', W
+00D2  1D03  	BTFSS STATUS,Z
+00D3  28D6  	GOTO	label14
+00D4  30FD  	MOVLW 0xFD
+00D5  0240  	SUBWF gbl_15_gbl_zExp, W
+00D6        label14
+00D6  1C03  	BTFSS STATUS,C
+00D7  2985  	GOTO	label28
+00D8  0840  	MOVF gbl_15_gbl_zExp, W
+00D9  3CFD  	SUBLW 0xFD
+00DA  0841  	MOVF gbl_15_gbl_zExp+D'1', W
+00DB  1803  	BTFSC STATUS,C
+00DC  1D03  	BTFSS STATUS,Z
+00DD  1BC1  	BTFSC gbl_15_gbl_zExp+D'1',7
+00DE  28E0  	GOTO	label15
+00DF  28E9  	GOTO	label16
+00E0        label15
+00E0  30FD  	MOVLW 0xFD
+00E1  0640  	XORWF gbl_15_gbl_zExp, W
+00E2  1903  	BTFSC STATUS,Z
+00E3  0841  	MOVF gbl_15_gbl_zExp+D'1', W
+00E4  1D03  	BTFSS STATUS,Z
+00E5  2904  	GOTO	label18
+00E6  1683  	BSF STATUS, RP0
+00E7  1FAE  	BTFSS roundFloat_0001A_1_zSigPlusRound+D'3',7
+00E8  2904  	GOTO	label18
+00E9        label16
+00E9  3028  	MOVLW 0x28
+00EA  1283  	BCF STATUS, RP0
+00EB  04C8  	IORWF gbl_float_exception_flags, F
+00EC  1683  	BSF STATUS, RP0
+00ED  08A8  	MOVF roundFloat_0001A_1_roundIn_0001C, F
+00EE  1D03  	BTFSS STATUS,Z
+00EF  28FB  	GOTO	label17
+00F0  307F  	MOVLW 0x7F
+00F1  1283  	BCF STATUS, RP0
+00F2  00B3  	MOVWF gbl_15_gbl_zSig+D'2'
+00F3  30FF  	MOVLW 0xFF
+00F4  00B1  	MOVWF gbl_15_gbl_zSig
+00F5  00B2  	MOVWF gbl_15_gbl_zSig+D'1'
+00F6  01B4  	CLRF gbl_15_gbl_zSig+D'3'
+00F7  30FE  	MOVLW 0xFE
+00F8  00C0  	MOVWF gbl_15_gbl_zExp
+00F9  01C1  	CLRF gbl_15_gbl_zExp+D'1'
+00FA  0008  	RETURN
+00FB        label17
+00FB  30FF  	MOVLW 0xFF
+00FC  1283  	BCF STATUS, RP0
+00FD  00C0  	MOVWF gbl_15_gbl_zExp
+00FE  01C1  	CLRF gbl_15_gbl_zExp+D'1'
+00FF  01B1  	CLRF gbl_15_gbl_zSig
+0100  01B2  	CLRF gbl_15_gbl_zSig+D'1'
+0101  01B3  	CLRF gbl_15_gbl_zSig+D'2'
+0102  01B4  	CLRF gbl_15_gbl_zSig+D'3'
+0103  0008  	RETURN
+0104        label18
+0104  1283  	BCF STATUS, RP0
+0105  1FC1  	BTFSS gbl_15_gbl_zExp+D'1',7
+0106  2985  	GOTO	label28
+0107  1683  	BSF STATUS, RP0
+0108  01B0  	CLRF CompTempVar690
+0109  1283  	BCF STATUS, RP0
+010A  0346  	DECF gbl_float_detect_tininess, W
+010B  1D03  	BTFSS STATUS,Z
+010C  290F  	GOTO	label19
+010D  1683  	BSF STATUS, RP0
+010E  0AB0  	INCF CompTempVar690, F
+010F        label19
+010F  1683  	BSF STATUS, RP0
+0110  01AF  	CLRF CompTempVar689
+0111  1283  	BCF STATUS, RP0
+0112  0841  	MOVF gbl_15_gbl_zExp+D'1', W
+0113  3A80  	XORLW 0x80
+0114  1683  	BSF STATUS, RP0
+0115  00B4  	MOVWF CompTempVar696
+0116  307F  	MOVLW 0x7F
+0117  0234  	SUBWF CompTempVar696, W
+0118  1D03  	BTFSS STATUS,Z
+0119  291D  	GOTO	label20
+011A  30FF  	MOVLW 0xFF
+011B  1283  	BCF STATUS, RP0
+011C  0240  	SUBWF gbl_15_gbl_zExp, W
+011D        label20
+011D  1803  	BTFSC STATUS,C
+011E  2921  	GOTO	label21
+011F  1683  	BSF STATUS, RP0
+0120  0AAF  	INCF CompTempVar689, F
+0121        label21
+0121  1683  	BSF STATUS, RP0
+0122  01B3  	CLRF CompTempVar694
+0123  08AF  	MOVF CompTempVar689, F
+0124  1903  	BTFSC STATUS,Z
+0125  08B0  	MOVF CompTempVar690, F
+0126  1D03  	BTFSS STATUS,Z
+0127  0AB3  	INCF CompTempVar694, F
+0128  3080  	MOVLW 0x80
+0129  052E  	ANDWF roundFloat_0001A_1_zSigPlusRound+D'3', W
+012A  00B1  	MOVWF CompTempVar692
+012B  01B2  	CLRF CompTempVar693
+012C  0AB2  	INCF CompTempVar693, F
+012D  08B1  	MOVF CompTempVar692, F
+012E  1D03  	BTFSS STATUS,Z
+012F  1032  	BCF CompTempVar693,0
+0130  01AA  	CLRF roundFloat_0001A_1_isTiny
+0131  08B2  	MOVF CompTempVar693, F
+0132  1903  	BTFSC STATUS,Z
+0133  08B3  	MOVF CompTempVar694, F
+0134  1D03  	BTFSS STATUS,Z
+0135  0AAA  	INCF roundFloat_0001A_1_isTiny, F
+0136  1283  	BCF STATUS, RP0
+0137  08C0  	MOVF gbl_15_gbl_zExp, F
+0138  1903  	BTFSC STATUS,Z
+0139  08C1  	MOVF gbl_15_gbl_zExp+D'1', F
+013A  1903  	BTFSC STATUS,Z
+013B  2976  	GOTO	label27
+013C  0940  	COMF gbl_15_gbl_zExp, W
+013D  1683  	BSF STATUS, RP0
+013E  00AF  	MOVWF CompTempVar697
+013F  1283  	BCF STATUS, RP0
+0140  0941  	COMF gbl_15_gbl_zExp+D'1', W
+0141  1683  	BSF STATUS, RP0
+0142  00B0  	MOVWF CompTempVar698
+0143  0AAF  	INCF CompTempVar697, F
+0144  1903  	BTFSC STATUS,Z
+0145  0AB0  	INCF CompTempVar698, F
+0146  3020  	MOVLW 0x20
+0147  022F  	SUBWF CompTempVar697, W
+0148  0830  	MOVF CompTempVar698, W
+0149  1803  	BTFSC STATUS,C
+014A  294D  	GOTO	label22
+014B  1903  	BTFSC STATUS,Z
+014C  294F  	GOTO	label23
+014D        label22
+014D  1FB0  	BTFSS CompTempVar698,7
+014E  2969  	GOTO	label26
+014F        label23
+014F  1031  	BCF roundFloat_0001A_30_stickyBit,0
+0150  1283  	BCF STATUS, RP0
+0151  0940  	COMF gbl_15_gbl_zExp, W
+0152  1683  	BSF STATUS, RP0
+0153  00B2  	MOVWF roundFloat_0001A_30_count
+0154  0AB2  	INCF roundFloat_0001A_30_count, F
+0155        label24
+0155  1283  	BCF STATUS, RP0
+0156  1C31  	BTFSS gbl_15_gbl_zSig,0
+0157  295A  	GOTO	label25
+0158  1683  	BSF STATUS, RP0
+0159  1431  	BSF roundFloat_0001A_30_stickyBit,0
+015A        label25
+015A  1003  	BCF STATUS,C
+015B  1283  	BCF STATUS, RP0
+015C  0CB4  	RRF gbl_15_gbl_zSig+D'3', F
+015D  0CB3  	RRF gbl_15_gbl_zSig+D'2', F
+015E  0CB2  	RRF gbl_15_gbl_zSig+D'1', F
+015F  0CB1  	RRF gbl_15_gbl_zSig, F
+0160  1683  	BSF STATUS, RP0
+0161  03B2  	DECF roundFloat_0001A_30_count, F
+0162  1D03  	BTFSS STATUS,Z
+0163  2955  	GOTO	label24
+0164  1C31  	BTFSS roundFloat_0001A_30_stickyBit,0
+0165  2976  	GOTO	label27
+0166  1283  	BCF STATUS, RP0
+0167  1431  	BSF gbl_15_gbl_zSig,0
+0168  2976  	GOTO	label27
+0169        label26
+0169  1283  	BCF STATUS, RP0
+016A  0831  	MOVF gbl_15_gbl_zSig, W
+016B  0432  	IORWF gbl_15_gbl_zSig+D'1', W
+016C  0433  	IORWF gbl_15_gbl_zSig+D'2', W
+016D  0434  	IORWF gbl_15_gbl_zSig+D'3', W
+016E  39FF  	ANDLW 0xFF
+016F  1903  	BTFSC STATUS,Z
+0170  2976  	GOTO	label27
+0171  3001  	MOVLW 0x01
+0172  00B1  	MOVWF gbl_15_gbl_zSig
+0173  01B2  	CLRF gbl_15_gbl_zSig+D'1'
+0174  01B3  	CLRF gbl_15_gbl_zSig+D'2'
+0175  01B4  	CLRF gbl_15_gbl_zSig+D'3'
+0176        label27
+0176  1283  	BCF STATUS, RP0
+0177  01C0  	CLRF gbl_15_gbl_zExp
+0178  01C1  	CLRF gbl_15_gbl_zExp+D'1'
+0179  307F  	MOVLW 0x7F
+017A  0531  	ANDWF gbl_15_gbl_zSig, W
+017B  1683  	BSF STATUS, RP0
+017C  00A9  	MOVWF roundFloat_0001A_1_roundBits
+017D  08AA  	MOVF roundFloat_0001A_1_isTiny, F
+017E  1903  	BTFSC STATUS,Z
+017F  2985  	GOTO	label28
+0180  08A9  	MOVF roundFloat_0001A_1_roundBits, F
+0181  1903  	BTFSC STATUS,Z
+0182  2985  	GOTO	label28
+0183  1283  	BCF STATUS, RP0
+0184  1648  	BSF gbl_float_exception_flags,4
+0185        label28
+0185  1683  	BSF STATUS, RP0
+0186  08A9  	MOVF roundFloat_0001A_1_roundBits, F
+0187  1903  	BTFSC STATUS,Z
+0188  298B  	GOTO	label29
+0189  1283  	BCF STATUS, RP0
+018A  16C8  	BSF gbl_float_exception_flags,5
+018B        label29
+018B  1683  	BSF STATUS, RP0
+018C  0828  	MOVF roundFloat_0001A_1_roundIn_0001C, W
+018D  00AF  	MOVWF CompTempVar701
+018E  01B0  	CLRF CompTempVar701+D'1'
+018F  01B1  	CLRF CompTempVar701+D'2'
+0190  01B2  	CLRF CompTempVar701+D'3'
+0191  1FA8  	BTFSS roundFloat_0001A_1_roundIn_0001C,7
+0192  2996  	GOTO	label30
+0193  03B0  	DECF CompTempVar701+D'1', F
+0194  03B1  	DECF CompTempVar701+D'2', F
+0195  03B2  	DECF CompTempVar701+D'3', F
+0196        label30
+0196  082F  	MOVF CompTempVar701, W
+0197  1283  	BCF STATUS, RP0
+0198  07B1  	ADDWF gbl_15_gbl_zSig, F
+0199  1683  	BSF STATUS, RP0
+019A  0830  	MOVF CompTempVar701+D'1', W
+019B  1C03  	BTFSS STATUS,C
+019C  29A0  	GOTO	label31
+019D  0F30  	INCFSZ CompTempVar701+D'1', W
+019E  29A0  	GOTO	label31
+019F  29A2  	GOTO	label32
+01A0        label31
+01A0  1283  	BCF STATUS, RP0
+01A1  07B2  	ADDWF gbl_15_gbl_zSig+D'1', F
+01A2        label32
+01A2  1683  	BSF STATUS, RP0
+01A3  0831  	MOVF CompTempVar701+D'2', W
+01A4  1C03  	BTFSS STATUS,C
+01A5  29A9  	GOTO	label33
+01A6  0F31  	INCFSZ CompTempVar701+D'2', W
+01A7  29A9  	GOTO	label33
+01A8  29AB  	GOTO	label34
+01A9        label33
+01A9  1283  	BCF STATUS, RP0
+01AA  07B3  	ADDWF gbl_15_gbl_zSig+D'2', F
+01AB        label34
+01AB  1683  	BSF STATUS, RP0
+01AC  0832  	MOVF CompTempVar701+D'3', W
+01AD  1C03  	BTFSS STATUS,C
+01AE  29B2  	GOTO	label35
+01AF  0F32  	INCFSZ CompTempVar701+D'3', W
+01B0  29B2  	GOTO	label35
+01B1  29B4  	GOTO	label36
+01B2        label35
+01B2  1283  	BCF STATUS, RP0
+01B3  07B4  	ADDWF gbl_15_gbl_zSig+D'3', F
+01B4        label36
+01B4  3007  	MOVLW 0x07
+01B5  1683  	BSF STATUS, RP0
+01B6  00AF  	MOVWF roundFloat_0001A_44_i
+01B7        label37
+01B7  08AF  	MOVF roundFloat_0001A_44_i, F
+01B8  1903  	BTFSC STATUS,Z
+01B9  29C3  	GOTO	label38
+01BA  1003  	BCF STATUS,C
+01BB  1283  	BCF STATUS, RP0
+01BC  0CB4  	RRF gbl_15_gbl_zSig+D'3', F
+01BD  0CB3  	RRF gbl_15_gbl_zSig+D'2', F
+01BE  0CB2  	RRF gbl_15_gbl_zSig+D'1', F
+01BF  0CB1  	RRF gbl_15_gbl_zSig, F
+01C0  1683  	BSF STATUS, RP0
+01C1  03AF  	DECF roundFloat_0001A_44_i, F
+01C2  29B7  	GOTO	label37
+01C3        label38
+01C3  3040  	MOVLW 0x40
+01C4  0629  	XORWF roundFloat_0001A_1_roundBits, W
+01C5  1D03  	BTFSS STATUS,Z
+01C6  29CB  	GOTO	label39
+01C7  1283  	BCF STATUS, RP0
+01C8  08FE  	MOVF roundFloat_0001A_1_roundNe_0001B, F
+01C9  1D03  	BTFSS STATUS,Z
+01CA  1031  	BCF gbl_15_gbl_zSig,0
+01CB        label39
+01CB  1283  	BCF STATUS, RP0
+01CC  0831  	MOVF gbl_15_gbl_zSig, W
+01CD  0432  	IORWF gbl_15_gbl_zSig+D'1', W
+01CE  0433  	IORWF gbl_15_gbl_zSig+D'2', W
+01CF  0434  	IORWF gbl_15_gbl_zSig+D'3', W
+01D0  39FF  	ANDLW 0xFF
+01D1  1D03  	BTFSS STATUS,Z
+01D2  0008  	RETURN
+01D3  01C0  	CLRF gbl_15_gbl_zExp
+01D4  01C1  	CLRF gbl_15_gbl_zExp+D'1'
+01D5  0008  	RETURN
+01D6        ; } roundFloat32NA function end
+
+	ORG 0x000001D6
+01D6        packFloat3_0001D
+01D6        ; { packFloat32NA ; function begin
+01D6  1283  	BCF STATUS, RP0
+01D7  1303  	BCF STATUS, RP1
+01D8  1C34  	BTFSS gbl_15_gbl_zSig+D'3',0
+01D9  29DE  	GOTO	label40
+01DA  3002  	MOVLW 0x02
+01DB  07C0  	ADDWF gbl_15_gbl_zExp, F
+01DC  1803  	BTFSC STATUS,C
+01DD  0AC1  	INCF gbl_15_gbl_zExp+D'1', F
+01DE        label40
+01DE  1FB3  	BTFSS gbl_15_gbl_zSig+D'2',7
+01DF  29E4  	GOTO	label41
+01E0  0AC0  	INCF gbl_15_gbl_zExp, F
+01E1  1D03  	BTFSS STATUS,Z
+01E2  29E4  	GOTO	label41
+01E3  0AC1  	INCF gbl_15_gbl_zExp+D'1', F
+01E4        label41
+01E4  0840  	MOVF gbl_15_gbl_zExp, W
+01E5  00B4  	MOVWF gbl_15_gbl_zSig+D'3'
+01E6  1003  	BCF STATUS,C
+01E7  0CB4  	RRF gbl_15_gbl_zSig+D'3', F
+01E8  13B3  	BCF gbl_15_gbl_zSig+D'2',7
+01E9  1840  	BTFSC gbl_15_gbl_zExp,0
+01EA  17B3  	BSF gbl_15_gbl_zSig+D'2',7
+01EB  08CD  	MOVF gbl_15_gbl_zSign, F
+01EC  1D03  	BTFSS STATUS,Z
+01ED  17B4  	BSF gbl_15_gbl_zSig+D'3',7
+01EE  0008  	RETURN
+01EF        ; } packFloat32NA function end
+
+	ORG 0x000001EF
+01EF        mul32To32s_0002C
+01EF        ; { mul32To32sticky ; function begin
+01EF  3040  	MOVLW 0x40
+01F0  1283  	BCF STATUS, RP0
+01F1  1303  	BCF STATUS, RP1
+01F2  00FE  	MOVWF mul32To32s_0002C_1_i
+01F3  1683  	BSF STATUS, RP0
+01F4  01A0  	CLRF mul32To32s_0002C_1_zSig0
+01F5  01A1  	CLRF mul32To32s_0002C_1_zSig0+D'1'
+01F6  01A2  	CLRF mul32To32s_0002C_1_zSig0+D'2'
+01F7  01A3  	CLRF mul32To32s_0002C_1_zSig0+D'3'
+01F8  1283  	BCF STATUS, RP0
+01F9  01B1  	CLRF gbl_15_gbl_zSig
+01FA  01B2  	CLRF gbl_15_gbl_zSig+D'1'
+01FB  01B3  	CLRF gbl_15_gbl_zSig+D'2'
+01FC  01B4  	CLRF gbl_15_gbl_zSig+D'3'
+01FD        label42
+01FD  087E  	MOVF mul32To32s_0002C_1_i, W
+01FE  1683  	BSF STATUS, RP0
+01FF  00A8  	MOVWF CompTempVar988
+0200  1283  	BCF STATUS, RP0
+0201  03FE  	DECF mul32To32s_0002C_1_i, F
+0202  1683  	BSF STATUS, RP0
+0203  08A8  	MOVF CompTempVar988, F
+0204  1903  	BTFSC STATUS,Z
+0205  2A61  	GOTO	label52
+0206  1003  	BCF STATUS,C
+0207  1283  	BCF STATUS, RP0
+0208  0DB1  	RLF gbl_15_gbl_zSig, F
+0209  0DB2  	RLF gbl_15_gbl_zSig+D'1', F
+020A  0DB3  	RLF gbl_15_gbl_zSig+D'2', F
+020B  0DB4  	RLF gbl_15_gbl_zSig+D'3', F
+020C  1683  	BSF STATUS, RP0
+020D  1FA3  	BTFSS mul32To32s_0002C_1_zSig0+D'3',7
+020E  2A11  	GOTO	label43
+020F  1283  	BCF STATUS, RP0
+0210  1431  	BSF gbl_15_gbl_zSig,0
+0211        label43
+0211  1003  	BCF STATUS,C
+0212  1683  	BSF STATUS, RP0
+0213  0DA0  	RLF mul32To32s_0002C_1_zSig0, F
+0214  0DA1  	RLF mul32To32s_0002C_1_zSig0+D'1', F
+0215  0DA2  	RLF mul32To32s_0002C_1_zSig0+D'2', F
+0216  0DA3  	RLF mul32To32s_0002C_1_zSig0+D'3', F
+0217  1283  	BCF STATUS, RP0
+0218  1FB0  	BTFSS gbl_15_gbl_bSig+D'3',7
+0219  2A58  	GOTO	label51
+021A  0829  	MOVF gbl_15_gbl_aSig, W
+021B  1683  	BSF STATUS, RP0
+021C  07A0  	ADDWF mul32To32s_0002C_1_zSig0, F
+021D  1283  	BCF STATUS, RP0
+021E  082A  	MOVF gbl_15_gbl_aSig+D'1', W
+021F  1C03  	BTFSS STATUS,C
+0220  2A24  	GOTO	label44
+0221  0F2A  	INCFSZ gbl_15_gbl_aSig+D'1', W
+0222  2A24  	GOTO	label44
+0223  2A26  	GOTO	label45
+0224        label44
+0224  1683  	BSF STATUS, RP0
+0225  07A1  	ADDWF mul32To32s_0002C_1_zSig0+D'1', F
+0226        label45
+0226  1283  	BCF STATUS, RP0
+0227  082B  	MOVF gbl_15_gbl_aSig+D'2', W
+0228  1C03  	BTFSS STATUS,C
+0229  2A2D  	GOTO	label46
+022A  0F2B  	INCFSZ gbl_15_gbl_aSig+D'2', W
+022B  2A2D  	GOTO	label46
+022C  2A2F  	GOTO	label47
+022D        label46
+022D  1683  	BSF STATUS, RP0
+022E  07A2  	ADDWF mul32To32s_0002C_1_zSig0+D'2', F
+022F        label47
+022F  1283  	BCF STATUS, RP0
+0230  082C  	MOVF gbl_15_gbl_aSig+D'3', W
+0231  1C03  	BTFSS STATUS,C
+0232  2A36  	GOTO	label48
+0233  0F2C  	INCFSZ gbl_15_gbl_aSig+D'3', W
+0234  2A36  	GOTO	label48
+0235  2A38  	GOTO	label49
+0236        label48
+0236  1683  	BSF STATUS, RP0
+0237  07A3  	ADDWF mul32To32s_0002C_1_zSig0+D'3', F
+0238        label49
+0238  1283  	BCF STATUS, RP0
+0239  082C  	MOVF gbl_15_gbl_aSig+D'3', W
+023A  1683  	BSF STATUS, RP0
+023B  0223  	SUBWF mul32To32s_0002C_1_zSig0+D'3', W
+023C  1D03  	BTFSS STATUS,Z
+023D  2A4E  	GOTO	label50
+023E  1283  	BCF STATUS, RP0
+023F  082B  	MOVF gbl_15_gbl_aSig+D'2', W
+0240  1683  	BSF STATUS, RP0
+0241  0222  	SUBWF mul32To32s_0002C_1_zSig0+D'2', W
+0242  1D03  	BTFSS STATUS,Z
+0243  2A4E  	GOTO	label50
+0244  1283  	BCF STATUS, RP0
+0245  082A  	MOVF gbl_15_gbl_aSig+D'1', W
+0246  1683  	BSF STATUS, RP0
+0247  0221  	SUBWF mul32To32s_0002C_1_zSig0+D'1', W
+0248  1D03  	BTFSS STATUS,Z
+0249  2A4E  	GOTO	label50
+024A  1283  	BCF STATUS, RP0
+024B  0829  	MOVF gbl_15_gbl_aSig, W
+024C  1683  	BSF STATUS, RP0
+024D  0220  	SUBWF mul32To32s_0002C_1_zSig0, W
+024E        label50
+024E  1803  	BTFSC STATUS,C
+024F  2A58  	GOTO	label51
+0250  1283  	BCF STATUS, RP0
+0251  0AB1  	INCF gbl_15_gbl_zSig, F
+0252  1903  	BTFSC STATUS,Z
+0253  0AB2  	INCF gbl_15_gbl_zSig+D'1', F
+0254  1903  	BTFSC STATUS,Z
+0255  0AB3  	INCF gbl_15_gbl_zSig+D'2', F
+0256  1903  	BTFSC STATUS,Z
+0257  0AB4  	INCF gbl_15_gbl_zSig+D'3', F
+0258        label51
+0258  1283  	BCF STATUS, RP0
+0259  1BB4  	BTFSC gbl_15_gbl_zSig+D'3',7
+025A  2A61  	GOTO	label52
+025B  1003  	BCF STATUS,C
+025C  0DAD  	RLF gbl_15_gbl_bSig, F
+025D  0DAE  	RLF gbl_15_gbl_bSig+D'1', F
+025E  0DAF  	RLF gbl_15_gbl_bSig+D'2', F
+025F  0DB0  	RLF gbl_15_gbl_bSig+D'3', F
+0260  29FD  	GOTO	label42
+0261        label52
+0261  1283  	BCF STATUS, RP0
+0262  01C1  	CLRF gbl_15_gbl_zExp+D'1'
+0263  3020  	MOVLW 0x20
+0264  027E  	SUBWF mul32To32s_0002C_1_i, W
+0265  00C0  	MOVWF gbl_15_gbl_zExp
+0266  1C03  	BTFSS STATUS,C
+0267  03C1  	DECF gbl_15_gbl_zExp+D'1', F
+0268  1BFE  	BTFSC mul32To32s_0002C_1_i,7
+0269  03C1  	DECF gbl_15_gbl_zExp+D'1', F
+026A  1683  	BSF STATUS, RP0
+026B  0820  	MOVF mul32To32s_0002C_1_zSig0, W
+026C  0421  	IORWF mul32To32s_0002C_1_zSig0+D'1', W
+026D  0422  	IORWF mul32To32s_0002C_1_zSig0+D'2', W
+026E  0423  	IORWF mul32To32s_0002C_1_zSig0+D'3', W
+026F  39FF  	ANDLW 0xFF
+0270  1903  	BTFSC STATUS,Z
+0271  0008  	RETURN
+0272  1283  	BCF STATUS, RP0
+0273  1431  	BSF gbl_15_gbl_zSig,0
+0274  0008  	RETURN
+0275        ; } mul32To32sticky function end
+
+	ORG 0x00000275
+0275        _float32_a_0002A
+0275        ; { _float32_addSig ; function begin
+0275  1283  	BCF STATUS, RP0
+0276  1303  	BCF STATUS, RP1
+0277  0829  	MOVF gbl_15_gbl_aSig, W
+0278  00B1  	MOVWF gbl_15_gbl_zSig
+0279  082A  	MOVF gbl_15_gbl_aSig+D'1', W
+027A  00B2  	MOVWF gbl_15_gbl_zSig+D'1'
+027B  082B  	MOVF gbl_15_gbl_aSig+D'2', W
+027C  00B3  	MOVWF gbl_15_gbl_zSig+D'2'
+027D  082C  	MOVF gbl_15_gbl_aSig+D'3', W
+027E  00B4  	MOVWF gbl_15_gbl_zSig+D'3'
+027F  084C  	MOVF gbl_15_gbl_bSign, W
+0280  064B  	XORWF gbl_15_gbl_aSign, W
+0281  1903  	BTFSC STATUS,Z
+0282  2AA7  	GOTO	label55
+0283  082D  	MOVF gbl_15_gbl_bSig, W
+0284  3C00  	SUBLW 0x00
+0285  00FC  	MOVWF CompTempVar921
+0286  3000  	MOVLW 0x00
+0287  00FD  	MOVWF CompTempVar922
+0288  00FE  	MOVWF CompTempVar923
+0289  1683  	BSF STATUS, RP0
+028A  00A8  	MOVWF CompTempVar924
+028B  1283  	BCF STATUS, RP0
+028C  082E  	MOVF gbl_15_gbl_bSig+D'1', W
+028D  1C03  	BTFSS STATUS,C
+028E  0F2E  	INCFSZ gbl_15_gbl_bSig+D'1', W
+028F  02FD  	SUBWF CompTempVar922, F
+0290  082F  	MOVF gbl_15_gbl_bSig+D'2', W
+0291  1C03  	BTFSS STATUS,C
+0292  0F2F  	INCFSZ gbl_15_gbl_bSig+D'2', W
+0293  02FE  	SUBWF CompTempVar923, F
+0294  0830  	MOVF gbl_15_gbl_bSig+D'3', W
+0295  1803  	BTFSC STATUS,C
+0296  2A9A  	GOTO	label53
+0297  0F30  	INCFSZ gbl_15_gbl_bSig+D'3', W
+0298  2A9A  	GOTO	label53
+0299  2A9C  	GOTO	label54
+029A        label53
+029A  1683  	BSF STATUS, RP0
+029B  02A8  	SUBWF CompTempVar924, F
+029C        label54
+029C  1283  	BCF STATUS, RP0
+029D  087C  	MOVF CompTempVar921, W
+029E  00AD  	MOVWF gbl_15_gbl_bSig
+029F  087D  	MOVF CompTempVar922, W
+02A0  00AE  	MOVWF gbl_15_gbl_bSig+D'1'
+02A1  087E  	MOVF CompTempVar923, W
+02A2  00AF  	MOVWF gbl_15_gbl_bSig+D'2'
+02A3  1683  	BSF STATUS, RP0
+02A4  0828  	MOVF CompTempVar924, W
+02A5  1283  	BCF STATUS, RP0
+02A6  00B0  	MOVWF gbl_15_gbl_bSig+D'3'
+02A7        label55
+02A7  082D  	MOVF gbl_15_gbl_bSig, W
+02A8  07B1  	ADDWF gbl_15_gbl_zSig, F
+02A9  082E  	MOVF gbl_15_gbl_bSig+D'1', W
+02AA  1803  	BTFSC STATUS,C
+02AB  0F2E  	INCFSZ gbl_15_gbl_bSig+D'1', W
+02AC  07B2  	ADDWF gbl_15_gbl_zSig+D'1', F
+02AD  082F  	MOVF gbl_15_gbl_bSig+D'2', W
+02AE  1803  	BTFSC STATUS,C
+02AF  0F2F  	INCFSZ gbl_15_gbl_bSig+D'2', W
+02B0  07B3  	ADDWF gbl_15_gbl_zSig+D'2', F
+02B1  0830  	MOVF gbl_15_gbl_bSig+D'3', W
+02B2  1803  	BTFSC STATUS,C
+02B3  0F30  	INCFSZ gbl_15_gbl_bSig+D'3', W
+02B4  07B4  	ADDWF gbl_15_gbl_zSig+D'3', F
+02B5  01CE  	CLRF gbl_15_gbl_zSigZero
+02B6  0831  	MOVF gbl_15_gbl_zSig, W
+02B7  0432  	IORWF gbl_15_gbl_zSig+D'1', W
+02B8  0433  	IORWF gbl_15_gbl_zSig+D'2', W
+02B9  0434  	IORWF gbl_15_gbl_zSig+D'3', W
+02BA  39FF  	ANDLW 0xFF
+02BB  1D03  	BTFSS STATUS,Z
+02BC  0008  	RETURN
+02BD  3001  	MOVLW 0x01
+02BE  00CE  	MOVWF gbl_15_gbl_zSigZero
+02BF  0008  	RETURN
+02C0        ; } _float32_addSig function end
+
+	ORG 0x000002C0
+02C0        __mul_16u__0000C
+02C0        ; { __mul_16u_16u__16 ; function begin
+02C0  1683  	BSF STATUS, RP0
+02C1  01A1  	CLRF __mul_16u__0000C_1_i
+02C2  01A4  	CLRF CompTempVarRet455
+02C3  01A5  	CLRF CompTempVarRet455+D'1'
+02C4  1283  	BCF STATUS, RP0
+02C5  087A  	MOVF __mul_16u__0000C_arg_a, W
+02C6  1683  	BSF STATUS, RP0
+02C7  00A2  	MOVWF __mul_16u__0000C_1_t
+02C8  1283  	BCF STATUS, RP0
+02C9  087B  	MOVF __mul_16u__0000C_arg_a+D'1', W
+02CA  1683  	BSF STATUS, RP0
+02CB  00A3  	MOVWF __mul_16u__0000C_1_t+D'1'
+02CC        label56
+02CC  1A21  	BTFSC __mul_16u__0000C_1_i,4
+02CD  0008  	RETURN
+02CE  1283  	BCF STATUS, RP0
+02CF  1C7C  	BTFSS __mul_16u__0000C_arg_b,0
+02D0  2AD8  	GOTO	label57
+02D1  1683  	BSF STATUS, RP0
+02D2  0822  	MOVF __mul_16u__0000C_1_t, W
+02D3  07A4  	ADDWF CompTempVarRet455, F
+02D4  0823  	MOVF __mul_16u__0000C_1_t+D'1', W
+02D5  1803  	BTFSC gbl_status,0
+02D6  0F23  	INCFSZ __mul_16u__0000C_1_t+D'1', W
+02D7  07A5  	ADDWF CompTempVarRet455+D'1', F
+02D8        label57
+02D8  1003  	BCF gbl_status,0
+02D9  1283  	BCF STATUS, RP0
+02DA  0CFD  	RRF __mul_16u__0000C_arg_b+D'1', F
+02DB  0CFC  	RRF __mul_16u__0000C_arg_b, F
+02DC  1003  	BCF gbl_status,0
+02DD  1683  	BSF STATUS, RP0
+02DE  0DA2  	RLF __mul_16u__0000C_1_t, F
+02DF  0DA3  	RLF __mul_16u__0000C_1_t+D'1', F
+02E0  0AA1  	INCF __mul_16u__0000C_1_i, F
+02E1  2ACC  	GOTO	label56
+02E2        ; } __mul_16u_16u__16 function end
+
+	ORG 0x000002E2
+02E2        __div_16_1_00003
+02E2        ; { __div_16_16 ; function begin
+02E2  1683  	BSF STATUS, RP0
+02E3  01A0  	CLRF __div_16_1_00003_1_r
+02E4  01A1  	CLRF __div_16_1_00003_1_r+D'1'
+02E5  01A2  	CLRF CompTempVarRet214
+02E6  01A3  	CLRF CompTempVarRet214+D'1'
+02E7  1283  	BCF STATUS, RP0
+02E8  01FE  	CLRF __div_16_1_00003_1_i
+02E9        label58
+02E9  1A7E  	BTFSC __div_16_1_00003_1_i,4
+02EA  0008  	RETURN
+02EB  1003  	BCF STATUS,C
+02EC  1683  	BSF STATUS, RP0
+02ED  0DA2  	RLF CompTempVarRet214, F
+02EE  0DA3  	RLF CompTempVarRet214+D'1', F
+02EF  1283  	BCF STATUS, RP0
+02F0  0DFA  	RLF __div_16_1_00003_arg_a, F
+02F1  0DFB  	RLF __div_16_1_00003_arg_a+D'1', F
+02F2  1683  	BSF STATUS, RP0
+02F3  0DA0  	RLF __div_16_1_00003_1_r, F
+02F4  0DA1  	RLF __div_16_1_00003_1_r+D'1', F
+02F5  1283  	BCF STATUS, RP0
+02F6  087D  	MOVF __div_16_1_00003_arg_b+D'1', W
+02F7  1683  	BSF STATUS, RP0
+02F8  0221  	SUBWF __div_16_1_00003_1_r+D'1', W
+02F9  1D03  	BTFSS STATUS,Z
+02FA  2AFF  	GOTO	label59
+02FB  1283  	BCF STATUS, RP0
+02FC  087C  	MOVF __div_16_1_00003_arg_b, W
+02FD  1683  	BSF STATUS, RP0
+02FE  0220  	SUBWF __div_16_1_00003_1_r, W
+02FF        label59
+02FF  1C03  	BTFSS STATUS,C
+0300  2B0E  	GOTO	label61
+0301  1283  	BCF STATUS, RP0
+0302  087C  	MOVF __div_16_1_00003_arg_b, W
+0303  1683  	BSF STATUS, RP0
+0304  02A0  	SUBWF __div_16_1_00003_1_r, F
+0305  1283  	BCF STATUS, RP0
+0306  087D  	MOVF __div_16_1_00003_arg_b+D'1', W
+0307  1803  	BTFSC STATUS,C
+0308  2B0B  	GOTO	label60
+0309  1683  	BSF STATUS, RP0
+030A  03A1  	DECF __div_16_1_00003_1_r+D'1', F
+030B        label60
+030B  1683  	BSF STATUS, RP0
+030C  02A1  	SUBWF __div_16_1_00003_1_r+D'1', F
+030D  1422  	BSF CompTempVarRet214,0
+030E        label61
+030E  1283  	BCF STATUS, RP0
+030F  0AFE  	INCF __div_16_1_00003_1_i, F
+0310  2AE9  	GOTO	label58
+0311        ; } __div_16_16 function end
+
+	ORG 0x00000311
+0311        Wdt_Delay__0003E
+0311        ; { Wdt_Delay_Ms ; function begin
+0311  01D7  	CLRF Wdt_Delay__0003E_1_i
+0312        label62
+0312  0856  	MOVF Wdt_Delay__0003E_arg_delay, W
+0313  0257  	SUBWF Wdt_Delay__0003E_1_i, W
+0314  1803  	BTFSC STATUS,C
+0315  0008  	RETURN
+0316  0064  	CLRWDT
+0317  3001  	MOVLW 0x01
+0318  00D8  	MOVWF delay_ms_00000_arg_del
+0319  2010  	CALL delay_ms_00000
+031A  0AD7  	INCF Wdt_Delay__0003E_1_i, F
+031B  2B12  	GOTO	label62
+031C        ; } Wdt_Delay_Ms function end
+
+	ORG 0x0000031C
+031C        NormaliseF_00019
+031C        ; { NormaliseFloat32NA ; function begin
+031C  1283  	BCF STATUS, RP0
+031D  1303  	BCF STATUS, RP1
+031E  0831  	MOVF gbl_15_gbl_zSig, W
+031F  0432  	IORWF gbl_15_gbl_zSig+D'1', W
+0320  0433  	IORWF gbl_15_gbl_zSig+D'2', W
+0321  0434  	IORWF gbl_15_gbl_zSig+D'3', W
+0322  39FF  	ANDLW 0xFF
+0323  1903  	BTFSC STATUS,Z
+0324  2B31  	GOTO	label64
+0325        label63
+0325  1B34  	BTFSC gbl_15_gbl_zSig+D'3',6
+0326  0008  	RETURN
+0327  1003  	BCF STATUS,C
+0328  0DB1  	RLF gbl_15_gbl_zSig, F
+0329  0DB2  	RLF gbl_15_gbl_zSig+D'1', F
+032A  0DB3  	RLF gbl_15_gbl_zSig+D'2', F
+032B  0DB4  	RLF gbl_15_gbl_zSig+D'3', F
+032C  08C0  	MOVF gbl_15_gbl_zExp, F
+032D  1903  	BTFSC STATUS,Z
+032E  03C1  	DECF gbl_15_gbl_zExp+D'1', F
+032F  03C0  	DECF gbl_15_gbl_zExp, F
+0330  2B25  	GOTO	label63
+0331        label64
+0331  01C0  	CLRF gbl_15_gbl_zExp
+0332  01C1  	CLRF gbl_15_gbl_zExp+D'1'
+0333  0008  	RETURN
+0334        ; } NormaliseFloat32NA function end
+
+	ORG 0x00000334
+0334        FCD_LCDDis_00051
+0334        ; { FCD_LCDDisplay0_RawSend ; function begin
+0334  1107  	BCF gbl_portc,2
+0335  1187  	BCF gbl_portc,3
+0336  1207  	BCF gbl_portc,4
+0337  1287  	BCF gbl_portc,5
+0338  1007  	BCF gbl_portc,0
+0339  1087  	BCF gbl_portc,1
+033A  0E58  	SWAPF FCD_LCDDis_00051_arg_in, W
+033B  390F  	ANDLW 0x0F
+033C  00DA  	MOVWF FCD_LCDDis_00051_1_pt
+033D  300F  	MOVLW 0x0F
+033E  05DA  	ANDWF FCD_LCDDis_00051_1_pt, F
+033F  185A  	BTFSC FCD_LCDDis_00051_1_pt,0
+0340  1507  	BSF gbl_portc,2
+0341  18DA  	BTFSC FCD_LCDDis_00051_1_pt,1
+0342  1587  	BSF gbl_portc,3
+0343  195A  	BTFSC FCD_LCDDis_00051_1_pt,2
+0344  1607  	BSF gbl_portc,4
+0345  19DA  	BTFSC FCD_LCDDis_00051_1_pt,3
+0346  1687  	BSF gbl_portc,5
+0347  08D9  	MOVF FCD_LCDDis_00051_arg_mask, F
+0348  1D03  	BTFSS STATUS,Z
+0349  1407  	BSF gbl_portc,0
+034A  300A  	MOVLW 0x0A
+034B  00DB  	MOVWF delay_10us_00000_arg_del
+034C  203C  	CALL delay_10us_00000
+034D  1487  	BSF gbl_portc,1
+034E  300A  	MOVLW 0x0A
+034F  00DB  	MOVWF delay_10us_00000_arg_del
+0350  203C  	CALL delay_10us_00000
+0351  1087  	BCF gbl_portc,1
+0352  300F  	MOVLW 0x0F
+0353  0558  	ANDWF FCD_LCDDis_00051_arg_in, W
+0354  00DA  	MOVWF FCD_LCDDis_00051_1_pt
+0355  300A  	MOVLW 0x0A
+0356  00DB  	MOVWF delay_10us_00000_arg_del
+0357  203C  	CALL delay_10us_00000
+0358  1107  	BCF gbl_portc,2
+0359  1187  	BCF gbl_portc,3
+035A  1207  	BCF gbl_portc,4
+035B  1287  	BCF gbl_portc,5
+035C  1007  	BCF gbl_portc,0
+035D  1087  	BCF gbl_portc,1
+035E  185A  	BTFSC FCD_LCDDis_00051_1_pt,0
+035F  1507  	BSF gbl_portc,2
+0360  18DA  	BTFSC FCD_LCDDis_00051_1_pt,1
+0361  1587  	BSF gbl_portc,3
+0362  195A  	BTFSC FCD_LCDDis_00051_1_pt,2
+0363  1607  	BSF gbl_portc,4
+0364  19DA  	BTFSC FCD_LCDDis_00051_1_pt,3
+0365  1687  	BSF gbl_portc,5
+0366  08D9  	MOVF FCD_LCDDis_00051_arg_mask, F
+0367  1D03  	BTFSS STATUS,Z
+0368  1407  	BSF gbl_portc,0
+0369  300A  	MOVLW 0x0A
+036A  00DB  	MOVWF delay_10us_00000_arg_del
+036B  203C  	CALL delay_10us_00000
+036C  1487  	BSF gbl_portc,1
+036D  300A  	MOVLW 0x0A
+036E  00DB  	MOVWF delay_10us_00000_arg_del
+036F  203C  	CALL delay_10us_00000
+0370  1087  	BCF gbl_portc,1
+0371  300A  	MOVLW 0x0A
+0372  00DB  	MOVWF delay_10us_00000_arg_del
+0373  203C  	CALL delay_10us_00000
+0374  0008  	RETURN
+0375        ; } FCD_LCDDisplay0_RawSend function end
+
+	ORG 0x00000375
+0375        float32_to_int32
+0375        ; { float32_to_int32 ; function begin
+0375  0870  	MOVF float32_to_int32_arg_a, W
+0376  00A9  	MOVWF gbl_15_gbl_aSig
+0377  0871  	MOVF float32_to_int32_arg_a+D'1', W
+0378  00AA  	MOVWF gbl_15_gbl_aSig+D'1'
+0379  0872  	MOVF float32_to_int32_arg_a+D'2', W
+037A  00AB  	MOVWF gbl_15_gbl_aSig+D'2'
+037B  13AB  	BCF gbl_15_gbl_aSig+D'2',7
+037C  01AC  	CLRF gbl_15_gbl_aSig+D'3'
+037D  0873  	MOVF float32_to_int32_arg_a+D'3', W
+037E  00C9  	MOVWF gbl_15_gbl_aExp
+037F  13C9  	BCF gbl_15_gbl_aExp,7
+0380  1003  	BCF STATUS,C
+0381  0DC9  	RLF gbl_15_gbl_aExp, F
+0382  1BF2  	BTFSC float32_to_int32_arg_a+D'2',7
+0383  1449  	BSF gbl_15_gbl_aExp,0
+0384  01CB  	CLRF gbl_15_gbl_aSign
+0385  1FF3  	BTFSS float32_to_int32_arg_a+D'3',7
+0386  2B89  	GOTO	label65
+0387  3001  	MOVLW 0x01
+0388  00CB  	MOVWF gbl_15_gbl_aSign
+0389        label65
+0389  01F5  	CLRF float32_to_int32_1_shiftCount+D'1'
+038A  3096  	MOVLW 0x96
+038B  0249  	SUBWF gbl_15_gbl_aExp, W
+038C  00F4  	MOVWF float32_to_int32_1_shiftCount
+038D  1C03  	BTFSS STATUS,C
+038E  03F5  	DECF float32_to_int32_1_shiftCount+D'1', F
+038F  3080  	MOVLW 0x80
+0390  0249  	SUBWF gbl_15_gbl_aExp, W
+0391  00F6  	MOVWF float32_to_int32_1_absExp_1
+0392  0876  	MOVF float32_to_int32_1_absExp_1, W
+0393  3C15  	SUBLW 0x15
+0394  1803  	BTFSC STATUS,C
+0395  2C1E  	GOTO	label79
+0396  1BF6  	BTFSC float32_to_int32_1_absExp_1,7
+0397  2C1E  	GOTO	label79
+0398  0876  	MOVF float32_to_int32_1_absExp_1, W
+0399  3C1D  	SUBLW 0x1D
+039A  1803  	BTFSC STATUS,C
+039B  2BCC  	GOTO	label69
+039C  1BF6  	BTFSC float32_to_int32_1_absExp_1,7
+039D  2BCC  	GOTO	label69
+039E  0870  	MOVF float32_to_int32_arg_a, W
+039F  3C00  	SUBLW 0x00
+03A0  1D03  	BTFSS STATUS,Z
+03A1  2BAE  	GOTO	label66
+03A2  0871  	MOVF float32_to_int32_arg_a+D'1', W
+03A3  3C00  	SUBLW 0x00
+03A4  1D03  	BTFSS STATUS,Z
+03A5  2BAE  	GOTO	label66
+03A6  0872  	MOVF float32_to_int32_arg_a+D'2', W
+03A7  3C00  	SUBLW 0x00
+03A8  1D03  	BTFSS STATUS,Z
+03A9  2BAE  	GOTO	label66
+03AA  0873  	MOVF float32_to_int32_arg_a+D'3', W
+03AB  3CCF  	SUBLW 0xCF
+03AC  1903  	BTFSC STATUS,Z
+03AD  2BC6  	GOTO	label68
+03AE        label66
+03AE  1448  	BSF gbl_float_exception_flags,0
+03AF  08CB  	MOVF gbl_15_gbl_aSign, F
+03B0  1903  	BTFSC STATUS,Z
+03B1  2BBF  	GOTO	label67
+03B2  0876  	MOVF float32_to_int32_1_absExp_1, W
+03B3  3A7F  	XORLW 0x7F
+03B4  1BF6  	BTFSC float32_to_int32_1_absExp_1,7
+03B5  2BC6  	GOTO	label68
+03B6  1D03  	BTFSS STATUS,Z
+03B7  2BC6  	GOTO	label68
+03B8  0829  	MOVF gbl_15_gbl_aSig, W
+03B9  042A  	IORWF gbl_15_gbl_aSig+D'1', W
+03BA  042B  	IORWF gbl_15_gbl_aSig+D'2', W
+03BB  042C  	IORWF gbl_15_gbl_aSig+D'3', W
+03BC  39FF  	ANDLW 0xFF
+03BD  1903  	BTFSC STATUS,Z
+03BE  2BC6  	GOTO	label68
+03BF        label67
+03BF  307F  	MOVLW 0x7F
+03C0  00FE  	MOVWF CompTempVarRet710+D'3'
+03C1  30FF  	MOVLW 0xFF
+03C2  00FB  	MOVWF CompTempVarRet710
+03C3  00FC  	MOVWF CompTempVarRet710+D'1'
+03C4  00FD  	MOVWF CompTempVarRet710+D'2'
+03C5  0008  	RETURN
+03C6        label68
+03C6  01FB  	CLRF CompTempVarRet710
+03C7  01FC  	CLRF CompTempVarRet710+D'1'
+03C8  01FD  	CLRF CompTempVarRet710+D'2'
+03C9  3080  	MOVLW 0x80
+03CA  00FE  	MOVWF CompTempVarRet710+D'3'
+03CB  0008  	RETURN
+03CC        label69
+03CC  3016  	MOVLW 0x16
+03CD  02F6  	SUBWF float32_to_int32_1_absExp_1, F
+03CE  17AB  	BSF gbl_15_gbl_aSig+D'2',7
+03CF  0876  	MOVF float32_to_int32_1_absExp_1, W
+03D0  1683  	BSF STATUS, RP0
+03D1  00A0  	MOVWF float32_to_int32_28_i
+03D2        label70
+03D2  08A0  	MOVF float32_to_int32_28_i, F
+03D3  1903  	BTFSC STATUS,Z
+03D4  2BDE  	GOTO	label71
+03D5  1003  	BCF STATUS,C
+03D6  1283  	BCF STATUS, RP0
+03D7  0DA9  	RLF gbl_15_gbl_aSig, F
+03D8  0DAA  	RLF gbl_15_gbl_aSig+D'1', F
+03D9  0DAB  	RLF gbl_15_gbl_aSig+D'2', F
+03DA  0DAC  	RLF gbl_15_gbl_aSig+D'3', F
+03DB  1683  	BSF STATUS, RP0
+03DC  03A0  	DECF float32_to_int32_28_i, F
+03DD  2BD2  	GOTO	label70
+03DE        label71
+03DE  1283  	BCF STATUS, RP0
+03DF  08CB  	MOVF gbl_15_gbl_aSign, F
+03E0  1903  	BTFSC STATUS,Z
+03E1  2C15  	GOTO	label78
+03E2  0829  	MOVF gbl_15_gbl_aSig, W
+03E3  3C00  	SUBLW 0x00
+03E4  1683  	BSF STATUS, RP0
+03E5  00A0  	MOVWF CompTempVar727
+03E6  3000  	MOVLW 0x00
+03E7  00A1  	MOVWF CompTempVar728
+03E8  00A2  	MOVWF CompTempVar729
+03E9  00A3  	MOVWF CompTempVar730
+03EA  1283  	BCF STATUS, RP0
+03EB  082A  	MOVF gbl_15_gbl_aSig+D'1', W
+03EC  1803  	BTFSC STATUS,C
+03ED  2BF1  	GOTO	label72
+03EE  0F2A  	INCFSZ gbl_15_gbl_aSig+D'1', W
+03EF  2BF1  	GOTO	label72
+03F0  2BF3  	GOTO	label73
+03F1        label72
+03F1  1683  	BSF STATUS, RP0
+03F2  02A1  	SUBWF CompTempVar728, F
+03F3        label73
+03F3  1283  	BCF STATUS, RP0
+03F4  082B  	MOVF gbl_15_gbl_aSig+D'2', W
+03F5  1803  	BTFSC STATUS,C
+03F6  2BFA  	GOTO	label74
+03F7  0F2B  	INCFSZ gbl_15_gbl_aSig+D'2', W
+03F8  2BFA  	GOTO	label74
+03F9  2BFC  	GOTO	label75
+03FA        label74
+03FA  1683  	BSF STATUS, RP0
+03FB  02A2  	SUBWF CompTempVar729, F
+03FC        label75
+03FC  1283  	BCF STATUS, RP0
+03FD  082C  	MOVF gbl_15_gbl_aSig+D'3', W
+03FE  1803  	BTFSC STATUS,C
+03FF  2C03  	GOTO	label76
+0400  0F2C  	INCFSZ gbl_15_gbl_aSig+D'3', W
+0401  2C03  	GOTO	label76
+0402  2C05  	GOTO	label77
+0403        label76
+0403  1683  	BSF STATUS, RP0
+0404  02A3  	SUBWF CompTempVar730, F
+0405        label77
+0405  1683  	BSF STATUS, RP0
+0406  0820  	MOVF CompTempVar727, W
+0407  1283  	BCF STATUS, RP0
+0408  00A9  	MOVWF gbl_15_gbl_aSig
+0409  1683  	BSF STATUS, RP0
+040A  0821  	MOVF CompTempVar728, W
+040B  1283  	BCF STATUS, RP0
+040C  00AA  	MOVWF gbl_15_gbl_aSig+D'1'
+040D  1683  	BSF STATUS, RP0
+040E  0822  	MOVF CompTempVar729, W
+040F  1283  	BCF STATUS, RP0
+0410  00AB  	MOVWF gbl_15_gbl_aSig+D'2'
+0411  1683  	BSF STATUS, RP0
+0412  0823  	MOVF CompTempVar730, W
+0413  1283  	BCF STATUS, RP0
+0414  00AC  	MOVWF gbl_15_gbl_aSig+D'3'
+0415        label78
+0415  0829  	MOVF gbl_15_gbl_aSig, W
+0416  00FB  	MOVWF CompTempVarRet710
+0417  082A  	MOVF gbl_15_gbl_aSig+D'1', W
+0418  00FC  	MOVWF CompTempVarRet710+D'1'
+0419  082B  	MOVF gbl_15_gbl_aSig+D'2', W
+041A  00FD  	MOVWF CompTempVarRet710+D'2'
+041B  082C  	MOVF gbl_15_gbl_aSig+D'3', W
+041C  00FE  	MOVWF CompTempVarRet710+D'3'
+041D  0008  	RETURN
+041E        label79
+041E  307E  	MOVLW 0x7E
+041F  0249  	SUBWF gbl_15_gbl_aExp, W
+0420  1803  	BTFSC STATUS,C
+0421  2C3F  	GOTO	label84
+0422  08C9  	MOVF gbl_15_gbl_aExp, F
+0423  1903  	BTFSC STATUS,Z
+0424  2C26  	GOTO	label80
+0425  2C2D  	GOTO	label81
+0426        label80
+0426  0829  	MOVF gbl_15_gbl_aSig, W
+0427  042A  	IORWF gbl_15_gbl_aSig+D'1', W
+0428  042B  	IORWF gbl_15_gbl_aSig+D'2', W
+0429  042C  	IORWF gbl_15_gbl_aSig+D'3', W
+042A  39FF  	ANDLW 0xFF
+042B  1903  	BTFSC STATUS,Z
+042C  2C34  	GOTO	label82
+042D        label81
+042D  3001  	MOVLW 0x01
+042E  1683  	BSF STATUS, RP0
+042F  00A0  	MOVWF float32_to_int32_32_aSigExtra
+0430  01A1  	CLRF float32_to_int32_32_aSigExtra+D'1'
+0431  01A2  	CLRF float32_to_int32_32_aSigExtra+D'2'
+0432  01A3  	CLRF float32_to_int32_32_aSigExtra+D'3'
+0433  2C39  	GOTO	label83
+0434        label82
+0434  1683  	BSF STATUS, RP0
+0435  01A0  	CLRF float32_to_int32_32_aSigExtra
+0436  01A1  	CLRF float32_to_int32_32_aSigExtra+D'1'
+0437  01A2  	CLRF float32_to_int32_32_aSigExtra+D'2'
+0438  01A3  	CLRF float32_to_int32_32_aSigExtra+D'3'
+0439        label83
+0439  1283  	BCF STATUS, RP0
+043A  01F7  	CLRF float32_to_int32_1_z
+043B  01F8  	CLRF float32_to_int32_1_z+D'1'
+043C  01F9  	CLRF float32_to_int32_1_z+D'2'
+043D  01FA  	CLRF float32_to_int32_1_z+D'3'
+043E  2C7B  	GOTO	label88
+043F        label84
+043F  17AB  	BSF gbl_15_gbl_aSig+D'2',7
+0440  0829  	MOVF gbl_15_gbl_aSig, W
+0441  1683  	BSF STATUS, RP0
+0442  00A0  	MOVWF float32_to_int32_32_aSigExtra
+0443  1283  	BCF STATUS, RP0
+0444  082A  	MOVF gbl_15_gbl_aSig+D'1', W
+0445  1683  	BSF STATUS, RP0
+0446  00A1  	MOVWF float32_to_int32_32_aSigExtra+D'1'
+0447  1283  	BCF STATUS, RP0
+0448  082B  	MOVF gbl_15_gbl_aSig+D'2', W
+0449  1683  	BSF STATUS, RP0
+044A  00A2  	MOVWF float32_to_int32_32_aSigExtra+D'2'
+044B  1283  	BCF STATUS, RP0
+044C  082C  	MOVF gbl_15_gbl_aSig+D'3', W
+044D  1683  	BSF STATUS, RP0
+044E  00A3  	MOVWF float32_to_int32_32_aSigExtra+D'3'
+044F  301F  	MOVLW 0x1F
+0450  1283  	BCF STATUS, RP0
+0451  0574  	ANDWF float32_to_int32_1_shiftCount, W
+0452  1683  	BSF STATUS, RP0
+0453  00A4  	MOVWF float32_to_int32_40_i
+0454        label85
+0454  08A4  	MOVF float32_to_int32_40_i, F
+0455  1903  	BTFSC STATUS,Z
+0456  2C5E  	GOTO	label86
+0457  1003  	BCF STATUS,C
+0458  0DA0  	RLF float32_to_int32_32_aSigExtra, F
+0459  0DA1  	RLF float32_to_int32_32_aSigExtra+D'1', F
+045A  0DA2  	RLF float32_to_int32_32_aSigExtra+D'2', F
+045B  0DA3  	RLF float32_to_int32_32_aSigExtra+D'3', F
+045C  03A4  	DECF float32_to_int32_40_i, F
+045D  2C54  	GOTO	label85
+045E        label86
+045E  1283  	BCF STATUS, RP0
+045F  0829  	MOVF gbl_15_gbl_aSig, W
+0460  00F7  	MOVWF float32_to_int32_1_z
+0461  082A  	MOVF gbl_15_gbl_aSig+D'1', W
+0462  00F8  	MOVWF float32_to_int32_1_z+D'1'
+0463  082B  	MOVF gbl_15_gbl_aSig+D'2', W
+0464  00F9  	MOVWF float32_to_int32_1_z+D'2'
+0465  082C  	MOVF gbl_15_gbl_aSig+D'3', W
+0466  00FA  	MOVWF float32_to_int32_1_z+D'3'
+0467  09F4  	COMF float32_to_int32_1_shiftCount, F
+0468  09F5  	COMF float32_to_int32_1_shiftCount+D'1', F
+0469  0AF4  	INCF float32_to_int32_1_shiftCount, F
+046A  1903  	BTFSC STATUS,Z
+046B  0AF5  	INCF float32_to_int32_1_shiftCount+D'1', F
+046C  0874  	MOVF float32_to_int32_1_shiftCount, W
+046D  1683  	BSF STATUS, RP0
+046E  00A4  	MOVWF float32_to_int32_44_i
+046F        label87
+046F  08A4  	MOVF float32_to_int32_44_i, F
+0470  1903  	BTFSC STATUS,Z
+0471  2C7B  	GOTO	label88
+0472  1283  	BCF STATUS, RP0
+0473  0D7A  	RLF float32_to_int32_1_z+D'3', W
+0474  0CFA  	RRF float32_to_int32_1_z+D'3', F
+0475  0CF9  	RRF float32_to_int32_1_z+D'2', F
+0476  0CF8  	RRF float32_to_int32_1_z+D'1', F
+0477  0CF7  	RRF float32_to_int32_1_z, F
+0478  1683  	BSF STATUS, RP0
+0479  03A4  	DECF float32_to_int32_44_i, F
+047A  2C6F  	GOTO	label87
+047B        label88
+047B  1683  	BSF STATUS, RP0
+047C  0820  	MOVF float32_to_int32_32_aSigExtra, W
+047D  0421  	IORWF float32_to_int32_32_aSigExtra+D'1', W
+047E  0422  	IORWF float32_to_int32_32_aSigExtra+D'2', W
+047F  0423  	IORWF float32_to_int32_32_aSigExtra+D'3', W
+0480  39FF  	ANDLW 0xFF
+0481  1903  	BTFSC STATUS,Z
+0482  2C85  	GOTO	label89
+0483  1283  	BCF STATUS, RP0
+0484  16C8  	BSF gbl_float_exception_flags,5
+0485        label89
+0485  1283  	BCF STATUS, RP0
+0486  08C7  	MOVF gbl_float_rounding_mode, F
+0487  1D03  	BTFSS STATUS,Z
+0488  2CE4  	GOTO	label97
+0489  1683  	BSF STATUS, RP0
+048A  1FA3  	BTFSS float32_to_int32_32_aSigExtra+D'3',7
+048B  2CAC  	GOTO	label90
+048C  1283  	BCF STATUS, RP0
+048D  0AF7  	INCF float32_to_int32_1_z, F
+048E  1903  	BTFSC STATUS,Z
+048F  0AF8  	INCF float32_to_int32_1_z+D'1', F
+0490  1903  	BTFSC STATUS,Z
+0491  0AF9  	INCF float32_to_int32_1_z+D'2', F
+0492  1903  	BTFSC STATUS,Z
+0493  0AFA  	INCF float32_to_int32_1_z+D'3', F
+0494  1683  	BSF STATUS, RP0
+0495  0820  	MOVF float32_to_int32_32_aSigExtra, W
+0496  00A4  	MOVWF CompTempVar735
+0497  0821  	MOVF float32_to_int32_32_aSigExtra+D'1', W
+0498  00A5  	MOVWF CompTempVar736
+0499  0822  	MOVF float32_to_int32_32_aSigExtra+D'2', W
+049A  00A6  	MOVWF CompTempVar737
+049B  0823  	MOVF float32_to_int32_32_aSigExtra+D'3', W
+049C  00A7  	MOVWF CompTempVar738
+049D  1003  	BCF STATUS,C
+049E  0DA4  	RLF CompTempVar735, F
+049F  0DA5  	RLF CompTempVar736, F
+04A0  0DA6  	RLF CompTempVar737, F
+04A1  0DA7  	RLF CompTempVar738, F
+04A2  0824  	MOVF CompTempVar735, W
+04A3  0425  	IORWF CompTempVar736, W
+04A4  0426  	IORWF CompTempVar737, W
+04A5  0427  	IORWF CompTempVar738, W
+04A6  39FF  	ANDLW 0xFF
+04A7  1D03  	BTFSS STATUS,Z
+04A8  2CAC  	GOTO	label90
+04A9  30FE  	MOVLW 0xFE
+04AA  1283  	BCF STATUS, RP0
+04AB  05F7  	ANDWF float32_to_int32_1_z, F
+04AC        label90
+04AC  1283  	BCF STATUS, RP0
+04AD  08CB  	MOVF gbl_15_gbl_aSign, F
+04AE  1903  	BTFSC STATUS,Z
+04AF  2D45  	GOTO	label106
+04B0  0877  	MOVF float32_to_int32_1_z, W
+04B1  3C00  	SUBLW 0x00
+04B2  1683  	BSF STATUS, RP0
+04B3  00A4  	MOVWF CompTempVar739
+04B4  3000  	MOVLW 0x00
+04B5  00A5  	MOVWF CompTempVar740
+04B6  00A6  	MOVWF CompTempVar741
+04B7  00A7  	MOVWF CompTempVar742
+04B8  1283  	BCF STATUS, RP0
+04B9  0878  	MOVF float32_to_int32_1_z+D'1', W
+04BA  1803  	BTFSC STATUS,C
+04BB  2CBF  	GOTO	label91
+04BC  0F78  	INCFSZ float32_to_int32_1_z+D'1', W
+04BD  2CBF  	GOTO	label91
+04BE  2CC1  	GOTO	label92
+04BF        label91
+04BF  1683  	BSF STATUS, RP0
+04C0  02A5  	SUBWF CompTempVar740, F
+04C1        label92
+04C1  1283  	BCF STATUS, RP0
+04C2  0879  	MOVF float32_to_int32_1_z+D'2', W
+04C3  1803  	BTFSC STATUS,C
+04C4  2CC8  	GOTO	label93
+04C5  0F79  	INCFSZ float32_to_int32_1_z+D'2', W
+04C6  2CC8  	GOTO	label93
+04C7  2CCA  	GOTO	label94
+04C8        label93
+04C8  1683  	BSF STATUS, RP0
+04C9  02A6  	SUBWF CompTempVar741, F
+04CA        label94
+04CA  1283  	BCF STATUS, RP0
+04CB  087A  	MOVF float32_to_int32_1_z+D'3', W
+04CC  1803  	BTFSC STATUS,C
+04CD  2CD1  	GOTO	label95
+04CE  0F7A  	INCFSZ float32_to_int32_1_z+D'3', W
+04CF  2CD1  	GOTO	label95
+04D0  2CD3  	GOTO	label96
+04D1        label95
+04D1  1683  	BSF STATUS, RP0
+04D2  02A7  	SUBWF CompTempVar742, F
+04D3        label96
+04D3  1683  	BSF STATUS, RP0
+04D4  0824  	MOVF CompTempVar739, W
+04D5  1283  	BCF STATUS, RP0
+04D6  00F7  	MOVWF float32_to_int32_1_z
+04D7  1683  	BSF STATUS, RP0
+04D8  0825  	MOVF CompTempVar740, W
+04D9  1283  	BCF STATUS, RP0
+04DA  00F8  	MOVWF float32_to_int32_1_z+D'1'
+04DB  1683  	BSF STATUS, RP0
+04DC  0826  	MOVF CompTempVar741, W
+04DD  1283  	BCF STATUS, RP0
+04DE  00F9  	MOVWF float32_to_int32_1_z+D'2'
+04DF  1683  	BSF STATUS, RP0
+04E0  0827  	MOVF CompTempVar742, W
+04E1  1283  	BCF STATUS, RP0
+04E2  00FA  	MOVWF float32_to_int32_1_z+D'3'
+04E3  2D45  	GOTO	label106
+04E4        label97
+04E4  1683  	BSF STATUS, RP0
+04E5  01A4  	CLRF float32_to_int32_53_extraNonZero
+04E6  0820  	MOVF float32_to_int32_32_aSigExtra, W
+04E7  0421  	IORWF float32_to_int32_32_aSigExtra+D'1', W
+04E8  0422  	IORWF float32_to_int32_32_aSigExtra+D'2', W
+04E9  0423  	IORWF float32_to_int32_32_aSigExtra+D'3', W
+04EA  39FF  	ANDLW 0xFF
+04EB  1D03  	BTFSS STATUS,Z
+04EC  1424  	BSF float32_to_int32_53_extraNonZero,0
+04ED  1283  	BCF STATUS, RP0
+04EE  08CB  	MOVF gbl_15_gbl_aSign, F
+04EF  1903  	BTFSC STATUS,Z
+04F0  2D35  	GOTO	label105
+04F1  0347  	DECF gbl_float_rounding_mode, W
+04F2  1D03  	BTFSS STATUS,Z
+04F3  2D00  	GOTO	label98
+04F4  1683  	BSF STATUS, RP0
+04F5  08A4  	MOVF float32_to_int32_53_extraNonZero, F
+04F6  1903  	BTFSC STATUS,Z
+04F7  2D00  	GOTO	label98
+04F8  1283  	BCF STATUS, RP0
+04F9  0AF7  	INCF float32_to_int32_1_z, F
+04FA  1903  	BTFSC STATUS,Z
+04FB  0AF8  	INCF float32_to_int32_1_z+D'1', F
+04FC  1903  	BTFSC STATUS,Z
+04FD  0AF9  	INCF float32_to_int32_1_z+D'2', F
+04FE  1903  	BTFSC STATUS,Z
+04FF  0AFA  	INCF float32_to_int32_1_z+D'3', F
+0500        label98
+0500  1283  	BCF STATUS, RP0
+0501  0877  	MOVF float32_to_int32_1_z, W
+0502  3C00  	SUBLW 0x00
+0503  1683  	BSF STATUS, RP0
+0504  00A5  	MOVWF CompTempVar744
+0505  3000  	MOVLW 0x00
+0506  00A6  	MOVWF CompTempVar745
+0507  00A7  	MOVWF CompTempVar746
+0508  00A8  	MOVWF CompTempVar747
+0509  1283  	BCF STATUS, RP0
+050A  0878  	MOVF float32_to_int32_1_z+D'1', W
+050B  1803  	BTFSC STATUS,C
+050C  2D10  	GOTO	label99
+050D  0F78  	INCFSZ float32_to_int32_1_z+D'1', W
+050E  2D10  	GOTO	label99
+050F  2D12  	GOTO	label100
+0510        label99
+0510  1683  	BSF STATUS, RP0
+0511  02A6  	SUBWF CompTempVar745, F
+0512        label100
+0512  1283  	BCF STATUS, RP0
+0513  0879  	MOVF float32_to_int32_1_z+D'2', W
+0514  1803  	BTFSC STATUS,C
+0515  2D19  	GOTO	label101
+0516  0F79  	INCFSZ float32_to_int32_1_z+D'2', W
+0517  2D19  	GOTO	label101
+0518  2D1B  	GOTO	label102
+0519        label101
+0519  1683  	BSF STATUS, RP0
+051A  02A7  	SUBWF CompTempVar746, F
+051B        label102
+051B  1283  	BCF STATUS, RP0
+051C  087A  	MOVF float32_to_int32_1_z+D'3', W
+051D  1803  	BTFSC STATUS,C
+051E  2D22  	GOTO	label103
+051F  0F7A  	INCFSZ float32_to_int32_1_z+D'3', W
+0520  2D22  	GOTO	label103
+0521  2D24  	GOTO	label104
+0522        label103
+0522  1683  	BSF STATUS, RP0
+0523  02A8  	SUBWF CompTempVar747, F
+0524        label104
+0524  1683  	BSF STATUS, RP0
+0525  0825  	MOVF CompTempVar744, W
+0526  1283  	BCF STATUS, RP0
+0527  00F7  	MOVWF float32_to_int32_1_z
+0528  1683  	BSF STATUS, RP0
+0529  0826  	MOVF CompTempVar745, W
+052A  1283  	BCF STATUS, RP0
+052B  00F8  	MOVWF float32_to_int32_1_z+D'1'
+052C  1683  	BSF STATUS, RP0
+052D  0827  	MOVF CompTempVar746, W
+052E  1283  	BCF STATUS, RP0
+052F  00F9  	MOVWF float32_to_int32_1_z+D'2'
+0530  1683  	BSF STATUS, RP0
+0531  0828  	MOVF CompTempVar747, W
+0532  1283  	BCF STATUS, RP0
+0533  00FA  	MOVWF float32_to_int32_1_z+D'3'
+0534  2D45  	GOTO	label106
+0535        label105
+0535  0847  	MOVF gbl_float_rounding_mode, W
+0536  3A02  	XORLW 0x02
+0537  1D03  	BTFSS STATUS,Z
+0538  2D45  	GOTO	label106
+0539  1683  	BSF STATUS, RP0
+053A  08A4  	MOVF float32_to_int32_53_extraNonZero, F
+053B  1903  	BTFSC STATUS,Z
+053C  2D45  	GOTO	label106
+053D  1283  	BCF STATUS, RP0
+053E  0AF7  	INCF float32_to_int32_1_z, F
+053F  1903  	BTFSC STATUS,Z
+0540  0AF8  	INCF float32_to_int32_1_z+D'1', F
+0541  1903  	BTFSC STATUS,Z
+0542  0AF9  	INCF float32_to_int32_1_z+D'2', F
+0543  1903  	BTFSC STATUS,Z
+0544  0AFA  	INCF float32_to_int32_1_z+D'3', F
+0545        label106
+0545  1283  	BCF STATUS, RP0
+0546  0877  	MOVF float32_to_int32_1_z, W
+0547  00FB  	MOVWF CompTempVarRet710
+0548  0878  	MOVF float32_to_int32_1_z+D'1', W
+0549  00FC  	MOVWF CompTempVarRet710+D'1'
+054A  0879  	MOVF float32_to_int32_1_z+D'2', W
+054B  00FD  	MOVWF CompTempVarRet710+D'2'
+054C  087A  	MOVF float32_to_int32_1_z+D'3', W
+054D  00FE  	MOVWF CompTempVarRet710+D'3'
+054E  0008  	RETURN
+054F        ; } float32_to_int32 function end
+
+	ORG 0x0000054F
+054F        float32_mul
+054F        ; { float32_mul ; function begin
+054F  0870  	MOVF float32_mul_arg_a, W
+0550  00A9  	MOVWF gbl_15_gbl_aSig
+0551  0871  	MOVF float32_mul_arg_a+D'1', W
+0552  00AA  	MOVWF gbl_15_gbl_aSig+D'1'
+0553  0872  	MOVF float32_mul_arg_a+D'2', W
+0554  00AB  	MOVWF gbl_15_gbl_aSig+D'2'
+0555  13AB  	BCF gbl_15_gbl_aSig+D'2',7
+0556  01AC  	CLRF gbl_15_gbl_aSig+D'3'
+0557  0873  	MOVF float32_mul_arg_a+D'3', W
+0558  00C9  	MOVWF gbl_15_gbl_aExp
+0559  13C9  	BCF gbl_15_gbl_aExp,7
+055A  1003  	BCF STATUS,C
+055B  0DC9  	RLF gbl_15_gbl_aExp, F
+055C  1BF2  	BTFSC float32_mul_arg_a+D'2',7
+055D  1449  	BSF gbl_15_gbl_aExp,0
+055E  0874  	MOVF float32_mul_arg_b, W
+055F  00AD  	MOVWF gbl_15_gbl_bSig
+0560  0875  	MOVF float32_mul_arg_b+D'1', W
+0561  00AE  	MOVWF gbl_15_gbl_bSig+D'1'
+0562  0876  	MOVF float32_mul_arg_b+D'2', W
+0563  00AF  	MOVWF gbl_15_gbl_bSig+D'2'
+0564  13AF  	BCF gbl_15_gbl_bSig+D'2',7
+0565  01B0  	CLRF gbl_15_gbl_bSig+D'3'
+0566  0877  	MOVF float32_mul_arg_b+D'3', W
+0567  00CA  	MOVWF gbl_15_gbl_bExp
+0568  13CA  	BCF gbl_15_gbl_bExp,7
+0569  1003  	BCF STATUS,C
+056A  0DCA  	RLF gbl_15_gbl_bExp, F
+056B  1BF6  	BTFSC float32_mul_arg_b+D'2',7
+056C  144A  	BSF gbl_15_gbl_bExp,0
+056D  01CB  	CLRF gbl_15_gbl_aSign
+056E  1FF3  	BTFSS float32_mul_arg_a+D'3',7
+056F  2D72  	GOTO	label107
+0570  3001  	MOVLW 0x01
+0571  00CB  	MOVWF gbl_15_gbl_aSign
+0572        label107
+0572  01CC  	CLRF gbl_15_gbl_bSign
+0573  1FF7  	BTFSS float32_mul_arg_b+D'3',7
+0574  2D77  	GOTO	label108
+0575  3001  	MOVLW 0x01
+0576  00CC  	MOVWF gbl_15_gbl_bSign
+0577        label108
+0577  084C  	MOVF gbl_15_gbl_bSign, W
+0578  064B  	XORWF gbl_15_gbl_aSign, W
+0579  00CD  	MOVWF gbl_15_gbl_zSign
+057A  1078  	BCF float32_mul_1_aNanInf,0
+057B  0A49  	INCF gbl_15_gbl_aExp, W
+057C  1903  	BTFSC STATUS,Z
+057D  1478  	BSF float32_mul_1_aNanInf,0
+057E  10F8  	BCF float32_mul_1_bNanInf,1
+057F  0A4A  	INCF gbl_15_gbl_bExp, W
+0580  1903  	BTFSC STATUS,Z
+0581  14F8  	BSF float32_mul_1_bNanInf,1
+0582  1178  	BCF float32_mul_1_gbl_aSigIsZero,2
+0583  0829  	MOVF gbl_15_gbl_aSig, W
+0584  042A  	IORWF gbl_15_gbl_aSig+D'1', W
+0585  042B  	IORWF gbl_15_gbl_aSig+D'2', W
+0586  042C  	IORWF gbl_15_gbl_aSig+D'3', W
+0587  39FF  	ANDLW 0xFF
+0588  1903  	BTFSC STATUS,Z
+0589  1578  	BSF float32_mul_1_gbl_aSigIsZero,2
+058A  11F8  	BCF float32_mul_1_gbl_bSigIsZero,3
+058B  082D  	MOVF gbl_15_gbl_bSig, W
+058C  042E  	IORWF gbl_15_gbl_bSig+D'1', W
+058D  042F  	IORWF gbl_15_gbl_bSig+D'2', W
+058E  0430  	IORWF gbl_15_gbl_bSig+D'3', W
+058F  39FF  	ANDLW 0xFF
+0590  1903  	BTFSC STATUS,Z
+0591  15F8  	BSF float32_mul_1_gbl_bSigIsZero,3
+0592  1878  	BTFSC float32_mul_1_aNanInf,0
+0593  2D96  	GOTO	label109
+0594  1CF8  	BTFSS float32_mul_1_bNanInf,1
+0595  2DE3  	GOTO	label118
+0596        label109
+0596  1C78  	BTFSS float32_mul_1_aNanInf,0
+0597  2D9E  	GOTO	label110
+0598  1978  	BTFSC float32_mul_1_gbl_aSigIsZero,2
+0599  2D9E  	GOTO	label110
+059A  1B72  	BTFSC float32_mul_arg_a+D'2',6
+059B  2D9E  	GOTO	label110
+059C  1448  	BSF gbl_float_exception_flags,0
+059D  2DD3  	GOTO	label117
+059E        label110
+059E  1CF8  	BTFSS float32_mul_1_bNanInf,1
+059F  2DA6  	GOTO	label111
+05A0  19F8  	BTFSC float32_mul_1_gbl_bSigIsZero,3
+05A1  2DA6  	GOTO	label111
+05A2  1B76  	BTFSC float32_mul_arg_b+D'2',6
+05A3  2DA6  	GOTO	label111
+05A4  1448  	BSF gbl_float_exception_flags,0
+05A5  2DD3  	GOTO	label117
+05A6        label111
+05A6  1C78  	BTFSS float32_mul_1_aNanInf,0
+05A7  2DAA  	GOTO	label112
+05A8  1D78  	BTFSS float32_mul_1_gbl_aSigIsZero,2
+05A9  2DD3  	GOTO	label117
+05AA        label112
+05AA  1CF8  	BTFSS float32_mul_1_bNanInf,1
+05AB  2DAE  	GOTO	label113
+05AC  1DF8  	BTFSS float32_mul_1_gbl_bSigIsZero,3
+05AD  2DD3  	GOTO	label117
+05AE        label113
+05AE  1DF8  	BTFSS float32_mul_1_gbl_bSigIsZero,3
+05AF  2DB5  	GOTO	label114
+05B0  08CA  	MOVF gbl_15_gbl_bExp, F
+05B1  1D03  	BTFSS STATUS,Z
+05B2  2DB5  	GOTO	label114
+05B3  1448  	BSF gbl_float_exception_flags,0
+05B4  2DD3  	GOTO	label117
+05B5        label114
+05B5  1D78  	BTFSS float32_mul_1_gbl_aSigIsZero,2
+05B6  2DBC  	GOTO	label115
+05B7  08C9  	MOVF gbl_15_gbl_aExp, F
+05B8  1D03  	BTFSS STATUS,Z
+05B9  2DBC  	GOTO	label115
+05BA  1448  	BSF gbl_float_exception_flags,0
+05BB  2DD3  	GOTO	label117
+05BC        label115
+05BC  1683  	BSF STATUS, RP0
+05BD  01A0  	CLRF float32_mul_50_ret
+05BE  01A1  	CLRF float32_mul_50_ret+D'1'
+05BF  307F  	MOVLW 0x7F
+05C0  00A3  	MOVWF float32_mul_50_ret+D'3'
+05C1  3080  	MOVLW 0x80
+05C2  00A2  	MOVWF float32_mul_50_ret+D'2'
+05C3  1283  	BCF STATUS, RP0
+05C4  08CD  	MOVF gbl_15_gbl_zSign, F
+05C5  1903  	BTFSC STATUS,Z
+05C6  2DC9  	GOTO	label116
+05C7  1683  	BSF STATUS, RP0
+05C8  17A3  	BSF float32_mul_50_ret+D'3',7
+05C9        label116
+05C9  1683  	BSF STATUS, RP0
+05CA  0823  	MOVF float32_mul_50_ret+D'3', W
+05CB  00A7  	MOVWF CompTempVarRet927+D'3'
+05CC  0822  	MOVF float32_mul_50_ret+D'2', W
+05CD  00A6  	MOVWF CompTempVarRet927+D'2'
+05CE  0821  	MOVF float32_mul_50_ret+D'1', W
+05CF  00A5  	MOVWF CompTempVarRet927+D'1'
+05D0  0820  	MOVF float32_mul_50_ret, W
+05D1  00A4  	MOVWF CompTempVarRet927
+05D2  0008  	RETURN
+05D3        label117
+05D3  1683  	BSF STATUS, RP0
+05D4  01A0  	CLRF float32_mul_57__a
+05D5  01A1  	CLRF float32_mul_57__a+D'1'
+05D6  30C0  	MOVLW 0xC0
+05D7  00A2  	MOVWF float32_mul_57__a+D'2'
+05D8  30FF  	MOVLW 0xFF
+05D9  00A3  	MOVWF float32_mul_57__a+D'3'
+05DA  0823  	MOVF float32_mul_57__a+D'3', W
+05DB  00A7  	MOVWF CompTempVarRet927+D'3'
+05DC  0822  	MOVF float32_mul_57__a+D'2', W
+05DD  00A6  	MOVWF CompTempVarRet927+D'2'
+05DE  0821  	MOVF float32_mul_57__a+D'1', W
+05DF  00A5  	MOVWF CompTempVarRet927+D'1'
+05E0  0820  	MOVF float32_mul_57__a, W
+05E1  00A4  	MOVWF CompTempVarRet927
+05E2  0008  	RETURN
+05E3        label118
+05E3  307F  	MOVLW 0x7F
+05E4  00F9  	MOVWF float32_mul_1_expBias
+05E5  08C9  	MOVF gbl_15_gbl_aExp, F
+05E6  1D03  	BTFSS STATUS,Z
+05E7  2E09  	GOTO	label122
+05E8  1D78  	BTFSS float32_mul_1_gbl_aSigIsZero,2
+05E9  2DFF  	GOTO	label120
+05EA  1683  	BSF STATUS, RP0
+05EB  01A0  	CLRF float32_mul_61_ret
+05EC  01A1  	CLRF float32_mul_61_ret+D'1'
+05ED  01A3  	CLRF float32_mul_61_ret+D'3'
+05EE  01A2  	CLRF float32_mul_61_ret+D'2'
+05EF  1283  	BCF STATUS, RP0
+05F0  08CD  	MOVF gbl_15_gbl_zSign, F
+05F1  1903  	BTFSC STATUS,Z
+05F2  2DF5  	GOTO	label119
+05F3  1683  	BSF STATUS, RP0
+05F4  17A3  	BSF float32_mul_61_ret+D'3',7
+05F5        label119
+05F5  1683  	BSF STATUS, RP0
+05F6  0823  	MOVF float32_mul_61_ret+D'3', W
+05F7  00A7  	MOVWF CompTempVarRet927+D'3'
+05F8  0822  	MOVF float32_mul_61_ret+D'2', W
+05F9  00A6  	MOVWF CompTempVarRet927+D'2'
+05FA  0821  	MOVF float32_mul_61_ret+D'1', W
+05FB  00A5  	MOVWF CompTempVarRet927+D'1'
+05FC  0820  	MOVF float32_mul_61_ret, W
+05FD  00A4  	MOVWF CompTempVarRet927
+05FE  0008  	RETURN
+05FF        label120
+05FF  03F9  	DECF float32_mul_1_expBias, F
+0600        label121
+0600  1BAB  	BTFSC gbl_15_gbl_aSig+D'2',7
+0601  2E0A  	GOTO	label123
+0602  1003  	BCF STATUS,C
+0603  0DA9  	RLF gbl_15_gbl_aSig, F
+0604  0DAA  	RLF gbl_15_gbl_aSig+D'1', F
+0605  0DAB  	RLF gbl_15_gbl_aSig+D'2', F
+0606  0DAC  	RLF gbl_15_gbl_aSig+D'3', F
+0607  0AF9  	INCF float32_mul_1_expBias, F
+0608  2E00  	GOTO	label121
+0609        label122
+0609  17AB  	BSF gbl_15_gbl_aSig+D'2',7
+060A        label123
+060A  08CA  	MOVF gbl_15_gbl_bExp, F
+060B  1D03  	BTFSS STATUS,Z
+060C  2E2E  	GOTO	label127
+060D  1DF8  	BTFSS float32_mul_1_gbl_bSigIsZero,3
+060E  2E24  	GOTO	label125
+060F  1683  	BSF STATUS, RP0
+0610  01A0  	CLRF float32_mul_75_ret
+0611  01A1  	CLRF float32_mul_75_ret+D'1'
+0612  01A3  	CLRF float32_mul_75_ret+D'3'
+0613  01A2  	CLRF float32_mul_75_ret+D'2'
+0614  1283  	BCF STATUS, RP0
+0615  08CD  	MOVF gbl_15_gbl_zSign, F
+0616  1903  	BTFSC STATUS,Z
+0617  2E1A  	GOTO	label124
+0618  1683  	BSF STATUS, RP0
+0619  17A3  	BSF float32_mul_75_ret+D'3',7
+061A        label124
+061A  1683  	BSF STATUS, RP0
+061B  0823  	MOVF float32_mul_75_ret+D'3', W
+061C  00A7  	MOVWF CompTempVarRet927+D'3'
+061D  0822  	MOVF float32_mul_75_ret+D'2', W
+061E  00A6  	MOVWF CompTempVarRet927+D'2'
+061F  0821  	MOVF float32_mul_75_ret+D'1', W
+0620  00A5  	MOVWF CompTempVarRet927+D'1'
+0621  0820  	MOVF float32_mul_75_ret, W
+0622  00A4  	MOVWF CompTempVarRet927
+0623  0008  	RETURN
+0624        label125
+0624  03F9  	DECF float32_mul_1_expBias, F
+0625        label126
+0625  1BAF  	BTFSC gbl_15_gbl_bSig+D'2',7
+0626  2E2F  	GOTO	label128
+0627  1003  	BCF STATUS,C
+0628  0DAD  	RLF gbl_15_gbl_bSig, F
+0629  0DAE  	RLF gbl_15_gbl_bSig+D'1', F
+062A  0DAF  	RLF gbl_15_gbl_bSig+D'2', F
+062B  0DB0  	RLF gbl_15_gbl_bSig+D'3', F
+062C  0AF9  	INCF float32_mul_1_expBias, F
+062D  2E25  	GOTO	label126
+062E        label127
+062E  17AF  	BSF gbl_15_gbl_bSig+D'2',7
+062F        label128
+062F  3007  	MOVLW 0x07
+0630  00FE  	MOVWF float32_mul_88_i
+0631        label129
+0631  08FE  	MOVF float32_mul_88_i, F
+0632  1903  	BTFSC STATUS,Z
+0633  2E3B  	GOTO	label130
+0634  1003  	BCF STATUS,C
+0635  0DA9  	RLF gbl_15_gbl_aSig, F
+0636  0DAA  	RLF gbl_15_gbl_aSig+D'1', F
+0637  0DAB  	RLF gbl_15_gbl_aSig+D'2', F
+0638  0DAC  	RLF gbl_15_gbl_aSig+D'3', F
+0639  03FE  	DECF float32_mul_88_i, F
+063A  2E31  	GOTO	label129
+063B        label130
+063B  3008  	MOVLW 0x08
+063C  00FE  	MOVWF float32_mul_90_i
+063D        label131
+063D  08FE  	MOVF float32_mul_90_i, F
+063E  1903  	BTFSC STATUS,Z
+063F  2E47  	GOTO	label132
+0640  1003  	BCF STATUS,C
+0641  0DAD  	RLF gbl_15_gbl_bSig, F
+0642  0DAE  	RLF gbl_15_gbl_bSig+D'1', F
+0643  0DAF  	RLF gbl_15_gbl_bSig+D'2', F
+0644  0DB0  	RLF gbl_15_gbl_bSig+D'3', F
+0645  03FE  	DECF float32_mul_90_i, F
+0646  2E3D  	GOTO	label131
+0647        label132
+0647  21EF  	CALL mul32To32s_0002C
+0648  1283  	BCF STATUS, RP0
+0649  08C0  	MOVF gbl_15_gbl_zExp, F
+064A  1903  	BTFSC STATUS,Z
+064B  08C1  	MOVF gbl_15_gbl_zExp+D'1', F
+064C  1903  	BTFSC STATUS,Z
+064D  2E87  	GOTO	label138
+064E  0940  	COMF gbl_15_gbl_zExp, W
+064F  00FE  	MOVWF CompTempVar984
+0650  0941  	COMF gbl_15_gbl_zExp+D'1', W
+0651  1683  	BSF STATUS, RP0
+0652  00A0  	MOVWF CompTempVar985
+0653  1283  	BCF STATUS, RP0
+0654  0AFE  	INCF CompTempVar984, F
+0655  1D03  	BTFSS STATUS,Z
+0656  2E59  	GOTO	label133
+0657  1683  	BSF STATUS, RP0
+0658  0AA0  	INCF CompTempVar985, F
+0659        label133
+0659  3020  	MOVLW 0x20
+065A  1283  	BCF STATUS, RP0
+065B  027E  	SUBWF CompTempVar984, W
+065C  1683  	BSF STATUS, RP0
+065D  0820  	MOVF CompTempVar985, W
+065E  1803  	BTFSC STATUS,C
+065F  2E62  	GOTO	label134
+0660  1903  	BTFSC STATUS,Z
+0661  2E64  	GOTO	label135
+0662        label134
+0662  1FA0  	BTFSS CompTempVar985,7
+0663  2E7A  	GOTO	label137
+0664        label135
+0664  1283  	BCF STATUS, RP0
+0665  1278  	BCF float32_mul_96_stickyBit,4
+0666  0940  	COMF gbl_15_gbl_zExp, W
+0667  1683  	BSF STATUS, RP0
+0668  00A1  	MOVWF float32_mul_96_count
+0669  0AA1  	INCF float32_mul_96_count, F
+066A        label136
+066A  1283  	BCF STATUS, RP0
+066B  1831  	BTFSC gbl_15_gbl_zSig,0
+066C  1678  	BSF float32_mul_96_stickyBit,4
+066D  1003  	BCF STATUS,C
+066E  0CB4  	RRF gbl_15_gbl_zSig+D'3', F
+066F  0CB3  	RRF gbl_15_gbl_zSig+D'2', F
+0670  0CB2  	RRF gbl_15_gbl_zSig+D'1', F
+0671  0CB1  	RRF gbl_15_gbl_zSig, F
+0672  1683  	BSF STATUS, RP0
+0673  03A1  	DECF float32_mul_96_count, F
+0674  1D03  	BTFSS STATUS,Z
+0675  2E6A  	GOTO	label136
+0676  1283  	BCF STATUS, RP0
+0677  1A78  	BTFSC float32_mul_96_stickyBit,4
+0678  1431  	BSF gbl_15_gbl_zSig,0
+0679  2E87  	GOTO	label138
+067A        label137
+067A  1283  	BCF STATUS, RP0
+067B  0831  	MOVF gbl_15_gbl_zSig, W
+067C  0432  	IORWF gbl_15_gbl_zSig+D'1', W
+067D  0433  	IORWF gbl_15_gbl_zSig+D'2', W
+067E  0434  	IORWF gbl_15_gbl_zSig+D'3', W
+067F  39FF  	ANDLW 0xFF
+0680  1903  	BTFSC STATUS,Z
+0681  2E87  	GOTO	label138
+0682  3001  	MOVLW 0x01
+0683  00B1  	MOVWF gbl_15_gbl_zSig
+0684  01B2  	CLRF gbl_15_gbl_zSig+D'1'
+0685  01B3  	CLRF gbl_15_gbl_zSig+D'2'
+0686  01B4  	CLRF gbl_15_gbl_zSig+D'3'
+0687        label138
+0687  0849  	MOVF gbl_15_gbl_aExp, W
+0688  00C0  	MOVWF gbl_15_gbl_zExp
+0689  01C1  	CLRF gbl_15_gbl_zExp+D'1'
+068A  084A  	MOVF gbl_15_gbl_bExp, W
+068B  07C0  	ADDWF gbl_15_gbl_zExp, F
+068C  1803  	BTFSC STATUS,C
+068D  0AC1  	INCF gbl_15_gbl_zExp+D'1', F
+068E  0879  	MOVF float32_mul_1_expBias, W
+068F  02C0  	SUBWF gbl_15_gbl_zExp, F
+0690  1C03  	BTFSS STATUS,C
+0691  03C1  	DECF gbl_15_gbl_zExp+D'1', F
+0692  1B34  	BTFSC gbl_15_gbl_zSig+D'3',6
+0693  2E9D  	GOTO	label139
+0694  1003  	BCF STATUS,C
+0695  0DB1  	RLF gbl_15_gbl_zSig, F
+0696  0DB2  	RLF gbl_15_gbl_zSig+D'1', F
+0697  0DB3  	RLF gbl_15_gbl_zSig+D'2', F
+0698  0DB4  	RLF gbl_15_gbl_zSig+D'3', F
+0699  08C0  	MOVF gbl_15_gbl_zExp, F
+069A  1903  	BTFSC STATUS,Z
+069B  03C1  	DECF gbl_15_gbl_zExp+D'1', F
+069C  03C0  	DECF gbl_15_gbl_zExp, F
+069D        label139
+069D  2079  	CALL roundFloat_0001A
+069E  21D6  	CALL packFloat3_0001D
+069F  0831  	MOVF gbl_15_gbl_zSig, W
+06A0  00FA  	MOVWF float32_mul_1_retxxx
+06A1  0832  	MOVF gbl_15_gbl_zSig+D'1', W
+06A2  00FB  	MOVWF float32_mul_1_retxxx+D'1'
+06A3  0833  	MOVF gbl_15_gbl_zSig+D'2', W
+06A4  00FC  	MOVWF float32_mul_1_retxxx+D'2'
+06A5  0834  	MOVF gbl_15_gbl_zSig+D'3', W
+06A6  00FD  	MOVWF float32_mul_1_retxxx+D'3'
+06A7  087D  	MOVF float32_mul_1_retxxx+D'3', W
+06A8  1683  	BSF STATUS, RP0
+06A9  00A7  	MOVWF CompTempVarRet927+D'3'
+06AA  1283  	BCF STATUS, RP0
+06AB  087C  	MOVF float32_mul_1_retxxx+D'2', W
+06AC  1683  	BSF STATUS, RP0
+06AD  00A6  	MOVWF CompTempVarRet927+D'2'
+06AE  1283  	BCF STATUS, RP0
+06AF  087B  	MOVF float32_mul_1_retxxx+D'1', W
+06B0  1683  	BSF STATUS, RP0
+06B1  00A5  	MOVWF CompTempVarRet927+D'1'
+06B2  1283  	BCF STATUS, RP0
+06B3  087A  	MOVF float32_mul_1_retxxx, W
+06B4  1683  	BSF STATUS, RP0
+06B5  00A4  	MOVWF CompTempVarRet927
+06B6  0008  	RETURN
+06B7        ; } float32_mul function end
+
+	ORG 0x000006B7
+06B7        float32_le
+06B7        ; { float32_le ; function begin
+06B7  0873  	MOVF float32_le_arg_a+D'3', W
+06B8  1683  	BSF STATUS, RP0
+06B9  00B2  	MOVWF float32_le_2_a+D'3'
+06BA  1283  	BCF STATUS, RP0
+06BB  0872  	MOVF float32_le_arg_a+D'2', W
+06BC  1683  	BSF STATUS, RP0
+06BD  00B1  	MOVWF float32_le_2_a+D'2'
+06BE  1283  	BCF STATUS, RP0
+06BF  0871  	MOVF float32_le_arg_a+D'1', W
+06C0  1683  	BSF STATUS, RP0
+06C1  00B0  	MOVWF float32_le_2_a+D'1'
+06C2  1283  	BCF STATUS, RP0
+06C3  0870  	MOVF float32_le_arg_a, W
+06C4  1683  	BSF STATUS, RP0
+06C5  00AF  	MOVWF float32_le_2_a
+06C6  0832  	MOVF float32_le_2_a+D'3', W
+06C7  00B3  	MOVWF float32_le_4_ret
+06C8  1003  	BCF STATUS,C
+06C9  0DB3  	RLF float32_le_4_ret, F
+06CA  1BB1  	BTFSC float32_le_2_a+D'2',7
+06CB  1433  	BSF float32_le_4_ret,0
+06CC  0833  	MOVF float32_le_4_ret, W
+06CD  1283  	BCF STATUS, RP0
+06CE  00FA  	MOVWF CompTempVar1597
+06CF  01FB  	CLRF CompTempVar1597+D'1'
+06D0  30FF  	MOVLW 0xFF
+06D1  067A  	XORWF CompTempVar1597, W
+06D2  1903  	BTFSC STATUS,Z
+06D3  087B  	MOVF CompTempVar1597+D'1', W
+06D4  1D03  	BTFSS STATUS,Z
+06D5  2EF6  	GOTO	label140
+06D6  0873  	MOVF float32_le_arg_a+D'3', W
+06D7  1683  	BSF STATUS, RP0
+06D8  00B2  	MOVWF float32_le_8_a+D'3'
+06D9  1283  	BCF STATUS, RP0
+06DA  0872  	MOVF float32_le_arg_a+D'2', W
+06DB  1683  	BSF STATUS, RP0
+06DC  00B1  	MOVWF float32_le_8_a+D'2'
+06DD  1283  	BCF STATUS, RP0
+06DE  0871  	MOVF float32_le_arg_a+D'1', W
+06DF  1683  	BSF STATUS, RP0
+06E0  00B0  	MOVWF float32_le_8_a+D'1'
+06E1  1283  	BCF STATUS, RP0
+06E2  0870  	MOVF float32_le_arg_a, W
+06E3  1683  	BSF STATUS, RP0
+06E4  00AF  	MOVWF float32_le_8_a
+06E5  13B1  	BCF float32_le_8_a+D'2',7
+06E6  01B2  	CLRF float32_le_8_a+D'3'
+06E7  082F  	MOVF float32_le_8_a, W
+06E8  00A0  	MOVWF CompTempVar1598
+06E9  0830  	MOVF float32_le_8_a+D'1', W
+06EA  00A1  	MOVWF CompTempVar1598+D'1'
+06EB  0831  	MOVF float32_le_8_a+D'2', W
+06EC  00A2  	MOVWF CompTempVar1598+D'2'
+06ED  0832  	MOVF float32_le_8_a+D'3', W
+06EE  00A3  	MOVWF CompTempVar1598+D'3'
+06EF  0820  	MOVF CompTempVar1598, W
+06F0  0421  	IORWF CompTempVar1598+D'1', W
+06F1  0422  	IORWF CompTempVar1598+D'2', W
+06F2  0423  	IORWF CompTempVar1598+D'3', W
+06F3  39FF  	ANDLW 0xFF
+06F4  1D03  	BTFSS STATUS,Z
+06F5  2F36  	GOTO	label141
+06F6        label140
+06F6  1283  	BCF STATUS, RP0
+06F7  0877  	MOVF float32_le_arg_b+D'3', W
+06F8  1683  	BSF STATUS, RP0
+06F9  00B2  	MOVWF float32_le_14_a+D'3'
+06FA  1283  	BCF STATUS, RP0
+06FB  0876  	MOVF float32_le_arg_b+D'2', W
+06FC  1683  	BSF STATUS, RP0
+06FD  00B1  	MOVWF float32_le_14_a+D'2'
+06FE  1283  	BCF STATUS, RP0
+06FF  0875  	MOVF float32_le_arg_b+D'1', W
+0700  1683  	BSF STATUS, RP0
+0701  00B0  	MOVWF float32_le_14_a+D'1'
+0702  1283  	BCF STATUS, RP0
+0703  0874  	MOVF float32_le_arg_b, W
+0704  1683  	BSF STATUS, RP0
+0705  00AF  	MOVWF float32_le_14_a
+0706  0832  	MOVF float32_le_14_a+D'3', W
+0707  00B3  	MOVWF float32_le_16_ret
+0708  1003  	BCF STATUS,C
+0709  0DB3  	RLF float32_le_16_ret, F
+070A  1BB1  	BTFSC float32_le_14_a+D'2',7
+070B  1433  	BSF float32_le_16_ret,0
+070C  0833  	MOVF float32_le_16_ret, W
+070D  1283  	BCF STATUS, RP0
+070E  00FC  	MOVWF CompTempVar1601
+070F  01FD  	CLRF CompTempVar1601+D'1'
+0710  30FF  	MOVLW 0xFF
+0711  067C  	XORWF CompTempVar1601, W
+0712  1903  	BTFSC STATUS,Z
+0713  087D  	MOVF CompTempVar1601+D'1', W
+0714  1D03  	BTFSS STATUS,Z
+0715  2F3B  	GOTO	label142
+0716  0877  	MOVF float32_le_arg_b+D'3', W
+0717  1683  	BSF STATUS, RP0
+0718  00B2  	MOVWF float32_le_20_a+D'3'
+0719  1283  	BCF STATUS, RP0
+071A  0876  	MOVF float32_le_arg_b+D'2', W
+071B  1683  	BSF STATUS, RP0
+071C  00B1  	MOVWF float32_le_20_a+D'2'
+071D  1283  	BCF STATUS, RP0
+071E  0875  	MOVF float32_le_arg_b+D'1', W
+071F  1683  	BSF STATUS, RP0
+0720  00B0  	MOVWF float32_le_20_a+D'1'
+0721  1283  	BCF STATUS, RP0
+0722  0874  	MOVF float32_le_arg_b, W
+0723  1683  	BSF STATUS, RP0
+0724  00AF  	MOVWF float32_le_20_a
+0725  13B1  	BCF float32_le_20_a+D'2',7
+0726  01B2  	CLRF float32_le_20_a+D'3'
+0727  082F  	MOVF float32_le_20_a, W
+0728  00A4  	MOVWF CompTempVar1602
+0729  0830  	MOVF float32_le_20_a+D'1', W
+072A  00A5  	MOVWF CompTempVar1602+D'1'
+072B  0831  	MOVF float32_le_20_a+D'2', W
+072C  00A6  	MOVWF CompTempVar1602+D'2'
+072D  0832  	MOVF float32_le_20_a+D'3', W
+072E  00A7  	MOVWF CompTempVar1602+D'3'
+072F  0824  	MOVF CompTempVar1602, W
+0730  0425  	IORWF CompTempVar1602+D'1', W
+0731  0426  	IORWF CompTempVar1602+D'2', W
+0732  0427  	IORWF CompTempVar1602+D'3', W
+0733  39FF  	ANDLW 0xFF
+0734  1903  	BTFSC STATUS,Z
+0735  2F3B  	GOTO	label142
+0736        label141
+0736  1283  	BCF STATUS, RP0
+0737  1448  	BSF gbl_float_exception_flags,0
+0738  1683  	BSF STATUS, RP0
+0739  01AF  	CLRF CompTempVarRet1586
+073A  0008  	RETURN
+073B        label142
+073B  1283  	BCF STATUS, RP0
+073C  0873  	MOVF float32_le_arg_a+D'3', W
+073D  1683  	BSF STATUS, RP0
+073E  00B3  	MOVWF float32_le_31_a+D'3'
+073F  1283  	BCF STATUS, RP0
+0740  0872  	MOVF float32_le_arg_a+D'2', W
+0741  1683  	BSF STATUS, RP0
+0742  00B2  	MOVWF float32_le_31_a+D'2'
+0743  1283  	BCF STATUS, RP0
+0744  0871  	MOVF float32_le_arg_a+D'1', W
+0745  1683  	BSF STATUS, RP0
+0746  00B1  	MOVWF float32_le_31_a+D'1'
+0747  1283  	BCF STATUS, RP0
+0748  0870  	MOVF float32_le_arg_a, W
+0749  1683  	BSF STATUS, RP0
+074A  00B0  	MOVWF float32_le_31_a
+074B  3080  	MOVLW 0x80
+074C  0533  	ANDWF float32_le_31_a+D'3', W
+074D  00B4  	MOVWF CompTempVar1629
+074E  1283  	BCF STATUS, RP0
+074F  01F8  	CLRF float32_le_1_aSign
+0750  1683  	BSF STATUS, RP0
+0751  08B4  	MOVF CompTempVar1629, F
+0752  1903  	BTFSC STATUS,Z
+0753  2F56  	GOTO	label143
+0754  1283  	BCF STATUS, RP0
+0755  1478  	BSF float32_le_1_aSign,0
+0756        label143
+0756  1283  	BCF STATUS, RP0
+0757  0877  	MOVF float32_le_arg_b+D'3', W
+0758  1683  	BSF STATUS, RP0
+0759  00B3  	MOVWF float32_le_36_a+D'3'
+075A  1283  	BCF STATUS, RP0
+075B  0876  	MOVF float32_le_arg_b+D'2', W
+075C  1683  	BSF STATUS, RP0
+075D  00B2  	MOVWF float32_le_36_a+D'2'
+075E  1283  	BCF STATUS, RP0
+075F  0875  	MOVF float32_le_arg_b+D'1', W
+0760  1683  	BSF STATUS, RP0
+0761  00B1  	MOVWF float32_le_36_a+D'1'
+0762  1283  	BCF STATUS, RP0
+0763  0874  	MOVF float32_le_arg_b, W
+0764  1683  	BSF STATUS, RP0
+0765  00B0  	MOVWF float32_le_36_a
+0766  3080  	MOVLW 0x80
+0767  0533  	ANDWF float32_le_36_a+D'3', W
+0768  00B4  	MOVWF CompTempVar1633
+0769  1283  	BCF STATUS, RP0
+076A  01F9  	CLRF float32_le_1_bSign
+076B  1683  	BSF STATUS, RP0
+076C  08B4  	MOVF CompTempVar1633, F
+076D  1903  	BTFSC STATUS,Z
+076E  2F71  	GOTO	label144
+076F  1283  	BCF STATUS, RP0
+0770  1479  	BSF float32_le_1_bSign,0
+0771        label144
+0771  1283  	BCF STATUS, RP0
+0772  0879  	MOVF float32_le_1_bSign, W
+0773  0678  	XORWF float32_le_1_aSign, W
+0774  1903  	BTFSC STATUS,Z
+0775  2FAE  	GOTO	label148
+0776  0874  	MOVF float32_le_arg_b, W
+0777  0470  	IORWF float32_le_arg_a, W
+0778  00FE  	MOVWF CompTempVar1611
+0779  0875  	MOVF float32_le_arg_b+D'1', W
+077A  0471  	IORWF float32_le_arg_a+D'1', W
+077B  1683  	BSF STATUS, RP0
+077C  00A8  	MOVWF CompTempVar1612
+077D  1283  	BCF STATUS, RP0
+077E  0876  	MOVF float32_le_arg_b+D'2', W
+077F  0472  	IORWF float32_le_arg_a+D'2', W
+0780  1683  	BSF STATUS, RP0
+0781  00A9  	MOVWF CompTempVar1613
+0782  1283  	BCF STATUS, RP0
+0783  0877  	MOVF float32_le_arg_b+D'3', W
+0784  0473  	IORWF float32_le_arg_a+D'3', W
+0785  1683  	BSF STATUS, RP0
+0786  00AA  	MOVWF CompTempVar1614
+0787  1003  	BCF STATUS,C
+0788  1283  	BCF STATUS, RP0
+0789  0DFE  	RLF CompTempVar1611, F
+078A  1683  	BSF STATUS, RP0
+078B  0DA8  	RLF CompTempVar1612, F
+078C  0DA9  	RLF CompTempVar1613, F
+078D  0DAA  	RLF CompTempVar1614, F
+078E  01AB  	CLRF CompTempVar1615
+078F  0AAB  	INCF CompTempVar1615, F
+0790  1283  	BCF STATUS, RP0
+0791  08FE  	MOVF CompTempVar1611, F
+0792  1903  	BTFSC STATUS,Z
+0793  2F96  	GOTO	label145
+0794  1683  	BSF STATUS, RP0
+0795  102B  	BCF CompTempVar1615,0
+0796        label145
+0796  1683  	BSF STATUS, RP0
+0797  08A8  	MOVF CompTempVar1612, F
+0798  1D03  	BTFSS STATUS,Z
+0799  102B  	BCF CompTempVar1615,0
+079A  08A9  	MOVF CompTempVar1613, F
+079B  1D03  	BTFSS STATUS,Z
+079C  102B  	BCF CompTempVar1615,0
+079D  08AA  	MOVF CompTempVar1614, F
+079E  1D03  	BTFSS STATUS,Z
+079F  102B  	BCF CompTempVar1615,0
+07A0  01B0  	CLRF CompTempVar1635
+07A1  08AB  	MOVF CompTempVar1615, F
+07A2  1D03  	BTFSS STATUS,Z
+07A3  2FA6  	GOTO	label146
+07A4  1283  	BCF STATUS, RP0
+07A5  08F8  	MOVF float32_le_1_aSign, F
+07A6        label146
+07A6  1903  	BTFSC STATUS,Z
+07A7  2FAA  	GOTO	label147
+07A8  1683  	BSF STATUS, RP0
+07A9  0AB0  	INCF CompTempVar1635, F
+07AA        label147
+07AA  1683  	BSF STATUS, RP0
+07AB  0830  	MOVF CompTempVar1635, W
+07AC  00AF  	MOVWF CompTempVarRet1586
+07AD  0008  	RETURN
+07AE        label148
+07AE  1683  	BSF STATUS, RP0
+07AF  01AE  	CLRF CompTempVar1618
+07B0  0AAE  	INCF CompTempVar1618, F
+07B1  1283  	BCF STATUS, RP0
+07B2  0874  	MOVF float32_le_arg_b, W
+07B3  0270  	SUBWF float32_le_arg_a, W
+07B4  1903  	BTFSC STATUS,Z
+07B5  2FB8  	GOTO	label149
+07B6  1683  	BSF STATUS, RP0
+07B7  01AE  	CLRF CompTempVar1618
+07B8        label149
+07B8  1283  	BCF STATUS, RP0
+07B9  0875  	MOVF float32_le_arg_b+D'1', W
+07BA  0271  	SUBWF float32_le_arg_a+D'1', W
+07BB  1903  	BTFSC STATUS,Z
+07BC  2FBF  	GOTO	label150
+07BD  1683  	BSF STATUS, RP0
+07BE  01AE  	CLRF CompTempVar1618
+07BF        label150
+07BF  1283  	BCF STATUS, RP0
+07C0  0876  	MOVF float32_le_arg_b+D'2', W
+07C1  0272  	SUBWF float32_le_arg_a+D'2', W
+07C2  1903  	BTFSC STATUS,Z
+07C3  2FC6  	GOTO	label151
+07C4  1683  	BSF STATUS, RP0
+07C5  01AE  	CLRF CompTempVar1618
+07C6        label151
+07C6  1283  	BCF STATUS, RP0
+07C7  0877  	MOVF float32_le_arg_b+D'3', W
+07C8  0273  	SUBWF float32_le_arg_a+D'3', W
+07C9  1903  	BTFSC STATUS,Z
+07CA  2FCD  	GOTO	label152
+07CB  1683  	BSF STATUS, RP0
+07CC  01AE  	CLRF CompTempVar1618
+07CD        label152
+07CD  1683  	BSF STATUS, RP0
+07CE  01AC  	CLRF CompTempVar1616
+07CF  1283  	BCF STATUS, RP0
+07D0  0877  	MOVF float32_le_arg_b+D'3', W
+07D1  0273  	SUBWF float32_le_arg_a+D'3', W
+07D2  1D03  	BTFSS STATUS,Z
+07D3  2FDE  	GOTO	label153
+07D4  0876  	MOVF float32_le_arg_b+D'2', W
+07D5  0272  	SUBWF float32_le_arg_a+D'2', W
+07D6  1D03  	BTFSS STATUS,Z
+07D7  2FDE  	GOTO	label153
+07D8  0875  	MOVF float32_le_arg_b+D'1', W
+07D9  0271  	SUBWF float32_le_arg_a+D'1', W
+07DA  1D03  	BTFSS STATUS,Z
+07DB  2FDE  	GOTO	label153
+07DC  0874  	MOVF float32_le_arg_b, W
+07DD  0270  	SUBWF float32_le_arg_a, W
+07DE        label153
+07DE  1803  	BTFSC STATUS,C
+07DF  2FE2  	GOTO	label154
+07E0  1683  	BSF STATUS, RP0
+07E1  0AAC  	INCF CompTempVar1616, F
+07E2        label154
+07E2  1683  	BSF STATUS, RP0
+07E3  082C  	MOVF CompTempVar1616, W
+07E4  1283  	BCF STATUS, RP0
+07E5  0678  	XORWF float32_le_1_aSign, W
+07E6  1683  	BSF STATUS, RP0
+07E7  00AD  	MOVWF CompTempVar1617
+07E8  01B0  	CLRF CompTempVar1636
+07E9  08AD  	MOVF CompTempVar1617, F
+07EA  1903  	BTFSC STATUS,Z
+07EB  08AE  	MOVF CompTempVar1618, F
+07EC  1D03  	BTFSS STATUS,Z
+07ED  0AB0  	INCF CompTempVar1636, F
+07EE  0830  	MOVF CompTempVar1636, W
+07EF  00AF  	MOVWF CompTempVarRet1586
+07F0  0008  	RETURN
+07F1        ; } float32_le function end
+
+	ORG 0x000007F1
+07F1        float32_from_int32
+07F1        ; { float32_from_int32 ; function begin
+07F1  0870  	MOVF float32_from_int32_arg_a, W
+07F2  00B1  	MOVWF gbl_15_gbl_zSig
+07F3  0871  	MOVF float32_from_int32_arg_a+D'1', W
+07F4  00B2  	MOVWF gbl_15_gbl_zSig+D'1'
+07F5  0872  	MOVF float32_from_int32_arg_a+D'2', W
+07F6  00B3  	MOVWF gbl_15_gbl_zSig+D'2'
+07F7  0873  	MOVF float32_from_int32_arg_a+D'3', W
+07F8  00B4  	MOVWF gbl_15_gbl_zSig+D'3'
+07F9  0831  	MOVF gbl_15_gbl_zSig, W
+07FA  3C00  	SUBLW 0x00
+07FB  158A  	BSF PCLATH,3
+07FC  1D03  	BTFSS STATUS,Z
+07FD  2810  	GOTO	label155
+07FE  0832  	MOVF gbl_15_gbl_zSig+D'1', W
+07FF  3C00  	SUBLW 0x00
+0800  1D03  	BTFSS STATUS,Z
+0801  2810  	GOTO	label155
+0802  0833  	MOVF gbl_15_gbl_zSig+D'2', W
+0803  3C00  	SUBLW 0x00
+0804  1D03  	BTFSS STATUS,Z
+0805  2810  	GOTO	label155
+0806  0834  	MOVF gbl_15_gbl_zSig+D'3', W
+0807  3C80  	SUBLW 0x80
+0808  1D03  	BTFSS STATUS,Z
+0809  2810  	GOTO	label155
+080A  3001  	MOVLW 0x01
+080B  00CD  	MOVWF gbl_15_gbl_zSign
+080C  309E  	MOVLW 0x9E
+080D  00C0  	MOVWF gbl_15_gbl_zExp
+080E  01C1  	CLRF gbl_15_gbl_zExp+D'1'
+080F  2836  	GOTO	label157
+0810        label155
+0810  01CD  	CLRF gbl_15_gbl_zSign
+0811  1FB4  	BTFSS gbl_15_gbl_zSig+D'3',7
+0812  2830  	GOTO	label156
+0813  3001  	MOVLW 0x01
+0814  00CD  	MOVWF gbl_15_gbl_zSign
+0815  0831  	MOVF gbl_15_gbl_zSig, W
+0816  3C00  	SUBLW 0x00
+0817  00F8  	MOVWF CompTempVar675
+0818  3000  	MOVLW 0x00
+0819  00F9  	MOVWF CompTempVar676
+081A  00FA  	MOVWF CompTempVar677
+081B  00FB  	MOVWF CompTempVar678
+081C  0832  	MOVF gbl_15_gbl_zSig+D'1', W
+081D  1C03  	BTFSS STATUS,C
+081E  0F32  	INCFSZ gbl_15_gbl_zSig+D'1', W
+081F  02F9  	SUBWF CompTempVar676, F
+0820  0833  	MOVF gbl_15_gbl_zSig+D'2', W
+0821  1C03  	BTFSS STATUS,C
+0822  0F33  	INCFSZ gbl_15_gbl_zSig+D'2', W
+0823  02FA  	SUBWF CompTempVar677, F
+0824  0834  	MOVF gbl_15_gbl_zSig+D'3', W
+0825  1C03  	BTFSS STATUS,C
+0826  0F34  	INCFSZ gbl_15_gbl_zSig+D'3', W
+0827  02FB  	SUBWF CompTempVar678, F
+0828  0878  	MOVF CompTempVar675, W
+0829  00B1  	MOVWF gbl_15_gbl_zSig
+082A  0879  	MOVF CompTempVar676, W
+082B  00B2  	MOVWF gbl_15_gbl_zSig+D'1'
+082C  087A  	MOVF CompTempVar677, W
+082D  00B3  	MOVWF gbl_15_gbl_zSig+D'2'
+082E  087B  	MOVF CompTempVar678, W
+082F  00B4  	MOVWF gbl_15_gbl_zSig+D'3'
+0830        label156
+0830  309C  	MOVLW 0x9C
+0831  00C0  	MOVWF gbl_15_gbl_zExp
+0832  01C1  	CLRF gbl_15_gbl_zExp+D'1'
+0833  118A  	BCF PCLATH,3
+0834  231C  	CALL NormaliseF_00019
+0835  2079  	CALL roundFloat_0001A
+0836        label157
+0836  118A  	BCF PCLATH,3
+0837  21D6  	CALL packFloat3_0001D
+0838  0831  	MOVF gbl_15_gbl_zSig, W
+0839  00F4  	MOVWF float32_from_int32_1_retxxx
+083A  0832  	MOVF gbl_15_gbl_zSig+D'1', W
+083B  00F5  	MOVWF float32_from_int32_1_retxxx+D'1'
+083C  0833  	MOVF gbl_15_gbl_zSig+D'2', W
+083D  00F6  	MOVWF float32_from_int32_1_retxxx+D'2'
+083E  0834  	MOVF gbl_15_gbl_zSig+D'3', W
+083F  00F7  	MOVWF float32_from_int32_1_retxxx+D'3'
+0840  0877  	MOVF float32_from_int32_1_retxxx+D'3', W
+0841  00FB  	MOVWF CompTempVarRet673+D'3'
+0842  0876  	MOVF float32_from_int32_1_retxxx+D'2', W
+0843  00FA  	MOVWF CompTempVarRet673+D'2'
+0844  0875  	MOVF float32_from_int32_1_retxxx+D'1', W
+0845  00F9  	MOVWF CompTempVarRet673+D'1'
+0846  0874  	MOVF float32_from_int32_1_retxxx, W
+0847  00F8  	MOVWF CompTempVarRet673
+0848  0008  	RETURN
+0849        ; } float32_from_int32 function end
+
+	ORG 0x00000849
+0849        float32_addsub
+0849        ; { float32_addsub ; function begin
+0849  08F8  	MOVF float32_addsub_arg_subtract, F
+084A  1903  	BTFSC STATUS,Z
+084B  284E  	GOTO	label158
+084C  3080  	MOVLW 0x80
+084D  06F7  	XORWF float32_addsub_arg_b+D'3', F
+084E        label158
+084E  0873  	MOVF float32_addsub_arg_a+D'3', W
+084F  00C9  	MOVWF gbl_15_gbl_aExp
+0850  13C9  	BCF gbl_15_gbl_aExp,7
+0851  1003  	BCF STATUS,C
+0852  0DC9  	RLF gbl_15_gbl_aExp, F
+0853  1BF2  	BTFSC float32_addsub_arg_a+D'2',7
+0854  1449  	BSF gbl_15_gbl_aExp,0
+0855  01CB  	CLRF gbl_15_gbl_aSign
+0856  1FF3  	BTFSS float32_addsub_arg_a+D'3',7
+0857  285A  	GOTO	label159
+0858  3001  	MOVLW 0x01
+0859  00CB  	MOVWF gbl_15_gbl_aSign
+085A        label159
+085A  0870  	MOVF float32_addsub_arg_a, W
+085B  00A9  	MOVWF gbl_15_gbl_aSig
+085C  0871  	MOVF float32_addsub_arg_a+D'1', W
+085D  00AA  	MOVWF gbl_15_gbl_aSig+D'1'
+085E  0872  	MOVF float32_addsub_arg_a+D'2', W
+085F  00AB  	MOVWF gbl_15_gbl_aSig+D'2'
+0860  13AB  	BCF gbl_15_gbl_aSig+D'2',7
+0861  01AC  	CLRF gbl_15_gbl_aSig+D'3'
+0862  0877  	MOVF float32_addsub_arg_b+D'3', W
+0863  00CA  	MOVWF gbl_15_gbl_bExp
+0864  13CA  	BCF gbl_15_gbl_bExp,7
+0865  1003  	BCF STATUS,C
+0866  0DCA  	RLF gbl_15_gbl_bExp, F
+0867  1BF6  	BTFSC float32_addsub_arg_b+D'2',7
+0868  144A  	BSF gbl_15_gbl_bExp,0
+0869  01CC  	CLRF gbl_15_gbl_bSign
+086A  1FF7  	BTFSS float32_addsub_arg_b+D'3',7
+086B  286E  	GOTO	label160
+086C  3001  	MOVLW 0x01
+086D  00CC  	MOVWF gbl_15_gbl_bSign
+086E        label160
+086E  0874  	MOVF float32_addsub_arg_b, W
+086F  00AD  	MOVWF gbl_15_gbl_bSig
+0870  0875  	MOVF float32_addsub_arg_b+D'1', W
+0871  00AE  	MOVWF gbl_15_gbl_bSig+D'1'
+0872  0876  	MOVF float32_addsub_arg_b+D'2', W
+0873  00AF  	MOVWF gbl_15_gbl_bSig+D'2'
+0874  13AF  	BCF gbl_15_gbl_bSig+D'2',7
+0875  01B0  	CLRF gbl_15_gbl_bSig+D'3'
+0876  3006  	MOVLW 0x06
+0877  00FC  	MOVWF float32_addsub_31_i
+0878        label161
+0878  08FC  	MOVF float32_addsub_31_i, F
+0879  1903  	BTFSC STATUS,Z
+087A  2882  	GOTO	label162
+087B  1003  	BCF STATUS,C
+087C  0DA9  	RLF gbl_15_gbl_aSig, F
+087D  0DAA  	RLF gbl_15_gbl_aSig+D'1', F
+087E  0DAB  	RLF gbl_15_gbl_aSig+D'2', F
+087F  0DAC  	RLF gbl_15_gbl_aSig+D'3', F
+0880  03FC  	DECF float32_addsub_31_i, F
+0881  2878  	GOTO	label161
+0882        label162
+0882  3006  	MOVLW 0x06
+0883  00FC  	MOVWF float32_addsub_33_i
+0884        label163
+0884  08FC  	MOVF float32_addsub_33_i, F
+0885  1903  	BTFSC STATUS,Z
+0886  288E  	GOTO	label164
+0887  1003  	BCF STATUS,C
+0888  0DAD  	RLF gbl_15_gbl_bSig, F
+0889  0DAE  	RLF gbl_15_gbl_bSig+D'1', F
+088A  0DAF  	RLF gbl_15_gbl_bSig+D'2', F
+088B  0DB0  	RLF gbl_15_gbl_bSig+D'3', F
+088C  03FC  	DECF float32_addsub_33_i, F
+088D  2884  	GOTO	label163
+088E        label164
+088E  1079  	BCF float32_addsub_1_aNanInf,0
+088F  0A49  	INCF gbl_15_gbl_aExp, W
+0890  1903  	BTFSC STATUS,Z
+0891  1479  	BSF float32_addsub_1_aNanInf,0
+0892  10F9  	BCF float32_addsub_1_bNanInf,1
+0893  0A4A  	INCF gbl_15_gbl_bExp, W
+0894  1903  	BTFSC STATUS,Z
+0895  14F9  	BSF float32_addsub_1_bNanInf,1
+0896  1179  	BCF float32_addsub_1_aSigIsZero,2
+0897  0829  	MOVF gbl_15_gbl_aSig, W
+0898  042A  	IORWF gbl_15_gbl_aSig+D'1', W
+0899  042B  	IORWF gbl_15_gbl_aSig+D'2', W
+089A  042C  	IORWF gbl_15_gbl_aSig+D'3', W
+089B  39FF  	ANDLW 0xFF
+089C  1903  	BTFSC STATUS,Z
+089D  1579  	BSF float32_addsub_1_aSigIsZero,2
+089E  11F9  	BCF float32_addsub_1_bSigIsZero,3
+089F  082D  	MOVF gbl_15_gbl_bSig, W
+08A0  042E  	IORWF gbl_15_gbl_bSig+D'1', W
+08A1  042F  	IORWF gbl_15_gbl_bSig+D'2', W
+08A2  0430  	IORWF gbl_15_gbl_bSig+D'3', W
+08A3  39FF  	ANDLW 0xFF
+08A4  1903  	BTFSC STATUS,Z
+08A5  15F9  	BSF float32_addsub_1_bSigIsZero,3
+08A6  1879  	BTFSC float32_addsub_1_aNanInf,0
+08A7  28AA  	GOTO	label165
+08A8  1CF9  	BTFSS float32_addsub_1_bNanInf,1
+08A9  2913  	GOTO	label177
+08AA        label165
+08AA  1679  	BSF float32_addsub_39_bSignalingNaN,4
+08AB  1F76  	BTFSS float32_addsub_arg_b+D'2',6
+08AC  28AE  	GOTO	label166
+08AD  1279  	BCF float32_addsub_39_bSignalingNaN,4
+08AE        label166
+08AE  16F9  	BSF float32_addsub_39_aSignalingNaN,5
+08AF  1B72  	BTFSC float32_addsub_arg_a+D'2',6
+08B0  12F9  	BCF float32_addsub_39_aSignalingNaN,5
+08B1  1C79  	BTFSS float32_addsub_1_aNanInf,0
+08B2  28D1  	GOTO	label169
+08B3  1CF9  	BTFSS float32_addsub_1_bNanInf,1
+08B4  28D1  	GOTO	label169
+08B5  1D79  	BTFSS float32_addsub_1_aSigIsZero,2
+08B6  28C2  	GOTO	label167
+08B7  1DF9  	BTFSS float32_addsub_1_bSigIsZero,3
+08B8  28C2  	GOTO	label167
+08B9  084C  	MOVF gbl_15_gbl_bSign, W
+08BA  064B  	XORWF gbl_15_gbl_aSign, W
+08BB  1903  	BTFSC STATUS,Z
+08BC  28F2  	GOTO	label174
+08BD  1448  	BSF gbl_float_exception_flags,0
+08BE  08CB  	MOVF gbl_15_gbl_aSign, F
+08BF  1D03  	BTFSS STATUS,Z
+08C0  28F1  	GOTO	label173
+08C1  2902  	GOTO	label175
+08C2        label167
+08C2  1D79  	BTFSS float32_addsub_1_aSigIsZero,2
+08C3  28C9  	GOTO	label168
+08C4  19F9  	BTFSC float32_addsub_1_bSigIsZero,3
+08C5  28C9  	GOTO	label168
+08C6  1A79  	BTFSC float32_addsub_39_bSignalingNaN,4
+08C7  1448  	BSF gbl_float_exception_flags,0
+08C8  2902  	GOTO	label175
+08C9        label168
+08C9  1979  	BTFSC float32_addsub_1_aSigIsZero,2
+08CA  28D1  	GOTO	label169
+08CB  1DF9  	BTFSS float32_addsub_1_bSigIsZero,3
+08CC  28D1  	GOTO	label169
+08CD  1EF9  	BTFSS float32_addsub_39_aSignalingNaN,5
+08CE  28F1  	GOTO	label173
+08CF  1448  	BSF gbl_float_exception_flags,0
+08D0  28F1  	GOTO	label173
+08D1        label169
+08D1  1C79  	BTFSS float32_addsub_1_aNanInf,0
+08D2  28D7  	GOTO	label170
+08D3  1D79  	BTFSS float32_addsub_1_aSigIsZero,2
+08D4  28D7  	GOTO	label170
+08D5  1CF9  	BTFSS float32_addsub_1_bNanInf,1
+08D6  28F2  	GOTO	label174
+08D7        label170
+08D7  1CF9  	BTFSS float32_addsub_1_bNanInf,1
+08D8  28DD  	GOTO	label171
+08D9  1DF9  	BTFSS float32_addsub_1_bSigIsZero,3
+08DA  28DD  	GOTO	label171
+08DB  1C79  	BTFSS float32_addsub_1_aNanInf,0
+08DC  2903  	GOTO	label176
+08DD        label171
+08DD  1C79  	BTFSS float32_addsub_1_aNanInf,0
+08DE  28EA  	GOTO	label172
+08DF  1979  	BTFSC float32_addsub_1_aSigIsZero,2
+08E0  28EA  	GOTO	label172
+08E1  1AF9  	BTFSC float32_addsub_39_aSignalingNaN,5
+08E2  1448  	BSF gbl_float_exception_flags,0
+08E3  1CF9  	BTFSS float32_addsub_1_bNanInf,1
+08E4  28F1  	GOTO	label173
+08E5  19F9  	BTFSC float32_addsub_1_bSigIsZero,3
+08E6  28F1  	GOTO	label173
+08E7  1A79  	BTFSC float32_addsub_39_bSignalingNaN,4
+08E8  1448  	BSF gbl_float_exception_flags,0
+08E9  28F1  	GOTO	label173
+08EA        label172
+08EA  1CF9  	BTFSS float32_addsub_1_bNanInf,1
+08EB  28F1  	GOTO	label173
+08EC  19F9  	BTFSC float32_addsub_1_bSigIsZero,3
+08ED  28F1  	GOTO	label173
+08EE  1A79  	BTFSC float32_addsub_39_bSignalingNaN,4
+08EF  1448  	BSF gbl_float_exception_flags,0
+08F0  2902  	GOTO	label175
+08F1        label173
+08F1  1772  	BSF float32_addsub_arg_a+D'2',6
+08F2        label174
+08F2  0873  	MOVF float32_addsub_arg_a+D'3', W
+08F3  1683  	BSF STATUS, RP0
+08F4  00A7  	MOVWF CompTempVarRet879+D'3'
+08F5  1283  	BCF STATUS, RP0
+08F6  0872  	MOVF float32_addsub_arg_a+D'2', W
+08F7  1683  	BSF STATUS, RP0
+08F8  00A6  	MOVWF CompTempVarRet879+D'2'
+08F9  1283  	BCF STATUS, RP0
+08FA  0871  	MOVF float32_addsub_arg_a+D'1', W
+08FB  1683  	BSF STATUS, RP0
+08FC  00A5  	MOVWF CompTempVarRet879+D'1'
+08FD  1283  	BCF STATUS, RP0
+08FE  0870  	MOVF float32_addsub_arg_a, W
+08FF  1683  	BSF STATUS, RP0
+0900  00A4  	MOVWF CompTempVarRet879
+0901  0008  	RETURN
+0902        label175
+0902  1776  	BSF float32_addsub_arg_b+D'2',6
+0903        label176
+0903  0877  	MOVF float32_addsub_arg_b+D'3', W
+0904  1683  	BSF STATUS, RP0
+0905  00A7  	MOVWF CompTempVarRet879+D'3'
+0906  1283  	BCF STATUS, RP0
+0907  0876  	MOVF float32_addsub_arg_b+D'2', W
+0908  1683  	BSF STATUS, RP0
+0909  00A6  	MOVWF CompTempVarRet879+D'2'
+090A  1283  	BCF STATUS, RP0
+090B  0875  	MOVF float32_addsub_arg_b+D'1', W
+090C  1683  	BSF STATUS, RP0
+090D  00A5  	MOVWF CompTempVarRet879+D'1'
+090E  1283  	BCF STATUS, RP0
+090F  0874  	MOVF float32_addsub_arg_b, W
+0910  1683  	BSF STATUS, RP0
+0911  00A4  	MOVWF CompTempVarRet879
+0912  0008  	RETURN
+0913        label177
+0913  0849  	MOVF gbl_15_gbl_aExp, W
+0914  00FA  	MOVWF float32_addsub_1_expDiff
+0915  01FB  	CLRF float32_addsub_1_expDiff+D'1'
+0916  084A  	MOVF gbl_15_gbl_bExp, W
+0917  00FD  	MOVWF CompTempVar911
+0918  01FE  	CLRF CompTempVar911+D'1'
+0919  087D  	MOVF CompTempVar911, W
+091A  02FA  	SUBWF float32_addsub_1_expDiff, F
+091B  0A7E  	INCF CompTempVar911+D'1', W
+091C  1803  	BTFSC STATUS,C
+091D  087E  	MOVF CompTempVar911+D'1', W
+091E  02FB  	SUBWF float32_addsub_1_expDiff+D'1', F
+091F  084A  	MOVF gbl_15_gbl_bExp, W
+0920  0249  	SUBWF gbl_15_gbl_aExp, W
+0921  1C03  	BTFSS STATUS,C
+0922  2937  	GOTO	label179
+0923  0849  	MOVF gbl_15_gbl_aExp, W
+0924  064A  	XORWF gbl_15_gbl_bExp, W
+0925  1D03  	BTFSS STATUS,Z
+0926  2961  	GOTO	label180
+0927  0830  	MOVF gbl_15_gbl_bSig+D'3', W
+0928  022C  	SUBWF gbl_15_gbl_aSig+D'3', W
+0929  1D03  	BTFSS STATUS,Z
+092A  2935  	GOTO	label178
+092B  082F  	MOVF gbl_15_gbl_bSig+D'2', W
+092C  022B  	SUBWF gbl_15_gbl_aSig+D'2', W
+092D  1D03  	BTFSS STATUS,Z
+092E  2935  	GOTO	label178
+092F  082E  	MOVF gbl_15_gbl_bSig+D'1', W
+0930  022A  	SUBWF gbl_15_gbl_aSig+D'1', W
+0931  1D03  	BTFSS STATUS,Z
+0932  2935  	GOTO	label178
+0933  082D  	MOVF gbl_15_gbl_bSig, W
+0934  0229  	SUBWF gbl_15_gbl_aSig, W
+0935        label178
+0935  1803  	BTFSC STATUS,C
+0936  2961  	GOTO	label180
+0937        label179
+0937  082C  	MOVF gbl_15_gbl_aSig+D'3', W
+0938  00B4  	MOVWF gbl_15_gbl_zSig+D'3'
+0939  082B  	MOVF gbl_15_gbl_aSig+D'2', W
+093A  00B3  	MOVWF gbl_15_gbl_zSig+D'2'
+093B  082A  	MOVF gbl_15_gbl_aSig+D'1', W
+093C  00B2  	MOVWF gbl_15_gbl_zSig+D'1'
+093D  0829  	MOVF gbl_15_gbl_aSig, W
+093E  00B1  	MOVWF gbl_15_gbl_zSig
+093F  0849  	MOVF gbl_15_gbl_aExp, W
+0940  00C0  	MOVWF gbl_15_gbl_zExp
+0941  01C1  	CLRF gbl_15_gbl_zExp+D'1'
+0942  084B  	MOVF gbl_15_gbl_aSign, W
+0943  00CD  	MOVWF gbl_15_gbl_zSign
+0944  0830  	MOVF gbl_15_gbl_bSig+D'3', W
+0945  00AC  	MOVWF gbl_15_gbl_aSig+D'3'
+0946  082F  	MOVF gbl_15_gbl_bSig+D'2', W
+0947  00AB  	MOVWF gbl_15_gbl_aSig+D'2'
+0948  082E  	MOVF gbl_15_gbl_bSig+D'1', W
+0949  00AA  	MOVWF gbl_15_gbl_aSig+D'1'
+094A  082D  	MOVF gbl_15_gbl_bSig, W
+094B  00A9  	MOVWF gbl_15_gbl_aSig
+094C  0834  	MOVF gbl_15_gbl_zSig+D'3', W
+094D  00B0  	MOVWF gbl_15_gbl_bSig+D'3'
+094E  0833  	MOVF gbl_15_gbl_zSig+D'2', W
+094F  00AF  	MOVWF gbl_15_gbl_bSig+D'2'
+0950  0832  	MOVF gbl_15_gbl_zSig+D'1', W
+0951  00AE  	MOVWF gbl_15_gbl_bSig+D'1'
+0952  0831  	MOVF gbl_15_gbl_zSig, W
+0953  00AD  	MOVWF gbl_15_gbl_bSig
+0954  084A  	MOVF gbl_15_gbl_bExp, W
+0955  00C9  	MOVWF gbl_15_gbl_aExp
+0956  0840  	MOVF gbl_15_gbl_zExp, W
+0957  00CA  	MOVWF gbl_15_gbl_bExp
+0958  084C  	MOVF gbl_15_gbl_bSign, W
+0959  00CB  	MOVWF gbl_15_gbl_aSign
+095A  084D  	MOVF gbl_15_gbl_zSign, W
+095B  00CC  	MOVWF gbl_15_gbl_bSign
+095C  09FA  	COMF float32_addsub_1_expDiff, F
+095D  09FB  	COMF float32_addsub_1_expDiff+D'1', F
+095E  0AFA  	INCF float32_addsub_1_expDiff, F
+095F  1903  	BTFSC STATUS,Z
+0960  0AFB  	INCF float32_addsub_1_expDiff+D'1', F
+0961        label180
+0961  08C9  	MOVF gbl_15_gbl_aExp, F
+0962  1D03  	BTFSS STATUS,Z
+0963  298A  	GOTO	label186
+0964  08CA  	MOVF gbl_15_gbl_bExp, F
+0965  1D03  	BTFSS STATUS,Z
+0966  298A  	GOTO	label186
+0967  118A  	BCF PCLATH,3
+0968  2275  	CALL _float32_a_0002A
+0969  08CE  	MOVF gbl_15_gbl_zSigZero, F
+096A  158A  	BSF PCLATH,3
+096B  1903  	BTFSC STATUS,Z
+096C  2979  	GOTO	label182
+096D  084C  	MOVF gbl_15_gbl_bSign, W
+096E  064B  	XORWF gbl_15_gbl_aSign, W
+096F  1903  	BTFSC STATUS,Z
+0970  2979  	GOTO	label182
+0971  0347  	DECF gbl_float_rounding_mode, W
+0972  1D03  	BTFSS STATUS,Z
+0973  2977  	GOTO	label181
+0974  3001  	MOVLW 0x01
+0975  00CD  	MOVWF gbl_15_gbl_zSign
+0976  297B  	GOTO	label183
+0977        label181
+0977  01CD  	CLRF gbl_15_gbl_zSign
+0978  297B  	GOTO	label183
+0979        label182
+0979  084B  	MOVF gbl_15_gbl_aSign, W
+097A  00CD  	MOVWF gbl_15_gbl_zSign
+097B        label183
+097B  3006  	MOVLW 0x06
+097C  00FC  	MOVWF float32_addsub_86_i
+097D        label184
+097D  08FC  	MOVF float32_addsub_86_i, F
+097E  1903  	BTFSC STATUS,Z
+097F  2987  	GOTO	label185
+0980  1003  	BCF STATUS,C
+0981  0CB4  	RRF gbl_15_gbl_zSig+D'3', F
+0982  0CB3  	RRF gbl_15_gbl_zSig+D'2', F
+0983  0CB2  	RRF gbl_15_gbl_zSig+D'1', F
+0984  0CB1  	RRF gbl_15_gbl_zSig, F
+0985  03FC  	DECF float32_addsub_86_i, F
+0986  297D  	GOTO	label184
+0987        label185
+0987  01C0  	CLRF gbl_15_gbl_zExp
+0988  01C1  	CLRF gbl_15_gbl_zExp+D'1'
+0989  29C3  	GOTO	label196
+098A        label186
+098A  08CA  	MOVF gbl_15_gbl_bExp, F
+098B  1D03  	BTFSS STATUS,Z
+098C  2993  	GOTO	label188
+098D  08FA  	MOVF float32_addsub_1_expDiff, F
+098E  1D03  	BTFSS STATUS,Z
+098F  2991  	GOTO	label187
+0990  03FB  	DECF float32_addsub_1_expDiff+D'1', F
+0991        label187
+0991  03FA  	DECF float32_addsub_1_expDiff, F
+0992  2994  	GOTO	label189
+0993        label188
+0993  16B0  	BSF gbl_15_gbl_bSig+D'3',5
+0994        label189
+0994  08C9  	MOVF gbl_15_gbl_aExp, F
+0995  1D03  	BTFSS STATUS,Z
+0996  299C  	GOTO	label190
+0997  0AFA  	INCF float32_addsub_1_expDiff, F
+0998  1D03  	BTFSS STATUS,Z
+0999  299D  	GOTO	label191
+099A  0AFB  	INCF float32_addsub_1_expDiff+D'1', F
+099B  299D  	GOTO	label191
+099C        label190
+099C  16AC  	BSF gbl_15_gbl_aSig+D'3',5
+099D        label191
+099D  087A  	MOVF float32_addsub_1_expDiff, W
+099E  00FD  	MOVWF shift32Rig_0002B_arg_shiftCount
+099F  087B  	MOVF float32_addsub_1_expDiff+D'1', W
+09A0  00FE  	MOVWF shift32Rig_0002B_arg_shiftCount+D'1'
+09A1  118A  	BCF PCLATH,3
+09A2  204F  	CALL shift32Rig_0002B
+09A3  2275  	CALL _float32_a_0002A
+09A4  08CE  	MOVF gbl_15_gbl_zSigZero, F
+09A5  158A  	BSF PCLATH,3
+09A6  1903  	BTFSC STATUS,Z
+09A7  29B0  	GOTO	label193
+09A8  0347  	DECF gbl_float_rounding_mode, W
+09A9  1D03  	BTFSS STATUS,Z
+09AA  29AE  	GOTO	label192
+09AB  3001  	MOVLW 0x01
+09AC  00CD  	MOVWF gbl_15_gbl_zSign
+09AD  29B2  	GOTO	label194
+09AE        label192
+09AE  01CD  	CLRF gbl_15_gbl_zSign
+09AF  29B2  	GOTO	label194
+09B0        label193
+09B0  084B  	MOVF gbl_15_gbl_aSign, W
+09B1  00CD  	MOVWF gbl_15_gbl_zSign
+09B2        label194
+09B2  0849  	MOVF gbl_15_gbl_aExp, W
+09B3  00C0  	MOVWF gbl_15_gbl_zExp
+09B4  01C1  	CLRF gbl_15_gbl_zExp+D'1'
+09B5  1B34  	BTFSC gbl_15_gbl_zSig+D'3',6
+09B6  29C0  	GOTO	label195
+09B7  1003  	BCF STATUS,C
+09B8  0DB1  	RLF gbl_15_gbl_zSig, F
+09B9  0DB2  	RLF gbl_15_gbl_zSig+D'1', F
+09BA  0DB3  	RLF gbl_15_gbl_zSig+D'2', F
+09BB  0DB4  	RLF gbl_15_gbl_zSig+D'3', F
+09BC  08C0  	MOVF gbl_15_gbl_zExp, F
+09BD  1903  	BTFSC STATUS,Z
+09BE  03C1  	DECF gbl_15_gbl_zExp+D'1', F
+09BF  03C0  	DECF gbl_15_gbl_zExp, F
+09C0        label195
+09C0  118A  	BCF PCLATH,3
+09C1  231C  	CALL NormaliseF_00019
+09C2  2079  	CALL roundFloat_0001A
+09C3        label196
+09C3  118A  	BCF PCLATH,3
+09C4  21D6  	CALL packFloat3_0001D
+09C5  0831  	MOVF gbl_15_gbl_zSig, W
+09C6  1683  	BSF STATUS, RP0
+09C7  00A0  	MOVWF float32_addsub_1_retxxx
+09C8  1283  	BCF STATUS, RP0
+09C9  0832  	MOVF gbl_15_gbl_zSig+D'1', W
+09CA  1683  	BSF STATUS, RP0
+09CB  00A1  	MOVWF float32_addsub_1_retxxx+D'1'
+09CC  1283  	BCF STATUS, RP0
+09CD  0833  	MOVF gbl_15_gbl_zSig+D'2', W
+09CE  1683  	BSF STATUS, RP0
+09CF  00A2  	MOVWF float32_addsub_1_retxxx+D'2'
+09D0  1283  	BCF STATUS, RP0
+09D1  0834  	MOVF gbl_15_gbl_zSig+D'3', W
+09D2  1683  	BSF STATUS, RP0
+09D3  00A3  	MOVWF float32_addsub_1_retxxx+D'3'
+09D4  0823  	MOVF float32_addsub_1_retxxx+D'3', W
+09D5  00A7  	MOVWF CompTempVarRet879+D'3'
+09D6  0822  	MOVF float32_addsub_1_retxxx+D'2', W
+09D7  00A6  	MOVWF CompTempVarRet879+D'2'
+09D8  0821  	MOVF float32_addsub_1_retxxx+D'1', W
+09D9  00A5  	MOVWF CompTempVarRet879+D'1'
+09DA  0820  	MOVF float32_addsub_1_retxxx, W
+09DB  00A4  	MOVWF CompTempVarRet879
+09DC  0008  	RETURN
+09DD        ; } float32_addsub function end
+
+	ORG 0x000009DD
+09DD        FC_CAL_Sam_0005E
+09DD        ; { FC_CAL_Sample_ADC ; function begin
+09DD  3004  	MOVLW 0x04
+09DE  041F  	IORWF gbl_adcon0, W
+09DF  009F  	MOVWF gbl_adcon0
+09E0        label197
+09E0  191F  	BTFSC gbl_adcon0,2
+09E1  29E0  	GOTO	label197
+09E2  08DF  	MOVF FC_CAL_Sam_0005E_arg_Sample_Mode, F
+09E3  1903  	BTFSC STATUS,Z
+09E4  29F9  	GOTO	label198
+09E5  081E  	MOVF gbl_adresh, W
+09E6  00E0  	MOVWF FC_CAL_Sam_0005E_1_iRetVal
+09E7  01E1  	CLRF FC_CAL_Sam_0005E_1_iRetVal+D'1'
+09E8  0DE0  	RLF FC_CAL_Sam_0005E_1_iRetVal, F
+09E9  0DE1  	RLF FC_CAL_Sam_0005E_1_iRetVal+D'1', F
+09EA  0DE0  	RLF FC_CAL_Sam_0005E_1_iRetVal, F
+09EB  0DE1  	RLF FC_CAL_Sam_0005E_1_iRetVal+D'1', F
+09EC  30FC  	MOVLW 0xFC
+09ED  05E0  	ANDWF FC_CAL_Sam_0005E_1_iRetVal, F
+09EE  1683  	BSF STATUS, RP0
+09EF  0C1E  	RRF gbl_adresl, W
+09F0  1283  	BCF STATUS, RP0
+09F1  00E2  	MOVWF CompTempVar2227
+09F2  0CE2  	RRF CompTempVar2227, F
+09F3  0EE2  	SWAPF CompTempVar2227, F
+09F4  3003  	MOVLW 0x03
+09F5  0562  	ANDWF CompTempVar2227, W
+09F6  04E0  	IORWF FC_CAL_Sam_0005E_1_iRetVal, F
+09F7  08E1  	MOVF FC_CAL_Sam_0005E_1_iRetVal+D'1', F
+09F8  29FC  	GOTO	label199
+09F9        label198
+09F9  081E  	MOVF gbl_adresh, W
+09FA  00E0  	MOVWF FC_CAL_Sam_0005E_1_iRetVal
+09FB  01E1  	CLRF FC_CAL_Sam_0005E_1_iRetVal+D'1'
+09FC        label199
+09FC  0860  	MOVF FC_CAL_Sam_0005E_1_iRetVal, W
+09FD  00E2  	MOVWF CompTempVarRet2224
+09FE  0861  	MOVF FC_CAL_Sam_0005E_1_iRetVal+D'1', W
+09FF  00E3  	MOVWF CompTempVarRet2224+D'1'
+0A00  0008  	RETURN
+0A01        ; } FC_CAL_Sample_ADC function end
+
+	ORG 0x00000A01
+0A01        FC_CAL_Ena_0005D
+0A01        ; { FC_CAL_Enable_ADC ; function begin
+0A01  085F  	MOVF FC_CAL_Ena_0005D_arg_Channel, W
+0A02  3A00  	XORLW 0x00
+0A03  1D03  	BTFSS STATUS,Z
+0A04  2A15  	GOTO	label201
+0A05  3001  	MOVLW 0x01
+0A06  00D0  	MOVWF gbl_tris_mask
+0A07  3000  	MOVLW HIGH(gbl_trisa+D'0')
+0A08  00C5  	MOVWF gbl_tris_reg+D'1'
+0A09  3085  	MOVLW LOW(gbl_trisa+D'0')
+0A0A  00C4  	MOVWF gbl_tris_reg
+0A0B  08E1  	MOVF FC_CAL_Ena_0005D_arg_Vref, F
+0A0C  1D03  	BTFSS STATUS,Z
+0A0D  2A12  	GOTO	label200
+0A0E  300E  	MOVLW 0x0E
+0A0F  1683  	BSF STATUS, RP0
+0A10  009F  	MOVWF gbl_adcon1
+0A11  2A15  	GOTO	label201
+0A12        label200
+0A12  3005  	MOVLW 0x05
+0A13  1683  	BSF STATUS, RP0
+0A14  009F  	MOVWF gbl_adcon1
+0A15        label201
+0A15  1283  	BCF STATUS, RP0
+0A16  0860  	MOVF FC_CAL_Ena_0005D_arg_Conv_Speed, W
+0A17  3C03  	SUBLW 0x03
+0A18  1803  	BTFSC STATUS,C
+0A19  2A1C  	GOTO	label202
+0A1A  1683  	BSF STATUS, RP0
+0A1B  171F  	BSF gbl_adcon1,6
+0A1C        label202
+0A1C  1383  	BCF STATUS,IRP
+0A1D  1283  	BCF STATUS, RP0
+0A1E  1845  	BTFSC gbl_tris_reg+D'1',0
+0A1F  1783  	BSF STATUS,IRP
+0A20  0844  	MOVF gbl_tris_reg, W
+0A21  0084  	MOVWF FSR
+0A22  0800  	MOVF INDF, W
+0A23  00CF  	MOVWF gbl_old_tris
+0A24  0850  	MOVF gbl_tris_mask, W
+0A25  044F  	IORWF gbl_old_tris, W
+0A26  00E3  	MOVWF CompTempVar2218
+0A27  0080  	MOVWF INDF
+0A28  0860  	MOVF FC_CAL_Ena_0005D_arg_Conv_Speed, W
+0A29  00E3  	MOVWF CompTempVar2219
+0A2A  01E4  	CLRF CompTempVar2220
+0A2B  0DE3  	RLF CompTempVar2219, F
+0A2C  0DE4  	RLF CompTempVar2220, F
+0A2D  0DE3  	RLF CompTempVar2219, F
+0A2E  0DE4  	RLF CompTempVar2220, F
+0A2F  0DE3  	RLF CompTempVar2219, F
+0A30  0DE4  	RLF CompTempVar2220, F
+0A31  0DE3  	RLF CompTempVar2219, F
+0A32  0DE4  	RLF CompTempVar2220, F
+0A33  0DE3  	RLF CompTempVar2219, F
+0A34  0DE4  	RLF CompTempVar2220, F
+0A35  0DE3  	RLF CompTempVar2219, F
+0A36  0DE4  	RLF CompTempVar2220, F
+0A37  30C0  	MOVLW 0xC0
+0A38  0563  	ANDWF CompTempVar2219, W
+0A39  3801  	IORLW 0x01
+0A3A  00E6  	MOVWF CompTempVar2223
+0A3B  085F  	MOVF FC_CAL_Ena_0005D_arg_Channel, W
+0A3C  00E5  	MOVWF CompTempVar2222
+0A3D  0DE5  	RLF CompTempVar2222, F
+0A3E  0DE5  	RLF CompTempVar2222, F
+0A3F  0DE5  	RLF CompTempVar2222, F
+0A40  30F8  	MOVLW 0xF8
+0A41  0565  	ANDWF CompTempVar2222, W
+0A42  0466  	IORWF CompTempVar2223, W
+0A43  009F  	MOVWF gbl_adcon0
+0A44  0862  	MOVF FC_CAL_Ena_0005D_arg_T_Charge, W
+0A45  00E3  	MOVWF delay_us_00000_arg_del
+0A46  118A  	BCF PCLATH,3
+0A47  204A  	CALL delay_us_00000
+0A48  0008  	RETURN
+0A49        ; } FC_CAL_Enable_ADC function end
+
+	ORG 0x00000A49
+0A49        FC_CAL_Dis_0005F
+0A49        ; { FC_CAL_Disable_ADC ; function begin
+0A49  1383  	BCF STATUS,IRP
+0A4A  1283  	BCF STATUS, RP0
+0A4B  1303  	BCF STATUS, RP1
+0A4C  1845  	BTFSC gbl_tris_reg+D'1',0
+0A4D  1783  	BSF STATUS,IRP
+0A4E  0844  	MOVF gbl_tris_reg, W
+0A4F  0084  	MOVWF FSR
+0A50  084F  	MOVF gbl_old_tris, W
+0A51  0080  	MOVWF INDF
+0A52  3007  	MOVLW 0x07
+0A53  1683  	BSF STATUS, RP0
+0A54  009F  	MOVWF gbl_adcon1
+0A55  1283  	BCF STATUS, RP0
+0A56  019F  	CLRF gbl_adcon0
+0A57  0008  	RETURN
+0A58        ; } FC_CAL_Disable_ADC function end
+
+	ORG 0x00000A58
+0A58        FCI_TOSTRI_00049
+0A58        ; { FCI_TOSTRING ; function begin
+0A58  08F4  	MOVF FCI_TOSTRI_00049_arg_iDst_len, F
+0A59  1D03  	BTFSS STATUS,Z
+0A5A  2A5D  	GOTO	label203
+0A5B  01F9  	CLRF CompTempVarRet2009
+0A5C  0008  	RETURN
+0A5D        label203
+0A5D  3010  	MOVLW 0x10
+0A5E  00F6  	MOVWF FCI_TOSTRI_00049_1_top
+0A5F  3027  	MOVLW 0x27
+0A60  00F7  	MOVWF FCI_TOSTRI_00049_1_top+D'1'
+0A61  01F8  	CLRF FCI_TOSTRI_00049_1_idx
+0A62  1FF1  	BTFSS FCI_TOSTRI_00049_arg_iSrc1+D'1',7
+0A63  2A74  	GOTO	label204
+0A64  1383  	BCF STATUS,IRP
+0A65  1873  	BTFSC FCI_TOSTRI_00049_arg_sDst+D'1',0
+0A66  1783  	BSF STATUS,IRP
+0A67  0872  	MOVF FCI_TOSTRI_00049_arg_sDst, W
+0A68  0084  	MOVWF FSR
+0A69  01FA  	CLRF CompTempVar2011
+0A6A  087A  	MOVF CompTempVar2011, W
+0A6B  0784  	ADDWF FSR, F
+0A6C  302D  	MOVLW 0x2D
+0A6D  0080  	MOVWF INDF
+0A6E  0AF8  	INCF FCI_TOSTRI_00049_1_idx, F
+0A6F  09F0  	COMF FCI_TOSTRI_00049_arg_iSrc1, F
+0A70  09F1  	COMF FCI_TOSTRI_00049_arg_iSrc1+D'1', F
+0A71  0AF0  	INCF FCI_TOSTRI_00049_arg_iSrc1, F
+0A72  1903  	BTFSC STATUS,Z
+0A73  0AF1  	INCF FCI_TOSTRI_00049_arg_iSrc1+D'1', F
+0A74        label204
+0A74  01F5  	CLRF FCI_TOSTRI_00049_1_tmp1
+0A75  08F0  	MOVF FCI_TOSTRI_00049_arg_iSrc1, F
+0A76  1D03  	BTFSS STATUS,Z
+0A77  2A7F  	GOTO	label205
+0A78  08F1  	MOVF FCI_TOSTRI_00049_arg_iSrc1+D'1', F
+0A79  1D03  	BTFSS STATUS,Z
+0A7A  2A7F  	GOTO	label205
+0A7B  3001  	MOVLW 0x01
+0A7C  00F5  	MOVWF FCI_TOSTRI_00049_1_tmp1
+0A7D  00F6  	MOVWF FCI_TOSTRI_00049_1_top
+0A7E  01F7  	CLRF FCI_TOSTRI_00049_1_top+D'1'
+0A7F        label205
+0A7F  0874  	MOVF FCI_TOSTRI_00049_arg_iDst_len, W
+0A80  0278  	SUBWF FCI_TOSTRI_00049_1_idx, W
+0A81  1803  	BTFSC STATUS,C
+0A82  2ADD  	GOTO	label210
+0A83  0876  	MOVF FCI_TOSTRI_00049_1_top, W
+0A84  3C00  	SUBLW 0x00
+0A85  1803  	BTFSC STATUS,C
+0A86  0877  	MOVF FCI_TOSTRI_00049_1_top+D'1', W
+0A87  1903  	BTFSC STATUS,Z
+0A88  2ADD  	GOTO	label210
+0A89  0877  	MOVF FCI_TOSTRI_00049_1_top+D'1', W
+0A8A  0271  	SUBWF FCI_TOSTRI_00049_arg_iSrc1+D'1', W
+0A8B  1D03  	BTFSS STATUS,Z
+0A8C  2A8F  	GOTO	label206
+0A8D  0876  	MOVF FCI_TOSTRI_00049_1_top, W
+0A8E  0270  	SUBWF FCI_TOSTRI_00049_arg_iSrc1, W
+0A8F        label206
+0A8F  1803  	BTFSC STATUS,C
+0A90  2A94  	GOTO	label207
+0A91  08F5  	MOVF FCI_TOSTRI_00049_1_tmp1, F
+0A92  1903  	BTFSC STATUS,Z
+0A93  2ACA  	GOTO	label209
+0A94        label207
+0A94  0870  	MOVF FCI_TOSTRI_00049_arg_iSrc1, W
+0A95  00FA  	MOVWF __div_16_1_00003_arg_a
+0A96  0871  	MOVF FCI_TOSTRI_00049_arg_iSrc1+D'1', W
+0A97  00FB  	MOVWF __div_16_1_00003_arg_a+D'1'
+0A98  0876  	MOVF FCI_TOSTRI_00049_1_top, W
+0A99  00FC  	MOVWF __div_16_1_00003_arg_b
+0A9A  0877  	MOVF FCI_TOSTRI_00049_1_top+D'1', W
+0A9B  00FD  	MOVWF __div_16_1_00003_arg_b+D'1'
+0A9C  118A  	BCF PCLATH,3
+0A9D  22E2  	CALL __div_16_1_00003
+0A9E  1683  	BSF STATUS, RP0
+0A9F  0822  	MOVF CompTempVarRet214, W
+0AA0  1283  	BCF STATUS, RP0
+0AA1  00F5  	MOVWF FCI_TOSTRI_00049_1_tmp1
+0AA2  0875  	MOVF FCI_TOSTRI_00049_1_tmp1, W
+0AA3  3E30  	ADDLW 0x30
+0AA4  00FA  	MOVWF CompTempVar2015
+0AA5  1383  	BCF STATUS,IRP
+0AA6  1873  	BTFSC FCI_TOSTRI_00049_arg_sDst+D'1',0
+0AA7  1783  	BSF STATUS,IRP
+0AA8  0872  	MOVF FCI_TOSTRI_00049_arg_sDst, W
+0AA9  0778  	ADDWF FCI_TOSTRI_00049_1_idx, W
+0AAA  0084  	MOVWF FSR
+0AAB  087A  	MOVF CompTempVar2015, W
+0AAC  0080  	MOVWF INDF
+0AAD  0AF8  	INCF FCI_TOSTRI_00049_1_idx, F
+0AAE  0875  	MOVF FCI_TOSTRI_00049_1_tmp1, W
+0AAF  00FA  	MOVWF __mul_16u__0000C_arg_a
+0AB0  01FB  	CLRF __mul_16u__0000C_arg_a+D'1'
+0AB1  0876  	MOVF FCI_TOSTRI_00049_1_top, W
+0AB2  00FC  	MOVWF __mul_16u__0000C_arg_b
+0AB3  0877  	MOVF FCI_TOSTRI_00049_1_top+D'1', W
+0AB4  00FD  	MOVWF __mul_16u__0000C_arg_b+D'1'
+0AB5  22C0  	CALL __mul_16u__0000C
+0AB6  0824  	MOVF CompTempVarRet455, W
+0AB7  1283  	BCF STATUS, RP0
+0AB8  00FE  	MOVWF CompTempVar2016
+0AB9  1683  	BSF STATUS, RP0
+0ABA  0825  	MOVF CompTempVarRet455+D'1', W
+0ABB  00A0  	MOVWF CompTempVar2017
+0ABC  1283  	BCF STATUS, RP0
+0ABD  087E  	MOVF CompTempVar2016, W
+0ABE  02F0  	SUBWF FCI_TOSTRI_00049_arg_iSrc1, F
+0ABF  1683  	BSF STATUS, RP0
+0AC0  0820  	MOVF CompTempVar2017, W
+0AC1  158A  	BSF PCLATH,3
+0AC2  1803  	BTFSC STATUS,C
+0AC3  2AC6  	GOTO	label208
+0AC4  1283  	BCF STATUS, RP0
+0AC5  03F1  	DECF FCI_TOSTRI_00049_arg_iSrc1+D'1', F
+0AC6        label208
+0AC6  1283  	BCF STATUS, RP0
+0AC7  02F1  	SUBWF FCI_TOSTRI_00049_arg_iSrc1+D'1', F
+0AC8  3001  	MOVLW 0x01
+0AC9  00F5  	MOVWF FCI_TOSTRI_00049_1_tmp1
+0ACA        label209
+0ACA  0876  	MOVF FCI_TOSTRI_00049_1_top, W
+0ACB  00FA  	MOVWF __div_16_1_00003_arg_a
+0ACC  0877  	MOVF FCI_TOSTRI_00049_1_top+D'1', W
+0ACD  00FB  	MOVWF __div_16_1_00003_arg_a+D'1'
+0ACE  300A  	MOVLW 0x0A
+0ACF  00FC  	MOVWF __div_16_1_00003_arg_b
+0AD0  01FD  	CLRF __div_16_1_00003_arg_b+D'1'
+0AD1  118A  	BCF PCLATH,3
+0AD2  22E2  	CALL __div_16_1_00003
+0AD3  1683  	BSF STATUS, RP0
+0AD4  0822  	MOVF CompTempVarRet214, W
+0AD5  1283  	BCF STATUS, RP0
+0AD6  00F6  	MOVWF FCI_TOSTRI_00049_1_top
+0AD7  1683  	BSF STATUS, RP0
+0AD8  0823  	MOVF CompTempVarRet214+D'1', W
+0AD9  1283  	BCF STATUS, RP0
+0ADA  00F7  	MOVWF FCI_TOSTRI_00049_1_top+D'1'
+0ADB  158A  	BSF PCLATH,3
+0ADC  2A7F  	GOTO	label205
+0ADD        label210
+0ADD  0874  	MOVF FCI_TOSTRI_00049_arg_iDst_len, W
+0ADE  0278  	SUBWF FCI_TOSTRI_00049_1_idx, W
+0ADF  1803  	BTFSC STATUS,C
+0AE0  2AE9  	GOTO	label211
+0AE1  1383  	BCF STATUS,IRP
+0AE2  1873  	BTFSC FCI_TOSTRI_00049_arg_sDst+D'1',0
+0AE3  1783  	BSF STATUS,IRP
+0AE4  0872  	MOVF FCI_TOSTRI_00049_arg_sDst, W
+0AE5  0778  	ADDWF FCI_TOSTRI_00049_1_idx, W
+0AE6  0084  	MOVWF FSR
+0AE7  3000  	MOVLW 0x00
+0AE8  0080  	MOVWF INDF
+0AE9        label211
+0AE9  0878  	MOVF FCI_TOSTRI_00049_1_idx, W
+0AEA  00F9  	MOVWF CompTempVarRet2009
+0AEB  0008  	RETURN
+0AEC        ; } FCI_TOSTRING function end
+
+	ORG 0x00000AEC
+0AEC        FCD_LCDDis_00056
+0AEC        ; { FCD_LCDDisplay0_Cursor ; function begin
+0AEC  08D5  	MOVF FCD_LCDDis_00056_arg_y, F
+0AED  1D03  	BTFSS STATUS,Z
+0AEE  2AF2  	GOTO	label212
+0AEF  3080  	MOVLW 0x80
+0AF0  00D5  	MOVWF FCD_LCDDis_00056_arg_y
+0AF1  2B01  	GOTO	label215
+0AF2        label212
+0AF2  0355  	DECF FCD_LCDDis_00056_arg_y, W
+0AF3  1D03  	BTFSS STATUS,Z
+0AF4  2AF8  	GOTO	label213
+0AF5  30C0  	MOVLW 0xC0
+0AF6  00D5  	MOVWF FCD_LCDDis_00056_arg_y
+0AF7  2B01  	GOTO	label215
+0AF8        label213
+0AF8  0855  	MOVF FCD_LCDDis_00056_arg_y, W
+0AF9  3A02  	XORLW 0x02
+0AFA  1D03  	BTFSS STATUS,Z
+0AFB  2AFF  	GOTO	label214
+0AFC  3090  	MOVLW 0x90
+0AFD  00D5  	MOVWF FCD_LCDDis_00056_arg_y
+0AFE  2B01  	GOTO	label215
+0AFF        label214
+0AFF  30D0  	MOVLW 0xD0
+0B00  00D5  	MOVWF FCD_LCDDis_00056_arg_y
+0B01        label215
+0B01  0854  	MOVF FCD_LCDDis_00056_arg_x, W
+0B02  0755  	ADDWF FCD_LCDDis_00056_arg_y, W
+0B03  00D8  	MOVWF FCD_LCDDis_00051_arg_in
+0B04  01D9  	CLRF FCD_LCDDis_00051_arg_mask
+0B05  118A  	BCF PCLATH,3
+0B06  2334  	CALL FCD_LCDDis_00051
+0B07  3002  	MOVLW 0x02
+0B08  00D6  	MOVWF Wdt_Delay__0003E_arg_delay
+0B09  2311  	CALL Wdt_Delay__0003E
+0B0A  0008  	RETURN
+0B0B        ; } FCD_LCDDisplay0_Cursor function end
+
+	ORG 0x00000B0B
+0B0B        FCI_FLOAT__0004D
+0B0B        ; { FCI_FLOAT_TO_STRING ; function begin
+0B0B  01DD  	CLRF FCI_FLOAT__0004D_1_stringidx
+0B0C  3003  	MOVLW 0x03
+0B0D  00C7  	MOVWF gbl_float_rounding_mode
+0B0E  0851  	MOVF FCI_FLOAT__0004D_arg_Number, W
+0B0F  00F0  	MOVWF float32_to_int32_arg_a
+0B10  0852  	MOVF FCI_FLOAT__0004D_arg_Number+D'1', W
+0B11  00F1  	MOVWF float32_to_int32_arg_a+D'1'
+0B12  0853  	MOVF FCI_FLOAT__0004D_arg_Number+D'2', W
+0B13  00F2  	MOVWF float32_to_int32_arg_a+D'2'
+0B14  0854  	MOVF FCI_FLOAT__0004D_arg_Number+D'3', W
+0B15  00F3  	MOVWF float32_to_int32_arg_a+D'3'
+0B16  118A  	BCF PCLATH,3
+0B17  2375  	CALL float32_to_int32
+0B18  087B  	MOVF CompTempVarRet710, W
+0B19  00D9  	MOVWF FCI_FLOAT__0004D_1_whole
+0B1A  087C  	MOVF CompTempVarRet710+D'1', W
+0B1B  00DA  	MOVWF FCI_FLOAT__0004D_1_whole+D'1'
+0B1C  0859  	MOVF FCI_FLOAT__0004D_1_whole, W
+0B1D  00F0  	MOVWF float32_from_int32_arg_a
+0B1E  085A  	MOVF FCI_FLOAT__0004D_1_whole+D'1', W
+0B1F  00F1  	MOVWF float32_from_int32_arg_a+D'1'
+0B20  01F2  	CLRF float32_from_int32_arg_a+D'2'
+0B21  01F3  	CLRF float32_from_int32_arg_a+D'3'
+0B22  158A  	BSF PCLATH,3
+0B23  1FDA  	BTFSS FCI_FLOAT__0004D_1_whole+D'1',7
+0B24  2B27  	GOTO	label216
+0B25  03F2  	DECF float32_from_int32_arg_a+D'2', F
+0B26  03F3  	DECF float32_from_int32_arg_a+D'3', F
+0B27        label216
+0B27  118A  	BCF PCLATH,3
+0B28  27F1  	CALL float32_from_int32
+0B29  0878  	MOVF CompTempVarRet673, W
+0B2A  00E2  	MOVWF FCI_FLOAT__0004D_1_temp
+0B2B  0879  	MOVF CompTempVarRet673+D'1', W
+0B2C  00E3  	MOVWF FCI_FLOAT__0004D_1_temp+D'1'
+0B2D  087A  	MOVF CompTempVarRet673+D'2', W
+0B2E  00E4  	MOVWF FCI_FLOAT__0004D_1_temp+D'2'
+0B2F  087B  	MOVF CompTempVarRet673+D'3', W
+0B30  00E5  	MOVWF FCI_FLOAT__0004D_1_temp+D'3'
+0B31  01F0  	CLRF float32_le_arg_a
+0B32  01F1  	CLRF float32_le_arg_a+D'1'
+0B33  01F2  	CLRF float32_le_arg_a+D'2'
+0B34  01F3  	CLRF float32_le_arg_a+D'3'
+0B35  0851  	MOVF FCI_FLOAT__0004D_arg_Number, W
+0B36  00F4  	MOVWF float32_le_arg_b
+0B37  0852  	MOVF FCI_FLOAT__0004D_arg_Number+D'1', W
+0B38  00F5  	MOVWF float32_le_arg_b+D'1'
+0B39  0853  	MOVF FCI_FLOAT__0004D_arg_Number+D'2', W
+0B3A  00F6  	MOVWF float32_le_arg_b+D'2'
+0B3B  0854  	MOVF FCI_FLOAT__0004D_arg_Number+D'3', W
+0B3C  00F7  	MOVWF float32_le_arg_b+D'3'
+0B3D  26B7  	CALL float32_le
+0B3E  08AF  	MOVF CompTempVarRet1586, F
+0B3F  158A  	BSF PCLATH,3
+0B40  1903  	BTFSC STATUS,Z
+0B41  2B67  	GOTO	label217
+0B42  1283  	BCF STATUS, RP0
+0B43  0851  	MOVF FCI_FLOAT__0004D_arg_Number, W
+0B44  00F0  	MOVWF float32_addsub_arg_a
+0B45  0852  	MOVF FCI_FLOAT__0004D_arg_Number+D'1', W
+0B46  00F1  	MOVWF float32_addsub_arg_a+D'1'
+0B47  0853  	MOVF FCI_FLOAT__0004D_arg_Number+D'2', W
+0B48  00F2  	MOVWF float32_addsub_arg_a+D'2'
+0B49  0854  	MOVF FCI_FLOAT__0004D_arg_Number+D'3', W
+0B4A  00F3  	MOVWF float32_addsub_arg_a+D'3'
+0B4B  0862  	MOVF FCI_FLOAT__0004D_1_temp, W
+0B4C  00F4  	MOVWF float32_addsub_arg_b
+0B4D  0863  	MOVF FCI_FLOAT__0004D_1_temp+D'1', W
+0B4E  00F5  	MOVWF float32_addsub_arg_b+D'1'
+0B4F  0864  	MOVF FCI_FLOAT__0004D_1_temp+D'2', W
+0B50  00F6  	MOVWF float32_addsub_arg_b+D'2'
+0B51  0865  	MOVF FCI_FLOAT__0004D_1_temp+D'3', W
+0B52  00F7  	MOVWF float32_addsub_arg_b+D'3'
+0B53  3001  	MOVLW 0x01
+0B54  00F8  	MOVWF float32_addsub_arg_subtract
+0B55  2049  	CALL float32_addsub
+0B56  0824  	MOVF CompTempVarRet879, W
+0B57  1283  	BCF STATUS, RP0
+0B58  00DE  	MOVWF FCI_FLOAT__0004D_1_real
+0B59  1683  	BSF STATUS, RP0
+0B5A  0825  	MOVF CompTempVarRet879+D'1', W
+0B5B  1283  	BCF STATUS, RP0
+0B5C  00DF  	MOVWF FCI_FLOAT__0004D_1_real+D'1'
+0B5D  1683  	BSF STATUS, RP0
+0B5E  0826  	MOVF CompTempVarRet879+D'2', W
+0B5F  1283  	BCF STATUS, RP0
+0B60  00E0  	MOVWF FCI_FLOAT__0004D_1_real+D'2'
+0B61  1683  	BSF STATUS, RP0
+0B62  0827  	MOVF CompTempVarRet879+D'3', W
+0B63  1283  	BCF STATUS, RP0
+0B64  00E1  	MOVWF FCI_FLOAT__0004D_1_real+D'3'
+0B65  158A  	BSF PCLATH,3
+0B66  2B9A  	GOTO	label219
+0B67        label217
+0B67  1283  	BCF STATUS, RP0
+0B68  08D9  	MOVF FCI_FLOAT__0004D_1_whole, F
+0B69  1D03  	BTFSS STATUS,Z
+0B6A  2B78  	GOTO	label218
+0B6B  08DA  	MOVF FCI_FLOAT__0004D_1_whole+D'1', F
+0B6C  1D03  	BTFSS STATUS,Z
+0B6D  2B78  	GOTO	label218
+0B6E  1383  	BCF STATUS,IRP
+0B6F  1857  	BTFSC FCI_FLOAT__0004D_arg_String+D'1',0
+0B70  1783  	BSF STATUS,IRP
+0B71  0856  	MOVF FCI_FLOAT__0004D_arg_String, W
+0B72  075D  	ADDWF FCI_FLOAT__0004D_1_stringidx, W
+0B73  0084  	MOVWF FSR
+0B74  302D  	MOVLW 0x2D
+0B75  0080  	MOVWF INDF
+0B76  0A5D  	INCF FCI_FLOAT__0004D_1_stringidx, W
+0B77  00DD  	MOVWF FCI_FLOAT__0004D_1_stringidx
+0B78        label218
+0B78  0862  	MOVF FCI_FLOAT__0004D_1_temp, W
+0B79  00F0  	MOVWF float32_addsub_arg_a
+0B7A  0863  	MOVF FCI_FLOAT__0004D_1_temp+D'1', W
+0B7B  00F1  	MOVWF float32_addsub_arg_a+D'1'
+0B7C  0864  	MOVF FCI_FLOAT__0004D_1_temp+D'2', W
+0B7D  00F2  	MOVWF float32_addsub_arg_a+D'2'
+0B7E  0865  	MOVF FCI_FLOAT__0004D_1_temp+D'3', W
+0B7F  00F3  	MOVWF float32_addsub_arg_a+D'3'
+0B80  0851  	MOVF FCI_FLOAT__0004D_arg_Number, W
+0B81  00F4  	MOVWF float32_addsub_arg_b
+0B82  0852  	MOVF FCI_FLOAT__0004D_arg_Number+D'1', W
+0B83  00F5  	MOVWF float32_addsub_arg_b+D'1'
+0B84  0853  	MOVF FCI_FLOAT__0004D_arg_Number+D'2', W
+0B85  00F6  	MOVWF float32_addsub_arg_b+D'2'
+0B86  0854  	MOVF FCI_FLOAT__0004D_arg_Number+D'3', W
+0B87  00F7  	MOVWF float32_addsub_arg_b+D'3'
+0B88  3001  	MOVLW 0x01
+0B89  00F8  	MOVWF float32_addsub_arg_subtract
+0B8A  2049  	CALL float32_addsub
+0B8B  0824  	MOVF CompTempVarRet879, W
+0B8C  1283  	BCF STATUS, RP0
+0B8D  00DE  	MOVWF FCI_FLOAT__0004D_1_real
+0B8E  1683  	BSF STATUS, RP0
+0B8F  0825  	MOVF CompTempVarRet879+D'1', W
+0B90  1283  	BCF STATUS, RP0
+0B91  00DF  	MOVWF FCI_FLOAT__0004D_1_real+D'1'
+0B92  1683  	BSF STATUS, RP0
+0B93  0826  	MOVF CompTempVarRet879+D'2', W
+0B94  1283  	BCF STATUS, RP0
+0B95  00E0  	MOVWF FCI_FLOAT__0004D_1_real+D'2'
+0B96  1683  	BSF STATUS, RP0
+0B97  0827  	MOVF CompTempVarRet879+D'3', W
+0B98  1283  	BCF STATUS, RP0
+0B99  00E1  	MOVWF FCI_FLOAT__0004D_1_real+D'3'
+0B9A        label219
+0B9A  0859  	MOVF FCI_FLOAT__0004D_1_whole, W
+0B9B  00F0  	MOVWF FCI_TOSTRI_00049_arg_iSrc1
+0B9C  085A  	MOVF FCI_FLOAT__0004D_1_whole+D'1', W
+0B9D  00F1  	MOVWF FCI_TOSTRI_00049_arg_iSrc1+D'1'
+0B9E  3000  	MOVLW HIGH(FCI_FLOAT__0004D_1_temp_string+D'0')
+0B9F  00F3  	MOVWF FCI_TOSTRI_00049_arg_sDst+D'1'
+0BA0  3066  	MOVLW LOW(FCI_FLOAT__0004D_1_temp_string+D'0')
+0BA1  00F2  	MOVWF FCI_TOSTRI_00049_arg_sDst
+0BA2  3005  	MOVLW 0x05
+0BA3  00F4  	MOVWF FCI_TOSTRI_00049_arg_iDst_len
+0BA4  158A  	BSF PCLATH,3
+0BA5  2258  	CALL FCI_TOSTRI_00049
+0BA6  0879  	MOVF CompTempVarRet2009, W
+0BA7  00DB  	MOVWF FCI_FLOAT__0004D_1_str_length
+0BA8  01DC  	CLRF FCI_FLOAT__0004D_1_idx
+0BA9        label220
+0BA9  085B  	MOVF FCI_FLOAT__0004D_1_str_length, W
+0BAA  025C  	SUBWF FCI_FLOAT__0004D_1_idx, W
+0BAB  1803  	BTFSC STATUS,C
+0BAC  2BC6  	GOTO	label222
+0BAD  0858  	MOVF FCI_FLOAT__0004D_arg_MSZ_String, W
+0BAE  025D  	SUBWF FCI_FLOAT__0004D_1_stringidx, W
+0BAF  1803  	BTFSC STATUS,C
+0BB0  2BC4  	GOTO	label221
+0BB1  1383  	BCF	STATUS,IRP
+0BB2  3066  	MOVLW LOW(FCI_FLOAT__0004D_1_temp_string+D'0')
+0BB3  0084  	MOVWF FSR
+0BB4  085C  	MOVF FCI_FLOAT__0004D_1_idx, W
+0BB5  00F0  	MOVWF CompTempVar2032
+0BB6  0870  	MOVF CompTempVar2032, W
+0BB7  0784  	ADDWF FSR, F
+0BB8  0800  	MOVF INDF, W
+0BB9  00F1  	MOVWF CompTempVar2033
+0BBA  1383  	BCF STATUS,IRP
+0BBB  1857  	BTFSC FCI_FLOAT__0004D_arg_String+D'1',0
+0BBC  1783  	BSF STATUS,IRP
+0BBD  0856  	MOVF FCI_FLOAT__0004D_arg_String, W
+0BBE  075D  	ADDWF FCI_FLOAT__0004D_1_stringidx, W
+0BBF  0084  	MOVWF FSR
+0BC0  0871  	MOVF CompTempVar2033, W
+0BC1  0080  	MOVWF INDF
+0BC2  0A5D  	INCF FCI_FLOAT__0004D_1_stringidx, W
+0BC3  00DD  	MOVWF FCI_FLOAT__0004D_1_stringidx
+0BC4        label221
+0BC4  0ADC  	INCF FCI_FLOAT__0004D_1_idx, F
+0BC5  2BA9  	GOTO	label220
+0BC6        label222
+0BC6  0858  	MOVF FCI_FLOAT__0004D_arg_MSZ_String, W
+0BC7  025D  	SUBWF FCI_FLOAT__0004D_1_stringidx, W
+0BC8  1803  	BTFSC STATUS,C
+0BC9  2BD4  	GOTO	label223
+0BCA  1383  	BCF STATUS,IRP
+0BCB  1857  	BTFSC FCI_FLOAT__0004D_arg_String+D'1',0
+0BCC  1783  	BSF STATUS,IRP
+0BCD  0856  	MOVF FCI_FLOAT__0004D_arg_String, W
+0BCE  075D  	ADDWF FCI_FLOAT__0004D_1_stringidx, W
+0BCF  0084  	MOVWF FSR
+0BD0  302E  	MOVLW 0x2E
+0BD1  0080  	MOVWF INDF
+0BD2  0A5D  	INCF FCI_FLOAT__0004D_1_stringidx, W
+0BD3  00DD  	MOVWF FCI_FLOAT__0004D_1_stringidx
+0BD4        label223
+0BD4  01DC  	CLRF FCI_FLOAT__0004D_1_idx
+0BD5        label224
+0BD5  0855  	MOVF FCI_FLOAT__0004D_arg_Precision, W
+0BD6  025C  	SUBWF FCI_FLOAT__0004D_1_idx, W
+0BD7  1803  	BTFSC STATUS,C
+0BD8  2C51  	GOTO	label226
+0BD9  0858  	MOVF FCI_FLOAT__0004D_arg_MSZ_String, W
+0BDA  025D  	SUBWF FCI_FLOAT__0004D_1_stringidx, W
+0BDB  1803  	BTFSC STATUS,C
+0BDC  2C51  	GOTO	label226
+0BDD  085E  	MOVF FCI_FLOAT__0004D_1_real, W
+0BDE  00F0  	MOVWF float32_mul_arg_a
+0BDF  085F  	MOVF FCI_FLOAT__0004D_1_real+D'1', W
+0BE0  00F1  	MOVWF float32_mul_arg_a+D'1'
+0BE1  0860  	MOVF FCI_FLOAT__0004D_1_real+D'2', W
+0BE2  00F2  	MOVWF float32_mul_arg_a+D'2'
+0BE3  0861  	MOVF FCI_FLOAT__0004D_1_real+D'3', W
+0BE4  00F3  	MOVWF float32_mul_arg_a+D'3'
+0BE5  01F4  	CLRF float32_mul_arg_b
+0BE6  01F5  	CLRF float32_mul_arg_b+D'1'
+0BE7  3020  	MOVLW 0x20
+0BE8  00F6  	MOVWF float32_mul_arg_b+D'2'
+0BE9  3041  	MOVLW 0x41
+0BEA  00F7  	MOVWF float32_mul_arg_b+D'3'
+0BEB  118A  	BCF PCLATH,3
+0BEC  254F  	CALL float32_mul
+0BED  0824  	MOVF CompTempVarRet927, W
+0BEE  1283  	BCF STATUS, RP0
+0BEF  00DE  	MOVWF FCI_FLOAT__0004D_1_real
+0BF0  1683  	BSF STATUS, RP0
+0BF1  0825  	MOVF CompTempVarRet927+D'1', W
+0BF2  1283  	BCF STATUS, RP0
+0BF3  00DF  	MOVWF FCI_FLOAT__0004D_1_real+D'1'
+0BF4  1683  	BSF STATUS, RP0
+0BF5  0826  	MOVF CompTempVarRet927+D'2', W
+0BF6  1283  	BCF STATUS, RP0
+0BF7  00E0  	MOVWF FCI_FLOAT__0004D_1_real+D'2'
+0BF8  1683  	BSF STATUS, RP0
+0BF9  0827  	MOVF CompTempVarRet927+D'3', W
+0BFA  1283  	BCF STATUS, RP0
+0BFB  00E1  	MOVWF FCI_FLOAT__0004D_1_real+D'3'
+0BFC  085E  	MOVF FCI_FLOAT__0004D_1_real, W
+0BFD  00F0  	MOVWF float32_to_int32_arg_a
+0BFE  085F  	MOVF FCI_FLOAT__0004D_1_real+D'1', W
+0BFF  00F1  	MOVWF float32_to_int32_arg_a+D'1'
+0C00  0860  	MOVF FCI_FLOAT__0004D_1_real+D'2', W
+0C01  00F2  	MOVWF float32_to_int32_arg_a+D'2'
+0C02  0861  	MOVF FCI_FLOAT__0004D_1_real+D'3', W
+0C03  00F3  	MOVWF float32_to_int32_arg_a+D'3'
+0C04  2375  	CALL float32_to_int32
+0C05  087B  	MOVF CompTempVarRet710, W
+0C06  00D9  	MOVWF FCI_FLOAT__0004D_1_whole
+0C07  087C  	MOVF CompTempVarRet710+D'1', W
+0C08  00DA  	MOVWF FCI_FLOAT__0004D_1_whole+D'1'
+0C09  0859  	MOVF FCI_FLOAT__0004D_1_whole, W
+0C0A  00F0  	MOVWF float32_from_int32_arg_a
+0C0B  085A  	MOVF FCI_FLOAT__0004D_1_whole+D'1', W
+0C0C  00F1  	MOVWF float32_from_int32_arg_a+D'1'
+0C0D  01F2  	CLRF float32_from_int32_arg_a+D'2'
+0C0E  01F3  	CLRF float32_from_int32_arg_a+D'3'
+0C0F  158A  	BSF PCLATH,3
+0C10  1FDA  	BTFSS FCI_FLOAT__0004D_1_whole+D'1',7
+0C11  2C14  	GOTO	label225
+0C12  03F2  	DECF float32_from_int32_arg_a+D'2', F
+0C13  03F3  	DECF float32_from_int32_arg_a+D'3', F
+0C14        label225
+0C14  118A  	BCF PCLATH,3
+0C15  27F1  	CALL float32_from_int32
+0C16  0878  	MOVF CompTempVarRet673, W
+0C17  00E2  	MOVWF FCI_FLOAT__0004D_1_temp
+0C18  0879  	MOVF CompTempVarRet673+D'1', W
+0C19  00E3  	MOVWF FCI_FLOAT__0004D_1_temp+D'1'
+0C1A  087A  	MOVF CompTempVarRet673+D'2', W
+0C1B  00E4  	MOVWF FCI_FLOAT__0004D_1_temp+D'2'
+0C1C  087B  	MOVF CompTempVarRet673+D'3', W
+0C1D  00E5  	MOVWF FCI_FLOAT__0004D_1_temp+D'3'
+0C1E  085E  	MOVF FCI_FLOAT__0004D_1_real, W
+0C1F  00F0  	MOVWF float32_addsub_arg_a
+0C20  085F  	MOVF FCI_FLOAT__0004D_1_real+D'1', W
+0C21  00F1  	MOVWF float32_addsub_arg_a+D'1'
+0C22  0860  	MOVF FCI_FLOAT__0004D_1_real+D'2', W
+0C23  00F2  	MOVWF float32_addsub_arg_a+D'2'
+0C24  0861  	MOVF FCI_FLOAT__0004D_1_real+D'3', W
+0C25  00F3  	MOVWF float32_addsub_arg_a+D'3'
+0C26  0862  	MOVF FCI_FLOAT__0004D_1_temp, W
+0C27  00F4  	MOVWF float32_addsub_arg_b
+0C28  0863  	MOVF FCI_FLOAT__0004D_1_temp+D'1', W
+0C29  00F5  	MOVWF float32_addsub_arg_b+D'1'
+0C2A  0864  	MOVF FCI_FLOAT__0004D_1_temp+D'2', W
+0C2B  00F6  	MOVWF float32_addsub_arg_b+D'2'
+0C2C  0865  	MOVF FCI_FLOAT__0004D_1_temp+D'3', W
+0C2D  00F7  	MOVWF float32_addsub_arg_b+D'3'
+0C2E  3001  	MOVLW 0x01
+0C2F  00F8  	MOVWF float32_addsub_arg_subtract
+0C30  158A  	BSF PCLATH,3
+0C31  2049  	CALL float32_addsub
+0C32  0824  	MOVF CompTempVarRet879, W
+0C33  1283  	BCF STATUS, RP0
+0C34  00DE  	MOVWF FCI_FLOAT__0004D_1_real
+0C35  1683  	BSF STATUS, RP0
+0C36  0825  	MOVF CompTempVarRet879+D'1', W
+0C37  1283  	BCF STATUS, RP0
+0C38  00DF  	MOVWF FCI_FLOAT__0004D_1_real+D'1'
+0C39  1683  	BSF STATUS, RP0
+0C3A  0826  	MOVF CompTempVarRet879+D'2', W
+0C3B  1283  	BCF STATUS, RP0
+0C3C  00E0  	MOVWF FCI_FLOAT__0004D_1_real+D'2'
+0C3D  1683  	BSF STATUS, RP0
+0C3E  0827  	MOVF CompTempVarRet879+D'3', W
+0C3F  1283  	BCF STATUS, RP0
+0C40  00E1  	MOVWF FCI_FLOAT__0004D_1_real+D'3'
+0C41  0859  	MOVF FCI_FLOAT__0004D_1_whole, W
+0C42  3E30  	ADDLW 0x30
+0C43  00F0  	MOVWF CompTempVar2037
+0C44  1383  	BCF STATUS,IRP
+0C45  1857  	BTFSC FCI_FLOAT__0004D_arg_String+D'1',0
+0C46  1783  	BSF STATUS,IRP
+0C47  0856  	MOVF FCI_FLOAT__0004D_arg_String, W
+0C48  075D  	ADDWF FCI_FLOAT__0004D_1_stringidx, W
+0C49  0084  	MOVWF FSR
+0C4A  0870  	MOVF CompTempVar2037, W
+0C4B  0080  	MOVWF INDF
+0C4C  0A5D  	INCF FCI_FLOAT__0004D_1_stringidx, W
+0C4D  00DD  	MOVWF FCI_FLOAT__0004D_1_stringidx
+0C4E  0ADC  	INCF FCI_FLOAT__0004D_1_idx, F
+0C4F  158A  	BSF PCLATH,3
+0C50  2BD5  	GOTO	label224
+0C51        label226
+0C51  0858  	MOVF FCI_FLOAT__0004D_arg_MSZ_String, W
+0C52  025D  	SUBWF FCI_FLOAT__0004D_1_stringidx, W
+0C53  1803  	BTFSC STATUS,C
+0C54  2C5D  	GOTO	label227
+0C55  1383  	BCF STATUS,IRP
+0C56  1857  	BTFSC FCI_FLOAT__0004D_arg_String+D'1',0
+0C57  1783  	BSF STATUS,IRP
+0C58  0856  	MOVF FCI_FLOAT__0004D_arg_String, W
+0C59  075D  	ADDWF FCI_FLOAT__0004D_1_stringidx, W
+0C5A  0084  	MOVWF FSR
+0C5B  3000  	MOVLW 0x00
+0C5C  0080  	MOVWF INDF
+0C5D        label227
+0C5D  085D  	MOVF FCI_FLOAT__0004D_1_stringidx, W
+0C5E  00F0  	MOVWF CompTempVarRet2026
+0C5F  0008  	RETURN
+0C60        ; } FCI_FLOAT_TO_STRING function end
+
+	ORG 0x00000C60
+0C60        FCD_LCDDis_0005B
+0C60        ; { FCD_LCDDisplay0_ClearLine ; function begin
+0C60  3010  	MOVLW 0x10
+0C61  00D3  	MOVWF FCD_LCDDis_0005B_1_rowcount
+0C62  01D4  	CLRF FCD_LCDDis_00056_arg_x
+0C63  0851  	MOVF FCD_LCDDis_0005B_arg_Line, W
+0C64  00D5  	MOVWF FCD_LCDDis_00056_arg_y
+0C65  22EC  	CALL FCD_LCDDis_00056
+0C66  01D2  	CLRF FCD_LCDDis_0005B_1_count
+0C67        label228
+0C67  0853  	MOVF FCD_LCDDis_0005B_1_rowcount, W
+0C68  0252  	SUBWF FCD_LCDDis_0005B_1_count, W
+0C69  158A  	BSF PCLATH,3
+0C6A  1803  	BTFSC STATUS,C
+0C6B  2C75  	GOTO	label229
+0C6C  3020  	MOVLW 0x20
+0C6D  00D8  	MOVWF FCD_LCDDis_00051_arg_in
+0C6E  3010  	MOVLW 0x10
+0C6F  00D9  	MOVWF FCD_LCDDis_00051_arg_mask
+0C70  118A  	BCF PCLATH,3
+0C71  2334  	CALL FCD_LCDDis_00051
+0C72  0AD2  	INCF FCD_LCDDis_0005B_1_count, F
+0C73  158A  	BSF PCLATH,3
+0C74  2C67  	GOTO	label228
+0C75        label229
+0C75  01D4  	CLRF FCD_LCDDis_00056_arg_x
+0C76  0851  	MOVF FCD_LCDDis_0005B_arg_Line, W
+0C77  00D5  	MOVWF FCD_LCDDis_00056_arg_y
+0C78  22EC  	CALL FCD_LCDDis_00056
+0C79  0008  	RETURN
+0C7A        ; } FCD_LCDDisplay0_ClearLine function end
+
+	ORG 0x00000C7A
+0C7A        FCD_LCDDis_00058
+0C7A        ; { FCD_LCDDisplay0_PrintString ; function begin
+0C7A  01D7  	CLRF FCD_LCDDis_00058_1_idx
+0C7B  01D7  	CLRF FCD_LCDDis_00058_1_idx
+0C7C        label230
+0C7C  0856  	MOVF FCD_LCDDis_00058_arg_MSZ_String, W
+0C7D  0257  	SUBWF FCD_LCDDis_00058_1_idx, W
+0C7E  1803  	BTFSC STATUS,C
+0C7F  0008  	RETURN
+0C80  1383  	BCF STATUS,IRP
+0C81  1852  	BTFSC FCD_LCDDis_00058_arg_String+D'1',0
+0C82  1783  	BSF STATUS,IRP
+0C83  0851  	MOVF FCD_LCDDis_00058_arg_String, W
+0C84  0757  	ADDWF FCD_LCDDis_00058_1_idx, W
+0C85  0084  	MOVWF FSR
+0C86  0880  	MOVF INDF, F
+0C87  1903  	BTFSC STATUS,Z
+0C88  0008  	RETURN
+0C89  1383  	BCF STATUS,IRP
+0C8A  1852  	BTFSC FCD_LCDDis_00058_arg_String+D'1',0
+0C8B  1783  	BSF STATUS,IRP
+0C8C  0851  	MOVF FCD_LCDDis_00058_arg_String, W
+0C8D  0757  	ADDWF FCD_LCDDis_00058_1_idx, W
+0C8E  0084  	MOVWF FSR
+0C8F  0800  	MOVF INDF, W
+0C90  00D8  	MOVWF FCD_LCDDis_00051_arg_in
+0C91  3010  	MOVLW 0x10
+0C92  00D9  	MOVWF FCD_LCDDis_00051_arg_mask
+0C93  118A  	BCF PCLATH,3
+0C94  2334  	CALL FCD_LCDDis_00051
+0C95  0AD7  	INCF FCD_LCDDis_00058_1_idx, F
+0C96  158A  	BSF PCLATH,3
+0C97  2C7C  	GOTO	label230
+0C98        ; } FCD_LCDDisplay0_PrintString function end
+
+	ORG 0x00000C98
+0C98        FCD_LCDDis_00053
+0C98        ; { FCD_LCDDisplay0_Clear ; function begin
+0C98  3001  	MOVLW 0x01
+0C99  1283  	BCF STATUS, RP0
+0C9A  1303  	BCF STATUS, RP1
+0C9B  00D8  	MOVWF FCD_LCDDis_00051_arg_in
+0C9C  01D9  	CLRF FCD_LCDDis_00051_arg_mask
+0C9D  118A  	BCF PCLATH,3
+0C9E  2334  	CALL FCD_LCDDis_00051
+0C9F  3002  	MOVLW 0x02
+0CA0  00D6  	MOVWF Wdt_Delay__0003E_arg_delay
+0CA1  2311  	CALL Wdt_Delay__0003E
+0CA2  3002  	MOVLW 0x02
+0CA3  00D8  	MOVWF FCD_LCDDis_00051_arg_in
+0CA4  01D9  	CLRF FCD_LCDDis_00051_arg_mask
+0CA5  2334  	CALL FCD_LCDDis_00051
+0CA6  3002  	MOVLW 0x02
+0CA7  00D6  	MOVWF Wdt_Delay__0003E_arg_delay
+0CA8  2311  	CALL Wdt_Delay__0003E
+0CA9  0008  	RETURN
+0CAA        ; } FCD_LCDDisplay0_Clear function end
+
+	ORG 0x00000CAA
+0CAA        FCD_LCDDis_00052
+0CAA        ; { FCD_LCDDisplay0_Start ; function begin
+0CAA  1683  	BSF STATUS, RP0
+0CAB  1303  	BCF STATUS, RP1
+0CAC  1107  	BCF gbl_trisc,2
+0CAD  1283  	BCF STATUS, RP0
+0CAE  1107  	BCF gbl_portc,2
+0CAF  1683  	BSF STATUS, RP0
+0CB0  1187  	BCF gbl_trisc,3
+0CB1  1283  	BCF STATUS, RP0
+0CB2  1187  	BCF gbl_portc,3
+0CB3  1683  	BSF STATUS, RP0
+0CB4  1207  	BCF gbl_trisc,4
+0CB5  1283  	BCF STATUS, RP0
+0CB6  1207  	BCF gbl_portc,4
+0CB7  1683  	BSF STATUS, RP0
+0CB8  1287  	BCF gbl_trisc,5
+0CB9  1283  	BCF STATUS, RP0
+0CBA  1287  	BCF gbl_portc,5
+0CBB  1683  	BSF STATUS, RP0
+0CBC  1007  	BCF gbl_trisc,0
+0CBD  1283  	BCF STATUS, RP0
+0CBE  1007  	BCF gbl_portc,0
+0CBF  1683  	BSF STATUS, RP0
+0CC0  1087  	BCF gbl_trisc,1
+0CC1  1283  	BCF STATUS, RP0
+0CC2  1087  	BCF gbl_portc,1
+0CC3  300C  	MOVLW 0x0C
+0CC4  00D6  	MOVWF Wdt_Delay__0003E_arg_delay
+0CC5  118A  	BCF PCLATH,3
+0CC6  2311  	CALL Wdt_Delay__0003E
+0CC7  3033  	MOVLW 0x33
+0CC8  00D8  	MOVWF FCD_LCDDis_00051_arg_in
+0CC9  01D9  	CLRF FCD_LCDDis_00051_arg_mask
+0CCA  2334  	CALL FCD_LCDDis_00051
+0CCB  3002  	MOVLW 0x02
+0CCC  00D6  	MOVWF Wdt_Delay__0003E_arg_delay
+0CCD  2311  	CALL Wdt_Delay__0003E
+0CCE  3033  	MOVLW 0x33
+0CCF  00D8  	MOVWF FCD_LCDDis_00051_arg_in
+0CD0  01D9  	CLRF FCD_LCDDis_00051_arg_mask
+0CD1  2334  	CALL FCD_LCDDis_00051
+0CD2  3002  	MOVLW 0x02
+0CD3  00D6  	MOVWF Wdt_Delay__0003E_arg_delay
+0CD4  2311  	CALL Wdt_Delay__0003E
+0CD5  3032  	MOVLW 0x32
+0CD6  00D8  	MOVWF FCD_LCDDis_00051_arg_in
+0CD7  01D9  	CLRF FCD_LCDDis_00051_arg_mask
+0CD8  2334  	CALL FCD_LCDDis_00051
+0CD9  3002  	MOVLW 0x02
+0CDA  00D6  	MOVWF Wdt_Delay__0003E_arg_delay
+0CDB  2311  	CALL Wdt_Delay__0003E
+0CDC  302C  	MOVLW 0x2C
+0CDD  00D8  	MOVWF FCD_LCDDis_00051_arg_in
+0CDE  01D9  	CLRF FCD_LCDDis_00051_arg_mask
+0CDF  2334  	CALL FCD_LCDDis_00051
+0CE0  3002  	MOVLW 0x02
+0CE1  00D6  	MOVWF Wdt_Delay__0003E_arg_delay
+0CE2  2311  	CALL Wdt_Delay__0003E
+0CE3  3006  	MOVLW 0x06
+0CE4  00D8  	MOVWF FCD_LCDDis_00051_arg_in
+0CE5  01D9  	CLRF FCD_LCDDis_00051_arg_mask
+0CE6  2334  	CALL FCD_LCDDis_00051
+0CE7  3002  	MOVLW 0x02
+0CE8  00D6  	MOVWF Wdt_Delay__0003E_arg_delay
+0CE9  2311  	CALL Wdt_Delay__0003E
+0CEA  300C  	MOVLW 0x0C
+0CEB  00D8  	MOVWF FCD_LCDDis_00051_arg_in
+0CEC  01D9  	CLRF FCD_LCDDis_00051_arg_mask
+0CED  2334  	CALL FCD_LCDDis_00051
+0CEE  3002  	MOVLW 0x02
+0CEF  00D6  	MOVWF Wdt_Delay__0003E_arg_delay
+0CF0  2311  	CALL Wdt_Delay__0003E
+0CF1  3001  	MOVLW 0x01
+0CF2  00D8  	MOVWF FCD_LCDDis_00051_arg_in
+0CF3  01D9  	CLRF FCD_LCDDis_00051_arg_mask
+0CF4  2334  	CALL FCD_LCDDis_00051
+0CF5  3002  	MOVLW 0x02
+0CF6  00D6  	MOVWF Wdt_Delay__0003E_arg_delay
+0CF7  2311  	CALL Wdt_Delay__0003E
+0CF8  3002  	MOVLW 0x02
+0CF9  00D8  	MOVWF FCD_LCDDis_00051_arg_in
+0CFA  01D9  	CLRF FCD_LCDDis_00051_arg_mask
+0CFB  2334  	CALL FCD_LCDDis_00051
+0CFC  3002  	MOVLW 0x02
+0CFD  00D6  	MOVWF Wdt_Delay__0003E_arg_delay
+0CFE  2311  	CALL Wdt_Delay__0003E
+0CFF  0008  	RETURN
+0D00        ; } FCD_LCDDisplay0_Start function end
+
+	ORG 0x00000D00
+0D00        FCD_ADC0_R_00063
+0D00        ; { FCD_ADC0_ReadAsVoltage ; function begin
+0D00  1283  	BCF STATUS, RP0
+0D01  1303  	BCF STATUS, RP1
+0D02  01DF  	CLRF FC_CAL_Ena_0005D_arg_Channel
+0D03  3001  	MOVLW 0x01
+0D04  00E0  	MOVWF FC_CAL_Ena_0005D_arg_Conv_Speed
+0D05  01E1  	CLRF FC_CAL_Ena_0005D_arg_Vref
+0D06  3028  	MOVLW 0x28
+0D07  00E2  	MOVWF FC_CAL_Ena_0005D_arg_T_Charge
+0D08  2201  	CALL FC_CAL_Ena_0005D
+0D09  3001  	MOVLW 0x01
+0D0A  00DF  	MOVWF FC_CAL_Sam_0005E_arg_Sample_Mode
+0D0B  158A  	BSF PCLATH,3
+0D0C  21DD  	CALL FC_CAL_Sam_0005E
+0D0D  0862  	MOVF CompTempVarRet2224, W
+0D0E  00D1  	MOVWF FCD_ADC0_R_00063_1_iSample
+0D0F  0863  	MOVF CompTempVarRet2224+D'1', W
+0D10  00D2  	MOVWF FCD_ADC0_R_00063_1_iSample+D'1'
+0D11  2249  	CALL FC_CAL_Dis_0005F
+0D12  30F4  	MOVLW 0xF4
+0D13  00F0  	MOVWF float32_from_int32_arg_a
+0D14  3001  	MOVLW 0x01
+0D15  00F1  	MOVWF float32_from_int32_arg_a+D'1'
+0D16  01F2  	CLRF float32_from_int32_arg_a+D'2'
+0D17  01F3  	CLRF float32_from_int32_arg_a+D'3'
+0D18  118A  	BCF PCLATH,3
+0D19  27F1  	CALL float32_from_int32
+0D1A  0878  	MOVF CompTempVarRet673, W
+0D1B  00D7  	MOVWF FCD_ADC0_R_00063_1_fVoltage
+0D1C  0879  	MOVF CompTempVarRet673+D'1', W
+0D1D  00D8  	MOVWF FCD_ADC0_R_00063_1_fVoltage+D'1'
+0D1E  087A  	MOVF CompTempVarRet673+D'2', W
+0D1F  00D9  	MOVWF FCD_ADC0_R_00063_1_fVoltage+D'2'
+0D20  087B  	MOVF CompTempVarRet673+D'3', W
+0D21  00DA  	MOVWF FCD_ADC0_R_00063_1_fVoltage+D'3'
+0D22  0857  	MOVF FCD_ADC0_R_00063_1_fVoltage, W
+0D23  00F0  	MOVWF float32_mul_arg_a
+0D24  0858  	MOVF FCD_ADC0_R_00063_1_fVoltage+D'1', W
+0D25  00F1  	MOVWF float32_mul_arg_a+D'1'
+0D26  0859  	MOVF FCD_ADC0_R_00063_1_fVoltage+D'2', W
+0D27  00F2  	MOVWF float32_mul_arg_a+D'2'
+0D28  085A  	MOVF FCD_ADC0_R_00063_1_fVoltage+D'3', W
+0D29  00F3  	MOVWF float32_mul_arg_a+D'3'
+0D2A  300A  	MOVLW 0x0A
+0D2B  00F4  	MOVWF float32_mul_arg_b
+0D2C  30D7  	MOVLW 0xD7
+0D2D  00F5  	MOVWF float32_mul_arg_b+D'1'
+0D2E  3023  	MOVLW 0x23
+0D2F  00F6  	MOVWF float32_mul_arg_b+D'2'
+0D30  303C  	MOVLW 0x3C
+0D31  00F7  	MOVWF float32_mul_arg_b+D'3'
+0D32  254F  	CALL float32_mul
+0D33  0824  	MOVF CompTempVarRet927, W
+0D34  1283  	BCF STATUS, RP0
+0D35  00D7  	MOVWF FCD_ADC0_R_00063_1_fVoltage
+0D36  1683  	BSF STATUS, RP0
+0D37  0825  	MOVF CompTempVarRet927+D'1', W
+0D38  1283  	BCF STATUS, RP0
+0D39  00D8  	MOVWF FCD_ADC0_R_00063_1_fVoltage+D'1'
+0D3A  1683  	BSF STATUS, RP0
+0D3B  0826  	MOVF CompTempVarRet927+D'2', W
+0D3C  1283  	BCF STATUS, RP0
+0D3D  00D9  	MOVWF FCD_ADC0_R_00063_1_fVoltage+D'2'
+0D3E  1683  	BSF STATUS, RP0
+0D3F  0827  	MOVF CompTempVarRet927+D'3', W
+0D40  1283  	BCF STATUS, RP0
+0D41  00DA  	MOVWF FCD_ADC0_R_00063_1_fVoltage+D'3'
+0D42  0857  	MOVF FCD_ADC0_R_00063_1_fVoltage, W
+0D43  00F0  	MOVWF float32_mul_arg_a
+0D44  0858  	MOVF FCD_ADC0_R_00063_1_fVoltage+D'1', W
+0D45  00F1  	MOVWF float32_mul_arg_a+D'1'
+0D46  0859  	MOVF FCD_ADC0_R_00063_1_fVoltage+D'2', W
+0D47  00F2  	MOVWF float32_mul_arg_a+D'2'
+0D48  085A  	MOVF FCD_ADC0_R_00063_1_fVoltage+D'3', W
+0D49  00F3  	MOVWF float32_mul_arg_a+D'3'
+0D4A  3040  	MOVLW 0x40
+0D4B  00F4  	MOVWF float32_mul_arg_b
+0D4C  30DA  	MOVLW 0xDA
+0D4D  00F5  	MOVWF float32_mul_arg_b+D'1'
+0D4E  307F  	MOVLW 0x7F
+0D4F  00F6  	MOVWF float32_mul_arg_b+D'2'
+0D50  303A  	MOVLW 0x3A
+0D51  00F7  	MOVWF float32_mul_arg_b+D'3'
+0D52  254F  	CALL float32_mul
+0D53  0824  	MOVF CompTempVarRet927, W
+0D54  1283  	BCF STATUS, RP0
+0D55  00DB  	MOVWF FCD_ADC0_R_00063_1_fVperDiv
+0D56  1683  	BSF STATUS, RP0
+0D57  0825  	MOVF CompTempVarRet927+D'1', W
+0D58  1283  	BCF STATUS, RP0
+0D59  00DC  	MOVWF FCD_ADC0_R_00063_1_fVperDiv+D'1'
+0D5A  1683  	BSF STATUS, RP0
+0D5B  0826  	MOVF CompTempVarRet927+D'2', W
+0D5C  1283  	BCF STATUS, RP0
+0D5D  00DD  	MOVWF FCD_ADC0_R_00063_1_fVperDiv+D'2'
+0D5E  1683  	BSF STATUS, RP0
+0D5F  0827  	MOVF CompTempVarRet927+D'3', W
+0D60  1283  	BCF STATUS, RP0
+0D61  00DE  	MOVWF FCD_ADC0_R_00063_1_fVperDiv+D'3'
+0D62  0851  	MOVF FCD_ADC0_R_00063_1_iSample, W
+0D63  00F0  	MOVWF float32_from_int32_arg_a
+0D64  0852  	MOVF FCD_ADC0_R_00063_1_iSample+D'1', W
+0D65  00F1  	MOVWF float32_from_int32_arg_a+D'1'
+0D66  01F2  	CLRF float32_from_int32_arg_a+D'2'
+0D67  01F3  	CLRF float32_from_int32_arg_a+D'3'
+0D68  27F1  	CALL float32_from_int32
+0D69  0878  	MOVF CompTempVarRet673, W
+0D6A  00D3  	MOVWF FCD_ADC0_R_00063_1_fSample
+0D6B  0879  	MOVF CompTempVarRet673+D'1', W
+0D6C  00D4  	MOVWF FCD_ADC0_R_00063_1_fSample+D'1'
+0D6D  087A  	MOVF CompTempVarRet673+D'2', W
+0D6E  00D5  	MOVWF FCD_ADC0_R_00063_1_fSample+D'2'
+0D6F  087B  	MOVF CompTempVarRet673+D'3', W
+0D70  00D6  	MOVWF FCD_ADC0_R_00063_1_fSample+D'3'
+0D71  0853  	MOVF FCD_ADC0_R_00063_1_fSample, W
+0D72  00F0  	MOVWF float32_mul_arg_a
+0D73  0854  	MOVF FCD_ADC0_R_00063_1_fSample+D'1', W
+0D74  00F1  	MOVWF float32_mul_arg_a+D'1'
+0D75  0855  	MOVF FCD_ADC0_R_00063_1_fSample+D'2', W
+0D76  00F2  	MOVWF float32_mul_arg_a+D'2'
+0D77  0856  	MOVF FCD_ADC0_R_00063_1_fSample+D'3', W
+0D78  00F3  	MOVWF float32_mul_arg_a+D'3'
+0D79  085B  	MOVF FCD_ADC0_R_00063_1_fVperDiv, W
+0D7A  00F4  	MOVWF float32_mul_arg_b
+0D7B  085C  	MOVF FCD_ADC0_R_00063_1_fVperDiv+D'1', W
+0D7C  00F5  	MOVWF float32_mul_arg_b+D'1'
+0D7D  085D  	MOVF FCD_ADC0_R_00063_1_fVperDiv+D'2', W
+0D7E  00F6  	MOVWF float32_mul_arg_b+D'2'
+0D7F  085E  	MOVF FCD_ADC0_R_00063_1_fVperDiv+D'3', W
+0D80  00F7  	MOVWF float32_mul_arg_b+D'3'
+0D81  254F  	CALL float32_mul
+0D82  0824  	MOVF CompTempVarRet927, W
+0D83  1283  	BCF STATUS, RP0
+0D84  00D7  	MOVWF FCD_ADC0_R_00063_1_fVoltage
+0D85  1683  	BSF STATUS, RP0
+0D86  0825  	MOVF CompTempVarRet927+D'1', W
+0D87  1283  	BCF STATUS, RP0
+0D88  00D8  	MOVWF FCD_ADC0_R_00063_1_fVoltage+D'1'
+0D89  1683  	BSF STATUS, RP0
+0D8A  0826  	MOVF CompTempVarRet927+D'2', W
+0D8B  1283  	BCF STATUS, RP0
+0D8C  00D9  	MOVWF FCD_ADC0_R_00063_1_fVoltage+D'2'
+0D8D  1683  	BSF STATUS, RP0
+0D8E  0827  	MOVF CompTempVarRet927+D'3', W
+0D8F  1283  	BCF STATUS, RP0
+0D90  00DA  	MOVWF FCD_ADC0_R_00063_1_fVoltage+D'3'
+0D91  0857  	MOVF FCD_ADC0_R_00063_1_fVoltage, W
+0D92  00DF  	MOVWF CompTempVarRet2232
+0D93  0858  	MOVF FCD_ADC0_R_00063_1_fVoltage+D'1', W
+0D94  00E0  	MOVWF CompTempVarRet2232+D'1'
+0D95  0859  	MOVF FCD_ADC0_R_00063_1_fVoltage+D'2', W
+0D96  00E1  	MOVWF CompTempVarRet2232+D'2'
+0D97  085A  	MOVF FCD_ADC0_R_00063_1_fVoltage+D'3', W
+0D98  00E2  	MOVWF CompTempVarRet2232+D'3'
+0D99  0008  	RETURN
+0D9A        ; } FCD_ADC0_ReadAsVoltage function end
+
+	ORG 0x00000D9A
+0D9A        main
+0D9A        ; { main ; function begin
+0D9A  3007  	MOVLW 0x07
+0D9B  1683  	BSF STATUS, RP0
+0D9C  1303  	BCF STATUS, RP1
+0D9D  009F  	MOVWF gbl_adcon1
+0D9E  30C0  	MOVLW 0xC0
+0D9F  0081  	MOVWF gbl_option_reg
+0DA0  24AA  	CALL FCD_LCDDis_00052
+0DA1  158A  	BSF PCLATH,3
+0DA2  2498  	CALL FCD_LCDDis_00053
+0DA3        label231
+0DA3  01D1  	CLRF FCD_LCDDis_0005B_arg_Line
+0DA4  158A  	BSF PCLATH,3
+0DA5  2460  	CALL FCD_LCDDis_0005B
+0DA6  01D4  	CLRF FCD_LCDDis_00056_arg_x
+0DA7  01D5  	CLRF FCD_LCDDis_00056_arg_y
+0DA8  158A  	BSF PCLATH,3
+0DA9  22EC  	CALL FCD_LCDDis_00056
+0DAA  3056  	MOVLW 0x56
+0DAB  00D3  	MOVWF CompTempVar2258
+0DAC  303A  	MOVLW 0x3A
+0DAD  00D4  	MOVWF CompTempVar2258+D'1'
+0DAE  01D5  	CLRF CompTempVar2258+D'2'
+0DAF  3000  	MOVLW HIGH(CompTempVar2258+D'0')
+0DB0  00D2  	MOVWF FCD_LCDDis_00058_arg_String+D'1'
+0DB1  3053  	MOVLW LOW(CompTempVar2258+D'0')
+0DB2  00D1  	MOVWF FCD_LCDDis_00058_arg_String
+0DB3  3002  	MOVLW 0x02
+0DB4  00D6  	MOVWF FCD_LCDDis_00058_arg_MSZ_String
+0DB5  158A  	BSF PCLATH,3
+0DB6  247A  	CALL FCD_LCDDis_00058
+0DB7  2500  	CALL FCD_ADC0_R_00063
+0DB8  085F  	MOVF CompTempVarRet2232, W
+0DB9  00B9  	MOVWF gbl_FCV_VIN
+0DBA  0860  	MOVF CompTempVarRet2232+D'1', W
+0DBB  00BA  	MOVWF gbl_FCV_VIN+D'1'
+0DBC  0861  	MOVF CompTempVarRet2232+D'2', W
+0DBD  00BB  	MOVWF gbl_FCV_VIN+D'2'
+0DBE  0862  	MOVF CompTempVarRet2232+D'3', W
+0DBF  00BC  	MOVWF gbl_FCV_VIN+D'3'
+0DC0  0839  	MOVF gbl_FCV_VIN, W
+0DC1  00D1  	MOVWF FCI_FLOAT__0004D_arg_Number
+0DC2  083A  	MOVF gbl_FCV_VIN+D'1', W
+0DC3  00D2  	MOVWF FCI_FLOAT__0004D_arg_Number+D'1'
+0DC4  083B  	MOVF gbl_FCV_VIN+D'2', W
+0DC5  00D3  	MOVWF FCI_FLOAT__0004D_arg_Number+D'2'
+0DC6  083C  	MOVF gbl_FCV_VIN+D'3', W
+0DC7  00D4  	MOVWF FCI_FLOAT__0004D_arg_Number+D'3'
+0DC8  3006  	MOVLW 0x06
+0DC9  00D5  	MOVWF FCI_FLOAT__0004D_arg_Precision
+0DCA  3000  	MOVLW HIGH(gbl_FCV_V_AN0+D'0')
+0DCB  00D7  	MOVWF FCI_FLOAT__0004D_arg_String+D'1'
+0DCC  3020  	MOVLW LOW(gbl_FCV_V_AN0+D'0')
+0DCD  00D6  	MOVWF FCI_FLOAT__0004D_arg_String
+0DCE  3005  	MOVLW 0x05
+0DCF  00D8  	MOVWF FCI_FLOAT__0004D_arg_MSZ_String
+0DD0  158A  	BSF PCLATH,3
+0DD1  230B  	CALL FCI_FLOAT__0004D
+0DD2  3000  	MOVLW HIGH(gbl_FCV_V_AN0+D'0')
+0DD3  00D2  	MOVWF FCD_LCDDis_00058_arg_String+D'1'
+0DD4  3020  	MOVLW LOW(gbl_FCV_V_AN0+D'0')
+0DD5  00D1  	MOVWF FCD_LCDDis_00058_arg_String
+0DD6  3005  	MOVLW 0x05
+0DD7  00D6  	MOVWF FCD_LCDDis_00058_arg_MSZ_String
+0DD8  247A  	CALL FCD_LCDDis_00058
+0DD9  3064  	MOVLW 0x64
+0DDA  00D8  	MOVWF delay_ms_00000_arg_del
+0DDB  118A  	BCF PCLATH,3
+0DDC  2010  	CALL delay_ms_00000
+0DDD  158A  	BSF PCLATH,3
+0DDE  2DA3  	GOTO	label231
+0DDF        ; } main function end
+
+	ORG 0x00000DDF
+0DDF        _startup
+0DDF  30D5  	MOVLW 0xD5
+0DE0  1283  	BCF STATUS, RP0
+0DE1  1303  	BCF STATUS, RP1
+0DE2  00A5  	MOVWF gbl_14_LSR
+0DE3  30C4  	MOVLW 0xC4
+0DE4  00A6  	MOVWF gbl_14_LSR+D'1'
+0DE5  30BB  	MOVLW 0xBB
+0DE6  00A7  	MOVWF gbl_14_LSR+D'2'
+0DE7  30DC  	MOVLW 0xDC
+0DE8  00A8  	MOVWF gbl_14_LSR+D'3'
+0DE9  01A9  	CLRF gbl_15_gbl_aSig
+0DEA  01AA  	CLRF gbl_15_gbl_aSig+D'1'
+0DEB  01AB  	CLRF gbl_15_gbl_aSig+D'2'
+0DEC  01AC  	CLRF gbl_15_gbl_aSig+D'3'
+0DED  01AD  	CLRF gbl_15_gbl_bSig
+0DEE  01AE  	CLRF gbl_15_gbl_bSig+D'1'
+0DEF  01AF  	CLRF gbl_15_gbl_bSig+D'2'
+0DF0  01B0  	CLRF gbl_15_gbl_bSig+D'3'
+0DF1  01B1  	CLRF gbl_15_gbl_zSig
+0DF2  01B2  	CLRF gbl_15_gbl_zSig+D'1'
+0DF3  01B3  	CLRF gbl_15_gbl_zSig+D'2'
+0DF4  01B4  	CLRF gbl_15_gbl_zSig+D'3'
+0DF5  01C9  	CLRF gbl_15_gbl_aExp
+0DF6  01CA  	CLRF gbl_15_gbl_bExp
+0DF7  01C0  	CLRF gbl_15_gbl_zExp
+0DF8  01C1  	CLRF gbl_15_gbl_zExp+D'1'
+0DF9  01CB  	CLRF gbl_15_gbl_aSign
+0DFA  01CC  	CLRF gbl_15_gbl_bSign
+0DFB  01CD  	CLRF gbl_15_gbl_zSign
+0DFC  01CE  	CLRF gbl_15_gbl_zSigZero
+0DFD  01B5  	CLRF gbl_15_gbl_ret
+0DFE  01B6  	CLRF gbl_15_gbl_ret+D'1'
+0DFF  01B7  	CLRF gbl_15_gbl_ret+D'2'
+0E00  01B8  	CLRF gbl_15_gbl_ret+D'3'
+0E01  01C7  	CLRF gbl_float_rounding_mode
+0E02  01C8  	CLRF gbl_float_exception_flags
+0E03  01C6  	CLRF gbl_float_detect_tininess
+0E04  01C2  	CLRF gbl_FCV_ADC
+0E05  01C3  	CLRF gbl_FCV_ADC+D'1'
+0E06  158A  	BSF PCLATH,3
+0E07  120A  	BCF PCLATH,4
+0E08  2D9A  	GOTO	main
+	ORG 0x00000E09
+0E09        interrupt
+0E09        ; { interrupt ; function begin
+0E09  1283  	BCF STATUS, RP0
+0E0A  1303  	BCF STATUS, RP1
+0E0B  0E3F  	SWAPF Int1BContext+D'2', W
+0E0C  0084  	MOVWF FSR
+0E0D  0E3E  	SWAPF Int1BContext+D'1', W
+0E0E  008A  	MOVWF PCLATH
+0E0F  0E3D  	SWAPF Int1BContext, W
+0E10  0083  	MOVWF STATUS
+0E11  0EFF  	SWAPF Int1Context, F
+0E12  0E7F  	SWAPF Int1Context, W
+0E13  0009  	RETFIE
+0E14        ; } interrupt function end
+
+	ORG 0x00002007
+2007  3F32  	DW 0x3F32

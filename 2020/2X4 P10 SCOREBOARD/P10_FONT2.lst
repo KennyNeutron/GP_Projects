@@ -1,0 +1,539 @@
+MPASM  5.51                     P10_FONT2.ASM   4-15-2020  11:11:55         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[205]: Found directive in column 1. (ORG)
+                      00001 ORG 0X6000
+                      00002 
+006000                00003 FONT2_0
+006000 0E00           00004                         MOVLW   0
+Error[113]  : Symbol not previously defined (PCLATU)
+006002 6E00           00005                         MOVWF   PCLATU,0
+006004 0E60           00006                         MOVLW   0X60
+Error[113]  : Symbol not previously defined (PCLATH)
+006006 6E00           00007                         MOVWF   PCLATH,0
+                      00008 
+Error[113]  : Symbol not previously defined (BTCOUNT)
+Error[113]  : Symbol not previously defined (WREG)
+006008 C000 F000      00009                         MOVFF   BTCOUNT,WREG
+Error[113]  : Symbol not previously defined (C)
+Error[113]  : Symbol not previously defined (STATUS)
+00600C 9000           00010                         BCF             STATUS,C
+Error[113]  : Symbol not previously defined (WREG)
+00600E 3600           00011                         RLCF    WREG
+                      00012 
+                      00013                 
+Error[113]  : Symbol not previously defined (PCL)
+006010 2600           00014                         ADDWF   PCL,1,0
+006012 0CFF 0CFF      00015                         DT      B'11111111',B'11111111'
+006016 0CC0 0CFF      00016                         DT      B'11000000',B'11111111'
+00601A 0C80 0C7F      00017                         DT      B'10000000',B'01111111'
+00601E 0C1E 0C3F      00018                         DT      B'00011110',B'00111111'
+006022 0C3F 0C3F      00019                         DT      B'00111111',B'00111111'
+006026 0C3F 0C3F      00020                         DT      B'00111111',B'00111111'
+00602A 0C3F 0C3F      00021                         DT      B'00111111',B'00111111'
+00602E 0C3F 0C3F      00022                         DT      B'00111111',B'00111111'
+006032 0C3F 0C3F      00023                         DT      B'00111111',B'00111111'
+006036 0C3F 0C3F      00024                         DT      B'00111111',B'00111111'
+00603A 0C3F 0C3F      00025                         DT      B'00111111',B'00111111'
+00603E 0C3F 0C3F      00026                         DT      B'00111111',B'00111111'
+006042 0C3F 0C3F      00027                         DT      B'00111111',B'00111111'
+006046 0C1E 0C3F      00028                         DT      B'00011110',B'00111111'
+00604A 0C80 0C7F      00029                         DT      B'10000000',B'01111111'
+00604E 0CC0 0CFF      00030                         DT      B'11000000',B'11111111'
+                      00031 
+                      00032 
+                      00033 
+                      00034 
+                      00035 
+Warning[205]: Found directive in column 1. (ORG)
+                      00036 ORG     0X6100
+                      00037 
+006100                00038 FONT2_1
+006100 0E00           00039                         MOVLW   0
+Error[113]  : Symbol not previously defined (PCLATU)
+006102 6E00           00040                         MOVWF   PCLATU,0
+006104 0E61           00041                         MOVLW   0X61
+Error[113]  : Symbol not previously defined (PCLATH)
+MPASM  5.51                     P10_FONT2.ASM   4-15-2020  11:11:55         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+006106 6E00           00042                         MOVWF   PCLATH,0
+                      00043 
+Error[113]  : Symbol not previously defined (BTCOUNT)
+Error[113]  : Symbol not previously defined (WREG)
+006108 C000 F000      00044                         MOVFF   BTCOUNT,WREG
+Error[113]  : Symbol not previously defined (C)
+Error[113]  : Symbol not previously defined (STATUS)
+00610C 9000           00045                         BCF             STATUS,C
+Error[113]  : Symbol not previously defined (WREG)
+00610E 3600           00046                         RLCF    WREG
+                      00047 
+                      00048                 
+Error[113]  : Symbol not previously defined (PCL)
+006110 2600           00049                         ADDWF   PCL,1,0
+006112 0CFF 0CFF      00050                         DT      B'11111111',B'11111111';BTC=00
+006116 0CE7 0CFF      00051                         DT      B'11100111',B'11111111';BTC=01
+00611A 0CE7 0CFF      00052                         DT      B'11100111',B'11111111';BTC=02
+00611E 0CC7 0CFF      00053                         DT      B'11000111',B'11111111';BTC=03
+006122 0C87 0CFF      00054                         DT      B'10000111',B'11111111';BTC=04
+006126 0C27 0CFF      00055                         DT      B'00100111',B'11111111';BTC=05
+00612A 0CE7 0CFF      00056                         DT      B'11100111',B'11111111';BTC=06
+00612E 0CE7 0CFF      00057                         DT      B'11100111',B'11111111';BTC=07
+006132 0CE7 0CFF      00058                         DT      B'11100111',B'11111111';BTC=08
+006136 0CE7 0CFF      00059                         DT      B'11100111',B'11111111';BTC=09
+00613A 0CE7 0CFF      00060                         DT      B'11100111',B'11111111';BTC=0A
+00613E 0CE7 0CFF      00061                         DT      B'11100111',B'11111111';BTC=0B
+006142 0CE7 0CFF      00062                         DT      B'11100111',B'11111111';BTC=0C
+006146 0CE7 0CFF      00063                         DT      B'11100111',B'11111111';BTC=0D
+00614A 0C00 0CFF      00064                         DT      B'00000000',B'11111111';BTC=0E
+00614E 0C00 0CFF      00065                         DT      B'00000000',B'11111111';BTC=0F
+                      00066 
+                      00067 
+                      00068 
+                      00069 
+Warning[205]: Found directive in column 1. (ORG)
+                      00070 ORG     0X6200
+                      00071 
+006200                00072 FONT2_2
+006200 0E00           00073                         MOVLW   0
+Error[113]  : Symbol not previously defined (PCLATU)
+006202 6E00           00074                         MOVWF   PCLATU,0
+006204 0E62           00075                         MOVLW   0X62
+Error[113]  : Symbol not previously defined (PCLATH)
+006206 6E00           00076                         MOVWF   PCLATH,0
+                      00077 
+Error[113]  : Symbol not previously defined (BTCOUNT)
+Error[113]  : Symbol not previously defined (WREG)
+006208 C000 F000      00078                         MOVFF   BTCOUNT,WREG
+Error[113]  : Symbol not previously defined (C)
+Error[113]  : Symbol not previously defined (STATUS)
+00620C 9000           00079                         BCF             STATUS,C
+Error[113]  : Symbol not previously defined (WREG)
+00620E 3600           00080                         RLCF    WREG
+MPASM  5.51                     P10_FONT2.ASM   4-15-2020  11:11:55         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00081 
+                      00082                 
+Error[113]  : Symbol not previously defined (PCL)
+006210 2600           00083                         ADDWF   PCL,1,0
+006212 0CFF 0CFF      00084                         DT      B'11111111',B'11111111' ;BTC=0F
+006216 0CC0 0CFF      00085                         DT      B'11000000',B'11111111' ;BTC=00
+00621A 0C80 0C7F      00086                         DT      B'10000000',B'01111111' ;BTC=01
+00621E 0C3E 0C3F      00087                         DT      B'00111110',B'00111111' ;BTC=02
+006222 0CFF 0C3F      00088                         DT      B'11111111',B'00111111' ;BTC=03
+006226 0CFF 0C3F      00089                         DT      B'11111111',B'00111111' ;BTC=04
+00622A 0CFF 0C3F      00090                         DT      B'11111111',B'00111111' ;BTC=05
+00622E 0CFE 0C3F      00091                         DT      B'11111110',B'00111111' ;BTC=06
+006232 0CC0 0C7F      00092                         DT      B'11000000',B'01111111' ;BTC=07
+006236 0C80 0CFF      00093                         DT      B'10000000',B'11111111' ;BTC=08
+00623A 0C1F 0CFF      00094                         DT      B'00011111',B'11111111' ;BTC=09
+00623E 0C3F 0CFF      00095                         DT      B'00111111',B'11111111' ;BTC=0A
+006242 0C3F 0CFF      00096                         DT      B'00111111',B'11111111' ;BTC=0B
+006246 0C3F 0C3F      00097                         DT      B'00111111',B'00111111' ;BTC=0C
+00624A 0C00 0C3F      00098                         DT      B'00000000',B'00111111' ;BTC=0D
+00624E 0C00 0C3F      00099                         DT      B'00000000',B'00111111' ;BTC=0E
+                      00100 
+                      00101 
+                      00102 
+Warning[205]: Found directive in column 1. (ORG)
+                      00103 ORG     0X6300
+                      00104 
+006300                00105 FONT2_3
+006300 0E00           00106                         MOVLW   0
+Error[113]  : Symbol not previously defined (PCLATU)
+006302 6E00           00107                         MOVWF   PCLATU,0
+006304 0E63           00108                         MOVLW   0X63
+Error[113]  : Symbol not previously defined (PCLATH)
+006306 6E00           00109                         MOVWF   PCLATH,0
+                      00110 
+Error[113]  : Symbol not previously defined (BTCOUNT)
+Error[113]  : Symbol not previously defined (WREG)
+006308 C000 F000      00111                         MOVFF   BTCOUNT,WREG
+Error[113]  : Symbol not previously defined (C)
+Error[113]  : Symbol not previously defined (STATUS)
+00630C 9000           00112                         BCF             STATUS,C
+Error[113]  : Symbol not previously defined (WREG)
+00630E 3600           00113                         RLCF    WREG
+                      00114 
+                      00115                 
+Error[113]  : Symbol not previously defined (PCL)
+006310 2600           00116                         ADDWF   PCL,1,0
+006312 0CFF 0CFF      00117                         DT      B'11111111',B'11111111' ;BTC=0F
+006316 0CC0 0CFF      00118                         DT      B'11000000',B'11111111' ;BTC=00
+00631A 0C80 0C7F      00119                         DT      B'10000000',B'01111111' ;BTC=01
+00631E 0C1E 0C3F      00120                         DT      B'00011110',B'00111111' ;BTC=02
+006322 0C3F 0C3F      00121                         DT      B'00111111',B'00111111' ;BTC=03
+006326 0CFF 0C3F      00122                         DT      B'11111111',B'00111111' ;BTC=04
+00632A 0CFF 0C3F      00123                         DT      B'11111111',B'00111111' ;BTC=05
+MPASM  5.51                     P10_FONT2.ASM   4-15-2020  11:11:55         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00632E 0CFE 0C3F      00124                         DT      B'11111110',B'00111111' ;BTC=06
+006332 0CE0 0C7F      00125                         DT      B'11100000',B'01111111' ;BTC=07
+006336 0CE0 0C7F      00126                         DT      B'11100000',B'01111111' ;BTC=08
+00633A 0CFE 0C3F      00127                         DT      B'11111110',B'00111111' ;BTC=09
+00633E 0CFF 0C3F      00128                         DT      B'11111111',B'00111111' ;BTC=0A
+006342 0C3F 0C3F      00129                         DT      B'00111111',B'00111111' ;BTC=0B
+006346 0C1E 0C3F      00130                         DT      B'00011110',B'00111111' ;BTC=0C
+00634A 0C80 0C7F      00131                         DT      B'10000000',B'01111111' ;BTC=0D
+00634E 0CC0 0CFF      00132                         DT      B'11000000',B'11111111' ;BTC=0E
+                      00133 
+                      00134 
+                      00135 
+                      00136 
+                      00137 
+Warning[205]: Found directive in column 1. (ORG)
+                      00138 ORG     0X6400
+                      00139 
+006400                00140 FONT2_4
+006400 0E00           00141                         MOVLW   0
+Error[113]  : Symbol not previously defined (PCLATU)
+006402 6E00           00142                         MOVWF   PCLATU,0
+006404 0E64           00143                         MOVLW   0X64
+Error[113]  : Symbol not previously defined (PCLATH)
+006406 6E00           00144                         MOVWF   PCLATH,0
+                      00145 
+Error[113]  : Symbol not previously defined (BTCOUNT)
+Error[113]  : Symbol not previously defined (WREG)
+006408 C000 F000      00146                         MOVFF   BTCOUNT,WREG
+Error[113]  : Symbol not previously defined (C)
+Error[113]  : Symbol not previously defined (STATUS)
+00640C 9000           00147                         BCF             STATUS,C
+Error[113]  : Symbol not previously defined (WREG)
+00640E 3600           00148                         RLCF    WREG
+                      00149 
+                      00150                 
+Error[113]  : Symbol not previously defined (PCL)
+006410 2600           00151                         ADDWF   PCL,1,0
+006412 0CFF 0CFF      00152                         DT      B'11111111',B'11111111' ;BTC=0F
+006416 0CFF 0CBF      00153                         DT      B'11111111',B'10111111' ;BTC=00
+00641A 0CFD 0C3F      00154                         DT      B'11111101',B'00111111' ;BTC=01
+00641E 0CF9 0C3F      00155                         DT      B'11111001',B'00111111' ;BTC=02
+006422 0CF9 0C3F      00156                         DT      B'11111001',B'00111111' ;BTC=03
+006426 0CF3 0C3F      00157                         DT      B'11110011',B'00111111' ;BTC=04
+00642A 0CE7 0C3F      00158                         DT      B'11100111',B'00111111' ;BTC=05
+00642E 0CCF 0C3F      00159                         DT      B'11001111',B'00111111' ;BTC=06
+006432 0C9F 0C3F      00160                         DT      B'10011111',B'00111111' ;BTC=07
+006436 0C3F 0C3F      00161                         DT      B'00111111',B'00111111' ;BTC=08
+00643A 0C00 0C3F      00162                         DT      B'00000000',B'00111111' ;BTC=09
+00643E 0C00 0C3F      00163                         DT      B'00000000',B'00111111' ;BTC=0A
+006442 0CFF 0C3F      00164                         DT      B'11111111',B'00111111' ;BTC=0B
+006446 0CFF 0C3F      00165                         DT      B'11111111',B'00111111' ;BTC=0C
+00644A 0CFF 0C3F      00166                         DT      B'11111111',B'00111111' ;BTC=0D
+00644E 0CFF 0C7F      00167                         DT      B'11111111',B'01111111' ;BTC=0E
+MPASM  5.51                     P10_FONT2.ASM   4-15-2020  11:11:55         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00168 
+                      00169 
+                      00170 
+Warning[205]: Found directive in column 1. (ORG)
+                      00171 ORG     0X6500
+                      00172 
+006500                00173 FONT2_5
+006500 0E00           00174                         MOVLW   0
+Error[113]  : Symbol not previously defined (PCLATU)
+006502 6E00           00175                         MOVWF   PCLATU,0
+006504 0E65           00176                         MOVLW   0X65
+Error[113]  : Symbol not previously defined (PCLATH)
+006506 6E00           00177                         MOVWF   PCLATH,0
+                      00178 
+Error[113]  : Symbol not previously defined (BTCOUNT)
+Error[113]  : Symbol not previously defined (WREG)
+006508 C000 F000      00179                         MOVFF   BTCOUNT,WREG
+Error[113]  : Symbol not previously defined (C)
+Error[113]  : Symbol not previously defined (STATUS)
+00650C 9000           00180                         BCF             STATUS,C
+Error[113]  : Symbol not previously defined (WREG)
+00650E 3600           00181                         RLCF    WREG
+                      00182 
+                      00183                 
+Error[113]  : Symbol not previously defined (PCL)
+006510 2600           00184                         ADDWF   PCL,1,0
+006512 0CFF 0CFF      00185                         DT      B'11111111',B'11111111' ;BTC=0F
+006516 0C00 0C3F      00186                         DT      B'00000000',B'00111111' ;BTC=00
+00651A 0C00 0C3F      00187                         DT      B'00000000',B'00111111' ;BTC=01
+00651E 0C3F 0C7F      00188                         DT      B'00111111',B'01111111' ;BTC=02
+006522 0C3F 0CFF      00189                         DT      B'00111111',B'11111111' ;BTC=03
+006526 0C3F 0CFF      00190                         DT      B'00111111',B'11111111' ;BTC=04
+00652A 0C3F 0CFF      00191                         DT      B'00111111',B'11111111' ;BTC=05
+00652E 0C00 0CFF      00192                         DT      B'00000000',B'11111111' ;BTC=06
+006532 0C00 0C7F      00193                         DT      B'00000000',B'01111111' ;BTC=07
+006536 0CFE 0C3F      00194                         DT      B'11111110',B'00111111' ;BTC=08
+00653A 0CFF 0C3F      00195                         DT      B'11111111',B'00111111' ;BTC=09
+00653E 0CFF 0C3F      00196                         DT      B'11111111',B'00111111' ;BTC=0A
+006542 0C3F 0C3F      00197                         DT      B'00111111',B'00111111' ;BTC=0B
+006546 0C1E 0C3F      00198                         DT      B'00011110',B'00111111' ;BTC=0C
+00654A 0C80 0C7F      00199                         DT      B'10000000',B'01111111' ;BTC=0D
+00654E 0CC0 0CFF      00200                         DT      B'11000000',B'11111111' ;BTC=0E
+                      00201 
+                      00202 
+Warning[205]: Found directive in column 1. (ORG)
+                      00203 ORG     0X6600
+                      00204 
+006600                00205 FONT2_6
+006600 0E00           00206                         MOVLW   0
+Error[113]  : Symbol not previously defined (PCLATU)
+006602 6E00           00207                         MOVWF   PCLATU,0
+006604 0E66           00208                         MOVLW   0X66
+Error[113]  : Symbol not previously defined (PCLATH)
+MPASM  5.51                     P10_FONT2.ASM   4-15-2020  11:11:55         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+006606 6E00           00209                         MOVWF   PCLATH,0
+                      00210 
+Error[113]  : Symbol not previously defined (BTCOUNT)
+Error[113]  : Symbol not previously defined (WREG)
+006608 C000 F000      00211                         MOVFF   BTCOUNT,WREG
+Error[113]  : Symbol not previously defined (C)
+Error[113]  : Symbol not previously defined (STATUS)
+00660C 9000           00212                         BCF             STATUS,C
+Error[113]  : Symbol not previously defined (WREG)
+00660E 3600           00213                         RLCF    WREG
+                      00214 
+                      00215                 
+Error[113]  : Symbol not previously defined (PCL)
+006610 2600           00216                         ADDWF   PCL,1,0
+006612 0CFF 0CFF      00217                         DT      B'11111111',B'11111111' ;BTC=0F
+006616 0CC0 0C7F      00218                         DT      B'11000000',B'01111111' ;BTC=00
+00661A 0C80 0C3F      00219                         DT      B'10000000',B'00111111' ;BTC=01
+00661E 0C1E 0C3F      00220                         DT      B'00011110',B'00111111' ;BTC=02
+006622 0C3F 0C3F      00221                         DT      B'00111111',B'00111111' ;BTC=03
+006626 0C3F 0CFF      00222                         DT      B'00111111',B'11111111' ;BTC=04
+00662A 0C1F 0CFF      00223                         DT      B'00011111',B'11111111' ;BTC=05
+00662E 0C00 0CFF      00224                         DT      B'00000000',B'11111111' ;BTC=06
+006632 0C00 0C7F      00225                         DT      B'00000000',B'01111111' ;BTC=07
+006636 0C1E 0C3F      00226                         DT      B'00011110',B'00111111' ;BTC=08
+00663A 0C3F 0C3F      00227                         DT      B'00111111',B'00111111' ;BTC=09
+00663E 0C3F 0C3F      00228                         DT      B'00111111',B'00111111' ;BTC=0A
+006642 0C3F 0C3F      00229                         DT      B'00111111',B'00111111' ;BTC=0B
+006646 0C1E 0C3F      00230                         DT      B'00011110',B'00111111' ;BTC=0C
+00664A 0C80 0C7F      00231                         DT      B'10000000',B'01111111' ;BTC=0D
+00664E 0CC0 0CFF      00232                         DT      B'11000000',B'11111111' ;BTC=0E
+                      00233 
+                      00234 
+Warning[205]: Found directive in column 1. (ORG)
+                      00235 ORG     0X6700
+                      00236 
+006700                00237 FONT2_7
+006700 0E00           00238                         MOVLW   0
+Error[113]  : Symbol not previously defined (PCLATU)
+006702 6E00           00239                         MOVWF   PCLATU,0
+006704 0E67           00240                         MOVLW   0X67
+Error[113]  : Symbol not previously defined (PCLATH)
+006706 6E00           00241                         MOVWF   PCLATH,0
+                      00242 
+Error[113]  : Symbol not previously defined (BTCOUNT)
+Error[113]  : Symbol not previously defined (WREG)
+006708 C000 F000      00243                         MOVFF   BTCOUNT,WREG
+Error[113]  : Symbol not previously defined (C)
+Error[113]  : Symbol not previously defined (STATUS)
+00670C 9000           00244                         BCF             STATUS,C
+Error[113]  : Symbol not previously defined (WREG)
+00670E 3600           00245                         RLCF    WREG
+                      00246 
+                      00247                 
+MPASM  5.51                     P10_FONT2.ASM   4-15-2020  11:11:55         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Error[113]  : Symbol not previously defined (PCL)
+006710 2600           00248                         ADDWF   PCL,1,0
+006712 0CFF 0CFF      00249                         DT      B'11111111',B'11111111' ;BTC=0F
+006716 0C00 0C3F      00250                         DT      B'00000000',B'00111111' ;BTC=00
+00671A 0C00 0C3F      00251                         DT      B'00000000',B'00111111' ;BTC=01
+00671E 0C3F 0C3F      00252                         DT      B'00111111',B'00111111' ;BTC=02
+006722 0C3F 0C3F      00253                         DT      B'00111111',B'00111111' ;BTC=03
+006726 0CFF 0C3F      00254                         DT      B'11111111',B'00111111' ;BTC=04
+00672A 0CFE 0C3F      00255                         DT      B'11111110',B'00111111' ;BTC=05
+00672E 0CFC 0C7F      00256                         DT      B'11111100',B'01111111' ;BTC=06
+006732 0CF8 0CFF      00257                         DT      B'11111000',B'11111111' ;BTC=07
+006736 0CF1 0CFF      00258                         DT      B'11110001',B'11111111' ;BTC=08
+00673A 0CE3 0CFF      00259                         DT      B'11100011',B'11111111' ;BTC=09
+00673E 0CE7 0CFF      00260                         DT      B'11100111',B'11111111' ;BTC=0A
+006742 0CE7 0CFF      00261                         DT      B'11100111',B'11111111' ;BTC=0B
+006746 0CE7 0CFF      00262                         DT      B'11100111',B'11111111' ;BTC=0C
+00674A 0CE7 0CFF      00263                         DT      B'11100111',B'11111111' ;BTC=0D
+00674E 0CE7 0CFF      00264                         DT      B'11100111',B'11111111' ;BTC=0E
+                      00265 
+                      00266 
+                      00267 
+Warning[205]: Found directive in column 1. (ORG)
+                      00268 ORG     0X6800
+                      00269 
+006800                00270 FONT2_8
+006800 0E00           00271                         MOVLW   0
+Error[113]  : Symbol not previously defined (PCLATU)
+006802 6E00           00272                         MOVWF   PCLATU,0
+006804 0E68           00273                         MOVLW   0X68
+Error[113]  : Symbol not previously defined (PCLATH)
+006806 6E00           00274                         MOVWF   PCLATH,0
+                      00275 
+Error[113]  : Symbol not previously defined (BTCOUNT)
+Error[113]  : Symbol not previously defined (WREG)
+006808 C000 F000      00276                         MOVFF   BTCOUNT,WREG
+Error[113]  : Symbol not previously defined (C)
+Error[113]  : Symbol not previously defined (STATUS)
+00680C 9000           00277                         BCF             STATUS,C
+Error[113]  : Symbol not previously defined (WREG)
+00680E 3600           00278                         RLCF    WREG
+                      00279 
+                      00280                 
+Error[113]  : Symbol not previously defined (PCL)
+006810 2600           00281                         ADDWF   PCL,1,0
+006812 0CFF 0CFF      00282                         DT      B'11111111',B'11111111' ;BTC=0F
+006816 0CC0 0CFF      00283                         DT      B'11000000',B'11111111' ;BTC=00
+00681A 0C80 0C7F      00284                         DT      B'10000000',B'01111111' ;BTC=01
+00681E 0C1E 0C3F      00285                         DT      B'00011110',B'00111111' ;BTC=02
+006822 0C3F 0C3F      00286                         DT      B'00111111',B'00111111' ;BTC=03
+006826 0C3F 0C3F      00287                         DT      B'00111111',B'00111111' ;BTC=04
+00682A 0C1E 0C3F      00288                         DT      B'00011110',B'00111111' ;BTC=05
+00682E 0C80 0C7F      00289                         DT      B'10000000',B'01111111' ;BTC=06
+006832 0C80 0C7F      00290                         DT      B'10000000',B'01111111' ;BTC=07
+MPASM  5.51                     P10_FONT2.ASM   4-15-2020  11:11:55         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+006836 0C1E 0C3F      00291                         DT      B'00011110',B'00111111' ;BTC=08
+00683A 0C3F 0C3F      00292                         DT      B'00111111',B'00111111' ;BTC=09
+00683E 0C3F 0C3F      00293                         DT      B'00111111',B'00111111' ;BTC=0A
+006842 0C3F 0C3F      00294                         DT      B'00111111',B'00111111' ;BTC=0B
+006846 0C1E 0C3F      00295                         DT      B'00011110',B'00111111' ;BTC=0C
+00684A 0C80 0C7F      00296                         DT      B'10000000',B'01111111' ;BTC=0D
+00684E 0CC0 0CFF      00297                         DT      B'11000000',B'11111111' ;BTC=0E
+                      00298 
+                      00299 
+                      00300 
+Warning[205]: Found directive in column 1. (ORG)
+                      00301 ORG     0X6900
+006900                00302 FONT2_9
+006900 0E00           00303                         MOVLW   0
+Error[113]  : Symbol not previously defined (PCLATU)
+006902 6E00           00304                         MOVWF   PCLATU,0
+006904 0E69           00305                         MOVLW   0X69
+Error[113]  : Symbol not previously defined (PCLATH)
+006906 6E00           00306                         MOVWF   PCLATH,0
+                      00307 
+Error[113]  : Symbol not previously defined (BTCOUNT)
+Error[113]  : Symbol not previously defined (WREG)
+006908 C000 F000      00308                         MOVFF   BTCOUNT,WREG
+Error[113]  : Symbol not previously defined (C)
+Error[113]  : Symbol not previously defined (STATUS)
+00690C 9000           00309                         BCF             STATUS,C
+Error[113]  : Symbol not previously defined (WREG)
+00690E 3600           00310                         RLCF    WREG
+                      00311 
+                      00312                 
+Error[113]  : Symbol not previously defined (PCL)
+006910 2600           00313                         ADDWF   PCL,1,0
+006912 0CFF 0CFF      00314                         DT      B'11111111',B'11111111' ;BTC=0F
+006916 0CC0 0CFF      00315                         DT      B'11000000',B'11111111' ;BTC=00
+00691A 0C80 0C7F      00316                         DT      B'10000000',B'01111111' ;BTC=01
+00691E 0C1E 0C3F      00317                         DT      B'00011110',B'00111111' ;BTC=02
+006922 0C3F 0C3F      00318                         DT      B'00111111',B'00111111' ;BTC=03
+006926 0C3F 0C3F      00319                         DT      B'00111111',B'00111111' ;BTC=04
+00692A 0C3F 0C3F      00320                         DT      B'00111111',B'00111111' ;BTC=05
+00692E 0C1E 0C3F      00321                         DT      B'00011110',B'00111111' ;BTC=06
+006932 0C80 0C3F      00322                         DT      B'10000000',B'00111111' ;BTC=07
+006936 0CC0 0C3F      00323                         DT      B'11000000',B'00111111' ;BTC=08
+00693A 0CFE 0C3F      00324                         DT      B'11111110',B'00111111' ;BTC=09
+00693E 0CFF 0C3F      00325                         DT      B'11111111',B'00111111' ;BTC=0A
+006942 0C3F 0C3F      00326                         DT      B'00111111',B'00111111' ;BTC=0B
+006946 0C1E 0C3F      00327                         DT      B'00011110',B'00111111' ;BTC=0C
+00694A 0C80 0C7F      00328                         DT      B'10000000',B'01111111' ;BTC=0D
+00694E 0CC0 0CFF      00329                         DT      B'11000000',B'11111111' ;BTC=0E
+                      00330 
+                      00331 
+Warning[205]: Found directive in column 1. (ORG)
+                      00332 ORG     0X6A00
+006A00                00333 FONT2_A
+MPASM  5.51                     P10_FONT2.ASM   4-15-2020  11:11:55         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+006A00 0E00           00334                         MOVLW   0
+Error[113]  : Symbol not previously defined (PCLATU)
+006A02 6E00           00335                         MOVWF   PCLATU,0
+006A04 0E6A           00336                         MOVLW   0X6A
+Error[113]  : Symbol not previously defined (PCLATH)
+006A06 6E00           00337                         MOVWF   PCLATH,0
+                      00338 
+Error[113]  : Symbol not previously defined (BTCOUNT)
+Error[113]  : Symbol not previously defined (WREG)
+006A08 C000 F000      00339                         MOVFF   BTCOUNT,WREG
+Error[113]  : Symbol not previously defined (C)
+Error[113]  : Symbol not previously defined (STATUS)
+006A0C 9000           00340                         BCF             STATUS,C
+Error[113]  : Symbol not previously defined (WREG)
+006A0E 3600           00341                         RLCF    WREG
+                      00342 
+                      00343                 
+Error[113]  : Symbol not previously defined (PCL)
+006A10 2600           00344                         ADDWF   PCL,1,0
+006A12 0CFF 0CFF      00345                         DT      B'11111111',B'11111111' ;BTC=00
+006A16 0CFF 0CFF      00346                         DT      B'11111111',B'11111111' ;BTC=01
+006A1A 0CE7 0CFF      00347                         DT      B'11100111',B'11111111' ;BTC=02
+006A1E 0CC3 0CFF      00348                         DT      B'11000011',B'11111111' ;BTC=03
+006A22 0CC3 0CFF      00349                         DT      B'11000011',B'11111111' ;BTC=04
+006A26 0CE7 0CFF      00350                         DT      B'11100111',B'11111111' ;BTC=05
+006A2A 0CFF 0CFF      00351                         DT      B'11111111',B'11111111' ;BTC=06
+006A2E 0CFF 0CFF      00352                         DT      B'11111111',B'11111111' ;BTC=07
+006A32 0CFF 0CFF      00353                         DT      B'11111111',B'11111111' ;BTC=08
+006A36 0CFF 0CFF      00354                         DT      B'11111111',B'11111111' ;BTC=09
+006A3A 0CFF 0CFF      00355                         DT      B'11111111',B'11111111' ;BTC=0A
+006A3E 0CE7 0CFF      00356                         DT      B'11100111',B'11111111' ;BTC=0B
+006A42 0CC3 0CFF      00357                         DT      B'11000011',B'11111111' ;BTC=0C
+006A46 0CC3 0CFF      00358                         DT      B'11000011',B'11111111' ;BTC=0D
+006A4A 0CE7 0CFF      00359                         DT      B'11100111',B'11111111' ;BTC=0E
+006A4E 0CFF 0CFF      00360                         DT      B'11111111',B'11111111' ;BTC=0F
+Error[129]  : Expected (END)
+MPASM  5.51                     P10_FONT2.ASM   4-15-2020  11:11:55         PAGE 10
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+FONT2_0                           00006000
+FONT2_1                           00006100
+FONT2_2                           00006200
+FONT2_3                           00006300
+FONT2_4                           00006400
+FONT2_5                           00006500
+FONT2_6                           00006600
+FONT2_7                           00006700
+FONT2_8                           00006800
+FONT2_9                           00006900
+FONT2_A                           00006A00
+__18F4620                         00000001
+__DEBUG                           1
+
+Errors   :    89
+Warnings :    11 reported,     0 suppressed
+Messages :     0 reported,     0 suppressed
+
+

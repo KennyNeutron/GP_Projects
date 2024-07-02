@@ -1,0 +1,2653 @@
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 ;**********************************************************************
+                      00002 ;                                                                     *
+                      00003 ;    Filename:      HUB12_LIBRARY3.asm                                *
+                      00004 ;    Date:          2019.06.05                                        *
+                      00005 ;    File Version:                                                    *
+                      00006 ;                                                                     *
+                      00007 ;    Author:                                                          *
+                      00008 ;    Company:      GER-PER ENGINEERING                                *
+                      00009 ;                                                                     * 
+                      00010 ;                                                                     *
+                      00011 ;**********************************************************************
+                      00012 ;                                                                     *
+                      00013 ;    Files Required: P16F690.INC                                      *
+                      00014 ;                                                                     *
+                      00015 ;**********************************************************************
+                      00016 
+                      00017 
+                      00018 
+                      00019 
+                      00020         list            p=16f690                ; list directive to define processor
+                      00021         #include        <P16F690.inc>           ; processor specific variable definitions
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC16F690 processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2013 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+                      00756         LIST
+                      00022         
+2007   30C2           00023         __CONFIG    _CP_OFF & _CPD_OFF & _BOR_OFF & _PWRTE_ON & _WDT_OFF & _HS_OSC & _MCLRE_OFF & _FCMEN
+                            _OFF & _IESO_OFF
+                      00024 
+                      00025 
+                      00026 ; '__CONFIG' directive is used to embed configuration data within .asm file.
+                      00027 ; The labels following the directive are located in the respective .inc file.
+                      00028 ; See respective data sheet for additional information on configuration word.
+                      00029 
+                      00030 
+                      00031 
+                      00032 
+                      00033 
+                      00034 
+                      00035 ;***** VARIABLE DEFINITIONS
+  0000007D            00036 w_temp          EQU     0x7D                    ; variable used for context saving
+  0000007E            00037 status_temp     EQU     0x7E                    ; variable used for context saving
+  0000007F            00038 pclath_temp     EQU     0x7F                    ; variable used for context saving
+                      00039         
+                      00040 
+                      00041         ;#DEFINE C0_ON          BSF PORTC,      0       PORTC0=====>HI
+                      00042         ;#DEFINE C0_OFF         BCF PORTC,      0       PORTC0=====>LO
+                      00043 
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00044         #DEFINE A_ON            BSF     PORTC,  0
+                      00045         #DEFINE A_OFF           BCF     PORTC,  0
+                      00046         
+                      00047         #DEFINE B_ON            BSF     PORTC,  1
+                      00048         #DEFINE B_OFF           BCF     PORTC,  1
+                      00049 
+                      00050         #DEFINE DAT_ON          BSF     PORTC,  2
+                      00051         #DEFINE DAT_OFF         BCF     PORTC,  2
+                      00052 
+                      00053         #DEFINE CLK_ON          BSF     PORTC,  7
+                      00054         #DEFINE CLK_OFF         BCF     PORTC,  7
+                      00055         
+                      00056         #DEFINE REG_ON          BSF     PORTC,  4
+                      00057         #DEFINE REG_OFF         BCF     PORTC,  4
+                      00058         
+                      00059         #DEFINE OE_ON           BSF     PORTC,  5
+                      00060         #DEFINE OE_OFF          BCF     PORTC,  5
+                      00061         
+                      00062         CBLOCK 0x20
+                      00063 
+  00000020            00064                         DELAYUS, DELAYMS, DELAYS, MILSEC, SEC   ;DELAY VARIABLES
+                      00065                         ;=======================================================
+                      00066                         
+  00000025            00067                         COUNT0, COUNT1, COUNT2, COUNT3
+                      00068                         
+  00000029            00069                         VAR0
+  0000002A            00070                         TEMPFILE, PT
+  0000002C            00071                         DRAM : .64, POINTER
+  0000006D            00072                         COUNT4
+  0000006E            00073                         SHCNT
+  0000006F            00074                         CURSOR
+  00000070            00075                         TESTER
+                      00076                 
+  00000071            00077                         NUMBER,BTCOUNT,WIDTH
+                      00078 
+                      00079                 
+                      00080         ENDC
+                      00081 ;********************************************************************** 
+0000                  00082         ORG             0x000                   ; processor reset vector
+                      00083 
+Warning[207]: Found label after column 1. (.)
+0000   2810           00084         .       goto    INIT             ; go to beginning of program
+                      00085 
+0004                  00086         ORG             0x004                   ; interrupt vector location
+0004   00FD           00087         movwf           w_temp                  ; save off current W register contents
+0005   0803           00088         movf            STATUS,w                ; move status register into W register
+0006   00FE           00089         movwf           status_temp             ; save off contents of STATUS register
+0007   080A           00090         movf            PCLATH,w                ; move pclath register into W register
+0008   00FF           00091         movwf           pclath_temp             ; save off contents of PCLATH register
+                      00092 
+                      00093 
+                      00094 ; isr code can go here or be located as a call subroutine elsewhere
+                      00095 
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0009   087F           00096         movf            pclath_temp,w           ; retrieve copy of PCLATH registerz`
+000A   008A           00097         movwf           PCLATH                  ; restore pre-isr PCLATH register contents      
+000B   087E           00098         movf            status_temp,w           ; retrieve copy of STATUS register
+000C   0083           00099         movwf           STATUS                  ; restore pre-isr STATUS register contents
+000D   0EFD           00100         swapf           w_temp,f
+000E   0E7D           00101         swapf           w_temp,w                ; restore pre-isr W register contents
+000F   0009           00102         retfie                                  ; return from interrupt
+                      00103 
+                      00104 
+                      00105 ;$$$$$$$$$$$$$$$$$$$$$  INITIALIZE      $$$$$$$$$$$$$$$$$$$$$$$$$$$$
+                      00106 
+                      00107 
+                      00108 ;DECLARE PORTC AS OUTPUT HERE:
+0010                  00109 INIT
+Warning[205]: Found directive in column 1. (BANKSEL)
+0010   1283 1703      00110 BANKSEL ANSEL
+                      00111 
+Warning[203]: Found opcode in column 1. (MOVLW)
+0012   3000           00112 MOVLW   B'00000000'
+Warning[203]: Found opcode in column 1. (MOVWF)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0013   009E           00113 MOVWF   ANSEL
+                      00114 
+Warning[203]: Found opcode in column 1. (MOVWF)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0014   009F           00115 MOVWF   ANSELH
+                      00116 
+Warning[203]: Found opcode in column 1. (MOVLW)
+0015   3000           00117 MOVLW   B'00000000'
+Warning[203]: Found opcode in column 1. (TRIS)
+Warning[224]: Use of this instruction is not recommended.
+0016   0067           00118 TRIS    PORTC
+                      00119 
+Warning[205]: Found directive in column 1. (BANKSEL)
+0017   1283 1303      00120 BANKSEL PORTA
+                      00121 
+Warning[203]: Found opcode in column 1. (CALL)
+0019   212A           00122 CALL    CLRAM
+                      00123 
+                      00124 
+                      00125 
+Warning[203]: Found opcode in column 1. (MOVLW)
+001A   300A           00126 MOVLW   .10
+Warning[203]: Found opcode in column 1. (MOVWF)
+001B   00AB           00127 MOVWF   PT
+Warning[203]: Found opcode in column 1. (MOVLW)
+001C   3000           00128 MOVLW   0
+Warning[203]: Found opcode in column 1. (MOVWF)
+001D   00F1           00129 MOVWF   NUMBER
+                      00130 
+                      00131 
+                      00132 
+                      00133 
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[203]: Found opcode in column 1. (GOTO)
+001E   281F           00134 GOTO    MAIN
+                      00135 ;$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+                      00136 
+                      00137 
+                      00138 
+                      00139 
+                      00140 
+                      00141 
+                      00142 ;#######################        MAIN    ##############################
+001F                  00143 MAIN
+                      00144 
+                      00145 
+                      00146 
+                      00147 
+                      00148 
+                      00149 
+001F   212A           00150         CALL    CLRAM
+0020   3018           00151         MOVLW   .24
+0021   00EF           00152         MOVWF   CURSOR
+                      00153         
+0022   3009           00154         MOVLW   .9
+0023   00F1           00155         MOVWF   NUMBER
+0024   20A9           00156         CALL    DUMP
+0025   2156           00157         CALL    SHIFT
+                      00158 
+0026   3010           00159         MOVLW   .16
+0027   00EF           00160         MOVWF   CURSOR
+0028   3001           00161         MOVLW   .1
+0029   00F1           00162         MOVWF   NUMBER
+                      00163         
+002A   20A9           00164         CALL    DUMP
+002B   2156           00165         CALL    SHIFT
+                      00166 
+002C   3008           00167         MOVLW   .8
+002D   00EF           00168         MOVWF   CURSOR
+                      00169 
+002E   3000           00170         MOVLW   .0
+002F   00F1           00171         MOVWF   NUMBER
+                      00172         
+0030   20A9           00173         CALL    DUMP
+0031   2156           00174         CALL    SHIFT
+                      00175 
+0032   3002           00176         MOVLW   .2
+0033   00F1           00177         MOVWF   NUMBER
+                      00178         
+0034   20A9           00179         CALL    DUMP
+                      00180         
+0035   2038           00181         CALL    SHIFTL
+                      00182 
+                      00183 
+0036   20E9           00184         CALL    DISPLAY
+                      00185 
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00186 
+                      00187 
+Warning[203]: Found opcode in column 1. (GOTO)
+0037   281F           00188 GOTO MAIN
+                      00189 ;#################################################################
+                      00190 
+                      00191 
+0038                  00192 SHIFTL
+0038   30FF           00193         MOVLW           0XFF
+0039   00AA           00194         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+003A   1403           00195         SETC            1
+Message[305]: Using default destination of 1 (file).
+003B   0DEB           00196         RLF                     DRAM+3F
+Message[305]: Using default destination of 1 (file).
+003C   0DAA           00197         RLF                     TEMPFILE
+                      00198         
+003D   082A           00199         MOVFW           TEMPFILE
+003E   05E7           00200         ANDWF           DRAM+3B,F
+                      00201 
+003F   30FF           00202         MOVLW           0XFF
+0040   00AA           00203         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+0041   1403           00204         SETC            1
+Message[305]: Using default destination of 1 (file).
+0042   0DDB           00205         RLF                     DRAM+2F
+Message[305]: Using default destination of 1 (file).
+0043   0DAA           00206         RLF                     TEMPFILE
+                      00207         
+0044   082A           00208         MOVFW           TEMPFILE
+0045   05D7           00209         ANDWF           DRAM+2B,F
+                      00210 
+0046   30FF           00211         MOVLW           0XFF
+0047   00AA           00212         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+0048   1403           00213         SETC            1
+Message[305]: Using default destination of 1 (file).
+0049   0DCB           00214         RLF                     DRAM+1F
+Message[305]: Using default destination of 1 (file).
+004A   0DAA           00215         RLF                     TEMPFILE
+                      00216         
+004B   082A           00217         MOVFW           TEMPFILE
+004C   05C7           00218         ANDWF           DRAM+1B,F
+                      00219 
+004D   30FF           00220         MOVLW           0XFF
+004E   00AA           00221         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+004F   1403           00222         SETC            1
+Message[305]: Using default destination of 1 (file).
+0050   0DBB           00223         RLF                     DRAM+0F
+Message[305]: Using default destination of 1 (file).
+0051   0DAA           00224         RLF                     TEMPFILE
+                      00225         
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0052   082A           00226         MOVFW           TEMPFILE
+0053   05B7           00227         ANDWF           DRAM+0B,F
+                      00228 
+0054   30FF           00229         MOVLW           0XFF
+0055   00AA           00230         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+0056   1403           00231         SETC            1
+Message[305]: Using default destination of 1 (file).
+0057   0DEA           00232         RLF                     DRAM+3E
+Message[305]: Using default destination of 1 (file).
+0058   0DAA           00233         RLF                     TEMPFILE
+                      00234         
+0059   082A           00235         MOVFW           TEMPFILE
+005A   05E6           00236         ANDWF           DRAM+3A,F
+                      00237         
+005B   30FF           00238         MOVLW           0XFF
+005C   00AA           00239         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+005D   1403           00240         SETC            1
+Message[305]: Using default destination of 1 (file).
+005E   0DDA           00241         RLF                     DRAM+2E
+Message[305]: Using default destination of 1 (file).
+005F   0DAA           00242         RLF                     TEMPFILE
+                      00243         
+0060   082A           00244         MOVFW           TEMPFILE
+0061   05D6           00245         ANDWF           DRAM+2A,F
+                      00246 
+0062   30FF           00247         MOVLW           0XFF
+0063   00AA           00248         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+0064   1403           00249         SETC            1
+Message[305]: Using default destination of 1 (file).
+0065   0DCA           00250         RLF                     DRAM+1E
+Message[305]: Using default destination of 1 (file).
+0066   0DAA           00251         RLF                     TEMPFILE
+                      00252         
+0067   082A           00253         MOVFW           TEMPFILE
+0068   05C6           00254         ANDWF           DRAM+1A,F
+                      00255 
+                      00256         
+0069   30FF           00257         MOVLW           0XFF
+006A   00AA           00258         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+006B   1403           00259         SETC            1
+Message[305]: Using default destination of 1 (file).
+006C   0DBA           00260         RLF                     DRAM+0E
+Message[305]: Using default destination of 1 (file).
+006D   0DAA           00261         RLF                     TEMPFILE
+                      00262         
+006E   082A           00263         MOVFW           TEMPFILE
+006F   05B6           00264         ANDWF           DRAM+0A,F
+                      00265 
+0070   30FF           00266         MOVLW           0XFF
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0071   00AA           00267         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+0072   1403           00268         SETC            1
+Message[305]: Using default destination of 1 (file).
+0073   0DE9           00269         RLF                     DRAM+3D
+Message[305]: Using default destination of 1 (file).
+0074   0DAA           00270         RLF                     TEMPFILE
+                      00271         
+0075   082A           00272         MOVFW           TEMPFILE
+0076   05E5           00273         ANDWF           DRAM+39,F
+                      00274 
+0077   30FF           00275         MOVLW           0XFF
+0078   00AA           00276         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+0079   1403           00277         SETC            1
+Message[305]: Using default destination of 1 (file).
+007A   0DD9           00278         RLF                     DRAM+2D
+Message[305]: Using default destination of 1 (file).
+007B   0DAA           00279         RLF                     TEMPFILE
+                      00280         
+007C   082A           00281         MOVFW           TEMPFILE
+007D   05D5           00282         ANDWF           DRAM+29,F
+                      00283 
+007E   30FF           00284         MOVLW           0XFF
+007F   00AA           00285         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+0080   1403           00286         SETC            1
+Message[305]: Using default destination of 1 (file).
+0081   0DC9           00287         RLF                     DRAM+1D
+Message[305]: Using default destination of 1 (file).
+0082   0DAA           00288         RLF                     TEMPFILE
+                      00289         
+0083   082A           00290         MOVFW           TEMPFILE
+0084   05C5           00291         ANDWF           DRAM+19,F
+                      00292 
+0085   30FF           00293         MOVLW           0XFF
+0086   00AA           00294         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+0087   1403           00295         SETC            1
+Message[305]: Using default destination of 1 (file).
+0088   0DB9           00296         RLF                     DRAM+0D
+Message[305]: Using default destination of 1 (file).
+0089   0DAA           00297         RLF                     TEMPFILE
+                      00298         
+008A   082A           00299         MOVFW           TEMPFILE
+008B   05B5           00300         ANDWF           DRAM+09,F
+                      00301 
+008C   30FF           00302         MOVLW           0XFF
+008D   00AA           00303         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+008E   1403           00304         SETC            1
+Message[305]: Using default destination of 1 (file).
+008F   0DE8           00305         RLF                     DRAM+3C
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Message[305]: Using default destination of 1 (file).
+0090   0DAA           00306         RLF                     TEMPFILE
+                      00307         
+0091   082A           00308         MOVFW           TEMPFILE
+0092   05E4           00309         ANDWF           DRAM+38,F
+                      00310 
+0093   30FF           00311         MOVLW           0XFF
+0094   00AA           00312         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+0095   1403           00313         SETC            1
+Message[305]: Using default destination of 1 (file).
+0096   0DD8           00314         RLF                     DRAM+2C
+Message[305]: Using default destination of 1 (file).
+0097   0DAA           00315         RLF                     TEMPFILE
+                      00316         
+0098   082A           00317         MOVFW           TEMPFILE
+0099   05D4           00318         ANDWF           DRAM+28,F
+                      00319 
+009A   30FF           00320         MOVLW           0XFF
+009B   00AA           00321         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+009C   1403           00322         SETC            1
+Message[305]: Using default destination of 1 (file).
+009D   0DC8           00323         RLF                     DRAM+1C
+Message[305]: Using default destination of 1 (file).
+009E   0DAA           00324         RLF                     TEMPFILE
+                      00325         
+009F   082A           00326         MOVFW           TEMPFILE
+00A0   05C4           00327         ANDWF           DRAM+18,F
+                      00328         
+00A1   30FF           00329         MOVLW           0XFF
+00A2   00AA           00330         MOVWF           TEMPFILE
+Warning[211]: Extraneous arguments on the line.
+00A3   1403           00331         SETC            1
+Message[305]: Using default destination of 1 (file).
+00A4   0DB8           00332         RLF                     DRAM+0C
+Message[305]: Using default destination of 1 (file).
+00A5   0DAA           00333         RLF                     TEMPFILE
+                      00334         
+00A6   082A           00335         MOVFW           TEMPFILE
+00A7   05B4           00336         ANDWF           DRAM+08,F
+                      00337         
+Warning[203]: Found opcode in column 1. (RETURN)
+00A8   0008           00338 RETURN
+                      00339 
+                      00340 
+                      00341 
+00A9                  00342 DUMP
+00A9   3000           00343         MOVLW   .0
+00AA   00F2           00344         MOVWF   BTCOUNT
+                      00345 
+                      00346 
+00AB   3008           00347         MOVLW   .8
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00AC   008A           00348         MOVWF   PCLATH
+                      00349         
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00AD   2000           00350         CALL    CHAR
+00AE   00F3           00351         MOVWF   WIDTH
+Message[305]: Using default destination of 1 (file).
+00AF   0AF2           00352         INCF    BTCOUNT
+                      00353 
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00B0   2000           00354         CALL    CHAR
+00B1   00DF           00355         MOVWF   DRAM+33
+Message[305]: Using default destination of 1 (file).
+00B2   0AF2           00356         INCF    BTCOUNT
+                      00357         
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00B3   2000           00358         CALL    CHAR
+00B4   00CF           00359         MOVWF   DRAM+23
+Message[305]: Using default destination of 1 (file).
+00B5   0AF2           00360         INCF    BTCOUNT
+                      00361 
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00B6   2000           00362         CALL    CHAR
+00B7   00BF           00363         MOVWF   DRAM+13
+Message[305]: Using default destination of 1 (file).
+00B8   0AF2           00364         INCF    BTCOUNT
+                      00365 
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00B9   2000           00366         CALL    CHAR
+00BA   00AF           00367         MOVWF   DRAM+03
+Message[305]: Using default destination of 1 (file).
+00BB   0AF2           00368         INCF    BTCOUNT
+                      00369 
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00BC   2000           00370         CALL    CHAR
+00BD   00DE           00371         MOVWF   DRAM+32
+Message[305]: Using default destination of 1 (file).
+00BE   0AF2           00372         INCF    BTCOUNT
+                      00373 
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00BF   2000           00374         CALL    CHAR
+00C0   00CE           00375         MOVWF   DRAM+22
+Message[305]: Using default destination of 1 (file).
+00C1   0AF2           00376         INCF    BTCOUNT
+                      00377 
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00C2   2000           00378         CALL    CHAR
+00C3   00BE           00379         MOVWF   DRAM+12
+Message[305]: Using default destination of 1 (file).
+00C4   0AF2           00380         INCF    BTCOUNT
+                      00381 
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00C5   2000           00382         CALL    CHAR
+00C6   00AE           00383         MOVWF   DRAM+02
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 10
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Message[305]: Using default destination of 1 (file).
+00C7   0AF2           00384         INCF    BTCOUNT
+                      00385 
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00C8   2000           00386         CALL    CHAR
+00C9   00DD           00387         MOVWF   DRAM+31
+Message[305]: Using default destination of 1 (file).
+00CA   0AF2           00388         INCF    BTCOUNT
+                      00389 
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00CB   2000           00390         CALL    CHAR
+00CC   00CD           00391         MOVWF   DRAM+21
+Message[305]: Using default destination of 1 (file).
+00CD   0AF2           00392         INCF    BTCOUNT
+                      00393 
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00CE   2000           00394         CALL    CHAR
+00CF   00BD           00395         MOVWF   DRAM+11
+Message[305]: Using default destination of 1 (file).
+00D0   0AF2           00396         INCF    BTCOUNT
+                      00397 
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00D1   2000           00398         CALL    CHAR
+00D2   00AD           00399         MOVWF   DRAM+01
+Message[305]: Using default destination of 1 (file).
+00D3   0AF2           00400         INCF    BTCOUNT
+                      00401 
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00D4   2000           00402         CALL    CHAR
+00D5   00DC           00403         MOVWF   DRAM+30
+Message[305]: Using default destination of 1 (file).
+00D6   0AF2           00404         INCF    BTCOUNT
+                      00405 
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00D7   2000           00406         CALL    CHAR
+00D8   00CC           00407         MOVWF   DRAM+20
+Message[305]: Using default destination of 1 (file).
+00D9   0AF2           00408         INCF    BTCOUNT
+                      00409 
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00DA   2000           00410         CALL    CHAR
+00DB   00BC           00411         MOVWF   DRAM+10
+Message[305]: Using default destination of 1 (file).
+00DC   0AF2           00412         INCF    BTCOUNT
+                      00413 
+Message[306]: Crossing page boundary -- ensure page bits are set.
+00DD   2000           00414         CALL    CHAR
+00DE   00AC           00415         MOVWF   DRAM+00
+Message[305]: Using default destination of 1 (file).
+00DF   0AF2           00416         INCF    BTCOUNT
+                      00417 
+00E0   3000           00418         MOVLW   .0                      ;BACK TO PAGE1
+00E1   008A           00419         MOVWF   PCLATH
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 11
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00420 
+00E2   0008           00421         RETURN
+                      00422 
+                      00423 
+                      00424 
+                      00425 ;-------------------
+00E3                  00426 DISP
+00E3   3050           00427         MOVLW   .80
+00E4   00ED           00428         MOVWF   COUNT4
+00E5                  00429 MN0
+00E5   20E9           00430         CALL    DISPLAY
+00E6   0BED           00431         DECFSZ  COUNT4,F
+00E7   28E5           00432         GOTO    MN0
+                      00433 
+Warning[203]: Found opcode in column 1. (RETURN)
+00E8   0008           00434 RETURN
+                      00435 ;-------------------
+                      00436 
+                      00437 ;#########################      DISPLAY ####################
+00E9                  00438 DISPLAY
+                      00439 
+00E9                  00440 DP0
+00E9   3010           00441         MOVLW           .16
+00EA   00EC           00442         MOVWF           POINTER
+00EB   302C           00443         MOVLW           .44
+00EC   0084           00444         MOVWF           FSR
+                      00445 
+00ED                  00446 DSP0
+00ED   2114           00447         CALL            DATALATCH
+00EE   0A84           00448         INCF            FSR, F
+00EF   0BEC           00449         DECFSZ          POINTER, F
+00F0   28ED           00450         GOTO            DSP0
+                      00451 
+00F1   1407           00452         A_ON
+00F2   1487           00453         B_ON
+00F3   1687           00454         OE_ON
+00F4   213E           00455         CALL            DELAY_ONEMS
+                      00456 
+                      00457 
+00F5   3010           00458         MOVLW           .16
+00F6   00EC           00459         MOVWF           POINTER
+                      00460 
+00F7                  00461 DSP1
+00F7   2114           00462         CALL            DATALATCH
+00F8   0A84           00463         INCF            FSR, F
+00F9   0BEC           00464         DECFSZ          POINTER, F
+00FA   28F7           00465         GOTO            DSP1
+                      00466 
+00FB   1007           00467         A_OFF
+00FC   1487           00468         B_ON
+00FD   1687           00469         OE_ON
+00FE   213E           00470         CALL            DELAY_ONEMS
+                      00471 
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 12
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00FF   3010           00472         MOVLW           .16
+0100   00EC           00473         MOVWF           POINTER
+                      00474 
+0101                  00475 DSP2
+0101   2114           00476         CALL            DATALATCH
+0102   0A84           00477         INCF            FSR, F
+0103   0BEC           00478         DECFSZ          POINTER, F
+0104   2901           00479         GOTO            DSP2
+                      00480 
+0105   1407           00481         A_ON
+0106   1087           00482         B_OFF
+0107   1687           00483         OE_ON
+0108   213E           00484         CALL            DELAY_ONEMS
+                      00485 
+0109   3010           00486         MOVLW           .16
+010A   00EC           00487         MOVWF           POINTER
+                      00488 
+010B                  00489 DSP3
+010B   2114           00490         CALL            DATALATCH
+010C   0A84           00491         INCF            FSR, F
+010D   0BEC           00492         DECFSZ          POINTER, F
+010E   290B           00493         GOTO            DSP3
+                      00494 
+010F   1007           00495         A_OFF
+0110   1087           00496         B_OFF
+0111   1687           00497         OE_ON
+0112   213E           00498         CALL            DELAY_ONEMS
+                      00499 
+                      00500 
+                      00501 
+                      00502 
+Warning[203]: Found opcode in column 1. (RETURN)
+0113   0008           00503 RETURN
+                      00504 ;###############################################################
+                      00505 
+                      00506 
+                      00507 
+                      00508 
+                      00509 
+                      00510 
+                      00511 
+                      00512 
+                      00513 
+                      00514 
+                      00515 
+                      00516 ;============   DATA    LATCH   ================================
+0114                  00517 DATALATCH
+0114   1387           00518         CLK_OFF
+0115   1207           00519         REG_OFF
+0116   1287           00520         OE_OFF
+0117   0800           00521         MOVF            INDF,W
+0118   00A9           00522         MOVWF           VAR0
+0119   3008           00523         MOVLW   .8
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 13
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+011A   00A5           00524         MOVWF   COUNT0
+                      00525 
+011B                  00526 DL0
+011B   0DA9           00527         RLF VAR0,F      ; Rotate "Var" one place to the left
+011C   1C03           00528         BTFSS STATUS,C  ; Is carry 1?
+011D   291F           00529         GOTO    D0
+011E   2921           00530         GOTO    D1
+                      00531 
+011F                  00532 D0
+011F   1107           00533         DAT_OFF
+0120   2923           00534         GOTO DL1
+0121                  00535 D1
+0121   1507           00536         DAT_ON
+0122   2923           00537         GOTO DL1
+                      00538         
+0123                  00539 DL1
+0123   1787           00540         CLK_ON
+0124   1387           00541         CLK_OFF
+0125   0BA5           00542         DECFSZ  COUNT0,F
+0126   291B           00543         GOTO    DL0
+0127   1607           00544         REG_ON
+0128   1207           00545         REG_OFF 
+                      00546         
+                      00547 
+Warning[203]: Found opcode in column 1. (RETURN)
+0129   0008           00548 RETURN
+                      00549 ;===============================================================
+                      00550 
+                      00551 
+                      00552 
+                      00553 
+                      00554 
+                      00555 
+                      00556 ;=======================        CLEAR   RAM             ====================
+012A                  00557 CLRAM
+012A   3040           00558         MOVLW           .64
+012B   00EC           00559         MOVWF           POINTER
+012C   302C           00560         MOVLW           DRAM
+012D   0084           00561         MOVWF           FSR
+                      00562 
+012E                  00563 DRM0
+012E   30FF           00564         MOVLW           0XFF
+012F   0080           00565         MOVWF           INDF
+0130   3000           00566         MOVLW           INDF
+                      00567         
+0131   2114           00568         CALL            DATALATCH
+0132   0A84           00569         INCF            FSR, F
+0133   0BEC           00570         DECFSZ          POINTER, F
+0134   292E           00571         GOTO            DRM0
+                      00572          
+0135   0008           00573         RETURN
+                      00574 ;===============================================================
+                      00575 
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 14
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00576 
+                      00577 
+                      00578 
+                      00579 
+                      00580 
+                      00581 
+                      00582 ;==========     DELAY USEC =========
+0136                  00583 DELAY_US
+                      00584 
+0136   00A0           00585         MOVWF   DELAYUS
+                      00586 
+0137                  00587 USEC
+                      00588 
+0137   0000           00589         NOP
+0138   0000           00590         NOP
+0139   0000           00591         NOP
+013A   0000           00592         NOP
+Warning[203]: Found opcode in column 1. (DECFSZ)
+013B   0BA0           00593 DECFSZ  DELAYUS,F
+                      00594 
+Warning[203]: Found opcode in column 1. (GOTO)
+013C   2937           00595 GOTO    USEC
+                      00596 
+Warning[203]: Found opcode in column 1. (RETURN)
+013D   0008           00597 RETURN
+                      00598 ;=================================
+                      00599 
+                      00600 
+                      00601 
+                      00602 ;=========== DELAY ONE MS ========
+013E                  00603 DELAY_ONEMS
+                      00604 
+013E   3005           00605         MOVLW   .5
+013F   00A3           00606         MOVWF   MILSEC
+                      00607 
+0140                  00608 MSEC
+0140   30C8           00609         MOVLW   .200
+0141   2136           00610         CALL    DELAY_US
+0142   0BA3           00611         DECFSZ  MILSEC,F
+0143   2940           00612         GOTO    MSEC
+                      00613 
+Warning[203]: Found opcode in column 1. (RETURN)
+0144   0008           00614 RETURN
+                      00615 ;==================================
+                      00616 
+                      00617 
+                      00618 ;=========== DELAY MS   ===========
+0145                  00619 DELAY_MS
+                      00620         
+0145   00A1           00621         MOVWF   DELAYMS
+0146                  00622 MSEC0
+0146   213E           00623         CALL    DELAY_ONEMS
+0147   0BA1           00624         DECFSZ  DELAYMS,F
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 15
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0148   2946           00625         GOTO    MSEC0
+Warning[203]: Found opcode in column 1. (RETURN)
+0149   0008           00626 RETURN
+                      00627 ;==================================
+                      00628 
+                      00629 ;=========== DELAY      ONE     SECOND ====
+014A                  00630 DELAY_ONESEC
+                      00631 
+014A   3005           00632         MOVLW   .5
+014B   00A4           00633         MOVWF   SEC
+014C                  00634 SEC0
+014C   30C8           00635         MOVLW   .200
+014D   2145           00636         CALL    DELAY_MS
+014E   0BA4           00637         DECFSZ  SEC,F
+014F   294C           00638         GOTO    SEC0
+Warning[203]: Found opcode in column 1. (RETURN)
+0150   0008           00639 RETURN
+                      00640 ;==================================
+                      00641 
+                      00642 ;==========     DELAY SEC =============
+0151                  00643 DELAY_SEC
+                      00644 
+0151   00A2           00645         MOVWF   DELAYS
+0152                  00646 SEC1
+0152   214A           00647         CALL    DELAY_ONESEC
+0153   0BA2           00648         DECFSZ  DELAYS,F
+0154   2952           00649         GOTO    SEC1
+Warning[203]: Found opcode in column 1. (RETURN)
+0155   0008           00650 RETURN
+                      00651 ;==================================
+                      00652 
+                      00653 
+                      00654 ;################## DRAM SHIFT ################
+0156                  00655 SHIFT
+                      00656 
+0156   3008           00657         MOVLW   .8
+0157   00F0           00658         MOVWF   TESTER
+                      00659 
+0158   086F           00660         MOVF    CURSOR,W
+0159   0270           00661         SUBWF   TESTER,W
+015A   1903           00662         BTFSC   STATUS,Z
+015B   295F           00663         GOTO    CSR_ET7
+                      00664 
+015C   1803           00665         BTFSC   STATUS,C
+015D   295F           00666         GOTO    CSR_LT7
+015E   29C0           00667         GOTO    CSR_GT7
+                      00668 
+                      00669 
+                      00670         
+                      00671 
+015F                  00672 CSR_LT7 ;CURSOR LESS THAN DEC7
+015F                  00673 CSR_ET7 ;CURSOR EQUAL   DEC7
+015F   086F           00674         MOVF    CURSOR,0
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 16
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0160   00EE           00675         MOVWF   SHCNT
+0161                  00676 SHT00
+Message[305]: Using default destination of 1 (file).
+0161   0CDF           00677         RRF             DRAM + 33
+Message[305]: Using default destination of 1 (file).
+0162   0CE3           00678         RRF             DRAM + 37
+Message[305]: Using default destination of 1 (file).
+0163   0BEE           00679         DECFSZ  SHCNT
+0164   2961           00680         GOTO    SHT00
+                      00681 
+0165   086F           00682         MOVF    CURSOR,0
+0166   00EE           00683         MOVWF   SHCNT
+0167                  00684 SHT01
+Message[305]: Using default destination of 1 (file).
+0167   0CCF           00685         RRF             DRAM + 23
+Message[305]: Using default destination of 1 (file).
+0168   0CD3           00686         RRF             DRAM + 27
+Message[305]: Using default destination of 1 (file).
+0169   0BEE           00687         DECFSZ  SHCNT
+016A   2967           00688         GOTO    SHT01
+                      00689 
+016B   086F           00690         MOVF    CURSOR,0
+016C   00EE           00691         MOVWF   SHCNT
+016D                  00692 SHT02
+Message[305]: Using default destination of 1 (file).
+016D   0CBF           00693         RRF             DRAM + 13
+Message[305]: Using default destination of 1 (file).
+016E   0CC3           00694         RRF             DRAM + 17
+Message[305]: Using default destination of 1 (file).
+016F   0BEE           00695         DECFSZ  SHCNT
+0170   296D           00696         GOTO    SHT02
+                      00697 
+0171   086F           00698         MOVF    CURSOR,0
+0172   00EE           00699         MOVWF   SHCNT
+0173                  00700 SHT03
+Message[305]: Using default destination of 1 (file).
+0173   0CAF           00701         RRF             DRAM + 03
+Message[305]: Using default destination of 1 (file).
+0174   0CB3           00702         RRF             DRAM + 07
+Message[305]: Using default destination of 1 (file).
+0175   0BEE           00703         DECFSZ  SHCNT
+0176   2973           00704         GOTO    SHT03
+                      00705 
+0177   086F           00706         MOVF    CURSOR,0
+0178   00EE           00707         MOVWF   SHCNT
+0179                  00708 SHT04
+Message[305]: Using default destination of 1 (file).
+0179   0CDE           00709         RRF             DRAM + 32
+Message[305]: Using default destination of 1 (file).
+017A   0CE2           00710         RRF             DRAM + 36
+Message[305]: Using default destination of 1 (file).
+017B   0BEE           00711         DECFSZ  SHCNT
+017C   2979           00712         GOTO    SHT04
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 17
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00713 
+017D   086F           00714         MOVF    CURSOR,0
+017E   00EE           00715         MOVWF   SHCNT
+017F                  00716 SHT05
+Message[305]: Using default destination of 1 (file).
+017F   0CCE           00717         RRF             DRAM + 22
+Message[305]: Using default destination of 1 (file).
+0180   0CD2           00718         RRF             DRAM + 26
+Message[305]: Using default destination of 1 (file).
+0181   0BEE           00719         DECFSZ  SHCNT
+0182   297F           00720         GOTO    SHT05
+                      00721 
+0183   086F           00722         MOVF    CURSOR,0
+0184   00EE           00723         MOVWF   SHCNT
+0185                  00724 SHT06
+Message[305]: Using default destination of 1 (file).
+0185   0CBE           00725         RRF             DRAM + 12
+Message[305]: Using default destination of 1 (file).
+0186   0CC2           00726         RRF             DRAM + 16
+Message[305]: Using default destination of 1 (file).
+0187   0BEE           00727         DECFSZ  SHCNT
+0188   2985           00728         GOTO    SHT06
+                      00729 
+                      00730 
+0189   086F           00731         MOVF    CURSOR,0
+018A   00EE           00732         MOVWF   SHCNT
+018B                  00733 SHT07
+Message[305]: Using default destination of 1 (file).
+018B   0CAE           00734         RRF             DRAM + 02
+Message[305]: Using default destination of 1 (file).
+018C   0CB2           00735         RRF             DRAM + 06
+Message[305]: Using default destination of 1 (file).
+018D   0BEE           00736         DECFSZ  SHCNT
+018E   298B           00737         GOTO    SHT07
+                      00738 
+018F   086F           00739         MOVF    CURSOR,0
+0190   00EE           00740         MOVWF   SHCNT
+0191                  00741 SHT08
+Message[305]: Using default destination of 1 (file).
+0191   0CDD           00742         RRF             DRAM + 31
+Message[305]: Using default destination of 1 (file).
+0192   0CE1           00743         RRF             DRAM + 35
+Message[305]: Using default destination of 1 (file).
+0193   0BEE           00744         DECFSZ  SHCNT
+0194   2991           00745         GOTO    SHT08
+                      00746 
+0195   086F           00747         MOVF    CURSOR,0
+0196   00EE           00748         MOVWF   SHCNT
+0197                  00749 SHT09
+Message[305]: Using default destination of 1 (file).
+0197   0CCD           00750         RRF             DRAM + 21
+Message[305]: Using default destination of 1 (file).
+0198   0CD1           00751         RRF             DRAM + 25
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 18
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Message[305]: Using default destination of 1 (file).
+0199   0BEE           00752         DECFSZ  SHCNT
+019A   2997           00753         GOTO    SHT09
+                      00754         
+019B   086F           00755         MOVF    CURSOR,0
+019C   00EE           00756         MOVWF   SHCNT
+019D                  00757 SHT0A
+Message[305]: Using default destination of 1 (file).
+019D   0CBD           00758         RRF             DRAM + 11
+Message[305]: Using default destination of 1 (file).
+019E   0CC1           00759         RRF             DRAM + 15
+Message[305]: Using default destination of 1 (file).
+019F   0BEE           00760         DECFSZ  SHCNT
+01A0   299D           00761         GOTO    SHT0A
+                      00762 
+01A1   086F           00763         MOVF    CURSOR,0
+01A2   00EE           00764         MOVWF   SHCNT
+01A3                  00765 SHT0B
+Message[305]: Using default destination of 1 (file).
+01A3   0CAD           00766         RRF             DRAM + 01
+Message[305]: Using default destination of 1 (file).
+01A4   0CB1           00767         RRF             DRAM + 05
+Message[305]: Using default destination of 1 (file).
+01A5   0BEE           00768         DECFSZ  SHCNT
+01A6   29A3           00769         GOTO    SHT0B
+                      00770 
+01A7   086F           00771         MOVF    CURSOR,0
+01A8   00EE           00772         MOVWF   SHCNT
+01A9                  00773 SHT0C
+Message[305]: Using default destination of 1 (file).
+01A9   0CDC           00774         RRF             DRAM + 30
+Message[305]: Using default destination of 1 (file).
+01AA   0CE0           00775         RRF             DRAM + 34
+Message[305]: Using default destination of 1 (file).
+01AB   0BEE           00776         DECFSZ  SHCNT
+01AC   29A9           00777         GOTO    SHT0C
+                      00778 
+01AD   086F           00779         MOVF    CURSOR,0
+01AE   00EE           00780         MOVWF   SHCNT
+01AF                  00781 SHT0D
+Message[305]: Using default destination of 1 (file).
+01AF   0CCC           00782         RRF             DRAM + 20
+Message[305]: Using default destination of 1 (file).
+01B0   0CD0           00783         RRF             DRAM + 24
+Message[305]: Using default destination of 1 (file).
+01B1   0BEE           00784         DECFSZ  SHCNT
+01B2   29AF           00785         GOTO    SHT0D
+                      00786 
+01B3   086F           00787         MOVF    CURSOR,0
+01B4   00EE           00788         MOVWF   SHCNT
+01B5                  00789 SHT0E
+Message[305]: Using default destination of 1 (file).
+01B5   0CBC           00790         RRF             DRAM + 10
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 19
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Message[305]: Using default destination of 1 (file).
+01B6   0CC0           00791         RRF             DRAM + 14
+Message[305]: Using default destination of 1 (file).
+01B7   0BEE           00792         DECFSZ  SHCNT
+01B8   29B5           00793         GOTO    SHT0E
+                      00794         
+01B9   086F           00795         MOVF    CURSOR,0
+01BA   00EE           00796         MOVWF   SHCNT
+01BB                  00797 SHT0F
+Message[305]: Using default destination of 1 (file).
+01BB   0CAC           00798         RRF             DRAM + 00
+Message[305]: Using default destination of 1 (file).
+01BC   0CB0           00799         RRF             DRAM + 04
+Message[305]: Using default destination of 1 (file).
+01BD   0BEE           00800         DECFSZ  SHCNT
+01BE   29BB           00801         GOTO    SHT0F
+                      00802 
+Warning[203]: Found opcode in column 1. (RETURN)
+01BF   0008           00803 RETURN
+                      00804 
+01C0                  00805 CSR_GT7 ;CURSOR GREATER THAN DEC7
+                      00806         
+01C0   3010           00807         MOVLW   .16
+01C1   00F0           00808         MOVWF   TESTER
+                      00809 
+01C2   086F           00810         MOVF    CURSOR,W
+01C3   0270           00811         SUBWF   TESTER,W
+01C4   1903           00812         BTFSC   STATUS,Z
+01C5   29C9           00813         GOTO    CSR_ETF
+                      00814 
+01C6   1803           00815         BTFSC   STATUS,C
+01C7   29C9           00816         GOTO    CSR_LTF
+01C8   2A3A           00817         GOTO    CSR_GTF 
+                      00818 
+01C9                  00819 CSR_LTF         ;CURSOR LESS THAN 0XF
+01C9                  00820 CSR_ETF         ;CURSOR EQUALS  0XF
+                      00821         
+01C9   086F           00822         MOVF    CURSOR,0
+01CA   00EE           00823         MOVWF   SHCNT
+01CB                  00824 SHT10
+Message[305]: Using default destination of 1 (file).
+01CB   0CDF           00825         RRF             DRAM + 33
+Message[305]: Using default destination of 1 (file).
+01CC   0CE3           00826         RRF             DRAM + 37
+Message[305]: Using default destination of 1 (file).
+01CD   0CE7           00827         RRF             DRAM + 3B
+Message[305]: Using default destination of 1 (file).
+01CE   0BEE           00828         DECFSZ  SHCNT
+01CF   29CB           00829         GOTO    SHT10
+                      00830 
+01D0   086F           00831         MOVF    CURSOR,0
+01D1   00EE           00832         MOVWF   SHCNT
+01D2                  00833 SHT11
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 20
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Message[305]: Using default destination of 1 (file).
+01D2   0CCF           00834         RRF             DRAM + 23
+Message[305]: Using default destination of 1 (file).
+01D3   0CD3           00835         RRF             DRAM + 27
+Message[305]: Using default destination of 1 (file).
+01D4   0CD7           00836         RRF             DRAM + 2B
+Message[305]: Using default destination of 1 (file).
+01D5   0BEE           00837         DECFSZ  SHCNT
+01D6   29D2           00838         GOTO    SHT11
+                      00839 
+01D7   086F           00840         MOVF    CURSOR,0
+01D8   00EE           00841         MOVWF   SHCNT
+01D9                  00842 SHT12
+Message[305]: Using default destination of 1 (file).
+01D9   0CBF           00843         RRF             DRAM + 13
+Message[305]: Using default destination of 1 (file).
+01DA   0CC3           00844         RRF             DRAM + 17
+Message[305]: Using default destination of 1 (file).
+01DB   0CC7           00845         RRF             DRAM + 1B
+Message[305]: Using default destination of 1 (file).
+01DC   0BEE           00846         DECFSZ  SHCNT
+01DD   29D9           00847         GOTO    SHT12
+                      00848 
+01DE   086F           00849         MOVF    CURSOR,0
+01DF   00EE           00850         MOVWF   SHCNT
+01E0                  00851 SHT13
+Message[305]: Using default destination of 1 (file).
+01E0   0CAF           00852         RRF             DRAM + 03
+Message[305]: Using default destination of 1 (file).
+01E1   0CB3           00853         RRF             DRAM + 07
+Message[305]: Using default destination of 1 (file).
+01E2   0CB7           00854         RRF             DRAM + 0B
+Message[305]: Using default destination of 1 (file).
+01E3   0BEE           00855         DECFSZ  SHCNT
+01E4   29E0           00856         GOTO    SHT13
+                      00857 
+01E5   086F           00858         MOVF    CURSOR,0
+01E6   00EE           00859         MOVWF   SHCNT
+01E7                  00860 SHT14
+Message[305]: Using default destination of 1 (file).
+01E7   0CDE           00861         RRF             DRAM + 32
+Message[305]: Using default destination of 1 (file).
+01E8   0CE2           00862         RRF             DRAM + 36
+Message[305]: Using default destination of 1 (file).
+01E9   0CE6           00863         RRF             DRAM + 3A
+Message[305]: Using default destination of 1 (file).
+01EA   0BEE           00864         DECFSZ  SHCNT
+01EB   29E7           00865         GOTO    SHT14
+                      00866 
+01EC   086F           00867         MOVF    CURSOR,0
+01ED   00EE           00868         MOVWF   SHCNT
+01EE                  00869 SHT15
+Message[305]: Using default destination of 1 (file).
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 21
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+01EE   0CCE           00870         RRF             DRAM + 22
+Message[305]: Using default destination of 1 (file).
+01EF   0CD2           00871         RRF             DRAM + 26
+Message[305]: Using default destination of 1 (file).
+01F0   0CD6           00872         RRF             DRAM + 2A
+Message[305]: Using default destination of 1 (file).
+01F1   0BEE           00873         DECFSZ  SHCNT
+01F2   29EE           00874         GOTO    SHT15
+                      00875 
+01F3   086F           00876         MOVF    CURSOR,0
+01F4   00EE           00877         MOVWF   SHCNT
+01F5                  00878 SHT16
+Message[305]: Using default destination of 1 (file).
+01F5   0CBE           00879         RRF             DRAM + 12
+Message[305]: Using default destination of 1 (file).
+01F6   0CC2           00880         RRF             DRAM + 16
+Message[305]: Using default destination of 1 (file).
+01F7   0CC6           00881         RRF             DRAM + 1A
+Message[305]: Using default destination of 1 (file).
+01F8   0BEE           00882         DECFSZ  SHCNT
+01F9   29F5           00883         GOTO    SHT16
+                      00884 
+                      00885 
+01FA   086F           00886         MOVF    CURSOR,0
+01FB   00EE           00887         MOVWF   SHCNT
+01FC                  00888 SHT17
+Message[305]: Using default destination of 1 (file).
+01FC   0CAE           00889         RRF             DRAM + 02
+Message[305]: Using default destination of 1 (file).
+01FD   0CB2           00890         RRF             DRAM + 06
+Message[305]: Using default destination of 1 (file).
+01FE   0CB6           00891         RRF             DRAM + 0A
+Message[305]: Using default destination of 1 (file).
+01FF   0BEE           00892         DECFSZ  SHCNT
+0200   29FC           00893         GOTO    SHT17
+                      00894 
+0201   086F           00895         MOVF    CURSOR,0
+0202   00EE           00896         MOVWF   SHCNT
+0203                  00897 SHT18
+Message[305]: Using default destination of 1 (file).
+0203   0CDD           00898         RRF             DRAM + 31
+Message[305]: Using default destination of 1 (file).
+0204   0CE1           00899         RRF             DRAM + 35
+Message[305]: Using default destination of 1 (file).
+0205   0CE5           00900         RRF             DRAM + 39
+Message[305]: Using default destination of 1 (file).
+0206   0BEE           00901         DECFSZ  SHCNT
+0207   2A03           00902         GOTO    SHT18
+                      00903 
+0208   086F           00904         MOVF    CURSOR,0
+0209   00EE           00905         MOVWF   SHCNT
+020A                  00906 SHT19
+Message[305]: Using default destination of 1 (file).
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 22
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+020A   0CCD           00907         RRF             DRAM + 21
+Message[305]: Using default destination of 1 (file).
+020B   0CD1           00908         RRF             DRAM + 25
+Message[305]: Using default destination of 1 (file).
+020C   0CD5           00909         RRF             DRAM + 29
+Message[305]: Using default destination of 1 (file).
+020D   0BEE           00910         DECFSZ  SHCNT
+020E   2A0A           00911         GOTO    SHT19
+                      00912         
+020F   086F           00913         MOVF    CURSOR,0
+0210   00EE           00914         MOVWF   SHCNT
+0211                  00915 SHT1A
+Message[305]: Using default destination of 1 (file).
+0211   0CBD           00916         RRF             DRAM + 11
+Message[305]: Using default destination of 1 (file).
+0212   0CC1           00917         RRF             DRAM + 15
+Message[305]: Using default destination of 1 (file).
+0213   0CC5           00918         RRF             DRAM + 19
+Message[305]: Using default destination of 1 (file).
+0214   0BEE           00919         DECFSZ  SHCNT
+0215   2A11           00920         GOTO    SHT1A
+                      00921 
+0216   086F           00922         MOVF    CURSOR,0
+0217   00EE           00923         MOVWF   SHCNT
+0218                  00924 SHT1B
+Message[305]: Using default destination of 1 (file).
+0218   0CAD           00925         RRF             DRAM + 01
+Message[305]: Using default destination of 1 (file).
+0219   0CB1           00926         RRF             DRAM + 05
+Message[305]: Using default destination of 1 (file).
+021A   0CB5           00927         RRF             DRAM + 09
+Message[305]: Using default destination of 1 (file).
+021B   0BEE           00928         DECFSZ  SHCNT
+021C   2A18           00929         GOTO    SHT1B
+                      00930 
+021D   086F           00931         MOVF    CURSOR,0
+021E   00EE           00932         MOVWF   SHCNT
+021F                  00933 SHT1C
+Message[305]: Using default destination of 1 (file).
+021F   0CDC           00934         RRF             DRAM + 30
+Message[305]: Using default destination of 1 (file).
+0220   0CE0           00935         RRF             DRAM + 34
+Message[305]: Using default destination of 1 (file).
+0221   0CE4           00936         RRF             DRAM + 38
+Message[305]: Using default destination of 1 (file).
+0222   0BEE           00937         DECFSZ  SHCNT
+0223   2A1F           00938         GOTO    SHT1C
+                      00939 
+0224   086F           00940         MOVF    CURSOR,0
+0225   00EE           00941         MOVWF   SHCNT
+0226                  00942 SHT1D
+Message[305]: Using default destination of 1 (file).
+0226   0CCC           00943         RRF             DRAM + 20
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 23
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Message[305]: Using default destination of 1 (file).
+0227   0CD0           00944         RRF             DRAM + 24
+Message[305]: Using default destination of 1 (file).
+0228   0CD4           00945         RRF             DRAM + 28
+Message[305]: Using default destination of 1 (file).
+0229   0BEE           00946         DECFSZ  SHCNT
+022A   2A26           00947         GOTO    SHT1D
+                      00948 
+022B   086F           00949         MOVF    CURSOR,0
+022C   00EE           00950         MOVWF   SHCNT
+022D                  00951 SHT1E
+Message[305]: Using default destination of 1 (file).
+022D   0CBC           00952         RRF             DRAM + 10
+Message[305]: Using default destination of 1 (file).
+022E   0CC0           00953         RRF             DRAM + 14
+Message[305]: Using default destination of 1 (file).
+022F   0CC4           00954         RRF             DRAM + 18
+Message[305]: Using default destination of 1 (file).
+0230   0BEE           00955         DECFSZ  SHCNT
+0231   2A2D           00956         GOTO    SHT1E
+                      00957         
+0232   086F           00958         MOVF    CURSOR,0
+0233   00EE           00959         MOVWF   SHCNT
+0234                  00960 SHT1F
+Message[305]: Using default destination of 1 (file).
+0234   0CAC           00961         RRF             DRAM + 00
+Message[305]: Using default destination of 1 (file).
+0235   0CB0           00962         RRF             DRAM + 04
+Message[305]: Using default destination of 1 (file).
+0236   0CB4           00963         RRF             DRAM + 08
+Message[305]: Using default destination of 1 (file).
+0237   0BEE           00964         DECFSZ  SHCNT
+0238   2A34           00965         GOTO    SHT1F
+Warning[203]: Found opcode in column 1. (RETURN)
+0239   0008           00966 RETURN
+                      00967 
+023A                  00968 CSR_GTF ; CURSOR GREATER THAN 0XF
+                      00969 
+023A   3019           00970         MOVLW   .25
+023B   00F0           00971         MOVWF   TESTER
+                      00972 
+023C   086F           00973         MOVF    CURSOR,W
+023D   0270           00974         SUBWF   TESTER,W
+023E   1903           00975         BTFSC   STATUS,Z
+023F   2A43           00976         GOTO    CSR_ETF8
+                      00977 
+0240   1803           00978         BTFSC   STATUS,C
+0241   2A43           00979         GOTO    CSR_LTF8
+0242   2AC3           00980         GOTO    CSR_GTF8        
+                      00981 
+0243                  00982 CSR_LTF8                ;CURSOR LESS THAN 0X18
+0243                  00983 CSR_ETF8                ;CURSOR EQUALS  0X18
+                      00984         
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 24
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0243   086F           00985         MOVF    CURSOR,0
+0244   00EE           00986         MOVWF   SHCNT
+0245                  00987 SHT20
+Message[305]: Using default destination of 1 (file).
+0245   0CDF           00988         RRF             DRAM + 33
+Message[305]: Using default destination of 1 (file).
+0246   0CE3           00989         RRF             DRAM + 37
+Message[305]: Using default destination of 1 (file).
+0247   0CE7           00990         RRF             DRAM + 3B
+Message[305]: Using default destination of 1 (file).
+0248   0CEB           00991         RRF             DRAM + 3F
+Message[305]: Using default destination of 1 (file).
+0249   0BEE           00992         DECFSZ  SHCNT
+024A   2A45           00993         GOTO    SHT20
+                      00994 
+024B   086F           00995         MOVF    CURSOR,0
+024C   00EE           00996         MOVWF   SHCNT
+024D                  00997 SHT21
+Message[305]: Using default destination of 1 (file).
+024D   0CCF           00998         RRF             DRAM + 23
+Message[305]: Using default destination of 1 (file).
+024E   0CD3           00999         RRF             DRAM + 27
+Message[305]: Using default destination of 1 (file).
+024F   0CD7           01000         RRF             DRAM + 2B
+Message[305]: Using default destination of 1 (file).
+0250   0CDB           01001         RRF             DRAM + 2F
+Message[305]: Using default destination of 1 (file).
+0251   0BEE           01002         DECFSZ  SHCNT
+0252   2A4D           01003         GOTO    SHT21
+                      01004 
+0253   086F           01005         MOVF    CURSOR,0
+0254   00EE           01006         MOVWF   SHCNT
+0255                  01007 SHT22
+Message[305]: Using default destination of 1 (file).
+0255   0CBF           01008         RRF             DRAM + 13
+Message[305]: Using default destination of 1 (file).
+0256   0CC3           01009         RRF             DRAM + 17
+Message[305]: Using default destination of 1 (file).
+0257   0CC7           01010         RRF             DRAM + 1B
+Message[305]: Using default destination of 1 (file).
+0258   0CCB           01011         RRF             DRAM + 1F
+Message[305]: Using default destination of 1 (file).
+0259   0BEE           01012         DECFSZ  SHCNT
+025A   2A55           01013         GOTO    SHT22
+                      01014 
+025B   086F           01015         MOVF    CURSOR,0
+025C   00EE           01016         MOVWF   SHCNT
+025D                  01017 SHT23
+Message[305]: Using default destination of 1 (file).
+025D   0CAF           01018         RRF             DRAM + 03
+Message[305]: Using default destination of 1 (file).
+025E   0CB3           01019         RRF             DRAM + 07
+Message[305]: Using default destination of 1 (file).
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 25
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+025F   0CB7           01020         RRF             DRAM + 0B
+Message[305]: Using default destination of 1 (file).
+0260   0CBB           01021         RRF             DRAM + 0F
+Message[305]: Using default destination of 1 (file).
+0261   0BEE           01022         DECFSZ  SHCNT
+0262   2A5D           01023         GOTO    SHT23
+                      01024 
+0263   086F           01025         MOVF    CURSOR,0
+0264   00EE           01026         MOVWF   SHCNT
+0265                  01027 SHT24
+Message[305]: Using default destination of 1 (file).
+0265   0CDE           01028         RRF             DRAM + 32
+Message[305]: Using default destination of 1 (file).
+0266   0CE2           01029         RRF             DRAM + 36
+Message[305]: Using default destination of 1 (file).
+0267   0CE6           01030         RRF             DRAM + 3A
+Message[305]: Using default destination of 1 (file).
+0268   0CEA           01031         RRF             DRAM + 3E
+Message[305]: Using default destination of 1 (file).
+0269   0BEE           01032         DECFSZ  SHCNT
+026A   2A65           01033         GOTO    SHT24
+                      01034 
+026B   086F           01035         MOVF    CURSOR,0
+026C   00EE           01036         MOVWF   SHCNT
+026D                  01037 SHT25
+Message[305]: Using default destination of 1 (file).
+026D   0CCE           01038         RRF             DRAM + 22
+Message[305]: Using default destination of 1 (file).
+026E   0CD2           01039         RRF             DRAM + 26
+Message[305]: Using default destination of 1 (file).
+026F   0CD6           01040         RRF             DRAM + 2A
+Message[305]: Using default destination of 1 (file).
+0270   0CDA           01041         RRF             DRAM + 2E
+Message[305]: Using default destination of 1 (file).
+0271   0BEE           01042         DECFSZ  SHCNT
+0272   2A6D           01043         GOTO    SHT25
+                      01044 
+0273   086F           01045         MOVF    CURSOR,0
+0274   00EE           01046         MOVWF   SHCNT
+0275                  01047 SHT26
+Message[305]: Using default destination of 1 (file).
+0275   0CBE           01048         RRF             DRAM + 12
+Message[305]: Using default destination of 1 (file).
+0276   0CC2           01049         RRF             DRAM + 16
+Message[305]: Using default destination of 1 (file).
+0277   0CC6           01050         RRF             DRAM + 1A
+Message[305]: Using default destination of 1 (file).
+0278   0CCA           01051         RRF             DRAM + 1E
+Message[305]: Using default destination of 1 (file).
+0279   0BEE           01052         DECFSZ  SHCNT
+027A   2A75           01053         GOTO    SHT26
+                      01054 
+                      01055 
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 26
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+027B   086F           01056         MOVF    CURSOR,0
+027C   00EE           01057         MOVWF   SHCNT
+027D                  01058 SHT27
+Message[305]: Using default destination of 1 (file).
+027D   0CAE           01059         RRF             DRAM + 02
+Message[305]: Using default destination of 1 (file).
+027E   0CB2           01060         RRF             DRAM + 06
+Message[305]: Using default destination of 1 (file).
+027F   0CB6           01061         RRF             DRAM + 0A
+Message[305]: Using default destination of 1 (file).
+0280   0CBA           01062         RRF             DRAM + 0E
+Message[305]: Using default destination of 1 (file).
+0281   0BEE           01063         DECFSZ  SHCNT
+0282   2A7D           01064         GOTO    SHT27
+                      01065 
+0283   086F           01066         MOVF    CURSOR,0
+0284   00EE           01067         MOVWF   SHCNT
+0285                  01068 SHT28
+Message[305]: Using default destination of 1 (file).
+0285   0CDD           01069         RRF             DRAM + 31
+Message[305]: Using default destination of 1 (file).
+0286   0CE1           01070         RRF             DRAM + 35
+Message[305]: Using default destination of 1 (file).
+0287   0CE5           01071         RRF             DRAM + 39
+Message[305]: Using default destination of 1 (file).
+0288   0CE9           01072         RRF             DRAM + 3D
+Message[305]: Using default destination of 1 (file).
+0289   0BEE           01073         DECFSZ  SHCNT
+028A   2A85           01074         GOTO    SHT28
+                      01075 
+028B   086F           01076         MOVF    CURSOR,0
+028C   00EE           01077         MOVWF   SHCNT
+028D                  01078 SHT29
+Message[305]: Using default destination of 1 (file).
+028D   0CCD           01079         RRF             DRAM + 21
+Message[305]: Using default destination of 1 (file).
+028E   0CD1           01080         RRF             DRAM + 25
+Message[305]: Using default destination of 1 (file).
+028F   0CD5           01081         RRF             DRAM + 29
+Message[305]: Using default destination of 1 (file).
+0290   0CD9           01082         RRF             DRAM + 2D
+Message[305]: Using default destination of 1 (file).
+0291   0BEE           01083         DECFSZ  SHCNT
+0292   2A8D           01084         GOTO    SHT29
+                      01085         
+0293   086F           01086         MOVF    CURSOR,0
+0294   00EE           01087         MOVWF   SHCNT
+0295                  01088 SHT2A
+Message[305]: Using default destination of 1 (file).
+0295   0CBD           01089         RRF             DRAM + 11
+Message[305]: Using default destination of 1 (file).
+0296   0CC1           01090         RRF             DRAM + 15
+Message[305]: Using default destination of 1 (file).
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 27
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0297   0CC5           01091         RRF             DRAM + 19
+Message[305]: Using default destination of 1 (file).
+0298   0CC9           01092         RRF             DRAM + 1D
+Message[305]: Using default destination of 1 (file).
+0299   0BEE           01093         DECFSZ  SHCNT
+029A   2A95           01094         GOTO    SHT2A
+                      01095 
+029B   086F           01096         MOVF    CURSOR,0
+029C   00EE           01097         MOVWF   SHCNT
+029D                  01098 SHT2B
+Message[305]: Using default destination of 1 (file).
+029D   0CAD           01099         RRF             DRAM + 01
+Message[305]: Using default destination of 1 (file).
+029E   0CB1           01100         RRF             DRAM + 05
+Message[305]: Using default destination of 1 (file).
+029F   0CB5           01101         RRF             DRAM + 09
+Message[305]: Using default destination of 1 (file).
+02A0   0CB9           01102         RRF             DRAM + 0D
+Message[305]: Using default destination of 1 (file).
+02A1   0BEE           01103         DECFSZ  SHCNT
+02A2   2A9D           01104         GOTO    SHT2B
+                      01105 
+02A3   086F           01106         MOVF    CURSOR,0
+02A4   00EE           01107         MOVWF   SHCNT
+02A5                  01108 SHT2C
+Message[305]: Using default destination of 1 (file).
+02A5   0CDC           01109         RRF             DRAM + 30
+Message[305]: Using default destination of 1 (file).
+02A6   0CE0           01110         RRF             DRAM + 34
+Message[305]: Using default destination of 1 (file).
+02A7   0CE4           01111         RRF             DRAM + 38
+Message[305]: Using default destination of 1 (file).
+02A8   0CE8           01112         RRF             DRAM + 3C
+Message[305]: Using default destination of 1 (file).
+02A9   0BEE           01113         DECFSZ  SHCNT
+02AA   2AA5           01114         GOTO    SHT2C
+                      01115 
+02AB   086F           01116         MOVF    CURSOR,0
+02AC   00EE           01117         MOVWF   SHCNT
+02AD                  01118 SHT2D
+Message[305]: Using default destination of 1 (file).
+02AD   0CCC           01119         RRF             DRAM + 20
+Message[305]: Using default destination of 1 (file).
+02AE   0CD0           01120         RRF             DRAM + 24
+Message[305]: Using default destination of 1 (file).
+02AF   0CD4           01121         RRF             DRAM + 28
+Message[305]: Using default destination of 1 (file).
+02B0   0CD8           01122         RRF             DRAM + 2C
+Message[305]: Using default destination of 1 (file).
+02B1   0BEE           01123         DECFSZ  SHCNT
+02B2   2AAD           01124         GOTO    SHT2D
+                      01125 
+02B3   086F           01126         MOVF    CURSOR,0
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 28
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+02B4   00EE           01127         MOVWF   SHCNT
+02B5                  01128 SHT2E
+Message[305]: Using default destination of 1 (file).
+02B5   0CBC           01129         RRF             DRAM + 10
+Message[305]: Using default destination of 1 (file).
+02B6   0CC0           01130         RRF             DRAM + 14
+Message[305]: Using default destination of 1 (file).
+02B7   0CC4           01131         RRF             DRAM + 18
+Message[305]: Using default destination of 1 (file).
+02B8   0CC8           01132         RRF             DRAM + 1C
+Message[305]: Using default destination of 1 (file).
+02B9   0BEE           01133         DECFSZ  SHCNT
+02BA   2AB5           01134         GOTO    SHT2E
+                      01135         
+02BB   086F           01136         MOVF    CURSOR,0
+02BC   00EE           01137         MOVWF   SHCNT
+02BD                  01138 SHT2F
+Message[305]: Using default destination of 1 (file).
+02BD   0CAC           01139         RRF             DRAM + 00
+Message[305]: Using default destination of 1 (file).
+02BE   0CB0           01140         RRF             DRAM + 04
+Message[305]: Using default destination of 1 (file).
+02BF   0CB4           01141         RRF             DRAM + 08
+Message[305]: Using default destination of 1 (file).
+02C0   0CB8           01142         RRF             DRAM + 0C
+Message[305]: Using default destination of 1 (file).
+02C1   0BEE           01143         DECFSZ  SHCNT
+02C2   2ABD           01144         GOTO    SHT2F
+                      01145         
+02C3                  01146 CSR_GTF8 ;CURSOR IS GREATER THAN DEC24
+                      01147 
+                      01148 
+Warning[203]: Found opcode in column 1. (RETURN)
+02C3   0008           01149 RETURN
+                      01150 
+                      01151 
+                      01152 
+                      01153 
+                      01154 
+                      01155 
+                      01156 
+                      01157 
+                      01158 
+                      01159 
+                      01160 
+                      01161 
+                      01162 
+                      01163 
+                      01164 
+0800                  01165         ORG 0X800
+                      01166 
+0800                  01167 CHAR
+0800   0871           01168         MOVFW   NUMBER
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 29
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0801   0782           01169         ADDWF   PCL,F
+                      01170 
+0802   280C           01171         GOTO    ZERO
+                      01172 
+0803   2821           01173         GOTO    ONE
+                      01174 
+0804   2834           01175         GOTO    TWO
+                      01176 
+0805   2847           01177         GOTO    THREE
+                      01178         
+0806   285A           01179         GOTO    FOUR
+                      01180         
+0807   286D           01181         GOTO    FIVE
+                      01182         
+0808   2880           01183         GOTO    SIX
+                      01184         
+0809   2893           01185         GOTO    SEVEN
+                      01186 
+080A   28A6           01187         GOTO    EIGHT
+                      01188 
+080B   28B9           01189         GOTO    NINE
+                      01190                 
+                      01191 
+                      01192 
+                      01193 
+                      01194 
+Warning[207]: Found label after column 1. (ZERO)
+080C                  01195         ZERO
+080C   0872           01196                         MOVFW   BTCOUNT
+080D   0782           01197                         ADDWF   PCL, F
+                      01198 
+080E   3408           01199                         DT      8
+080F   34C7           01200                         DT      B'11000111'
+0810   3483           01201                         DT      B'10000011'
+0811   3411           01202                         DT      B'00010001'
+0812   3439           01203                         DT      B'00111001'
+0813   3439           01204                         DT      B'00111001'
+0814   3439           01205                         DT      B'00111001'
+0815   3439           01206                         DT      B'00111001'
+0816   3439           01207                         DT      B'00111001'
+0817   3439           01208                         DT      B'00111001'
+0818   3439           01209                         DT      B'00111001'
+0819   3439           01210                         DT      B'00111001'
+081A   3439           01211                         DT      B'00111001'
+081B   3439           01212                         DT      B'00111001'
+081C   3411           01213                         DT      B'00010001'
+081D   3483           01214                         DT      B'10000011'
+081E   34C7           01215                         DT      B'11000111'
+081F   3000           01216                         MOVLW   .0
+0820   008A           01217                         MOVWF   PCLATH
+                      01218 
+Warning[207]: Found label after column 1. (ONE)
+0821                  01219         ONE
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 30
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0821   0872           01220                         MOVFW   BTCOUNT
+0822   0782           01221                         ADDWF   PCL, F
+                      01222 
+0823   3407           01223                         DT      7
+0824   34CF           01224                         DT      B'11001111'
+0825   34CF           01225                         DT      B'11001111'
+0826   348F           01226                         DT      B'10001111'
+0827   340F           01227                         DT      B'00001111'
+0828   344F           01228                         DT      B'01001111'
+0829   34CF           01229                         DT      B'11001111'
+082A   34CF           01230                         DT      B'11001111'
+082B   34CF           01231                         DT      B'11001111'
+082C   34CF           01232                         DT      B'11001111'
+082D   34CF           01233                         DT      B'11001111'
+082E   34CF           01234                         DT      B'11001111'
+082F   34CF           01235                         DT      B'11001111'
+0830   34CF           01236                         DT      B'11001111'
+0831   34CF           01237                         DT      B'11001111'
+0832   3403           01238                         DT      B'00000011'
+0833   3403           01239                         DT      B'00000011'
+                      01240 
+Warning[207]: Found label after column 1. (TWO)
+0834                  01241         TWO
+0834   0872           01242                         MOVFW   BTCOUNT
+0835   0782           01243                         ADDWF   PCL, F
+                      01244 
+0836   3408           01245                         DT      8
+0837   3487           01246                         DT      B'10000111'
+0838   3403           01247                         DT      B'00000011'
+0839   3431           01248                         DT      B'00110001'
+083A   34F9           01249                         DT      B'11111001'
+083B   34F9           01250                         DT      B'11111001'
+083C   34F9           01251                         DT      B'11111001'
+083D   34F9           01252                         DT      B'11111001'
+083E   34F1           01253                         DT      B'11110001'
+083F   3483           01254                         DT      B'10000011'
+0840   3407           01255                         DT      B'00000111'
+0841   343F           01256                         DT      B'00111111'
+0842   343D           01257                         DT      B'00111101'
+0843   3439           01258                         DT      B'00111001'
+0844   3439           01259                         DT      B'00111001'
+0845   3401           01260                         DT      B'00000001'
+0846   3401           01261                         DT      B'00000001'
+                      01262                                 
+                      01263 
+Warning[207]: Found label after column 1. (THREE)
+0847                  01264         THREE
+0847   0872           01265                         MOVFW   BTCOUNT
+0848   0782           01266                         ADDWF   PCL, F
+                      01267 
+0849   3408           01268                         DT      8
+084A   3487           01269                         DT      B'10000111'
+084B   3403           01270                         DT      B'00000011'
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 31
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+084C   3431           01271                         DT      B'00110001'
+084D   34F9           01272                         DT      B'11111001'
+084E   34F9           01273                         DT      B'11111001'
+084F   34F9           01274                         DT      B'11111001'
+0850   34F1           01275                         DT      B'11110001'
+0851   34C3           01276                         DT      B'11000011'
+0852   34C3           01277                         DT      B'11000011'
+0853   34F1           01278                         DT      B'11110001'
+0854   34F9           01279                         DT      B'11111001'
+0855   34F9           01280                         DT      B'11111001'
+0856   34F9           01281                         DT      B'11111001'
+0857   3431           01282                         DT      B'00110001'
+0858   3403           01283                         DT      B'00000011'
+0859   3487           01284                         DT      B'10000111'
+                      01285                         
+                      01286 
+Warning[207]: Found label after column 1. (FOUR)
+085A                  01287         FOUR
+085A   0872           01288                         MOVFW   BTCOUNT
+085B   0782           01289                         ADDWF   PCL, F
+                      01290 
+085C   3408           01291                         DT      8
+085D   34FD           01292                         DT      B'11111101'
+085E   34F9           01293                         DT      B'11111001'
+085F   34E9           01294                         DT      B'11101001'
+0860   34C9           01295                         DT      B'11001001'
+0861   34C9           01296                         DT      B'11001001'
+0862   34C9           01297                         DT      B'11001001'
+0863   3499           01298                         DT      B'10011001'
+0864   3439           01299                         DT      B'00111001'
+0865   3401           01300                         DT      B'00000001'
+0866   3401           01301                         DT      B'00000001'
+0867   34F9           01302                         DT      B'11111001'
+0868   34F9           01303                         DT      B'11111001'
+0869   34F9           01304                         DT      B'11111001'
+086A   34F9           01305                         DT      B'11111001'
+086B   34F9           01306                         DT      B'11111001'
+086C   34FB           01307                         DT      B'11111011'
+                      01308 
+Warning[207]: Found label after column 1. (FIVE)
+086D                  01309         FIVE
+086D   0872           01310                         MOVFW   BTCOUNT
+086E   0782           01311                         ADDWF   PCL, F
+                      01312 
+086F   3408           01313                         DT      8
+0870   3401           01314                         DT      B'00000001'
+0871   3401           01315                         DT      B'00000001'
+0872   3439           01316                         DT      B'00111001'
+0873   343B           01317                         DT      B'00111011'
+0874   343F           01318                         DT      B'00111111'
+0875   343F           01319                         DT      B'00111111'
+0876   343F           01320                         DT      B'00111111'
+0877   3407           01321                         DT      B'00000111'
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 32
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0878   3403           01322                         DT      B'00000011'
+0879   34F1           01323                         DT      B'11110001'
+087A   34F9           01324                         DT      B'11111001'
+087B   34F9           01325                         DT      B'11111001'
+087C   34F9           01326                         DT      B'11111001'
+087D   34F1           01327                         DT      B'11110001'
+087E   3403           01328                         DT      B'00000011'
+087F   3407           01329                         DT      B'00000111'
+                      01330 
+                      01331 
+Warning[207]: Found label after column 1. (SIX)
+0880                  01332         SIX
+0880   0872           01333                         MOVFW   BTCOUNT
+0881   0782           01334                         ADDWF   PCL, F
+                      01335 
+0882   3408           01336                         DT      8
+0883   34C7           01337                         DT      B'11000111'
+0884   3483           01338                         DT      B'10000011'
+0885   3419           01339                         DT      B'00011001'
+0886   3439           01340                         DT      B'00111001'
+0887   343F           01341                         DT      B'00111111'
+0888   343F           01342                         DT      B'00111111'
+0889   343F           01343                         DT      B'00111111'
+088A   3427           01344                         DT      B'00100111'
+088B   3403           01345                         DT      B'00000011'
+088C   3411           01346                         DT      B'00010001'
+088D   3439           01347                         DT      B'00111001'
+088E   3439           01348                         DT      B'00111001'
+088F   3439           01349                         DT      B'00111001'
+0890   3411           01350                         DT      B'00010001'
+0891   3483           01351                         DT      B'10000011'
+0892   34C7           01352                         DT      B'11000111'
+                      01353 
+Warning[207]: Found label after column 1. (SEVEN)
+0893                  01354         SEVEN   
+0893   0872           01355                         MOVFW   BTCOUNT
+0894   0782           01356                         ADDWF   PCL, F
+                      01357 
+0895   3408           01358                         DT      8       
+0896   3401           01359                         DT      B'00000001'
+0897   3401           01360                         DT      B'00000001'
+0898   3439           01361                         DT      B'00111001'
+0899   3439           01362                         DT      B'00111001'
+089A   34F9           01363                         DT      B'11111001'
+089B   34F9           01364                         DT      B'11111001'
+089C   34F9           01365                         DT      B'11111001'
+089D   34F3           01366                         DT      B'11110011'
+089E   34E7           01367                         DT      B'11100111'
+089F   34CF           01368                         DT      B'11001111'
+08A0   34CF           01369                         DT      B'11001111'
+08A1   34CF           01370                         DT      B'11001111'
+08A2   34CF           01371                         DT      B'11001111'
+08A3   34CF           01372                         DT      B'11001111'
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 33
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+08A4   34CF           01373                         DT      B'11001111'
+08A5   34CF           01374                         DT      B'11001111'
+                      01375                                 
+Warning[207]: Found label after column 1. (EIGHT)
+08A6                  01376         EIGHT
+08A6   0872           01377                         MOVFW   BTCOUNT
+08A7   0782           01378                         ADDWF   PCL, F
+                      01379 
+08A8   3408           01380                         DT      8
+08A9   34C7           01381                         DT      B'11000111'
+08AA   3483           01382                         DT      B'10000011'
+08AB   3411           01383                         DT      B'00010001'
+08AC   3439           01384                         DT      B'00111001'
+08AD   3439           01385                         DT      B'00111001'
+08AE   3439           01386                         DT      B'00111001'
+08AF   3493           01387                         DT      B'10010011'
+08B0   34C7           01388                         DT      B'11000111'
+08B1   3483           01389                         DT      B'10000011'
+08B2   3411           01390                         DT      B'00010001'
+08B3   3439           01391                         DT      B'00111001'
+08B4   3439           01392                         DT      B'00111001'
+08B5   3439           01393                         DT      B'00111001'
+08B6   3411           01394                         DT      B'00010001'
+08B7   3483           01395                         DT      B'10000011'
+08B8   34C7           01396                         DT      B'11000111'
+                      01397 
+Warning[207]: Found label after column 1. (NINE)
+08B9                  01398         NINE
+08B9   0872           01399                         MOVFW   BTCOUNT
+08BA   0782           01400                         ADDWF   PCL, F
+                      01401 
+08BB   3408           01402                         DT      8
+08BC   34C7           01403                         DT      B'11000111'
+08BD   3483           01404                         DT      B'10000011'
+08BE   3411           01405                         DT      B'00010001'
+08BF   3439           01406                         DT      B'00111001'
+08C0   3439           01407                         DT      B'00111001'
+08C1   3439           01408                         DT      B'00111001'
+08C2   3411           01409                         DT      B'00010001'
+08C3   3481           01410                         DT      B'10000001'
+08C4   34C9           01411                         DT      B'11001001'
+08C5   34F9           01412                         DT      B'11111001'
+08C6   34F9           01413                         DT      B'11111001'
+08C7   34F9           01414                         DT      B'11111001'
+08C8   3439           01415                         DT      B'00111001'
+08C9   3439           01416                         DT      B'00111001'
+08CA   3483           01417                         DT      B'10000011'
+08CB   34C7           01418                         DT      B'11000111'
+                      01419 
+                      01420         
+                      01421 
+                      01422 
+                      01423 
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 34
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+2100                  01424         ORG     0x2100                          ; data EEPROM location
+2100   0001 0002 0003 01425         DE      1,2,3,4                         ; define first four EEPROM locations as 1, 2, 3, and 4
+       0004 
+                      01426 
+                      01427 
+                      01428 
+                      01429 
+                      01430         END                       ; directive 'end of program'
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 35
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+.                                 00000000
+ABDEN                             00000000
+ABDOVF                            00000007
+ADCON0                            0000001F
+ADCON1                            0000009F
+ADCS0                             00000004
+ADCS1                             00000005
+ADCS2                             00000006
+ADDEN                             00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+ANS0                              00000000
+ANS1                              00000001
+ANS10                             00000002
+ANS11                             00000003
+ANS2                              00000002
+ANS3                              00000003
+ANS4                              00000004
+ANS5                              00000005
+ANS6                              00000006
+ANS7                              00000007
+ANS8                              00000000
+ANS9                              00000001
+ANSEL                             0000011E
+ANSELH                            0000011F
+A_OFF                             BCF     PORTC,  0
+A_ON                              BSF     PORTC,  0
+BAUDCTL                           0000009B
+BF                                00000000
+BRG0                              00000000
+BRG1                              00000001
+BRG10                             00000002
+BRG11                             00000003
+BRG12                             00000004
+BRG13                             00000005
+BRG14                             00000006
+BRG15                             00000007
+BRG16                             00000003
+BRG2                              00000002
+BRG3                              00000003
+BRG4                              00000004
+BRG5                              00000005
+BRG6                              00000006
+BRG7                              00000007
+BRG8                              00000000
+BRG9                              00000001
+BRGH                              00000002
+BTCOUNT                           00000072
+B_OFF                             BCF     PORTC,  1
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 36
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+B_ON                              BSF     PORTC,  1
+C                                 00000000
+C1CH0                             00000000
+C1CH1                             00000001
+C1IE                              00000005
+C1IF                              00000005
+C1OE                              00000005
+C1ON                              00000007
+C1OUT                             00000006
+C1POL                             00000004
+C1R                               00000002
+C1SEN                             00000005
+C1VREN                            00000007
+C2CH0                             00000000
+C2CH1                             00000001
+C2IE                              00000006
+C2IF                              00000006
+C2OE                              00000005
+C2ON                              00000007
+C2OUT                             00000006
+C2POL                             00000004
+C2R                               00000002
+C2REN                             00000004
+C2SYNC                            00000000
+C2VREN                            00000006
+CCP1CON                           00000017
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCPR                              00000015
+CCPR1H                            00000016
+CCPR1L                            00000015
+CHAR                              00000800
+CHS0                              00000002
+CHS1                              00000003
+CHS2                              00000004
+CHS3                              00000005
+CKE                               00000006
+CKP                               00000004
+CLK_OFF                           BCF     PORTC,  7
+CLK_ON                            BSF     PORTC,  7
+CLRAM                             0000012A
+CM1CON0                           00000119
+CM2CON0                           0000011A
+CM2CON1                           0000011B
+COUNT0                            00000025
+COUNT1                            00000026
+COUNT2                            00000027
+COUNT3                            00000028
+COUNT4                            0000006D
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 37
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CREN                              00000004
+CSRC                              00000007
+CSR_ET7                           0000015F
+CSR_ETF                           000001C9
+CSR_ETF8                          00000243
+CSR_GT7                           000001C0
+CSR_GTF                           0000023A
+CSR_GTF8                          000002C3
+CSR_LT7                           0000015F
+CSR_LTF                           000001C9
+CSR_LTF8                          00000243
+CURSOR                            0000006F
+D                                 00000005
+D0                                0000011F
+D1                                00000121
+DATALATCH                         00000114
+DATA_ADDRESS                      00000005
+DAT_OFF                           BCF     PORTC,  2
+DAT_ON                            BSF     PORTC,  2
+DC                                00000001
+DC1B0                             00000004
+DC1B1                             00000005
+DELAYMS                           00000021
+DELAYS                            00000022
+DELAYUS                           00000020
+DELAY_MS                          00000145
+DELAY_ONEMS                       0000013E
+DELAY_ONESEC                      0000014A
+DELAY_SEC                         00000151
+DELAY_US                          00000136
+DISP                              000000E3
+DISPLAY                           000000E9
+DL0                               0000011B
+DL1                               00000123
+DP0                               000000E9
+DRAM                              0000002C
+DRM0                              0000012E
+DSP0                              000000ED
+DSP1                              000000F7
+DSP2                              00000101
+DSP3                              0000010B
+DUMP                              000000A9
+D_A                               00000005
+D_NOT_A                           00000005
+ECCPAS                            0000001D
+ECCPAS0                           00000004
+ECCPAS1                           00000005
+ECCPAS2                           00000006
+ECCPASE                           00000007
+EEADR                             0000010D
+EEADRH                            0000010F
+EECON1                            0000018C
+EECON2                            0000018D
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 38
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+EEDAT                             0000010C
+EEDATA                            0000010C
+EEDATH                            0000010E
+EEIE                              00000004
+EEIF                              00000004
+EEPGD                             00000007
+EIGHT                             000008A6
+F                                 00000001
+FERR                              00000002
+FIVE                              0000086D
+FOUR                              0000085A
+FSR                               00000004
+GIE                               00000007
+GO                                00000001
+GO_DONE                           00000001
+GO_NOT_DONE                       00000001
+HTS                               00000002
+I2C_DATA                          00000005
+I2C_READ                          00000002
+I2C_START                         00000003
+I2C_STOP                          00000004
+INDF                              00000000
+INIT                              00000010
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IOC                               00000096
+IOC0                              00000000
+IOC1                              00000001
+IOC2                              00000002
+IOC3                              00000003
+IOC4                              00000004
+IOC5                              00000005
+IOCA                              00000096
+IOCA0                             00000000
+IOCA1                             00000001
+IOCA2                             00000002
+IOCA3                             00000003
+IOCA4                             00000004
+IOCA5                             00000005
+IOCB                              00000116
+IOCB4                             00000004
+IOCB5                             00000005
+IOCB6                             00000006
+IOCB7                             00000007
+IRCF0                             00000004
+IRCF1                             00000005
+IRCF2                             00000006
+IRP                               00000007
+LTS                               00000001
+MAIN                              0000001F
+MC1OUT                            00000007
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 39
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+MC2OUT                            00000006
+MILSEC                            00000023
+MN0                               000000E5
+MSEC                              00000140
+MSEC0                             00000146
+MSK                               00000093
+MSK0                              00000000
+MSK1                              00000001
+MSK2                              00000002
+MSK3                              00000003
+MSK4                              00000004
+MSK5                              00000005
+MSK6                              00000006
+MSK7                              00000007
+NINE                              000008B9
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
+NOT_BOR                           00000000
+NOT_DONE                          00000001
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_RABPU                         00000007
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+NOT_W                             00000002
+NOT_WRITE                         00000002
+NUMBER                            00000071
+OERR                              00000001
+OE_OFF                            BCF     PORTC,  5
+OE_ON                             BSF     PORTC,  5
+ONE                               00000821
+OPTION_REG                        00000081
+OSCCON                            0000008F
+OSCTUNE                           00000090
+OSFIE                             00000007
+OSFIF                             00000007
+OSTS                              00000003
+P                                 00000004
+P1M0                              00000006
+P1M1                              00000007
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PDC0                              00000000
+PDC1                              00000001
+PDC2                              00000002
+PDC3                              00000003
+PDC4                              00000004
+PDC5                              00000005
+PDC6                              00000006
+PEIE                              00000006
+PIE1                              0000008C
+PIE2                              0000008D
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 40
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PIR1                              0000000C
+PIR2                              0000000D
+POINTER                           0000006C
+PORTA                             00000005
+PORTB                             00000006
+PORTC                             00000007
+PR2                               00000092
+PRSEN                             00000007
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+PSSAC0                            00000002
+PSSAC1                            00000003
+PSSBD0                            00000000
+PSSBD1                            00000001
+PSTRCON                           0000019D
+PT                                0000002B
+PULSR                             00000002
+PULSS                             00000003
+PWM1CON                           0000001C
+R                                 00000002
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RA5                               00000005
+RABIE                             00000003
+RABIF                             00000000
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RC0                               00000000
+RC1                               00000001
+RC2                               00000002
+RC3                               00000003
+RC4                               00000004
+RC5                               00000005
+RC6                               00000006
+RC7                               00000007
+RCIDL                             00000006
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+RCSTA                             00000018
+RD                                00000000
+READ_WRITE                        00000002
+REG_OFF                           BCF     PORTC,  4
+REG_ON                            BSF     PORTC,  4
+RP0                               00000005
+RP1                               00000006
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 41
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RX9                               00000006
+RX9D                              00000000
+R_NOT_W                           00000002
+R_W                               00000002
+S                                 00000003
+SBOREN                            00000004
+SCKP                              00000004
+SCS                               00000000
+SEC                               00000024
+SEC0                              0000014C
+SEC1                              00000152
+SENB                              00000003
+SENDB                             00000003
+SEVEN                             00000893
+SHCNT                             0000006E
+SHIFT                             00000156
+SHIFTL                            00000038
+SHT00                             00000161
+SHT01                             00000167
+SHT02                             0000016D
+SHT03                             00000173
+SHT04                             00000179
+SHT05                             0000017F
+SHT06                             00000185
+SHT07                             0000018B
+SHT08                             00000191
+SHT09                             00000197
+SHT0A                             0000019D
+SHT0B                             000001A3
+SHT0C                             000001A9
+SHT0D                             000001AF
+SHT0E                             000001B5
+SHT0F                             000001BB
+SHT10                             000001CB
+SHT11                             000001D2
+SHT12                             000001D9
+SHT13                             000001E0
+SHT14                             000001E7
+SHT15                             000001EE
+SHT16                             000001F5
+SHT17                             000001FC
+SHT18                             00000203
+SHT19                             0000020A
+SHT1A                             00000211
+SHT1B                             00000218
+SHT1C                             0000021F
+SHT1D                             00000226
+SHT1E                             0000022D
+SHT1F                             00000234
+SHT20                             00000245
+SHT21                             0000024D
+SHT22                             00000255
+SHT23                             0000025D
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 42
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+SHT24                             00000265
+SHT25                             0000026D
+SHT26                             00000275
+SHT27                             0000027D
+SHT28                             00000285
+SHT29                             0000028D
+SHT2A                             00000295
+SHT2B                             0000029D
+SHT2C                             000002A5
+SHT2D                             000002AD
+SHT2E                             000002B5
+SHT2F                             000002BD
+SIX                               00000880
+SMP                               00000007
+SPBRG                             00000099
+SPBRGH                            0000009A
+SPEN                              00000007
+SR0                               00000006
+SR1                               00000007
+SRCON                             0000019E
+SREN                              00000005
+SSPADD                            00000093
+SSPBUF                            00000013
+SSPCON                            00000014
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+SSPM3                             00000003
+SSPMSK                            00000093
+SSPOV                             00000006
+SSPSTAT                           00000094
+STATUS                            00000003
+STRA                              00000000
+STRB                              00000001
+STRC                              00000002
+STRD                              00000003
+STRSYNC                           00000004
+SWDTEN                            00000000
+SYNC                              00000004
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1GINV                            00000007
+T1GSS                             00000001
+T1IE                              00000000
+T1IF                              00000000
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 43
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+T1OSCEN                           00000003
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+T2IE                              00000001
+T2IF                              00000001
+TEMPFILE                          0000002A
+TESTER                            00000070
+THREE                             00000847
+TMR0                              00000001
+TMR1                              0000000E
+TMR1CS                            00000001
+TMR1GE                            00000006
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISA5                            00000005
+TRISB                             00000086
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+TRISC                             00000087
+TRISC0                            00000000
+TRISC1                            00000001
+TRISC2                            00000002
+TRISC3                            00000003
+TRISC4                            00000004
+TRISC5                            00000005
+TRISC6                            00000006
+TRISC7                            00000007
+TRMT                              00000001
+TUN0                              00000000
+TUN1                              00000001
+TUN2                              00000002
+TUN3                              00000003
+TUN4                              00000004
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 44
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TWO                               00000834
+TX9                               00000006
+TX9D                              00000000
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+TXSTA                             00000098
+UA                                00000001
+ULPWUE                            00000005
+USEC                              00000137
+VAR0                              00000029
+VCFG                              00000006
+VP6EN                             00000004
+VR0                               00000000
+VR1                               00000001
+VR2                               00000002
+VR3                               00000003
+VRCON                             00000118
+VRR                               00000005
+W                                 00000000
+WCOL                              00000007
+WDTCON                            00000097
+WDTPS0                            00000001
+WDTPS1                            00000002
+WDTPS2                            00000003
+WDTPS3                            00000004
+WIDTH                             00000073
+WPU                               00000095
+WPU0                              00000000
+WPU1                              00000001
+WPU2                              00000002
+WPU4                              00000004
+WPU5                              00000005
+WPUA                              00000095
+WPUA0                             00000000
+WPUA1                             00000001
+WPUA2                             00000002
+WPUA4                             00000004
+WPUA5                             00000005
+WPUB                              00000115
+WPUB4                             00000004
+WPUB5                             00000005
+WPUB6                             00000006
+WPUB7                             00000007
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+WUE                               00000001
+Z                                 00000002
+ZERO                              0000080C
+_BOD_NSLEEP                       00003EFF
+_BOD_OFF                          00003CFF
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 45
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_BOD_ON                           00003FFF
+_BOD_SBODEN                       00003DFF
+_BOREN_NSLEEP                     00003EFF
+_BOREN_OFF                        00003CFF
+_BOREN_ON                         00003FFF
+_BOREN_SBODEN                     00003DFF
+_BOR_NSLEEP                       00003EFF
+_BOR_OFF                          00003CFF
+_BOR_ON                           00003FFF
+_BOR_SBODEN                       00003DFF
+_CONFIG                           00002007
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003F7F
+_CP_OFF                           00003FFF
+_CP_ON                            00003FBF
+_DEVID1                           00002006
+_EC_OSC                           00003FFB
+_EXTRC                            00003FFF
+_EXTRCIO                          00003FFE
+_EXTRC_OSC_CLKOUT                 00003FFF
+_EXTRC_OSC_NOCLKOUT               00003FFE
+_FCMEN_OFF                        000037FF
+_FCMEN_ON                         00003FFF
+_FOSC_EC                          00003FFB
+_FOSC_EXTRCCLK                    00003FFF
+_FOSC_EXTRCIO                     00003FFE
+_FOSC_HS                          00003FFA
+_FOSC_INTRCCLK                    00003FFD
+_FOSC_INTRCIO                     00003FFC
+_FOSC_LP                          00003FF8
+_FOSC_XT                          00003FF9
+_HS_OSC                           00003FFA
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_IESO_OFF                         00003BFF
+_IESO_ON                          00003FFF
+_INTOSC                           00003FFD
+_INTOSCIO                         00003FFC
+_INTRC_OSC_CLKOUT                 00003FFD
+_INTRC_OSC_NOCLKOUT               00003FFC
+_LP_OSC                           00003FF8
+_MCLRE_OFF                        00003FDF
+_MCLRE_ON                         00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FEF
+_WDTE_OFF                         00003FF7
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FF7
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FF9
+__16F690                          00000001
+MPASM  5.51                HUB12_LIBRARY3.ASM   5-6-2019  18:46:04         PAGE 46
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+pclath_temp                       0000007F
+status_temp                       0000007E
+w_temp                            0000007D
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+0000 : X---XXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0080 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+00C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0100 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0140 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0180 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+01C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0200 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0240 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0280 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+02C0 : XXXX------------ ---------------- ---------------- ----------------
+0800 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0840 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0880 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+08C0 : XXXXXXXXXXXX---- ---------------- ---------------- ----------------
+2000 : -------X-------- ---------------- ---------------- ----------------
+2100 : XXXX------------ ---------------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:   909
+Program Memory Words Free:  3187
+
+
+Errors   :     0
+Warnings :    56 reported,     0 suppressed
+Messages :   260 reported,     0 suppressed
+
+

@@ -1,0 +1,29 @@
+CAM output for current project MINS-MILLI-6in_2sided.t3001
+Output on 13. Apr 2021, 16:29h
+Current project created using TARGET 13.4.0.51 smart
+Output created using PCBout V13.4.0.51
+DELIVERY ADDRESS:
+  
+  
+  
+  GB- 
+  Tel: 
+  FAX: 
+  eMail: 
+Size of PCB: 153.67 mm x 305.753 mm
+
+Description of created files as follows:
+
+MINS-MILLI-6in_2sided.Top = 16 = Copper top L2   ( *.Top )
+MINS-MILLI-6in_2sided.Bot = 2 = Copper bottom L1   ( *.Bot )
+MINS-MILLI-6in_2sided.Tool = drill tool list
+MINS-MILLI-6in_2sided.Drill = Galvanised drills
+MINS-MILLI-6in_2sided.Outline = 23 = PCB outline   ( *.Outline )
+MINS-MILLI-6in_2sided.StopTop = 18 = Solder stop mask top   ( *.StopTop )
+MINS-MILLI-6in_2sided.StopBot = 4 = Solder stop mask bottom   ( *.StopBot )
+MINS-MILLI-6in_2sided.PosiTop = 21 = Placement print top   ( *.PosiTop )
+MINS-MILLI-6in_2sided.PosiBot = 7 = Placement print bottom   ( *.PosiBot )
+MINS-MILLI-6in_2sided.PasteBot = 5 = Solder paste bottom   ( *.PasteBot )
+MINS-MILLI-6in_2sided.Apr = TARGET 3001! aperture list
+MINS-MILLI-6in_2sided.Whl = Eagle compatible aperture list
+

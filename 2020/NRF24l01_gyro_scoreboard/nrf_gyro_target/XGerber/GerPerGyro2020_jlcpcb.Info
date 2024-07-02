@@ -1,0 +1,31 @@
+CAM output for current project GerPerGyro2020_jlcpcb.T3001
+Output on 28. Sep 2020, 19:48h
+Current project created using TARGET 19.4.0.27 discover
+Output created using TARGET 3001! V19.4.0.27
+Current Project from TARGET NC version: Commercial use is criminal!
+DELIVERY ADDRESS:
+  
+  
+  
+  GB- 
+  Tel: 
+  FAX: 
+  eMail: 
+Size of PCB: 41.275 mm x 40 mm
+
+Description of created files as follows:
+
+GerPerGyro2020_jlcpcb.Top = 16 = Copper top L1   ( *.Top )
+GerPerGyro2020_jlcpcb.Bot = 2 = Copper bottom L2   ( *.Bot )
+GerPerGyro2020_jlcpcb.Tool = drill tool list
+GerPerGyro2020_jlcpcb.Drill = Galvanised drills
+GerPerGyro2020_jlcpcb.Outline = 23 = PCB outline   ( *.Outline )
+GerPerGyro2020_jlcpcb.StopTop = 18 = Solder stop mask top   ( *.StopTop )
+GerPerGyro2020_jlcpcb.StopBot = 4 = Solder stop mask bottom   ( *.StopBot )
+GerPerGyro2020_jlcpcb.PosiTop = 21 = Placement print top   ( *.PosiTop )
+GerPerGyro2020_jlcpcb.PosiBot = 7 = Placement print bottom   ( *.PosiBot )
+GerPerGyro2020_jlcpcb.PasteTop = 19 = Solder paste top   ( *.PasteTop )
+GerPerGyro2020_jlcpcb.PasteBot = 5 = Solder paste bottom   ( *.PasteBot )
+GerPerGyro2020_jlcpcb.Apr = TARGET 3001! aperture list
+GerPerGyro2020_jlcpcb.Whl = Eagle compatible aperture list
+

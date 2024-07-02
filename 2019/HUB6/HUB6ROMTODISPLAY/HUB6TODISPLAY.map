@@ -1,0 +1,90 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Mon Oct 07 17:31:24 2019
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000004    program   0x000206
+.config_2007_HUB6TODISPLAY.O       code   0x002007    program   0x000002
+                   .org_3       code   0x002100    program   0x000008
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x000106      
+                            0x002007    0x002007      
+                            0x002100    0x002103      
+            265 out of 4359 program addresses used, program memory utilization is 6%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                 ACKTEST0   0x0000be    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+            ALL_SCL_PULSE   0x0000dd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                 DELAY_MS   0x000102    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+              DELAY_ONEMS   0x0000fb    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                 DELAY_US   0x0000f3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                   I2CADD   0x0000a7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                  I2CADD0   0x0000ab    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                  I2CADD1   0x0000b3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                  I2CBIT0   0x0000af    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                  I2CBIT1   0x0000b1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                    I2CR0   0x000068    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                    I2CR1   0x000073    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                    I2CR3   0x000066    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                  I2CREAD   0x000037    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                 I2CSTART   0x0000c5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                  I2CSTOP   0x0000e2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+            I2C_MASTERACK   0x00007f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+           I2C_MASTERNACK   0x000093    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+             I2C_SLAVEACK   0x0000b7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                     INIT   0x000010    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                     MAIN   0x000034    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                    MISO0   0x00006b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                    MISO1   0x00006f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                     MSEC   0x0000fd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                    MSEC0   0x000103    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                SCL_PULSE   0x0000d6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                     USEC   0x0000f4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     INIT   0x000010    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                     MAIN   0x000034    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                  I2CREAD   0x000037    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                    I2CR3   0x000066    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                    I2CR0   0x000068    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                    MISO0   0x00006b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                    MISO1   0x00006f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                    I2CR1   0x000073    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+            I2C_MASTERACK   0x00007f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+           I2C_MASTERNACK   0x000093    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                   I2CADD   0x0000a7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                  I2CADD0   0x0000ab    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                  I2CBIT0   0x0000af    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                  I2CBIT1   0x0000b1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                  I2CADD1   0x0000b3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+             I2C_SLAVEACK   0x0000b7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                 ACKTEST0   0x0000be    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                 I2CSTART   0x0000c5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                SCL_PULSE   0x0000d6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+            ALL_SCL_PULSE   0x0000dd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                  I2CSTOP   0x0000e2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                 DELAY_US   0x0000f3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                     USEC   0x0000f4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+              DELAY_ONEMS   0x0000fb    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                     MSEC   0x0000fd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                 DELAY_MS   0x000102    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+                    MSEC0   0x000103    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\20191007_HUB6ROMTODISPLAY\HUB6TODISPLAY.ASM
+
+

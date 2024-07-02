@@ -1,0 +1,32 @@
+// SourceBoost Linker Function Resource Usage Dump
+
+#GLOBAL:"global",line = 0,ram = 42.3,rom = 0;
+__div_16_16(unsigned short,unsigned short):"E:\Prg\compiler.trunk\picantc\libc\div.c",line = 116,ram = 9.0,rom = 31;
+__mul_8u_8u(unsigned char,unsigned char):"E:\Prg\compiler.trunk\picantc\libc\mul.c",line = 96,ram = 7.0,rom = 22;
+Wdt_Delay_Ms(unsigned char):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_Delay.c",line = 118,ram = 2.0,rom = 11;
+FCM_display(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\FC\PIC Dev Kit.c",line = 895,ram = 13.0,rom = 190;
+FCD_LCDDisplay0_Cursor(unsigned char,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\FC\PIC Dev Kit.c",line = 488,ram = 2.0,rom = 30;
+FCD_LCDDisplay0_PrintString(unsigned char*,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\FC\PIC Dev Kit.c",line = 577,ram = 4.0,rom = 28;
+FCD_LCDDisplay0_PrintNumber(signed short):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\FC\PIC Dev Kit.c",line = 519,ram = 7.0,rom = 238;
+FCD_PWM0_SetDutyCycle(unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\FC\PIC Dev Kit.c",line = 867,ram = 1.0,rom = 4;
+FCD_LCDDisplay0_RawSend(unsigned char,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\FC\PIC Dev Kit.c",line = 368,ram = 3.0,rom = 65;
+FCD_LCDDisplay0_Start(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\FC\PIC Dev Kit.c",line = 418,ram = 0.0,rom = 85;
+FCD_LCDDisplay0_Clear(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\FC\PIC Dev Kit.c",line = 451,ram = 0.0,rom = 17;
+FCD_LCDDisplay0_ClearLine(unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\FC\PIC Dev Kit.c",line = 643,ram = 3.0,rom = 23;
+FC_CAL_Enable_ADC(unsigned char,unsigned char,unsigned char,unsigned char):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_ADC.c",line = 55,ram = 8.0,rom = 71;
+FC_CAL_Sample_ADC(unsigned char):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_ADC.c",line = 150,ram = 5.0,rom = 36;
+FC_CAL_Disable_ADC(void):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_ADC.c",line = 165,ram = 0.0,rom = 15;
+FCD_ADC0_ReadAsByte(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\FC\PIC Dev Kit.c",line = 705,ram = 2.0,rom = 17;
+FC_CAL_PWM_Enable_Channel_1(void):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_PWM.c",line = 84,ram = 0.0,rom = 8;
+FC_CAL_PWM_Set_Duty_8Bit_1(unsigned char):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_PWM.c",line = 335,ram = 0.0,rom = 3;
+FC_CAL_PWM_Change_Period_1(unsigned char,unsigned short):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_PWM.c",line = 375,ram = 0.0,rom = 32;
+FCD_PWM0_Enable(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\FC\PIC Dev Kit.c",line = 852,ram = 0.0,rom = 10;
+main(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\FC\PIC Dev Kit.c",line = 1023,ram = 8.0,rom = 243;
+interrupt(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\FC\PIC Dev Kit.c",line = 1270,ram = 0.0,rom = 11;
+delay_us(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 5;
+delay_10us(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 14;
+delay_ms(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 44;
+delay_s(unsigned char):"NoSourceFile",line = 0,ram = 1.0,rom = 15;
+_startup(void):"NoSourceFile",line = 0,ram = 0.0,rom = 48;
+#HEAP_BLOCK: 0, 160, 95;
+#HEAP_BLOCK: 1, 97, 30;

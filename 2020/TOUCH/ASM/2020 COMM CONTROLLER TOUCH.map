@@ -1,0 +1,88 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Fri Feb 21 10:11:48 2020
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000004    program   0x000118
+.config_2007_2020 COMM CONTROLLER TOUCH.O       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x00008f      
+                            0x002007    0x002007      
+            142 out of 4359 program addresses used, program memory utilization is 3%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                CLK_PULSE   0x000069    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                 DELAY_MS   0x00007f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+              DELAY_ONEMS   0x000078    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+             DELAY_ONESEC   0x000084    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                DELAY_SEC   0x00008b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                 DELAY_US   0x000070    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                     INIT   0x000010    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                     MAIN   0x000021    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                      MN0   0x000026    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                      MN1   0x000033    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                     MN10   0x000038    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                     MN11   0x00003a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                     MSEC   0x00007a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                    MSEC0   0x000080    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                      PD0   0x00004a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                     PD00   0x00004e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                     PD01   0x000050    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                      PD1   0x000051    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                     PD10   0x00005c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                     PD11   0x00005e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                      PD2   0x000058    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                      PD3   0x00005f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                  PUTDATA   0x000046    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                     SEC0   0x000086    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                     SEC1   0x00008c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+              SI_CLKPULSE   0x00003f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                     USEC   0x000071    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     INIT   0x000010    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                     MAIN   0x000021    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                      MN0   0x000026    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                      MN1   0x000033    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                     MN10   0x000038    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                     MN11   0x00003a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+              SI_CLKPULSE   0x00003f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                  PUTDATA   0x000046    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                      PD0   0x00004a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                     PD00   0x00004e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                     PD01   0x000050    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                      PD1   0x000051    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                      PD2   0x000058    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                     PD10   0x00005c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                     PD11   0x00005e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                      PD3   0x00005f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                CLK_PULSE   0x000069    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                 DELAY_US   0x000070    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                     USEC   0x000071    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+              DELAY_ONEMS   0x000078    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                     MSEC   0x00007a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                 DELAY_MS   0x00007f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                    MSEC0   0x000080    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+             DELAY_ONESEC   0x000084    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                     SEC0   0x000086    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                DELAY_SEC   0x00008b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+                     SEC1   0x00008c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\TOUCH\ASM\2020 COMM CONTROLLER TOUCH.ASM
+
+

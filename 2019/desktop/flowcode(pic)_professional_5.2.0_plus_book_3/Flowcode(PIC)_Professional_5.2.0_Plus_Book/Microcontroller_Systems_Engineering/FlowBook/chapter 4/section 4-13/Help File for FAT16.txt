@@ -1,0 +1,181 @@
+*****************************
+Currently unsupported 
+*****************************
+long file names
+FAT32 file system
+Delete data from file
+Delete directory
+Directories other then root cannot have more then 512 entries
+
+
+*****************************
+Init_FAT
+*****************************
+Initialises the card and starts up the FAT driver, points the directory to root.
+Current directory is specified as Root.
+
+Retval = 0 - Init OK
+Retval > 0 - Init Not OK
+
+
+
+*****************************
+Open_File
+*****************************
+Searches for a file in the current directory and opens the first sector into memory.
+
+512-byte buffer contains 1st sector of file
+
+prerequisites - Init_FAT
+
+Retval = 0 - File found and opened
+Retval = 1 - File not found
+Retval > 1 - Error
+
+
+
+*****************************
+Read_File_Sector
+*****************************
+Overwrites local buffer with the current sector from the disk - Used to refresh the local buffer.
+
+512-byte buffer contains current sector of file
+
+prerequisites - Init_FAT & Open_File
+
+Retval = 0 - Sector read
+Retval > 0 - Error
+
+
+
+*****************************
+Read_File_Length
+*****************************
+returns index of next free byte in the sector - 512 = sector full.
+
+512-byte buffer contains current sector of file
+
+prerequisites - Init_FAT & Open_File
+
+
+
+*****************************
+Read_Next_File_Sector
+*****************************
+Reads the next 512 bytes of the file. If the current 512 bytes is at the end of the file then returns a 1.
+
+512-byte buffer contains next sector of file or current sector of file if the last sector has been reached.
+
+prerequisites - Init_FAT & Open_File
+
+Retval = 0 - Sector read
+Retval = 1 - At last sector in file
+Retval > 1 - Error
+
+
+
+*****************************
+Append_String_To_File
+*****************************
+Writes a string to the end of a file and modifies the file size accordingly. Very compatible but can be slow for multiple writes.
+
+512-byte buffer contains last sector of file
+
+prerequisites - Init_FAT & Open_File
+
+Retval = 0 - String Appended
+Retval > 0 - Error
+
+
+*****************************
+Write_File_Sector
+*****************************
+Writes the contents of the local 512 byte buffer back into the card at the current sector in the file. Easy to get wrong but much faster then Append function. If in doubt do not use as you can corrupt the card very easily using this function.
+
+512-byte buffer contains current sector of file
+
+prerequisites - Init_FAT & Open_File
+
+Retval = 0 - Sector Written
+Retval > 0 - Error
+
+
+*****************************
+Force_Next_File_Sector
+*****************************
+Same as the read next file sector but if the end of the file is found then a new cluster of data is created.
+
+512-byte buffer contains next sector of file or newly created sector of file
+
+Retval = 0 - Moved to next sector correctly
+Retval > 0 - Error
+
+
+*****************************
+Create_File
+*****************************
+Creates an empty file in the current folder, file must be opened before and data can be read or written.
+After a file has been created it must be opened to allow read and write commands to function.
+
+prerequisites - Init_FAT
+
+Retval = 0 - File created
+Retval > 0 - Error
+
+
+*****************************
+Delete_File
+*****************************
+Deletes a file from the current folder of the card by setting a deleted flag in the directory entry and then clearing the assosiated file fat tables. 
+
+prerequisites - Init_FAT
+
+Retval = 0 - File deleted
+Retval > 0 - Error
+
+
+*****************************
+Write_Buffer
+*****************************
+Writes a byte to the local buffer at address 0 - 511.
+
+
+*****************************
+Read_Buffer
+*****************************
+Reads a byte from the local buffer at address 0 - 511.
+
+
+*****************************
+Open_Folder
+*****************************
+Moves current folder to point to a directory.
+
+Retval = 0 - Folder opened
+Retval = 1 - Folder not found
+Retval > 1 - Error
+
+
+*****************************
+Goto_Root_Folder
+*****************************
+Moves current folder back to root.
+
+
+
+*****************************
+Scan_Current_Folder
+*****************************
+Scan current folder for files(0) or folders(1) depending on the Scan_Type parameter. 
+
+Retval = 0 - File or Folder entry found
+Retval = 1 - End of directory reached
+Retval > 1 - Error
+
+
+*****************************
+Read_Byte_From_Scan
+*****************************
+Returns a character from the filename discovered using the scan command.
+
+

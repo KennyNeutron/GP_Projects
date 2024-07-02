@@ -1,0 +1,287 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Fri Feb 28 17:54:44 2020
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000004    program   0x0001a2
+                   .org_3       code   0x000100    program   0x000200
+                   .org_4       code   0x000200    program   0x000262
+                   .org_5       code   0x000500    program   0x0001c4
+                   .org_6       code   0x000600    program   0x0001f8
+                   .org_7       code   0x000700    program   0x0001f0
+                   .org_8       code   0x000900    program   0x0000a8
+ .config_2007_MODULEGPU.O       code   0x002007    program   0x000002
+                   .org_9       code   0x002100    program   0x000008
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x0000d4      
+                            0x000100    0x000330      
+                            0x000500    0x0005e1      
+                            0x000600    0x0006fb      
+                            0x000700    0x0007f7      
+                            0x000900    0x000953      
+                            0x002007    0x002007      
+                            0x002100    0x002103      
+            1586 out of 4359 program addresses used, program memory utilization is 36%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                      CCG   0x00004f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     CCG0   0x000056    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     CCG1   0x000059    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     CCG2   0x00005f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     CCG3   0x00007c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   CCGRET   0x00008b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     CHAR   0x00069b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    CHARB   0x000700    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     CLR0   0x0001dd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     CLR1   0x0001e6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    CLRAM   0x0001d7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+               CLRDISPLAY   0x0000d3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    CLRT0   0x000042    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  CLRTRAM   0x00003e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    COLON   0x0007e5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+               COMCPU2GPU   0x000048    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    CSRT0   0x000322    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    CSRT1   0x000328    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   CTRET1   0x00032e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+               CURSORTEST   0x00030a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                DATALATCH   0x000095    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    DBIT0   0x000064    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    DBIT1   0x000066    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                 DCURSOR0   0x000141    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                 DCURSOR1   0x000148    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  DDECODE   0x00011b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    DDRET   0x000187    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                 DELAY_MS   0x0001fb    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+              DELAY_ONEMS   0x0001f4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                 DELAY_US   0x0001ec    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   DFONT0   0x000158    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   DFONT1   0x00016f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     DHUB   0x000151    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  DISPHUB   0x000189    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  DISPLAY   0x0000a6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+       DONTSCROLLHUB1DIG0   0x0001af    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+       DONTSCROLLHUB1DIG1   0x0001a5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+       DONTSCROLLHUB1DIG2   0x00019b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+       DONTSCROLLHUB3DIG0   0x0001cd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+       DONTSCROLLHUB3DIG1   0x0001c3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+       DONTSCROLLHUB3DIG2   0x0001b9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                      DOT   0x0007ac    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     DSP0   0x000099    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    EIGHT   0x000760    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   F0LN00   0x00026e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   F0LN01   0x000250    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   F0LN10   0x00025f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   F0LN11   0x000241    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                F0_LINE00   0x000268    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                F0_LINE01   0x00024a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                F0_LINE10   0x000259    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                F0_LINE11   0x00023b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   F1LN00   0x0002da    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  F1LN002   0x0002e8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   F1LN01   0x0002a0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  F1LN012   0x0002ae    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   F1LN10   0x0002bd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  F1LN102   0x0002cb    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   F1LN11   0x000283    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  F1LN112   0x000291    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                F1_LINE00   0x0002d4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                F1_LINE01   0x00029a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                F1_LINE10   0x0002b7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                F1_LINE11   0x00027d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     FIVE   0x000727    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    FONT0   0x000235    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    FONT1   0x000277    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     FOUR   0x000714    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                 GUESTPOS   0x0007d2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                      HB1   0x00022b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                      HB2   0x000225    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                      HB3   0x00021f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                      HB4   0x000219    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                      HB5   0x000213    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                      HB6   0x00020d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     HDP1   0x000231    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  HOMEPOS   0x0007bf    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  HUBDUMP   0x000200    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     INIT   0x000010    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     MAIN   0x00003c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     MSEC   0x0001f6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    MSEC0   0x0001fc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     NINE   0x000773    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                      ONE   0x0006c3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                       OT   0x000786    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     PDT0   0x00010c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  PUTDATA   0x000100    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   SCOLON   0x000799    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    SEVEN   0x00074d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   SHFDT0   0x0002f9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   SHFDT1   0x000307    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                SHIFTDATA   0x0002f1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                      SIX   0x00073a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    THREE   0x0006e9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                      TWO   0x0006d6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   T_CHAR   0x000500    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  T_CHARB   0x000600    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  T_EIGHT   0x000654    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   T_FIVE   0x0005bf    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   T_FOUR   0x00059c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   T_NINE   0x000677    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    T_ONE   0x000533    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  T_SEVEN   0x000631    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    T_SIX   0x00060e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  T_THREE   0x000579    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    T_TWO   0x000556    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   T_ZERO   0x000510    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     USEC   0x0001ed    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  WCF0RET   0x00092f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  WCF1RET   0x00094f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    WDF02   0x000916    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    WDF04   0x00091b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    WDF06   0x000920    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    WDF07   0x000925    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    WDF08   0x00092a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    WDF18   0x000944    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    WDF1A   0x000949    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+             WIDTHCHECKF0   0x000900    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+             WIDTHCHECKF1   0x000934    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     ZERO   0x0006b0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     INIT   0x000010    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     MAIN   0x00003c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  CLRTRAM   0x00003e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    CLRT0   0x000042    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+               COMCPU2GPU   0x000048    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                      CCG   0x00004f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     CCG0   0x000056    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     CCG1   0x000059    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     CCG2   0x00005f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    DBIT0   0x000064    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    DBIT1   0x000066    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     CCG3   0x00007c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   CCGRET   0x00008b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                DATALATCH   0x000095    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     DSP0   0x000099    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  DISPLAY   0x0000a6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+               CLRDISPLAY   0x0000d3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  PUTDATA   0x000100    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     PDT0   0x00010c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  DDECODE   0x00011b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                 DCURSOR0   0x000141    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                 DCURSOR1   0x000148    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     DHUB   0x000151    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   DFONT0   0x000158    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   DFONT1   0x00016f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    DDRET   0x000187    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  DISPHUB   0x000189    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+       DONTSCROLLHUB1DIG2   0x00019b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+       DONTSCROLLHUB1DIG1   0x0001a5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+       DONTSCROLLHUB1DIG0   0x0001af    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+       DONTSCROLLHUB3DIG2   0x0001b9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+       DONTSCROLLHUB3DIG1   0x0001c3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+       DONTSCROLLHUB3DIG0   0x0001cd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    CLRAM   0x0001d7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     CLR0   0x0001dd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     CLR1   0x0001e6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                 DELAY_US   0x0001ec    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     USEC   0x0001ed    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+              DELAY_ONEMS   0x0001f4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     MSEC   0x0001f6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                 DELAY_MS   0x0001fb    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    MSEC0   0x0001fc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  HUBDUMP   0x000200    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                      HB6   0x00020d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                      HB5   0x000213    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                      HB4   0x000219    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                      HB3   0x00021f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                      HB2   0x000225    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                      HB1   0x00022b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     HDP1   0x000231    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    FONT0   0x000235    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                F0_LINE11   0x00023b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   F0LN11   0x000241    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                F0_LINE01   0x00024a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   F0LN01   0x000250    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                F0_LINE10   0x000259    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   F0LN10   0x00025f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                F0_LINE00   0x000268    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   F0LN00   0x00026e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    FONT1   0x000277    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                F1_LINE11   0x00027d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   F1LN11   0x000283    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  F1LN112   0x000291    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                F1_LINE01   0x00029a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   F1LN01   0x0002a0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  F1LN012   0x0002ae    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                F1_LINE10   0x0002b7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   F1LN10   0x0002bd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  F1LN102   0x0002cb    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                F1_LINE00   0x0002d4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   F1LN00   0x0002da    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  F1LN002   0x0002e8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                SHIFTDATA   0x0002f1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   SHFDT0   0x0002f9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   SHFDT1   0x000307    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+               CURSORTEST   0x00030a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    CSRT0   0x000322    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    CSRT1   0x000328    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   CTRET1   0x00032e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   T_CHAR   0x000500    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   T_ZERO   0x000510    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    T_ONE   0x000533    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    T_TWO   0x000556    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  T_THREE   0x000579    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   T_FOUR   0x00059c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   T_FIVE   0x0005bf    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  T_CHARB   0x000600    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    T_SIX   0x00060e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  T_SEVEN   0x000631    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  T_EIGHT   0x000654    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   T_NINE   0x000677    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     CHAR   0x00069b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     ZERO   0x0006b0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                      ONE   0x0006c3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                      TWO   0x0006d6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    THREE   0x0006e9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    CHARB   0x000700    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     FOUR   0x000714    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     FIVE   0x000727    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                      SIX   0x00073a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    SEVEN   0x00074d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    EIGHT   0x000760    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                     NINE   0x000773    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                       OT   0x000786    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                   SCOLON   0x000799    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                      DOT   0x0007ac    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  HOMEPOS   0x0007bf    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                 GUESTPOS   0x0007d2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    COLON   0x0007e5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+             WIDTHCHECKF0   0x000900    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    WDF02   0x000916    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    WDF04   0x00091b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    WDF06   0x000920    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    WDF07   0x000925    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    WDF08   0x00092a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  WCF0RET   0x00092f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+             WIDTHCHECKF1   0x000934    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    WDF18   0x000944    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                    WDF1A   0x000949    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+                  WCF1RET   0x00094f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2019\HUB12\20190717_MODULESB2_GPU\MODULEGPU.ASM
+
+

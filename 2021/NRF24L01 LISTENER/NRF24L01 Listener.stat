@@ -1,0 +1,38 @@
+// SourceBoost Linker Function Resource Usage Dump
+
+#GLOBAL:"global",line = 0,ram = 91.3,rom = 0;
+__div_16_16(unsigned short,unsigned short):"E:\Prg\compiler.trunk\picantc\libc\div.c",line = 116,ram = 9.0,rom = 31;
+Wdt_Delay_Ms(unsigned char):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_Delay.c",line = 118,ram = 2.0,rom = 11;
+FCI_SCOPY(unsigned char*,unsigned char,unsigned char*,unsigned char):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_String.c",line = 745,ram = 9.0,rom = 63;
+FCM_spi_data_write(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24L01 LISTENER\NRF24L01 Listener.c",line = 870,ram = 1.0,rom = 36;
+FCD_SPI_Legacy0_SPI_Send_Char(unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24L01 LISTENER\NRF24L01 Listener.c",line = 735,ram = 1.0,rom = 4;
+FCM_spi_data_read(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24L01 LISTENER\NRF24L01 Listener.c",line = 913,ram = 1.0,rom = 33;
+FCD_SPI_Legacy0_SPI_Get_Char(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24L01 LISTENER\NRF24L01 Listener.c",line = 756,ram = 2.0,rom = 12;
+FCM_nrf_FUNCTION_test(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24L01 LISTENER\NRF24L01 Listener.c",line = 987,ram = 17.0,rom = 197;
+FCD_LCDDisplay0_Clear(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24L01 LISTENER\NRF24L01 Listener.c",line = 467,ram = 0.0,rom = 17;
+FCD_LCDDisplay0_Cursor(unsigned char,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24L01 LISTENER\NRF24L01 Listener.c",line = 504,ram = 2.0,rom = 32;
+FCD_LCDDisplay0_PrintString(unsigned char*,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24L01 LISTENER\NRF24L01 Listener.c",line = 593,ram = 4.0,rom = 32;
+FCM_display_test(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24L01 LISTENER\NRF24L01 Listener.c",line = 1192,ram = 10.0,rom = 197;
+FCD_LCDDisplay0_PrintNumber(signed short):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24L01 LISTENER\NRF24L01 Listener.c",line = 535,ram = 7.0,rom = 293;
+FCM_rcv_macro(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24L01 LISTENER\NRF24L01 Listener.c",line = 1296,ram = 12.0,rom = 793;
+FCM_rcv_init(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24L01 LISTENER\NRF24L01 Listener.c",line = 1645,ram = 0.0,rom = 44;
+FCM_read_addr(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24L01 LISTENER\NRF24L01 Listener.c",line = 1878,ram = 1.0,rom = 48;
+FCM_check_fifo_status(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24L01 LISTENER\NRF24L01 Listener.c",line = 1954,ram = 0.0,rom = 8;
+FCM_read_payload(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24L01 LISTENER\NRF24L01 Listener.c",line = 1973,ram = 2.0,rom = 55;
+FCD_LCDDisplay0_ClearLine(unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24L01 LISTENER\NRF24L01 Listener.c",line = 659,ram = 3.0,rom = 28;
+FCM_nrf_flush_fifo(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24L01 LISTENER\NRF24L01 Listener.c",line = 2033,ram = 1.0,rom = 56;
+FCM_setup_nrf_address(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24L01 LISTENER\NRF24L01 Listener.c",line = 1753,ram = 1.0,rom = 107;
+FCM_nrf_clr_status(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24L01 LISTENER\NRF24L01 Listener.c",line = 1938,ram = 0.0,rom = 8;
+FCD_LCDDisplay0_RawSend(unsigned char,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24L01 LISTENER\NRF24L01 Listener.c",line = 384,ram = 3.0,rom = 107;
+FCD_LCDDisplay0_Start(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24L01 LISTENER\NRF24L01 Listener.c",line = 434,ram = 0.0,rom = 87;
+FC_CAL_SPI_Master_Init_1(void):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_SPI.c",line = 455,ram = 0.0,rom = 19;
+FC_CAL_SPI_Master_Byte_1(unsigned char):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_SPI.c",line = 516,ram = 3.0,rom = 13;
+FCD_SPI_Legacy0_SPI_Init(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24L01 LISTENER\NRF24L01 Listener.c",line = 712,ram = 0.0,rom = 12;
+main(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24L01 LISTENER\NRF24L01 Listener.c",line = 2094,ram = 17.0,rom = 320;
+interrupt(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24L01 LISTENER\NRF24L01 Listener.c",line = 2269,ram = 0.0,rom = 11;
+delay_us(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 5;
+delay_10us(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 14;
+delay_ms(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 44;
+delay_s(unsigned char):"NoSourceFile",line = 0,ram = 1.0,rom = 17;
+_startup(void):"NoSourceFile",line = 0,ram = 0.0,rom = 61;
+#HEAP_BLOCK: 0, 183, 72;

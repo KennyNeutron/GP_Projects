@@ -1,0 +1,110 @@
+;/////////////////////////////////////////////////////////////////////////////////
+;// Code Generator: BoostC Compiler - http://www.sourceboost.com
+;// Version       : 7.03
+;// License Type  : Pro License
+;// Limitations   : PIC12,PIC16 max code size:Unlimited, max RAM banks:Unlimited
+;/////////////////////////////////////////////////////////////////////////////////
+
+	ORG 0x00000000
+0000  2826  	GOTO	_startup
+	ORG 0x00000004
+0004  00FF  	MOVWF Int1Context
+0005  0E03  	SWAPF STATUS, W
+0006  1283  	BCF STATUS, RP0
+0007  1303  	BCF STATUS, RP1
+0008  00B4  	MOVWF Int1BContext
+0009  0E0A  	SWAPF PCLATH, W
+000A  00B5  	MOVWF Int1BContext+D'1'
+000B  0E04  	SWAPF FSR, W
+000C  00B6  	MOVWF Int1BContext+D'2'
+000D  118A  	BCF PCLATH,3
+000E  120A  	BCF PCLATH,4
+000F  284E  	GOTO	interrupt
+	ORG 0x00000010
+0010        main
+0010        ; { main ; function begin
+0010  3007  	MOVLW 0x07
+0011  1683  	BSF STATUS, RP0
+0012  1303  	BCF STATUS, RP1
+0013  009F  	MOVWF gbl_adcon1
+0014  30C0  	MOVLW 0xC0
+0015  0081  	MOVWF gbl_option_reg
+0016  0185  	CLRF gbl_trisa
+0017  30AA  	MOVLW 0xAA
+0018  1283  	BCF STATUS, RP0
+0019  0085  	MOVWF gbl_porta
+001A  30FB  	MOVLW 0xFB
+001B  1683  	BSF STATUS, RP0
+001C  0506  	ANDWF gbl_trisb, W
+001D  0086  	MOVWF gbl_trisb
+001E  30FB  	MOVLW 0xFB
+001F  1283  	BCF STATUS, RP0
+0020  0506  	ANDWF gbl_portb, W
+0021  00C2  	MOVWF CompTempVar2188
+0022  3004  	MOVLW 0x04
+0023  0442  	IORWF CompTempVar2188, W
+0024  0086  	MOVWF gbl_portb
+0025        label1
+0025  2825  	GOTO	label1
+0026        ; } main function end
+
+	ORG 0x00000026
+0026        _startup
+0026  30D5  	MOVLW 0xD5
+0027  1283  	BCF STATUS, RP0
+0028  1303  	BCF STATUS, RP1
+0029  00A0  	MOVWF gbl_14_LSR
+002A  30C4  	MOVLW 0xC4
+002B  00A1  	MOVWF gbl_14_LSR+D'1'
+002C  30BB  	MOVLW 0xBB
+002D  00A2  	MOVWF gbl_14_LSR+D'2'
+002E  30DC  	MOVLW 0xDC
+002F  00A3  	MOVWF gbl_14_LSR+D'3'
+0030  01A4  	CLRF gbl_15_gbl_aSig
+0031  01A5  	CLRF gbl_15_gbl_aSig+D'1'
+0032  01A6  	CLRF gbl_15_gbl_aSig+D'2'
+0033  01A7  	CLRF gbl_15_gbl_aSig+D'3'
+0034  01A8  	CLRF gbl_15_gbl_bSig
+0035  01A9  	CLRF gbl_15_gbl_bSig+D'1'
+0036  01AA  	CLRF gbl_15_gbl_bSig+D'2'
+0037  01AB  	CLRF gbl_15_gbl_bSig+D'3'
+0038  01AC  	CLRF gbl_15_gbl_zSig
+0039  01AD  	CLRF gbl_15_gbl_zSig+D'1'
+003A  01AE  	CLRF gbl_15_gbl_zSig+D'2'
+003B  01AF  	CLRF gbl_15_gbl_zSig+D'3'
+003C  01BC  	CLRF gbl_15_gbl_aExp
+003D  01BD  	CLRF gbl_15_gbl_bExp
+003E  01B7  	CLRF gbl_15_gbl_zExp
+003F  01B8  	CLRF gbl_15_gbl_zExp+D'1'
+0040  01BE  	CLRF gbl_15_gbl_aSign
+0041  01BF  	CLRF gbl_15_gbl_bSign
+0042  01C0  	CLRF gbl_15_gbl_zSign
+0043  01C1  	CLRF gbl_15_gbl_zSigZero
+0044  01B0  	CLRF gbl_15_gbl_ret
+0045  01B1  	CLRF gbl_15_gbl_ret+D'1'
+0046  01B2  	CLRF gbl_15_gbl_ret+D'2'
+0047  01B3  	CLRF gbl_15_gbl_ret+D'3'
+0048  01BA  	CLRF gbl_float_rounding_mode
+0049  01BB  	CLRF gbl_float_exception_flags
+004A  01B9  	CLRF gbl_float_detect_tininess
+004B  118A  	BCF PCLATH,3
+004C  120A  	BCF PCLATH,4
+004D  2810  	GOTO	main
+	ORG 0x0000004E
+004E        interrupt
+004E        ; { interrupt ; function begin
+004E  1283  	BCF STATUS, RP0
+004F  1303  	BCF STATUS, RP1
+0050  0E36  	SWAPF Int1BContext+D'2', W
+0051  0084  	MOVWF FSR
+0052  0E35  	SWAPF Int1BContext+D'1', W
+0053  008A  	MOVWF PCLATH
+0054  0E34  	SWAPF Int1BContext, W
+0055  0083  	MOVWF STATUS
+0056  0EFF  	SWAPF Int1Context, F
+0057  0E7F  	SWAPF Int1Context, W
+0058  0009  	RETFIE
+0059        ; } interrupt function end
+
+	ORG 0x00002007
+2007  3FBB  	DW 0x3FBB

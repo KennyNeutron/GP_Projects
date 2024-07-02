@@ -1,0 +1,222 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Fri Apr 16 17:25:13 2021
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000004    program   0x000308
+                   .org_3       code   0x000ea0    program   0x000010
+                   .org_4       code   0x000ed0    program   0x00021a
+.config_2007_NRF_GYRO_REICIEVERV0.O       code   0x002007    program   0x000002
+                   .org_5       code   0x002100    program   0x000008
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x000187      
+                            0x000ea0    0x000ea7      
+                            0x000ed0    0x000fdc      
+                            0x002007    0x002007      
+                            0x002100    0x002103      
+            671 out of 4359 program addresses used, program memory utilization is 15%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+              CMD_REGREAD   0x000f9c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+             CMD_REGWRITE   0x000f92    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     INIT   0x000011    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                INTERRUPT   0x000186    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+             KEYPAD_RESET   0x000182    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+               LONG_SHIFT   0x000171    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     MAIN   0x00004b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+             NRF_DELAY_MS   0x000fd8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+          NRF_DELAY_ONEMS   0x000fd1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+             NRF_DELAY_US   0x000fc9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+          NRF_GET_PAYLOAD   0x000ea2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                 NRF_MSEC   0x000fd3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                NRF_MSEC0   0x000fd9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+         NRF_SEND_PAYLOAD   0x000ea0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                 NRF_USEC   0x000fca    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     PBZ0   0x0000a6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     PGF0   0x0000c7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     PGS0   0x0000dd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     PHF0   0x0000bc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     PHS0   0x0000d2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+             PRESS_BUZZER   0x0000a4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+          PRESS_GUESTFOUL   0x0000c5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+         PRESS_GUESTSCORE   0x0000db    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+           PRESS_HOMEFOUL   0x0000ba    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+          PRESS_HOMESCORE   0x0000d0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+              PRESS_SHIFT   0x00016a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+          PRESS_SHOTCLOCK   0x0000e6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+          PRESS_STARTSTOP   0x0000af    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     PSC0   0x0000e8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     PST0   0x0000b1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                 P_BUZZER   0x000090    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+              P_GUESTFOUL   0x00008e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+             P_GUESTSCORE   0x00008c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+               P_HOMEFOUL   0x000084    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+              P_HOMESCORE   0x000086    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                  P_PRESS   0x000064    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                  P_SHIFT   0x000067    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+              P_SHOTCLOCK   0x000088    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+              P_STARTSTOP   0x00008a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+              RADIO_BEGIN   0x000f2d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+          RADIO_CHECKFIFO   0x000efd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+        RADIO_CHECKSTATUS   0x000f18    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+          RADIO_CLRSTATUS   0x000f12    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+          RADIO_FLUSHFIFO   0x000f1e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+        RADIO_READ_RXFIFO   0x000f03    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+          RADIO_RECV_DATA   0x000ef0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+          RADIO_SEND_DATA   0x000ed0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     RFF0   0x000f0b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     RRD0   0x000efa    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     RSD0   0x000ed8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     RSD1   0x000eee    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                    RXDR0   0x000ef4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                    RXDR1   0x000ef5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                  RXT_END   0x0000a0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     SBZ0   0x00015b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+           SET_RX_ADDRESS   0x000f7d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+           SET_TX_ADDRESS   0x000f68    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     SGF0   0x000137    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     SGS0   0x000125    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     SHF0   0x0000f4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+             SHIFT_BUZZER   0x000158    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+          SHIFT_GUESTFOUL   0x000134    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+         SHIFT_GUESTSCORE   0x000122    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+           SHIFT_HOMEFOUL   0x0000f1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+          SHIFT_HOMESCORE   0x0000fe    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+          SHIFT_SHOTCLOCK   0x000110    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+          SHIFT_STARTSTOP   0x000146    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     SHS0   0x000101    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+             SPI_RECVBYTE   0x000fb5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+             SPI_SENDBYTE   0x000fa4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     SRB0   0x000fb9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     SRB1   0x000fc0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                SRB_MISO0   0x000fbe    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                SRB_MISO1   0x000fbc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     SSB0   0x000fa6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     SSB1   0x000faf    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                SSB_MOSI0   0x000fac    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                SSB_MOSI1   0x000faa    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     SSC0   0x000113    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     SSS0   0x000149    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+           START_PRESSING   0x00006a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+         START_SHIFTPRESS   0x000077    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                 S_BUZZER   0x00009e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+              S_GUESTFOUL   0x00009c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+             S_GUESTSCORE   0x00009a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+               S_HOMEFOUL   0x000092    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+              S_HOMESCORE   0x000094    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+              S_SHOTCLOCK   0x000096    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+              S_STARTSTOP   0x000098    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                    TXDS0   0x000ee9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                    TXDS1   0x000eeb    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     INIT   0x000011    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     MAIN   0x00004b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                  P_PRESS   0x000064    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                  P_SHIFT   0x000067    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+           START_PRESSING   0x00006a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+         START_SHIFTPRESS   0x000077    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+               P_HOMEFOUL   0x000084    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+              P_HOMESCORE   0x000086    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+              P_SHOTCLOCK   0x000088    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+              P_STARTSTOP   0x00008a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+             P_GUESTSCORE   0x00008c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+              P_GUESTFOUL   0x00008e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                 P_BUZZER   0x000090    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+               S_HOMEFOUL   0x000092    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+              S_HOMESCORE   0x000094    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+              S_SHOTCLOCK   0x000096    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+              S_STARTSTOP   0x000098    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+             S_GUESTSCORE   0x00009a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+              S_GUESTFOUL   0x00009c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                 S_BUZZER   0x00009e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                  RXT_END   0x0000a0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+             PRESS_BUZZER   0x0000a4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     PBZ0   0x0000a6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+          PRESS_STARTSTOP   0x0000af    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     PST0   0x0000b1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+           PRESS_HOMEFOUL   0x0000ba    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     PHF0   0x0000bc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+          PRESS_GUESTFOUL   0x0000c5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     PGF0   0x0000c7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+          PRESS_HOMESCORE   0x0000d0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     PHS0   0x0000d2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+         PRESS_GUESTSCORE   0x0000db    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     PGS0   0x0000dd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+          PRESS_SHOTCLOCK   0x0000e6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     PSC0   0x0000e8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+           SHIFT_HOMEFOUL   0x0000f1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     SHF0   0x0000f4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+          SHIFT_HOMESCORE   0x0000fe    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     SHS0   0x000101    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+          SHIFT_SHOTCLOCK   0x000110    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     SSC0   0x000113    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+         SHIFT_GUESTSCORE   0x000122    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     SGS0   0x000125    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+          SHIFT_GUESTFOUL   0x000134    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     SGF0   0x000137    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+          SHIFT_STARTSTOP   0x000146    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     SSS0   0x000149    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+             SHIFT_BUZZER   0x000158    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     SBZ0   0x00015b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+              PRESS_SHIFT   0x00016a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+               LONG_SHIFT   0x000171    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+             KEYPAD_RESET   0x000182    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                INTERRUPT   0x000186    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+         NRF_SEND_PAYLOAD   0x000ea0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+          NRF_GET_PAYLOAD   0x000ea2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+          RADIO_SEND_DATA   0x000ed0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     RSD0   0x000ed8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                    TXDS0   0x000ee9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                    TXDS1   0x000eeb    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     RSD1   0x000eee    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+          RADIO_RECV_DATA   0x000ef0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                    RXDR0   0x000ef4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                    RXDR1   0x000ef5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     RRD0   0x000efa    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+          RADIO_CHECKFIFO   0x000efd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+        RADIO_READ_RXFIFO   0x000f03    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     RFF0   0x000f0b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+          RADIO_CLRSTATUS   0x000f12    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+        RADIO_CHECKSTATUS   0x000f18    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+          RADIO_FLUSHFIFO   0x000f1e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+              RADIO_BEGIN   0x000f2d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+           SET_TX_ADDRESS   0x000f68    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+           SET_RX_ADDRESS   0x000f7d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+             CMD_REGWRITE   0x000f92    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+              CMD_REGREAD   0x000f9c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+             SPI_SENDBYTE   0x000fa4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     SSB0   0x000fa6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                SSB_MOSI1   0x000faa    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                SSB_MOSI0   0x000fac    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     SSB1   0x000faf    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+             SPI_RECVBYTE   0x000fb5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     SRB0   0x000fb9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                SRB_MISO1   0x000fbc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                SRB_MISO0   0x000fbe    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                     SRB1   0x000fc0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+             NRF_DELAY_US   0x000fc9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                 NRF_USEC   0x000fca    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+          NRF_DELAY_ONEMS   0x000fd1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                 NRF_MSEC   0x000fd3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+             NRF_DELAY_MS   0x000fd8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+                NRF_MSEC0   0x000fd9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_reciever\nrf_gyro_reciever_20201017\nrf_gyro_reicieverv0.asm
+
+

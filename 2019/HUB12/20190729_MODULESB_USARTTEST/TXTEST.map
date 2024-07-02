@@ -1,0 +1,70 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Thu Nov 14 11:48:00 2019
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000004    program   0x0000a0
+    .config_2007_TXTEST.O       code   0x002007    program   0x000002
+                   .org_3       code   0x002100    program   0x000008
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x000053      
+                            0x002007    0x002007      
+                            0x002100    0x002103      
+            86 out of 4359 program addresses used, program memory utilization is 1%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                       D0   0x000034    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+                       D1   0x000032    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+                    DELAY   0x000030    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+                 DELAY_MS   0x000048    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+              DELAY_ONEMS   0x000041    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+             DELAY_ONESEC   0x00004d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+                 DELAY_US   0x000039    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+                     INIT   0x000010    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+                     MAIN   0x000023    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+                      MN0   0x000025    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+                     MSEC   0x000043    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+                    MSEC0   0x000049    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+                     SEC0   0x00004f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+                  TIMEOUT   0x00002b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+                  TRANSWT   0x00002b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+                     USEC   0x00003a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+                   WTHERE   0x00002c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     INIT   0x000010    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+                     MAIN   0x000023    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+                      MN0   0x000025    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+                  TRANSWT   0x00002b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+                  TIMEOUT   0x00002b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+                   WTHERE   0x00002c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+                    DELAY   0x000030    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+                       D1   0x000032    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+                       D0   0x000034    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+                 DELAY_US   0x000039    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+                     USEC   0x00003a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+              DELAY_ONEMS   0x000041    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+                     MSEC   0x000043    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+                 DELAY_MS   0x000048    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+                    MSEC0   0x000049    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+             DELAY_ONESEC   0x00004d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+                     SEC0   0x00004f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190729_MODULESB_USARTTEST\TXTEST.ASM
+
+

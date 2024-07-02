@@ -1,0 +1,6784 @@
+;/////////////////////////////////////////////////////////////////////////////////
+;// Code Generator: BoostC Compiler - http://www.sourceboost.com
+;// Version       : 7.03
+;// License Type  : Pro License
+;// Limitations   : PIC12,PIC16 max code size:Unlimited, max RAM banks:Unlimited
+;/////////////////////////////////////////////////////////////////////////////////
+
+/*********************************************************************
+ *                  Flowcode CAL String File
+ *
+ * File: PIC_CAL_String.c
+ *
+ * (c) 2011 Matrix Multimedia Ltd.
+ * http://www.matrixmultimedia.com
+ *
+ * Software License Agreement
+ *
+ * The software supplied herewith by Matrix Multimedia Ltd (the
+ * “Company”) for its Flowcode graphical programming language is
+ * intended and supplied to you, the Company’s customer, for use
+ * solely and exclusively on the Company's products. The software
+ * is owned by the Company, and is protected under applicable
+ * copyright laws. All rights are reserved. Any use in violation
+ * of the foregoing restrictions may subject the user to criminal
+ * sanctions under applicable laws, as well as to civil liability
+ * for the breach of the terms and conditions of this licence.
+ *
+ * THIS SOFTWARE IS PROVIDED IN AN “AS IS” CONDITION. NO WARRANTIES,
+ * WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING, BUT NOT LIMITED
+ * TO, IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE APPLY TO THIS SOFTWARE. THE COMPANY SHALL NOT,
+ * IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL OR
+ * CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+ *
+ * Changelog:
+ *
+ *  date  | by | description
+ * -------+----+-----------------------------------------------------
+ * 010911 | BR | Created
+ * 150911 | JW | Added v5 string functions
+ * 270212 | BR | Fixed an issue with ToUpper where the 1st character was being returned as null
+ * 120312 | BR | Fixed an issue with some of the float functions not using CAL functions
+ */
+
+
+// Useful call for finding the length of an (uncorrupted) string
+#define FCI_GETLENGTH__x(str, max, idx)         for (idx = 0; idx < max; idx++) if (str[idx] == 0) break
+#define FCI_STRMOV__x(str, max, dst, dlen, ix)  for (ix = 0; ix < (max) && ix < (dlen) && str[ix] != '\0'; ix++) dst[ix] = str[ix]
+#define FCI_CONCATENATE(s0, l0, s1, l1, sd, ld) FCI_SHEAD(s0, l0, s1, l1, sd, ld)
+
+
+#ifndef MX_USES_UINT32
+	#define MX_USES_UINT32 0
+#endif
+#ifndef MX_USES_SINT32
+	#define MX_USES_SINT32 0
+#endif
+
+
+#if (MX_USES_UINT32 || MX_USES_SINT32)
+	#define MX_STRF_LONG
+	#define MX_ULONG MX_UINT32
+	#define MX_SLONG MX_SINT32
+#else
+	#define MX_ULONG MX_UINT16
+	#define MX_SLONG MX_SINT16
+#endif
+
+
+//String function definitions
+MX_UINT8 FCI_GETCHAR(MX_STRING sStr1, MX_UINT8 iStr1_len, MX_UINT8 iPos);
+MX_UINT8 FCI_GETLENGTH(MX_STRING sStr1, MX_UINT8 iStr1_len);
+MX_UINT8 FCI_MIDSTRING(MX_STRING sSrc, MX_UINT8 iSrc_len, MX_UINT8 iStart, MX_UINT8 iCount, MX_STRING sDst, MX_UINT8 iDst_len);
+MX_UINT8 FCI_LEFTSTRING(MX_STRING sSrc, MX_UINT8 iSrc_len, MX_UINT8 iCount, MX_STRING sDst, MX_UINT8 iDst_len);
+MX_UINT8 FCI_RIGHTSTRING(MX_STRING sSrc, MX_UINT8 iSrc_len, MX_UINT8 iCount, MX_STRING sDst, MX_UINT8 iDst_len);
+MX_UINT8 FCI_TOSTRING(MX_SLONG iSrc1, MX_STRING sDst, MX_UINT8 iDst_len);
+void FCI_TOLOWER(MX_STRING sSrc, MX_UINT8 iSrc_len, MX_STRING sDst, MX_UINT8 iDst_len);
+void FCI_TOUPPER(MX_STRING sSrc, MX_UINT8 iSrc_len, MX_STRING sDst, MX_UINT8 iDst_len);
+MX_UINT8 FCI_COMPARE(MX_STRING sSrc1, MX_UINT8 iSrc1_len, MX_STRING sSrc2, MX_UINT8 iSrc2_len, MX_UINT8 iNoCase);
+MX_UINT8 FCI_FLOAT_TO_STRING(MX_FLOAT Number, MX_UINT8 Precision, MX_STRING String, MX_UINT8 MSZ_String);
+MX_UINT8 FCI_NUMBER_TO_HEX(MX_ULONG Number, MX_STRING String, MX_UINT8 MSZ_String);
+MX_SINT32 FCI_STRING_TO_INT(MX_STRING String, MX_UINT8 MSZ_String);
+MX_FLOAT FCI_STRING_TO_FLOAT(MX_STRING String, MX_UINT8 MSZ_String);
+
+// Functions for contatenation
+MX_UINT8 FCI_STRREV(MX_STRING sSrc, MX_UINT8 iSrc_len, MX_STRING sDst, MX_UINT8 iDst_len);
+MX_UINT8 FCI_STRMOV(MX_STRING sSrc, MX_UINT8 iSrc_len, MX_STRING sDst, MX_UINT8 iDst_len);
+void FCI_SHEAD(MX_STRING sSrc1, MX_UINT8 iSrc1_len, MX_STRING sSrc2, MX_UINT8 iSrc2_len, MX_STRING sDst, MX_UINT8 iDst_len);
+void FCI_SCOPY(MX_STRING sSrc, MX_UINT8 iSrc_len, MX_STRING sDst, MX_UINT8 iDst_len);
+
+
+
+MX_UINT8 FCI_GETCHAR(MX_STRING sStr1, MX_UINT8 iStr1_len, MX_UINT8 iPos)
+{
+	MX_UINT8 tmp;
+	FCI_GETLENGTH__x(sStr1, iStr1_len, tmp);
+
+	if(iPos < tmp)
+		return sStr1[iPos];
+	return '\0';
+}
+
+MX_UINT8 FCI_GETLENGTH(MX_STRING sStr1, MX_UINT8 iStr1_len)
+{
+	MX_UINT8 tmp;
+	FCI_GETLENGTH__x(sStr1, iStr1_len, tmp);
+	return (tmp);
+}
+
+MX_UINT8 FCI_MIDSTRING(MX_STRING sSrc, MX_UINT8 iSrc_len, MX_UINT8 iStart, MX_UINT8 iCount, MX_STRING sDst, MX_UINT8 iDst_len)
+
+{
+	if (iDst_len == 0) return 0;
+0099  08E6  	MOVF FCI_MIDSTR_00046_arg_iDst_len, F
+009A  1D03  	BTFSS STATUS,Z
+009B  289E  	GOTO	label11
+009C  01E8  	CLRF CompTempVarRet1998
+009E        label11
+
+	MX_UINT8 idx;
+	FCI_GETLENGTH__x(sSrc, iSrc_len, idx);	//find the length of the source string
+009E  01E7  	CLRF FCI_MIDSTR_00046_1_idx
+009F        label12
+009F  0861  	MOVF FCI_MIDSTR_00046_arg_iSrc_len, W
+00A0  0267  	SUBWF FCI_MIDSTR_00046_1_idx, W
+00A1  1803  	BTFSC STATUS,C
+00A2  28AE  	GOTO	label13
+00A3  1383  	BCF STATUS,IRP
+00A4  1860  	BTFSC FCI_MIDSTR_00046_arg_sSrc+D'1',0
+00A5  1783  	BSF STATUS,IRP
+00A6  085F  	MOVF FCI_MIDSTR_00046_arg_sSrc, W
+00A7  0767  	ADDWF FCI_MIDSTR_00046_1_idx, W
+00A8  0084  	MOVWF FSR
+00A9  0880  	MOVF INDF, F
+00AA  1903  	BTFSC STATUS,Z
+00AB  28AE  	GOTO	label13
+00AC  0AE7  	INCF FCI_MIDSTR_00046_1_idx, F
+00AD  289F  	GOTO	label12
+00AE        label13
+
+
+	if (iStart >= idx)
+00AE  0867  	MOVF FCI_MIDSTR_00046_1_idx, W
+00AF  0262  	SUBWF FCI_MIDSTR_00046_arg_iStart, W
+00B0  1C03  	BTFSS STATUS,C
+00B1  28BA  	GOTO	label14
+00BA        label14
+
+	{
+		*sDst = '\0';						//starting position is beyond string length, so return a null string
+00B2  1383  	BCF STATUS,IRP
+00B3  1865  	BTFSC FCI_MIDSTR_00046_arg_sDst+D'1',0
+00B4  1783  	BSF STATUS,IRP
+00B5  0864  	MOVF FCI_MIDSTR_00046_arg_sDst, W
+00B6  0084  	MOVWF FSR
+00B7  3000  	MOVLW 0x00
+00B8  0080  	MOVWF INDF
+
+	}
+	else
+00B9  28FB  	GOTO	label20
+
+	{
+		if ((iStart + iCount) >= idx)		//Make sure the required length is not too big
+00BA  01EA  	CLRF CompTempVar2001
+00BB  0863  	MOVF FCI_MIDSTR_00046_arg_iCount, W
+00BC  0762  	ADDWF FCI_MIDSTR_00046_arg_iStart, W
+00BD  00E9  	MOVWF CompTempVar2000
+00BE  1803  	BTFSC STATUS,C
+00BF  0AEA  	INCF CompTempVar2001, F
+00C0  3000  	MOVLW 0x00
+00C1  026A  	SUBWF CompTempVar2001, W
+00C2  1D03  	BTFSS STATUS,Z
+00C3  28C6  	GOTO	label15
+00C4  0867  	MOVF FCI_MIDSTR_00046_1_idx, W
+00C5  0269  	SUBWF CompTempVar2000, W
+00C6        label15
+00C6  1C03  	BTFSS STATUS,C
+00C7  28CB  	GOTO	label16
+00CB        label16
+
+			iCount = idx - iStart;
+00C8  0862  	MOVF FCI_MIDSTR_00046_arg_iStart, W
+00C9  0267  	SUBWF FCI_MIDSTR_00046_1_idx, W
+00CA  00E3  	MOVWF FCI_MIDSTR_00046_arg_iCount
+
+		if (iCount > (iDst_len))			//make sure the required length is not too big
+00CB  0863  	MOVF FCI_MIDSTR_00046_arg_iCount, W
+00CC  0266  	SUBWF FCI_MIDSTR_00046_arg_iDst_len, W
+00CD  1803  	BTFSC STATUS,C
+00CE  28D1  	GOTO	label17
+00D1        label17
+
+			iCount = (iDst_len);
+00CF  0866  	MOVF FCI_MIDSTR_00046_arg_iDst_len, W
+00D0  00E3  	MOVWF FCI_MIDSTR_00046_arg_iCount
+
+
+		sSrc += iStart;						//Move to the correct place in the source string
+00D1  0862  	MOVF FCI_MIDSTR_00046_arg_iStart, W
+00D2  07DF  	ADDWF FCI_MIDSTR_00046_arg_sSrc, F
+00D3  1803  	BTFSC STATUS,C
+00D4  0AE0  	INCF FCI_MIDSTR_00046_arg_sSrc+D'1', F
+
+
+		for (idx = 0; idx < iCount; idx++)	//Copy the contents of the source string
+00D5  01E7  	CLRF FCI_MIDSTR_00046_1_idx
+00D6        label18
+00D6  0863  	MOVF FCI_MIDSTR_00046_arg_iCount, W
+00D7  0267  	SUBWF FCI_MIDSTR_00046_1_idx, W
+00D8  1803  	BTFSC STATUS,C
+00D9  28F0  	GOTO	label19
+00EE  0AE7  	INCF FCI_MIDSTR_00046_1_idx, F
+00EF  28D6  	GOTO	label18
+00F0        label19
+
+		{
+			*sDst = *sSrc;
+00DA  1383  	BCF STATUS,IRP
+00DB  1860  	BTFSC FCI_MIDSTR_00046_arg_sSrc+D'1',0
+00DC  1783  	BSF STATUS,IRP
+00DD  085F  	MOVF FCI_MIDSTR_00046_arg_sSrc, W
+00DE  0084  	MOVWF FSR
+00DF  0800  	MOVF INDF, W
+00E0  00EB  	MOVWF CompTempVar2002
+00E1  1383  	BCF STATUS,IRP
+00E2  1865  	BTFSC FCI_MIDSTR_00046_arg_sDst+D'1',0
+00E3  1783  	BSF STATUS,IRP
+00E4  0864  	MOVF FCI_MIDSTR_00046_arg_sDst, W
+00E5  0084  	MOVWF FSR
+00E6  086B  	MOVF CompTempVar2002, W
+00E7  0080  	MOVWF INDF
+
+			sDst++;
+00E8  0AE4  	INCF FCI_MIDSTR_00046_arg_sDst, F
+00E9  1903  	BTFSC STATUS,Z
+00EA  0AE5  	INCF FCI_MIDSTR_00046_arg_sDst+D'1', F
+
+			sSrc++;
+00EB  0ADF  	INCF FCI_MIDSTR_00046_arg_sSrc, F
+00EC  1903  	BTFSC STATUS,Z
+00ED  0AE0  	INCF FCI_MIDSTR_00046_arg_sSrc+D'1', F
+
+		}
+		if (idx < iDst_len)						//add terminating null (if we can)
+00F0  0866  	MOVF FCI_MIDSTR_00046_arg_iDst_len, W
+00F1  0267  	SUBWF FCI_MIDSTR_00046_1_idx, W
+00F2  1803  	BTFSC STATUS,C
+00F3  28FB  	GOTO	label20
+00FB        label20
+
+			*sDst = '\0';
+00F4  1383  	BCF STATUS,IRP
+00F5  1865  	BTFSC FCI_MIDSTR_00046_arg_sDst+D'1',0
+00F6  1783  	BSF STATUS,IRP
+00F7  0864  	MOVF FCI_MIDSTR_00046_arg_sDst, W
+00F8  0084  	MOVWF FSR
+00F9  3000  	MOVLW 0x00
+00FA  0080  	MOVWF INDF
+
+	}
+	return (idx);
+00FB  0867  	MOVF FCI_MIDSTR_00046_1_idx, W
+00FC  00E8  	MOVWF CompTempVarRet1998
+
+}
+009D  0008  	RETURN
+00FD  0008  	RETURN
+
+
+MX_UINT8 FCI_LEFTSTRING(MX_STRING sSrc, MX_UINT8 iSrc_len, MX_UINT8 iCount, MX_STRING sDst, MX_UINT8 iDst_len)
+{
+	if (iDst_len == 0) return 0;
+	MX_UINT8 idx;
+	FCI_GETLENGTH__x(sSrc, iSrc_len, idx);	//find the length of the source string
+
+	if (iCount > idx)						//make sure the required length is not too big
+		iCount = idx;
+	if (iCount > (iDst_len))			//make sure the required length is not too big
+		iCount = (iDst_len);
+
+	for (idx = 0; idx < iCount; idx++)		//copy the required MX_UINT8acters
+	{
+		*sDst = *sSrc;
+		sDst++;
+		sSrc++;
+	}
+	if (idx < iDst_len)						//add terminating null (if we can)
+		*sDst = '\0';
+	return (idx);
+}
+
+MX_UINT8 FCI_RIGHTSTRING(MX_STRING sSrc, MX_UINT8 iSrc_len, MX_UINT8 iCount, MX_STRING sDst, MX_UINT8 iDst_len)
+{
+	if (iDst_len == 0) return 0;
+	MX_UINT8 idx;
+	MX_UINT8 delta;
+
+	FCI_GETLENGTH__x(sSrc, iSrc_len, idx);	//find the length of the source string
+
+	if (iCount > idx)						//make sure the required length is not too big
+		iCount = idx;
+	delta = idx - iCount;					//get the offset
+	if (iCount > (iDst_len))				//make sure the required length is not too big
+		iCount = (iDst_len);
+	sSrc += delta;							//Move to the correct place in the source string
+
+	for(idx = 0; idx < iCount; idx++)		//copy the required MX_UINT8acters
+	{
+		*sDst = *sSrc;
+		sDst++;
+		sSrc++;
+	}
+	if (idx < iDst_len)						//add terminating null (if we can)
+		*sDst = '\0';
+	return (idx);
+}
+
+MX_UINT8 FCI_TOSTRING(MX_SLONG iSrc1, MX_STRING sDst, MX_UINT8 iDst_len)
+{
+	if (iDst_len == 0) return 0;
+	MX_UINT8 tmp1;
+
+	#ifdef MX_STRF_LONG
+		unsigned long top = 1000000000; 	// Maximum power of 10 less than 4294967296
+	#else
+		unsigned short top = 10000; 		// Maximum power of 10 less than 65536
+	#endif
+
+	MX_UINT8 idx = 0;
+
+	//copy source 1 into destination:
+	//minus sign
+	if (iSrc1 < 0)
+	{
+		sDst[0] = '-';
+		idx++;
+		iSrc1 = -iSrc1;
+	}
+
+	tmp1 = 0;    // Nothing added yet
+	if (iSrc1 == 0) // Force showing zero
+	{
+		tmp1 = 1;
+		top = 1;
+	}
+	while (( idx < iDst_len) && (top > 0))
+	{
+		#ifdef MX_STRF_LONG
+		if (((unsigned long)iSrc1 >= top) || (tmp1))
+		#else
+		if (((unsigned)iSrc1 >= top) || (tmp1))
+		#endif
+		{
+			#ifdef MX_STRF_LONG
+			tmp1 = (unsigned long)iSrc1 / top;	// Top digit
+			#else
+			tmp1 = (unsigned)iSrc1 / top;	// Top digit
+			#endif
+			sDst[idx] = '0' + tmp1;			// Add digit to buffer
+			idx++;
+			iSrc1 -= tmp1 * top;			// Remove digit
+			tmp1 = 1;						// Add zeros now
+		}
+		top /= 10;							// Go to next digit
+	}
+
+	if (idx < iDst_len)						//add terminating null (if we can)
+		sDst[idx] = '\0';
+	return (idx);
+}
+
+
+
+void FCI_TOLOWER(MX_STRING sSrc, MX_UINT8 iSrc_len, MX_STRING sDst, MX_UINT8 iDst_len)
+{
+	if (iDst_len == 0) return;
+	MX_UINT8 idx;
+	MX_UINT8 ch;
+
+	if (iSrc_len < iDst_len) iSrc_len = iDst_len; // Bound so cant overflow dest
+	//copy source into destination and change to lower case
+	for (idx=0; idx<iSrc_len; idx++)
+	{
+		ch = sSrc[idx];
+		if ((ch >= 'A') && (ch <= 'Z'))
+		{
+			ch ^= 0x20;
+		}
+		sDst[idx] = ch;
+		if (ch == 0)
+		{
+			break;
+		}
+	}
+	if (idx < iDst_len)						//add terminating null (if we can)
+		sDst[idx] = '\0';
+}
+
+void FCI_TOUPPER(MX_STRING sSrc, MX_UINT8 iSrc_len, MX_STRING sDst, MX_UINT8 iDst_len)
+{
+	if (iDst_len == 0) return;
+	MX_UINT8 idx;
+	MX_UINT8 ch;
+
+	if (iSrc_len < iDst_len) iSrc_len = iDst_len; // Bound so cant overflow dest
+	//copy source into destination and change to upper case
+	for (idx=0; idx<iSrc_len; idx++)
+	{
+		ch = sSrc[idx];
+		if ((ch >= 'a') && (ch <= 'z'))
+		{
+			ch ^= 0x20;
+		}
+		sDst[idx] = ch;
+		if (ch == 0)
+		{
+			break;
+		}
+	}
+	if (idx < iDst_len)						//add terminating null (if we can)
+		sDst[idx] = '\0';
+}
+
+MX_UINT8 FCI_COMPARE(MX_STRING sSrc1, MX_UINT8 iSrc1_len, MX_STRING sSrc2, MX_UINT8 iSrc2_len, MX_UINT8 iNoCase)
+{
+	MX_UINT8 iRetVal = 0;
+	MX_UINT8 idx;
+	MX_UINT8 ch1, ch2;
+
+	for (idx=0; idx < iSrc1_len; idx++)	//compare a byte from the strings
+	{
+		if (idx < iSrc2_len)
+		{
+			ch1 = *sSrc1;
+			ch2 = *sSrc2;
+
+			if (iNoCase)
+			{
+				if ((ch1 >= 'a') && (ch1 <= 'z'))
+					ch1 = (ch1 & 0xDF);
+
+				if ((ch2 >= 'a') && (ch2 <= 'z'))
+					ch2 = (ch2 & 0xDF);
+
+			}
+
+			if (ch1 < ch2)
+			{
+				return(255);
+			}
+			else if (ch1 > ch2)
+			{
+				return(1);
+			}
+
+			sSrc1++;
+			sSrc2++;
+		}
+		else
+		{
+			if (*sSrc1 == 0)
+				return (0);				//end of source1 as well, so ok
+			else
+				return (1);				//reached the end of iSrc2, but still more of iSrc1
+		}
+	}
+
+	if (iSrc1_len == iSrc2_len)			//reached the end of iSrc1.  If we're also at the end of iSrc2, then return 0
+		return (0);
+	else
+	{
+		if (*sSrc2 == 0)
+			return (0);					//end of source1 as well, so ok
+		else
+			return (255);				//not at end of source2, so return -1
+	}
+}
+
+
+MX_UINT8 FCI_FLOAT_TO_STRING(MX_FLOAT Number, MX_UINT8 Precision, MX_STRING String, MX_UINT8 MSZ_String)
+{
+	MX_SINT16 whole;
+	MX_UINT8 str_length;
+	MX_UINT8 idx;
+	MX_UINT8 stringidx = 0;
+	MX_FLOAT real, temp;
+	MX_UINT8 old;
+	MX_UINT8 temp_string[10];
+
+	#ifdef _BOOSTC									//BoostC Floating Point
+
+		float_rounding_mode = 3;					//Always round to zero
+		whole = float32_to_int32(Number);			//Convert to whole integer
+		temp = float32_from_int32(whole);			//Convert whole number back to floating point
+
+		if (float32_ge(Number,0))
+		{
+			real = float32_sub(Number, temp);		//Subtract whole number from floating point number
+		}
+		else
+		{
+			if (whole == 0)							//Fix -0 bug
+			{
+				String[stringidx] = '-';
+				stringidx = stringidx + 1;
+			}
+
+			real = float32_sub(temp, Number);		//Subtract floating point number from whole number
+		}
+	#endif
+
+	#ifdef HI_TECH_C								//HiTECH Floating Point
+
+		whole = (int)Number;						//Convert to whole integer
+		temp = whole;								//Convert whole number back to floating point
+
+		if (Number >= 0)
+		{
+			real = Number - temp;					//Subtract whole number from floating point number
+		}
+		else
+		{
+			if (whole == 0)							//Fix -0 bug
+			{
+				String[stringidx] = '-';
+				stringidx = stringidx + 1;
+			}
+
+			real = temp - Number;					//Subtract floating point number from whole number
+		}
+	#endif
+
+	str_length = FCI_TOSTRING(whole, temp_string, 5);		//Convert integer numbers to strings
+
+	for (idx=0; idx<str_length; idx++)						//Copy whole part of number to string
+	{
+		if(stringidx < MSZ_String)
+		{
+			String[stringidx] = temp_string[idx];
+			stringidx = stringidx + 1;
+		}
+	}
+
+	if(stringidx < MSZ_String)						//Add decimal point to string
+	{
+		String[stringidx] = '.';
+		stringidx = stringidx + 1;
+	}
+
+	for (idx = 0; idx < Precision; idx++)			//Output Real Part Of Number
+	{
+		if (stringidx >= MSZ_String)
+			break;
+
+		#ifdef _BOOSTC								//BoostC Floating Point
+			real = float32_mul(real, 10);
+			whole = float32_to_int32(real);			//Convert to whole integer
+			temp = float32_from_int32(whole);		//Convert whole number back to floating point
+			real = float32_sub(real, temp);			//Subtract whole number from floating point number
+		#endif
+		#ifdef HI_TECH_C							//HiTECH Floating Point
+			real = real * 10;
+			whole = (int)real;						//Convert to whole integer
+			temp = whole;							//Convert whole number back to floating point
+			real = real - temp;						//Subtract whole number from floating point number
+		#endif
+
+		String[stringidx] = '0' + whole;
+		stringidx = stringidx + 1;
+	}
+
+	if(stringidx < MSZ_String)									//Add null termination to string
+	{
+		String[stringidx] = 0;
+	}
+
+	return stringidx;
+}
+
+
+
+
+
+
+
+
+
+
+
+MX_UINT8 FCI_NUMBER_TO_HEX(MX_ULONG Number, MX_STRING String, MX_UINT8 MSZ_String)
+{
+	MX_UINT8 stringidx;
+	MX_UINT8 idx = 0;
+	MX_UINT8 temp;
+	MX_UINT8 digit[8] = {0,0,0,0,0,0,0,0};
+
+	#ifdef MX_STRF_LONG
+		MX_UINT32 num = Number;
+	#else
+		MX_UINT16 num = Number;
+	#endif
+
+	//Check that output string is long enough to store result
+	if((Number > 0xFFFF) && (MSZ_String < 10))
+		return 0;
+
+	if((Number > 0xFF) && (MSZ_String < 6))
+		return 0;
+
+	if((Number <= 0xFF) && (MSZ_String < 4))
+		return 0;
+
+	//Initialise start of string with hexadecimal indicator
+	String[0] = '0';
+	String[1] = 'x';
+
+	//Calculate hex values
+	do
+	{
+		temp = num % 16;
+		num = num >> 4;
+
+		if(temp > 9)
+		{
+			temp = temp - 10;
+			digit[idx] = temp + 'A';
+		}
+		else
+			digit[idx] = temp + '0';
+
+		idx = idx + 1;
+	} while (num > 0);
+
+	//Copy Hex values over to output string
+	for (stringidx = 2; stringidx < (idx + 2); stringidx++)
+		String[stringidx] = digit[idx - (stringidx - 1)];
+
+	//Add null termination to string
+	if(stringidx < MSZ_String)
+	{
+		String[stringidx] = 0;
+	}
+
+	return stringidx;
+}
+
+
+MX_SINT32 FCI_STRING_TO_INT(MX_STRING String, MX_UINT8 MSZ_String)
+{
+	MX_UINT8 bNegative = 0;
+	MX_UINT8 idx = 0;
+	MX_SINT32 RetVal = 0;
+
+	//Is number negative
+	if(String[0] == '-')
+	{
+		bNegative = 1;
+		idx = 1;
+	}
+
+	//While string contains a valid number
+	while (idx < MSZ_String && String[idx] >= '0' && String[idx] <= '9')
+	{
+		//Pull MX_UINT8acter from string and add to running total
+		RetVal = (long) RetVal * 10;
+		RetVal = (long) RetVal + (String[idx] - '0');
+		idx = idx + 1;
+	}
+
+	if (bNegative)
+		RetVal = (long) 0 - RetVal;
+
+	return RetVal;
+}
+
+
+MX_FLOAT FCI_STRING_TO_FLOAT(MX_STRING String, MX_UINT8 MSZ_String)
+{
+	MX_FLOAT RetVal = 0;
+	MX_FLOAT real_divider = 1;
+	MX_UINT32 whole, real;			//Changed from INT 23/07/10
+	MX_UINT8 idx = 0;
+	MX_UINT8 idx2 = 0;
+	MX_UINT8 offset = 0;
+	MX_UINT8 bNegative = 0;
+	MX_UINT8 Comp_String[8];
+
+	//Is number negative
+	if(String[0] == '-')
+	{
+		bNegative = 1;
+		offset = 1;
+	}
+
+	//Scan for decimal point
+	for(idx=offset; idx<MSZ_String; idx++)
+	{
+		if(String[idx] == '.')
+			break;
+	}
+
+	//Convert whole portion of number from string
+	whole = FCI_STRING_TO_INT (String, idx);
+
+	//No decimal point found
+	if(idx == MSZ_String)
+	{
+		#ifdef _BOOSTC
+			RetVal = float32_from_int32(whole);
+		#endif
+		#ifdef HI_TECH_C
+			RetVal = (int)whole;
+		#endif
+		return RetVal;
+	}
+
+	//Collect real portion of number into new string
+	offset = idx + 1;
+	for(idx=offset; idx<MSZ_String; idx++)
+	{
+		if(String[idx] >= '0' && String[idx] <= '9')
+		{
+			Comp_String[idx - offset] = String[idx];
+			#ifdef _BOOSTC
+				real_divider = float32_mul(real_divider, 0.1);
+			#endif
+			#ifdef HI_TECH_C
+				real_divider = real_divider * 0.1;
+			#endif
+		}
+		else
+			break;
+	}
+
+	//Convert real portion of number from string
+	real = FCI_STRING_TO_INT (Comp_String, (idx - offset));
+
+	//Adjust weighting of values and combine into one float variable
+	#ifdef _BOOSTC
+
+		RetVal = float32_from_int32(real);
+		RetVal = float32_mul(RetVal, real_divider);
+		real_divider = float32_from_int32(whole);
+		RetVal = float32_add(RetVal, real_divider);
+
+		if (bNegative)
+			RetVal = float32_sub(0, RetVal);
+
+	#endif
+	#ifdef HI_TECH_C
+
+		RetVal = (MX_FLOAT)real;
+		RetVal = RetVal * real_divider;
+		real_divider = (MX_FLOAT)whole;
+		RetVal = RetVal + real_divider;
+
+		if (bNegative)
+			RetVal = 0 - RetVal;
+	#endif
+
+	return RetVal;
+}
+
+
+
+/*=----------------------------------------------------------------------=*\
+   Use :Move but do not null-terminate sSrc to sDst, max len iSrc_len
+       :This differs from FCI_STRMOV() in that the bytes are copied from the
+       :end of the string to the start
+       :Returns length of copy
+\*=----------------------------------------------------------------------=*/
+MX_UINT8 FCI_STRREV(MX_STRING sSrc, MX_UINT8 iSrc_len, MX_STRING sDst, MX_UINT8 iDst_len)
+{
+  MX_UINT8 ix, len;
+  FCI_GETLENGTH__x(sSrc, iSrc_len, len);
+  if (len > iDst_len)
+  {
+    len = iDst_len;
+  }
+  ix = len;
+  while (ix > 0)
+  {
+    ix--;
+    sDst[ix] = sSrc[ix];
+  }
+  // No null terminate
+  // Return length of string
+  return len;
+}
+
+
+/*=----------------------------------------------------------------------=*\
+   Use :Move but do not null-terminate sSrc to sDst, max len iSrc_len
+       :Returns length of copy
+\*=----------------------------------------------------------------------=*/
+MX_UINT8 FCI_STRMOV(MX_STRING sSrc, MX_UINT8 iSrc_len, MX_STRING sDst, MX_UINT8 iDst_len)
+{
+  MX_UINT8 ix;
+  ix = 0;
+  while (ix < iSrc_len && ix < iDst_len && sSrc[ix] != '\0')
+  {
+    sDst[ix] = sSrc[ix];
+    ix++;
+  }
+  // No null terminate
+  // Return length of string
+  return ix;
+}
+
+/*=----------------------------------------------------------------------=*\
+   Use :Concatenate sDst = (sSrc1 + sSrc2)
+       :sDst is only null terminated if the concat doesnt overflow
+       :
+\*=----------------------------------------------------------------------=*/
+void FCI_SHEAD(MX_STRING sSrc1, MX_UINT8 iSrc1_len, MX_STRING sSrc2, MX_UINT8 iSrc2_len, MX_STRING sDst, MX_UINT8 iDst_len)
+
+{
+  MX_UINT8 len, strt;
+
+  len = 0;
+01B0  01D0  	CLRF FCI_SHEAD_00000_1_len
+
+  if (sSrc2 == sDst)
+01B1  084D  	MOVF FCI_SHEAD_00000_arg_sDst, W
+01B2  064A  	XORWF FCI_SHEAD_00000_arg_sSrc2, W
+01B3  1D03  	BTFSS STATUS,Z
+01B4  2A57  	GOTO	label38
+01B5  084E  	MOVF FCI_SHEAD_00000_arg_sDst+D'1', W
+01B6  064B  	XORWF FCI_SHEAD_00000_arg_sSrc2+D'1', W
+01B7  1D03  	BTFSS STATUS,Z
+01B8  2A57  	GOTO	label38
+0257        label38
+
+  {
+    FCI_GETLENGTH__x(sSrc1, iSrc1_len, strt);
+01B9  01D1  	CLRF FCI_SHEAD_00000_1_strt
+01BA        label27
+01BA  0849  	MOVF FCI_SHEAD_00000_arg_iSrc1_len, W
+01BB  0251  	SUBWF FCI_SHEAD_00000_1_strt, W
+01BC  1803  	BTFSC STATUS,C
+01BD  29C9  	GOTO	label28
+01BE  1383  	BCF STATUS,IRP
+01BF  1846  	BTFSC FCI_SHEAD_00000_arg_sSrc1+D'1',0
+01C0  1783  	BSF STATUS,IRP
+01C1  0845  	MOVF FCI_SHEAD_00000_arg_sSrc1, W
+01C2  0751  	ADDWF FCI_SHEAD_00000_1_strt, W
+01C3  0084  	MOVWF FSR
+01C4  0880  	MOVF INDF, F
+01C5  1903  	BTFSC STATUS,Z
+01C6  29C9  	GOTO	label28
+01C7  0AD1  	INCF FCI_SHEAD_00000_1_strt, F
+01C8  29BA  	GOTO	label27
+01C9        label28
+0256  2A31  	GOTO	label37
+
+    if (strt < iDst_len)
+01C9  084F  	MOVF FCI_SHEAD_00000_arg_iDst_len, W
+01CA  0251  	SUBWF FCI_SHEAD_00000_1_strt, W
+01CB  1803  	BTFSC STATUS,C
+01CC  2A30  	GOTO	label36
+0230        label36
+
+    {
+      // Copy second, in reverse
+      // len = FCI_STRREV(sSrc2, iSrc2_len, sDst + strt, iDst_len - strt);
+      FCI_GETLENGTH__x(sSrc2, iSrc2_len, len);
+01CD  01D0  	CLRF FCI_SHEAD_00000_1_len
+01CE        label29
+01CE  084C  	MOVF FCI_SHEAD_00000_arg_iSrc2_len, W
+01CF  0250  	SUBWF FCI_SHEAD_00000_1_len, W
+01D0  1803  	BTFSC STATUS,C
+01D1  29DD  	GOTO	label30
+01D2  1383  	BCF STATUS,IRP
+01D3  184B  	BTFSC FCI_SHEAD_00000_arg_sSrc2+D'1',0
+01D4  1783  	BSF STATUS,IRP
+01D5  084A  	MOVF FCI_SHEAD_00000_arg_sSrc2, W
+01D6  0750  	ADDWF FCI_SHEAD_00000_1_len, W
+01D7  0084  	MOVWF FSR
+01D8  0880  	MOVF INDF, F
+01D9  1903  	BTFSC STATUS,Z
+01DA  29DD  	GOTO	label30
+01DB  0AD0  	INCF FCI_SHEAD_00000_1_len, F
+01DC  29CE  	GOTO	label29
+01DD        label30
+
+      if (len > (iDst_len - strt))
+01DD  0851  	MOVF FCI_SHEAD_00000_1_strt, W
+01DE  024F  	SUBWF FCI_SHEAD_00000_arg_iDst_len, W
+01DF  00D2  	MOVWF CompTempVar2110
+01E0  0850  	MOVF FCI_SHEAD_00000_1_len, W
+01E1  0252  	SUBWF CompTempVar2110, W
+01E2  1803  	BTFSC STATUS,C
+01E3  29E7  	GOTO	label31
+01E7        label31
+
+      {
+        len = (iDst_len - strt); // Length of string to copy to
+01E4  0851  	MOVF FCI_SHEAD_00000_1_strt, W
+01E5  024F  	SUBWF FCI_SHEAD_00000_arg_iDst_len, W
+01E6  00D0  	MOVWF FCI_SHEAD_00000_1_len
+
+      }
+      iSrc2_len = strt + len; // Use no longer needed var as an offset
+01E7  0850  	MOVF FCI_SHEAD_00000_1_len, W
+01E8  0751  	ADDWF FCI_SHEAD_00000_1_strt, W
+01E9  00CC  	MOVWF FCI_SHEAD_00000_arg_iSrc2_len
+
+      strt = len;
+01EA  0850  	MOVF FCI_SHEAD_00000_1_len, W
+01EB  00D1  	MOVWF FCI_SHEAD_00000_1_strt
+
+      while (strt > 0)
+01EC        label32
+01EC  0851  	MOVF FCI_SHEAD_00000_1_strt, W
+01ED  3C00  	SUBLW 0x00
+01EE  1803  	BTFSC STATUS,C
+01EF  2A06  	GOTO	label33
+0205  29EC  	GOTO	label32
+0206        label33
+
+      {
+        strt--;
+01F0  03D1  	DECF FCI_SHEAD_00000_1_strt, F
+
+        iSrc2_len--;
+01F1  03CC  	DECF FCI_SHEAD_00000_arg_iSrc2_len, F
+
+        sDst[iSrc2_len] = sSrc2[strt];
+01F2  1383  	BCF STATUS,IRP
+01F3  184B  	BTFSC FCI_SHEAD_00000_arg_sSrc2+D'1',0
+01F4  1783  	BSF STATUS,IRP
+01F5  084A  	MOVF FCI_SHEAD_00000_arg_sSrc2, W
+01F6  0084  	MOVWF FSR
+01F7  0851  	MOVF FCI_SHEAD_00000_1_strt, W
+01F8  00D3  	MOVWF CompTempVar2117
+01F9  0853  	MOVF CompTempVar2117, W
+01FA  0784  	ADDWF FSR, F
+01FB  0800  	MOVF INDF, W
+01FC  00D4  	MOVWF CompTempVar2118
+01FD  1383  	BCF STATUS,IRP
+01FE  184E  	BTFSC FCI_SHEAD_00000_arg_sDst+D'1',0
+01FF  1783  	BSF STATUS,IRP
+0200  084D  	MOVF FCI_SHEAD_00000_arg_sDst, W
+0201  074C  	ADDWF FCI_SHEAD_00000_arg_iSrc2_len, W
+0202  0084  	MOVWF FSR
+0203  0854  	MOVF CompTempVar2118, W
+0204  0080  	MOVWF INDF
+
+      }
+      // Move first
+      FCI_STRMOV__x(sSrc1, iSrc1_len, sDst, iDst_len, strt);
+0206  01D1  	CLRF FCI_SHEAD_00000_1_strt
+0207        label34
+0207  0849  	MOVF FCI_SHEAD_00000_arg_iSrc1_len, W
+0208  0251  	SUBWF FCI_SHEAD_00000_1_strt, W
+0209  1803  	BTFSC STATUS,C
+020A  2A2D  	GOTO	label35
+020B  084F  	MOVF FCI_SHEAD_00000_arg_iDst_len, W
+020C  0251  	SUBWF FCI_SHEAD_00000_1_strt, W
+020D  1803  	BTFSC STATUS,C
+020E  2A2D  	GOTO	label35
+020F  1383  	BCF STATUS,IRP
+0210  1846  	BTFSC FCI_SHEAD_00000_arg_sSrc1+D'1',0
+0211  1783  	BSF STATUS,IRP
+0212  0845  	MOVF FCI_SHEAD_00000_arg_sSrc1, W
+0213  0751  	ADDWF FCI_SHEAD_00000_1_strt, W
+0214  0084  	MOVWF FSR
+0215  0880  	MOVF INDF, F
+0216  1903  	BTFSC STATUS,Z
+0217  2A2D  	GOTO	label35
+0218  1383  	BCF STATUS,IRP
+0219  1846  	BTFSC FCI_SHEAD_00000_arg_sSrc1+D'1',0
+021A  1783  	BSF STATUS,IRP
+021B  0845  	MOVF FCI_SHEAD_00000_arg_sSrc1, W
+021C  0084  	MOVWF FSR
+021D  0851  	MOVF FCI_SHEAD_00000_1_strt, W
+021E  00D3  	MOVWF CompTempVar2121
+021F  0853  	MOVF CompTempVar2121, W
+0220  0784  	ADDWF FSR, F
+0221  0800  	MOVF INDF, W
+0222  00D4  	MOVWF CompTempVar2122
+0223  1383  	BCF STATUS,IRP
+0224  184E  	BTFSC FCI_SHEAD_00000_arg_sDst+D'1',0
+0225  1783  	BSF STATUS,IRP
+0226  084D  	MOVF FCI_SHEAD_00000_arg_sDst, W
+0227  0751  	ADDWF FCI_SHEAD_00000_1_strt, W
+0228  0084  	MOVWF FSR
+0229  0854  	MOVF CompTempVar2122, W
+022A  0080  	MOVWF INDF
+022B  0AD1  	INCF FCI_SHEAD_00000_1_strt, F
+022C  2A07  	GOTO	label34
+022D        label35
+
+      len += strt;
+022D  0851  	MOVF FCI_SHEAD_00000_1_strt, W
+022E  07D0  	ADDWF FCI_SHEAD_00000_1_len, F
+
+    }
+    else
+022F  2AB9  	GOTO	label43
+
+    {
+      // Copy first
+      FCI_STRMOV__x(sSrc1, iSrc1_len, sDst, iDst_len, len);
+0230  01D0  	CLRF FCI_SHEAD_00000_1_len
+0231        label37
+0231  0849  	MOVF FCI_SHEAD_00000_arg_iSrc1_len, W
+0232  0250  	SUBWF FCI_SHEAD_00000_1_len, W
+0233  1803  	BTFSC STATUS,C
+0234  2AB9  	GOTO	label43
+0235  084F  	MOVF FCI_SHEAD_00000_arg_iDst_len, W
+0236  0250  	SUBWF FCI_SHEAD_00000_1_len, W
+0237  1803  	BTFSC STATUS,C
+0238  2AB9  	GOTO	label43
+0239  1383  	BCF STATUS,IRP
+023A  1846  	BTFSC FCI_SHEAD_00000_arg_sSrc1+D'1',0
+023B  1783  	BSF STATUS,IRP
+023C  0845  	MOVF FCI_SHEAD_00000_arg_sSrc1, W
+023D  0750  	ADDWF FCI_SHEAD_00000_1_len, W
+023E  0084  	MOVWF FSR
+023F  0880  	MOVF INDF, F
+0240  1903  	BTFSC STATUS,Z
+0241  2AB9  	GOTO	label43
+0242  1383  	BCF STATUS,IRP
+0243  1846  	BTFSC FCI_SHEAD_00000_arg_sSrc1+D'1',0
+0244  1783  	BSF STATUS,IRP
+0245  0845  	MOVF FCI_SHEAD_00000_arg_sSrc1, W
+0246  0084  	MOVWF FSR
+0247  0850  	MOVF FCI_SHEAD_00000_1_len, W
+0248  00D2  	MOVWF CompTempVar2129
+0249  0852  	MOVF CompTempVar2129, W
+024A  0784  	ADDWF FSR, F
+024B  0800  	MOVF INDF, W
+024C  00D3  	MOVWF CompTempVar2130
+024D  1383  	BCF STATUS,IRP
+024E  184E  	BTFSC FCI_SHEAD_00000_arg_sDst+D'1',0
+024F  1783  	BSF STATUS,IRP
+0250  084D  	MOVF FCI_SHEAD_00000_arg_sDst, W
+0251  0750  	ADDWF FCI_SHEAD_00000_1_len, W
+0252  0084  	MOVWF FSR
+0253  0853  	MOVF CompTempVar2130, W
+0254  0080  	MOVWF INDF
+0255  0AD0  	INCF FCI_SHEAD_00000_1_len, F
+
+    }
+  }
+  else
+  {
+    // Copy first
+    FCI_STRMOV__x(sSrc1, iSrc1_len, sDst, iDst_len, len);
+0257  01D0  	CLRF FCI_SHEAD_00000_1_len
+0258        label39
+0258  0849  	MOVF FCI_SHEAD_00000_arg_iSrc1_len, W
+0259  0250  	SUBWF FCI_SHEAD_00000_1_len, W
+025A  1803  	BTFSC STATUS,C
+025B  2A7E  	GOTO	label40
+025C  084F  	MOVF FCI_SHEAD_00000_arg_iDst_len, W
+025D  0250  	SUBWF FCI_SHEAD_00000_1_len, W
+025E  1803  	BTFSC STATUS,C
+025F  2A7E  	GOTO	label40
+0260  1383  	BCF STATUS,IRP
+0261  1846  	BTFSC FCI_SHEAD_00000_arg_sSrc1+D'1',0
+0262  1783  	BSF STATUS,IRP
+0263  0845  	MOVF FCI_SHEAD_00000_arg_sSrc1, W
+0264  0750  	ADDWF FCI_SHEAD_00000_1_len, W
+0265  0084  	MOVWF FSR
+0266  0880  	MOVF INDF, F
+0267  1903  	BTFSC STATUS,Z
+0268  2A7E  	GOTO	label40
+0269  1383  	BCF STATUS,IRP
+026A  1846  	BTFSC FCI_SHEAD_00000_arg_sSrc1+D'1',0
+026B  1783  	BSF STATUS,IRP
+026C  0845  	MOVF FCI_SHEAD_00000_arg_sSrc1, W
+026D  0084  	MOVWF FSR
+026E  0850  	MOVF FCI_SHEAD_00000_1_len, W
+026F  00D2  	MOVWF CompTempVar2137
+0270  0852  	MOVF CompTempVar2137, W
+0271  0784  	ADDWF FSR, F
+0272  0800  	MOVF INDF, W
+0273  00D3  	MOVWF CompTempVar2138
+0274  1383  	BCF STATUS,IRP
+0275  184E  	BTFSC FCI_SHEAD_00000_arg_sDst+D'1',0
+0276  1783  	BSF STATUS,IRP
+0277  084D  	MOVF FCI_SHEAD_00000_arg_sDst, W
+0278  0750  	ADDWF FCI_SHEAD_00000_1_len, W
+0279  0084  	MOVWF FSR
+027A  0853  	MOVF CompTempVar2138, W
+027B  0080  	MOVWF INDF
+027C  0AD0  	INCF FCI_SHEAD_00000_1_len, F
+027D  2A58  	GOTO	label39
+027E        label40
+
+    // Copy second
+    if (len < iDst_len)
+027E  084F  	MOVF FCI_SHEAD_00000_arg_iDst_len, W
+027F  0250  	SUBWF FCI_SHEAD_00000_1_len, W
+0280  1803  	BTFSC STATUS,C
+0281  2AB9  	GOTO	label43
+02B9        label43
+
+    {
+      sSrc1 = sDst + len; // make temp copies in no longer used variables
+0282  0850  	MOVF FCI_SHEAD_00000_1_len, W
+0283  074D  	ADDWF FCI_SHEAD_00000_arg_sDst, W
+0284  00D2  	MOVWF CompTempVar2143
+0285  084E  	MOVF FCI_SHEAD_00000_arg_sDst+D'1', W
+0286  00D3  	MOVWF CompTempVar2144
+0287  1803  	BTFSC STATUS,C
+0288  0AD3  	INCF CompTempVar2144, F
+0289  0852  	MOVF CompTempVar2143, W
+028A  00C5  	MOVWF FCI_SHEAD_00000_arg_sSrc1
+028B  0853  	MOVF CompTempVar2144, W
+028C  00C6  	MOVWF FCI_SHEAD_00000_arg_sSrc1+D'1'
+
+      iSrc1_len = iDst_len - len;
+028D  0850  	MOVF FCI_SHEAD_00000_1_len, W
+028E  024F  	SUBWF FCI_SHEAD_00000_arg_iDst_len, W
+028F  00C9  	MOVWF FCI_SHEAD_00000_arg_iSrc1_len
+
+      FCI_STRMOV__x(sSrc2, iSrc2_len, sSrc1, iSrc1_len, strt);
+0290  01D1  	CLRF FCI_SHEAD_00000_1_strt
+0291        label41
+0291  084C  	MOVF FCI_SHEAD_00000_arg_iSrc2_len, W
+0292  0251  	SUBWF FCI_SHEAD_00000_1_strt, W
+0293  1803  	BTFSC STATUS,C
+0294  2AB7  	GOTO	label42
+0295  0849  	MOVF FCI_SHEAD_00000_arg_iSrc1_len, W
+0296  0251  	SUBWF FCI_SHEAD_00000_1_strt, W
+0297  1803  	BTFSC STATUS,C
+0298  2AB7  	GOTO	label42
+0299  1383  	BCF STATUS,IRP
+029A  184B  	BTFSC FCI_SHEAD_00000_arg_sSrc2+D'1',0
+029B  1783  	BSF STATUS,IRP
+029C  084A  	MOVF FCI_SHEAD_00000_arg_sSrc2, W
+029D  0751  	ADDWF FCI_SHEAD_00000_1_strt, W
+029E  0084  	MOVWF FSR
+029F  0880  	MOVF INDF, F
+02A0  1903  	BTFSC STATUS,Z
+02A1  2AB7  	GOTO	label42
+02A2  1383  	BCF STATUS,IRP
+02A3  184B  	BTFSC FCI_SHEAD_00000_arg_sSrc2+D'1',0
+02A4  1783  	BSF STATUS,IRP
+02A5  084A  	MOVF FCI_SHEAD_00000_arg_sSrc2, W
+02A6  0084  	MOVWF FSR
+02A7  0851  	MOVF FCI_SHEAD_00000_1_strt, W
+02A8  00D2  	MOVWF CompTempVar2147
+02A9  0852  	MOVF CompTempVar2147, W
+02AA  0784  	ADDWF FSR, F
+02AB  0800  	MOVF INDF, W
+02AC  00D3  	MOVWF CompTempVar2148
+02AD  1383  	BCF STATUS,IRP
+02AE  1846  	BTFSC FCI_SHEAD_00000_arg_sSrc1+D'1',0
+02AF  1783  	BSF STATUS,IRP
+02B0  0845  	MOVF FCI_SHEAD_00000_arg_sSrc1, W
+02B1  0751  	ADDWF FCI_SHEAD_00000_1_strt, W
+02B2  0084  	MOVWF FSR
+02B3  0853  	MOVF CompTempVar2148, W
+02B4  0080  	MOVWF INDF
+02B5  0AD1  	INCF FCI_SHEAD_00000_1_strt, F
+02B6  2A91  	GOTO	label41
+02B7        label42
+
+      len += strt;
+02B7  0851  	MOVF FCI_SHEAD_00000_1_strt, W
+02B8  07D0  	ADDWF FCI_SHEAD_00000_1_len, F
+
+    }
+  }
+  // Terminate (only if can)
+  if (len < iDst_len)
+02B9  084F  	MOVF FCI_SHEAD_00000_arg_iDst_len, W
+02BA  0250  	SUBWF FCI_SHEAD_00000_1_len, W
+02BB  1803  	BTFSC STATUS,C
+
+  {
+    sDst[len] = '\0';
+02BD  1383  	BCF STATUS,IRP
+02BE  184E  	BTFSC FCI_SHEAD_00000_arg_sDst+D'1',0
+02BF  1783  	BSF STATUS,IRP
+02C0  084D  	MOVF FCI_SHEAD_00000_arg_sDst, W
+02C1  0750  	ADDWF FCI_SHEAD_00000_1_len, W
+02C2  0084  	MOVWF FSR
+02C3  3000  	MOVLW 0x00
+02C4  0080  	MOVWF INDF
+
+  }
+}
+02BC  0008  	RETURN
+02C5  0008  	RETURN
+
+
+
+/*=----------------------------------------------------------------------=*\
+   Use :Copy and null-terminate sSrc to sDst, max len iSrc_len
+       :sDst is only null terminated if the concat doesnt overflow
+       :
+\*=----------------------------------------------------------------------=*/
+void FCI_SCOPY(MX_STRING sSrc, MX_UINT8 iSrc_len, MX_STRING sDst, MX_UINT8 iDst_len)
+
+{
+  MX_UINT8 len;
+
+  // Move first
+  FCI_STRMOV__x(sSrc, iSrc_len, sDst, iDst_len, len);
+02C6  01DC  	CLRF FCI_SCOPY_00000_1_len
+02C7        label44
+02C7  0858  	MOVF FCI_SCOPY_00000_arg_iSrc_len, W
+02C8  025C  	SUBWF FCI_SCOPY_00000_1_len, W
+02C9  1803  	BTFSC STATUS,C
+02CA  2AED  	GOTO	label45
+02CB  085B  	MOVF FCI_SCOPY_00000_arg_iDst_len, W
+02CC  025C  	SUBWF FCI_SCOPY_00000_1_len, W
+02CD  1803  	BTFSC STATUS,C
+02CE  2AED  	GOTO	label45
+02CF  1383  	BCF STATUS,IRP
+02D0  1846  	BTFSC FCI_SCOPY_00000_arg_sSrc+D'1',0
+02D1  1783  	BSF STATUS,IRP
+02D2  0845  	MOVF FCI_SCOPY_00000_arg_sSrc, W
+02D3  075C  	ADDWF FCI_SCOPY_00000_1_len, W
+02D4  0084  	MOVWF FSR
+02D5  0880  	MOVF INDF, F
+02D6  1903  	BTFSC STATUS,Z
+02D7  2AED  	GOTO	label45
+02D8  1383  	BCF STATUS,IRP
+02D9  1846  	BTFSC FCI_SCOPY_00000_arg_sSrc+D'1',0
+02DA  1783  	BSF STATUS,IRP
+02DB  0845  	MOVF FCI_SCOPY_00000_arg_sSrc, W
+02DC  0084  	MOVWF FSR
+02DD  085C  	MOVF FCI_SCOPY_00000_1_len, W
+02DE  00DD  	MOVWF CompTempVar2156
+02DF  085D  	MOVF CompTempVar2156, W
+02E0  0784  	ADDWF FSR, F
+02E1  0800  	MOVF INDF, W
+02E2  00DE  	MOVWF CompTempVar2157
+02E3  1383  	BCF STATUS,IRP
+02E4  185A  	BTFSC FCI_SCOPY_00000_arg_sDst+D'1',0
+02E5  1783  	BSF STATUS,IRP
+02E6  0859  	MOVF FCI_SCOPY_00000_arg_sDst, W
+02E7  075C  	ADDWF FCI_SCOPY_00000_1_len, W
+02E8  0084  	MOVWF FSR
+02E9  085E  	MOVF CompTempVar2157, W
+02EA  0080  	MOVWF INDF
+02EB  0ADC  	INCF FCI_SCOPY_00000_1_len, F
+02EC  2AC7  	GOTO	label44
+02ED        label45
+
+  // Terminate (only if can)
+  if (len < iDst_len)
+02ED  085B  	MOVF FCI_SCOPY_00000_arg_iDst_len, W
+02EE  025C  	SUBWF FCI_SCOPY_00000_1_len, W
+02EF  1803  	BTFSC STATUS,C
+
+  {
+    sDst[len] = '\0';
+02F1  1383  	BCF STATUS,IRP
+02F2  185A  	BTFSC FCI_SCOPY_00000_arg_sDst+D'1',0
+02F3  1783  	BSF STATUS,IRP
+02F4  0859  	MOVF FCI_SCOPY_00000_arg_sDst, W
+02F5  075C  	ADDWF FCI_SCOPY_00000_1_len, W
+02F6  0084  	MOVWF FSR
+02F7  3000  	MOVLW 0x00
+02F8  0080  	MOVWF INDF
+
+  }
+}
+02F0  0008  	RETURN
+02F9  0008  	RETURN
+
+
+
+
+
+//************************************************************************************
+//**  
+//**  File name:     C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\NRF_test2\NRF_lib_v2.c
+//**  Title:         
+//**  Description:   
+//**  
+//**  Generated by:  Flowcode v5.2.0.0
+//**  Date:          Sunday, August 09, 2020 20:52:00
+//**  Licence:       Professional
+//**  Registered to: xyz
+//**  Licence key:   WUK7B9
+//**  
+//**  
+//**  http://www.matrixmultimedia.com
+//**  
+//************************************************************************************
+
+
+#define MX_PIC
+
+#define MX_USES_UINT8 1
+#define MX_USES_SINT16 0
+#define MX_USES_CHAR 2
+#define MX_USES_FLOAT 0
+#define MX_USES_SINT32 0
+#define MX_USES_BOOL 1
+#define MX_USES_UINT16 0
+#define MX_USES_UINT32 0
+//Defines for microcontroller
+#define P16F873A
+#define FC_CAL_PIC
+#define MX_ADC
+#define MX_ADC_TYPE_1
+#define MX_ADC_BITS_10
+#define MX_EE
+#define MX_EE_TYPE2
+#define MX_EE_SIZE 128
+#define MX_SPI_1
+#define MX_SPI_1_MISO_PORT portc
+#define MX_SPI_1_MISO_TRIS trisc
+#define MX_SPI_1_MISO_PIN 4
+#define MX_SPI_1_MOSI_PORT portc
+#define MX_SPI_1_MOSI_TRIS trisc
+#define MX_SPI_1_MOSI_PIN 5
+#define MX_SPI_1_CLK_PORT portc
+#define MX_SPI_1_CLK_TRIS trisc
+#define MX_SPI_1_CLK_PIN 3
+#define MX_SPI_1_SS_PORT portc
+#define MX_SPI_1_SS_TRIS trisc
+#define MX_UART_1
+#define MX_UART_1_TX_PORT portc
+#define MX_UART_1_TX_TRIS trisc
+#define MX_UART_1_TX_PIN 6
+#define MX_UART_1_RX_PORT portc
+#define MX_UART_1_RX_TRIS trisc
+#define MX_UART_1_RX_PIN 7
+#define MX_I2C
+#define MX_MI2C
+#define MX_I2C_1
+#define MX_I2C_1_SDA_PORT portc
+#define MX_I2C_1_SDA_TRIS trisc
+#define MX_I2C_1_SDA_PIN 4
+#define MX_I2C_1_SCL_PORT portc
+#define MX_I2C_1_SCL_TRIS trisc
+#define MX_I2C_1_SCL_PIN 3
+#define MX_PWM
+#define MX_PWM_CNT 2
+#define MX_PWM_PSCA1
+#define MX_PWM_PSCA4
+#define MX_PWM_PSCA16
+#define MX_PWM_1_PORT portc
+#define MX_PWM_1_TRIS trisc
+#define MX_PWM_1_PIN 2
+#define MX_PWM_2_PORT portc
+#define MX_PWM_2_TRIS trisc
+#define MX_PWM_2_PIN 1
+
+//Functions
+#define MX_CLK_SPEED 20000000
+#ifdef _BOOSTC
+#include <system.h>
+#endif
+#ifdef HI_TECH_C
+#include <pic.h>
+#endif
+
+//Configuration data
+#ifdef _BOOSTC
+#pragma DATA 0x2007, 0x3f3a
+#endif
+#ifdef HI_TECH_C
+__CONFIG(0x3f3a);
+#endif
+
+//Internal functions
+#include "C:\Program Files (x86)\Flowcode\v5\FCD\internals.c"
+
+//Macro function declarations
+void FCM_cmd_write_reg();
+void FCM_cmd_read_reg();
+void FCM_radio_init_rx();
+void FCM_set_rx_addr();
+void FCM_set_tx_addr();
+void FCM_cmd_read_rx_addr();
+void FCM_cmd_read_tx_addr();
+void FCM_radio_init_tx();
+void FCM_flush_fifo_txrx();
+void FCM_radio_send_data();
+void FCM_radio_recieve_data();
+void FCM_check_status();
+void FCM_read_recieved_data();
+void FCM_uart_int();
+
+
+//Variable declarations
+#define FCSZ_PAYLOAD_RECIEVE 18
+#define FCSZ_PAYLOAD_TRANSMIT 16
+#define FCSZ_RX_ADDR 5
+#define FCSZ_TX_ADDR 5
+#define FCV_FALSE (0)
+#define FCV_TRUE (1)
+MX_UINT8 FCV_DATA_TO_WRITE = (0xff);
+0692  30FF  	MOVLW 0xFF
+0693  1683  	BSF STATUS, RP0
+0694  00A3  	MOVWF gbl_FCV_DATA_TO_WRITE
+
+MX_UINT8 FCV_REG10_TX_ADDR_BYTE1 = (0x0);
+0695  01A4  	CLRF gbl_FCV_REG10_TX_ADDR_BYTE1
+
+MX_UINT8 FCV_REG01 = (0x0); // en_aa
+0696  01A5  	CLRF gbl_FCV_REG01
+
+MX_BOOL FCV_TRANCIEVER_BIT = (0);
+0697  1026  	BCF gbl_FCV_TRANCIEVER_BIT,0
+
+MX_UINT8 FCV_REG10_TX_ADDR_BYTE2 = (0x0);
+0698  01A7  	CLRF gbl_FCV_REG10_TX_ADDR_BYTE2
+
+MX_UINT8 FCV_REG02 = (0x0); // en_rxaddr
+0699  01A8  	CLRF gbl_FCV_REG02
+
+MX_CHAR FCV_PAYLOAD_RECIEVE[FCSZ_PAYLOAD_RECIEVE] = ("");
+069A  1283  	BCF STATUS, RP0
+069B  01B4  	CLRF gbl_FCV_PAYLOAD_RECIEVE
+
+MX_UINT8 FCV_REG10_TX_ADDR_BYTE3 = (0x0);
+069C  1683  	BSF STATUS, RP0
+069D  01A9  	CLRF gbl_FCV_REG10_TX_ADDR_BYTE3
+
+MX_UINT8 FCV_REG03 = (0x0); // setup
+069E  01AA  	CLRF gbl_FCV_REG03
+
+MX_UINT8 FCV_REG10_TX_ADDR_BYTE4 = (0x0);
+069F  01AB  	CLRF gbl_FCV_REG10_TX_ADDR_BYTE4
+
+MX_UINT8 FCV_REG04 = (0x0); // setup_retr
+06A0  01AC  	CLRF gbl_FCV_REG04
+
+MX_UINT8 FCV_STATUS_MAX_RT = (0x0);
+06A1  01AD  	CLRF gbl_FCV_STATUS_MAX_RT
+
+MX_UINT8 FCV_REG05 = (0x0); // rf_ch
+06A2  01AE  	CLRF gbl_FCV_REG05
+
+MX_UINT8 FCV_SPI_DATA0 = (0xff);
+06A3  30FF  	MOVLW 0xFF
+06A4  00AF  	MOVWF gbl_FCV_SPI_DATA0
+
+MX_UINT8 FCV_REG17 = (0x0); // fifo_status
+06A5  01B0  	CLRF gbl_FCV_REG17
+
+MX_UINT8 FCV_REG06 = (0x0); // rf_setup
+06A6  01B1  	CLRF gbl_FCV_REG06
+
+MX_UINT8 FCV_SPI_DATA1 = (0xff);
+06A7  30FF  	MOVLW 0xFF
+06A8  00B2  	MOVWF gbl_FCV_SPI_DATA1
+
+MX_UINT8 FCV_DATA_TO_READ = (0xff);
+06A9  30FF  	MOVLW 0xFF
+06AA  00B3  	MOVWF gbl_FCV_DATA_TO_READ
+
+MX_UINT8 FCV_REG07 = (0x0); // status
+06AB  01B4  	CLRF gbl_FCV_REG07
+
+MX_CHAR FCV_PAYLOAD_TRANSMIT[FCSZ_PAYLOAD_TRANSMIT] = ("");
+06AC  1283  	BCF STATUS, RP0
+06AD  01C6  	CLRF gbl_FCV_PAYLOAD_TRANSMIT
+
+MX_UINT8 FCV_FLAG_PROT = (0x0);
+06AE  1683  	BSF STATUS, RP0
+06AF  01B5  	CLRF gbl_FCV_FLAG_PROT
+
+MX_UINT8 FCV_REG0A_RX_ADDR_P0_BYTE0 = (0x0);
+06B0  01B6  	CLRF gbl_FCV_REG0A_RX_ADDR_P0_BYTE0
+
+MX_UINT8 FCV_REG08 = (0x0); // observe_tx
+06B1  01B7  	CLRF gbl_FCV_REG08
+
+MX_UINT8 FCV_REG0A_RX_ADDR_P0_BYTE1 = (0x0);
+06B2  01B8  	CLRF gbl_FCV_REG0A_RX_ADDR_P0_BYTE1
+
+MX_UINT8 FCV_REG09 = (0x0); // cd
+06B3  01B9  	CLRF gbl_FCV_REG09
+
+MX_UINT8 FCV_UART_RX = (0xff);
+06B4  30FF  	MOVLW 0xFF
+06B5  00BA  	MOVWF gbl_FCV_UART_RX
+
+MX_UINT8 FCV_REG0A_RX_ADDR_P0_BYTE2 = (0x0);
+06B6  01BB  	CLRF gbl_FCV_REG0A_RX_ADDR_P0_BYTE2
+
+MX_UINT8 FCV_REG0A_RX_ADDR_P0_BYTE3 = (0x0);
+06B7  01BC  	CLRF gbl_FCV_REG0A_RX_ADDR_P0_BYTE3
+
+MX_UINT8 FCV_STATUS_TX_DS = (0x0);
+06B8  01BD  	CLRF gbl_FCV_STATUS_TX_DS
+
+MX_BOOL FCV_FLAGBIT = (0);
+06B9  10A6  	BCF gbl_FCV_FLAGBIT,1
+
+MX_BOOL FCV_UART_FLAG = (0);
+06BA  1126  	BCF gbl_FCV_UART_FLAG,2
+
+MX_UINT8 FCV_REG0A_RX_ADDR_P0_BYTE4 = (0x0);
+06BB  01BE  	CLRF gbl_FCV_REG0A_RX_ADDR_P0_BYTE4
+
+MX_UINT8 FCV_REG_TO_WRITE = (0x0);
+06BC  01BF  	CLRF gbl_FCV_REG_TO_WRITE
+
+MX_UINT8 FCV_PAYLOADSIZE = (0x20);
+06BD  3020  	MOVLW 0x20
+06BE  00C0  	MOVWF gbl_FCV_PAYLOADSIZE
+
+MX_CHAR FCV_RX_ADDR[FCSZ_RX_ADDR] = ("");
+06BF  1283  	BCF STATUS, RP0
+06C0  01D6  	CLRF gbl_FCV_RX_ADDR
+
+MX_CHAR FCV_TX_ADDR[FCSZ_TX_ADDR] = ("");
+06C1  01DB  	CLRF gbl_FCV_TX_ADDR
+
+MX_UINT8 FCV_LOOP_COUNT = (0x0);
+06C2  1683  	BSF STATUS, RP0
+06C3  01C1  	CLRF gbl_FCV_LOOP_COUNT
+
+MX_BOOL FCV_FLAG_RADIO_RX = (0);
+06C4  11A6  	BCF gbl_FCV_FLAG_RADIO_RX,3
+
+MX_UINT8 FCV_REG11 = (0x0); // rx payload width @pipe0
+06C5  01C2  	CLRF gbl_FCV_REG11
+
+MX_UINT8 FCV_REG10_TX_ADDR_BYTE0 = (0x0);
+06C6  01C3  	CLRF gbl_FCV_REG10_TX_ADDR_BYTE0
+
+MX_UINT8 FCV_REG00 = (0x0); // config
+06C7  01C4  	CLRF gbl_FCV_REG00
+
+
+
+
+
+//SPI_Legacy(0): //Defines:
+
+/**** Macro Substitutions ****
+a = Unique Ref
+b = SPI Channel
+c = MOSI Pin
+d = MOSI Port
+e = MISO Pin
+f = MISO Port
+g = SCK Pin
+h = SCK Port
+i = Clock Polarity + Clock Phase + Data Sample Phase
+j = SPI Prescaler
+k = SPI Postscaler
+l = DAC Enable Pin
+m = DAC Enable Port
+n = FRAM Enable Pin
+o = FRAM Enable Port
+******************************/
+
+//MX_SPI_BMODE - Bus Mode - Bit0=CPOL, Bit1=CPHA, Bit2=CSMP
+//CPOL - Clock Polarity - Idle State of the clock 0=0, 1=1
+//CPHA - Clock Phase - Clock Edge 0=leading edge, 1=trailing edge
+//CSMP - Input Data Bit Sample Phase
+
+
+//Definitions for CS control lines
+#define SPI_2_MX_SPI_LEGACY_DAC_PIN		0
+#define SPI_2_MX_SPI_LEGACY_DAC_PORT		porta
+#define SPI_2_MX_SPI_LEGACY_DAC_TRIS		trisa
+#define SPI_2_MX_SPI_LEGACY_FRAM_PIN		0
+#define SPI_2_MX_SPI_LEGACY_FRAM_PORT		porta
+#define SPI_2_MX_SPI_LEGACY_FRAM_TRIS		trisa
+
+
+//Definitions for SPI slot allocation
+#ifndef	MX_SPI_REF1
+	#define MX_SPI_REF1
+	#define SPI_2_MX_SPI_UREF			1
+	#define MX_SPI_CHANNEL_1		1
+	#define MX_SPI_MOSI_PIN_1		-1
+	#define MX_SPI_MOSI_PORT_1		port0
+	#define MX_SPI_MOSI_TRIS_1		tris0
+	#define MX_SPI_MISO_PIN_1		-1
+	#define MX_SPI_MISO_PORT_1		port0
+	#define MX_SPI_MISO_TRIS_1		tris0
+	#define MX_SPI_SCK_PIN_1		-1
+	#define MX_SPI_SCK_PORT_1		port0
+	#define MX_SPI_SCK_TRIS_1		tris0
+	#define MX_SPI_CS_PIN_1			0
+	#define MX_SPI_CS_PORT_1		0
+	#define MX_SPI_BMODE_1			6
+	#define MX_SPI_PR_SCALE_1		4
+	#define MX_SPI_PO_SCALE_1		0
+	#define MX_SPI_INT_1			0
+#else
+ #ifndef	MX_SPI_REF2
+	#define MX_SPI_REF2
+	#define SPI_2_MX_SPI_UREF			2
+	#define MX_SPI_CHANNEL_2		1
+	#define MX_SPI_MOSI_PIN_2		-1
+	#define MX_SPI_MOSI_PORT_2		port0
+	#define MX_SPI_MOSI_TRIS_2		tris0
+	#define MX_SPI_MISO_PIN_2		-1
+	#define MX_SPI_MISO_PORT_2		port0
+	#define MX_SPI_MISO_TRIS_2		tris0
+	#define MX_SPI_SCK_PIN_2		-1
+	#define MX_SPI_SCK_PORT_2		port0
+	#define MX_SPI_SCK_TRIS_2		tris0
+	#define MX_SPI_CS_PIN_2			0
+	#define MX_SPI_CS_PORT_2		0
+	#define MX_SPI_BMODE_2			6
+	#define MX_SPI_PR_SCALE_2		4
+	#define MX_SPI_PO_SCALE_2		0
+	#define MX_SPI_INT_2			0
+ #else
+  #ifndef	MX_SPI_REF3
+	#define MX_SPI_REF3
+	#define SPI_2_MX_SPI_UREF			3
+	#define MX_SPI_CHANNEL_3		1
+	#define MX_SPI_MOSI_PIN_3		-1
+	#define MX_SPI_MOSI_PORT_3		port0
+	#define MX_SPI_MOSI_TRIS_3		tris0
+	#define MX_SPI_MISO_PIN_3		-1
+	#define MX_SPI_MISO_PORT_3		port0
+	#define MX_SPI_MISO_TRIS_3		tris0
+	#define MX_SPI_SCK_PIN_3		-1
+	#define MX_SPI_SCK_PORT_3		port0
+	#define MX_SPI_SCK_TRIS_3		tris0
+	#define MX_SPI_CS_PIN_3			0
+	#define MX_SPI_CS_PORT_3		0
+	#define MX_SPI_BMODE_3			6
+	#define MX_SPI_PR_SCALE_3		4
+	#define MX_SPI_PO_SCALE_3		0
+	#define MX_SPI_INT_3			0
+  #else
+   #ifndef	MX_SPI_REF4
+	#define MX_SPI_REF4
+	#define SPI_2_MX_SPI_UREF			4
+	#define MX_SPI_CHANNEL_4		1
+	#define MX_SPI_MOSI_PIN_4		-1
+	#define MX_SPI_MOSI_PORT_4		port0
+	#define MX_SPI_MOSI_TRIS_4		tris0
+	#define MX_SPI_MISO_PIN_4		-1
+	#define MX_SPI_MISO_PORT_4		port0
+	#define MX_SPI_MISO_TRIS_4		tris0
+	#define MX_SPI_SCK_PIN_4		-1
+	#define MX_SPI_SCK_PORT_4		port0
+	#define MX_SPI_SCK_TRIS_4		tris0
+	#define MX_SPI_CS_PIN_4			0
+	#define MX_SPI_CS_PORT_4		0
+	#define MX_SPI_BMODE_4			6
+	#define MX_SPI_PR_SCALE_4		4
+	#define MX_SPI_PO_SCALE_4		0
+	#define MX_SPI_INT_4			0
+   #endif
+  #endif
+ #endif
+#endif
+
+#define SPI_2_SPI_Master_Init		CAL_APPEND(FC_CAL_SPI_Master_Init_, SPI_2_MX_SPI_UREF)
+#define SPI_2_SPI_Master_Uninit	CAL_APPEND(FC_CAL_SPI_Master_Uninit_, SPI_2_MX_SPI_UREF)
+#define SPI_2_SPI_Master_Byte		CAL_APPEND(FC_CAL_SPI_Master_Byte_, SPI_2_MX_SPI_UREF)
+
+extern void SPI_2_SPI_Master_Init ();
+extern void SPI_2_SPI_Master_Uninit ();
+extern MX_UINT8 SPI_2_SPI_Master_Byte (MX_UINT8 DataOut);
+
+//FRAM commands
+#define FRAM_WREN  	6
+#define FRAM_WRDI  	4
+#define FRAM_RDSR  	5
+#define FRAM_WRSR  	1
+#define FRAM_READ  	3
+#define FRAM_WRITE 	2
+
+
+
+
+//SPI_Legacy(0): //Macro function declarations
+
+void FCD_SPI_Legacy0_SPI_Init();
+void FCD_SPI_Legacy0_SPI_Uninit();
+void FCD_SPI_Legacy0_SPI_Send_Char(MX_UINT8 Char);
+void FCD_SPI_Legacy0_SPI_Send_String(MX_STRING String, MX_UINT8 MSZ_String);
+MX_UINT8 FCD_SPI_Legacy0_SPI_Get_Char();
+void FCD_SPI_Legacy0_SPI_Get_String(MX_CHAR* FCR_RETVAL, MX_UINT8 FCR_RETVAL_SIZE, MX_UINT8 NumBytes);
+void FCD_SPI_Legacy0_DAC_Send_Char(MX_UINT8 Char);
+void FCD_SPI_Legacy0_NVM_Send_Char(MX_UINT8 hi_addr, MX_UINT8 lo_addr, MX_UINT8 Char);
+MX_UINT8 FCD_SPI_Legacy0_NVM_Get_Char(MX_UINT8 hi_addr, MX_UINT8 lo_addr);
+MX_UINT8 FCD_SPI_Legacy0_FramOutput(MX_UINT8 Char);
+void FCD_SPI_Legacy0_EnableFRAM();
+void FCD_SPI_Legacy0_DisableFRAM();
+
+
+//RS232(0): //Defines:
+
+/**** Macro Substitutions ****
+a = Unique Reference
+b = Uart Channel		(0-software / 1-4 hardware)
+c = tx pin
+d = tx port
+e = rx pin
+f = rx port
+g = flow control		(0-Off / 1-On)
+h = cts pin
+i = cts port
+j = rts pin
+k = rts port
+l = baud rate
+m = data bits			(7/8/9) (7 only supported in software modes)
+n = return type		(0-byte / 1-MX_UINT16)
+o = echo enable		(0-Off / 1-On)
+******************************/
+
+//Definitions for RS232 UART slot allocation
+#ifndef	MX_UART_REF1
+	#define MX_UART_REF1
+	#define RS232_4_MX_UART_UREF			1
+	#define MX_UART_CHANNEL_1		1
+	#define MX_UART_TX_PIN_1		0
+	#define MX_UART_TX_PORT_1		porta
+	#define MX_UART_TX_TRIS_1		trisa
+	#define MX_UART_RX_PIN_1		0
+	#define MX_UART_RX_PORT_1		porta
+	#define MX_UART_RX_TRIS_1		trisa
+	#define MX_UART_FLOWEN_1		0
+	#define MX_UART_CTS_PIN_1		4
+	#define MX_UART_CTS_PORT_1		portc
+	#define MX_UART_CTS_TRIS_1		trisc
+	#define MX_UART_RTS_PIN_1		0
+	#define MX_UART_RTS_PORT_1		portc
+	#define MX_UART_RTS_TRIS_1		trisc
+	#define MX_UART_BAUD_1			9600
+	#define MX_UART_DBITS_1			8
+	#define MX_UART_RETURN_1		0
+	#define MX_UART_ECHO_1			0
+	#define MX_UART_INT_1			0
+#else
+ #ifndef	MX_UART_REF2
+	#define MX_UART_REF2
+	#define RS232_4_MX_UART_UREF			2
+	#define MX_UART_CHANNEL_2		1
+	#define MX_UART_TX_PIN_2		0
+	#define MX_UART_TX_PORT_2		porta
+	#define MX_UART_TX_TRIS_2		trisa
+	#define MX_UART_RX_PIN_2		0
+	#define MX_UART_RX_PORT_2		porta
+	#define MX_UART_RX_TRIS_2		trisa
+	#define MX_UART_FLOWEN_2		0
+	#define MX_UART_CTS_PIN_2		4
+	#define MX_UART_CTS_PORT_2		portc
+	#define MX_UART_CTS_TRIS_2		trisc
+	#define MX_UART_RTS_PIN_2		0
+	#define MX_UART_RTS_PORT_2		portc
+	#define MX_UART_RTS_TRIS_2		trisc
+	#define MX_UART_BAUD_2			9600
+	#define MX_UART_DBITS_2			8
+	#define MX_UART_RETURN_2		0
+	#define MX_UART_ECHO_2			0
+	#define MX_UART_INT_2			0
+ #else
+  #ifndef	MX_UART_REF3
+	#define MX_UART_REF3
+	#define RS232_4_MX_UART_UREF			3
+	#define MX_UART_CHANNEL_3		1
+	#define MX_UART_TX_PIN_3		0
+	#define MX_UART_TX_PORT_3		porta
+	#define MX_UART_TX_TRIS_3		trisa
+	#define MX_UART_RX_PIN_3		0
+	#define MX_UART_RX_PORT_3		porta
+	#define MX_UART_RX_TRIS_3		trisa
+	#define MX_UART_FLOWEN_3		0
+	#define MX_UART_CTS_PIN_3		4
+	#define MX_UART_CTS_PORT_3		portc
+	#define MX_UART_CTS_TRIS_3		trisc
+	#define MX_UART_RTS_PIN_3		0
+	#define MX_UART_RTS_PORT_3		portc
+	#define MX_UART_RTS_TRIS_3		trisc
+	#define MX_UART_BAUD_3			9600
+	#define MX_UART_DBITS_3			8
+	#define MX_UART_RETURN_3		0
+	#define MX_UART_ECHO_3			0
+	#define MX_UART_INT_3			0
+  #else
+   #ifndef	MX_UART_REF4
+	#define MX_UART_REF4
+	#define RS232_4_MX_UART_UREF			4
+	#define MX_UART_CHANNEL_4		1
+	#define MX_UART_TX_PIN_4		0
+	#define MX_UART_TX_PORT_4		porta
+	#define MX_UART_TX_TRIS_4		trisa
+	#define MX_UART_RX_PIN_4		0
+	#define MX_UART_RX_PORT_4		porta
+	#define MX_UART_RX_TRIS_4		trisa
+	#define MX_UART_FLOWEN_4		0
+	#define MX_UART_CTS_PIN_4		4
+	#define MX_UART_CTS_PORT_4		portc
+	#define MX_UART_CTS_TRIS_4		trisc
+	#define MX_UART_RTS_PIN_4		0
+	#define MX_UART_RTS_PORT_4		portc
+	#define MX_UART_RTS_TRIS_4		trisc
+	#define MX_UART_BAUD_4			9600
+	#define MX_UART_DBITS_4			8
+	#define MX_UART_RETURN_4		0
+	#define MX_UART_ECHO_4			0
+	#define MX_UART_INT_4			0
+   #endif
+  #endif
+ #endif
+#endif
+
+#define RS232_4_UART_Init		CAL_APPEND(FC_CAL_UART_Init_, RS232_4_MX_UART_UREF)
+#define RS232_4_UART_Send		CAL_APPEND(FC_CAL_UART_Send_, RS232_4_MX_UART_UREF)
+#define RS232_4_UART_Receive		CAL_APPEND(FC_CAL_UART_Receive_, RS232_4_MX_UART_UREF)
+#define RS232_4_UART_Update_Baud CAL_APPEND(FC_CAL_UART_Update_Baud_, RS232_4_MX_UART_UREF)
+
+extern void RS232_4_UART_Init();
+extern void RS232_4_UART_Send(MX_UINT16 nChar);
+extern MX_SINT16 RS232_4_UART_Receive(MX_UINT8 nTimeout);
+extern void RS232_4_UART_Update_Baud(MX_UINT8 newbaud);
+
+
+
+
+//RS232(0): //Macro function declarations
+
+void FCD_RS2320_SendRS232Char(MX_SINT16 nChar);
+void FCD_RS2320_SendRS232String(MX_STRING String, MX_UINT8 MSZ_String);
+MX_SINT16 FCD_RS2320_ReceiveRS232Char(MX_UINT8 nTimeout);
+void FCD_RS2320_ReceiveRS232String(MX_CHAR* FCR_RETVAL, MX_UINT8 FCR_RETVAL_SIZE, MX_UINT8 nTimeout, MX_UINT8 NumBytes);
+void FCD_RS2320_ChangeHWBaud(MX_UINT8 newbaud);
+
+
+
+//SPI_Legacy(0): //Macro implementations
+
+
+void FCD_SPI_Legacy0_SPI_Init()
+
+{
+	
+		//Disable SPI Devices
+		FC_CAL_Bit_High_DDR(SPI_2_MX_SPI_LEGACY_DAC_PORT, SPI_2_MX_SPI_LEGACY_DAC_TRIS, SPI_2_MX_SPI_LEGACY_DAC_PIN);
+0551  1683  	BSF STATUS, RP0
+0552  1303  	BCF STATUS, RP1
+0553  1005  	BCF gbl_trisa,0
+0554  1283  	BCF STATUS, RP0
+0555  1405  	BSF gbl_porta,0
+
+		FC_CAL_Bit_High_DDR(SPI_2_MX_SPI_LEGACY_FRAM_PORT, SPI_2_MX_SPI_LEGACY_FRAM_TRIS, SPI_2_MX_SPI_LEGACY_FRAM_PIN);
+0556  1683  	BSF STATUS, RP0
+0557  1005  	BCF gbl_trisa,0
+0558  1283  	BCF STATUS, RP0
+0559  1405  	BSF gbl_porta,0
+
+
+		//Init SPI
+		SPI_2_SPI_Master_Init();		//Call initialise function
+055A  2302  	CALL FC_CAL_SPI_00064
+
+
+}
+055B  0008  	RETURN
+
+
+void FCD_SPI_Legacy0_SPI_Uninit()
+{
+	
+		//Convert SPI Device Control Lines To Inputs
+		FC_CAL_Bit_In_DDR(SPI_2_MX_SPI_LEGACY_DAC_PORT, SPI_2_MX_SPI_LEGACY_DAC_TRIS, SPI_2_MX_SPI_LEGACY_DAC_PIN);
+		FC_CAL_Bit_In_DDR(SPI_2_MX_SPI_LEGACY_FRAM_PORT, SPI_2_MX_SPI_LEGACY_FRAM_TRIS, SPI_2_MX_SPI_LEGACY_FRAM_PIN);
+
+		//Uninit SPI
+		SPI_2_SPI_Master_Uninit();		//Call uninitialise function
+
+}
+
+void FCD_SPI_Legacy0_SPI_Send_Char(MX_UINT8 Char)
+
+{
+	
+		SPI_2_SPI_Master_Byte(Char);
+018F  0845  	MOVF FCD_SPI_Le_00052_arg_Char, W
+0190  00C6  	MOVWF FC_CAL_SPI_00066_arg_DataOut
+0191  2176  	CALL FC_CAL_SPI_00066
+
+
+}
+0192  0008  	RETURN
+
+
+void FCD_SPI_Legacy0_SPI_Send_String(MX_STRING String, MX_UINT8 MSZ_String)
+{
+	
+		MX_UINT8 idx;
+		for(idx = 0; idx < MSZ_String; idx++)
+		{
+			if (String[idx] == 0)				//End of string data?
+				break;
+
+			SPI_2_SPI_Master_Byte(String[idx]);
+		}
+
+}
+
+MX_UINT8 FCD_SPI_Legacy0_SPI_Get_Char()
+
+{
+	
+		MX_UINT8 retVal = 0;
+0184  1683  	BSF STATUS, RP0
+0185  1303  	BCF STATUS, RP1
+0186  01C5  	CLRF FCD_SPI_Le_00054_1_retVal
+
+
+		retVal = SPI_2_SPI_Master_Byte(0xFF);
+0187  30FF  	MOVLW 0xFF
+0188  00C6  	MOVWF FC_CAL_SPI_00066_arg_DataOut
+0189  2176  	CALL FC_CAL_SPI_00066
+018A  0848  	MOVF CompTempVarRet2248, W
+018B  00C5  	MOVWF FCD_SPI_Le_00054_1_retVal
+
+
+		return (retVal);
+018C  0845  	MOVF FCD_SPI_Le_00054_1_retVal, W
+018D  00C6  	MOVWF CompTempVarRet2190
+
+
+}
+018E  0008  	RETURN
+
+
+void FCD_SPI_Legacy0_SPI_Get_String(MX_CHAR* FCR_RETVAL, MX_UINT8 FCR_RETVAL_SIZE, MX_UINT8 NumBytes)
+{
+		MX_UINT8 idx;
+
+		if (NumBytes > FCR_RETVAL_SIZE)
+			NumBytes = FCR_RETVAL_SIZE;
+
+		for (idx = 0; idx < NumBytes; idx++)
+		{
+			FCR_RETVAL[idx] = SPI_2_SPI_Master_Byte(0xFF);		//Collect incoming data byte
+		}
+
+		if (idx < FCR_RETVAL_SIZE)
+			FCR_RETVAL[idx] = 0;					//Terminate string if string variable is longer then expected data
+
+}
+
+void FCD_SPI_Legacy0_DAC_Send_Char(MX_UINT8 Char)
+{
+	
+		MX_UINT8 dac_val;
+
+		FC_CAL_Bit_Low(SPI_2_MX_SPI_LEGACY_DAC_PORT, SPI_2_MX_SPI_LEGACY_DAC_PIN);		//enable dac
+
+		dac_val = (Char & 0xF0) >> 4;
+		SPI_2_SPI_Master_Byte(dac_val);
+
+		dac_val = (Char & 0x0F) << 4;
+		SPI_2_SPI_Master_Byte(dac_val);
+
+		FC_CAL_Bit_High(SPI_2_MX_SPI_LEGACY_DAC_PORT, SPI_2_MX_SPI_LEGACY_DAC_PIN);		//disable dac
+
+}
+
+void FCD_SPI_Legacy0_NVM_Send_Char(MX_UINT8 hi_addr, MX_UINT8 lo_addr, MX_UINT8 Char)
+{
+	
+		//enable writes
+		FCD_SPI_Legacy0_EnableFRAM();
+		FCD_SPI_Legacy0_FramOutput(FRAM_WREN);
+		FCD_SPI_Legacy0_DisableFRAM();
+
+		//send write-fram command, address and data
+		FCD_SPI_Legacy0_EnableFRAM();
+		FCD_SPI_Legacy0_FramOutput(FRAM_WRITE);
+		FCD_SPI_Legacy0_FramOutput(hi_addr);
+		FCD_SPI_Legacy0_FramOutput(lo_addr);
+		FCD_SPI_Legacy0_FramOutput(Char);
+		FCD_SPI_Legacy0_DisableFRAM();
+
+}
+
+MX_UINT8 FCD_SPI_Legacy0_NVM_Get_Char(MX_UINT8 hi_addr, MX_UINT8 lo_addr)
+{
+	
+		MX_UINT8 retVal;
+
+		FCD_SPI_Legacy0_EnableFRAM();
+
+		//send read-fram command and address
+		FCD_SPI_Legacy0_FramOutput(FRAM_READ);
+		FCD_SPI_Legacy0_FramOutput(hi_addr);
+		FCD_SPI_Legacy0_FramOutput(lo_addr);
+
+		//read the data
+		retVal = FCD_SPI_Legacy0_FramOutput(0x5A);  	//don't care byte of 0x5A
+
+		FCD_SPI_Legacy0_DisableFRAM();
+
+		return(retVal);
+
+}
+
+MX_UINT8 FCD_SPI_Legacy0_FramOutput(MX_UINT8 Char)
+{
+	
+		MX_UINT8 retVal = 0;
+		retVal = SPI_2_SPI_Master_Byte(Char);
+		return (retVal);
+
+}
+
+void FCD_SPI_Legacy0_EnableFRAM()
+{
+	
+		FC_CAL_Bit_Low(SPI_2_MX_SPI_LEGACY_FRAM_PORT, SPI_2_MX_SPI_LEGACY_FRAM_PIN);
+
+}
+
+void FCD_SPI_Legacy0_DisableFRAM()
+{
+	
+		FC_CAL_Bit_High(SPI_2_MX_SPI_LEGACY_FRAM_PORT, SPI_2_MX_SPI_LEGACY_FRAM_PIN);
+
+}
+
+
+
+//RS232(0): //Macro implementations
+
+
+void FCD_RS2320_SendRS232Char(MX_SINT16 nChar)
+{
+	
+		RS232_4_UART_Send ( nChar);
+
+}
+
+void FCD_RS2320_SendRS232String(MX_STRING String, MX_UINT8 MSZ_String)
+
+{
+	
+		MX_UINT8 idx;
+		for(idx = 0; idx < MSZ_String; idx++)
+055C  01C8  	CLRF FCD_RS2320_00078_1_idx
+055D        label53
+055D  0847  	MOVF FCD_RS2320_00078_arg_MSZ_String, W
+055E  0248  	SUBWF FCD_RS2320_00078_1_idx, W
+055F  1803  	BTFSC STATUS,C
+0574  1683  	BSF STATUS, RP0
+0575  0AC8  	INCF FCD_RS2320_00078_1_idx, F
+0576  2D5D  	GOTO	label53
+
+		{
+			if (String[idx] == 0)
+0561  1383  	BCF STATUS,IRP
+0562  1846  	BTFSC FCD_RS2320_00078_arg_String+D'1',0
+0563  1783  	BSF STATUS,IRP
+0564  0845  	MOVF FCD_RS2320_00078_arg_String, W
+0565  0748  	ADDWF FCD_RS2320_00078_1_idx, W
+0566  0084  	MOVWF FSR
+0567  0880  	MOVF INDF, F
+0568  1903  	BTFSC STATUS,Z
+
+				break;
+			else RS232_4_UART_Send ( String[idx] );
+056A  1383  	BCF STATUS,IRP
+056B  1846  	BTFSC FCD_RS2320_00078_arg_String+D'1',0
+056C  1783  	BSF STATUS,IRP
+056D  0845  	MOVF FCD_RS2320_00078_arg_String, W
+056E  0748  	ADDWF FCD_RS2320_00078_1_idx, W
+056F  0084  	MOVWF FSR
+0570  0800  	MOVF INDF, W
+0571  00C9  	MOVWF FC_CAL_UAR_00073_arg_nChar
+0572  01CA  	CLRF FC_CAL_UAR_00073_arg_nChar+D'1'
+0573  22FA  	CALL FC_CAL_UAR_00073
+
+		}
+
+}
+0560  0008  	RETURN
+0569  0008  	RETURN
+
+
+MX_SINT16 FCD_RS2320_ReceiveRS232Char(MX_UINT8 nTimeout)
+
+{
+	
+		return ( RS232_4_UART_Receive ( nTimeout) );
+0138  085F  	MOVF FCD_RS2320_00061_arg_nTimeout, W
+0139  00E9  	MOVWF FC_CAL_UAR_00074_arg_nTimeout
+013A  2041  	CALL FC_CAL_UAR_00074
+013B  0870  	MOVF CompTempVarRet2259, W
+013C  00E1  	MOVWF CompTempVarRet2243
+013D  0871  	MOVF CompTempVarRet2259+D'1', W
+013E  00E2  	MOVWF CompTempVarRet2243+D'1'
+
+
+}
+013F  0008  	RETURN
+
+
+void FCD_RS2320_ReceiveRS232String(MX_CHAR* FCR_RETVAL, MX_UINT8 FCR_RETVAL_SIZE, MX_UINT8 nTimeout, MX_UINT8 NumBytes)
+
+{
+	
+		MX_UINT8 idx;
+		MX_SINT16 RS232_TO = 255;
+00FE  30FF  	MOVLW 0xFF
+00FF  00E5  	MOVWF FCD_RS2320_00062_1_RS232_TO
+0100  01E6  	CLRF FCD_RS2320_00062_1_RS232_TO+D'1'
+
+		MX_SINT16 in;
+
+		if ( 0 != 0 )
+			RS232_TO = 256;
+
+		if (NumBytes > FCR_RETVAL_SIZE)
+0101  0863  	MOVF FCD_RS2320_00062_arg_NumBytes, W
+0102  0261  	SUBWF FCD_RS2320_00062_arg_FCR_R_00063, W
+0103  1803  	BTFSC STATUS,C
+0104  2907  	GOTO	label21
+0107        label21
+
+			NumBytes = FCR_RETVAL_SIZE;
+0105  0861  	MOVF FCD_RS2320_00062_arg_FCR_R_00063, W
+0106  00E3  	MOVWF FCD_RS2320_00062_arg_NumBytes
+
+
+		for (idx = 0; idx < NumBytes; idx++)
+0107  01E4  	CLRF FCD_RS2320_00062_1_idx
+0108        label22
+0108  0863  	MOVF FCD_RS2320_00062_arg_NumBytes, W
+0109  0264  	SUBWF FCD_RS2320_00062_1_idx, W
+010A  1803  	BTFSC STATUS,C
+010B  292B  	GOTO	label24
+0129  0AE4  	INCF FCD_RS2320_00062_1_idx, F
+012A  2908  	GOTO	label22
+012B        label24
+
+		{
+			in = RS232_4_UART_Receive ( nTimeout);
+010C  0862  	MOVF FCD_RS2320_00062_arg_nTimeout, W
+010D  00E9  	MOVWF FC_CAL_UAR_00074_arg_nTimeout
+010E  2041  	CALL FC_CAL_UAR_00074
+010F  0870  	MOVF CompTempVarRet2259, W
+0110  00E7  	MOVWF FCD_RS2320_00062_1_in
+0111  0871  	MOVF CompTempVarRet2259+D'1', W
+0112  00E8  	MOVWF FCD_RS2320_00062_1_in+D'1'
+
+			if(in < RS232_TO)
+0113  0868  	MOVF FCD_RS2320_00062_1_in+D'1', W
+0114  3A80  	XORLW 0x80
+0115  00E9  	MOVWF CompTempVar2244
+0116  0866  	MOVF FCD_RS2320_00062_1_RS232_TO+D'1', W
+0117  3A80  	XORLW 0x80
+0118  0269  	SUBWF CompTempVar2244, W
+0119  1D03  	BTFSS STATUS,Z
+011A  291D  	GOTO	label23
+011B  0865  	MOVF FCD_RS2320_00062_1_RS232_TO, W
+011C  0267  	SUBWF FCD_RS2320_00062_1_in, W
+011D        label23
+011D  1803  	BTFSC STATUS,C
+011E  292B  	GOTO	label24
+
+				FCR_RETVAL[idx] = in & 0xFF;
+011F  0867  	MOVF FCD_RS2320_00062_1_in, W
+0120  00E9  	MOVWF CompTempVar2246
+0121  1383  	BCF STATUS,IRP
+0122  1860  	BTFSC FCD_RS2320_00062_arg_FCR_RETVAL+D'1',0
+0123  1783  	BSF STATUS,IRP
+0124  085F  	MOVF FCD_RS2320_00062_arg_FCR_RETVAL, W
+0125  0764  	ADDWF FCD_RS2320_00062_1_idx, W
+0126  0084  	MOVWF FSR
+0127  0869  	MOVF CompTempVar2246, W
+0128  0080  	MOVWF INDF
+
+			else
+				break;
+
+		}
+
+		if (idx < FCR_RETVAL_SIZE)
+012B  0861  	MOVF FCD_RS2320_00062_arg_FCR_R_00063, W
+012C  0264  	SUBWF FCD_RS2320_00062_1_idx, W
+012D  1803  	BTFSC STATUS,C
+
+			FCR_RETVAL[idx] = 0;
+012F  1383  	BCF STATUS,IRP
+0130  1860  	BTFSC FCD_RS2320_00062_arg_FCR_RETVAL+D'1',0
+0131  1783  	BSF STATUS,IRP
+0132  085F  	MOVF FCD_RS2320_00062_arg_FCR_RETVAL, W
+0133  0764  	ADDWF FCD_RS2320_00062_1_idx, W
+0134  0084  	MOVWF FSR
+0135  3000  	MOVLW 0x00
+0136  0080  	MOVWF INDF
+
+
+}
+012E  0008  	RETURN
+0137  0008  	RETURN
+
+
+void FCD_RS2320_ChangeHWBaud(MX_UINT8 newbaud)
+{
+	
+		RS232_4_UART_Update_Baud (newbaud);
+
+}
+
+#include "C:\Program Files (x86)\Flowcode\v5\CAL\includes.c"
+
+//Macro implementations
+
+
+void FCM_cmd_write_reg()
+
+{
+
+	//CSN
+	//Output: 0 -> C2
+	trisc = trisc & 0xFB;
+0401  30FB  	MOVLW 0xFB
+0402  1683  	BSF STATUS, RP0
+0403  1303  	BCF STATUS, RP1
+0404  0507  	ANDWF gbl_trisc, W
+0405  0087  	MOVWF gbl_trisc
+
+	if ((0))
+		portc = (portc & 0xFB) | 0x04;
+	else
+		portc = portc & 0xFB;
+0406  30FB  	MOVLW 0xFB
+0407  1283  	BCF STATUS, RP0
+0408  0507  	ANDWF gbl_portc, W
+0409  0087  	MOVWF gbl_portc
+
+
+	//Calculation
+	//Calculation:
+	//  spi_data0 = reg_to_write + 0x20
+	FCV_SPI_DATA0 = FCV_REG_TO_WRITE + 0x20;
+040A  3020  	MOVLW 0x20
+040B  1683  	BSF STATUS, RP0
+040C  073F  	ADDWF gbl_FCV_REG_TO_WRITE, W
+040D  00AF  	MOVWF gbl_FCV_SPI_DATA0
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(spi_data0)
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_SPI_DATA0);
+040E  082F  	MOVF gbl_FCV_SPI_DATA0, W
+040F  00C5  	MOVWF FCD_SPI_Le_00052_arg_Char
+0410  218F  	CALL FCD_SPI_Le_00052
+
+
+	//Calculation
+	//Calculation:
+	//  spi_data0 = data_to_write
+	FCV_SPI_DATA0 = FCV_DATA_TO_WRITE;
+0411  0823  	MOVF gbl_FCV_DATA_TO_WRITE, W
+0412  00AF  	MOVWF gbl_FCV_SPI_DATA0
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(spi_data0)
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_SPI_DATA0);
+0413  082F  	MOVF gbl_FCV_SPI_DATA0, W
+0414  00C5  	MOVWF FCD_SPI_Le_00052_arg_Char
+0415  218F  	CALL FCD_SPI_Le_00052
+
+
+	//CSN
+	//Output: 1 -> C2
+	trisc = trisc & 0xFB;
+0416  30FB  	MOVLW 0xFB
+0417  0507  	ANDWF gbl_trisc, W
+0418  0087  	MOVWF gbl_trisc
+
+	if ((1))
+		portc = (portc & 0xFB) | 0x04;
+0419  30FB  	MOVLW 0xFB
+041A  1283  	BCF STATUS, RP0
+041B  0507  	ANDWF gbl_portc, W
+041C  1683  	BSF STATUS, RP0
+041D  00C5  	MOVWF CompTempVar2188
+041E  3004  	MOVLW 0x04
+041F  0445  	IORWF CompTempVar2188, W
+0420  1283  	BCF STATUS, RP0
+0421  0087  	MOVWF gbl_portc
+
+	else
+		portc = portc & 0xFB;
+
+}
+0422  0008  	RETURN
+
+
+
+void FCM_cmd_read_reg()
+
+{
+
+	//CSN
+	//Output: 0 -> C2
+	trisc = trisc & 0xFB;
+0193  30FB  	MOVLW 0xFB
+0194  1683  	BSF STATUS, RP0
+0195  1303  	BCF STATUS, RP1
+0196  0507  	ANDWF gbl_trisc, W
+0197  0087  	MOVWF gbl_trisc
+
+	if ((0))
+		portc = (portc & 0xFB) | 0x04;
+	else
+		portc = portc & 0xFB;
+0198  30FB  	MOVLW 0xFB
+0199  1283  	BCF STATUS, RP0
+019A  0507  	ANDWF gbl_portc, W
+019B  0087  	MOVWF gbl_portc
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(spi_data0)
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_SPI_DATA0);
+019C  1683  	BSF STATUS, RP0
+019D  082F  	MOVF gbl_FCV_SPI_DATA0, W
+019E  00C5  	MOVWF FCD_SPI_Le_00052_arg_Char
+019F  218F  	CALL FCD_SPI_Le_00052
+
+
+	//Call Component Macro
+	//Call Component Macro: spi_data1=SPI_Get_Char()
+	FCV_SPI_DATA1 = FCD_SPI_Legacy0_SPI_Get_Char();
+01A0  2184  	CALL FCD_SPI_Le_00054
+01A1  0846  	MOVF CompTempVarRet2190, W
+01A2  00B2  	MOVWF gbl_FCV_SPI_DATA1
+
+
+	//CSN
+	//Output: 1 -> C2
+	trisc = trisc & 0xFB;
+01A3  30FB  	MOVLW 0xFB
+01A4  0507  	ANDWF gbl_trisc, W
+01A5  0087  	MOVWF gbl_trisc
+
+	if ((1))
+		portc = (portc & 0xFB) | 0x04;
+01A6  30FB  	MOVLW 0xFB
+01A7  1283  	BCF STATUS, RP0
+01A8  0507  	ANDWF gbl_portc, W
+01A9  1683  	BSF STATUS, RP0
+01AA  00C5  	MOVWF CompTempVar2189
+01AB  3004  	MOVLW 0x04
+01AC  0445  	IORWF CompTempVar2189, W
+01AD  1283  	BCF STATUS, RP0
+01AE  0087  	MOVWF gbl_portc
+
+	else
+		portc = portc & 0xFB;
+
+}
+01AF  0008  	RETURN
+
+
+
+void FCM_radio_init_rx()
+
+{
+
+	//Calculation
+	//Calculation:
+	//  reg_to_write = 0x00
+	//  data_to_write = 0x0F
+	FCV_REG_TO_WRITE = 0x00;
+051E  1683  	BSF STATUS, RP0
+051F  1303  	BCF STATUS, RP1
+0520  01BF  	CLRF gbl_FCV_REG_TO_WRITE
+
+	FCV_DATA_TO_WRITE = 0x0F;
+0521  300F  	MOVLW 0x0F
+0522  00A3  	MOVWF gbl_FCV_DATA_TO_WRITE
+
+
+	//Call Macro
+	//Call Macro: cmd_write_reg()
+	FCM_cmd_write_reg();
+0523  2401  	CALL FCM_cmd_wr_00051
+
+
+	//Calculation
+	//Calculation:
+	//  reg_to_write = 01
+	//  data_to_write = 0x3F
+	FCV_REG_TO_WRITE = 01;
+0524  3001  	MOVLW 0x01
+0525  1683  	BSF STATUS, RP0
+0526  00BF  	MOVWF gbl_FCV_REG_TO_WRITE
+
+	FCV_DATA_TO_WRITE = 0x3F;
+0527  303F  	MOVLW 0x3F
+0528  00A3  	MOVWF gbl_FCV_DATA_TO_WRITE
+
+
+	//Call Macro
+	//Call Macro: cmd_write_reg()
+	FCM_cmd_write_reg();
+0529  2401  	CALL FCM_cmd_wr_00051
+
+
+	//Calculation
+	//Calculation:
+	//  reg_to_write = 02
+	//  data_to_write = 0x03
+	FCV_REG_TO_WRITE = 02;
+052A  3002  	MOVLW 0x02
+052B  1683  	BSF STATUS, RP0
+052C  00BF  	MOVWF gbl_FCV_REG_TO_WRITE
+
+	FCV_DATA_TO_WRITE = 0x03;
+052D  3003  	MOVLW 0x03
+052E  00A3  	MOVWF gbl_FCV_DATA_TO_WRITE
+
+
+	//Call Macro
+	//Call Macro: cmd_write_reg()
+	FCM_cmd_write_reg();
+052F  2401  	CALL FCM_cmd_wr_00051
+
+
+	//Calculation
+	//Calculation:
+	//  reg_to_write = 03
+	//  data_to_write = 0x03
+	FCV_REG_TO_WRITE = 03;
+0530  3003  	MOVLW 0x03
+0531  1683  	BSF STATUS, RP0
+0532  00BF  	MOVWF gbl_FCV_REG_TO_WRITE
+
+	FCV_DATA_TO_WRITE = 0x03;
+0533  00A3  	MOVWF gbl_FCV_DATA_TO_WRITE
+
+
+	//Call Macro
+	//Call Macro: cmd_write_reg()
+	FCM_cmd_write_reg();
+0534  2401  	CALL FCM_cmd_wr_00051
+
+
+	//Calculation
+	//Calculation:
+	//  reg_to_write = 0x04
+	//  data_to_write = 0x5F
+	FCV_REG_TO_WRITE = 0x04;
+0535  3004  	MOVLW 0x04
+0536  1683  	BSF STATUS, RP0
+0537  00BF  	MOVWF gbl_FCV_REG_TO_WRITE
+
+	FCV_DATA_TO_WRITE = 0x5F;
+0538  305F  	MOVLW 0x5F
+0539  00A3  	MOVWF gbl_FCV_DATA_TO_WRITE
+
+
+	//Call Macro
+	//Call Macro: cmd_write_reg()
+	FCM_cmd_write_reg();
+053A  2401  	CALL FCM_cmd_wr_00051
+
+
+	//Calculation
+	//Calculation:
+	//  reg_to_write = 0x05
+	//  data_to_write = 0x4C
+	FCV_REG_TO_WRITE = 0x05;
+053B  3005  	MOVLW 0x05
+053C  1683  	BSF STATUS, RP0
+053D  00BF  	MOVWF gbl_FCV_REG_TO_WRITE
+
+	FCV_DATA_TO_WRITE = 0x4C;
+053E  304C  	MOVLW 0x4C
+053F  00A3  	MOVWF gbl_FCV_DATA_TO_WRITE
+
+
+	//Call Macro
+	//Call Macro: cmd_write_reg()
+	FCM_cmd_write_reg();
+0540  2401  	CALL FCM_cmd_wr_00051
+
+
+	//Calculation
+	//Calculation:
+	//  reg_to_write = 0x06
+	//  data_to_write = 0x27
+	FCV_REG_TO_WRITE = 0x06;
+0541  3006  	MOVLW 0x06
+0542  1683  	BSF STATUS, RP0
+0543  00BF  	MOVWF gbl_FCV_REG_TO_WRITE
+
+	FCV_DATA_TO_WRITE = 0x27;
+0544  3027  	MOVLW 0x27
+0545  00A3  	MOVWF gbl_FCV_DATA_TO_WRITE
+
+
+	//Call Macro
+	//Call Macro: cmd_write_reg()
+	FCM_cmd_write_reg();
+0546  2401  	CALL FCM_cmd_wr_00051
+
+
+	//Calculation
+	//Calculation:
+	//  reg_to_write = 0x11
+	//  data_to_write = payloadsize
+	FCV_REG_TO_WRITE = 0x11;
+0547  3011  	MOVLW 0x11
+0548  1683  	BSF STATUS, RP0
+0549  00BF  	MOVWF gbl_FCV_REG_TO_WRITE
+
+	FCV_DATA_TO_WRITE = FCV_PAYLOADSIZE;
+054A  0840  	MOVF gbl_FCV_PAYLOADSIZE, W
+054B  00A3  	MOVWF gbl_FCV_DATA_TO_WRITE
+
+
+	//Call Macro
+	//Call Macro: cmd_write_reg()
+	FCM_cmd_write_reg();
+054C  2401  	CALL FCM_cmd_wr_00051
+
+
+	//Call Macro
+	//Call Macro: set_tx_addr()
+	FCM_set_tx_addr();
+054D  2314  	CALL FCM_set_tx_00056
+
+
+	//Call Macro
+	//Call Macro: set_rx_addr()
+	FCM_set_rx_addr();
+054E  2350  	CALL FCM_set_rx_00057
+
+
+	//Call Macro
+	//Call Macro: flush_fifo_txrx()
+	FCM_flush_fifo_txrx();
+054F  23D9  	CALL FCM_flush__00058
+
+
+}
+0550  0008  	RETURN
+
+
+
+void FCM_set_rx_addr()
+
+{
+
+	//CSN
+	//Output: 0 -> C2
+	trisc = trisc & 0xFB;
+0350  30FB  	MOVLW 0xFB
+0351  1683  	BSF STATUS, RP0
+0352  1303  	BCF STATUS, RP1
+0353  0507  	ANDWF gbl_trisc, W
+0354  0087  	MOVWF gbl_trisc
+
+	if ((0))
+		portc = (portc & 0xFB) | 0x04;
+	else
+		portc = portc & 0xFB;
+0355  30FB  	MOVLW 0xFB
+0356  1283  	BCF STATUS, RP0
+0357  0507  	ANDWF gbl_portc, W
+0358  0087  	MOVWF gbl_portc
+
+
+	//Delay
+	//Delay: 5 us
+	delay_us(5);
+0359  3005  	MOVLW 0x05
+035A  1683  	BSF STATUS, RP0
+035B  00F2  	MOVWF delay_us_00000_arg_del
+035C  2010  	CALL delay_us_00000
+
+
+	//Calculation
+	//Calculation:
+	//  spi_data0 = 0b00101010
+	FCV_SPI_DATA0 = 42;
+035D  302A  	MOVLW 0x2A
+035E  00AF  	MOVWF gbl_FCV_SPI_DATA0
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(spi_data0)
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_SPI_DATA0);
+035F  082F  	MOVF gbl_FCV_SPI_DATA0, W
+0360  00C5  	MOVWF FCD_SPI_Le_00052_arg_Char
+0361  218F  	CALL FCD_SPI_Le_00052
+
+
+	//Calculation
+	//Calculation:
+	//  spi_data0 = reg0A_rx_addr_p0_byte0
+	FCV_SPI_DATA0 = FCV_REG0A_RX_ADDR_P0_BYTE0;
+0362  0836  	MOVF gbl_FCV_REG0A_RX_ADDR_P0_BYTE0, W
+0363  00AF  	MOVWF gbl_FCV_SPI_DATA0
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(spi_data0)
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_SPI_DATA0);
+0364  082F  	MOVF gbl_FCV_SPI_DATA0, W
+0365  00C5  	MOVWF FCD_SPI_Le_00052_arg_Char
+0366  218F  	CALL FCD_SPI_Le_00052
+
+
+	//Calculation
+	//Calculation:
+	//  spi_data0 = reg0A_rx_addr_p0_byte1
+	FCV_SPI_DATA0 = FCV_REG0A_RX_ADDR_P0_BYTE1;
+0367  0838  	MOVF gbl_FCV_REG0A_RX_ADDR_P0_BYTE1, W
+0368  00AF  	MOVWF gbl_FCV_SPI_DATA0
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(spi_data0)
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_SPI_DATA0);
+0369  082F  	MOVF gbl_FCV_SPI_DATA0, W
+036A  00C5  	MOVWF FCD_SPI_Le_00052_arg_Char
+036B  218F  	CALL FCD_SPI_Le_00052
+
+
+	//Calculation
+	//Calculation:
+	//  spi_data0 = reg0A_rx_addr_p0_byte2
+	FCV_SPI_DATA0 = FCV_REG0A_RX_ADDR_P0_BYTE2;
+036C  083B  	MOVF gbl_FCV_REG0A_RX_ADDR_P0_BYTE2, W
+036D  00AF  	MOVWF gbl_FCV_SPI_DATA0
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(spi_data0)
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_SPI_DATA0);
+036E  082F  	MOVF gbl_FCV_SPI_DATA0, W
+036F  00C5  	MOVWF FCD_SPI_Le_00052_arg_Char
+0370  218F  	CALL FCD_SPI_Le_00052
+
+
+	//Calculation
+	//Calculation:
+	//  spi_data0 = reg0A_rx_addr_p0_byte3
+	FCV_SPI_DATA0 = FCV_REG0A_RX_ADDR_P0_BYTE3;
+0371  083C  	MOVF gbl_FCV_REG0A_RX_ADDR_P0_BYTE3, W
+0372  00AF  	MOVWF gbl_FCV_SPI_DATA0
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(spi_data0)
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_SPI_DATA0);
+0373  082F  	MOVF gbl_FCV_SPI_DATA0, W
+0374  00C5  	MOVWF FCD_SPI_Le_00052_arg_Char
+0375  218F  	CALL FCD_SPI_Le_00052
+
+
+	//Calculation
+	//Calculation:
+	//  spi_data0 = reg0A_rx_addr_p0_byte4
+	FCV_SPI_DATA0 = FCV_REG0A_RX_ADDR_P0_BYTE4;
+0376  083E  	MOVF gbl_FCV_REG0A_RX_ADDR_P0_BYTE4, W
+0377  00AF  	MOVWF gbl_FCV_SPI_DATA0
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(spi_data0)
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_SPI_DATA0);
+0378  082F  	MOVF gbl_FCV_SPI_DATA0, W
+0379  00C5  	MOVWF FCD_SPI_Le_00052_arg_Char
+037A  218F  	CALL FCD_SPI_Le_00052
+
+
+	//CSN
+	//Output: 1 -> C2
+	trisc = trisc & 0xFB;
+037B  30FB  	MOVLW 0xFB
+037C  0507  	ANDWF gbl_trisc, W
+037D  0087  	MOVWF gbl_trisc
+
+	if ((1))
+		portc = (portc & 0xFB) | 0x04;
+037E  30FB  	MOVLW 0xFB
+037F  1283  	BCF STATUS, RP0
+0380  0507  	ANDWF gbl_portc, W
+0381  1683  	BSF STATUS, RP0
+0382  00C5  	MOVWF CompTempVar2192
+0383  3004  	MOVLW 0x04
+0384  0445  	IORWF CompTempVar2192, W
+0385  1283  	BCF STATUS, RP0
+0386  0087  	MOVWF gbl_portc
+
+	else
+		portc = portc & 0xFB;
+
+	//Delay
+	//Delay: 5 us
+	delay_us(5);
+0387  3005  	MOVLW 0x05
+0388  1683  	BSF STATUS, RP0
+0389  00F2  	MOVWF delay_us_00000_arg_del
+038A  2010  	CALL delay_us_00000
+
+
+}
+038B  0008  	RETURN
+
+
+
+void FCM_set_tx_addr()
+
+{
+
+	//CSN
+	//Output: 0 -> C2
+	trisc = trisc & 0xFB;
+0314  30FB  	MOVLW 0xFB
+0315  1683  	BSF STATUS, RP0
+0316  1303  	BCF STATUS, RP1
+0317  0507  	ANDWF gbl_trisc, W
+0318  0087  	MOVWF gbl_trisc
+
+	if ((0))
+		portc = (portc & 0xFB) | 0x04;
+	else
+		portc = portc & 0xFB;
+0319  30FB  	MOVLW 0xFB
+031A  1283  	BCF STATUS, RP0
+031B  0507  	ANDWF gbl_portc, W
+031C  0087  	MOVWF gbl_portc
+
+
+	//Delay
+	//Delay: 5 us
+	delay_us(5);
+031D  3005  	MOVLW 0x05
+031E  1683  	BSF STATUS, RP0
+031F  00F2  	MOVWF delay_us_00000_arg_del
+0320  2010  	CALL delay_us_00000
+
+
+	//Calculation
+	//Calculation:
+	//  spi_data0 = 0b00110000
+	FCV_SPI_DATA0 = 48;
+0321  3030  	MOVLW 0x30
+0322  00AF  	MOVWF gbl_FCV_SPI_DATA0
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(spi_data0)
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_SPI_DATA0);
+0323  082F  	MOVF gbl_FCV_SPI_DATA0, W
+0324  00C5  	MOVWF FCD_SPI_Le_00052_arg_Char
+0325  218F  	CALL FCD_SPI_Le_00052
+
+
+	//Calculation
+	//Calculation:
+	//  spi_data0 = reg10_tx_addr_byte0
+	FCV_SPI_DATA0 = FCV_REG10_TX_ADDR_BYTE0;
+0326  0843  	MOVF gbl_FCV_REG10_TX_ADDR_BYTE0, W
+0327  00AF  	MOVWF gbl_FCV_SPI_DATA0
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(spi_data0)
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_SPI_DATA0);
+0328  082F  	MOVF gbl_FCV_SPI_DATA0, W
+0329  00C5  	MOVWF FCD_SPI_Le_00052_arg_Char
+032A  218F  	CALL FCD_SPI_Le_00052
+
+
+	//Calculation
+	//Calculation:
+	//  spi_data0 = reg10_tx_addr_byte1
+	FCV_SPI_DATA0 = FCV_REG10_TX_ADDR_BYTE1;
+032B  0824  	MOVF gbl_FCV_REG10_TX_ADDR_BYTE1, W
+032C  00AF  	MOVWF gbl_FCV_SPI_DATA0
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(spi_data0)
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_SPI_DATA0);
+032D  082F  	MOVF gbl_FCV_SPI_DATA0, W
+032E  00C5  	MOVWF FCD_SPI_Le_00052_arg_Char
+032F  218F  	CALL FCD_SPI_Le_00052
+
+
+	//Calculation
+	//Calculation:
+	//  spi_data0 = reg10_tx_addr_byte2
+	FCV_SPI_DATA0 = FCV_REG10_TX_ADDR_BYTE2;
+0330  0827  	MOVF gbl_FCV_REG10_TX_ADDR_BYTE2, W
+0331  00AF  	MOVWF gbl_FCV_SPI_DATA0
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(spi_data0)
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_SPI_DATA0);
+0332  082F  	MOVF gbl_FCV_SPI_DATA0, W
+0333  00C5  	MOVWF FCD_SPI_Le_00052_arg_Char
+0334  218F  	CALL FCD_SPI_Le_00052
+
+
+	//Calculation
+	//Calculation:
+	//  spi_data0 = reg10_tx_addr_byte3
+	FCV_SPI_DATA0 = FCV_REG10_TX_ADDR_BYTE3;
+0335  0829  	MOVF gbl_FCV_REG10_TX_ADDR_BYTE3, W
+0336  00AF  	MOVWF gbl_FCV_SPI_DATA0
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(spi_data0)
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_SPI_DATA0);
+0337  082F  	MOVF gbl_FCV_SPI_DATA0, W
+0338  00C5  	MOVWF FCD_SPI_Le_00052_arg_Char
+0339  218F  	CALL FCD_SPI_Le_00052
+
+
+	//Calculation
+	//Calculation:
+	//  spi_data0 = reg10_tx_addr_byte4
+	FCV_SPI_DATA0 = FCV_REG10_TX_ADDR_BYTE4;
+033A  082B  	MOVF gbl_FCV_REG10_TX_ADDR_BYTE4, W
+033B  00AF  	MOVWF gbl_FCV_SPI_DATA0
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(spi_data0)
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_SPI_DATA0);
+033C  082F  	MOVF gbl_FCV_SPI_DATA0, W
+033D  00C5  	MOVWF FCD_SPI_Le_00052_arg_Char
+033E  218F  	CALL FCD_SPI_Le_00052
+
+
+	//CSN
+	//Output: 1 -> C2
+	trisc = trisc & 0xFB;
+033F  30FB  	MOVLW 0xFB
+0340  0507  	ANDWF gbl_trisc, W
+0341  0087  	MOVWF gbl_trisc
+
+	if ((1))
+		portc = (portc & 0xFB) | 0x04;
+0342  30FB  	MOVLW 0xFB
+0343  1283  	BCF STATUS, RP0
+0344  0507  	ANDWF gbl_portc, W
+0345  1683  	BSF STATUS, RP0
+0346  00C5  	MOVWF CompTempVar2191
+0347  3004  	MOVLW 0x04
+0348  0445  	IORWF CompTempVar2191, W
+0349  1283  	BCF STATUS, RP0
+034A  0087  	MOVWF gbl_portc
+
+	else
+		portc = portc & 0xFB;
+
+	//Delay
+	//Delay: 5 us
+	delay_us(5);
+034B  3005  	MOVLW 0x05
+034C  1683  	BSF STATUS, RP0
+034D  00F2  	MOVWF delay_us_00000_arg_del
+034E  2010  	CALL delay_us_00000
+
+
+}
+034F  0008  	RETURN
+
+
+
+void FCM_cmd_read_rx_addr()
+{
+
+	//Comment:
+	//read rx addr
+
+	//Calculation
+	//Calculation:
+	//  spi_data0 = 0x0A
+	FCV_SPI_DATA0 = 0x0A;
+
+	//CSN
+	//Output: 0 -> C2
+	trisc = trisc & 0xFB;
+	if ((0))
+		portc = (portc & 0xFB) | 0x04;
+	else
+		portc = portc & 0xFB;
+
+	//Delay
+	//Delay: 5 us
+	delay_us(5);
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(spi_data0)
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_SPI_DATA0);
+
+	//Call Component Macro
+	//Call Component Macro: spi_data1=SPI_Get_Char()
+	FCV_SPI_DATA1 = FCD_SPI_Legacy0_SPI_Get_Char();
+
+	//Calculation
+	//Calculation:
+	//  reg0A_rx_addr_p0_byte0 = spi_data1
+	FCV_REG0A_RX_ADDR_P0_BYTE0 = FCV_SPI_DATA1;
+
+	//Call Component Macro
+	//Call Component Macro: spi_data1=SPI_Get_Char()
+	FCV_SPI_DATA1 = FCD_SPI_Legacy0_SPI_Get_Char();
+
+	//Calculation
+	//Calculation:
+	//  reg0A_rx_addr_p0_byte1 = spi_data1
+	FCV_REG0A_RX_ADDR_P0_BYTE1 = FCV_SPI_DATA1;
+
+	//Call Component Macro
+	//Call Component Macro: spi_data1=SPI_Get_Char()
+	FCV_SPI_DATA1 = FCD_SPI_Legacy0_SPI_Get_Char();
+
+	//Calculation
+	//Calculation:
+	//  reg0A_rx_addr_p0_byte2 = spi_data1
+	FCV_REG0A_RX_ADDR_P0_BYTE2 = FCV_SPI_DATA1;
+
+	//Call Component Macro
+	//Call Component Macro: spi_data1=SPI_Get_Char()
+	FCV_SPI_DATA1 = FCD_SPI_Legacy0_SPI_Get_Char();
+
+	//Calculation
+	//Calculation:
+	//  reg0A_rx_addr_p0_byte3 = spi_data1
+	FCV_REG0A_RX_ADDR_P0_BYTE3 = FCV_SPI_DATA1;
+
+	//Call Component Macro
+	//Call Component Macro: spi_data1=SPI_Get_Char()
+	FCV_SPI_DATA1 = FCD_SPI_Legacy0_SPI_Get_Char();
+
+	//Calculation
+	//Calculation:
+	//  reg0A_rx_addr_p0_byte4 = spi_data1
+	FCV_REG0A_RX_ADDR_P0_BYTE4 = FCV_SPI_DATA1;
+
+	//CSN
+	//Output: 1 -> C2
+	trisc = trisc & 0xFB;
+	if ((1))
+		portc = (portc & 0xFB) | 0x04;
+	else
+		portc = portc & 0xFB;
+
+	//Delay
+	//Delay: 5 us
+	delay_us(5);
+
+	//Calculation
+	//Calculation:
+	//  rx_addr = rx_addr + reg0A_rx_addr_p0_byte0
+	FCI_SHEAD(FCV_RX_ADDR,FCSZ_RX_ADDR, &FCV_REG0A_RX_ADDR_P0_BYTE0,1, FCV_RX_ADDR,FCSZ_RX_ADDR);
+
+	//Calculation
+	//Calculation:
+	//  rx_addr = rx_addr + reg0A_rx_addr_p0_byte1
+	FCI_SHEAD(FCV_RX_ADDR,FCSZ_RX_ADDR, &FCV_REG0A_RX_ADDR_P0_BYTE1,1, FCV_RX_ADDR,FCSZ_RX_ADDR);
+
+	//Calculation
+	//Calculation:
+	//  rx_addr = rx_addr + reg0A_rx_addr_p0_byte2
+	FCI_SHEAD(FCV_RX_ADDR,FCSZ_RX_ADDR, &FCV_REG0A_RX_ADDR_P0_BYTE2,1, FCV_RX_ADDR,FCSZ_RX_ADDR);
+
+	//Calculation
+	//Calculation:
+	//  rx_addr = rx_addr + reg0A_rx_addr_p0_byte3
+	FCI_SHEAD(FCV_RX_ADDR,FCSZ_RX_ADDR, &FCV_REG0A_RX_ADDR_P0_BYTE3,1, FCV_RX_ADDR,FCSZ_RX_ADDR);
+
+	//Calculation
+	//Calculation:
+	//  rx_addr = rx_addr + reg0A_rx_addr_p0_byte4
+	FCI_SHEAD(FCV_RX_ADDR,FCSZ_RX_ADDR, &FCV_REG0A_RX_ADDR_P0_BYTE4,1, FCV_RX_ADDR,FCSZ_RX_ADDR);
+
+}
+
+
+void FCM_cmd_read_tx_addr()
+{
+
+	//Comment:
+	//read tx addr
+
+	//Calculation
+	//Calculation:
+	//  spi_data0 = 0x10
+	FCV_SPI_DATA0 = 0x10;
+
+	//CSN
+	//Output: 0 -> C2
+	trisc = trisc & 0xFB;
+	if ((0))
+		portc = (portc & 0xFB) | 0x04;
+	else
+		portc = portc & 0xFB;
+
+	//Delay
+	//Delay: 5 us
+	delay_us(5);
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(spi_data0)
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_SPI_DATA0);
+
+	//Call Component Macro
+	//Call Component Macro: spi_data1=SPI_Get_Char()
+	FCV_SPI_DATA1 = FCD_SPI_Legacy0_SPI_Get_Char();
+
+	//Calculation
+	//Calculation:
+	//  reg10_tx_addr_byte0 = spi_data1
+	FCV_REG10_TX_ADDR_BYTE0 = FCV_SPI_DATA1;
+
+	//Call Component Macro
+	//Call Component Macro: spi_data1=SPI_Get_Char()
+	FCV_SPI_DATA1 = FCD_SPI_Legacy0_SPI_Get_Char();
+
+	//Calculation
+	//Calculation:
+	//  reg10_tx_addr_byte1 = spi_data1
+	FCV_REG10_TX_ADDR_BYTE1 = FCV_SPI_DATA1;
+
+	//Call Component Macro
+	//Call Component Macro: spi_data1=SPI_Get_Char()
+	FCV_SPI_DATA1 = FCD_SPI_Legacy0_SPI_Get_Char();
+
+	//Calculation
+	//Calculation:
+	//  reg10_tx_addr_byte2 = spi_data1
+	FCV_REG10_TX_ADDR_BYTE2 = FCV_SPI_DATA1;
+
+	//Call Component Macro
+	//Call Component Macro: spi_data1=SPI_Get_Char()
+	FCV_SPI_DATA1 = FCD_SPI_Legacy0_SPI_Get_Char();
+
+	//Calculation
+	//Calculation:
+	//  reg10_tx_addr_byte3 = spi_data1
+	FCV_REG10_TX_ADDR_BYTE3 = FCV_SPI_DATA1;
+
+	//Call Component Macro
+	//Call Component Macro: spi_data1=SPI_Get_Char()
+	FCV_SPI_DATA1 = FCD_SPI_Legacy0_SPI_Get_Char();
+
+	//Calculation
+	//Calculation:
+	//  reg10_tx_addr_byte4 = spi_data1
+	FCV_REG10_TX_ADDR_BYTE4 = FCV_SPI_DATA1;
+
+	//CSN
+	//Output: 1 -> C2
+	trisc = trisc & 0xFB;
+	if ((1))
+		portc = (portc & 0xFB) | 0x04;
+	else
+		portc = portc & 0xFB;
+
+	//Delay
+	//Delay: 5 us
+	delay_us(5);
+
+	//Calculation
+	//Calculation:
+	//  tx_addr = tx_addr + reg10_tx_addr_byte0
+	FCI_SHEAD(FCV_TX_ADDR,FCSZ_TX_ADDR, &FCV_REG10_TX_ADDR_BYTE0,1, FCV_TX_ADDR,FCSZ_TX_ADDR);
+
+	//Calculation
+	//Calculation:
+	//  tx_addr = tx_addr + reg10_tx_addr_byte1
+	FCI_SHEAD(FCV_TX_ADDR,FCSZ_TX_ADDR, &FCV_REG10_TX_ADDR_BYTE1,1, FCV_TX_ADDR,FCSZ_TX_ADDR);
+
+	//Calculation
+	//Calculation:
+	//  tx_addr = tx_addr + reg10_tx_addr_byte2
+	FCI_SHEAD(FCV_TX_ADDR,FCSZ_TX_ADDR, &FCV_REG10_TX_ADDR_BYTE2,1, FCV_TX_ADDR,FCSZ_TX_ADDR);
+
+	//Calculation
+	//Calculation:
+	//  tx_addr = tx_addr + reg10_tx_addr_byte3
+	FCI_SHEAD(FCV_TX_ADDR,FCSZ_TX_ADDR, &FCV_REG10_TX_ADDR_BYTE3,1, FCV_TX_ADDR,FCSZ_TX_ADDR);
+
+	//Calculation
+	//Calculation:
+	//  tx_addr = tx_addr + reg10_tx_addr_byte4
+	FCI_SHEAD(FCV_TX_ADDR,FCSZ_TX_ADDR, &FCV_REG10_TX_ADDR_BYTE4,1, FCV_TX_ADDR,FCSZ_TX_ADDR);
+
+}
+
+
+void FCM_radio_init_tx()
+
+{
+
+	//Calculation
+	//Calculation:
+	//  reg_to_write = 0x00
+	//  data_to_write = 0x0E
+	FCV_REG_TO_WRITE = 0x00;
+04EB  1683  	BSF STATUS, RP0
+04EC  1303  	BCF STATUS, RP1
+04ED  01BF  	CLRF gbl_FCV_REG_TO_WRITE
+
+	FCV_DATA_TO_WRITE = 0x0E;
+04EE  300E  	MOVLW 0x0E
+04EF  00A3  	MOVWF gbl_FCV_DATA_TO_WRITE
+
+
+	//Call Macro
+	//Call Macro: cmd_write_reg()
+	FCM_cmd_write_reg();
+04F0  2401  	CALL FCM_cmd_wr_00051
+
+
+	//Calculation
+	//Calculation:
+	//  reg_to_write = 01
+	//  data_to_write = 0x3F
+	FCV_REG_TO_WRITE = 01;
+04F1  3001  	MOVLW 0x01
+04F2  1683  	BSF STATUS, RP0
+04F3  00BF  	MOVWF gbl_FCV_REG_TO_WRITE
+
+	FCV_DATA_TO_WRITE = 0x3F;
+04F4  303F  	MOVLW 0x3F
+04F5  00A3  	MOVWF gbl_FCV_DATA_TO_WRITE
+
+
+	//Call Macro
+	//Call Macro: cmd_write_reg()
+	FCM_cmd_write_reg();
+04F6  2401  	CALL FCM_cmd_wr_00051
+
+
+	//Calculation
+	//Calculation:
+	//  reg_to_write = 02
+	//  data_to_write = 0x03
+	FCV_REG_TO_WRITE = 02;
+04F7  3002  	MOVLW 0x02
+04F8  1683  	BSF STATUS, RP0
+04F9  00BF  	MOVWF gbl_FCV_REG_TO_WRITE
+
+	FCV_DATA_TO_WRITE = 0x03;
+04FA  3003  	MOVLW 0x03
+04FB  00A3  	MOVWF gbl_FCV_DATA_TO_WRITE
+
+
+	//Call Macro
+	//Call Macro: cmd_write_reg()
+	FCM_cmd_write_reg();
+04FC  2401  	CALL FCM_cmd_wr_00051
+
+
+	//Calculation
+	//Calculation:
+	//  reg_to_write = 03
+	//  data_to_write = 0x03
+	FCV_REG_TO_WRITE = 03;
+04FD  3003  	MOVLW 0x03
+04FE  1683  	BSF STATUS, RP0
+04FF  00BF  	MOVWF gbl_FCV_REG_TO_WRITE
+
+	FCV_DATA_TO_WRITE = 0x03;
+0500  00A3  	MOVWF gbl_FCV_DATA_TO_WRITE
+
+
+	//Call Macro
+	//Call Macro: cmd_write_reg()
+	FCM_cmd_write_reg();
+0501  2401  	CALL FCM_cmd_wr_00051
+
+
+	//Calculation
+	//Calculation:
+	//  reg_to_write = 0x04
+	//  data_to_write = 0x5F
+	FCV_REG_TO_WRITE = 0x04;
+0502  3004  	MOVLW 0x04
+0503  1683  	BSF STATUS, RP0
+0504  00BF  	MOVWF gbl_FCV_REG_TO_WRITE
+
+	FCV_DATA_TO_WRITE = 0x5F;
+0505  305F  	MOVLW 0x5F
+0506  00A3  	MOVWF gbl_FCV_DATA_TO_WRITE
+
+
+	//Call Macro
+	//Call Macro: cmd_write_reg()
+	FCM_cmd_write_reg();
+0507  2401  	CALL FCM_cmd_wr_00051
+
+
+	//Calculation
+	//Calculation:
+	//  reg_to_write = 0x05
+	//  data_to_write = 0x4C
+	FCV_REG_TO_WRITE = 0x05;
+0508  3005  	MOVLW 0x05
+0509  1683  	BSF STATUS, RP0
+050A  00BF  	MOVWF gbl_FCV_REG_TO_WRITE
+
+	FCV_DATA_TO_WRITE = 0x4C;
+050B  304C  	MOVLW 0x4C
+050C  00A3  	MOVWF gbl_FCV_DATA_TO_WRITE
+
+
+	//Call Macro
+	//Call Macro: cmd_write_reg()
+	FCM_cmd_write_reg();
+050D  2401  	CALL FCM_cmd_wr_00051
+
+
+	//Calculation
+	//Calculation:
+	//  reg_to_write = 0x06
+	//  data_to_write = 0x27
+	FCV_REG_TO_WRITE = 0x06;
+050E  3006  	MOVLW 0x06
+050F  1683  	BSF STATUS, RP0
+0510  00BF  	MOVWF gbl_FCV_REG_TO_WRITE
+
+	FCV_DATA_TO_WRITE = 0x27;
+0511  3027  	MOVLW 0x27
+0512  00A3  	MOVWF gbl_FCV_DATA_TO_WRITE
+
+
+	//Call Macro
+	//Call Macro: cmd_write_reg()
+	FCM_cmd_write_reg();
+0513  2401  	CALL FCM_cmd_wr_00051
+
+
+	//Calculation
+	//Calculation:
+	//  reg_to_write = 0x11
+	//  data_to_write = payloadsize
+	FCV_REG_TO_WRITE = 0x11;
+0514  3011  	MOVLW 0x11
+0515  1683  	BSF STATUS, RP0
+0516  00BF  	MOVWF gbl_FCV_REG_TO_WRITE
+
+	FCV_DATA_TO_WRITE = FCV_PAYLOADSIZE;
+0517  0840  	MOVF gbl_FCV_PAYLOADSIZE, W
+0518  00A3  	MOVWF gbl_FCV_DATA_TO_WRITE
+
+
+	//Call Macro
+	//Call Macro: cmd_write_reg()
+	FCM_cmd_write_reg();
+0519  2401  	CALL FCM_cmd_wr_00051
+
+
+	//Call Macro
+	//Call Macro: set_tx_addr()
+	FCM_set_tx_addr();
+051A  2314  	CALL FCM_set_tx_00056
+
+
+	//Call Macro
+	//Call Macro: set_rx_addr()
+	FCM_set_rx_addr();
+051B  2350  	CALL FCM_set_rx_00057
+
+
+	//Call Macro
+	//Call Macro: flush_fifo_txrx()
+	FCM_flush_fifo_txrx();
+051C  23D9  	CALL FCM_flush__00058
+
+
+}
+051D  0008  	RETURN
+
+
+
+void FCM_flush_fifo_txrx()
+
+{
+
+	//CSN
+	//Output: 0 -> C2
+	trisc = trisc & 0xFB;
+03D9  30FB  	MOVLW 0xFB
+03DA  1683  	BSF STATUS, RP0
+03DB  1303  	BCF STATUS, RP1
+03DC  0507  	ANDWF gbl_trisc, W
+03DD  0087  	MOVWF gbl_trisc
+
+	if ((0))
+		portc = (portc & 0xFB) | 0x04;
+	else
+		portc = portc & 0xFB;
+03DE  30FB  	MOVLW 0xFB
+03DF  1283  	BCF STATUS, RP0
+03E0  0507  	ANDWF gbl_portc, W
+03E1  0087  	MOVWF gbl_portc
+
+
+	//Delay
+	//Delay: 5 us
+	delay_us(5);
+03E2  3005  	MOVLW 0x05
+03E3  1683  	BSF STATUS, RP0
+03E4  00F2  	MOVWF delay_us_00000_arg_del
+03E5  2010  	CALL delay_us_00000
+
+
+	//Calculation
+	//Calculation:
+	//  spi_data0 = 0xE1
+	FCV_SPI_DATA0 = 0xE1;
+03E6  30E1  	MOVLW 0xE1
+03E7  00AF  	MOVWF gbl_FCV_SPI_DATA0
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(spi_data0)
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_SPI_DATA0);
+03E8  082F  	MOVF gbl_FCV_SPI_DATA0, W
+03E9  00C5  	MOVWF FCD_SPI_Le_00052_arg_Char
+03EA  218F  	CALL FCD_SPI_Le_00052
+
+
+	//Calculation
+	//Calculation:
+	//  spi_data0 = 0xE2
+	FCV_SPI_DATA0 = 0xE2;
+03EB  30E2  	MOVLW 0xE2
+03EC  00AF  	MOVWF gbl_FCV_SPI_DATA0
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(spi_data0)
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_SPI_DATA0);
+03ED  082F  	MOVF gbl_FCV_SPI_DATA0, W
+03EE  00C5  	MOVWF FCD_SPI_Le_00052_arg_Char
+03EF  218F  	CALL FCD_SPI_Le_00052
+
+
+	//CSN
+	//Output: 1 -> C2
+	trisc = trisc & 0xFB;
+03F0  30FB  	MOVLW 0xFB
+03F1  0507  	ANDWF gbl_trisc, W
+03F2  0087  	MOVWF gbl_trisc
+
+	if ((1))
+		portc = (portc & 0xFB) | 0x04;
+03F3  30FB  	MOVLW 0xFB
+03F4  1283  	BCF STATUS, RP0
+03F5  0507  	ANDWF gbl_portc, W
+03F6  1683  	BSF STATUS, RP0
+03F7  00C5  	MOVWF CompTempVar2193
+03F8  3004  	MOVLW 0x04
+03F9  0445  	IORWF CompTempVar2193, W
+03FA  1283  	BCF STATUS, RP0
+03FB  0087  	MOVWF gbl_portc
+
+	else
+		portc = portc & 0xFB;
+
+	//Delay
+	//Delay: 5 us
+	delay_us(5);
+03FC  3005  	MOVLW 0x05
+03FD  1683  	BSF STATUS, RP0
+03FE  00F2  	MOVWF delay_us_00000_arg_del
+03FF  2010  	CALL delay_us_00000
+
+
+}
+0400  0008  	RETURN
+
+
+
+void FCM_radio_send_data()
+
+{
+
+	//CSN
+	//Output: 0 -> C2
+	trisc = trisc & 0xFB;
+0471  30FB  	MOVLW 0xFB
+0472  1683  	BSF STATUS, RP0
+0473  1303  	BCF STATUS, RP1
+0474  0507  	ANDWF gbl_trisc, W
+0475  0087  	MOVWF gbl_trisc
+
+	if ((0))
+		portc = (portc & 0xFB) | 0x04;
+	else
+		portc = portc & 0xFB;
+0476  30FB  	MOVLW 0xFB
+0477  1283  	BCF STATUS, RP0
+0478  0507  	ANDWF gbl_portc, W
+0479  0087  	MOVWF gbl_portc
+
+
+	//Delay
+	//Delay: 5 us
+	delay_us(5);
+047A  3005  	MOVLW 0x05
+047B  1683  	BSF STATUS, RP0
+047C  00F2  	MOVWF delay_us_00000_arg_del
+047D  2010  	CALL delay_us_00000
+
+
+	//Calculation
+	//Calculation:
+	//  spi_data0 = 0xA0
+	FCV_SPI_DATA0 = 0xA0;
+047E  30A0  	MOVLW 0xA0
+047F  00AF  	MOVWF gbl_FCV_SPI_DATA0
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(spi_data0)
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_SPI_DATA0);
+0480  082F  	MOVF gbl_FCV_SPI_DATA0, W
+0481  00C5  	MOVWF FCD_SPI_Le_00052_arg_Char
+0482  218F  	CALL FCD_SPI_Le_00052
+
+
+	//Calculation
+	//Calculation:
+	//  loop_count = 0
+	FCV_LOOP_COUNT = 0;
+0483  01C1  	CLRF gbl_FCV_LOOP_COUNT
+
+
+	//Connection Point
+	//Connection Point: [A]: A
+FCC_radio_send_data_A:
+0484        label50
+
+;
+
+	//Calculation
+	//Calculation:
+	//  spi_data0 = payload_transmit[loop_count]
+	FCV_SPI_DATA0 = FCV_PAYLOAD_TRANSMIT[FCV_LOOP_COUNT];
+0484  1283  	BCF STATUS, RP0
+0485  1383  	BCF	STATUS,IRP
+0486  3046  	MOVLW LOW(gbl_FCV_PAYLOAD_TRANSMIT+D'0')
+0487  0084  	MOVWF FSR
+0488  1683  	BSF STATUS, RP0
+0489  0841  	MOVF gbl_FCV_LOOP_COUNT, W
+048A  0784  	ADDWF FSR, F
+048B  0800  	MOVF INDF, W
+048C  00AF  	MOVWF gbl_FCV_SPI_DATA0
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(spi_data0)
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_SPI_DATA0);
+048D  082F  	MOVF gbl_FCV_SPI_DATA0, W
+048E  00C5  	MOVWF FCD_SPI_Le_00052_arg_Char
+048F  218F  	CALL FCD_SPI_Le_00052
+
+
+	//Calculation
+	//Calculation:
+	//  loop_count = loop_count + 1
+	FCV_LOOP_COUNT = FCV_LOOP_COUNT + 1;
+0490  0A41  	INCF gbl_FCV_LOOP_COUNT, W
+0491  00C1  	MOVWF gbl_FCV_LOOP_COUNT
+
+
+	//Decision
+	//Decision: loop_count = payloadsize?
+	if (FCV_LOOP_COUNT == FCV_PAYLOADSIZE)
+0492  0840  	MOVF gbl_FCV_PAYLOADSIZE, W
+0493  0641  	XORWF gbl_FCV_LOOP_COUNT, W
+0494  1D03  	BTFSS STATUS,Z
+
+	{
+
+	} else {
+
+		//Goto Connection Point
+		//Goto Connection Point: [A]: A
+		goto FCC_radio_send_data_A;
+0495  2C84  	GOTO	label50
+
+
+	}
+
+	//CSN
+	//Output: 1 -> C2
+	trisc = trisc & 0xFB;
+0496  30FB  	MOVLW 0xFB
+0497  0507  	ANDWF gbl_trisc, W
+0498  0087  	MOVWF gbl_trisc
+
+	if ((1))
+		portc = (portc & 0xFB) | 0x04;
+0499  30FB  	MOVLW 0xFB
+049A  1283  	BCF STATUS, RP0
+049B  0507  	ANDWF gbl_portc, W
+049C  1683  	BSF STATUS, RP0
+049D  00C5  	MOVWF CompTempVar2227
+049E  3004  	MOVLW 0x04
+049F  0445  	IORWF CompTempVar2227, W
+04A0  1283  	BCF STATUS, RP0
+04A1  0087  	MOVWF gbl_portc
+
+	else
+		portc = portc & 0xFB;
+
+	//Delay
+	//Delay: 5 us
+	delay_us(5);
+04A2  3005  	MOVLW 0x05
+04A3  1683  	BSF STATUS, RP0
+04A4  00F2  	MOVWF delay_us_00000_arg_del
+04A5  2010  	CALL delay_us_00000
+
+
+	//CE
+	//Output: 1 -> C1
+	trisc = trisc & 0xFD;
+04A6  30FD  	MOVLW 0xFD
+04A7  0507  	ANDWF gbl_trisc, W
+04A8  0087  	MOVWF gbl_trisc
+
+	if ((1))
+		portc = (portc & 0xFD) | 0x02;
+04A9  30FD  	MOVLW 0xFD
+04AA  1283  	BCF STATUS, RP0
+04AB  0507  	ANDWF gbl_portc, W
+04AC  1683  	BSF STATUS, RP0
+04AD  00C5  	MOVWF CompTempVar2228
+04AE  3002  	MOVLW 0x02
+04AF  0445  	IORWF CompTempVar2228, W
+04B0  1283  	BCF STATUS, RP0
+04B1  0087  	MOVWF gbl_portc
+
+	else
+		portc = portc & 0xFD;
+
+	//Delay
+	//Delay: 6 ms
+	delay_ms(6);
+04B2  3006  	MOVLW 0x06
+04B3  1683  	BSF STATUS, RP0
+04B4  00C5  	MOVWF delay_ms_00000_arg_del
+04B5  2015  	CALL delay_ms_00000
+
+
+	//CE
+	//Output: 0 -> C1
+	trisc = trisc & 0xFD;
+04B6  30FD  	MOVLW 0xFD
+04B7  0507  	ANDWF gbl_trisc, W
+04B8  0087  	MOVWF gbl_trisc
+
+	if ((0))
+		portc = (portc & 0xFD) | 0x02;
+	else
+		portc = portc & 0xFD;
+04B9  30FD  	MOVLW 0xFD
+04BA  1283  	BCF STATUS, RP0
+04BB  0507  	ANDWF gbl_portc, W
+04BC  0087  	MOVWF gbl_portc
+
+
+	//Call Macro
+	//Call Macro: check_status()
+	FCM_check_status();
+04BD  2423  	CALL FCM_check__0005D
+
+
+	//Decision
+	//Decision: reg07 = 0x2E?
+	if (FCV_REG07 == 0x2E)
+04BE  0834  	MOVF gbl_FCV_REG07, W
+04BF  3A2E  	XORLW 0x2E
+04C0  1D03  	BTFSS STATUS,Z
+04C1  2CDD  	GOTO	label51
+04DD        label51
+
+	{
+
+		//tx_ack
+		//Output: 1 -> C0
+		trisc = trisc & 0xFE;
+04C2  30FE  	MOVLW 0xFE
+04C3  0507  	ANDWF gbl_trisc, W
+04C4  0087  	MOVWF gbl_trisc
+
+		if ((1))
+			portc = (portc & 0xFE) | 0x01;
+04C5  30FE  	MOVLW 0xFE
+04C6  1283  	BCF STATUS, RP0
+04C7  0507  	ANDWF gbl_portc, W
+04C8  1683  	BSF STATUS, RP0
+04C9  00C5  	MOVWF CompTempVar2229
+04CA  3001  	MOVLW 0x01
+04CB  0445  	IORWF CompTempVar2229, W
+04CC  1283  	BCF STATUS, RP0
+04CD  0087  	MOVWF gbl_portc
+
+		else
+			portc = portc & 0xFE;
+
+		//Calculation
+		//Calculation:
+		//  reg_to_write = 0x07
+		//  data_to_write = 0x2E
+		FCV_REG_TO_WRITE = 0x07;
+04CE  3007  	MOVLW 0x07
+04CF  1683  	BSF STATUS, RP0
+04D0  00BF  	MOVWF gbl_FCV_REG_TO_WRITE
+
+		FCV_DATA_TO_WRITE = 0x2E;
+04D1  302E  	MOVLW 0x2E
+04D2  00A3  	MOVWF gbl_FCV_DATA_TO_WRITE
+
+
+		//Call Macro
+		//Call Macro: cmd_write_reg()
+		FCM_cmd_write_reg();
+04D3  2401  	CALL FCM_cmd_wr_00051
+
+
+		//Call Macro
+		//Call Macro: flush_fifo_txrx()
+		FCM_flush_fifo_txrx();
+04D4  23D9  	CALL FCM_flush__00058
+
+
+		//tx_ack
+		//Output: 0 -> C0
+		trisc = trisc & 0xFE;
+04D5  30FE  	MOVLW 0xFE
+04D6  0507  	ANDWF gbl_trisc, W
+04D7  0087  	MOVWF gbl_trisc
+
+		if ((0))
+			portc = (portc & 0xFE) | 0x01;
+		else
+			portc = portc & 0xFE;
+04D8  30FE  	MOVLW 0xFE
+04D9  1283  	BCF STATUS, RP0
+04DA  0507  	ANDWF gbl_portc, W
+04DB  0087  	MOVWF gbl_portc
+
+
+	} else {
+
+		//Decision
+		//Decision: reg07 = 0x1E?
+		if (FCV_REG07 == 0x1E)
+04DD  0834  	MOVF gbl_FCV_REG07, W
+04DE  3A1E  	XORLW 0x1E
+04DF  1D03  	BTFSS STATUS,Z
+04E0  2CE9  	GOTO	label52
+04E9        label52
+
+		{
+
+			//Call Macro
+			//Call Macro: flush_fifo_txrx()
+			FCM_flush_fifo_txrx();
+04E1  23D9  	CALL FCM_flush__00058
+
+
+			//Calculation
+			//Calculation:
+			//  reg_to_write = 0x07
+			//  data_to_write = 0x1E
+			FCV_REG_TO_WRITE = 0x07;
+04E2  3007  	MOVLW 0x07
+04E3  00BF  	MOVWF gbl_FCV_REG_TO_WRITE
+
+			FCV_DATA_TO_WRITE = 0x1E;
+04E4  301E  	MOVLW 0x1E
+04E5  00A3  	MOVWF gbl_FCV_DATA_TO_WRITE
+
+
+			//Call Macro
+			//Call Macro: cmd_write_reg()
+			FCM_cmd_write_reg();
+04E6  2401  	CALL FCM_cmd_wr_00051
+
+
+			//Call Macro
+			//Call Macro: flush_fifo_txrx()
+			FCM_flush_fifo_txrx();
+04E7  23D9  	CALL FCM_flush__00058
+
+
+		} else {
+
+			//Call Macro
+			//Call Macro: flush_fifo_txrx()
+			FCM_flush_fifo_txrx();
+04E9  23D9  	CALL FCM_flush__00058
+
+
+		}
+
+	}
+
+}
+04DC  0008  	RETURN
+04E8  0008  	RETURN
+04EA  0008  	RETURN
+
+
+
+void FCM_radio_recieve_data()
+
+{
+
+	//Delay
+	//Delay: 4 ms
+	delay_ms(4);
+0441  3004  	MOVLW 0x04
+0442  1683  	BSF STATUS, RP0
+0443  1303  	BCF STATUS, RP1
+0444  00C5  	MOVWF delay_ms_00000_arg_del
+0445  2015  	CALL delay_ms_00000
+
+
+	//Call Macro
+	//Call Macro: check_status()
+	FCM_check_status();
+0446  2423  	CALL FCM_check__0005D
+
+
+	//Decision
+	//Decision: reg07 = 64?
+	if (FCV_REG07 == 64)
+0447  0834  	MOVF gbl_FCV_REG07, W
+0448  3A40  	XORLW 0x40
+0449  1D03  	BTFSS STATUS,Z
+044A  2C68  	GOTO	label48
+0468        label48
+
+	{
+
+		//rx_ack
+		//Output: 1 -> A5
+		trisa = trisa & 0xDF;
+044B  30DF  	MOVLW 0xDF
+044C  0505  	ANDWF gbl_trisa, W
+044D  0085  	MOVWF gbl_trisa
+
+		if ((1))
+			porta = (porta & 0xDF) | 0x20;
+044E  30DF  	MOVLW 0xDF
+044F  1283  	BCF STATUS, RP0
+0450  0505  	ANDWF gbl_porta, W
+0451  1683  	BSF STATUS, RP0
+0452  00C5  	MOVWF CompTempVar2230
+0453  3020  	MOVLW 0x20
+0454  0445  	IORWF CompTempVar2230, W
+0455  1283  	BCF STATUS, RP0
+0456  0085  	MOVWF gbl_porta
+
+		else
+			porta = porta & 0xDF;
+
+		//Call Macro
+		//Call Macro: read_recieved_data()
+		FCM_read_recieved_data();
+0457  238C  	CALL FCM_read_r_0005F
+
+
+		//Calculation
+		//Calculation:
+		//  reg_to_write = 0x07
+		//  data_to_write = 0x4E
+		FCV_REG_TO_WRITE = 0x07;
+0458  3007  	MOVLW 0x07
+0459  00BF  	MOVWF gbl_FCV_REG_TO_WRITE
+
+		FCV_DATA_TO_WRITE = 0x4E;
+045A  304E  	MOVLW 0x4E
+045B  00A3  	MOVWF gbl_FCV_DATA_TO_WRITE
+
+
+		//Call Macro
+		//Call Macro: cmd_write_reg()
+		FCM_cmd_write_reg();
+045C  2401  	CALL FCM_cmd_wr_00051
+
+
+		//rx_ack
+		//Output: 0 -> A5
+		trisa = trisa & 0xDF;
+045D  30DF  	MOVLW 0xDF
+045E  1683  	BSF STATUS, RP0
+045F  0505  	ANDWF gbl_trisa, W
+0460  0085  	MOVWF gbl_trisa
+
+		if ((0))
+			porta = (porta & 0xDF) | 0x20;
+		else
+			porta = porta & 0xDF;
+0461  30DF  	MOVLW 0xDF
+0462  1283  	BCF STATUS, RP0
+0463  0505  	ANDWF gbl_porta, W
+0464  0085  	MOVWF gbl_porta
+
+
+		//Calculation
+		//Calculation:
+		//  flag_radio_rx = 1
+		FCV_FLAG_RADIO_RX = 1;
+0465  1683  	BSF STATUS, RP0
+0466  15A6  	BSF gbl_FCV_FLAG_RADIO_RX,3
+
+
+	} else {
+0467  2C6F  	GOTO	label49
+046F        label49
+
+
+		//rx_ack
+		//Output: 0 -> A5
+		trisa = trisa & 0xDF;
+0468  30DF  	MOVLW 0xDF
+0469  0505  	ANDWF gbl_trisa, W
+046A  0085  	MOVWF gbl_trisa
+
+		if ((0))
+			porta = (porta & 0xDF) | 0x20;
+		else
+			porta = porta & 0xDF;
+046B  30DF  	MOVLW 0xDF
+046C  1283  	BCF STATUS, RP0
+046D  0505  	ANDWF gbl_porta, W
+046E  0085  	MOVWF gbl_porta
+
+
+	}
+
+	//Call Macro
+	//Call Macro: flush_fifo_txrx()
+	FCM_flush_fifo_txrx();
+046F  23D9  	CALL FCM_flush__00058
+
+
+}
+0470  0008  	RETURN
+
+
+
+void FCM_check_status()
+
+{
+
+	//Comment:
+	//read reg07
+
+	//Calculation
+	//Calculation:
+	//  spi_data0 = 0x07
+	FCV_SPI_DATA0 = 0x07;
+0423  3007  	MOVLW 0x07
+0424  1683  	BSF STATUS, RP0
+0425  1303  	BCF STATUS, RP1
+0426  00AF  	MOVWF gbl_FCV_SPI_DATA0
+
+
+	//Call Macro
+	//Call Macro: cmd_read_reg()
+	FCM_cmd_read_reg();
+0427  2193  	CALL FCM_cmd_re_00053
+
+
+	//Calculation
+	//Calculation:
+	//  reg07 = spi_data1
+	FCV_REG07 = FCV_SPI_DATA1;
+0428  1683  	BSF STATUS, RP0
+0429  0832  	MOVF gbl_FCV_SPI_DATA1, W
+042A  00B4  	MOVWF gbl_FCV_REG07
+
+
+	//Comment:
+	//read reg17
+
+	//Calculation
+	//Calculation:
+	//  spi_data0 = 0x17
+	FCV_SPI_DATA0 = 0x17;
+042B  3017  	MOVLW 0x17
+042C  00AF  	MOVWF gbl_FCV_SPI_DATA0
+
+
+	//Call Macro
+	//Call Macro: cmd_read_reg()
+	FCM_cmd_read_reg();
+042D  2193  	CALL FCM_cmd_re_00053
+
+
+	//Calculation
+	//Calculation:
+	//  reg17 = spi_data1
+	FCV_REG17 = FCV_SPI_DATA1;
+042E  1683  	BSF STATUS, RP0
+042F  0832  	MOVF gbl_FCV_SPI_DATA1, W
+0430  00B0  	MOVWF gbl_FCV_REG17
+
+
+}
+0431  0008  	RETURN
+
+
+
+void FCM_read_recieved_data()
+
+{
+
+	//Calculation
+	//Calculation:
+	//  loop_count = 0
+	//  payload_recieve = ""
+	FCV_LOOP_COUNT = 0;
+038C  1683  	BSF STATUS, RP0
+038D  1303  	BCF STATUS, RP1
+038E  01C1  	CLRF gbl_FCV_LOOP_COUNT
+
+	FCI_SCOPY("",0, FCV_PAYLOAD_RECIEVE,FCSZ_PAYLOAD_RECIEVE);
+038F  01C7  	CLRF CompTempVar2231
+0390  3000  	MOVLW HIGH(CompTempVar2231+D'0')
+0391  00C6  	MOVWF FCI_SCOPY_00000_arg_sSrc+D'1'
+0392  30C7  	MOVLW LOW(CompTempVar2231+D'0')
+0393  00C5  	MOVWF FCI_SCOPY_00000_arg_sSrc
+0394  01D8  	CLRF FCI_SCOPY_00000_arg_iSrc_len
+0395  3000  	MOVLW HIGH(gbl_FCV_PAYLOAD_RECIEVE+D'0')
+0396  00DA  	MOVWF FCI_SCOPY_00000_arg_sDst+D'1'
+0397  3034  	MOVLW LOW(gbl_FCV_PAYLOAD_RECIEVE+D'0')
+0398  00D9  	MOVWF FCI_SCOPY_00000_arg_sDst
+0399  3012  	MOVLW 0x12
+039A  00DB  	MOVWF FCI_SCOPY_00000_arg_iDst_len
+039B  22C6  	CALL FCI_SCOPY_00000
+
+
+	//CSN
+	//Output: 0 -> C2
+	trisc = trisc & 0xFB;
+039C  30FB  	MOVLW 0xFB
+039D  0507  	ANDWF gbl_trisc, W
+039E  0087  	MOVWF gbl_trisc
+
+	if ((0))
+		portc = (portc & 0xFB) | 0x04;
+	else
+		portc = portc & 0xFB;
+039F  30FB  	MOVLW 0xFB
+03A0  1283  	BCF STATUS, RP0
+03A1  0507  	ANDWF gbl_portc, W
+03A2  0087  	MOVWF gbl_portc
+
+
+	//Delay
+	//Delay: 5 us
+	delay_us(5);
+03A3  3005  	MOVLW 0x05
+03A4  1683  	BSF STATUS, RP0
+03A5  00F2  	MOVWF delay_us_00000_arg_del
+03A6  2010  	CALL delay_us_00000
+
+
+	//Calculation
+	//Calculation:
+	//  spi_data0 = 0x61
+	FCV_SPI_DATA0 = 0x61;
+03A7  3061  	MOVLW 0x61
+03A8  00AF  	MOVWF gbl_FCV_SPI_DATA0
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Send_Char(spi_data0)
+	FCD_SPI_Legacy0_SPI_Send_Char(FCV_SPI_DATA0);
+03A9  082F  	MOVF gbl_FCV_SPI_DATA0, W
+03AA  00C5  	MOVWF FCD_SPI_Le_00052_arg_Char
+03AB  218F  	CALL FCD_SPI_Le_00052
+
+
+	//Connection Point
+	//Connection Point: [A]: A
+FCC_read_recieved_data_A:
+03AC        label47
+
+;
+
+	//Call Component Macro
+	//Call Component Macro: data_to_read=SPI_Get_Char()
+	FCV_DATA_TO_READ = FCD_SPI_Legacy0_SPI_Get_Char();
+03AC  2184  	CALL FCD_SPI_Le_00054
+03AD  0846  	MOVF CompTempVarRet2190, W
+03AE  00B3  	MOVWF gbl_FCV_DATA_TO_READ
+
+
+	//Calculation
+	//Calculation:
+	//  payload_recieve = payload_recieve + data_to_read
+	FCI_SHEAD(FCV_PAYLOAD_RECIEVE,FCSZ_PAYLOAD_RECIEVE, &FCV_DATA_TO_READ,1, FCV_PAYLOAD_RECIEVE,FCSZ_PAYLOAD_RECIEVE);
+03AF  3000  	MOVLW HIGH(gbl_FCV_PAYLOAD_RECIEVE+D'0')
+03B0  00C6  	MOVWF FCI_SHEAD_00000_arg_sSrc1+D'1'
+03B1  3034  	MOVLW LOW(gbl_FCV_PAYLOAD_RECIEVE+D'0')
+03B2  00C5  	MOVWF FCI_SHEAD_00000_arg_sSrc1
+03B3  3012  	MOVLW 0x12
+03B4  00C9  	MOVWF FCI_SHEAD_00000_arg_iSrc1_len
+03B5  3000  	MOVLW HIGH(gbl_FCV_DATA_TO_READ+D'0')
+03B6  00CB  	MOVWF FCI_SHEAD_00000_arg_sSrc2+D'1'
+03B7  30B3  	MOVLW LOW(gbl_FCV_DATA_TO_READ+D'0')
+03B8  00CA  	MOVWF FCI_SHEAD_00000_arg_sSrc2
+03B9  3001  	MOVLW 0x01
+03BA  00CC  	MOVWF FCI_SHEAD_00000_arg_iSrc2_len
+03BB  3000  	MOVLW HIGH(gbl_FCV_PAYLOAD_RECIEVE+D'0')
+03BC  00CE  	MOVWF FCI_SHEAD_00000_arg_sDst+D'1'
+03BD  3034  	MOVLW LOW(gbl_FCV_PAYLOAD_RECIEVE+D'0')
+03BE  00CD  	MOVWF FCI_SHEAD_00000_arg_sDst
+03BF  3012  	MOVLW 0x12
+03C0  00CF  	MOVWF FCI_SHEAD_00000_arg_iDst_len
+03C1  21B0  	CALL FCI_SHEAD_00000
+
+
+	//Calculation
+	//Calculation:
+	//  loop_count = loop_count + 1
+	FCV_LOOP_COUNT = FCV_LOOP_COUNT + 1;
+03C2  0A41  	INCF gbl_FCV_LOOP_COUNT, W
+03C3  00C1  	MOVWF gbl_FCV_LOOP_COUNT
+
+
+	//Decision
+	//Decision: loop_count = payloadsize?
+	if (FCV_LOOP_COUNT == FCV_PAYLOADSIZE)
+03C4  0840  	MOVF gbl_FCV_PAYLOADSIZE, W
+03C5  0641  	XORWF gbl_FCV_LOOP_COUNT, W
+03C6  1D03  	BTFSS STATUS,Z
+
+	{
+
+	} else {
+
+		//Goto Connection Point
+		//Goto Connection Point: [A]: A
+		goto FCC_read_recieved_data_A;
+03C7  2BAC  	GOTO	label47
+
+
+	}
+
+	//CSN
+	//Output: 1 -> C2
+	trisc = trisc & 0xFB;
+03C8  30FB  	MOVLW 0xFB
+03C9  0507  	ANDWF gbl_trisc, W
+03CA  0087  	MOVWF gbl_trisc
+
+	if ((1))
+		portc = (portc & 0xFB) | 0x04;
+03CB  30FB  	MOVLW 0xFB
+03CC  1283  	BCF STATUS, RP0
+03CD  0507  	ANDWF gbl_portc, W
+03CE  1683  	BSF STATUS, RP0
+03CF  00C5  	MOVWF CompTempVar2237
+03D0  3004  	MOVLW 0x04
+03D1  0445  	IORWF CompTempVar2237, W
+03D2  1283  	BCF STATUS, RP0
+03D3  0087  	MOVWF gbl_portc
+
+	else
+		portc = portc & 0xFB;
+
+	//Delay
+	//Delay: 5 us
+	delay_us(5);
+03D4  3005  	MOVLW 0x05
+03D5  1683  	BSF STATUS, RP0
+03D6  00F2  	MOVWF delay_us_00000_arg_del
+03D7  2010  	CALL delay_us_00000
+
+
+}
+03D8  0008  	RETURN
+
+
+
+void FCM_uart_int()
+
+{
+
+	//Connection Point
+	//Connection Point: [A]: A
+FCC_uart_int_A:
+0140        label25
+
+;
+
+	//Call Component Macro
+	//Call Component Macro: uart_rx=ReceiveRS232Char(1)
+	FCV_UART_RX = FCD_RS2320_ReceiveRS232Char(1);
+0140  3001  	MOVLW 0x01
+0141  1683  	BSF STATUS, RP0
+0142  1303  	BCF STATUS, RP1
+0143  00DF  	MOVWF FCD_RS2320_00061_arg_nTimeout
+0144  2138  	CALL FCD_RS2320_00061
+0145  0861  	MOVF CompTempVarRet2243, W
+0146  00BA  	MOVWF gbl_FCV_UART_RX
+
+
+	//Decision
+	//Decision: uart_rx = 0xEC?
+	if (FCV_UART_RX == 0xEC)
+0147  083A  	MOVF gbl_FCV_UART_RX, W
+0148  3AEC  	XORLW 0xEC
+0149  1D03  	BTFSS STATUS,Z
+014A  2940  	GOTO	label25
+
+	{
+
+		//Call Component Macro
+		//Call Component Macro: payload_recieve=ReceiveRS232String(1, 17)
+		FCD_RS2320_ReceiveRS232String(FCV_PAYLOAD_RECIEVE,FCSZ_PAYLOAD_RECIEVE, 1, 17);
+014B  3000  	MOVLW HIGH(gbl_FCV_PAYLOAD_RECIEVE+D'0')
+014C  00E0  	MOVWF FCD_RS2320_00062_arg_FCR_RETVAL+D'1'
+014D  3034  	MOVLW LOW(gbl_FCV_PAYLOAD_RECIEVE+D'0')
+014E  00DF  	MOVWF FCD_RS2320_00062_arg_FCR_RETVAL
+014F  3012  	MOVLW 0x12
+0150  00E1  	MOVWF FCD_RS2320_00062_arg_FCR_R_00063
+0151  3001  	MOVLW 0x01
+0152  00E2  	MOVWF FCD_RS2320_00062_arg_nTimeout
+0153  3011  	MOVLW 0x11
+0154  00E3  	MOVWF FCD_RS2320_00062_arg_NumBytes
+0155  20FE  	CALL FCD_RS2320_00062
+
+
+		//Decision
+		//Decision: payload_recieve[16] = 'ü'?
+		if (FCV_PAYLOAD_RECIEVE[16] == 'ü')
+		{
+
+		} else {
+
+			//rx_ack
+			//Output: 1 -> A5
+			trisa = trisa & 0xDF;
+0156  30DF  	MOVLW 0xDF
+0157  0505  	ANDWF gbl_trisa, W
+0158  0085  	MOVWF gbl_trisa
+
+			if ((1))
+				porta = (porta & 0xDF) | 0x20;
+0159  30DF  	MOVLW 0xDF
+015A  1283  	BCF STATUS, RP0
+015B  0505  	ANDWF gbl_porta, W
+015C  1683  	BSF STATUS, RP0
+015D  00DF  	MOVWF CompTempVar2240
+015E  3020  	MOVLW 0x20
+015F  045F  	IORWF CompTempVar2240, W
+0160  1283  	BCF STATUS, RP0
+0161  0085  	MOVWF gbl_porta
+
+			else
+				porta = porta & 0xDF;
+
+			//Calculation
+			//Calculation:
+			//  payload_transmit = Mid$ (payload_recieve,0,15)
+			FCI_MIDSTRING(FCV_PAYLOAD_RECIEVE, FCSZ_PAYLOAD_RECIEVE, 0, 15, FCV_PAYLOAD_TRANSMIT,FCSZ_PAYLOAD_TRANSMIT);
+0162  3000  	MOVLW HIGH(gbl_FCV_PAYLOAD_RECIEVE+D'0')
+0163  1683  	BSF STATUS, RP0
+0164  00E0  	MOVWF FCI_MIDSTR_00046_arg_sSrc+D'1'
+0165  3034  	MOVLW LOW(gbl_FCV_PAYLOAD_RECIEVE+D'0')
+0166  00DF  	MOVWF FCI_MIDSTR_00046_arg_sSrc
+0167  3012  	MOVLW 0x12
+0168  00E1  	MOVWF FCI_MIDSTR_00046_arg_iSrc_len
+0169  01E2  	CLRF FCI_MIDSTR_00046_arg_iStart
+016A  300F  	MOVLW 0x0F
+016B  00E3  	MOVWF FCI_MIDSTR_00046_arg_iCount
+016C  3000  	MOVLW HIGH(gbl_FCV_PAYLOAD_TRANSMIT+D'0')
+016D  00E5  	MOVWF FCI_MIDSTR_00046_arg_sDst+D'1'
+016E  3046  	MOVLW LOW(gbl_FCV_PAYLOAD_TRANSMIT+D'0')
+016F  00E4  	MOVWF FCI_MIDSTR_00046_arg_sDst
+0170  3010  	MOVLW 0x10
+0171  00E6  	MOVWF FCI_MIDSTR_00046_arg_iDst_len
+0172  2099  	CALL FCI_MIDSTR_00046
+
+
+			//Calculation
+			//Calculation:
+			//  flag_prot = 1
+			FCV_FLAG_PROT = 1;
+0173  3001  	MOVLW 0x01
+0174  00B5  	MOVWF gbl_FCV_FLAG_PROT
+
+
+		}
+
+	} else {
+
+		//Goto Connection Point
+		//Goto Connection Point: [A]: A
+		goto FCC_uart_int_A;
+
+
+	}
+
+}
+0175  0008  	RETURN
+
+
+
+
+void main()
+
+{
+	//Initialization
+	adcon1 = 0x07;
+0577  3007  	MOVLW 0x07
+0578  1683  	BSF STATUS, RP0
+0579  1303  	BCF STATUS, RP1
+057A  009F  	MOVWF gbl_adcon1
+
+
+	
+		RS232_4_UART_Init( );		//Call initialise function
+057B  2432  	CALL FC_CAL_UAR_00072
+
+
+
+	//Interrupt initialization code
+	option_reg = 0xC0;
+057C  30C0  	MOVLW 0xC0
+057D  0081  	MOVWF gbl_option_reg
+
+
+
+	//Call Component Macro
+	//Call Component Macro: SPI_Init()
+	FCD_SPI_Legacy0_SPI_Init();
+057E  2551  	CALL FCD_SPI_Le_00067
+
+
+	//Calculation
+	//Calculation:
+	//  payloadsize = 16
+	FCV_PAYLOADSIZE = 16;
+057F  3010  	MOVLW 0x10
+0580  1683  	BSF STATUS, RP0
+0581  00C0  	MOVWF gbl_FCV_PAYLOADSIZE
+
+
+	//Input
+	//Input: PORTA -> reg0A_rx_addr_p0_byte4
+	trisa = trisa | 0x07;
+0582  3007  	MOVLW 0x07
+0583  0405  	IORWF gbl_trisa, W
+0584  0085  	MOVWF gbl_trisa
+
+	FCV_REG0A_RX_ADDR_P0_BYTE4 = porta & 0x07;
+0585  3007  	MOVLW 0x07
+0586  1283  	BCF STATUS, RP0
+0587  0505  	ANDWF gbl_porta, W
+0588  1683  	BSF STATUS, RP0
+0589  00BE  	MOVWF gbl_FCV_REG0A_RX_ADDR_P0_BYTE4
+
+
+	//Input
+	//Input: A3 -> tranciever_bit
+	trisa = trisa | 0x08;
+058A  3008  	MOVLW 0x08
+058B  0405  	IORWF gbl_trisa, W
+058C  0085  	MOVWF gbl_trisa
+
+	FCV_TRANCIEVER_BIT = ((porta & 0x08) == 0x08);
+058D  3008  	MOVLW 0x08
+058E  1283  	BCF STATUS, RP0
+058F  0505  	ANDWF gbl_porta, W
+0590  1683  	BSF STATUS, RP0
+0591  00C5  	MOVWF CompTempVar2265
+0592  01C6  	CLRF CompTempVar2266
+0593  3008  	MOVLW 0x08
+0594  0245  	SUBWF CompTempVar2265, W
+0595  1903  	BTFSC STATUS,Z
+0596  0AC6  	INCF CompTempVar2266, F
+0597  1026  	BCF gbl_FCV_TRANCIEVER_BIT,0
+0598  0846  	MOVF CompTempVar2266, W
+0599  1D03  	BTFSS STATUS,Z
+059A  1426  	BSF gbl_FCV_TRANCIEVER_BIT,0
+
+
+	//Calculation
+	//Calculation:
+	//  reg0A_rx_addr_p0_byte4 = reg0A_rx_addr_p0_byte4 + 48
+	FCV_REG0A_RX_ADDR_P0_BYTE4 = FCV_REG0A_RX_ADDR_P0_BYTE4 + 48;
+059B  3030  	MOVLW 0x30
+059C  073E  	ADDWF gbl_FCV_REG0A_RX_ADDR_P0_BYTE4, W
+059D  00BE  	MOVWF gbl_FCV_REG0A_RX_ADDR_P0_BYTE4
+
+
+	//Calculation
+	//Calculation:
+	//  reg10_tx_addr_byte4 = reg0A_rx_addr_p0_byte4
+	FCV_REG10_TX_ADDR_BYTE4 = FCV_REG0A_RX_ADDR_P0_BYTE4;
+059E  083E  	MOVF gbl_FCV_REG0A_RX_ADDR_P0_BYTE4, W
+059F  00AB  	MOVWF gbl_FCV_REG10_TX_ADDR_BYTE4
+
+
+	//declare tx addr
+	//Calculation:
+	//  reg10_tx_addr_byte0 = 'G'
+	//  reg10_tx_addr_byte1 = '-'
+	//  reg10_tx_addr_byte2 = 'P'
+	//  reg10_tx_addr_byte3 = 'E'
+	FCV_REG10_TX_ADDR_BYTE0 = 'G';
+05A0  3047  	MOVLW 0x47
+05A1  00C3  	MOVWF gbl_FCV_REG10_TX_ADDR_BYTE0
+
+	FCV_REG10_TX_ADDR_BYTE1 = '-';
+05A2  302D  	MOVLW 0x2D
+05A3  00A4  	MOVWF gbl_FCV_REG10_TX_ADDR_BYTE1
+
+	FCV_REG10_TX_ADDR_BYTE2 = 'P';
+05A4  3050  	MOVLW 0x50
+05A5  00A7  	MOVWF gbl_FCV_REG10_TX_ADDR_BYTE2
+
+	FCV_REG10_TX_ADDR_BYTE3 = 'E';
+05A6  3045  	MOVLW 0x45
+05A7  00A9  	MOVWF gbl_FCV_REG10_TX_ADDR_BYTE3
+
+
+	//declare rx addr
+	//Calculation:
+	//  reg0A_rx_addr_p0_byte0 = 'G'
+	//  reg0A_rx_addr_p0_byte1 = '-'
+	//  reg0A_rx_addr_p0_byte2 = 'P'
+	//  reg0A_rx_addr_p0_byte3 = 'E'
+	FCV_REG0A_RX_ADDR_P0_BYTE0 = 'G';
+05A8  3047  	MOVLW 0x47
+05A9  00B6  	MOVWF gbl_FCV_REG0A_RX_ADDR_P0_BYTE0
+
+	FCV_REG0A_RX_ADDR_P0_BYTE1 = '-';
+05AA  302D  	MOVLW 0x2D
+05AB  00B8  	MOVWF gbl_FCV_REG0A_RX_ADDR_P0_BYTE1
+
+	FCV_REG0A_RX_ADDR_P0_BYTE2 = 'P';
+05AC  3050  	MOVLW 0x50
+05AD  00BB  	MOVWF gbl_FCV_REG0A_RX_ADDR_P0_BYTE2
+
+	FCV_REG0A_RX_ADDR_P0_BYTE3 = 'E';
+05AE  3045  	MOVLW 0x45
+05AF  00BC  	MOVWF gbl_FCV_REG0A_RX_ADDR_P0_BYTE3
+
+
+	//Decision
+	//Decision: tranciever_bit = 1?
+	if (FCV_TRANCIEVER_BIT == 1)
+05B0  1C26  	BTFSS gbl_FCV_TRANCIEVER_BIT,0
+05B1  2DB7  	GOTO	label54
+05B7        label54
+
+	{
+
+		//Interrupt
+		//Interrupt: Enable RXINT
+		st_bit(intcon,GIE);
+05B2  178B  	BSF gbl_intcon,7
+
+		st_bit(pie1, RCIE);
+05B3  168C  	BSF gbl_pie1,5
+
+		st_bit(intcon, PEIE);
+05B4  170B  	BSF gbl_intcon,6
+
+
+		//Call Macro
+		//Call Macro: radio_init_tx()
+		FCM_radio_init_tx();
+05B5  24EB  	CALL FCM_radio__0005B
+
+
+	} else {
+05B6  2DB9  	GOTO	label55
+05B9        label55
+
+
+		//Interrupt
+		//Interrupt: Disable RXINT
+		cr_bit(pie1, RCIE);
+05B7  128C  	BCF gbl_pie1,5
+
+
+		//Call Macro
+		//Call Macro: radio_init_rx()
+		FCM_radio_init_rx();
+05B8  251E  	CALL FCM_radio__00055
+
+
+	}
+
+	//rx_ack
+	//Output: 0 -> A5
+	trisa = trisa & 0xDF;
+05B9  30DF  	MOVLW 0xDF
+05BA  0505  	ANDWF gbl_trisa, W
+05BB  0085  	MOVWF gbl_trisa
+
+	if ((0))
+		porta = (porta & 0xDF) | 0x20;
+	else
+		porta = porta & 0xDF;
+05BC  30DF  	MOVLW 0xDF
+05BD  1283  	BCF STATUS, RP0
+05BE  0505  	ANDWF gbl_porta, W
+05BF  0085  	MOVWF gbl_porta
+
+
+	//tx_ack
+	//Output: 0 -> C0
+	trisc = trisc & 0xFE;
+05C0  30FE  	MOVLW 0xFE
+05C1  1683  	BSF STATUS, RP0
+05C2  0507  	ANDWF gbl_trisc, W
+05C3  0087  	MOVWF gbl_trisc
+
+	if ((0))
+		portc = (portc & 0xFE) | 0x01;
+	else
+		portc = portc & 0xFE;
+05C4  30FE  	MOVLW 0xFE
+05C5  1283  	BCF STATUS, RP0
+05C6  0507  	ANDWF gbl_portc, W
+05C7  0087  	MOVWF gbl_portc
+
+
+	//CSN
+	//Output: 1 -> C2
+	trisc = trisc & 0xFB;
+05C8  30FB  	MOVLW 0xFB
+05C9  1683  	BSF STATUS, RP0
+05CA  0507  	ANDWF gbl_trisc, W
+05CB  0087  	MOVWF gbl_trisc
+
+	if ((1))
+		portc = (portc & 0xFB) | 0x04;
+05CC  30FB  	MOVLW 0xFB
+05CD  1283  	BCF STATUS, RP0
+05CE  0507  	ANDWF gbl_portc, W
+05CF  1683  	BSF STATUS, RP0
+05D0  00C5  	MOVWF CompTempVar2267
+05D1  3004  	MOVLW 0x04
+05D2  0445  	IORWF CompTempVar2267, W
+05D3  1283  	BCF STATUS, RP0
+05D4  0087  	MOVWF gbl_portc
+
+	else
+		portc = portc & 0xFB;
+
+	//Calculation
+	//Calculation:
+	//  payload_transmit = "TESTING MESSAGE!"
+	FCI_SCOPY("TESTING MESSAGE!",16, FCV_PAYLOAD_TRANSMIT,FCSZ_PAYLOAD_TRANSMIT);
+05D5  3020  	MOVLW 0x20
+05D6  1683  	BSF STATUS, RP0
+05D7  00CE  	MOVWF CompTempVar2268+D'7'
+05D8  3021  	MOVLW 0x21
+05D9  00D6  	MOVWF CompTempVar2268+D'15'
+05DA  3041  	MOVLW 0x41
+05DB  00D3  	MOVWF CompTempVar2268+D'12'
+05DC  3045  	MOVLW 0x45
+05DD  00C8  	MOVWF CompTempVar2268+D'1'
+05DE  00D0  	MOVWF CompTempVar2268+D'9'
+05DF  00D5  	MOVWF CompTempVar2268+D'14'
+05E0  3047  	MOVLW 0x47
+05E1  00CD  	MOVWF CompTempVar2268+D'6'
+05E2  00D4  	MOVWF CompTempVar2268+D'13'
+05E3  3049  	MOVLW 0x49
+05E4  00CB  	MOVWF CompTempVar2268+D'4'
+05E5  304D  	MOVLW 0x4D
+05E6  00CF  	MOVWF CompTempVar2268+D'8'
+05E7  304E  	MOVLW 0x4E
+05E8  00CC  	MOVWF CompTempVar2268+D'5'
+05E9  3053  	MOVLW 0x53
+05EA  00C9  	MOVWF CompTempVar2268+D'2'
+05EB  00D1  	MOVWF CompTempVar2268+D'10'
+05EC  00D2  	MOVWF CompTempVar2268+D'11'
+05ED  3054  	MOVLW 0x54
+05EE  00C7  	MOVWF CompTempVar2268
+05EF  00CA  	MOVWF CompTempVar2268+D'3'
+05F0  01D7  	CLRF CompTempVar2268+D'16'
+05F1  3000  	MOVLW HIGH(CompTempVar2268+D'0')
+05F2  00C6  	MOVWF FCI_SCOPY_00000_arg_sSrc+D'1'
+05F3  30C7  	MOVLW LOW(CompTempVar2268+D'0')
+05F4  00C5  	MOVWF FCI_SCOPY_00000_arg_sSrc
+05F5  3010  	MOVLW 0x10
+05F6  00D8  	MOVWF FCI_SCOPY_00000_arg_iSrc_len
+05F7  3000  	MOVLW HIGH(gbl_FCV_PAYLOAD_TRANSMIT+D'0')
+05F8  00DA  	MOVWF FCI_SCOPY_00000_arg_sDst+D'1'
+05F9  3046  	MOVLW LOW(gbl_FCV_PAYLOAD_TRANSMIT+D'0')
+05FA  00D9  	MOVWF FCI_SCOPY_00000_arg_sDst
+05FB  3010  	MOVLW 0x10
+05FC  00DB  	MOVWF FCI_SCOPY_00000_arg_iDst_len
+05FD  22C6  	CALL FCI_SCOPY_00000
+
+
+	//Calculation
+	//Calculation:
+	//  flagbit = 0
+	FCV_FLAGBIT = 0;
+05FE  10A6  	BCF gbl_FCV_FLAGBIT,1
+
+
+	//Calculation
+	//Calculation:
+	//  uart_flag = 0
+	FCV_UART_FLAG = 0;
+05FF  1126  	BCF gbl_FCV_UART_FLAG,2
+
+
+	//Loop
+	//Loop: While 1
+	while (1)
+0600        label56
+066A  2E00  	GOTO	label56
+
+	{
+
+		//CE
+		//Output: 1 -> C1
+		trisc = trisc & 0xFD;
+0600  30FD  	MOVLW 0xFD
+0601  0507  	ANDWF gbl_trisc, W
+0602  0087  	MOVWF gbl_trisc
+
+		if ((1))
+			portc = (portc & 0xFD) | 0x02;
+0603  30FD  	MOVLW 0xFD
+0604  1283  	BCF STATUS, RP0
+0605  0507  	ANDWF gbl_portc, W
+0606  1683  	BSF STATUS, RP0
+0607  00C5  	MOVWF CompTempVar2271
+0608  3002  	MOVLW 0x02
+0609  0445  	IORWF CompTempVar2271, W
+060A  1283  	BCF STATUS, RP0
+060B  0087  	MOVWF gbl_portc
+
+		else
+			portc = portc & 0xFD;
+
+		//rx_ack
+		//Output: 0 -> A5
+		trisa = trisa & 0xDF;
+060C  30DF  	MOVLW 0xDF
+060D  1683  	BSF STATUS, RP0
+060E  0505  	ANDWF gbl_trisa, W
+060F  0085  	MOVWF gbl_trisa
+
+		if ((0))
+			porta = (porta & 0xDF) | 0x20;
+		else
+			porta = porta & 0xDF;
+0610  30DF  	MOVLW 0xDF
+0611  1283  	BCF STATUS, RP0
+0612  0505  	ANDWF gbl_porta, W
+0613  0085  	MOVWF gbl_porta
+
+
+		//tx_ack
+		//Output: 0 -> C0
+		trisc = trisc & 0xFE;
+0614  30FE  	MOVLW 0xFE
+0615  1683  	BSF STATUS, RP0
+0616  0507  	ANDWF gbl_trisc, W
+0617  0087  	MOVWF gbl_trisc
+
+		if ((0))
+			portc = (portc & 0xFE) | 0x01;
+		else
+			portc = portc & 0xFE;
+0618  30FE  	MOVLW 0xFE
+0619  1283  	BCF STATUS, RP0
+061A  0507  	ANDWF gbl_portc, W
+061B  0087  	MOVWF gbl_portc
+
+
+		//Delay
+		//Delay: 1 ms
+		delay_ms(1);
+061C  3001  	MOVLW 0x01
+061D  1683  	BSF STATUS, RP0
+061E  00C5  	MOVWF delay_ms_00000_arg_del
+061F  2015  	CALL delay_ms_00000
+
+
+		//Decision
+		//Decision: tranciever_bit = 1?
+		if (FCV_TRANCIEVER_BIT == 1)
+0620  1C26  	BTFSS gbl_FCV_TRANCIEVER_BIT,0
+0621  2E31  	GOTO	label59
+0631        label59
+
+		{
+
+			//Interrupt
+			//Interrupt: Disable RXINT
+			cr_bit(pie1, RCIE);
+0622  128C  	BCF gbl_pie1,5
+
+
+			//Decision
+			//Decision: flag_prot = 1?
+			if (FCV_FLAG_PROT == 1)
+0623  0335  	DECF gbl_FCV_FLAG_PROT, W
+0624  1D03  	BTFSS STATUS,Z
+0625  2E2C  	GOTO	label57
+062C        label57
+
+			{
+
+				//Call Macro
+				//Call Macro: radio_init_tx()
+				FCM_radio_init_tx();
+0626  24EB  	CALL FCM_radio__0005B
+
+
+				//Call Macro
+				//Call Macro: radio_send_data()
+				FCM_radio_send_data();
+0627  2471  	CALL FCM_radio__0005C
+
+
+				//Call Macro
+				//Call Macro: radio_send_data()
+				FCM_radio_send_data();
+0628  2471  	CALL FCM_radio__0005C
+
+
+				//Calculation
+				//Calculation:
+				//  flag_prot = 0
+				FCV_FLAG_PROT = 0;
+0629  1683  	BSF STATUS, RP0
+062A  01B5  	CLRF gbl_FCV_FLAG_PROT
+
+
+			} else {
+062B  2E2D  	GOTO	label58
+062D        label58
+
+
+				//Calculation
+				//Calculation:
+				//  flag_prot = 0
+				FCV_FLAG_PROT = 0;
+062C  01B5  	CLRF gbl_FCV_FLAG_PROT
+
+
+			}
+
+			//Interrupt
+			//Interrupt: Enable RXINT
+			st_bit(intcon,GIE);
+062D  178B  	BSF gbl_intcon,7
+
+			st_bit(pie1, RCIE);
+062E  168C  	BSF gbl_pie1,5
+
+			st_bit(intcon, PEIE);
+062F  170B  	BSF gbl_intcon,6
+
+
+		} else {
+0630  2E00  	GOTO	label56
+
+
+			//Interrupt
+			//Interrupt: Disable RXINT
+			cr_bit(pie1, RCIE);
+0631  128C  	BCF gbl_pie1,5
+
+
+			//Call Macro
+			//Call Macro: radio_init_rx()
+			FCM_radio_init_rx();
+0632  251E  	CALL FCM_radio__00055
+
+
+			//Call Macro
+			//Call Macro: radio_recieve_data()
+			FCM_radio_recieve_data();
+0633  2441  	CALL FCM_radio__0005E
+
+
+			//Decision
+			//Decision: flag_radio_rx = 1?
+			if (FCV_FLAG_RADIO_RX == 1)
+0634  1DA6  	BTFSS gbl_FCV_FLAG_RADIO_RX,3
+0635  2E00  	GOTO	label56
+
+			{
+
+				//Calculation
+				//Calculation:
+				//  payload_recieve = "ì" + payload_recieve + "ü"
+				FCI_SHEAD("ì",1, FCV_PAYLOAD_RECIEVE,FCSZ_PAYLOAD_RECIEVE, FCI_TMP_STR,20);
+0636  30EC  	MOVLW 0xEC
+0637  00C7  	MOVWF CompTempVar2272
+0638  01C8  	CLRF CompTempVar2272+D'1'
+0639  3000  	MOVLW HIGH(CompTempVar2272+D'0')
+063A  00C6  	MOVWF FCI_SHEAD_00000_arg_sSrc1+D'1'
+063B  30C7  	MOVLW LOW(CompTempVar2272+D'0')
+063C  00C5  	MOVWF FCI_SHEAD_00000_arg_sSrc1
+063D  3001  	MOVLW 0x01
+063E  00C9  	MOVWF FCI_SHEAD_00000_arg_iSrc1_len
+063F  3000  	MOVLW HIGH(gbl_FCV_PAYLOAD_RECIEVE+D'0')
+0640  00CB  	MOVWF FCI_SHEAD_00000_arg_sSrc2+D'1'
+0641  3034  	MOVLW LOW(gbl_FCV_PAYLOAD_RECIEVE+D'0')
+0642  00CA  	MOVWF FCI_SHEAD_00000_arg_sSrc2
+0643  3012  	MOVLW 0x12
+0644  00CC  	MOVWF FCI_SHEAD_00000_arg_iSrc2_len
+0645  3000  	MOVLW HIGH(gbl_FCI_TMP_STR+D'0')
+0646  00CE  	MOVWF FCI_SHEAD_00000_arg_sDst+D'1'
+0647  3020  	MOVLW LOW(gbl_FCI_TMP_STR+D'0')
+0648  00CD  	MOVWF FCI_SHEAD_00000_arg_sDst
+0649  3014  	MOVLW 0x14
+064A  00CF  	MOVWF FCI_SHEAD_00000_arg_iDst_len
+064B  21B0  	CALL FCI_SHEAD_00000
+
+				FCI_SHEAD(FCI_TMP_STR,20, "ü",1, FCV_PAYLOAD_RECIEVE,FCSZ_PAYLOAD_RECIEVE);
+064C  3000  	MOVLW HIGH(gbl_FCI_TMP_STR+D'0')
+064D  00C6  	MOVWF FCI_SHEAD_00000_arg_sSrc1+D'1'
+064E  3020  	MOVLW LOW(gbl_FCI_TMP_STR+D'0')
+064F  00C5  	MOVWF FCI_SHEAD_00000_arg_sSrc1
+0650  3014  	MOVLW 0x14
+0651  00C9  	MOVWF FCI_SHEAD_00000_arg_iSrc1_len
+0652  30FC  	MOVLW 0xFC
+0653  00C7  	MOVWF CompTempVar2276
+0654  01C8  	CLRF CompTempVar2276+D'1'
+0655  3000  	MOVLW HIGH(CompTempVar2276+D'0')
+0656  00CB  	MOVWF FCI_SHEAD_00000_arg_sSrc2+D'1'
+0657  30C7  	MOVLW LOW(CompTempVar2276+D'0')
+0658  00CA  	MOVWF FCI_SHEAD_00000_arg_sSrc2
+0659  3001  	MOVLW 0x01
+065A  00CC  	MOVWF FCI_SHEAD_00000_arg_iSrc2_len
+065B  3000  	MOVLW HIGH(gbl_FCV_PAYLOAD_RECIEVE+D'0')
+065C  00CE  	MOVWF FCI_SHEAD_00000_arg_sDst+D'1'
+065D  3034  	MOVLW LOW(gbl_FCV_PAYLOAD_RECIEVE+D'0')
+065E  00CD  	MOVWF FCI_SHEAD_00000_arg_sDst
+065F  3012  	MOVLW 0x12
+0660  00CF  	MOVWF FCI_SHEAD_00000_arg_iDst_len
+0661  21B0  	CALL FCI_SHEAD_00000
+
+
+				//Call Component Macro
+				//Call Component Macro: SendRS232String(payload_recieve)
+				FCD_RS2320_SendRS232String(FCV_PAYLOAD_RECIEVE, FCSZ_PAYLOAD_RECIEVE);
+0662  3000  	MOVLW HIGH(gbl_FCV_PAYLOAD_RECIEVE+D'0')
+0663  00C6  	MOVWF FCD_RS2320_00078_arg_String+D'1'
+0664  3034  	MOVLW LOW(gbl_FCV_PAYLOAD_RECIEVE+D'0')
+0665  00C5  	MOVWF FCD_RS2320_00078_arg_String
+0666  3012  	MOVLW 0x12
+0667  00C7  	MOVWF FCD_RS2320_00078_arg_MSZ_String
+0668  255C  	CALL FCD_RS2320_00078
+
+
+				//Calculation
+				//Calculation:
+				//  flag_radio_rx = 0
+				FCV_FLAG_RADIO_RX = 0;
+0669  11A6  	BCF gbl_FCV_FLAG_RADIO_RX,3
+
+
+			// } else {
+
+			}
+
+		}
+
+
+	}
+
+	mainendloop: goto mainendloop;
+}
+
+
+void MX_INTERRUPT_MACRO(void)
+
+{
+	//Handler code for [RXINT]
+	#ifndef MX_INTHANDLER_pir1_RCIF
+	#define MX_INTHANDLER_pir1_RCIF
+	if (ts_bit(pir1, RCIF) && ts_bit(pie1, RCIE))
+06CB  1283  	BCF STATUS, RP0
+06CC  1303  	BCF STATUS, RP1
+06CD  1E8C  	BTFSS gbl_pir1,5
+06CE  2ED5  	GOTO	label61
+06CF  1683  	BSF STATUS, RP0
+06D0  1E8C  	BTFSS gbl_pie1,5
+06D1  2ED5  	GOTO	label61
+06D5        label61
+
+	{
+		#ifdef USE_FLOWCODE_ICD
+			extern char ICD_Interrupt_Enable = 1;
+		#endif	
+		FCM_uart_int();
+06D2  2140  	CALL FCM_uart_i_00060
+
+		cr_bit(pir1, RCIF);
+06D3  1283  	BCF STATUS, RP0
+06D4  128C  	BCF gbl_pir1,5
+
+		#ifdef USE_FLOWCODE_ICD
+			extern char ICD_Interrupt_Enable = 0;
+		#endif	
+	}
+	#else
+	#warning "This interrupt has previously been enabled, so the macro <uart_int> may never get called."
+	#endif
+
+
+	//Handler code for [RXINT]
+	#ifndef MX_INTHANDLER_pir1_RCIF
+	#define MX_INTHANDLER_pir1_RCIF
+	if (ts_bit(pir1, RCIF) && ts_bit(pie1, RCIE))
+	{
+		#ifdef USE_FLOWCODE_ICD
+			extern char ICD_Interrupt_Enable = 1;
+		#endif	
+		FCM_uart_int();
+		cr_bit(pir1, RCIF);
+		#ifdef USE_FLOWCODE_ICD
+			extern char ICD_Interrupt_Enable = 0;
+		#endif	
+	}
+	#else
+	#warning "This interrupt has previously been enabled, so the macro <uart_int> may never get called."
+	#endif
+
+
+}
+06D5  1283  	BCF STATUS, RP0
+06D6  0E76  	SWAPF Int1BContext+D'2', W
+06D7  0084  	MOVWF FSR
+06D8  0E75  	SWAPF Int1BContext+D'1', W
+06D9  008A  	MOVWF PCLATH
+06DA  0E74  	SWAPF Int1BContext, W
+06DB  0083  	MOVWF STATUS
+06DC  0EFF  	SWAPF Int1Context, F
+06DD  0E7F  	SWAPF Int1Context, W
+06DE  0009  	RETFIE
+
+
+
+
+
+/*********************************************************************
+ *                  Flowcode CAL SPI File
+ *
+ * File: PIC_CAL_SPI.c
+ *
+ * (c) 2011 Matrix Multimedia Ltd.
+ * http://www.matrixmultimedia.com
+ *
+ * Software License Agreement
+ *
+ * The software supplied herewith by Matrix Multimedia Ltd (the
+ * “Company”) for its Flowcode graphical programming language is
+ * intended and supplied to you, the Company’s customer, for use
+ * solely and exclusively on the Company's products. The software
+ * is owned by the Company, and is protected under applicable
+ * copyright laws. All rights are reserved. Any use in violation
+ * of the foregoing restrictions may subject the user to criminal
+ * sanctions under applicable laws, as well as to civil liability
+ * for the breach of the terms and conditions of this licence.
+ *
+ * THIS SOFTWARE IS PROVIDED IN AN “AS IS” CONDITION. NO WARRANTIES,
+ * WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING, BUT NOT LIMITED
+ * TO, IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE APPLY TO THIS SOFTWARE. THE COMPANY SHALL NOT,
+ * IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL OR
+ * CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+ *
+ * Changelog:
+ *
+ *  date  | by | description
+ * -------+----+-----------------------------------------------------
+ * 010911 | BR | Created
+ * 150911 | BR | Updated variables with typedef alternatives
+ * 011211 | BR | Converted to new dynamic defines mechanism
+ *
+ */
+
+
+//When using hardware SPI channels override port and pin conns with FCD conn definitions
+//Only overwrite CS pin defines when using SPI in slave mode on a hardware channel
+//Also sort out postscale and prescale options for hardware channels
+#ifdef MX_SPI_REF1
+	#if MX_SPI_CHANNEL_1 > 0
+		#undef MX_SPI_MOSI_PIN_1
+		#undef MX_SPI_MOSI_PORT_1
+		#undef MX_SPI_MOSI_TRIS_1
+		#undef MX_SPI_MISO_PIN_1
+		#undef MX_SPI_MISO_PORT_1
+		#undef MX_SPI_MISO_TRIS_1
+		#undef MX_SPI_SCK_PIN_1
+		#undef MX_SPI_SCK_PORT_1
+		#undef MX_SPI_SCK_TRIS_1
+		#undef MX_SPI_CS_PIN_1
+		#undef MX_SPI_CS_PORT_1
+		#undef MX_SPI_CS_TRIS_1
+
+		#if MX_SPI_PR_SCALE_1 == 4
+			#undef MX_SPI_PR_SCALE_1
+			#define MX_SPI_PR_SCALE_1	0
+		#endif
+		#if MX_SPI_PR_SCALE_1 == 16
+			#undef MX_SPI_PR_SCALE_1
+			#define MX_SPI_PR_SCALE_1	1
+		#endif
+		#if MX_SPI_PR_SCALE_1 == 64
+			#undef MX_SPI_PR_SCALE_1
+			#define MX_SPI_PR_SCALE_1	2
+		#endif
+	#endif
+	#if MX_SPI_CHANNEL_1 == 1
+		#define MX_SPI_MOSI_PIN_1		MX_SPI_1_MOSI_PIN
+		#define MX_SPI_MOSI_PORT_1		MX_SPI_1_MOSI_PORT
+		#define MX_SPI_MOSI_TRIS_1		MX_SPI_1_MOSI_TRIS
+		#define MX_SPI_MISO_PIN_1		MX_SPI_1_MISO_PIN
+		#define MX_SPI_MISO_PORT_1		MX_SPI_1_MISO_PORT
+		#define MX_SPI_MISO_TRIS_1		MX_SPI_1_MISO_TRIS
+		#define MX_SPI_SCK_PIN_1		MX_SPI_1_CLK_PIN
+		#define MX_SPI_SCK_PORT_1		MX_SPI_1_CLK_PORT
+		#define MX_SPI_SCK_TRIS_1		MX_SPI_1_CLK_TRIS
+		#define MX_SPI_CS_PIN_1			MX_SPI_1_SS_PIN
+		#define MX_SPI_CS_PORT_1		MX_SPI_1_SS_PORT
+		#define MX_SPI_CS_TRIS_1		MX_SPI_1_SS_TRIS
+	#endif
+	#if MX_SPI_CHANNEL_1 == 2
+		#define MX_SPI_MOSI_PIN_1		MX_SPI_2_MOSI_PIN
+		#define MX_SPI_MOSI_PORT_1		MX_SPI_2_MOSI_PORT
+		#define MX_SPI_MOSI_TRIS_1		MX_SPI_2_MOSI_TRIS
+		#define MX_SPI_MISO_PIN_1		MX_SPI_2_MISO_PIN
+		#define MX_SPI_MISO_PORT_1		MX_SPI_2_MISO_PORT
+		#define MX_SPI_MISO_TRIS_1		MX_SPI_2_MISO_TRIS
+		#define MX_SPI_SCK_PIN_1		MX_SPI_2_CLK_PIN
+		#define MX_SPI_SCK_PORT_1		MX_SPI_2_CLK_PORT
+		#define MX_SPI_SCK_TRIS_1		MX_SPI_2_CLK_TRIS
+		#define MX_SPI_CS_PIN_1			MX_SPI_2_SS_PIN
+		#define MX_SPI_CS_PORT_1		MX_SPI_2_SS_PORT
+		#define MX_SPI_CS_TRIS_1		MX_SPI_2_SS_TRIS
+	#endif
+	#if MX_SPI_CHANNEL_1 == 3
+		#define MX_SPI_MOSI_PIN_1		MX_SPI_3_MOSI_PIN
+		#define MX_SPI_MOSI_PORT_1		MX_SPI_3_MOSI_PORT
+		#define MX_SPI_MOSI_TRIS_1		MX_SPI_3_MOSI_TRIS
+		#define MX_SPI_MISO_PIN_1		MX_SPI_3_MISO_PIN
+		#define MX_SPI_MISO_PORT_1		MX_SPI_3_MISO_PORT
+		#define MX_SPI_MISO_TRIS_1		MX_SPI_3_MISO_TRIS
+		#define MX_SPI_SCK_PIN_1		MX_SPI_3_CLK_PIN
+		#define MX_SPI_SCK_PORT_1		MX_SPI_3_CLK_PORT
+		#define MX_SPI_SCK_TRIS_1		MX_SPI_3_CLK_TRIS
+		#define MX_SPI_CS_PIN_1			MX_SPI_3_SS_PIN
+		#define MX_SPI_CS_PORT_1		MX_SPI_3_SS_PORT
+		#define MX_SPI_CS_TRIS_1		MX_SPI_3_SS_TRIS
+	#endif
+	#if MX_SPI_CHANNEL_1 == 4
+		#define MX_SPI_MOSI_PIN_1		MX_SPI_4_MOSI_PIN
+		#define MX_SPI_MOSI_PORT_1		MX_SPI_4_MOSI_PORT
+		#define MX_SPI_MOSI_TRIS_1		MX_SPI_4_MOSI_TRIS
+		#define MX_SPI_MISO_PIN_1		MX_SPI_4_MISO_PIN
+		#define MX_SPI_MISO_PORT_1		MX_SPI_4_MISO_PORT
+		#define MX_SPI_MISO_TRIS_1		MX_SPI_4_MISO_TRIS
+		#define MX_SPI_SCK_PIN_1		MX_SPI_4_CLK_PIN
+		#define MX_SPI_SCK_PORT_1		MX_SPI_4_CLK_PORT
+		#define MX_SPI_SCK_TRIS_1		MX_SPI_4_CLK_TRIS
+		#define MX_SPI_CS_PIN_1			MX_SPI_4_SS_PIN
+		#define MX_SPI_CS_PORT_1		MX_SPI_4_SS_PORT
+		#define MX_SPI_CS_TRIS_1		MX_SPI_4_SS_TRIS
+	#endif
+#endif
+#ifdef MX_SPI_REF2
+	#if MX_SPI_CHANNEL_2 > 0
+		#undef MX_SPI_MOSI_PIN_2
+		#undef MX_SPI_MOSI_PORT_2
+		#undef MX_SPI_MOSI_TRIS_2
+		#undef MX_SPI_MISO_PIN_2
+		#undef MX_SPI_MISO_PORT_2
+		#undef MX_SPI_MISO_TRIS_2
+		#undef MX_SPI_SCK_PIN_2
+		#undef MX_SPI_SCK_PORT_2
+		#undef MX_SPI_SCK_TRIS_2
+		#undef MX_SPI_CS_PIN_2
+		#undef MX_SPI_CS_PORT_2
+		#undef MX_SPI_CS_TRIS_2
+
+		#if MX_SPI_PR_SCALE_2 == 4
+			#undef MX_SPI_PR_SCALE_2
+			#define MX_SPI_PR_SCALE_2	0
+		#endif
+		#if MX_SPI_PR_SCALE_2 == 16
+			#undef MX_SPI_PR_SCALE_2
+			#define MX_SPI_PR_SCALE_2	1
+		#endif
+		#if MX_SPI_PR_SCALE_2 == 64
+			#undef MX_SPI_PR_SCALE_2
+			#define MX_SPI_PR_SCALE_2	2
+		#endif
+	#endif
+	#if MX_SPI_CHANNEL_2 == 1
+		#define MX_SPI_MOSI_PIN_2		MX_SPI_1_MOSI_PIN
+		#define MX_SPI_MOSI_PORT_2		MX_SPI_1_MOSI_PORT
+		#define MX_SPI_MOSI_TRIS_2		MX_SPI_1_MOSI_TRIS
+		#define MX_SPI_MISO_PIN_2		MX_SPI_1_MISO_PIN
+		#define MX_SPI_MISO_PORT_2		MX_SPI_1_MISO_PORT
+		#define MX_SPI_MISO_TRIS_2		MX_SPI_1_MISO_TRIS
+		#define MX_SPI_SCK_PIN_2		MX_SPI_1_CLK_PIN
+		#define MX_SPI_SCK_PORT_2		MX_SPI_1_CLK_PORT
+		#define MX_SPI_SCK_TRIS_2		MX_SPI_1_CLK_TRIS
+		#define MX_SPI_CS_PIN_2			MX_SPI_1_SS_PIN
+		#define MX_SPI_CS_PORT_2		MX_SPI_1_SS_PORT
+		#define MX_SPI_CS_TRIS_2		MX_SPI_1_SS_TRIS
+	#endif
+	#if MX_SPI_CHANNEL_2 == 2
+		#define MX_SPI_MOSI_PIN_2		MX_SPI_2_MOSI_PIN
+		#define MX_SPI_MOSI_PORT_2		MX_SPI_2_MOSI_PORT
+		#define MX_SPI_MOSI_TRIS_2		MX_SPI_2_MOSI_TRIS
+		#define MX_SPI_MISO_PIN_2		MX_SPI_2_MISO_PIN
+		#define MX_SPI_MISO_PORT_2		MX_SPI_2_MISO_PORT
+		#define MX_SPI_MISO_TRIS_2		MX_SPI_2_MISO_TRIS
+		#define MX_SPI_SCK_PIN_2		MX_SPI_2_CLK_PIN
+		#define MX_SPI_SCK_PORT_2		MX_SPI_2_CLK_PORT
+		#define MX_SPI_SCK_TRIS_2		MX_SPI_2_CLK_TRIS
+		#define MX_SPI_CS_PIN_2			MX_SPI_2_SS_PIN
+		#define MX_SPI_CS_PORT_2		MX_SPI_2_SS_PORT
+		#define MX_SPI_CS_TRIS_2		MX_SPI_2_SS_TRIS
+	#endif
+	#if MX_SPI_CHANNEL_2 == 3
+		#define MX_SPI_MOSI_PIN_2		MX_SPI_3_MOSI_PIN
+		#define MX_SPI_MOSI_PORT_2		MX_SPI_3_MOSI_PORT
+		#define MX_SPI_MOSI_TRIS_2		MX_SPI_3_MOSI_TRIS
+		#define MX_SPI_MISO_PIN_2		MX_SPI_3_MISO_PIN
+		#define MX_SPI_MISO_PORT_2		MX_SPI_3_MISO_PORT
+		#define MX_SPI_MISO_TRIS_2		MX_SPI_3_MISO_TRIS
+		#define MX_SPI_SCK_PIN_2		MX_SPI_3_CLK_PIN
+		#define MX_SPI_SCK_PORT_2		MX_SPI_3_CLK_PORT
+		#define MX_SPI_SCK_TRIS_2		MX_SPI_3_CLK_TRIS
+		#define MX_SPI_CS_PIN_2			MX_SPI_3_SS_PIN
+		#define MX_SPI_CS_PORT_2		MX_SPI_3_SS_PORT
+		#define MX_SPI_CS_TRIS_2		MX_SPI_3_SS_TRIS
+	#endif
+	#if MX_SPI_CHANNEL_2 == 4
+		#define MX_SPI_MOSI_PIN_2		MX_SPI_4_MOSI_PIN
+		#define MX_SPI_MOSI_PORT_2		MX_SPI_4_MOSI_PORT
+		#define MX_SPI_MOSI_TRIS_2		MX_SPI_4_MOSI_TRIS
+		#define MX_SPI_MISO_PIN_2		MX_SPI_4_MISO_PIN
+		#define MX_SPI_MISO_PORT_2		MX_SPI_4_MISO_PORT
+		#define MX_SPI_MISO_TRIS_2		MX_SPI_4_MISO_TRIS
+		#define MX_SPI_SCK_PIN_2		MX_SPI_4_CLK_PIN
+		#define MX_SPI_SCK_PORT_2		MX_SPI_4_CLK_PORT
+		#define MX_SPI_SCK_TRIS_2		MX_SPI_4_CLK_TRIS
+		#define MX_SPI_CS_PIN_2			MX_SPI_4_SS_PIN
+		#define MX_SPI_CS_PORT_2		MX_SPI_4_SS_PORT
+		#define MX_SPI_CS_TRIS_2		MX_SPI_4_SS_TRIS
+	#endif
+#endif
+#ifdef MX_SPI_REF3
+	#if MX_SPI_CHANNEL_3 > 0
+		#undef MX_SPI_MOSI_PIN_3
+		#undef MX_SPI_MOSI_PORT_3
+		#undef MX_SPI_MOSI_TRIS_3
+		#undef MX_SPI_MISO_PIN_3
+		#undef MX_SPI_MISO_PORT_3
+		#undef MX_SPI_MISO_TRIS_3
+		#undef MX_SPI_SCK_PIN_3
+		#undef MX_SPI_SCK_PORT_3
+		#undef MX_SPI_SCK_TRIS_3
+		#undef MX_SPI_CS_PIN_3
+		#undef MX_SPI_CS_PORT_3
+		#undef MX_SPI_CS_TRIS_3
+
+		#if MX_SPI_PR_SCALE_3 == 4
+			#undef MX_SPI_PR_SCALE_3
+			#define MX_SPI_PR_SCALE_3	0
+		#endif
+		#if MX_SPI_PR_SCALE_3 == 16
+			#undef MX_SPI_PR_SCALE_3
+			#define MX_SPI_PR_SCALE_3	1
+		#endif
+		#if MX_SPI_PR_SCALE_3 == 64
+			#undef MX_SPI_PR_SCALE_3
+			#define MX_SPI_PR_SCALE_3	2
+		#endif
+	#endif
+	#if MX_SPI_CHANNEL_3 == 1
+		#define MX_SPI_MOSI_PIN_3		MX_SPI_1_MOSI_PIN
+		#define MX_SPI_MOSI_PORT_3		MX_SPI_1_MOSI_PORT
+		#define MX_SPI_MOSI_TRIS_3		MX_SPI_1_MOSI_TRIS
+		#define MX_SPI_MISO_PIN_3		MX_SPI_1_MISO_PIN
+		#define MX_SPI_MISO_PORT_3		MX_SPI_1_MISO_PORT
+		#define MX_SPI_MISO_TRIS_3		MX_SPI_1_MISO_TRIS
+		#define MX_SPI_SCK_PIN_3		MX_SPI_1_CLK_PIN
+		#define MX_SPI_SCK_PORT_3		MX_SPI_1_CLK_PORT
+		#define MX_SPI_SCK_TRIS_3		MX_SPI_1_CLK_TRIS
+		#define MX_SPI_CS_PIN_3			MX_SPI_1_SS_PIN
+		#define MX_SPI_CS_PORT_3		MX_SPI_1_SS_PORT
+		#define MX_SPI_CS_TRIS_3		MX_SPI_1_SS_TRIS
+	#endif
+	#if MX_SPI_CHANNEL_3 == 2
+		#define MX_SPI_MOSI_PIN_3		MX_SPI_2_MOSI_PIN
+		#define MX_SPI_MOSI_PORT_3		MX_SPI_2_MOSI_PORT
+		#define MX_SPI_MOSI_TRIS_3		MX_SPI_2_MOSI_TRIS
+		#define MX_SPI_MISO_PIN_3		MX_SPI_2_MISO_PIN
+		#define MX_SPI_MISO_PORT_3		MX_SPI_2_MISO_PORT
+		#define MX_SPI_MISO_TRIS_3		MX_SPI_2_MISO_TRIS
+		#define MX_SPI_SCK_PIN_3		MX_SPI_2_CLK_PIN
+		#define MX_SPI_SCK_PORT_3		MX_SPI_2_CLK_PORT
+		#define MX_SPI_SCK_TRIS_3		MX_SPI_2_CLK_TRIS
+		#define MX_SPI_CS_PIN_3			MX_SPI_2_SS_PIN
+		#define MX_SPI_CS_PORT_3		MX_SPI_2_SS_PORT
+		#define MX_SPI_CS_TRIS_3		MX_SPI_2_SS_TRIS
+	#endif
+	#if MX_SPI_CHANNEL_3 == 3
+		#define MX_SPI_MOSI_PIN_3		MX_SPI_3_MOSI_PIN
+		#define MX_SPI_MOSI_PORT_3		MX_SPI_3_MOSI_PORT
+		#define MX_SPI_MOSI_TRIS_3		MX_SPI_3_MOSI_TRIS
+		#define MX_SPI_MISO_PIN_3		MX_SPI_3_MISO_PIN
+		#define MX_SPI_MISO_PORT_3		MX_SPI_3_MISO_PORT
+		#define MX_SPI_MISO_TRIS_3		MX_SPI_3_MISO_TRIS
+		#define MX_SPI_SCK_PIN_3		MX_SPI_3_CLK_PIN
+		#define MX_SPI_SCK_PORT_3		MX_SPI_3_CLK_PORT
+		#define MX_SPI_SCK_TRIS_3		MX_SPI_3_CLK_TRIS
+		#define MX_SPI_CS_PIN_3			MX_SPI_3_SS_PIN
+		#define MX_SPI_CS_PORT_3		MX_SPI_3_SS_PORT
+		#define MX_SPI_CS_TRIS_3		MX_SPI_3_SS_TRIS
+	#endif
+	#if MX_SPI_CHANNEL_3 == 4
+		#define MX_SPI_MOSI_PIN_3		MX_SPI_4_MOSI_PIN
+		#define MX_SPI_MOSI_PORT_3		MX_SPI_4_MOSI_PORT
+		#define MX_SPI_MOSI_TRIS_3		MX_SPI_4_MOSI_TRIS
+		#define MX_SPI_MISO_PIN_3		MX_SPI_4_MISO_PIN
+		#define MX_SPI_MISO_PORT_3		MX_SPI_4_MISO_PORT
+		#define MX_SPI_MISO_TRIS_3		MX_SPI_4_MISO_TRIS
+		#define MX_SPI_SCK_PIN_3		MX_SPI_4_CLK_PIN
+		#define MX_SPI_SCK_PORT_3		MX_SPI_4_CLK_PORT
+		#define MX_SPI_SCK_TRIS_3		MX_SPI_4_CLK_TRIS
+		#define MX_SPI_CS_PIN_3			MX_SPI_4_SS_PIN
+		#define MX_SPI_CS_PORT_3		MX_SPI_4_SS_PORT
+		#define MX_SPI_CS_TRIS_3		MX_SPI_4_SS_TRIS
+	#endif
+#endif
+#ifdef MX_SPI_REF4
+	#if MX_SPI_CHANNEL_4 > 0
+		#undef MX_SPI_MOSI_PIN_4
+		#undef MX_SPI_MOSI_PORT_4
+		#undef MX_SPI_MOSI_TRIS_4
+		#undef MX_SPI_MISO_PIN_4
+		#undef MX_SPI_MISO_PORT_4
+		#undef MX_SPI_MISO_TRIS_4
+		#undef MX_SPI_SCK_PIN_4
+		#undef MX_SPI_SCK_PORT_4
+		#undef MX_SPI_SCK_TRIS_4
+		#undef MX_SPI_CS_PIN_4
+		#undef MX_SPI_CS_PORT_4
+		#undef MX_SPI_CS_TRIS_4
+
+		#if MX_SPI_PR_SCALE_4 == 4
+			#undef MX_SPI_PR_SCALE_4
+			#define MX_SPI_PR_SCALE_4	0
+		#endif
+		#if MX_SPI_PR_SCALE_4 == 16
+			#undef MX_SPI_PR_SCALE_4
+			#define MX_SPI_PR_SCALE_4	1
+		#endif
+		#if MX_SPI_PR_SCALE_4 == 64
+			#undef MX_SPI_PR_SCALE_4
+			#define MX_SPI_PR_SCALE_4	2
+		#endif
+	#endif
+	#if MX_SPI_CHANNEL_4 == 1
+		#define MX_SPI_MOSI_PIN_4		MX_SPI_1_MOSI_PIN
+		#define MX_SPI_MOSI_PORT_4		MX_SPI_1_MOSI_PORT
+		#define MX_SPI_MOSI_TRIS_4		MX_SPI_1_MOSI_TRIS
+		#define MX_SPI_MISO_PIN_4		MX_SPI_1_MISO_PIN
+		#define MX_SPI_MISO_PORT_4		MX_SPI_1_MISO_PORT
+		#define MX_SPI_MISO_TRIS_4		MX_SPI_1_MISO_TRIS
+		#define MX_SPI_SCK_PIN_4		MX_SPI_1_CLK_PIN
+		#define MX_SPI_SCK_PORT_4		MX_SPI_1_CLK_PORT
+		#define MX_SPI_SCK_TRIS_4		MX_SPI_1_CLK_TRIS
+		#define MX_SPI_CS_PIN_4			MX_SPI_1_SS_PIN
+		#define MX_SPI_CS_PORT_4		MX_SPI_1_SS_PORT
+		#define MX_SPI_CS_TRIS_4		MX_SPI_1_SS_TRIS
+	#endif
+	#if MX_SPI_CHANNEL_4 == 2
+		#define MX_SPI_MOSI_PIN_4		MX_SPI_2_MOSI_PIN
+		#define MX_SPI_MOSI_PORT_4		MX_SPI_2_MOSI_PORT
+		#define MX_SPI_MOSI_TRIS_4		MX_SPI_2_MOSI_TRIS
+		#define MX_SPI_MISO_PIN_4		MX_SPI_2_MISO_PIN
+		#define MX_SPI_MISO_PORT_4		MX_SPI_2_MISO_PORT
+		#define MX_SPI_MISO_TRIS_4		MX_SPI_2_MISO_TRIS
+		#define MX_SPI_SCK_PIN_4		MX_SPI_2_CLK_PIN
+		#define MX_SPI_SCK_PORT_4		MX_SPI_2_CLK_PORT
+		#define MX_SPI_SCK_TRIS_4		MX_SPI_2_CLK_TRIS
+		#define MX_SPI_CS_PIN_4			MX_SPI_2_SS_PIN
+		#define MX_SPI_CS_PORT_4		MX_SPI_2_SS_PORT
+		#define MX_SPI_CS_TRIS_4		MX_SPI_2_SS_TRIS
+	#endif
+	#if MX_SPI_CHANNEL_4 == 3
+		#define MX_SPI_MOSI_PIN_4		MX_SPI_3_MOSI_PIN
+		#define MX_SPI_MOSI_PORT_4		MX_SPI_3_MOSI_PORT
+		#define MX_SPI_MOSI_TRIS_4		MX_SPI_3_MOSI_TRIS
+		#define MX_SPI_MISO_PIN_4		MX_SPI_3_MISO_PIN
+		#define MX_SPI_MISO_PORT_4		MX_SPI_3_MISO_PORT
+		#define MX_SPI_MISO_TRIS_4		MX_SPI_3_MISO_TRIS
+		#define MX_SPI_SCK_PIN_4		MX_SPI_3_CLK_PIN
+		#define MX_SPI_SCK_PORT_4		MX_SPI_3_CLK_PORT
+		#define MX_SPI_SCK_TRIS_4		MX_SPI_3_CLK_TRIS
+		#define MX_SPI_CS_PIN_4			MX_SPI_3_SS_PIN
+		#define MX_SPI_CS_PORT_4		MX_SPI_3_SS_PORT
+		#define MX_SPI_CS_TRIS_4		MX_SPI_3_SS_TRIS
+	#endif
+	#if MX_SPI_CHANNEL_4 == 4
+		#define MX_SPI_MOSI_PIN_4		MX_SPI_4_MOSI_PIN
+		#define MX_SPI_MOSI_PORT_4		MX_SPI_4_MOSI_PORT
+		#define MX_SPI_MOSI_TRIS_4		MX_SPI_4_MOSI_TRIS
+		#define MX_SPI_MISO_PIN_4		MX_SPI_4_MISO_PIN
+		#define MX_SPI_MISO_PORT_4		MX_SPI_4_MISO_PORT
+		#define MX_SPI_MISO_TRIS_4		MX_SPI_4_MISO_TRIS
+		#define MX_SPI_SCK_PIN_4		MX_SPI_4_CLK_PIN
+		#define MX_SPI_SCK_PORT_4		MX_SPI_4_CLK_PORT
+		#define MX_SPI_SCK_TRIS_4		MX_SPI_4_CLK_TRIS
+		#define MX_SPI_CS_PIN_4			MX_SPI_4_SS_PIN
+		#define MX_SPI_CS_PORT_4		MX_SPI_4_SS_PORT
+		#define MX_SPI_CS_TRIS_4		MX_SPI_4_SS_TRIS
+	#endif
+#endif
+
+#define MX_SPI_CHANNEL_X		CAL_APPEND(MX_SPI_CHANNEL_, MX_SPI_NUM)
+#define MX_SPI_MOSI_PIN_X		CAL_APPEND(MX_SPI_MOSI_PIN_, MX_SPI_NUM)
+#define MX_SPI_MOSI_PORT_X		CAL_APPEND(MX_SPI_MOSI_PORT_, MX_SPI_NUM)
+#define MX_SPI_MOSI_TRIS_X		CAL_APPEND(MX_SPI_MOSI_TRIS_, MX_SPI_NUM)
+#define MX_SPI_MISO_PIN_X		CAL_APPEND(MX_SPI_MISO_PIN_, MX_SPI_NUM)
+#define MX_SPI_MISO_PORT_X		CAL_APPEND(MX_SPI_MISO_PORT_, MX_SPI_NUM)
+#define MX_SPI_MISO_TRIS_X		CAL_APPEND(MX_SPI_MISO_TRIS_, MX_SPI_NUM)
+#define MX_SPI_SCK_PIN_X		CAL_APPEND(MX_SPI_SCK_PIN_, MX_SPI_NUM)
+#define MX_SPI_SCK_PORT_X		CAL_APPEND(MX_SPI_SCK_PORT_, MX_SPI_NUM)
+#define MX_SPI_SCK_TRIS_X		CAL_APPEND(MX_SPI_SCK_TRIS_, MX_SPI_NUM)
+#define MX_SPI_CS_PIN_X			CAL_APPEND(MX_SPI_CS_PIN_, MX_SPI_NUM)
+#define MX_SPI_CS_PORT_X		CAL_APPEND(MX_SPI_CS_PORT_, MX_SPI_NUM)
+#define MX_SPI_CS_TRIS_X		CAL_APPEND(MX_SPI_CS_TRIS_, MX_SPI_NUM)
+#define MX_SPI_BMODE_X			CAL_APPEND(MX_SPI_BMODE_, MX_SPI_NUM)
+#define MX_SPI_PR_SCALE_X		CAL_APPEND(MX_SPI_PR_SCALE_, MX_SPI_NUM)
+#define MX_SPI_PO_SCALE_X		CAL_APPEND(MX_SPI_PO_SCALE_, MX_SPI_NUM)
+#define MX_SPI_INT_X			CAL_APPEND(MX_SPI_INT_, MX_SPI_NUM)
+
+
+//Function Prototypes
+CALFUNCTION(void, FC_CAL_SPI_Master_Init_, (void));
+CALFUNCTION(void, FC_CAL_SPI_Master_Uninit_, (void));
+CALFUNCTION(MX_UINT8, FC_CAL_SPI_Master_Byte_, (MX_UINT8 DataOut));
+
+CALFUNCTION(void, FC_CAL_SPI_Slave_Init_, (void));
+CALFUNCTION(void, FC_CAL_SPI_Slave_Uninit_, (void));
+CALFUNCTION(void, FC_CAL_SPI_Slave_SetTxData_, (MX_UINT8 Data));
+CALFUNCTION(MX_UINT8, FC_CAL_SPI_Slave_GetRxData_, (void));
+
+
+#if (MX_SPI_CHANNEL_X == 0)
+  #ifndef MX_SPI_SW_DEL
+    #define MX_SPI_SW_DEL
+	MX_UINT8 SPI_SW_DELAY = 1;
+  #endif
+#endif
+
+
+//Bus Mode - Bit0=CPOL, Bit1=CPHA, Bit2=CSMP
+//CPOL - Clock Polarity - Idle State of the clock 0=0, 1=1
+//CPHA - Clock Phase - Clock Edge 0=leading edge, 1=trailing edge
+//CSMP - Input Data Bit Sample Phase
+//CRAT - SPI Clock Rate 0=1/4, 1=1/16, 2=1/64
+
+
+//Ensure SSPCON register is defined correctly
+#ifndef SSPCON
+  #ifdef SSPCON1
+	#define sspcon	sspcon1
+  #else
+	#ifdef SSP1CON1
+		#define sspcon	ssp1con1
+	#endif
+  #endif
+#endif
+#ifndef SSPBUF
+  #ifdef SSP1BUF
+	#define sspbuf	ssp1buf
+  #endif
+#endif
+
+#ifndef SSP2CON
+	#ifdef SSP2CON1
+		#define ssp2con	ssp2con1
+	#endif
+#endif
+
+
+
+
+CALFUNCTION(void, FC_CAL_SPI_Master_Init_, (void))
+
+{
+	FC_CAL_Bit_High_DDR (MX_SPI_MOSI_PORT_X, MX_SPI_MOSI_TRIS_X, MX_SPI_MOSI_PIN_X);		// MOSI pin is default high
+0302  1683  	BSF STATUS, RP0
+0303  1303  	BCF STATUS, RP1
+0304  1287  	BCF gbl_trisc,5
+0305  1283  	BCF STATUS, RP0
+0306  1687  	BSF gbl_portc,5
+
+	FC_CAL_Bit_In_DDR   (MX_SPI_MISO_PORT_X, MX_SPI_MISO_TRIS_X, MX_SPI_MISO_PIN_X);		// MISO pin is a input
+0307  1683  	BSF STATUS, RP0
+0308  1607  	BSF gbl_trisc,4
+
+
+	#if (MX_SPI_BMODE_X & 0x02)
+		FC_CAL_Bit_Low_DDR  (MX_SPI_SCK_PORT_X, MX_SPI_SCK_TRIS_X, MX_SPI_SCK_PIN_X);		// Clock pin is default low
+0309  1187  	BCF gbl_trisc,3
+030A  1283  	BCF STATUS, RP0
+030B  1187  	BCF gbl_portc,3
+
+	#else
+		FC_CAL_Bit_High_DDR (MX_SPI_SCK_PORT_X, MX_SPI_SCK_TRIS_X, MX_SPI_SCK_PIN_X);		// Clock pin is default high
+	#endif
+
+	#if (MX_SPI_CHANNEL_X == 1)
+	 #ifndef MX_SPI_1
+	 	#error "SPI channel 1 not available on this device"
+	 #else
+		sspcon 		 = MX_SPI_PR_SCALE_X & 0x03;			//Assign Clock Prescaler
+030C  0194  	CLRF gbl_sspcon
+
+		sspcon.CKP 	 = MX_SPI_BMODE_X & 0x01;				//Assign Clock Polarity
+030D  1214  	BCF gbl_sspcon,4
+
+		sspstat.CKE  = (MX_SPI_BMODE_X & 0x02) >> 1;		//Assign Clock Phase
+030E  1683  	BSF STATUS, RP0
+030F  1714  	BSF gbl_sspstat,6
+
+		sspstat.SMP  = (MX_SPI_BMODE_X & 0x04) >> 2;		//Assign Input Data Phase
+0310  1794  	BSF gbl_sspstat,7
+
+		sspcon.SSPEN = 1;									//Activate SPI Peripheral
+0311  1283  	BCF STATUS, RP0
+0312  1694  	BSF gbl_sspcon,5
+
+	 #endif
+	#endif
+
+	#if (MX_SPI_CHANNEL_X == 2)
+	 #ifndef MX_SPI_2
+	 	#error "SPI channel 2 not available on this device"
+	 #else
+
+	  #ifdef MX_SPI_2_REMAPPABLE
+		RPINR21 = 3; 										//MISO - RB0 - RP3
+		RPOR4 = 9;											//MOSI - RB1 - RP4
+		RPOR5 = 10;											//SCK  - RB2 - RP5
+	  #endif
+
+		ssp2con 	  = MX_SPI_PR_SCALE_X & 0x03;		//Assign Clock Prescaler
+		ssp2con.CKP   = MX_SPI_BMODE_X & 0x01;			//Assign Clock Polarity
+		ssp2stat.CKE  = (MX_SPI_BMODE_X & 0x02) >> 1;	//Assign Clock Phase
+		ssp2stat.SMP  = (MX_SPI_BMODE_X & 0x04) >> 2;	//Assign Input Data Phase
+		ssp2con.SSPEN = 1;									//Activate SPI Peripheral
+	 #endif
+	#endif
+}
+0313  0008  	RETURN
+
+
+
+CALFUNCTION(void, FC_CAL_SPI_Master_Uninit_, (void))
+{
+	#if (MX_SPI_CHANNEL_X == 1)
+		sspcon = 0;
+	#endif
+
+	#if (MX_SPI_CHANNEL_X == 2)
+		ssp2con = 0;
+    #endif
+
+	//Reset Pins to Inputs
+	FC_CAL_Bit_In_DDR (MX_SPI_MOSI_PORT_X, MX_SPI_MOSI_TRIS_X, MX_SPI_MOSI_PIN_X);
+	FC_CAL_Bit_In_DDR (MX_SPI_MISO_PORT_X, MX_SPI_MISO_TRIS_X, MX_SPI_MISO_PIN_X);
+	FC_CAL_Bit_In_DDR (MX_SPI_SCK_PORT_X, MX_SPI_SCK_TRIS_X, MX_SPI_SCK_PIN_X);
+}
+
+
+CALFUNCTION(MX_UINT8, FC_CAL_SPI_Master_Byte_, (MX_UINT8 DataOut))
+
+{
+	MX_UINT8 retVal = 0;
+0176  01C7  	CLRF FC_CAL_SPI_00066_1_retVal
+
+
+	#if (MX_SPI_CHANNEL_X == 0)
+		SPI_SW_DELAY = MX_SPI_PR_SCALE_X;
+
+		MX_UINT8 idx;
+		for (idx = 0; idx < 8; idx++)
+		{
+			retVal = retVal << 1;
+
+			#if ((MX_SPI_BMODE_X & 0x02) == 0x00)									//CKE = 0; Set SCK active before data
+				#if ((MX_SPI_BMODE_X & 0x01) == 0x00)								//CKP = 0
+					FC_CAL_Bit_High(MX_SPI_SCK_PORT_X, MX_SPI_SCK_PIN_X);
+				#else
+					FC_CAL_Bit_Low(MX_SPI_SCK_PORT_X, MX_SPI_SCK_PIN_X);
+				#endif
+			#endif
+
+			if (DataOut & 0x80)														//Test Data bit
+				FC_CAL_Bit_High(MX_SPI_MOSI_PORT_X, MX_SPI_MOSI_PIN_X);				//Set SDO bit
+			else
+				FC_CAL_Bit_Low (MX_SPI_MOSI_PORT_X, MX_SPI_MOSI_PIN_X);				//Clear SDO bit
+
+			delay_us(SPI_SW_DELAY);
+
+			#if ((MX_SPI_BMODE_X & 0x02) == 0x02)									//CKE = 1; Set SCK active after data
+				#if ((MX_SPI_BMODE_X & 0x01) == 0x00)								//CKP = 0
+					FC_CAL_Bit_High(MX_SPI_SCK_PORT_X, MX_SPI_SCK_PIN_X);
+				#else
+					FC_CAL_Bit_Low(MX_SPI_SCK_PORT_X, MX_SPI_SCK_PIN_X);
+				#endif
+			#else																	//CKE = 0; Set SCK idle after data
+				#if ((MX_SPI_BMODE_X & 0x01) == 0x00)								//CKP = 0
+					FC_CAL_Bit_Low(MX_SPI_SCK_PORT_X, MX_SPI_SCK_PIN_X);
+				#else
+					FC_CAL_Bit_High(MX_SPI_SCK_PORT_X, MX_SPI_SCK_PIN_X);
+				#endif
+			#endif
+
+			#if ((MX_SPI_BMODE_X & 0x04) == 0)										//Sample at the middle of period
+				if(FC_CAL_Bit_In(MX_SPI_MISO_PORT_X, MX_SPI_MISO_PIN_X))
+					retVal = retVal | 0x01;
+				else
+					retVal = retVal & 0xFE;
+			#endif
+
+			delay_us(SPI_SW_DELAY);
+
+			#if ((MX_SPI_BMODE_X & 0x02) == 0x02)									//CKE = 1; Set SCK idle to complete cycle																	//CKE = 0; Set SCK idle after data
+				#if ((MX_SPI_BMODE_X & 0x01) == 0x00)								//CKP = 0
+					FC_CAL_Bit_Low(MX_SPI_SCK_PORT_X, MX_SPI_SCK_PIN_X);
+				#else
+					FC_CAL_Bit_High(MX_SPI_SCK_PORT_X, MX_SPI_SCK_PIN_X);
+				#endif
+			#endif
+
+			#if ((MX_SPI_BMODE_X & 0x04) == 0x04)									//Sample at the end of period
+				if(FC_CAL_Bit_In(MX_SPI_MISO_PORT_X, MX_SPI_MISO_PIN_X))
+					retVal = retVal | 0x01;
+				else
+					retVal = retVal & 0xFE;
+			#endif
+
+			DataOut = DataOut << 1;							//Move to next data bit
+		}
+    #endif
+
+	#if (MX_SPI_CHANNEL_X == 1)
+		sspbuf = DataOut;					//Send outgoing byte
+0177  0846  	MOVF FC_CAL_SPI_00066_arg_DataOut, W
+0178  1283  	BCF STATUS, RP0
+0179  0093  	MOVWF gbl_sspbuf
+
+		while ((sspstat & 0x01) == 0);		//Wait until sspbuf is empty
+017A        label26
+017A  1683  	BSF STATUS, RP0
+017B  1C14  	BTFSS gbl_sspstat,0
+017C  297A  	GOTO	label26
+
+		retVal = sspbuf;					//Collect incoming byte
+017D  1283  	BCF STATUS, RP0
+017E  0813  	MOVF gbl_sspbuf, W
+017F  1683  	BSF STATUS, RP0
+0180  00C7  	MOVWF FC_CAL_SPI_00066_1_retVal
+
+	#endif
+
+	#if (MX_SPI_CHANNEL_X == 2)
+		ssp2buf = DataOut;					//Send outgoing byte
+		while ((ssp2stat & 0x01) == 0);		//Wait until sspbuf is empty
+		retVal = ssp2buf;					//Collect incoming byte
+	#endif
+
+	return (retVal);
+0181  0847  	MOVF FC_CAL_SPI_00066_1_retVal, W
+0182  00C8  	MOVWF CompTempVarRet2248
+
+}
+0183  0008  	RETURN
+
+
+
+
+
+
+CALFUNCTION(void, FC_CAL_SPI_Slave_Init_, (void))
+{
+
+}
+
+CALFUNCTION(void, FC_CAL_SPI_Slave_Uninit_, (void))
+{
+
+}
+
+CALFUNCTION(void, FC_CAL_SPI_Slave_SetTxData_, (MX_UINT8 Data))
+{
+
+}
+
+CALFUNCTION(MX_UINT8, FC_CAL_SPI_Slave_GetRxData_, (void))
+{
+
+}
+
+
+
+/*********************************************************************
+ *                  Flowcode CAL UART File
+ *
+ * File: PIC_CAL_UART.c
+ *
+ * (c) 2011 Matrix Multimedia Ltd.
+ * http://www.matrixmultimedia.com
+ *
+ * Software License Agreement
+ *
+ * The software supplied herewith by Matrix Multimedia Ltd (the
+ * “Company”) for its Flowcode graphical programming language is
+ * intended and supplied to you, the Company’s customer, for use
+ * solely and exclusively on the Company's products. The software
+ * is owned by the Company, and is protected under applicable
+ * copyright laws. All rights are reserved. Any use in violation
+ * of the foregoing restrictions may subject the user to criminal
+ * sanctions under applicable laws, as well as to civil liability
+ * for the breach of the terms and conditions of this licence.
+ *
+ * THIS SOFTWARE IS PROVIDED IN AN “AS IS” CONDITION. NO WARRANTIES,
+ * WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING, BUT NOT LIMITED
+ * TO, IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE APPLY TO THIS SOFTWARE. THE COMPANY SHALL NOT,
+ * IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL OR
+ * CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+ *
+ * Changelog:
+ *
+ *  date  | by | description
+ * -------+----+-----------------------------------------------------
+ * 010911 | BR | Created
+ * 020911 | BR | Updated variables with typedef alternatives
+ * 011211 | BR | Converted to new dynamic defines mechanism
+ * 160112 | BR | Fixed issues with rx return type and low bauds on fast devices
+ * 020212 | ST | Added <MX_UART_2_PIE4> routing to account for differences in 16F and 18F devices with 2 UARTs
+ * 270212 | BR | Fixed a bug in the receive functionality
+ * 280212 | BR | Sorted out auto echo functionality
+ * 160412 | BR | Addition of HW change baud function
+ */
+
+
+
+#ifndef MX_UART_SW_DEFS
+	#define MX_UART_SW_DEFS
+
+	#ifdef _BOOSTC
+		#define INST_COUNT	45	//65 for lower speeds or 40 for higher speeds.
+	#endif
+	#ifdef HI_TECH_C
+		#define INST_COUNT	315
+	#endif
+
+	//Work out number of nops for software baud rate
+	#define MX_INSTRUCTION_SPEED 	(MX_CLK_SPEED / 4)
+	#define MX_OVERHEAD				(MX_INSTRUCTION_SPEED / INST_COUNT)
+	#define SW_OFFSET				(1000000 / MX_OVERHEAD)
+
+	//Work out software baud rates if required
+	#define SW_1200_BAUD	(832 - SW_OFFSET)
+	#define SW_2400_BAUD	(416 - SW_OFFSET)
+	#define SW_4800_BAUD	(208 - SW_OFFSET)
+	#define SW_9600_BAUD	(104 - SW_OFFSET)
+	#define SW_19200_BAUD	(52 - SW_OFFSET)
+	#define SW_31250_BAUD	(32 - SW_OFFSET)
+	#define SW_115200_BAUD	(8 - SW_OFFSET)
+#endif
+
+ #if defined(MX_UART_CHANNEL_1) && (MX_UART_NUM==1)
+	#if (MX_UART_CHANNEL_1 == 0)
+		#if (MX_UART_BAUD_1 == 1200)
+			#define MX_SOFT_BAUD_1	SW_1200_BAUD
+			#if (SW_OFFSET < 1)
+				#error "Software UART Baud Rate 1200 Not Available At This Clock Speed"
+			#endif
+		#endif
+		#if (MX_UART_BAUD_1 == 2400)
+			#define MX_SOFT_BAUD_1	SW_2400_BAUD
+			#if (SW_OFFSET < 1)
+				#error "Software UART Baud Rate 2400 Not Available At This Clock Speed"
+			#endif
+		#endif
+		#if (MX_UART_BAUD_1 == 4800)
+			#define MX_SOFT_BAUD_1	SW_4800_BAUD
+			#if (SW_OFFSET < 1)
+				#error "Software UART Baud Rate 4800 Not Available At This Clock Speed"
+			#endif
+		#endif
+		#if (MX_UART_BAUD_1 == 9600)
+			#define MX_SOFT_BAUD_1	SW_9600_BAUD
+			#if (SW_OFFSET < 1)
+				#error "Software UART Baud Rate 9600 Not Available At This Clock Speed"
+			#endif
+		#endif
+		#if (MX_UART_BAUD_1 == 19200)
+			#define MX_SOFT_BAUD_1	SW_19200_BAUD
+			#if (SW_OFFSET < 1)
+				#error "Software UART Baud Rate 19200 Not Available At This Clock Speed"
+			#endif
+		#endif
+		#if (MX_UART_BAUD_1 == 31250)
+			#define MX_SOFT_BAUD_1	SW_31250_BAUD
+			#if (SW_OFFSET < 1)
+				#error "Software UART Baud Rate 31250 Not Available At This Clock Speed"
+			#endif
+		#endif
+		#if (MX_UART_BAUD_1 == 115200)
+			#define MX_SOFT_BAUD_1	SW_115200_BAUD
+			#if (SW_OFFSET < 1)
+				#error "Software UART Baud Rate 115200 Not Available At This Clock Speed"
+			#endif
+		#endif
+		#ifndef MX_SOFT_BAUD_1
+			#error "UART Baud Rate not supported in Software Mode"
+		#endif
+	#else
+		#define MX_SOFT_BAUD_1	1
+		#define MX_HARD_BAUD_1	(((MX_CLK_SPEED / MX_UART_BAUD_1) - 16) / 16)
+		#define MX_HARD_SLOW_1	0
+
+		#if (MX_HARD_BAUD_1 > 255)
+			#undef MX_HARD_BAUD_1
+			#undef MX_HARD_SLOW_1
+			#define MX_HARD_BAUD_1	(((MX_CLK_SPEED / MX_UART_BAUD_1) - 16)	/ 64)
+			#define MX_HARD_SLOW_1	1
+		#endif
+
+	#endif
+ #endif
+ #if defined(MX_UART_CHANNEL_2) && (MX_UART_NUM==2)
+	#if (MX_UART_CHANNEL_2 == 0)
+		#if (MX_UART_BAUD_2 == 1200)
+			#define MX_SOFT_BAUD_2	SW_1200_BAUD
+			#if (SW_OFFSET < 1)
+				#error "Software UART Baud Rate 1200 Not Available At This Clock Speed"
+			#endif
+		#endif
+		#if (MX_UART_BAUD_2 == 2400)
+			#define MX_SOFT_BAUD_2	SW_2400_BAUD
+			#if (SW_OFFSET < 1)
+				#error "Software UART Baud Rate 2400 Not Available At This Clock Speed"
+			#endif
+		#endif
+		#if (MX_UART_BAUD_2 == 4800)
+			#define MX_SOFT_BAUD_2	SW_4800_BAUD
+			#if (SW_OFFSET < 1)
+				#error "Software UART Baud Rate 4800 Not Available At This Clock Speed"
+			#endif
+		#endif
+		#if (MX_UART_BAUD_2 == 9600)
+			#define MX_SOFT_BAUD_2	SW_9600_BAUD
+			#if (SW_OFFSET < 1)
+				#error "Software UART Baud Rate 9600 Not Available At This Clock Speed"
+			#endif
+		#endif
+		#if (MX_UART_BAUD_2 == 19200)
+			#define MX_SOFT_BAUD_2	SW_19200_BAUD
+			#if (SW_OFFSET < 1)
+				#error "Software UART Baud Rate 19200 Not Available At This Clock Speed"
+			#endif
+		#endif
+		#if (MX_UART_BAUD_2 == 31250)
+			#define MX_SOFT_BAUD_2	SW_31250_BAUD
+			#if (SW_OFFSET < 1)
+				#error "Software UART Baud Rate 31250 Not Available At This Clock Speed"
+			#endif
+		#endif
+		#if (MX_UART_BAUD_2 == 115200)
+			#define MX_SOFT_BAUD_2	SW_115200_BAUD
+			#if (SW_OFFSET < 1)
+				#error "Software UART Baud Rate 115200 Not Available At This Clock Speed"
+			#endif
+		#endif
+		#ifndef MX_SOFT_BAUD_2
+			#error "UART Baud Rate not supported in Software Mode"
+		#endif
+	#else
+		#define MX_SOFT_BAUD_2	1
+		#define MX_HARD_BAUD_2	(((MX_CLK_SPEED / MX_UART_BAUD_2) - 16) / 16)
+		#define MX_HARD_SLOW_2	0
+
+		#if (MX_HARD_BAUD_2 > 255)
+			#undef MX_HARD_BAUD_2
+			#undef MX_HARD_SLOW_2
+			#define MX_HARD_BAUD_2	(((MX_CLK_SPEED / MX_UART_BAUD_2) - 16)	/ 64)
+			#define MX_HARD_SLOW_2	1
+		#endif
+ 	#endif
+ #endif
+ #if defined(MX_UART_CHANNEL_3) && (MX_UART_NUM==3)
+	#if (MX_UART_CHANNEL_3 == 0)
+		#if (MX_UART_BAUD_3 == 1200)
+			#define MX_SOFT_BAUD_3	SW_1200_BAUD
+			#if (SW_OFFSET < 1)
+				#error "Software UART Baud Rate 1200 Not Available At This Clock Speed"
+			#endif
+		#endif
+		#if (MX_UART_BAUD_3 == 2400)
+			#define MX_SOFT_BAUD_3	SW_2400_BAUD
+			#if (SW_OFFSET < 1)
+				#error "Software UART Baud Rate 2400 Not Available At This Clock Speed"
+			#endif
+		#endif
+		#if (MX_UART_BAUD_3 == 4800)
+			#define MX_SOFT_BAUD_3	SW_4800_BAUD
+			#if (SW_OFFSET < 1)
+				#error "Software UART Baud Rate 4800 Not Available At This Clock Speed"
+			#endif
+		#endif
+		#if (MX_UART_BAUD_3 == 9600)
+			#define MX_SOFT_BAUD_3	SW_9600_BAUD
+			#if (SW_OFFSET < 1)
+				#error "Software UART Baud Rate 9600 Not Available At This Clock Speed"
+			#endif
+		#endif
+		#if (MX_UART_BAUD_3 == 19200)
+			#define MX_SOFT_BAUD_3	SW_19200_BAUD
+			#if (SW_OFFSET < 1)
+				#error "Software UART Baud Rate 19200 Not Available At This Clock Speed"
+			#endif
+		#endif
+		#if (MX_UART_BAUD_3 == 31250)
+			#define MX_SOFT_BAUD_3	SW_31250_BAUD
+			#if (SW_OFFSET < 1)
+				#error "Software UART Baud Rate 31250 Not Available At This Clock Speed"
+			#endif
+		#endif
+		#if (MX_UART_BAUD_3 == 115200)
+			#define MX_SOFT_BAUD_3	SW_115200_BAUD
+			#if (SW_OFFSET < 1)
+				#error "Software UART Baud Rate 115200 Not Available At This Clock Speed"
+			#endif
+		#endif
+		#ifndef MX_SOFT_BAUD_3
+			#error "UART Baud Rate not supported in Software Mode"
+		#endif
+	#else
+		#define MX_SOFT_BAUD_3	1
+		#define MX_HARD_BAUD_3	(((MX_CLK_SPEED / MX_UART_BAUD_3) - 16) / 16)
+		#define MX_HARD_SLOW_3	0
+
+		#if (MX_HARD_BAUD_3 > 255)
+			#undef MX_HARD_BAUD_3
+			#undef MX_HARD_SLOW_3
+			#define MX_HARD_BAUD_3	(((MX_CLK_SPEED / MX_UART_BAUD_3) - 16)	/ 64)
+			#define MX_HARD_SLOW_3	1
+		#endif
+	#endif
+ #endif
+ #if defined(MX_UART_CHANNEL_4) && (MX_UART_NUM==4)
+	#if (MX_UART_CHANNEL_4 == 0)
+		#if (MX_UART_BAUD_4 == 1200)
+			#define MX_SOFT_BAUD_4	SW_1200_BAUD
+			#if (SW_OFFSET < 1)
+				#error "Software UART Baud Rate 1200 Not Available At This Clock Speed"
+			#endif
+		#endif
+		#if (MX_UART_BAUD_4 == 2400)
+			#define MX_SOFT_BAUD_4	SW_2400_BAUD
+			#if (SW_OFFSET < 1)
+				#error "Software UART Baud Rate 2400 Not Available At This Clock Speed"
+			#endif
+		#endif
+		#if (MX_UART_BAUD_4 == 4800)
+			#define MX_SOFT_BAUD_4	SW_4800_BAUD
+			#if (SW_OFFSET < 1)
+				#error "Software UART Baud Rate 4800 Not Available At This Clock Speed"
+			#endif
+		#endif
+		#if (MX_UART_BAUD_4 == 9600)
+			#define MX_SOFT_BAUD_4	SW_9600_BAUD
+			#if (SW_OFFSET < 1)
+				#error "Software UART Baud Rate 9600 Not Available At This Clock Speed"
+			#endif
+		#endif
+		#if (MX_UART_BAUD_4 == 19200)
+			#define MX_SOFT_BAUD_4	SW_19200_BAUD
+			#if (SW_OFFSET < 1)
+				#error "Software UART Baud Rate 19200 Not Available At This Clock Speed"
+			#endif
+		#endif
+		#if (MX_UART_BAUD_4 == 31250)
+			#define MX_SOFT_BAUD_4	SW_31250_BAUD
+			#if (SW_OFFSET < 1)
+				#error "Software UART Baud Rate 31250 Not Available At This Clock Speed"
+			#endif
+		#endif
+		#if (MX_UART_BAUD_4 == 115200)
+			#define MX_SOFT_BAUD_4	SW_115200_BAUD
+			#if (SW_OFFSET < 1)
+				#error "Software UART Baud Rate 115200 Not Available At This Clock Speed"
+			#endif
+		#endif
+		#ifndef MX_SOFT_BAUD_4
+			#error "UART Baud Rate not supported in Software Mode"
+		#endif
+	#else
+		#define MX_SOFT_BAUD_4	1
+		#define MX_HARD_BAUD_4	(((MX_CLK_SPEED / MX_UART_BAUD_4) - 16) / 16)
+		#define MX_HARD_SLOW_4	0
+
+		#if (MX_HARD_BAUD_4 > 255)
+			#undef MX_HARD_BAUD_4
+			#undef MX_HARD_SLOW_4
+			#define MX_HARD_BAUD_4	(((MX_CLK_SPEED / MX_UART_BAUD_4) - 16)	/ 64)
+			#define MX_HARD_SLOW_4	1
+		#endif
+	#endif
+ #endif
+
+
+//Hardware Baud update definitions
+#ifndef MX_HARD_BAUD_CHANGE_DEFS
+	#define MX_HARD_BAUD_CHANGE_DEFS
+
+	#define MX_HARD_BAUD_1200	(((MX_CLK_SPEED / 1200) - 16) / 16)
+	#if (MX_HARD_BAUD_1200 > 255)
+		#undef MX_HARD_BAUD_1200
+		#define MX_HARD_BAUD_1200	(((MX_CLK_SPEED / 1200) - 16) / 64)
+		#define MX_HARD_SLOW_1200	1
+	#else
+		#define MX_HARD_SLOW_1200	0
+	#endif
+
+	#define MX_HARD_BAUD_2400	(((MX_CLK_SPEED / 2400) - 16) / 16)
+	#if (MX_HARD_BAUD_2400 > 255)
+		#undef MX_HARD_BAUD_2400
+		#define MX_HARD_BAUD_2400	(((MX_CLK_SPEED / 2400) - 16) / 64)
+		#define MX_HARD_SLOW_2400	1
+	#else
+		#define MX_HARD_SLOW_2400	0
+	#endif
+
+	#define MX_HARD_BAUD_4800	(((MX_CLK_SPEED / 4800) - 16) / 16)
+	#if (MX_HARD_BAUD_4800 > 255)
+		#undef MX_HARD_BAUD_4800
+		#define MX_HARD_BAUD_4800	(((MX_CLK_SPEED / 4800) - 16) / 64)
+		#define MX_HARD_SLOW_4800	1
+	#else
+		#define MX_HARD_SLOW_4800	0
+	#endif
+
+	#define MX_HARD_BAUD_9600	(((MX_CLK_SPEED / 9600) - 16) / 16)
+	#if (MX_HARD_BAUD_9600 > 255)
+		#undef MX_HARD_BAUD_9600
+		#define MX_HARD_BAUD_9600	(((MX_CLK_SPEED / 9600) - 16) / 64)
+		#define MX_HARD_SLOW_9600	1
+	#else
+		#define MX_HARD_SLOW_9600	0
+	#endif
+
+	#define MX_HARD_BAUD_19200	(((MX_CLK_SPEED / 19200) - 16) / 16)
+	#if (MX_HARD_BAUD_19200 > 255)
+		#undef MX_HARD_BAUD_19200
+		#define MX_HARD_BAUD_19200	(((MX_CLK_SPEED / 19200) - 16) / 64)
+		#define MX_HARD_SLOW_19200	1
+	#else
+		#define MX_HARD_SLOW_19200	0
+	#endif
+
+	#define MX_HARD_BAUD_38400	(((MX_CLK_SPEED / 38400) - 16) / 16)
+	#if (MX_HARD_BAUD_38400 > 255)
+		#undef MX_HARD_BAUD_38400
+		#define MX_HARD_BAUD_38400	(((MX_CLK_SPEED / 38400) - 16) / 64)
+		#define MX_HARD_SLOW_38400	1
+	#else
+		#define MX_HARD_SLOW_38400	0
+	#endif
+
+	#define MX_HARD_BAUD_57600	(((MX_CLK_SPEED / 57600) - 16) / 16)
+	#if (MX_HARD_BAUD_57600 > 255)
+		#undef MX_HARD_BAUD_57600
+		#define MX_HARD_BAUD_57600	(((MX_CLK_SPEED / 57600) - 16) / 64)
+		#define MX_HARD_SLOW_57600	1
+	#else
+		#define MX_HARD_SLOW_57600	0
+	#endif
+
+	#define MX_HARD_BAUD_115200	(((MX_CLK_SPEED / 115200) - 16) / 16)
+	#if (MX_HARD_BAUD_115200 > 255)
+		#undef MX_HARD_BAUD_115200
+		#define MX_HARD_BAUD_115200	(((MX_CLK_SPEED / 115200) - 16) / 64)
+		#define MX_HARD_SLOW_115200	1
+	#else
+		#define MX_HARD_SLOW_115200	0
+	#endif
+#endif
+
+
+//Dynamic function naming based on defines and index number
+#define MX_UART_CHANNEL_X	CAL_APPEND(MX_UART_CHANNEL_, MX_UART_NUM)
+#define MX_UART_TX_PIN_X	CAL_APPEND(MX_UART_TX_PIN_, MX_UART_NUM)
+#define MX_UART_TX_PORT_X	CAL_APPEND(MX_UART_TX_PORT_, MX_UART_NUM)
+#define MX_UART_TX_TRIS_X	CAL_APPEND(MX_UART_TX_TRIS_, MX_UART_NUM)
+#define MX_UART_RX_PIN_X	CAL_APPEND(MX_UART_RX_PIN_, MX_UART_NUM)
+#define MX_UART_RX_PORT_X	CAL_APPEND(MX_UART_RX_PORT_, MX_UART_NUM)
+#define MX_UART_RX_TRIS_X	CAL_APPEND(MX_UART_RX_TRIS_, MX_UART_NUM)
+#define MX_UART_FLOWEN_X	CAL_APPEND(MX_UART_FLOWEN_, MX_UART_NUM)
+#define MX_UART_CTS_PIN_X	CAL_APPEND(MX_UART_CTS_PIN_, MX_UART_NUM)
+#define MX_UART_CTS_PORT_X	CAL_APPEND(MX_UART_CTS_PORT_, MX_UART_NUM)
+#define MX_UART_CTS_TRIS_X	CAL_APPEND(MX_UART_CTS_TRIS_, MX_UART_NUM)
+#define MX_UART_RTS_PIN_X	CAL_APPEND(MX_UART_RTS_PIN_, MX_UART_NUM)
+#define MX_UART_RTS_PORT_X	CAL_APPEND(MX_UART_RTS_PORT_, MX_UART_NUM)
+#define MX_UART_RTS_TRIS_X	CAL_APPEND(MX_UART_RTS_TRIS_, MX_UART_NUM)
+#define MX_UART_DBITS_X		CAL_APPEND(MX_UART_DBITS_, MX_UART_NUM)
+#define MX_UART_RETURN_X	CAL_APPEND(MX_UART_RETURN_, MX_UART_NUM)
+#define MX_UART_ECHO_X		CAL_APPEND(MX_UART_ECHO_, MX_UART_NUM)
+#define MX_UART_INT_X		CAL_APPEND(MX_UART_INT_, MX_UART_NUM)
+#define MX_UART_BAUD_X		CAL_APPEND(MX_HARD_BAUD_, MX_UART_NUM)
+#define MX_SOFT_BAUD_X		CAL_APPEND(MX_SOFT_BAUD_, MX_UART_NUM)
+#define MX_HARD_SLOW_X		CAL_APPEND(MX_HARD_SLOW_, MX_UART_NUM)
+
+#define UART_Delay_CAL		CAL_APPEND(FC_CAL_UART_Delay_, MX_UART_NUM)
+#define UART_Send			CAL_APPEND(FC_CAL_UART_Send_, MX_UART_NUM)
+#define UART_Uninit			CAL_APPEND(FC_CAL_UART_Uninit_, MX_UART_NUM)
+
+
+//Component Definitions
+#define UART_STATUS_LOOP	0
+#define UART_STATUS_TIMEOUT	1
+#define UART_STATUS_RXBYTE	2
+
+
+//Interrupt Definitions
+#ifdef MX_UART_2_PIE4
+  #define MX_UART2_PIE pie4
+  #define MX_UART2_PIR pir4
+  #define MX_UART2_TXSTA tx2sta
+  #define MX_UART2_RCSTA rc2sta
+  #define MX_UART2_TXREG tx2reg
+  #define MX_UART2_RCREG rc2reg
+#else
+  #define MX_UART2_PIE pie3
+  #define MX_UART2_PIR pir3
+  #define MX_UART2_TXSTA txsta2
+  #define MX_UART2_RCSTA rcsta2
+  #define MX_UART2_TXREG txreg2
+  #define MX_UART2_RCREG rcreg2
+#endif
+
+#if (MX_UART_INT_X == 1)
+
+	#ifndef MX_UART_INT_DEFS
+	#define MX_UART_INT_DEFS
+
+		#define MX_UART_INT_CH1_FUNC
+		#define MX_UART_INT_CH2_FUNC
+		#define MX_UART_INT_FUNC_END
+
+		#define MX_UART_INT_CH1_DET		ts_bit(pir1, RCIF) && ts_bit(pie1, RCIE)
+		#define MX_UART_INT_CH2_DET		ts_bit(MX_UART2_PIR, RC2IF) && ts_bit(MX_UART2_PIE, RC2IE)
+
+		#define MX_UART_INT_CH1_EN		st_bit (pie1, RCIE)
+		#define MX_UART_INT_CH2_EN		st_bit (MX_UART2_PIE, RC2IE)
+
+		#define MX_UART_INT_CH1_DIS		cr_bit (pie1, RCIE)
+		#define MX_UART_INT_CH2_DIS		cr_bit (MX_UART2_PIE, RC2IE)
+
+		#define MX_UART_INT_CH1_CLR		cr_bit (pir1, RCIF)
+		#define MX_UART_INT_CH2_CLR		cr_bit (MX_UART2_PIR, RC2IF)
+
+	#endif
+#endif
+
+
+//Function Prototypes
+CALFUNCTION(void, FC_CAL_UART_Init_, (void));
+CALFUNCTION(void, FC_CAL_UART_Uninit_, (void));
+CALFUNCTION(void, FC_CAL_UART_Send_, (MX_UINT16 nChar));
+CALFUNCTION(MX_SINT16, FC_CAL_UART_Receive_, (MX_UINT8 nTimeout));
+CALFUNCTION(void, FC_CAL_UART_Delay_, (void));
+
+
+//Peripheral Functions
+CALFUNCTION(void, FC_CAL_UART_Init_, (void))
+
+{
+
+	#if (MX_UART_CHANNEL_X == 0)
+		FC_CAL_Bit_In_DDR 	(MX_UART_RX_PORT_X, MX_UART_RX_TRIS_X, MX_UART_RX_PIN_X);		// Receive pin is a input
+		FC_CAL_Bit_High_DDR (MX_UART_TX_PORT_X, MX_UART_TX_TRIS_X, MX_UART_TX_PIN_X);		// Transmit pin is default high
+	#endif
+
+	#if (MX_UART_CHANNEL_X == 1)
+	  #ifndef MX_UART_1
+	  	  #error "UART channel 1 not available on this device"
+	  #else
+		  #if (MX_HARD_SLOW_X == 1)
+			cr_bit(txsta, BRGH);						//Low Speed
+		  #else
+			st_bit(txsta, BRGH);						//High Speed
+0432  1683  	BSF STATUS, RP0
+0433  1303  	BCF STATUS, RP1
+0434  1518  	BSF gbl_txsta,2
+
+		  #endif
+			spbrg = MX_UART_BAUD_X;   					// set the baud rate
+0435  3081  	MOVLW 0x81
+0436  0099  	MOVWF gbl_spbrg
+
+			rcsta = 0;                    				// 8-bit, disabled
+0437  1283  	BCF STATUS, RP0
+0438  0198  	CLRF gbl_rcsta
+
+
+			#if(MX_UART_DBITS_X == 9)
+				st_bit(txsta, TX9);   					// 9-bit TX
+				st_bit(rcsta, RX9);                    	// 9-bit RX
+			#endif
+
+			st_bit(rcsta, SPEN);         				// turn on serial interface
+0439  1798  	BSF gbl_rcsta,7
+
+			st_bit(txsta, TXEN);
+043A  1683  	BSF STATUS, RP0
+043B  1698  	BSF gbl_txsta,5
+
+			st_bit(rcsta, CREN);
+043C  1283  	BCF STATUS, RP0
+043D  1618  	BSF gbl_rcsta,4
+
+
+			#if (MX_UART_INT_X == 1)
+				MX_UART_INT_CH1_EN;
+				st_bit(intcon, PEIE);
+				st_bit(intcon, GIE);
+			#else
+				cr_bit (pie1, RCIE);
+043E  1683  	BSF STATUS, RP0
+043F  128C  	BCF gbl_pie1,5
+
+			#endif
+	  #endif
+	#endif
+
+
+	#if (MX_UART_CHANNEL_X == 2)
+
+	  #ifndef MX_UART_2
+		  #error "UART channel 2 not available on this device"
+	  #else
+		  #ifdef MX_UART_2_REMAPPABLE
+			RPOR9 = 5;									//TX2 - RP9 - RB6
+			RPINR16	= 10;								//RX2 - RP10 - RB7
+		  #endif
+		  #if (MX_HARD_SLOW_X == 1)
+			cr_bit(MX_UART2_TXSTA, BRGH);						//Low Speed
+		  #else
+			st_bit(MX_UART2_TXSTA, BRGH);						//High Speed
+		  #endif
+			spbrg2 = MX_UART_BAUD_X;   				// set the baud rate
+			MX_UART2_RCSTA = 0;                    				// 8-bit, disabled
+
+			#if(MX_UART_DBITS_X == 9)
+				st_bit(MX_UART2_TXSTA, TX9);   					// 9-bit TX
+				st_bit(MX_UART2_RCSTA, RX9);                    // 9-bit RX
+			#endif
+
+			st_bit(MX_UART2_RCSTA, SPEN);         				// turn on serial interface
+			st_bit(MX_UART2_TXSTA, TXEN);
+			st_bit(MX_UART2_RCSTA, CREN);
+
+			#if (MX_UART_INT_X == 1)
+				MX_UART_INT_CH2_EN;
+				st_bit(intcon, PEIE);
+				st_bit(intcon, GIE);
+			#else
+				cr_bit (MX_UART2_PIE, RC2IE);
+			#endif
+	  #endif
+	#endif
+
+	#if (MX_UART_FLOWEN_X == 1)						//Flowcontrol enabled?
+		FC_CAL_Bit_In_DDR (MX_UART_CTS_PORT_X, MX_UART_CTS_TRIS_X, MX_UART_CTS_PIN_X);	// CTS pin is a input
+		FC_CAL_Bit_High_DDR (MX_UART_RTS_PORT_X, MX_UART_RTS_TRIS_X, MX_UART_RTS_PIN_X);	// RTS not ready to accept data
+	#endif
+
+}
+0440  0008  	RETURN
+
+
+
+
+CALFUNCTION(void, FC_CAL_UART_Uninit_, (void))
+{
+
+	#if (MX_UART_CHANNEL_X == 0)
+		FC_CAL_Bit_In_DDR (MX_UART_RX_PORT_X, MX_UART_RX_TRIS_X, MX_UART_RX_PIN_X);		// Receive pin is a input
+		FC_CAL_Bit_In_DDR (MX_UART_TX_PORT_X, MX_UART_TX_TRIS_X, MX_UART_TX_PIN_X);		// Transmit pin is default high
+	#endif
+
+	#if (MX_UART_CHANNEL_X == 1)
+			rcsta = 0;                    								// 8-bit, disabled
+			txsta = 0;
+		  #ifdef MX_UART_RXINT
+			MX_UART_INT_CH1_DIS;
+		  #endif
+	#endif
+
+	#if (MX_UART_CHANNEL_X == 2)
+			MX_UART2_RCSTA = 0;                    								// 8-bit, disabled
+			MX_UART2_TXSTA = 0;
+		  #ifdef MX_UART_RXINT
+			MX_UART_INT_CH2_DIS;
+		  #endif
+	#endif
+
+	#if (MX_UART_FLOWEN_X == 1)										//Flowcontrol enabled?
+		FC_CAL_Bit_In_DDR (MX_UART_CTS_PORT_X, MX_UART_CTS_TRIS_X, MX_UART_CTS_PIN_X);		// CTS pin is a input
+		FC_CAL_Bit_In_DDR (MX_UART_RTS_PORT_X, MX_UART_RTS_TRIS_X, MX_UART_RTS_PIN_X);		// RTS not ready to accept data
+	#endif
+}
+
+
+
+CALFUNCTION(void, FC_CAL_UART_Send_, (MX_UINT16 nChar))
+
+{
+	#if (MX_UART_FLOWEN_X == 1)
+		while (FC_CAL_Bit_In(MX_UART_CTS_PORT_X, MX_UART_CTS_PIN_X) != 0);	// Wait until CTS is low
+	#endif
+
+	#if (MX_UART_CHANNEL_X == 0)													// Software UART TX
+		MX_UINT8 idx;
+		FC_CAL_Bit_Low(MX_UART_TX_PORT_X, MX_UART_TX_PIN_X);					// Send Start bit
+		UART_Delay_CAL();
+		for (idx = 0; idx < MX_UART_DBITS_X; idx++)
+		{
+			if (nChar & 0x01)														// Mask off data bit
+				FC_CAL_Bit_High(MX_UART_TX_PORT_X, MX_UART_TX_PIN_X);
+			else
+				FC_CAL_Bit_Low(MX_UART_TX_PORT_X, MX_UART_TX_PIN_X);
+			UART_Delay_CAL();
+			nChar = nChar >> 1;														// Move to next data bit
+		}
+		FC_CAL_Bit_High(MX_UART_TX_PORT_X, MX_UART_TX_PIN_X);					// Send Stop bit
+		UART_Delay_CAL();
+	#endif
+
+	#if (MX_UART_CHANNEL_X == 1)
+		while (ts_bit(pir1, TXIF) == 0);
+02FA        label46
+02FA  1283  	BCF STATUS, RP0
+02FB  1E0C  	BTFSS gbl_pir1,4
+02FC  2AFA  	GOTO	label46
+
+
+		#if (MX_UART_DBITS_X == 9)
+			if (test_bit(nChar, 8))
+				st_bit(txsta, TX9D);
+			else
+				cr_bit(txsta, TX9D);
+	  	#endif
+		txreg = nChar;
+02FD  1683  	BSF STATUS, RP0
+02FE  0849  	MOVF FC_CAL_UAR_00073_arg_nChar, W
+02FF  1283  	BCF STATUS, RP0
+0300  0099  	MOVWF gbl_txreg
+
+	#endif
+
+	#if (MX_UART_CHANNEL_X == 2)
+		while (ts_bit(pir3, TX2IF) == 0);
+
+		#if (MX_UART_DBITS_X == 9)
+			if (test_bit(nChar, 8))
+				st_bit(MX_UART2_TXSTA, TX9D);
+			else
+				cr_bit(MX_UART2_TXSTA, TX9D);
+		#endif
+		MX_UART2_TXREG = nChar;
+	#endif
+}
+0301  0008  	RETURN
+
+
+
+CALFUNCTION(MX_SINT16, FC_CAL_UART_Receive_, (MX_UINT8 nTimeout))
+
+{
+  #if (MX_UART_RETURN_X == 1)
+	MX_UINT16 retVal = 512;
+  #else
+  	MX_UINT8 retVal = 255;
+0041  30FF  	MOVLW 0xFF
+0042  00EA  	MOVWF FC_CAL_UAR_00074_1_retVal
+
+  #endif
+
+	MX_UINT8 delay1 = 0;
+0043  01EB  	CLRF FC_CAL_UAR_00074_1_delay1
+
+	MX_UINT8 regcheck = 0;
+0044  01EC  	CLRF FC_CAL_UAR_00074_1_regcheck
+
+	MX_UINT8 bWaitForever = 0;
+0045  01ED  	CLRF FC_CAL_UAR_00074_1_bWaitForever
+
+	MX_UINT8 rxStatus = UART_STATUS_LOOP;
+0046  01EE  	CLRF FC_CAL_UAR_00074_1_rxStatus
+
+
+  #if (MX_UART_CHANNEL_X == 0)
+  	MX_UINT8 idx;
+  #else
+  	MX_UINT8 dummy = 0;
+0047  01EF  	CLRF FC_CAL_UAR_00074_1_dummy
+
+  #endif
+
+	if (nTimeout == 255)
+0048  0A69  	INCF FC_CAL_UAR_00074_arg_nTimeout, W
+0049  1D03  	BTFSS STATUS,Z
+004A  284D  	GOTO	label4
+004D        label4
+
+		bWaitForever = 1;
+004B  3001  	MOVLW 0x01
+004C  00ED  	MOVWF FC_CAL_UAR_00074_1_bWaitForever
+
+
+	#if (MX_UART_FLOWEN_X == 1)
+		FC_CAL_Bit_Low (MX_UART_RTS_PORT_X, MX_UART_RTS_PIN_X);			// Ready to accept data
+	#endif
+
+	while (rxStatus == UART_STATUS_LOOP)
+004D  08EE  	MOVF FC_CAL_UAR_00074_1_rxStatus, F
+004E  1D03  	BTFSS STATUS,Z
+004F  2871  	GOTO	label7
+0070  284D  	GOTO	label4
+0071        label7
+
+	{
+		if (bWaitForever == 0)
+0050  08ED  	MOVF FC_CAL_UAR_00074_1_bWaitForever, F
+0051  1D03  	BTFSS STATUS,Z
+0052  2866  	GOTO	label6
+
+		{
+			if (nTimeout == 0)							//don't wait forever, so do timeout thing...
+0053  08E9  	MOVF FC_CAL_UAR_00074_arg_nTimeout, F
+0054  1D03  	BTFSS STATUS,Z
+0055  2859  	GOTO	label5
+0059        label5
+
+			{
+				rxStatus = UART_STATUS_TIMEOUT;
+0056  3001  	MOVLW 0x01
+0057  00EE  	MOVWF FC_CAL_UAR_00074_1_rxStatus
+
+			}
+			else
+0058  2866  	GOTO	label6
+
+			{
+				delay_us(10);
+0059  300A  	MOVLW 0x0A
+005A  00F2  	MOVWF delay_us_00000_arg_del
+005B  2010  	CALL delay_us_00000
+
+				delay1 = delay1 + 1;
+005C  0A6B  	INCF FC_CAL_UAR_00074_1_delay1, W
+005D  00EB  	MOVWF FC_CAL_UAR_00074_1_delay1
+
+				if(delay1 == 100)
+005E  086B  	MOVF FC_CAL_UAR_00074_1_delay1, W
+005F  3A64  	XORLW 0x64
+0060  1D03  	BTFSS STATUS,Z
+0061  2866  	GOTO	label6
+0066        label6
+
+				{
+					nTimeout = nTimeout - 1;
+0062  0369  	DECF FC_CAL_UAR_00074_arg_nTimeout, W
+0063  00E9  	MOVWF FC_CAL_UAR_00074_arg_nTimeout
+
+					MX_CLEAR_WATCHDOG;
+0064  0064  	CLRWDT
+
+					delay1 = 0;
+0065  01EB  	CLRF FC_CAL_UAR_00074_1_delay1
+
+				}
+			}
+		}
+
+		#if (MX_UART_CHANNEL_X == 0)
+			regcheck = FC_CAL_Bit_In(MX_UART_RX_PORT_1, MX_UART_RX_PIN_1);	//Test for start bit
+			if (regcheck == 0)
+				rxStatus = UART_STATUS_RXBYTE;
+		#endif
+
+		#if (MX_UART_CHANNEL_X == 1)
+			regcheck = ts_bit(pir1, RCIF);
+0066  3020  	MOVLW 0x20
+0067  1283  	BCF STATUS, RP0
+0068  050C  	ANDWF gbl_pir1, W
+0069  1683  	BSF STATUS, RP0
+006A  00EC  	MOVWF FC_CAL_UAR_00074_1_regcheck
+
+			if (regcheck != 0)
+006B  08EC  	MOVF FC_CAL_UAR_00074_1_regcheck, F
+006C  1903  	BTFSC STATUS,Z
+006D  284D  	GOTO	label4
+
+				rxStatus = UART_STATUS_RXBYTE;
+006E  3002  	MOVLW 0x02
+006F  00EE  	MOVWF FC_CAL_UAR_00074_1_rxStatus
+
+		#endif
+
+		#if (MX_UART_CHANNEL_X == 2)
+			regcheck = ts_bit(MX_UART2_PIR, RC2IF);
+			if (regcheck != 0)
+				rxStatus = UART_STATUS_RXBYTE;
+		#endif
+
+	}
+
+	if (rxStatus == UART_STATUS_RXBYTE)
+0071  086E  	MOVF FC_CAL_UAR_00074_1_rxStatus, W
+0072  3A02  	XORLW 0x02
+0073  1D03  	BTFSS STATUS,Z
+0074  2894  	GOTO	label10
+
+	{
+		#if (MX_UART_CHANNEL_X == 0)
+
+			retVal = 0;
+			UART_Delay_CAL();
+
+			for (idx = 0; idx < MX_UART_DBITS_X; idx++)
+			{
+				if (FC_CAL_Bit_In(MX_UART_RX_PORT_X, MX_UART_RX_PIN_X))
+					retVal = retVal | (0x01 << idx);
+
+				UART_Delay_CAL();
+			}
+		#endif
+
+		#if (MX_UART_CHANNEL_X == 1)
+			regcheck = ts_bit(rcsta, FERR);
+0075  3004  	MOVLW 0x04
+0076  1283  	BCF STATUS, RP0
+0077  0518  	ANDWF gbl_rcsta, W
+0078  1683  	BSF STATUS, RP0
+0079  00EC  	MOVWF FC_CAL_UAR_00074_1_regcheck
+
+			if (regcheck != 0)
+007A  08EC  	MOVF FC_CAL_UAR_00074_1_regcheck, F
+007B  1903  	BTFSC STATUS,Z
+007C  2882  	GOTO	label8
+0082        label8
+
+			{
+				dummy = rcreg;						//need to read the rcreg to clear FERR
+007D  1283  	BCF STATUS, RP0
+007E  081A  	MOVF gbl_rcreg, W
+007F  1683  	BSF STATUS, RP0
+0080  00EF  	MOVWF FC_CAL_UAR_00074_1_dummy
+
+				#if (MX_UART_RETURN_X == 1)
+					retVal = 0x400;					//Framing Error Flag
+				#endif
+			}
+			else
+0081  2894  	GOTO	label10
+
+			{
+				regcheck = ts_bit(rcsta, OERR);
+0082  3002  	MOVLW 0x02
+0083  1283  	BCF STATUS, RP0
+0084  0518  	ANDWF gbl_rcsta, W
+0085  1683  	BSF STATUS, RP0
+0086  00EC  	MOVWF FC_CAL_UAR_00074_1_regcheck
+
+				if (regcheck != 0)
+0087  08EC  	MOVF FC_CAL_UAR_00074_1_regcheck, F
+0088  1903  	BTFSC STATUS,Z
+0089  288E  	GOTO	label9
+008E        label9
+
+				{
+					cr_bit(rcsta, CREN);			//Reset receiver to clear error
+008A  1283  	BCF STATUS, RP0
+008B  1218  	BCF gbl_rcsta,4
+
+					st_bit(rcsta, CREN);
+008C  1618  	BSF gbl_rcsta,4
+
+
+					#if (MX_UART_RETURN_X == 1)
+						retVal = 0x800;				//Overrun Error Flag
+					#endif
+				}
+				else
+008D  2894  	GOTO	label10
+0094        label10
+
+				{
+					retVal = 0;
+008E  01EA  	CLRF FC_CAL_UAR_00074_1_retVal
+
+
+					#if (MX_UART_DBITS_X == 9)
+						if(ts_bit(rcsta, RX9D))
+							retVal = 0x100;
+					#endif
+
+					retVal = retVal | rcreg; 			//no error, so rx byte is valid
+008F  1283  	BCF STATUS, RP0
+0090  081A  	MOVF gbl_rcreg, W
+0091  1683  	BSF STATUS, RP0
+0092  046A  	IORWF FC_CAL_UAR_00074_1_retVal, W
+0093  00EA  	MOVWF FC_CAL_UAR_00074_1_retVal
+
+				}
+			}
+		#endif
+
+		#if (MX_UART_CHANNEL_X == 2)
+			regcheck = ts_bit(MX_UART2_RCSTA, FERR);
+			if (regcheck != 0)
+			{
+				dummy = MX_UART2_RCREG;			//need to read the rcreg to clear FERR
+				#if (MX_UART_RETURN_X == 1)
+					retVal = 0x400;					//Framing Error Flag
+				#endif
+			}
+			else
+			{
+				regcheck = ts_bit(MX_UART2_RCSTA, OERR);
+				if (regcheck != 0)
+				{
+					cr_bit(MX_UART2_RCSTA, CREN);	//Reset receiver to clear error
+					st_bit(MX_UART2_RCSTA, CREN);
+					#if (MX_UART_RETURN_X == 1)
+						retVal = 0x800;				//Overrun Error Flag
+					#endif
+				}
+				else
+				{
+					retVal = 0;
+
+					#if (MX_UART_DBITS_X == 9)
+						if(ts_bit(MX_UART2_RCSTA, RX9D))
+							retVal = 0x100;
+					#endif
+
+					retVal = retVal | MX_UART2_RCREG; 			//no error, so rx byte is valid
+				}
+			}
+
+		#endif
+
+		#if (MX_UART_ECHO_X == 1)
+			UART_Send(retVal);
+		#endif
+	}
+
+	#if (MX_UART_FLOWEN_X == 1)
+		FC_CAL_Bit_High(MX_UART_RTS_PORT_X, MX_UART_RTS_PIN_X);		//not ready to accept data
+	#endif
+
+	return (retVal);
+0094  1683  	BSF STATUS, RP0
+0095  086A  	MOVF FC_CAL_UAR_00074_1_retVal, W
+0096  00F0  	MOVWF CompTempVarRet2259
+0097  01F1  	CLRF CompTempVarRet2259+D'1'
+
+}
+0098  0008  	RETURN
+
+
+
+CALFUNCTION(void, FC_CAL_UART_Delay_, (void))
+{
+  #if (MX_UART_CHANNEL_X == 0)
+
+	MX_UINT16 delay = MX_SOFT_BAUD_X;
+
+	while (delay > 255)
+	{
+		delay_us(255);
+		delay = delay - 255;
+		MX_CLEAR_WATCHDOG;
+	}
+	delay_us(delay);
+	MX_CLEAR_WATCHDOG;
+
+  #endif
+}
+
+
+CALFUNCTION(void, FC_CAL_UART_Update_Baud_, (MX_UINT8 new_baud))
+{
+	//Baud Rates - Function compatible with hardware mode only
+	/*
+	0 - 1200
+	1 - 2400
+	2 - 4800
+	3 - 9600
+	4 - 19200
+	5 - 38400
+	6 - 57600
+	7 - 115200
+	*/
+
+	MX_UINT8 baudrate, baudmode;
+
+	if (new_baud > 7)
+		return;
+
+	if (new_baud == 0)
+	{
+		baudrate = MX_HARD_BAUD_1200;
+		baudmode = MX_HARD_SLOW_1200;
+	}
+	else if (new_baud == 1)
+	{
+		baudrate = MX_HARD_BAUD_2400;
+		baudmode = MX_HARD_SLOW_2400;
+	}
+	else if (new_baud == 2)
+	{
+		baudrate = MX_HARD_BAUD_4800;
+		baudmode = MX_HARD_SLOW_4800;
+	}
+	else if (new_baud == 3)
+	{
+		baudrate = MX_HARD_BAUD_9600;
+		baudmode = MX_HARD_SLOW_9600;
+	}
+	else if (new_baud == 4)
+	{
+		baudrate = MX_HARD_BAUD_19200;
+		baudmode = MX_HARD_SLOW_19200;
+	}
+	else if (new_baud == 5)
+	{
+		baudrate = MX_HARD_BAUD_38400;
+		baudmode = MX_HARD_SLOW_38400;
+	}
+	else if (new_baud == 6)
+	{
+		baudrate = MX_HARD_BAUD_57600;
+		baudmode = MX_HARD_SLOW_57600;
+	}
+	else if (new_baud == 7)
+	{
+		baudrate = MX_HARD_BAUD_115200;
+		baudmode = MX_HARD_SLOW_115200;
+	}
+
+	UART_Uninit();
+
+	#if (MX_UART_CHANNEL_X == 1)
+
+	    if (baudmode == 1)
+			cr_bit(txsta, BRGH);					//Low Speed
+	    else
+			st_bit(txsta, BRGH);					//High Speed
+
+		spbrg = baudrate;   						// set the baud rate
+		rcsta = 0;                    				// 8-bit, disabled
+
+		#if(MX_UART_DBITS_X == 9)
+			st_bit(txsta, TX9);   					// 9-bit TX
+			st_bit(rcsta, RX9);                    	// 9-bit RX
+		#endif
+
+		st_bit(rcsta, SPEN);         				// turn on serial interface
+		st_bit(txsta, TXEN);
+		st_bit(rcsta, CREN);
+
+		#if (MX_UART_INT_X == 1)
+			MX_UART_INT_CH1_EN;
+			st_bit(intcon, PEIE);
+			st_bit(intcon, GIE);
+		#else
+			cr_bit (pie1, RCIE);
+		#endif
+	#endif
+
+	#if (MX_UART_CHANNEL_X == 2)
+
+	  	if (baudmode == 1)
+			cr_bit(MX_UART2_TXSTA, BRGH);			//Low Speed
+	  	else
+			st_bit(MX_UART2_TXSTA, BRGH);			//High Speed
+
+		spbrg2 = baudrate;   						// set the baud rate
+		MX_UART2_RCSTA = 0;                    		// 8-bit, disabled
+
+		#if(MX_UART_DBITS_X == 9)
+			st_bit(MX_UART2_TXSTA, TX9);   			// 9-bit TX
+			st_bit(MX_UART2_RCSTA, RX9);            // 9-bit RX
+		#endif
+
+		st_bit(MX_UART2_RCSTA, SPEN);         		// turn on serial interface
+		st_bit(MX_UART2_TXSTA, TXEN);
+		st_bit(MX_UART2_RCSTA, CREN);
+
+		#if (MX_UART_INT_X == 1)
+			MX_UART_INT_CH2_EN;
+			st_bit(intcon, PEIE);
+			st_bit(intcon, GIE);
+		#else
+			cr_bit (MX_UART2_PIE, RC2IE);
+		#endif
+	#endif
+
+	#if (MX_UART_FLOWEN_X == 1)						//Flowcontrol enabled?
+		FC_CAL_Bit_In_DDR (MX_UART_CTS_PORT_X, MX_UART_CTS_TRIS_X, MX_UART_CTS_PIN_X);	// CTS pin is a input
+		FC_CAL_Bit_High_DDR (MX_UART_RTS_PORT_X, MX_UART_RTS_TRIS_X, MX_UART_RTS_PIN_X);	// RTS not ready to accept data
+	#endif
+
+}
+
+////////////////////////////////////////
+// Code with no source :-)
+////////////////////////////////////////
+0000  2E6B  	GOTO	_startup
+
+0004  00FF  	MOVWF Int1Context
+0005  0E03  	SWAPF STATUS, W
+0006  1283  	BCF STATUS, RP0
+0007  1303  	BCF STATUS, RP1
+0008  00F4  	MOVWF Int1BContext
+0009  0E0A  	SWAPF PCLATH, W
+000A  00F5  	MOVWF Int1BContext+D'1'
+000B  0E04  	SWAPF FSR, W
+000C  00F6  	MOVWF Int1BContext+D'2'
+000D  118A  	BCF PCLATH,3
+000E  120A  	BCF PCLATH,4
+000F  2ECB  	GOTO	interrupt
+0010        delay_us_00000
+0010        ; { delay_us ; function begin
+0010        label1
+0010  0000  	NOP
+0011  0000  	NOP
+0012  0BF2  	DECFSZ delay_us_00000_arg_del, F
+0013  2810  	GOTO	label1
+0014  0008  	RETURN
+0015        ; } delay_us function end
+
+0015        delay_ms_00000
+0015        ; { delay_ms ; function begin
+0015  08C5  	MOVF delay_ms_00000_arg_del, F
+0016  1D03  	BTFSS STATUS,Z
+0017  2819  	GOTO	label2
+0018  0008  	RETURN
+0019        label2
+0019  30F9  	MOVLW 0xF9
+001A        label3
+001A  0000  	NOP
+001B  0000  	NOP
+001C  0000  	NOP
+001D  0000  	NOP
+001E  0000  	NOP
+001F  0000  	NOP
+0020  0000  	NOP
+0021  0000  	NOP
+0022  0000  	NOP
+0023  0000  	NOP
+0024  0000  	NOP
+0025  0000  	NOP
+0026  0000  	NOP
+0027  0000  	NOP
+0028  0000  	NOP
+0029  0000  	NOP
+002A  3EFF  	ADDLW 0xFF
+002B  1D03  	BTFSS STATUS,Z
+002C  281A  	GOTO	label3
+002D  0000  	NOP
+002E  0000  	NOP
+002F  0000  	NOP
+0030  0000  	NOP
+0031  0000  	NOP
+0032  0000  	NOP
+0033  0000  	NOP
+0034  0000  	NOP
+0035  0000  	NOP
+0036  0000  	NOP
+0037  0000  	NOP
+0038  0000  	NOP
+0039  0000  	NOP
+003A  0000  	NOP
+003B  0000  	NOP
+003C  0000  	NOP
+003D  0000  	NOP
+003E  0BC5  	DECFSZ delay_ms_00000_arg_del, F
+003F  2819  	GOTO	label2
+0040  0008  	RETURN
+0041        ; } delay_ms function end
+
+
+066B        _startup
+066B  30D5  	MOVLW 0xD5
+066C  1283  	BCF STATUS, RP0
+066D  1303  	BCF STATUS, RP1
+066E  00E0  	MOVWF gbl_14_LSR
+066F  30C4  	MOVLW 0xC4
+0670  00E1  	MOVWF gbl_14_LSR+D'1'
+0671  30BB  	MOVLW 0xBB
+0672  00E2  	MOVWF gbl_14_LSR+D'2'
+0673  30DC  	MOVLW 0xDC
+0674  00E3  	MOVWF gbl_14_LSR+D'3'
+0675  01E4  	CLRF gbl_15_gbl_aSig
+0676  01E5  	CLRF gbl_15_gbl_aSig+D'1'
+0677  01E6  	CLRF gbl_15_gbl_aSig+D'2'
+0678  01E7  	CLRF gbl_15_gbl_aSig+D'3'
+0679  01E8  	CLRF gbl_15_gbl_bSig
+067A  01E9  	CLRF gbl_15_gbl_bSig+D'1'
+067B  01EA  	CLRF gbl_15_gbl_bSig+D'2'
+067C  01EB  	CLRF gbl_15_gbl_bSig+D'3'
+067D  01EC  	CLRF gbl_15_gbl_zSig
+067E  01ED  	CLRF gbl_15_gbl_zSig+D'1'
+067F  01EE  	CLRF gbl_15_gbl_zSig+D'2'
+0680  01EF  	CLRF gbl_15_gbl_zSig+D'3'
+0681  01FC  	CLRF gbl_15_gbl_aExp
+0682  01FD  	CLRF gbl_15_gbl_bExp
+0683  01F7  	CLRF gbl_15_gbl_zExp
+0684  01F8  	CLRF gbl_15_gbl_zExp+D'1'
+0685  01FE  	CLRF gbl_15_gbl_aSign
+0686  1683  	BSF STATUS, RP0
+0687  01A0  	CLRF gbl_15_gbl_bSign
+0688  01A1  	CLRF gbl_15_gbl_zSign
+0689  01A2  	CLRF gbl_15_gbl_zSigZero
+068A  1283  	BCF STATUS, RP0
+068B  01F0  	CLRF gbl_15_gbl_ret
+068C  01F1  	CLRF gbl_15_gbl_ret+D'1'
+068D  01F2  	CLRF gbl_15_gbl_ret+D'2'
+068E  01F3  	CLRF gbl_15_gbl_ret+D'3'
+068F  01FA  	CLRF gbl_float_rounding_mode
+0690  01FB  	CLRF gbl_float_exception_flags
+0691  01F9  	CLRF gbl_float_detect_tininess
+
+06C8  118A  	BCF PCLATH,3
+06C9  120A  	BCF PCLATH,4
+06CA  2D77  	GOTO	main
+
+2007  3F3A  	DW 0x3F3A

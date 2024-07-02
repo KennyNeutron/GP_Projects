@@ -1,0 +1,1364 @@
+MPASM  5.51                   HUB12_DRAM2.ASM   4-26-2019  18:10:15         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 ;**********************************************************************
+                      00002 ;   This file is a basic code template for assembly code generation   *
+                      00003 ;   on the PIC16F690. This file contains the basic code               *
+                      00004 ;   building blocks to build upon.                                    *  
+                      00005 ;                                                                     *
+                      00006 ;   Refer to the MPASM User's Guide for additional information on     *
+                      00007 ;   features of the assembler (Document DS33014).                     *
+                      00008 ;                                                                     *
+                      00009 ;   Refer to the respective PIC data sheet for additional             *
+                      00010 ;   information on the instruction set.                               *
+                      00011 ;                                                                     *
+                      00012 ;**********************************************************************
+                      00013 ;                                                                     *
+                      00014 ;    Filename:      xxx.asm                                           *
+                      00015 ;    Date:                                                            *
+                      00016 ;    File Version:                                                    *
+                      00017 ;                                                                     *
+                      00018 ;    Author:                                                          *
+                      00019 ;    Company:                                                         *
+                      00020 ;                                                                     * 
+                      00021 ;                                                                     *
+                      00022 ;**********************************************************************
+                      00023 ;                                                                     *
+                      00024 ;    Files Required: P16F690.INC                                      *
+                      00025 ;                                                                     *
+                      00026 ;**********************************************************************
+                      00027 ;                                                                     *
+                      00028 ;    Notes:                                                           *
+                      00029 ;                                                                     *
+                      00030 ;**********************************************************************
+                      00031 
+                      00032 
+                      00033         list            p=16f690                ; list directive to define processor
+                      00034         #include        <P16F690.inc>           ; processor specific variable definitions
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC16F690 processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2013 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+                      00756         LIST
+                      00035         
+2007   30C2           00036         __CONFIG    _CP_OFF & _CPD_OFF & _BOR_OFF & _PWRTE_ON & _WDT_OFF & _HS_OSC & _MCLRE_OFF & _FCMEN
+                            _OFF & _IESO_OFF
+                      00037 
+                      00038 
+                      00039 ; '__CONFIG' directive is used to embed configuration data within .asm file.
+                      00040 ; The labels following the directive are located in the respective .inc file.
+                      00041 ; See respective data sheet for additional information on configuration word.
+                      00042 
+                      00043 
+MPASM  5.51                   HUB12_DRAM2.ASM   4-26-2019  18:10:15         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00044 
+                      00045 
+                      00046 
+                      00047 
+                      00048 ;***** VARIABLE DEFINITIONS
+  0000007D            00049 w_temp          EQU     0x7D                    ; variable used for context saving
+  0000007E            00050 status_temp     EQU     0x7E                    ; variable used for context saving
+  0000007F            00051 pclath_temp     EQU     0x7F                    ; variable used for context saving
+                      00052         
+                      00053 
+                      00054         ;#DEFINE C0_ON          BSF PORTC,      0       PORTC0=====>HI
+                      00055         ;#DEFINE C0_OFF         BCF PORTC,      0       PORTC0=====>LO
+                      00056 
+                      00057         #DEFINE A_ON            BSF     PORTC,  0
+                      00058         #DEFINE A_OFF           BCF     PORTC,  0
+                      00059         
+                      00060         #DEFINE B_ON            BSF     PORTC,  1
+                      00061         #DEFINE B_OFF           BCF     PORTC,  1
+                      00062 
+                      00063         #DEFINE DAT_ON          BSF     PORTC,  2
+                      00064         #DEFINE DAT_OFF         BCF     PORTC,  2
+                      00065 
+                      00066         #DEFINE CLK_ON          BSF     PORTC,  7
+                      00067         #DEFINE CLK_OFF         BCF     PORTC,  7
+                      00068         
+                      00069         #DEFINE REG_ON          BSF     PORTC,  4
+                      00070         #DEFINE REG_OFF         BCF     PORTC,  4
+                      00071         
+                      00072         #DEFINE OE_ON           BSF     PORTC,  5
+                      00073         #DEFINE OE_OFF          BCF     PORTC,  5
+                      00074         
+                      00075         CBLOCK 0x20
+                      00076 
+  00000020            00077                         DELAYUS, DELAYMS, DELAYS, MILSEC, SEC   ;DELAY VARIABLES
+                      00078                         ;=======================================================
+                      00079                         
+  00000025            00080                         COUNT0, COUNT1, COUNT2, COUNT3
+                      00081                         
+  00000029            00082                         VAR0
+  0000002A            00083                         SAMBIT, CARR
+  0000002C            00084                         DRAM : .64, POINTER
+                      00085         ENDC
+                      00086 ;********************************************************************** 
+0000                  00087         ORG             0x000                   ; processor reset vector
+                      00088 
+0000   2810           00089 .       goto    INIT             ; go to beginning of program
+                      00090 
+0004                  00091         ORG             0x004                   ; interrupt vector location
+0004   00FD           00092         movwf           w_temp                  ; save off current W register contents
+0005   0803           00093         movf            STATUS,w                ; move status register into W register
+0006   00FE           00094         movwf           status_temp             ; save off contents of STATUS register
+0007   080A           00095         movf            PCLATH,w                ; move pclath register into W register
+0008   00FF           00096         movwf           pclath_temp             ; save off contents of PCLATH register
+MPASM  5.51                   HUB12_DRAM2.ASM   4-26-2019  18:10:15         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00097 
+                      00098 
+                      00099 ; isr code can go here or be located as a call subroutine elsewhere
+                      00100 
+0009   087F           00101         movf            pclath_temp,w           ; retrieve copy of PCLATH registerz`
+000A   008A           00102         movwf           PCLATH                  ; restore pre-isr PCLATH register contents      
+000B   087E           00103         movf            status_temp,w           ; retrieve copy of STATUS register
+000C   0083           00104         movwf           STATUS                  ; restore pre-isr STATUS register contents
+000D   0EFD           00105         swapf           w_temp,f
+000E   0E7D           00106         swapf           w_temp,w                ; restore pre-isr W register contents
+000F   0009           00107         retfie                                  ; return from interrupt
+                      00108 
+                      00109 ;DECLARE PORTC AS OUTPUT HERE:
+0010                  00110 INIT
+Warning[205]: Found directive in column 1. (BANKSEL)
+0010   1283 1703      00111 BANKSEL ANSEL
+Warning[203]: Found opcode in column 1. (MOVLW)
+0012   3000           00112 MOVLW   B'00000000'
+Warning[203]: Found opcode in column 1. (MOVWF)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0013   009E           00113 MOVWF   ANSEL
+Warning[203]: Found opcode in column 1. (MOVWF)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0014   009F           00114 MOVWF   ANSELH
+Warning[203]: Found opcode in column 1. (MOVLW)
+0015   3000           00115 MOVLW   B'00000000'
+Warning[203]: Found opcode in column 1. (TRIS)
+Warning[224]: Use of this instruction is not recommended.
+0016   0067           00116 TRIS    PORTC
+                      00117  
+                      00118 
+Warning[205]: Found directive in column 1. (BANKSEL)
+0017   1283 1303      00119 BANKSEL PORTA
+Warning[203]: Found opcode in column 1. (CALL)
+0019   2117           00120 CALL    CLRAM
+                      00121 
+Warning[203]: Found opcode in column 1. (GOTO)
+001A   281B           00122 GOTO    MAIN
+                      00123 
+                      00124 
+                      00125 
+                      00126 ;#######################        MAIN    ###########################
+001B                  00127 MAIN
+                      00128 
+                      00129 
+001B   302C           00130         MOVLW           .44
+001C   0084           00131         MOVWF           FSR
+001D   3006           00132         MOVLW           B'00000110'
+001E   0080           00133         MOVWF           INDF
+001F   3000           00134         MOVLW           INDF
+                      00135         
+0020   303C           00136         MOVLW           .16     +       .44
+0021   0084           00137         MOVWF           FSR
+MPASM  5.51                   HUB12_DRAM2.ASM   4-26-2019  18:10:15         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0022   3006           00138         MOVLW           B'00000110'
+0023   0080           00139         MOVWF           INDF
+0024   3000           00140         MOVLW           INDF
+                      00141 
+0025   304C           00142         MOVLW           .32     +       .44
+0026   0084           00143         MOVWF           FSR
+0027   303E           00144         MOVLW           B'00111110'
+0028   0080           00145         MOVWF           INDF
+0029   3000           00146         MOVLW           INDF
+                      00147         
+002A   305C           00148         MOVLW           .48     +       .44
+002B   0084           00149         MOVWF           FSR
+002C   307E           00150         MOVLW           B'01111110'
+002D   0080           00151         MOVWF           INDF
+002E   3000           00152         MOVLW           INDF
+                      00153 
+002F   302D           00154         MOVLW           .1      +       .44
+0030   0084           00155         MOVWF           FSR
+0031   3046           00156         MOVLW           B'01000110'
+0032   0080           00157         MOVWF           INDF
+0033   3000           00158         MOVLW           INDF
+                      00159 
+0034   303D           00160         MOVLW           .17     +       .44
+0035   0084           00161         MOVWF           FSR
+0036   3046           00162         MOVLW           B'01000110'
+0037   0080           00163         MOVWF           INDF
+0038   3000           00164         MOVLW           INDF
+                      00165 
+0039   304D           00166         MOVLW           .33 +   .44
+003A   0084           00167         MOVWF           FSR
+003B   307E           00168         MOVLW           B'01111110'
+003C   0080           00169         MOVWF           INDF
+003D   3000           00170         MOVLW           INDF
+                      00171 
+003E   305D           00172         MOVLW           .49     +       .44
+003F   0084           00173         MOVWF           FSR
+0040   303E           00174         MOVLW           B'00111110'
+0041   0080           00175         MOVWF           INDF
+0042   3000           00176         MOVLW           INDF
+                      00177 
+0043   302E           00178         MOVLW           .2      +       .44
+0044   0084           00179         MOVWF           FSR
+0045   303C           00180         MOVLW           B'00111100'
+0046   0080           00181         MOVWF           INDF
+0047   3000           00182         MOVLW           INDF
+                      00183 
+0048   303E           00184         MOVLW           .18     +       .44
+0049   0084           00185         MOVWF           FSR
+004A   307E           00186         MOVLW           B'01111110'
+004B   0080           00187         MOVWF           INDF
+004C   3000           00188         MOVLW           INDF
+                      00189 
+004D   304E           00190         MOVLW           .34     +       .44
+MPASM  5.51                   HUB12_DRAM2.ASM   4-26-2019  18:10:15         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+004E   0084           00191         MOVWF           FSR
+004F   3066           00192         MOVLW           B'01100110'
+0050   0080           00193         MOVWF           INDF
+0051   3000           00194         MOVLW           INDF
+                      00195 
+0052   305E           00196         MOVLW           .50     +       .44
+0053   0084           00197         MOVWF           FSR
+0054   3066           00198         MOVLW           B'01100110'
+0055   0080           00199         MOVWF           INDF
+0056   3000           00200         MOVLW           INDF
+                      00201 
+0057   302F           00202         MOVLW           .3      +       .44
+0058   0084           00203         MOVWF           FSR
+0059   3036           00204         MOVLW           B'00110110'
+005A   0080           00205         MOVWF           INDF
+005B   3000           00206         MOVLW           INDF
+                      00207 
+005C   303F           00208         MOVLW           .19     +       .44
+005D   0084           00209         MOVWF           FSR
+005E   3006           00210         MOVLW           B'00000110'
+005F   0080           00211         MOVWF           INDF
+0060   3000           00212         MOVLW           INDF
+                      00213 
+0061   304F           00214         MOVLW           .35     +       .44
+0062   0084           00215         MOVWF           FSR
+0063   3066           00216         MOVLW           B'01100110'
+0064   0080           00217         MOVWF           INDF
+0065   3000           00218         MOVLW           INDF
+                      00219 
+0066   305F           00220         MOVLW           .51     +       .44
+0067   0084           00221         MOVWF           FSR
+0068   303C           00222         MOVLW           B'00111100'
+0069   0080           00223         MOVWF           INDF
+006A   3000           00224         MOVLW           INDF
+                      00225 
+006B   3030           00226         MOVLW           .4      +       .44
+006C   0084           00227         MOVWF           FSR
+006D   307C           00228         MOVLW           B'01111100'
+006E   0080           00229         MOVWF           INDF
+006F   3000           00230         MOVLW           INDF
+                      00231 
+                      00232 
+                      00233 
+0070   3061           00234         MOVLW           .53     +       .44
+0071   0084           00235         MOVWF           FSR
+0072   307C           00236         MOVLW           B'01111100'
+0073   0080           00237         MOVWF           INDF
+0074   3000           00238         MOVLW           INDF
+                      00239 
+0075   3032           00240         MOVLW           .6      +       .44
+0076   0084           00241         MOVWF           FSR
+0077   307C           00242         MOVLW           B'01111100'
+0078   0080           00243         MOVWF           INDF
+MPASM  5.51                   HUB12_DRAM2.ASM   4-26-2019  18:10:15         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0079   3000           00244         MOVLW           INDF
+                      00245 
+007A   3063           00246         MOVLW           .55     +       .44
+007B   0084           00247         MOVWF           FSR
+007C   307C           00248         MOVLW           B'01111100'
+007D   0080           00249         MOVWF           INDF
+007E   3000           00250         MOVLW           INDF
+                      00251         
+007F   3040           00252         MOVLW           .20 +   .44
+0080   0084           00253         MOVWF           FSR
+0081   307E           00254         MOVLW           B'01111110'
+0082   0080           00255         MOVWF           INDF
+0083   3000           00256         MOVLW           INDF
+                      00257 
+0084   3051           00258         MOVLW           .37 +   .44
+0085   0084           00259         MOVWF           FSR
+0086   307E           00260         MOVLW           B'01111110'
+0087   0080           00261         MOVWF           INDF
+0088   3000           00262         MOVLW           INDF
+                      00263 
+0089   3042           00264         MOVLW           .22 +   .44
+008A   0084           00265         MOVWF           FSR
+008B   307E           00266         MOVLW           B'01111110'
+008C   0080           00267         MOVWF           INDF
+008D   3000           00268         MOVLW           INDF
+                      00269 
+008E   3053           00270         MOVLW           .39 +   .44
+008F   0084           00271         MOVWF           FSR
+0090   307E           00272         MOVLW           B'01111110'
+0091   0080           00273         MOVWF           INDF
+0092   3000           00274         MOVLW           INDF
+                      00275 
+0093   3050           00276         MOVLW           .36     +       .44
+0094   0084           00277         MOVWF           FSR
+0095   3006           00278         MOVLW           B'00000110'
+0096   0080           00279         MOVWF           INDF
+0097   3000           00280         MOVLW           INDF
+                      00281         
+0098   3041           00282         MOVLW           .21     +       .44
+0099   0084           00283         MOVWF           FSR
+009A   3006           00284         MOVLW           B'00000110'
+009B   0080           00285         MOVWF           INDF
+009C   3000           00286         MOVLW           INDF
+                      00287 
+009D   3052           00288         MOVLW           .38     +       .44
+009E   0084           00289         MOVWF           FSR
+009F   3006           00290         MOVLW           B'00000110'
+00A0   0080           00291         MOVWF           INDF
+00A1   3000           00292         MOVLW           INDF
+                      00293 
+00A2   3043           00294         MOVLW           .23     +       .44
+00A3   0084           00295         MOVWF           FSR
+00A4   3006           00296         MOVLW           B'00000110'
+MPASM  5.51                   HUB12_DRAM2.ASM   4-26-2019  18:10:15         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00A5   0080           00297         MOVWF           INDF
+00A6   3000           00298         MOVLW           INDF
+                      00299 
+00A7   3031           00300         MOVLW           .5      +       .44
+00A8   0084           00301         MOVWF           FSR
+00A9   301E           00302         MOVLW           B'00011110'
+00AA   0080           00303         MOVWF           INDF
+00AB   3000           00304         MOVLW           INDF
+                      00305         
+00AC   3033           00306         MOVLW           .7      +       .44
+00AD   0084           00307         MOVWF           FSR
+00AE   301E           00308         MOVLW           B'00011110'
+00AF   0080           00309         MOVWF           INDF
+00B0   3000           00310         MOVLW           INDF
+                      00311         
+00B1   3060           00312         MOVLW           .52     +       .44
+00B2   0084           00313         MOVWF           FSR
+00B3   301E           00314         MOVLW           B'00011110'
+00B4   0080           00315         MOVWF           INDF
+00B5   3000           00316         MOVLW           INDF
+                      00317 
+00B6   3062           00318         MOVLW           .54     +       .44
+00B7   0084           00319         MOVWF           FSR
+00B8   301E           00320         MOVLW           B'00011110'
+00B9   0080           00321         MOVWF           INDF
+00BA   3000           00322         MOVLW           INDF
+                      00323 
+00BB   3065           00324         MOVLW           .57     +       .44
+00BC   0084           00325         MOVWF           FSR
+00BD   303E           00326         MOVLW           B'00111110'
+00BE   0080           00327         MOVWF           INDF
+00BF   3000           00328         MOVLW           INDF
+                      00329         
+00C0   3067           00330         MOVLW           .59     +       .44
+00C1   0084           00331         MOVWF           FSR
+00C2   303E           00332         MOVLW           B'00111110'
+00C3   0080           00333         MOVWF           INDF
+00C4   3000           00334         MOVLW           INDF
+                      00335 
+00C5   3064           00336         MOVLW           .56     +       .44
+00C6   0084           00337         MOVWF           FSR
+00C7   303E           00338         MOVLW           B'00111110'
+00C8   0080           00339         MOVWF           INDF
+00C9   3000           00340         MOVLW           INDF
+                      00341 
+00CA   3066           00342         MOVLW           .58     +       .44
+00CB   0084           00343         MOVWF           FSR
+00CC   303E           00344         MOVLW           B'00111110'
+00CD   0080           00345         MOVWF           INDF
+00CE   3000           00346         MOVLW           INDF
+                      00347 
+00CF   3057           00348         MOVLW           .43     +       .44
+00D0   0084           00349         MOVWF           FSR
+MPASM  5.51                   HUB12_DRAM2.ASM   4-26-2019  18:10:15         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00D1   307E           00350         MOVLW           B'01111110'
+00D2   0080           00351         MOVWF           INDF
+00D3   3000           00352         MOVLW           INDF
+                      00353 
+00D4   3055           00354         MOVLW           .41     +       .44
+00D5   0084           00355         MOVWF           FSR
+00D6   307E           00356         MOVLW           B'01111110'
+00D7   0080           00357         MOVWF           INDF
+00D8   3000           00358         MOVLW           INDF
+                      00359 
+                      00360         
+00D9   3035           00361         MOVLW           .9      +       .44
+00DA   0084           00362         MOVWF           FSR
+00DB   3046           00363         MOVLW           B'01000110'
+00DC   0080           00364         MOVWF           INDF
+00DD   3000           00365         MOVLW           INDF
+                      00366 
+00DE   3045           00367         MOVLW           .25     +       .44
+00DF   0084           00368         MOVWF           FSR
+00E0   3046           00369         MOVLW           B'01000110'
+00E1   0080           00370         MOVWF           INDF
+00E2   3000           00371         MOVLW           INDF
+                      00372         
+00E3   3037           00373         MOVLW           .11     +       .44
+00E4   0084           00374         MOVWF           FSR
+00E5   3046           00375         MOVLW           B'01000110'
+00E6   0080           00376         MOVWF           INDF
+00E7   3000           00377         MOVLW           INDF
+                      00378 
+00E8   3047           00379         MOVLW           .27     +       .44
+00E9   0084           00380         MOVWF           FSR
+00EA   3046           00381         MOVLW           B'01000110'
+00EB   0080           00382         MOVWF           INDF
+00EC   3000           00383         MOVLW           INDF
+                      00384 
+00ED   3054           00385         MOVLW           .40     +       .44
+00EE   0084           00386         MOVWF           FSR
+00EF   3036           00387         MOVLW           B'00110110'
+00F0   0080           00388         MOVWF           INDF
+00F1   3000           00389         MOVLW           INDF
+                      00390         
+00F2   3056           00391         MOVLW           .42     +       .44
+00F3   0084           00392         MOVWF           FSR
+00F4   3036           00393         MOVLW           B'00110110'
+00F5   0080           00394         MOVWF           INDF
+00F6   3000           00395         MOVLW           INDF
+                      00396 
+                      00397         
+00F7   3044           00398         MOVLW           .24     +       .44
+00F8   0084           00399         MOVWF           FSR
+00F9   3066           00400         MOVLW           B'01100110'
+00FA   0080           00401         MOVWF           INDF
+00FB   3000           00402         MOVLW           INDF
+MPASM  5.51                   HUB12_DRAM2.ASM   4-26-2019  18:10:15         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00403         
+                      00404         
+00FC   3046           00405         MOVLW           .26     +       .44
+00FD   0084           00406         MOVWF           FSR
+00FE   3066           00407         MOVLW           B'01100110'
+00FF   0080           00408         MOVWF           INDF
+0100   3000           00409         MOVLW           INDF
+                      00410         
+                      00411         
+0101   3034           00412         MOVLW           .8      +       .44
+0102   0084           00413         MOVWF           FSR
+0103   30C6           00414         MOVLW           B'11000110'
+0104   0080           00415         MOVWF           INDF
+0105   3000           00416         MOVLW           INDF
+                      00417 
+                      00418         
+0106   3036           00419         MOVLW           .10     +       .44
+0107   0084           00420         MOVWF           FSR
+0108   30C6           00421         MOVLW           B'11000110'
+0109   0080           00422         MOVWF           INDF
+010A   3000           00423         MOVLW           INDF
+                      00424 
+                      00425         
+010B   303B           00426         MOVLW           .15     +       .44
+010C   0084           00427         MOVWF           FSR
+010D   301E           00428         MOVLW           B'00011110'
+010E   0080           00429         MOVWF           INDF
+010F   3000           00430         MOVLW           INDF
+                      00431 
+0110   306A           00432         MOVLW           .62     +       .44
+0111   0084           00433         MOVWF           FSR
+0112   301E           00434         MOVLW           B'00011110'
+0113   0080           00435         MOVWF           INDF
+0114   3000           00436         MOVLW           INDF
+                      00437         
+0115   2123           00438         CALL            DISPLAY
+                      00439         
+Warning[203]: Found opcode in column 1. (GOTO)
+0116   281B           00440 GOTO MAIN
+                      00441 ;###############################################################
+                      00442 
+                      00443 
+                      00444 
+                      00445 
+                      00446 ;=======================        CLEAR   RAM             ====================
+0117                  00447 CLRAM
+0117   3040           00448         MOVLW           .64
+0118   00EC           00449         MOVWF           POINTER
+0119   302C           00450         MOVLW           DRAM
+011A   0084           00451         MOVWF           FSR
+                      00452 
+011B                  00453 DRM0
+011B   3000           00454         MOVLW           0
+MPASM  5.51                   HUB12_DRAM2.ASM   4-26-2019  18:10:15         PAGE 10
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+011C   0080           00455         MOVWF           INDF
+011D   3000           00456         MOVLW           INDF
+                      00457         
+011E   214E           00458         CALL            DATALATCH
+011F   0A84           00459         INCF            FSR, F
+0120   0BEC           00460         DECFSZ          POINTER, F
+0121   291B           00461         GOTO            DRM0
+                      00462          
+0122   0008           00463         RETURN
+                      00464 ;===============================================================
+                      00465 
+                      00466 
+                      00467 ;#########################      DISPLAY ####################
+0123                  00468 DISPLAY
+0123   3010           00469         MOVLW           .16
+0124   00EC           00470         MOVWF           POINTER
+0125   302C           00471         MOVLW           .44
+0126   0084           00472         MOVWF           FSR
+                      00473 
+0127                  00474 DSP0
+0127   214E           00475         CALL            DATALATCH
+0128   0A84           00476         INCF            FSR, F
+0129   0BEC           00477         DECFSZ          POINTER, F
+012A   2927           00478         GOTO            DSP0
+                      00479 
+012B   1407           00480         A_ON
+012C   1487           00481         B_ON
+012D   1687           00482         OE_ON
+012E   216C           00483         CALL            DELAY_ONEMS
+                      00484 
+                      00485 
+012F   3010           00486         MOVLW           .16
+0130   00EC           00487         MOVWF           POINTER
+                      00488 
+0131                  00489 DSP1
+0131   214E           00490         CALL            DATALATCH
+0132   0A84           00491         INCF            FSR, F
+0133   0BEC           00492         DECFSZ          POINTER, F
+0134   2931           00493         GOTO            DSP1
+                      00494 
+0135   1007           00495         A_OFF
+0136   1487           00496         B_ON
+0137   1687           00497         OE_ON
+0138   216C           00498         CALL            DELAY_ONEMS
+                      00499 
+0139   3010           00500         MOVLW           .16
+013A   00EC           00501         MOVWF           POINTER
+                      00502 
+013B                  00503 DSP2
+013B   214E           00504         CALL            DATALATCH
+013C   0A84           00505         INCF            FSR, F
+013D   0BEC           00506         DECFSZ          POINTER, F
+013E   293B           00507         GOTO            DSP2
+MPASM  5.51                   HUB12_DRAM2.ASM   4-26-2019  18:10:15         PAGE 11
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00508 
+013F   1407           00509         A_ON
+0140   1087           00510         B_OFF
+0141   1687           00511         OE_ON
+0142   216C           00512         CALL            DELAY_ONEMS
+                      00513 
+0143   3010           00514         MOVLW           .16
+0144   00EC           00515         MOVWF           POINTER
+                      00516 
+0145                  00517 DSP3
+0145   214E           00518         CALL            DATALATCH
+0146   0A84           00519         INCF            FSR, F
+0147   0BEC           00520         DECFSZ          POINTER, F
+0148   2945           00521         GOTO            DSP3
+                      00522 
+0149   1007           00523         A_OFF
+014A   1087           00524         B_OFF
+014B   1687           00525         OE_ON
+014C   216C           00526         CALL            DELAY_ONEMS
+                      00527 
+                      00528 
+                      00529 
+                      00530 
+                      00531 
+014D   0008           00532         RETURN
+                      00533 ;###############################################################
+                      00534 
+                      00535 ;============   DATA    LATCH   ================================
+014E                  00536 DATALATCH
+014E   1387           00537         CLK_OFF
+014F   1207           00538         REG_OFF
+0150   1287           00539         OE_OFF
+0151   0800           00540         MOVF            INDF,W
+0152   00A9           00541         MOVWF           VAR0
+0153   3008           00542         MOVLW   .8
+0154   00A5           00543         MOVWF   COUNT0
+                      00544 
+0155                  00545 DL0
+0155   0CA9           00546         RRF VAR0,F      ; Rotate "Var" one place to the left
+0156   1C03           00547         BTFSS STATUS,C  ; Is carry 1?
+0157   2959           00548         GOTO    D0
+0158   295B           00549         GOTO    D1
+                      00550 
+0159                  00551 D0
+0159   1507           00552         DAT_ON
+015A   295D           00553         GOTO DL1
+015B                  00554 D1
+015B   1107           00555         DAT_OFF
+015C   295D           00556         GOTO DL1
+                      00557         
+015D                  00558 DL1
+015D   1787           00559         CLK_ON
+015E   1387           00560         CLK_OFF
+MPASM  5.51                   HUB12_DRAM2.ASM   4-26-2019  18:10:15         PAGE 12
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+015F   0BA5           00561         DECFSZ  COUNT0,F
+0160   2955           00562         GOTO    DL0
+0161   1607           00563         REG_ON
+0162   1207           00564         REG_OFF 
+                      00565         
+                      00566 
+Warning[203]: Found opcode in column 1. (RETURN)
+0163   0008           00567 RETURN
+                      00568 ;===============================================================
+                      00569 
+                      00570 
+                      00571 
+                      00572 
+                      00573 
+                      00574 
+                      00575 
+                      00576 
+                      00577 
+                      00578 ;==========     DELAY USEC =========
+0164                  00579 DELAY_US
+                      00580 
+0164   00A0           00581         MOVWF   DELAYUS
+                      00582 
+0165                  00583 USEC
+                      00584 
+0165   0000           00585         NOP
+0166   0000           00586         NOP
+0167   0000           00587         NOP
+0168   0000           00588         NOP
+Warning[203]: Found opcode in column 1. (DECFSZ)
+0169   0BA0           00589 DECFSZ  DELAYUS,F
+                      00590 
+Warning[203]: Found opcode in column 1. (GOTO)
+016A   2965           00591 GOTO    USEC
+                      00592 
+Warning[203]: Found opcode in column 1. (RETURN)
+016B   0008           00593 RETURN
+                      00594 ;=================================
+                      00595 
+                      00596 
+                      00597 
+                      00598 ;=========== DELAY ONE MS ========
+016C                  00599 DELAY_ONEMS
+                      00600 
+016C   3005           00601         MOVLW   .5
+016D   00A3           00602         MOVWF   MILSEC
+                      00603 
+016E                  00604 MSEC
+016E   30C8           00605         MOVLW   .200
+016F   2164           00606         CALL    DELAY_US
+0170   0BA3           00607         DECFSZ  MILSEC,F
+0171   296E           00608         GOTO    MSEC
+                      00609 
+MPASM  5.51                   HUB12_DRAM2.ASM   4-26-2019  18:10:15         PAGE 13
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[203]: Found opcode in column 1. (RETURN)
+0172   0008           00610 RETURN
+                      00611 ;==================================
+                      00612 
+                      00613 
+                      00614 ;=========== DELAY MS   ===========
+0173                  00615 DELAY_MS
+                      00616         
+0173   00A1           00617         MOVWF   DELAYMS
+0174                  00618 MSEC0
+0174   216C           00619         CALL    DELAY_ONEMS
+0175   0BA1           00620         DECFSZ  DELAYMS,F
+0176   2974           00621         GOTO    MSEC0
+Warning[203]: Found opcode in column 1. (RETURN)
+0177   0008           00622 RETURN
+                      00623 ;==================================
+                      00624 
+                      00625 ;=========== DELAY      ONE     SECOND ====
+0178                  00626 DELAY_ONESEC
+                      00627 
+0178   3005           00628         MOVLW   .5
+0179   00A4           00629         MOVWF   SEC
+017A                  00630 SEC0
+017A   30C8           00631         MOVLW   .200
+017B   2173           00632         CALL    DELAY_MS
+017C   0BA4           00633         DECFSZ  SEC,F
+017D   297A           00634         GOTO    SEC0
+Warning[203]: Found opcode in column 1. (RETURN)
+017E   0008           00635 RETURN
+                      00636 ;==================================
+                      00637 
+                      00638 ;==========     DELAY SEC =============
+017F                  00639 DELAY_SEC
+                      00640 
+017F   00A2           00641         MOVWF   DELAYS
+0180                  00642 SEC1
+0180   2178           00643         CALL    DELAY_ONESEC
+0181   0BA2           00644         DECFSZ  DELAYS,F
+0182   2980           00645         GOTO    SEC1
+Warning[203]: Found opcode in column 1. (RETURN)
+0183   0008           00646 RETURN
+                      00647 ;==================================
+                      00648 
+                      00649 
+                      00650 
+2100                  00651         ORG     0x2100                          ; data EEPROM location
+2100   0001 0002 0003 00652         DE      1,2,3,4                         ; define first four EEPROM locations as 1, 2, 3, and 4
+       0004 
+                      00653 
+                      00654 
+                      00655 
+                      00656 
+                      00657         END                       ; directive 'end of program'
+MPASM  5.51                   HUB12_DRAM2.ASM   4-26-2019  18:10:15         PAGE 14
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+.                                 00000000
+ABDEN                             00000000
+ABDOVF                            00000007
+ADCON0                            0000001F
+ADCON1                            0000009F
+ADCS0                             00000004
+ADCS1                             00000005
+ADCS2                             00000006
+ADDEN                             00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+ANS0                              00000000
+ANS1                              00000001
+ANS10                             00000002
+ANS11                             00000003
+ANS2                              00000002
+ANS3                              00000003
+ANS4                              00000004
+ANS5                              00000005
+ANS6                              00000006
+ANS7                              00000007
+ANS8                              00000000
+ANS9                              00000001
+ANSEL                             0000011E
+ANSELH                            0000011F
+A_OFF                             BCF     PORTC,  0
+A_ON                              BSF     PORTC,  0
+BAUDCTL                           0000009B
+BF                                00000000
+BRG0                              00000000
+BRG1                              00000001
+BRG10                             00000002
+BRG11                             00000003
+BRG12                             00000004
+BRG13                             00000005
+BRG14                             00000006
+BRG15                             00000007
+BRG16                             00000003
+BRG2                              00000002
+BRG3                              00000003
+BRG4                              00000004
+BRG5                              00000005
+BRG6                              00000006
+BRG7                              00000007
+BRG8                              00000000
+BRG9                              00000001
+BRGH                              00000002
+B_OFF                             BCF     PORTC,  1
+B_ON                              BSF     PORTC,  1
+MPASM  5.51                   HUB12_DRAM2.ASM   4-26-2019  18:10:15         PAGE 15
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+C                                 00000000
+C1CH0                             00000000
+C1CH1                             00000001
+C1IE                              00000005
+C1IF                              00000005
+C1OE                              00000005
+C1ON                              00000007
+C1OUT                             00000006
+C1POL                             00000004
+C1R                               00000002
+C1SEN                             00000005
+C1VREN                            00000007
+C2CH0                             00000000
+C2CH1                             00000001
+C2IE                              00000006
+C2IF                              00000006
+C2OE                              00000005
+C2ON                              00000007
+C2OUT                             00000006
+C2POL                             00000004
+C2R                               00000002
+C2REN                             00000004
+C2SYNC                            00000000
+C2VREN                            00000006
+CARR                              0000002B
+CCP1CON                           00000017
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCPR                              00000015
+CCPR1H                            00000016
+CCPR1L                            00000015
+CHS0                              00000002
+CHS1                              00000003
+CHS2                              00000004
+CHS3                              00000005
+CKE                               00000006
+CKP                               00000004
+CLK_OFF                           BCF     PORTC,  7
+CLK_ON                            BSF     PORTC,  7
+CLRAM                             00000117
+CM1CON0                           00000119
+CM2CON0                           0000011A
+CM2CON1                           0000011B
+COUNT0                            00000025
+COUNT1                            00000026
+COUNT2                            00000027
+COUNT3                            00000028
+CREN                              00000004
+CSRC                              00000007
+MPASM  5.51                   HUB12_DRAM2.ASM   4-26-2019  18:10:15         PAGE 16
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+D                                 00000005
+D0                                00000159
+D1                                0000015B
+DATALATCH                         0000014E
+DATA_ADDRESS                      00000005
+DAT_OFF                           BCF     PORTC,  2
+DAT_ON                            BSF     PORTC,  2
+DC                                00000001
+DC1B0                             00000004
+DC1B1                             00000005
+DELAYMS                           00000021
+DELAYS                            00000022
+DELAYUS                           00000020
+DELAY_MS                          00000173
+DELAY_ONEMS                       0000016C
+DELAY_ONESEC                      00000178
+DELAY_SEC                         0000017F
+DELAY_US                          00000164
+DISPLAY                           00000123
+DL0                               00000155
+DL1                               0000015D
+DRAM                              0000002C
+DRM0                              0000011B
+DSP0                              00000127
+DSP1                              00000131
+DSP2                              0000013B
+DSP3                              00000145
+D_A                               00000005
+D_NOT_A                           00000005
+ECCPAS                            0000001D
+ECCPAS0                           00000004
+ECCPAS1                           00000005
+ECCPAS2                           00000006
+ECCPASE                           00000007
+EEADR                             0000010D
+EEADRH                            0000010F
+EECON1                            0000018C
+EECON2                            0000018D
+EEDAT                             0000010C
+EEDATA                            0000010C
+EEDATH                            0000010E
+EEIE                              00000004
+EEIF                              00000004
+EEPGD                             00000007
+F                                 00000001
+FERR                              00000002
+FSR                               00000004
+GIE                               00000007
+GO                                00000001
+GO_DONE                           00000001
+GO_NOT_DONE                       00000001
+HTS                               00000002
+I2C_DATA                          00000005
+MPASM  5.51                   HUB12_DRAM2.ASM   4-26-2019  18:10:15         PAGE 17
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+I2C_READ                          00000002
+I2C_START                         00000003
+I2C_STOP                          00000004
+INDF                              00000000
+INIT                              00000010
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IOC                               00000096
+IOC0                              00000000
+IOC1                              00000001
+IOC2                              00000002
+IOC3                              00000003
+IOC4                              00000004
+IOC5                              00000005
+IOCA                              00000096
+IOCA0                             00000000
+IOCA1                             00000001
+IOCA2                             00000002
+IOCA3                             00000003
+IOCA4                             00000004
+IOCA5                             00000005
+IOCB                              00000116
+IOCB4                             00000004
+IOCB5                             00000005
+IOCB6                             00000006
+IOCB7                             00000007
+IRCF0                             00000004
+IRCF1                             00000005
+IRCF2                             00000006
+IRP                               00000007
+LTS                               00000001
+MAIN                              0000001B
+MC1OUT                            00000007
+MC2OUT                            00000006
+MILSEC                            00000023
+MSEC                              0000016E
+MSEC0                             00000174
+MSK                               00000093
+MSK0                              00000000
+MSK1                              00000001
+MSK2                              00000002
+MSK3                              00000003
+MSK4                              00000004
+MSK5                              00000005
+MSK6                              00000006
+MSK7                              00000007
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
+NOT_BOR                           00000000
+NOT_DONE                          00000001
+NOT_PD                            00000003
+MPASM  5.51                   HUB12_DRAM2.ASM   4-26-2019  18:10:15         PAGE 18
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+NOT_POR                           00000001
+NOT_RABPU                         00000007
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+NOT_W                             00000002
+NOT_WRITE                         00000002
+OERR                              00000001
+OE_OFF                            BCF     PORTC,  5
+OE_ON                             BSF     PORTC,  5
+OPTION_REG                        00000081
+OSCCON                            0000008F
+OSCTUNE                           00000090
+OSFIE                             00000007
+OSFIF                             00000007
+OSTS                              00000003
+P                                 00000004
+P1M0                              00000006
+P1M1                              00000007
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PDC0                              00000000
+PDC1                              00000001
+PDC2                              00000002
+PDC3                              00000003
+PDC4                              00000004
+PDC5                              00000005
+PDC6                              00000006
+PEIE                              00000006
+PIE1                              0000008C
+PIE2                              0000008D
+PIR1                              0000000C
+PIR2                              0000000D
+POINTER                           0000006C
+PORTA                             00000005
+PORTB                             00000006
+PORTC                             00000007
+PR2                               00000092
+PRSEN                             00000007
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+PSSAC0                            00000002
+PSSAC1                            00000003
+PSSBD0                            00000000
+PSSBD1                            00000001
+PSTRCON                           0000019D
+PULSR                             00000002
+PULSS                             00000003
+PWM1CON                           0000001C
+R                                 00000002
+RA0                               00000000
+MPASM  5.51                   HUB12_DRAM2.ASM   4-26-2019  18:10:15         PAGE 19
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RA5                               00000005
+RABIE                             00000003
+RABIF                             00000000
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RC0                               00000000
+RC1                               00000001
+RC2                               00000002
+RC3                               00000003
+RC4                               00000004
+RC5                               00000005
+RC6                               00000006
+RC7                               00000007
+RCIDL                             00000006
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+RCSTA                             00000018
+RD                                00000000
+READ_WRITE                        00000002
+REG_OFF                           BCF     PORTC,  4
+REG_ON                            BSF     PORTC,  4
+RP0                               00000005
+RP1                               00000006
+RX9                               00000006
+RX9D                              00000000
+R_NOT_W                           00000002
+R_W                               00000002
+S                                 00000003
+SAMBIT                            0000002A
+SBOREN                            00000004
+SCKP                              00000004
+SCS                               00000000
+SEC                               00000024
+SEC0                              0000017A
+SEC1                              00000180
+SENB                              00000003
+SENDB                             00000003
+SMP                               00000007
+SPBRG                             00000099
+SPBRGH                            0000009A
+SPEN                              00000007
+SR0                               00000006
+SR1                               00000007
+SRCON                             0000019E
+SREN                              00000005
+SSPADD                            00000093
+MPASM  5.51                   HUB12_DRAM2.ASM   4-26-2019  18:10:15         PAGE 20
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+SSPBUF                            00000013
+SSPCON                            00000014
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+SSPM3                             00000003
+SSPMSK                            00000093
+SSPOV                             00000006
+SSPSTAT                           00000094
+STATUS                            00000003
+STRA                              00000000
+STRB                              00000001
+STRC                              00000002
+STRD                              00000003
+STRSYNC                           00000004
+SWDTEN                            00000000
+SYNC                              00000004
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1GINV                            00000007
+T1GSS                             00000001
+T1IE                              00000000
+T1IF                              00000000
+T1OSCEN                           00000003
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+T2IE                              00000001
+T2IF                              00000001
+TMR0                              00000001
+TMR1                              0000000E
+TMR1CS                            00000001
+TMR1GE                            00000006
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+MPASM  5.51                   HUB12_DRAM2.ASM   4-26-2019  18:10:15         PAGE 21
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISA5                            00000005
+TRISB                             00000086
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+TRISC                             00000087
+TRISC0                            00000000
+TRISC1                            00000001
+TRISC2                            00000002
+TRISC3                            00000003
+TRISC4                            00000004
+TRISC5                            00000005
+TRISC6                            00000006
+TRISC7                            00000007
+TRMT                              00000001
+TUN0                              00000000
+TUN1                              00000001
+TUN2                              00000002
+TUN3                              00000003
+TUN4                              00000004
+TX9                               00000006
+TX9D                              00000000
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+TXSTA                             00000098
+UA                                00000001
+ULPWUE                            00000005
+USEC                              00000165
+VAR0                              00000029
+VCFG                              00000006
+VP6EN                             00000004
+VR0                               00000000
+VR1                               00000001
+VR2                               00000002
+VR3                               00000003
+VRCON                             00000118
+VRR                               00000005
+W                                 00000000
+WCOL                              00000007
+WDTCON                            00000097
+WDTPS0                            00000001
+WDTPS1                            00000002
+WDTPS2                            00000003
+MPASM  5.51                   HUB12_DRAM2.ASM   4-26-2019  18:10:15         PAGE 22
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+WDTPS3                            00000004
+WPU                               00000095
+WPU0                              00000000
+WPU1                              00000001
+WPU2                              00000002
+WPU4                              00000004
+WPU5                              00000005
+WPUA                              00000095
+WPUA0                             00000000
+WPUA1                             00000001
+WPUA2                             00000002
+WPUA4                             00000004
+WPUA5                             00000005
+WPUB                              00000115
+WPUB4                             00000004
+WPUB5                             00000005
+WPUB6                             00000006
+WPUB7                             00000007
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+WUE                               00000001
+Z                                 00000002
+_BOD_NSLEEP                       00003EFF
+_BOD_OFF                          00003CFF
+_BOD_ON                           00003FFF
+_BOD_SBODEN                       00003DFF
+_BOREN_NSLEEP                     00003EFF
+_BOREN_OFF                        00003CFF
+_BOREN_ON                         00003FFF
+_BOREN_SBODEN                     00003DFF
+_BOR_NSLEEP                       00003EFF
+_BOR_OFF                          00003CFF
+_BOR_ON                           00003FFF
+_BOR_SBODEN                       00003DFF
+_CONFIG                           00002007
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003F7F
+_CP_OFF                           00003FFF
+_CP_ON                            00003FBF
+_DEVID1                           00002006
+_EC_OSC                           00003FFB
+_EXTRC                            00003FFF
+_EXTRCIO                          00003FFE
+_EXTRC_OSC_CLKOUT                 00003FFF
+_EXTRC_OSC_NOCLKOUT               00003FFE
+_FCMEN_OFF                        000037FF
+_FCMEN_ON                         00003FFF
+_FOSC_EC                          00003FFB
+_FOSC_EXTRCCLK                    00003FFF
+_FOSC_EXTRCIO                     00003FFE
+_FOSC_HS                          00003FFA
+_FOSC_INTRCCLK                    00003FFD
+MPASM  5.51                   HUB12_DRAM2.ASM   4-26-2019  18:10:15         PAGE 23
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_FOSC_INTRCIO                     00003FFC
+_FOSC_LP                          00003FF8
+_FOSC_XT                          00003FF9
+_HS_OSC                           00003FFA
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_IESO_OFF                         00003BFF
+_IESO_ON                          00003FFF
+_INTOSC                           00003FFD
+_INTOSCIO                         00003FFC
+_INTRC_OSC_CLKOUT                 00003FFD
+_INTRC_OSC_NOCLKOUT               00003FFC
+_LP_OSC                           00003FF8
+_MCLRE_OFF                        00003FDF
+_MCLRE_ON                         00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FEF
+_WDTE_OFF                         00003FF7
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FF7
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FF9
+__16F690                          00000001
+__DEBUG                           1
+pclath_temp                       0000007F
+status_temp                       0000007E
+w_temp                            0000007D
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+0000 : X---XXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0080 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+00C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0100 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0140 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0180 : XXXX------------ ---------------- ---------------- ----------------
+2000 : -------X-------- ---------------- ---------------- ----------------
+2100 : XXXX------------ ---------------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:   385
+Program Memory Words Free:  3711
+
+
+MPASM  5.51                   HUB12_DRAM2.ASM   4-26-2019  18:10:15         PAGE 24
+
+
+
+
+
+Errors   :     0
+Warnings :    19 reported,     0 suppressed
+Messages :     2 reported,     0 suppressed
+
+

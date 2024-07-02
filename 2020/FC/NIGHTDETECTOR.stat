@@ -1,0 +1,15 @@
+// SourceBoost Linker Function Resource Usage Dump
+
+#GLOBAL:"global",line = 0,ram = 40.0,rom = 0;
+FC_CAL_Enable_ADC(unsigned char,unsigned char,unsigned char,unsigned char):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_ADC.c",line = 277,ram = 5.0,rom = 48;
+FC_CAL_Sample_ADC(unsigned char):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_ADC.c",line = 381,ram = 5.0,rom = 36;
+FC_CAL_Disable_ADC(void):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_ADC.c",line = 396,ram = 0.0,rom = 16;
+FCD_ADC0_ReadAsByte(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\FC\NIGHTDETECTOR.c",line = 172,ram = 2.0,rom = 19;
+main(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\FC\NIGHTDETECTOR.c",line = 320,ram = 2.0,rom = 87;
+interrupt(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\FC\NIGHTDETECTOR.c",line = 420,ram = 0.0,rom = 11;
+delay_us(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 10;
+delay_ms(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 12;
+_startup(void):"NoSourceFile",line = 0,ram = 0.0,rom = 41;
+#HEAP_BLOCK: 0, 160, 95;
+#HEAP_BLOCK: 1, 288, 80;
+#HEAP_BLOCK: 2, 78, 34;

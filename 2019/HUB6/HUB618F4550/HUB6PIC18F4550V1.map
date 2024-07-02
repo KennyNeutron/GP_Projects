@@ -1,0 +1,57 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Thu Oct 24 12:04:20 2019
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_2       code   0x000000    program   0x000004
+                   .org_3       code   0x000008    program   0x000002
+                   .org_4       code   0x000018    program   0x000034
+.config_300000_HUB6PIC18F4550V1.O    romdata   0x300000    program   0x000001
+.config_300001_HUB6PIC18F4550V1.O    romdata   0x300001    program   0x000001
+.config_300002_HUB6PIC18F4550V1.O    romdata   0x300002    program   0x000001
+.config_300003_HUB6PIC18F4550V1.O    romdata   0x300003    program   0x000001
+.config_300005_HUB6PIC18F4550V1.O    romdata   0x300005    program   0x000001
+.config_300006_HUB6PIC18F4550V1.O    romdata   0x300006    program   0x000001
+.config_300008_HUB6PIC18F4550V1.O    romdata   0x300008    program   0x000001
+.config_300009_HUB6PIC18F4550V1.O    romdata   0x300009    program   0x000001
+.config_30000A_HUB6PIC18F4550V1.O    romdata   0x30000a    program   0x000001
+.config_30000B_HUB6PIC18F4550V1.O    romdata   0x30000b    program   0x000001
+.config_30000C_HUB6PIC18F4550V1.O    romdata   0x30000c    program   0x000001
+.config_30000D_HUB6PIC18F4550V1.O    romdata   0x30000d    program   0x000001
+                   .org_1       code   0xf00000    program   0x000010
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000003      
+                            0x000008    0x000009      
+                            0x000018    0x00004b      
+                            0x300000    0x300003      
+                            0x300005    0x300006      
+                            0x300008    0x30000d      
+                            0xf00000    0xf0000f      
+            86 out of 33048 program addresses used, program memory utilization is 0%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                  HIGHINT   0x000032    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB618F4550\HUB6PIC18F4550V1.ASM
+                     MAIN   0x000034    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB618F4550\HUB6PIC18F4550V1.ASM
+                     TEST   0x000042    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB618F4550\HUB6PIC18F4550V1.ASM
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                  HIGHINT   0x000032    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB618F4550\HUB6PIC18F4550V1.ASM
+                     MAIN   0x000034    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB618F4550\HUB6PIC18F4550V1.ASM
+                     TEST   0x000042    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\HUB618F4550\HUB6PIC18F4550V1.ASM
+
+

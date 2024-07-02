@@ -1,0 +1,2085 @@
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 ;**********************************************************************
+                      00002 ;                                                                     *
+                      00003 ;    filename: nrf24l01_pic16f690_v0.asm                              *
+                      00004 ;    date:     08-11-2020                                             *
+                      00005 ;    file version:                                                    *
+                      00006 ;                                                                     *
+                      00007 ;    author:   kennyneutron                                           *
+                      00008 ;    company:  ger-per engineering                                    *
+                      00009 ;                                                                     * 
+                      00010 ;                                                                     *
+                      00011 ;**********************************************************************
+                      00012 
+                      00013 
+                      00014 
+                      00015         LIST            P=16F690                                ; list directive to define processor
+                      00016         #INCLUDE        <P16F690.INC>                   ; processor specific variable definitions
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC16F690 processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2013 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+                      00756         LIST
+                      00017         #INCLUDE        <NRF24L01_LIBKN.INC>    ;NRF24L01 library
+                      00001 ;######################################################################
+                      00002 ;       Radio Frequency Module based on NRF24l01LIBRARY                   #
+                      00003 ;   for PIC Microcontrollers                                                                            
+                              #
+                      00004 ;                                                                                                       
+                                                              #
+                      00005 ;       by:     Kenny Neutron                                                                           
+                                      #
+                      00006 ;       file:   nrf24l01_libkn.inc                                                                      
+                                      #
+                      00007 ;       vsn:    v08.14.20                                                                               
+                                              #
+                      00008 ;######################################################################
+                      00009 
+                      00010 
+                      00011 
+                      00012 
+                      00013 
+                      00014 
+                      00015 
+                      00016 
+                      00017         #DEFINE CE_HI           BSF PORTC,3
+                      00018         #DEFINE CE_LO           BCF     PORTC,3
+                      00019 
+                      00020         #DEFINE CSN_HI          BSF     PORTC,6
+                      00021         #DEFINE CSN_LO          BCF     PORTC,6
+                      00022 
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00023         #DEFINE CLK_HI          BSF     PORTB,6
+                      00024         #DEFINE CLK_LO          BCF     PORTB,6
+                      00025 
+                      00026         #DEFINE MOSI_HI         BSF     PORTC,7
+                      00027         #DEFINE MOSI_LO         BCF     PORTC,7
+                      00028 
+                      00029         #DEFINE TDS_HI          BSF PORTC,5
+                      00030         #DEFINE TDS_LO          BCF     PORTC,5
+                      00031 
+                      00032         #DEFINE RDR_HI          BSF     PORTC,4
+                      00033         #DEFINE RDR_LO          BCF     PORTC,4
+                      00034 
+                      00035 
+                      00036 ;============================   bank    0       ===========================
+Warning[205]: Found directive in column 1. (CBLOCK)
+                      00037 CBLOCK 0X20
+  00000020            00038                         NRF_REG00       ;config                         configuration
+  00000021            00039                         NRF_REG01       ;en_aa                          enable auto-acknowledgement
+  00000022            00040                         NRF_REG02       ;en_rxaddr                      enable rx address
+  00000023            00041                         NRF_REG03       ;setup_aw                       enable address width
+  00000024            00042                         NRF_REG04       ;setup_retr                     setup auto-retransmission
+  00000025            00043                         NRF_REG05       ;rf_ch                          rf channel
+  00000026            00044                         NRF_REG06       ;rf_seup                        rf setup register
+  00000027            00045                         NRF_REG07       ;nrf status                     nrf status register
+  00000028            00046                         RX_ADDR_P00     ;reg0a-0                        rx address pipe0 byte0
+  00000029            00047                         RX_ADDR_P01     ;reg0a-1                        rx address pipe0 byte1
+  0000002A            00048                         RX_ADDR_P02     ;reg0a-2                        rx address pipe0 byte2
+  0000002B            00049                         RX_ADDR_P03     ;reg0a-3                        rx address pipe0 byte3
+  0000002C            00050                         RX_ADDR_P04     ;reg0a-4                        rx address pipe0 byte4
+                      00051                         
+  0000002D            00052                         TX_ADDR_B0      ;reg10-0                        tx address byte0
+  0000002E            00053                         TX_ADDR_B1      ;reg10-1                        tx address byte1
+  0000002F            00054                         TX_ADDR_B2      ;reg10-2                        tx address byte2
+  00000030            00055                         TX_ADDR_B3      ;reg10-3                        tx address byte3
+  00000031            00056                         TX_ADDR_B4      ;reg10-4                        tx address byte4
+                      00057 
+  00000032            00058                         NRF_REG11       ;rx_pw_p0                       rx payload width in pipe0
+                      00059 
+  00000033            00060                         NRF_REG17       ;fifo_status
+                      00061 
+  00000034            00062                         TXPAYLOAD:.16                                   ;tx payload array, max payloadsi
+                            ze= 16B
+                      00063 
+  00000044            00064                         RXPAYLOAD:.16                                   ;rx payload array, max payloadsi
+                            ze= 16B
+                      00065 
+  00000054            00066                         PAYLOADSIZE                                             ;payload size
+                      00067 
+  00000055            00068                         REG_TOWRITE,REG_TOREAD                  ;reg address to write/read
+                      00069 
+  00000057            00070                         DATA_TOWRITE,DATA_TOREAD                ;data to/from reg specified 
+                      00071                                                                                         ;by reg_toread/r
+                            eg_towrite
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00072                                                                                 
+                      00073                         
+  00000059            00074                         SPI_DATA0,SPI_DATA1                             ;spi_data0(out)  spi_data1(in)
+  0000005B            00075                         CLK_LOOP                                                ;spi clk counter
+                      00076                         
+  0000005C            00077                         PL_LOOP                                                 ;payload counter
+                      00078 
+  0000005D            00079                         NRF_DLOOP                                               ;local delay loop
+  0000005E            00080                         NRF_DELAYUS,NRF_DELAYMS                 ;local delay variables
+                      00081                         
+                      00082 
+Warning[205]: Found directive in column 1. (ENDC)
+                      00083 ENDC
+                      00084 ;======================================================================
+                      00085 
+                      00086 
+Warning[205]: Found directive in column 1. (ORG)
+0100                  00087 ORG 0X100
+                      00088 
+0100                  00089 NRF_SEND_PAYLOAD
+0100   300E           00090         MOVLW   0X0E
+0101   008A           00091         MOVWF   PCLATH
+                      00092 
+Message[306]: Crossing page boundary -- ensure page bits are set.
+0102   26D0           00093         CALL    RADIO_SEND_DATA
+0103   3001           00094         MOVLW   0X01
+0104   008A           00095         MOVWF   PCLATH
+Warning[203]: Found opcode in column 1. (RETURN)
+0105   0008           00096 RETURN
+                      00097 
+0106                  00098 NRF_GET_PAYLOAD
+0106   300E           00099         MOVLW   0X0E
+0107   008A           00100         MOVWF   PCLATH
+Message[306]: Crossing page boundary -- ensure page bits are set.
+0108   26F0           00101         CALL    RADIO_RECV_DATA
+0109   3001           00102         MOVLW   0X01
+010A   008A           00103         MOVWF   PCLATH
+Warning[203]: Found opcode in column 1. (RETURN)
+010B   0008           00104 RETURN
+                      00105 
+                      00106 
+010C                  00107 NRF_TX_MODE
+010C   300E           00108         MOVLW   0X0E
+010D   008A           00109         MOVWF   PCLATH
+Message[306]: Crossing page boundary -- ensure page bits are set.
+010E   272D           00110         CALL    RADIO_TX_INIT
+010F   3001           00111         MOVLW   0X01
+0110   008A           00112         MOVWF   PCLATH  
+Warning[203]: Found opcode in column 1. (RETURN)
+0111   0008           00113 RETURN
+                      00114 
+0112                  00115 NRF_RX_MODE
+0112   300E           00116         MOVLW   0X0E
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0113   008A           00117         MOVWF   PCLATH
+Message[306]: Crossing page boundary -- ensure page bits are set.
+0114   2738           00118         CALL    RADIO_RX_INIT
+0115   3001           00119         MOVLW   0X01
+0116   008A           00120         MOVWF   PCLATH  
+Warning[203]: Found opcode in column 1. (RETURN)
+0117   0008           00121 RETURN
+                      00122 
+                      00123 
+                      00124 
+                      00125 
+                      00126 
+                      00127 
+                      00128 
+Warning[205]: Found directive in column 1. (ORG)
+0ED0                  00129 ORG 0XED0
+                      00130 ;========== nrf send payload =========
+0ED0                  00131 RADIO_SEND_DATA
+                      00132 
+0ED0   0854           00133         MOVFW   PAYLOADSIZE
+0ED1   00DC           00134         MOVWF   PL_LOOP
+                      00135 
+                      00136 
+0ED2   1307           00137         CSN_LO
+                      00138         
+0ED3   30A0           00139         MOVLW   0XA0
+0ED4   00D9           00140         MOVWF   SPI_DATA0
+0ED5   27B8           00141         CALL    SPI_SENDBYTE
+                      00142 
+0ED6   3034           00143         MOVLW   0X34
+0ED7   0084           00144         MOVWF   FSR
+                      00145 
+                      00146 
+0ED8                  00147 RSD0
+0ED8   0800           00148         MOVFW   INDF
+0ED9   00D9           00149         MOVWF   SPI_DATA0
+0EDA   27B8           00150         CALL    SPI_SENDBYTE
+                      00151 
+Message[305]: Using default destination of 1 (file).
+0EDB   0A84           00152         INCF    FSR
+                      00153 
+0EDC   0BDC           00154         DECFSZ  PL_LOOP,F
+0EDD   2ED8           00155         GOTO    RSD0
+                      00156 
+0EDE   1707           00157         CSN_HI
+                      00158 
+0EDF   0000           00159         NOP
+0EE0   0000           00160         NOP
+                      00161 
+0EE1   1587           00162         CE_HI
+                      00163         
+0EE2   3005           00164         MOVLW   0X05
+0EE3   27EC           00165         CALL    NRF_DELAY_MS
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00166 
+                      00167 
+0EE4   1187           00168         CE_LO
+                      00169 
+0EE5   2718           00170         CALL    RADIO_CHECKSTATUS
+0EE6   1EA7           00171         BTFSS   NRF_REG07,5
+0EE7   2EE9           00172         GOTO    TXDS0
+0EE8   2EEB           00173         GOTO    TXDS1
+                      00174 
+0EE9                  00175 TXDS0
+0EE9   1287           00176         TDS_LO
+0EEA   2EEE           00177         GOTO    RSD1
+                      00178 
+0EEB                  00179 TXDS1
+0EEB   1687           00180         TDS_HI
+0EEC   2EEE           00181         GOTO    RSD1
+                      00182 
+0EED   0000           00183         NOP     
+                      00184 
+0EEE                  00185 RSD1
+0EEE   2712           00186         CALL    RADIO_CLRSTATUS
+                      00187 
+                      00188 
+Warning[203]: Found opcode in column 1. (RETURN)
+0EEF   0008           00189 RETURN
+                      00190 ;=====================================
+                      00191 
+                      00192 
+                      00193 
+                      00194 ;======== nrf recieve payload ========
+0EF0                  00195 RADIO_RECV_DATA
+0EF0   26FD           00196         CALL    RADIO_CHECKFIFO
+                      00197 
+0EF1   1833           00198         BTFSC   NRF_REG17,0
+0EF2   2EF4           00199         GOTO    RXDR0
+0EF3   2EF5           00200         GOTO    RXDR1
+                      00201 
+0EF4                  00202 RXDR0
+                      00203 
+                      00204 ;       call    radio_flushfifo
+                      00205 
+0EF4   2EFA           00206         GOTO    RRD0
+                      00207 
+0EF5                  00208 RXDR1
+0EF5   1607           00209         RDR_HI
+0EF6   2703           00210         CALL    RADIO_READ_RXFIFO
+                      00211 
+0EF7   2712           00212         CALL    RADIO_CLRSTATUS
+                      00213 
+0EF8   271E           00214         CALL    RADIO_FLUSHFIFO
+                      00215 
+0EF9   2EFA           00216         GOTO    RRD0
+                      00217 
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0EFA                  00218 RRD0
+0EFA   0000           00219         NOP
+0EFB   1207           00220                 RDR_LO  
+Warning[203]: Found opcode in column 1. (RETURN)
+0EFC   0008           00221 RETURN
+                      00222 ;=====================================
+                      00223 
+                      00224 
+                      00225 
+                      00226         
+                      00227 
+0EFD                  00228 RADIO_CHECKFIFO
+0EFD   3017           00229         MOVLW   0X17
+0EFE   00D6           00230         MOVWF   REG_TOREAD
+0EFF   27B0           00231         CALL    CMD_REGREAD
+                      00232         
+0F00   0858           00233         MOVFW   DATA_TOREAD
+0F01   00B3           00234         MOVWF   NRF_REG17
+Warning[203]: Found opcode in column 1. (RETURN)
+0F02   0008           00235 RETURN
+                      00236 
+                      00237 
+                      00238 
+                      00239 
+                      00240         
+                      00241 ;========== nrf_read_rxfifo ==========
+0F03                  00242 RADIO_READ_RXFIFO
+0F03   3044           00243         MOVLW   0X44
+0F04   0084           00244         MOVWF   FSR
+0F05   0854           00245         MOVFW   PAYLOADSIZE
+0F06   00DC           00246         MOVWF   PL_LOOP
+                      00247 
+0F07   1307           00248         CSN_LO
+0F08   3061           00249         MOVLW   0X61
+0F09   00D9           00250         MOVWF   SPI_DATA0
+0F0A   27B8           00251         CALL    SPI_SENDBYTE
+                      00252 
+0F0B                  00253 RFF0
+0F0B   27C9           00254         CALL    SPI_RECVBYTE
+0F0C   085A           00255         MOVFW   SPI_DATA1
+0F0D   0080           00256         MOVWF   INDF
+Message[305]: Using default destination of 1 (file).
+0F0E   0A84           00257         INCF    FSR
+0F0F   0BDC           00258         DECFSZ  PL_LOOP,F
+0F10   2F0B           00259         GOTO    RFF0
+                      00260 
+Warning[203]: Found opcode in column 1. (RETURN)
+0F11   0008           00261 RETURN
+                      00262 ;=====================================
+                      00263 
+                      00264 ;========== nrf clear status =========
+0F12                  00265 RADIO_CLRSTATUS
+0F12   3007           00266         MOVLW   0X07
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0F13   00D5           00267         MOVWF   REG_TOWRITE
+0F14   30FF           00268         MOVLW   0XFF
+0F15   00D7           00269         MOVWF   DATA_TOWRITE
+0F16   27A6           00270         CALL    CMD_REGWRITE
+                      00271 
+Warning[203]: Found opcode in column 1. (RETURN)
+0F17   0008           00272 RETURN
+                      00273 ;=====================================
+                      00274 
+                      00275 ;========== nrf check status =========
+0F18                  00276 RADIO_CHECKSTATUS
+0F18   3007           00277         MOVLW   0X07
+0F19   00D6           00278         MOVWF   REG_TOREAD
+0F1A   27B0           00279         CALL    CMD_REGREAD
+                      00280         
+0F1B   0858           00281         MOVFW   DATA_TOREAD
+0F1C   00A7           00282         MOVWF   NRF_REG07
+Warning[203]: Found opcode in column 1. (RETURN)
+0F1D   0008           00283 RETURN
+                      00284 ;=====================================
+                      00285 
+                      00286 
+                      00287 
+                      00288 ;============ nrf clr fifo ===========
+0F1E                  00289 RADIO_FLUSHFIFO
+0F1E   1307           00290         CSN_LO
+0F1F   30E1           00291         MOVLW   0XE1
+0F20   00D9           00292         MOVWF   SPI_DATA0
+0F21   27B8           00293         CALL    SPI_SENDBYTE
+0F22   1707           00294         CSN_HI
+0F23   0000           00295         NOP
+0F24   0000           00296         NOP
+0F25   0000           00297         NOP
+0F26   0000           00298         NOP
+                      00299         
+0F27   1307           00300         CSN_LO
+                      00301 
+0F28   30E2           00302         MOVLW   0XE2
+0F29   00D9           00303         MOVWF   SPI_DATA0
+0F2A   27B8           00304         CALL    SPI_SENDBYTE
+0F2B   1707           00305         CSN_HI
+Warning[203]: Found opcode in column 1. (RETURN)
+0F2C   0008           00306 RETURN
+                      00307 ;=====================================
+                      00308 
+                      00309 
+                      00310 ;============ init tx mode ===========
+0F2D                  00311 RADIO_TX_INIT
+0F2D   1587           00312         CE_HI
+0F2E   1707           00313         CSN_HI
+0F2F   1306           00314         CLK_LO
+0F30   1787           00315         MOSI_HI
+                      00316 
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0F31   3010           00317         MOVLW   .16
+0F32   00D4           00318         MOVWF   PAYLOADSIZE
+                      00319 
+0F33   300E           00320         MOVLW   0X0E
+0F34   00A0           00321         MOVWF   NRF_REG00
+                      00322 
+0F35   2743           00323         CALL    RADIO_SETSETTINGS
+0F36   1187           00324         CE_LO
+Warning[203]: Found opcode in column 1. (RETURN)
+0F37   0008           00325 RETURN
+                      00326 
+                      00327 ;============ init rx mode ===========
+0F38                  00328 RADIO_RX_INIT
+0F38   1587           00329         CE_HI
+0F39   1707           00330         CSN_HI
+0F3A   1306           00331         CLK_LO
+0F3B   1787           00332         MOSI_HI
+                      00333 
+0F3C   3010           00334         MOVLW   .16
+0F3D   00D4           00335         MOVWF   PAYLOADSIZE
+                      00336 
+0F3E   300F           00337         MOVLW   0X0F
+0F3F   00A0           00338         MOVWF   NRF_REG00
+                      00339 
+0F40   2743           00340         CALL    RADIO_SETSETTINGS
+0F41   1587           00341         CE_HI
+Warning[203]: Found opcode in column 1. (RETURN)
+0F42   0008           00342 RETURN
+                      00343 ;=====================================
+                      00344 
+                      00345 
+                      00346 
+                      00347 ;========== set nrf settings =========
+0F43                  00348 RADIO_SETSETTINGS
+0F43   303F           00349         MOVLW   0X3F
+0F44   00A1           00350         MOVWF   NRF_REG01
+                      00351 
+0F45   3003           00352         MOVLW   0X03
+0F46   00A2           00353         MOVWF   NRF_REG02
+                      00354         
+0F47   3003           00355         MOVLW   0X03
+0F48   00A3           00356         MOVWF   NRF_REG03
+                      00357 
+0F49   305F           00358         MOVLW   0X5F
+0F4A   00A4           00359         MOVWF   NRF_REG04
+                      00360 
+0F4B   304C           00361         MOVLW   0X4C
+0F4C   00A5           00362         MOVWF   NRF_REG05
+                      00363 
+0F4D   3027           00364         MOVLW   0X27
+0F4E   00A6           00365         MOVWF   NRF_REG06
+                      00366 
+                      00367 
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0F4F   3000           00368         MOVLW   0X00
+0F50   00D5           00369         MOVWF   REG_TOWRITE
+0F51   0820           00370         MOVFW   NRF_REG00
+0F52   00D7           00371         MOVWF   DATA_TOWRITE
+0F53   27A6           00372         CALL    CMD_REGWRITE
+                      00373 
+0F54   3001           00374         MOVLW   0X01
+0F55   00D5           00375         MOVWF   REG_TOWRITE
+0F56   0821           00376         MOVFW   NRF_REG01
+0F57   00D7           00377         MOVWF   DATA_TOWRITE
+0F58   27A6           00378         CALL    CMD_REGWRITE
+                      00379 
+0F59   3002           00380         MOVLW   0X02
+0F5A   00D5           00381         MOVWF   REG_TOWRITE
+0F5B   0822           00382         MOVFW   NRF_REG02
+0F5C   00D7           00383         MOVWF   DATA_TOWRITE
+0F5D   27A6           00384         CALL    CMD_REGWRITE
+                      00385 
+0F5E   3003           00386         MOVLW   0X03
+0F5F   00D5           00387         MOVWF   REG_TOWRITE
+0F60   0823           00388         MOVFW   NRF_REG03
+0F61   00D7           00389         MOVWF   DATA_TOWRITE
+0F62   27A6           00390         CALL    CMD_REGWRITE
+                      00391 
+0F63   3004           00392         MOVLW   0X04
+0F64   00D5           00393         MOVWF   REG_TOWRITE
+0F65   0824           00394         MOVFW   NRF_REG04
+0F66   00D7           00395         MOVWF   DATA_TOWRITE
+0F67   27A6           00396         CALL    CMD_REGWRITE
+                      00397 
+0F68   3005           00398         MOVLW   0X05
+0F69   00D5           00399         MOVWF   REG_TOWRITE
+0F6A   0825           00400         MOVFW   NRF_REG05
+0F6B   00D7           00401         MOVWF   DATA_TOWRITE
+0F6C   27A6           00402         CALL    CMD_REGWRITE
+                      00403 
+0F6D   3006           00404         MOVLW   0X06
+0F6E   00D5           00405         MOVWF   REG_TOWRITE
+0F6F   0826           00406         MOVFW   NRF_REG06
+0F70   00D7           00407         MOVWF   DATA_TOWRITE
+0F71   27A6           00408         CALL    CMD_REGWRITE
+                      00409 
+0F72   3011           00410         MOVLW   0X11
+0F73   00D5           00411         MOVWF   REG_TOWRITE
+0F74   0854           00412         MOVFW   PAYLOADSIZE
+0F75   00D7           00413         MOVWF   DATA_TOWRITE
+0F76   27A6           00414         CALL    CMD_REGWRITE
+                      00415 
+0F77   277C           00416         CALL    SET_TX_ADDRESS
+0F78   2791           00417         CALL    SET_RX_ADDRESS
+                      00418 
+0F79   2712           00419         CALL    RADIO_CLRSTATUS
+0F7A   271E           00420         CALL    RADIO_FLUSHFIFO
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE 10
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[203]: Found opcode in column 1. (RETURN)
+0F7B   0008           00421 RETURN
+                      00422 ;=====================================
+                      00423 
+                      00424 ;========== set tx address ===========
+0F7C                  00425 SET_TX_ADDRESS
+0F7C   1307           00426         CSN_LO
+                      00427 
+0F7D   3030           00428         MOVLW   B'00110000'
+0F7E   00D9           00429         MOVWF   SPI_DATA0
+0F7F   27B8           00430         CALL    SPI_SENDBYTE
+                      00431 
+0F80   082D           00432         MOVFW   TX_ADDR_B0
+0F81   00D9           00433         MOVWF   SPI_DATA0
+0F82   27B8           00434         CALL    SPI_SENDBYTE
+                      00435 
+0F83   082E           00436         MOVFW   TX_ADDR_B1
+0F84   00D9           00437         MOVWF   SPI_DATA0
+0F85   27B8           00438         CALL    SPI_SENDBYTE
+                      00439 
+0F86   082F           00440         MOVFW   TX_ADDR_B2
+0F87   00D9           00441         MOVWF   SPI_DATA0
+0F88   27B8           00442         CALL    SPI_SENDBYTE
+                      00443 
+0F89   0830           00444         MOVFW   TX_ADDR_B3
+0F8A   00D9           00445         MOVWF   SPI_DATA0
+0F8B   27B8           00446         CALL    SPI_SENDBYTE
+                      00447 
+0F8C   0831           00448         MOVFW   TX_ADDR_B4
+0F8D   00D9           00449         MOVWF   SPI_DATA0
+0F8E   27B8           00450         CALL    SPI_SENDBYTE
+                      00451 
+0F8F   1707           00452         CSN_HI
+Warning[203]: Found opcode in column 1. (RETURN)
+0F90   0008           00453 RETURN
+                      00454 ;=====================================
+                      00455 
+                      00456 ;========== set rx address ===========
+0F91                  00457 SET_RX_ADDRESS
+0F91   1307           00458         CSN_LO
+0F92   302A           00459         MOVLW   B'00101010'
+0F93   00D9           00460         MOVWF   SPI_DATA0
+0F94   27B8           00461         CALL    SPI_SENDBYTE
+                      00462         
+0F95   0828           00463         MOVFW   RX_ADDR_P00
+0F96   00D9           00464         MOVWF   SPI_DATA0
+0F97   27B8           00465         CALL    SPI_SENDBYTE
+                      00466 
+0F98   0829           00467         MOVFW   RX_ADDR_P01
+0F99   00D9           00468         MOVWF   SPI_DATA0
+0F9A   27B8           00469         CALL    SPI_SENDBYTE
+                      00470 
+0F9B   082A           00471         MOVFW   RX_ADDR_P02
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE 11
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0F9C   00D9           00472         MOVWF   SPI_DATA0
+0F9D   27B8           00473         CALL    SPI_SENDBYTE
+                      00474         
+0F9E   082B           00475         MOVFW   RX_ADDR_P03
+0F9F   00D9           00476         MOVWF   SPI_DATA0
+0FA0   27B8           00477         CALL    SPI_SENDBYTE
+                      00478 
+0FA1   082C           00479         MOVFW   RX_ADDR_P04
+0FA2   00D9           00480         MOVWF   SPI_DATA0
+0FA3   27B8           00481         CALL    SPI_SENDBYTE
+                      00482 
+0FA4   1707           00483         CSN_HI
+Warning[203]: Found opcode in column 1. (RETURN)
+0FA5   0008           00484 RETURN
+                      00485 ;=====================================
+                      00486 
+                      00487 ;======== write nrf register =========
+0FA6                  00488 CMD_REGWRITE
+0FA6   1307           00489         CSN_LO
+                      00490 
+0FA7   16D5           00491         BSF             REG_TOWRITE,5
+0FA8   0855           00492         MOVFW   REG_TOWRITE
+                      00493 
+0FA9   00D9           00494         MOVWF   SPI_DATA0
+0FAA   27B8           00495         CALL    SPI_SENDBYTE
+                      00496 
+0FAB   0857           00497         MOVFW   DATA_TOWRITE
+                      00498 
+0FAC   00D9           00499         MOVWF   SPI_DATA0
+0FAD   27B8           00500         CALL    SPI_SENDBYTE
+                      00501 
+0FAE   1707           00502         CSN_HI
+Warning[203]: Found opcode in column 1. (RETURN)
+0FAF   0008           00503 RETURN
+                      00504 ;=====================================
+                      00505 
+                      00506 
+                      00507 ;======== read nrf register ==========
+0FB0                  00508 CMD_REGREAD
+0FB0   1307           00509         CSN_LO
+                      00510 
+0FB1   12D6           00511         BCF             REG_TOREAD,5
+0FB2   0856           00512         MOVFW   REG_TOREAD
+                      00513         
+0FB3   00D9           00514         MOVWF   SPI_DATA0
+0FB4   27B8           00515         CALL    SPI_SENDBYTE
+                      00516 
+0FB5   27C9           00517         CALL    SPI_RECVBYTE
+                      00518 
+0FB6   1707           00519         CSN_HI
+                      00520 
+Warning[203]: Found opcode in column 1. (RETURN)
+0FB7   0008           00521 RETURN
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE 12
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00522 ;=====================================
+                      00523 
+                      00524 
+                      00525 ;========== spi send byte ============
+0FB8                  00526 SPI_SENDBYTE
+                      00527 
+0FB8   3008           00528         MOVLW   8
+0FB9   00DB           00529         MOVWF   CLK_LOOP
+0FBA                  00530 SSB0
+Message[305]: Using default destination of 1 (file).
+0FBA   0DD9           00531         RLF             SPI_DATA0
+                      00532 
+0FBB   1C03           00533         BTFSS   STATUS,C
+0FBC   2FC0           00534         GOTO    SSB_MOSI0
+0FBD   2FBE           00535         GOTO    SSB_MOSI1
+                      00536 
+0FBE                  00537 SSB_MOSI1
+0FBE   1787           00538         MOSI_HI
+0FBF   2FC3           00539         GOTO    SSB1
+                      00540 
+0FC0                  00541 SSB_MOSI0
+0FC0   1387           00542         MOSI_LO
+0FC1   2FC3           00543         GOTO    SSB1
+Warning[203]: Found opcode in column 1. (NOP)
+0FC2   0000           00544 NOP
+                      00545 
+0FC3                  00546 SSB1
+0FC3   1706           00547         CLK_HI
+0FC4   1306           00548         CLK_LO
+                      00549 
+0FC5   0BDB           00550         DECFSZ  CLK_LOOP,F
+0FC6   2FBA           00551         GOTO    SSB0
+                      00552 
+0FC7   1306           00553         CLK_LO
+Warning[203]: Found opcode in column 1. (RETURN)
+0FC8   0008           00554 RETURN
+                      00555 ;=====================================
+                      00556 
+                      00557 
+                      00558 ;========== spi recieve byte =========
+0FC9                  00559 SPI_RECVBYTE
+0FC9   01DA           00560         CLRF    SPI_DATA1
+0FCA   01D8           00561         CLRF    DATA_TOREAD
+                      00562 
+0FCB   3008           00563         MOVLW   8
+0FCC   00DB           00564         MOVWF   CLK_LOOP
+                      00565 
+0FCD                  00566 SRB0
+0FCD   1E06           00567         BTFSS   PORTB,4
+0FCE   2FD2           00568         GOTO    SRB_MISO0
+0FCF   2FD0           00569         GOTO    SRB_MISO1
+                      00570 
+0FD0                  00571 SRB_MISO1
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE 13
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0FD0   1403           00572         SETC
+0FD1   2FD4           00573         GOTO    SRB1
+                      00574 
+0FD2                  00575 SRB_MISO0
+0FD2   1003           00576         CLRC
+0FD3   2FD4           00577         GOTO    SRB1
+                      00578 
+0FD4                  00579 SRB1
+Message[305]: Using default destination of 1 (file).
+0FD4   0DDA           00580         RLF     SPI_DATA1
+                      00581 
+0FD5   1706           00582         CLK_HI
+0FD6   1306           00583         CLK_LO
+                      00584 
+0FD7   0BDB           00585         DECFSZ  CLK_LOOP,F
+0FD8   2FCD           00586         GOTO    SRB0
+                      00587 
+0FD9   085A           00588         MOVFW   SPI_DATA1
+0FDA   00D8           00589         MOVWF   DATA_TOREAD
+                      00590 
+0FDB   1306           00591         CLK_LO
+Warning[203]: Found opcode in column 1. (RETURN)
+0FDC   0008           00592 RETURN
+                      00593 ;=====================================
+                      00594 
+                      00595 
+                      00596         
+                      00597         
+                      00598 
+                      00599 
+                      00600 ;==========     delay usec =========
+0FDD                  00601 NRF_DELAY_US
+                      00602 
+0FDD   00DE           00603         MOVWF   NRF_DELAYUS
+                      00604 
+0FDE                  00605 NRF_USEC
+                      00606 
+0FDE   0000           00607         NOP
+0FDF   0000           00608         NOP
+0FE0   0000           00609         NOP
+0FE1   0000           00610         NOP
+0FE2   0BDE           00611         DECFSZ  NRF_DELAYUS,F
+                      00612 
+0FE3   2FDE           00613         GOTO    NRF_USEC
+                      00614 
+Warning[203]: Found opcode in column 1. (RETURN)
+0FE4   0008           00615 RETURN
+                      00616 ;=================================
+                      00617 
+                      00618 
+                      00619 
+                      00620 ;=========== delay one ms ========
+0FE5                  00621 NRF_DELAY_ONEMS
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE 14
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00622 
+0FE5   3005           00623         MOVLW   .5
+0FE6   00DD           00624         MOVWF   NRF_DLOOP
+                      00625 
+0FE7                  00626 NRF_MSEC
+0FE7   30C8           00627         MOVLW   .200
+0FE8   27DD           00628         CALL    NRF_DELAY_US
+0FE9   0BDD           00629         DECFSZ  NRF_DLOOP,F
+0FEA   2FE7           00630         GOTO    NRF_MSEC
+                      00631 
+Warning[203]: Found opcode in column 1. (RETURN)
+0FEB   0008           00632 RETURN
+                      00633 ;==================================
+                      00634 
+                      00635 
+                      00636 ;=========== delay ms   ==========
+0FEC                  00637 NRF_DELAY_MS
+                      00638         
+0FEC   00DF           00639         MOVWF   NRF_DELAYMS
+0FED                  00640 NRF_MSEC0
+0FED   27E5           00641         CALL    NRF_DELAY_ONEMS
+0FEE   0BDF           00642         DECFSZ  NRF_DELAYMS,F
+0FEF   2FED           00643         GOTO    NRF_MSEC0
+Warning[203]: Found opcode in column 1. (RETURN)
+0FF0   0008           00644 RETURN
+                      00645 ;=================================
+                      00646 
+                      00647 
+                      00648 
+                      00649 
+                      00650 
+                      00651 
+                      00652 
+                      00653 
+                      00018         
+2007   30C2           00019         __CONFIG    _CP_OFF & _CPD_OFF & _BOR_OFF & _PWRTE_ON & _WDT_OFF & _HS_OSC & _MCLRE_OFF & _FCMEN
+                            _OFF & _IESO_OFF
+                      00020 
+                      00021 
+                      00022 ; '__config' directive is used to embed configuration data within .asm file.
+                      00023 ; the labels following the directive are located in the respective .inc file.
+                      00024 ; see respective data sheet for additional information on configuration word.
+                      00025 
+                      00026 
+                      00027 
+                      00028 
+                      00029 
+                      00030 
+                      00031 ;***** variable definitions
+  0000007D            00032 W_TEMP          EQU     0X7D                    ; variable used for context saving
+  0000007E            00033 STATUS_TEMP     EQU     0X7E                    ; variable used for context saving
+  0000007F            00034 PCLATH_TEMP     EQU     0X7F                    ; variable used for context saving
+                      00035 
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE 15
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00036 
+                      00037 
+                      00038 
+                      00039         #DEFINE BANK0           BANKSEL PORTA
+                      00040         #DEFINE BANK1           BANKSEL ADRESL
+                      00041         #DEFINE BANK2           BANKSEL ANSELH
+                      00042 
+                      00043 
+                      00044 
+                      00045 ;============================   bank    0       ===========================
+Warning[205]: Found directive in column 1. (CBLOCK)
+                      00046 CBLOCK 0X60
+  00000060            00047         UAPAYLOAD: .17
+  00000071            00048         UAPAYLOAD_TEMP
+  00000072            00049         HEADER,FOOTER
+  00000074            00050         CNT0,CNT1,VAR
+                      00051 
+  00000077            00052         UAFLAG                  ;bit0 ==> header detect
+                      00053                                         ;bit1 ==> footer detect
+                      00054 
+  00000078            00055         FSR_TEMP
+  00000079            00056         UA_FSR
+  0000007A            00057         UAPL_COUNT
+                      00058 
+  0000007B            00059         TEST
+Warning[205]: Found directive in column 1. (ENDC)
+                      00060 ENDC
+                      00061 ;======================================================================
+                      00062 
+                      00063 ;**********************************************************************
+0000                  00064         ORG             0X000                           ; processor reset vector
+0000   280E           00065         GOTO    INIT                            ; go to beginning of program
+                      00066 
+                      00067 
+0004                  00068         ORG             0X004                           ; interrupt vector location
+0004   138B           00069         BCF     INTCON,7                        ;disable all interrupts
+0005   00FD           00070         MOVWF   W_TEMP                  ; save off current w register contents
+0006   0803           00071         MOVFW   STATUS                  ; move status register into w register
+0007   00FE           00072         MOVWF   STATUS_TEMP             ; save off contents of status register
+0008   080A           00073         MOVFW   PCLATH                  ; move pclath register into w register
+0009   00FF           00074         MOVWF   PCLATH_TEMP             ; save off contents of pclath register
+                      00075 
+000A   0804           00076         MOVFW   FSR
+000B   00F8           00077         MOVWF   FSR_TEMP
+                      00078 
+000C   018A           00079         CLRF    PCLATH
+                      00080 
+000D   289A           00081         GOTO            INTERRUPT
+                      00082 ; isr code can go here or be located as a call subroutine elsewhere
+                      00083 
+000E                  00084 INIT:
+000E   1283 1703      00085         BANKSEL ANSEL
+0010   0103           00086         CLRW
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE 16
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0011   009E           00087         MOVWF   ANSEL
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0012   009F           00088         MOVWF   ANSELH
+                      00089 
+0013   1683 1303      00090         BANKSEL TRISA
+                      00091 
+0015   300C           00092         MOVLW   0X0C
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0016   0085           00093         MOVWF   TRISA
+                      00094 
+0017   30B0           00095         MOVLW   0XB0
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0018   0086           00096         MOVWF   TRISB
+                      00097 
+0019   3007           00098         MOVLW   0X07
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+001A   0087           00099         MOVWF   TRISC
+                      00100 
+001B   1283 1303      00101         BANK0
+                      00102         
+                      00103 
+001D   0187           00104         CLRF    PORTC
+001E   0186           00105         CLRF    PORTB
+001F   0185           00106         CLRF    PORTA
+                      00107 
+                      00108 ;banksel        wdtcon
+                      00109 ;       movlw   b'00001011
+                      00110 ;       movwf   wdtcon
+Warning[205]: Found directive in column 1. (BANKSEL)
+0020   1283 1303      00111 BANK0
+0022   3030           00112         MOVLW   0X30
+0023   00A8           00113         MOVWF   RX_ADDR_P00
+0024   00A9           00114         MOVWF   RX_ADDR_P01
+0025   00AA           00115         MOVWF   RX_ADDR_P02
+0026   00AB           00116         MOVWF   RX_ADDR_P03
+0027   00AC           00117         MOVWF   RX_ADDR_P04
+                      00118 
+0028   00AD           00119         MOVWF   TX_ADDR_B0
+0029   00AE           00120         MOVWF   TX_ADDR_B1
+002A   00AF           00121         MOVWF   TX_ADDR_B2
+002B   00B0           00122         MOVWF   TX_ADDR_B3
+002C   00B1           00123         MOVWF   TX_ADDR_B4
+                      00124 
+002D   01B4           00125         CLRF    TXPAYLOAD+00
+002E   01C4           00126         CLRF    RXPAYLOAD+00
+                      00127 
+002F   01B5           00128         CLRF    TXPAYLOAD+01
+0030   01C5           00129         CLRF    RXPAYLOAD+01
+                      00130 
+0031   01B6           00131         CLRF    TXPAYLOAD+02
+0032   01C6           00132         CLRF    RXPAYLOAD+02
+                      00133 
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE 17
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0033   01B7           00134         CLRF    TXPAYLOAD+03
+0034   01C7           00135         CLRF    RXPAYLOAD+03
+                      00136 
+0035   01B8           00137         CLRF    TXPAYLOAD+04
+0036   01C8           00138         CLRF    RXPAYLOAD+04
+                      00139         
+0037   01B9           00140         CLRF    TXPAYLOAD+05
+0038   01C9           00141         CLRF    RXPAYLOAD+05
+                      00142 
+0039   01BA           00143         CLRF    TXPAYLOAD+06
+003A   01CA           00144         CLRF    RXPAYLOAD+06
+                      00145 
+003B   01BB           00146         CLRF    TXPAYLOAD+07
+003C   01CB           00147         CLRF    RXPAYLOAD+07
+                      00148 
+003D   01BC           00149         CLRF    TXPAYLOAD+08
+003E   01CC           00150         CLRF    RXPAYLOAD+08
+                      00151 
+003F   01BD           00152         CLRF    TXPAYLOAD+09
+0040   01CD           00153         CLRF    RXPAYLOAD+09
+                      00154 
+0041   01BE           00155         CLRF    TXPAYLOAD+0A
+0042   01CE           00156         CLRF    RXPAYLOAD+0A
+                      00157 
+0043   01BF           00158         CLRF    TXPAYLOAD+0B
+0044   01CF           00159         CLRF    RXPAYLOAD+0B
+                      00160 
+0045   01C0           00161         CLRF    TXPAYLOAD+0C
+0046   01D0           00162         CLRF    RXPAYLOAD+0C
+                      00163 
+0047   01C1           00164         CLRF    TXPAYLOAD+0D
+0048   01D1           00165         CLRF    RXPAYLOAD+0D
+                      00166 
+0049   01C2           00167         CLRF    TXPAYLOAD+0E
+004A   01D2           00168         CLRF    RXPAYLOAD+0E
+                      00169 
+004B   01C3           00170         CLRF    TXPAYLOAD+0F
+004C   01D3           00171         CLRF    RXPAYLOAD+0F
+                      00172 
+Warning[205]: Found directive in column 1. (BANKSEL)
+004D   1283 1303      00173 BANK0
+004F   302F           00174         MOVLW   D'47'
+0050   00FB           00175         MOVWF   TEST
+0051   3010           00176         MOVLW   D'16'
+Message[305]: Using default destination of 1 (file).
+0052   05FB           00177         ANDWF   TEST
+                      00178         
+                      00179 
+0053   01F7           00180         CLRF    UAFLAG
+                      00181 
+0054   1D05           00182         BTFSS   PORTA,2
+0055   2857           00183         GOTO    INIT_RXMODE
+0056   285C           00184         GOTO    INIT_TXMODE
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE 18
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00185 
+0057                  00186 INIT_RXMODE
+0057   2112           00187         CALL    NRF_RX_MODE     
+0058   148A           00188         BSF             PCLATH,1
+0059   2212           00189         CALL    UART_TX_MODE
+005A   108A           00190         BCF             PCLATH,1
+Warning[203]: Found opcode in column 1. (GOTO)
+005B   2861           00191 GOTO    MAIN
+                      00192 
+005C                  00193 INIT_TXMODE
+005C   210C           00194         CALL    NRF_TX_MODE
+005D   148A           00195         BSF             PCLATH,1
+005E   2200           00196         CALL    UART_RX_MODE
+005F   108A           00197         BCF             PCLATH,1
+Warning[203]: Found opcode in column 1. (GOTO)
+0060   2861           00198 GOTO    MAIN
+                      00199 
+                      00200 
+                      00201 ;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+0061                  00202 MAIN:
+                      00203 
+0061   1D05           00204         BTFSS   PORTA,2
+0062   2864           00205         GOTO    OP_RXMODE
+0063   2888           00206         GOTO    OP_TXMODE
+                      00207 
+                      00208 ;##################################################
+0064                  00209 OP_RXMODE
+0064   208C           00210         CALL    TIMEOUT
+0065   208C           00211         CALL    TIMEOUT
+0066   208C           00212         CALL    TIMEOUT
+0067   208C           00213         CALL    TIMEOUT
+0068   208C           00214         CALL    TIMEOUT
+0069   208C           00215         CALL    TIMEOUT
+006A   208C           00216         CALL    TIMEOUT
+006B   208C           00217         CALL    TIMEOUT
+                      00218 
+006C   2106           00219         CALL    NRF_GET_PAYLOAD
+                      00220 
+006D   208C           00221         CALL    TIMEOUT
+006E   208C           00222         CALL    TIMEOUT
+006F   208C           00223         CALL    TIMEOUT
+0070   208C           00224         CALL    TIMEOUT
+0071   208C           00225         CALL    TIMEOUT
+0072   208C           00226         CALL    TIMEOUT
+0073   208C           00227         CALL    TIMEOUT
+0074   208C           00228         CALL    TIMEOUT
+                      00229 
+Warning[205]: Found directive in column 1. (BANKSEL)
+0075   1283 1303      00230 BANK0
+                      00231 
+0077   30EC           00232         MOVLW   0XEC
+0078   0099           00233         MOVWF   TXREG
+                      00234         
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE 19
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00235 
+0079   208C           00236         CALL    TIMEOUT
+                      00237 
+007A   3010           00238         MOVLW   .16
+007B   00F6           00239         MOVWF   VAR
+                      00240 
+007C   3044           00241         MOVLW   0X44
+007D   0084           00242         MOVWF   FSR
+                      00243 
+007E                  00244 MN0
+007E   0800           00245         MOVFW   INDF
+007F   0099           00246         MOVWF   TXREG
+                      00247 
+0080   208C           00248         CALL    TIMEOUT
+Message[305]: Using default destination of 1 (file).
+0081   0A84           00249         INCF    FSR
+0082   0BF6           00250         DECFSZ  VAR,F
+0083   287E           00251         GOTO    MN0
+                      00252 
+0084   30FC           00253         MOVLW   0XFC
+0085   0099           00254         MOVWF   TXREG
+                      00255 
+0086   208C           00256         CALL    TIMEOUT
+0087   2864           00257         GOTO    OP_RXMODE
+                      00258 ;##################################################
+                      00259 
+                      00260 ;##################################################
+0088                  00261 OP_TXMODE
+0088   0064           00262         CLRWDT
+0089   2100           00263         CALL    NRF_SEND_PAYLOAD
+                      00264 
+Warning[203]: Found opcode in column 1. (GOTO)
+008A   2888           00265 GOTO    OP_TXMODE
+                      00266 ;##################################################
+                      00267 
+Warning[203]: Found opcode in column 1. (GOTO)
+008B   2861           00268 GOTO    MAIN
+                      00269 ;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                      00270 
+                      00271 
+                      00272 
+008C                  00273 TIMEOUT
+                      00274 
+008C                  00275 TRANSWT
+008C   1683           00276         BSF STATUS, RP0
+008D                  00277 WTHERE
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+008D   1C98           00278         BTFSS TXSTA, TRMT
+008E   288D           00279     GOTO WTHERE
+                      00280 
+008F   1283           00281     BCF STATUS, RP0
+Warning[203]: Found opcode in column 1. (RETURN)
+0090   0008           00282 RETURN
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE 20
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00283 
+0091                  00284 DELAY
+0091   30F0           00285         MOVLW 0XF0
+0092   00F5           00286         MOVWF CNT1
+0093                  00287 D1
+0093   30FA           00288         MOVLW 0XFA
+0094   00F4           00289         MOVWF CNT0
+0095                  00290 D0
+Message[305]: Using default destination of 1 (file).
+0095   0BF4           00291         DECFSZ CNT0
+0096   2895           00292         GOTO D0
+                      00293         
+Message[305]: Using default destination of 1 (file).
+0097   0BF5           00294         DECFSZ CNT1
+0098   2893           00295         GOTO D1
+                      00296 
+0099   0008           00297         RETURN
+                      00298 
+                      00299 
+                      00300 
+                      00301 
+                      00302 
+                      00303 ;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+009A                  00304 INTERRUPT:
+009A   1E8C           00305         BTFSS   PIR1,5                          ;check if the rcif flag is set
+009B   28BE           00306         GOTO    END_INTERRUPT
+                      00307 
+                      00308 
+009C   081A           00309         MOVFW   RCREG                           ;move the received byte to w
+009D   00F1           00310         MOVWF   UAPAYLOAD_TEMP
+                      00311 
+009E   1877           00312         BTFSC   UAFLAG,0
+009F   28A9           00313         GOTO    UA_STARTED
+                      00314 
+                      00315         
+                      00316 ;============== header detect =====================
+00A0   30EC           00317         MOVLW   0XEC                            ;data header
+Message[305]: Using default destination of 1 (file).
+00A1   02F1           00318         SUBWF   UAPAYLOAD_TEMP
+00A2   1D03           00319         BTFSS   STATUS,Z
+00A3   28BD           00320         GOTO    EINT0
+                      00321 
+00A4   1477           00322         BSF             UAFLAG,0
+00A5   01FA           00323         CLRF    UAPL_COUNT
+00A6   3060           00324         MOVLW   0X60
+00A7   00F9           00325         MOVWF   UA_FSR
+                      00326 
+00A8   28BD           00327         GOTO    EINT0
+                      00328 ;==================================================     
+                      00329 
+                      00330 
+                      00331 
+00A9                  00332 UA_STARTED
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE 21
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00333         
+00A9   0879           00334         MOVFW   UA_FSR
+00AA   0084           00335         MOVWF   FSR
+                      00336         
+00AB   0871           00337         MOVFW   UAPAYLOAD_TEMP
+00AC   0080           00338         MOVWF   INDF
+                      00339 
+Message[305]: Using default destination of 1 (file).
+00AD   0AF9           00340         INCF    UA_FSR
+Message[305]: Using default destination of 1 (file).
+00AE   0AFA           00341         INCF    UAPL_COUNT
+                      00342 
+00AF   30FC           00343         MOVLW   0XFC
+Message[305]: Using default destination of 1 (file).
+00B0   02F1           00344         SUBWF   UAPAYLOAD_TEMP
+00B1   1D03           00345         BTFSS   STATUS,Z
+00B2   28BD           00346         GOTO    EINT0
+                      00347         
+00B3   01F7           00348         CLRF    UAFLAG
+                      00349 
+00B4   3011           00350         MOVLW   .17
+Message[305]: Using default destination of 1 (file).
+00B5   02FA           00351         SUBWF   UAPL_COUNT
+00B6   1D03           00352         BTFSS   STATUS,Z
+00B7   28B9           00353         GOTO    FOOTER0
+00B8   28BB           00354         GOTO    FOOTER1
+                      00355 
+00B9                  00356 FOOTER0
+00B9   0000           00357         NOP             ;footer is false
+00BA   28BD           00358         GOTO    EINT0
+                      00359 
+00BB                  00360 FOOTER1
+00BB   20C8           00361         CALL    UA_TRANSFER
+00BC   28BD           00362         GOTO    EINT0
+                      00363 
+                      00364 
+00BD                  00365 EINT0
+00BD   128C           00366         BCF PIR1,5
+                      00367 
+00BE                  00368 END_INTERRUPT:  
+00BE   0878           00369         MOVFW           FSR_TEMP
+00BF   0084           00370         MOVWF           FSR
+00C0   087F           00371         MOVF            PCLATH_TEMP,W   ; retrieve copy of pclath register
+00C1   008A           00372         MOVWF           PCLATH                  ; restore pre-isr pclath register contents      
+00C2   087E           00373         MOVF            STATUS_TEMP,W   ; retrieve copy of status register
+00C3   0083           00374         MOVWF           STATUS                  ; restore pre-isr status register contents
+00C4   0EFD           00375         SWAPF           W_TEMP,F
+00C5   0E7D           00376         SWAPF           W_TEMP,W                ; restore pre-isr w register contents
+00C6   178B           00377         BSF     INTCON,7                                ;enable all interrupts
+                      00378 
+00C7   0009           00379         RETFIE                                          ; return from interrupt
+                      00380 ;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                      00381 
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE 22
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00382 
+                      00383 
+                      00384 ;================== transferring data from uart payload to nrf payload ==================
+00C8                  00385 UA_TRANSFER
+00C8   0860           00386         MOVFW   UAPAYLOAD+00
+00C9   00B4           00387         MOVWF   TXPAYLOAD+00
+                      00388 
+00CA   0861           00389         MOVFW   UAPAYLOAD+01
+00CB   00B5           00390         MOVWF   TXPAYLOAD+01
+                      00391 
+00CC   0862           00392         MOVFW   UAPAYLOAD+02
+00CD   00B6           00393         MOVWF   TXPAYLOAD+02
+                      00394 
+                      00395 
+00CE   0863           00396         MOVFW   UAPAYLOAD+03
+00CF   00B7           00397         MOVWF   TXPAYLOAD+03
+                      00398 
+                      00399 
+00D0   0864           00400         MOVFW   UAPAYLOAD+04
+00D1   00B8           00401         MOVWF   TXPAYLOAD+04
+                      00402 
+                      00403 
+00D2   0865           00404         MOVFW   UAPAYLOAD+05
+00D3   00B9           00405         MOVWF   TXPAYLOAD+05
+                      00406 
+                      00407 
+00D4   0866           00408         MOVFW   UAPAYLOAD+06
+00D5   00BA           00409         MOVWF   TXPAYLOAD+06
+                      00410 
+                      00411 
+00D6   0867           00412         MOVFW   UAPAYLOAD+07
+00D7   00BB           00413         MOVWF   TXPAYLOAD+07
+                      00414 
+00D8   0868           00415         MOVFW   UAPAYLOAD+08
+00D9   00BC           00416         MOVWF   TXPAYLOAD+08
+                      00417 
+                      00418 
+00DA   0869           00419         MOVFW   UAPAYLOAD+09
+00DB   00BD           00420         MOVWF   TXPAYLOAD+09
+                      00421 
+                      00422 
+00DC   086A           00423         MOVFW   UAPAYLOAD+0A
+00DD   00BE           00424         MOVWF   TXPAYLOAD+0A
+                      00425 
+00DE   086B           00426         MOVFW   UAPAYLOAD+0B
+00DF   00BF           00427         MOVWF   TXPAYLOAD+0B
+                      00428 
+00E0   086C           00429         MOVFW   UAPAYLOAD+0C
+00E1   00C0           00430         MOVWF   TXPAYLOAD+0C
+                      00431 
+00E2   086D           00432         MOVFW   UAPAYLOAD+0D
+00E3   00C1           00433         MOVWF   TXPAYLOAD+0D
+                      00434 
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE 23
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00E4   086E           00435         MOVFW   UAPAYLOAD+0E
+00E5   00C2           00436         MOVWF   TXPAYLOAD+0E
+                      00437 
+00E6   086F           00438         MOVFW   UAPAYLOAD+0F
+00E7   00C3           00439         MOVWF   TXPAYLOAD+0F
+                      00440 
+Warning[203]: Found opcode in column 1. (RETURN)
+00E8   0008           00441 RETURN
+                      00442 ;=============================================================================
+                      00443 
+                      00444 
+Warning[205]: Found directive in column 1. (ORG)
+0200                  00445 ORG 0X200
+                      00446 ;=================================      uart rx initialization ===================
+0200                  00447 UART_RX_MODE
+                      00448 
+Warning[205]: Found directive in column 1. (BANKSEL)
+0200   1683 1303      00449 BANK1
+                      00450 
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0202   1381           00451         BCF OPTION_REG,7
+                      00452 
+                      00453         ;---configure peripheral interrupts
+0203   3020           00454         MOVLW B'00100000' ;disable all peripheral interrupts except receiver
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0204   008C           00455         MOVWF PIE1 ;peripheral interrupt enable/disable
+                      00456 
+                      00457         ;---configure general interrupts
+0205   3040           00458         MOVLW B'01000000' ;disable all interrupts except peripheral
+0206   008B           00459         MOVWF INTCON ;interrupt control register
+                      00460 
+                      00461         ;---configure spbrg for desired baud rate
+0207   3081           00462         MOVLW D'129' ;we will use 9600bps 
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0208   0099           00463         MOVWF SPBRG ;baud at 20mhz
+                      00464 
+                      00465         ;---configure txsta
+0209   3024           00466         MOVLW B'00100100' ;configure txsta as :
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+020A   0098           00467         MOVWF TXSTA ;
+                      00468         ;8 bit transmission - 6.bit
+                      00469         ;transmit enabled - 5.bit
+                      00470         ;asynchronous mode - 4.bit
+                      00471         ;enable high speed baud rate - 2.bit
+                      00472 
+Warning[205]: Found directive in column 1. (BANKSEL)
+020B   1283 1303      00473 BANK0
+                      00474 
+020D   3080           00475         MOVLW B'10000000' ;enable serial port
+020E   0098           00476         MOVWF RCSTA ;receive status reg
+                      00477 
+                      00478 
+                      00479 
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE 24
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+020F   178B           00480         BSF INTCON,7 ;enable all unmasked interrupts
+0210   1618           00481         BSF RCSTA,4 ;enable usart receive
+Warning[203]: Found opcode in column 1. (RETURN)
+0211   0008           00482 RETURN
+                      00483 ;=============================================================================
+                      00484 
+                      00485 ;=================================      uart tx initialization ===================
+0212                  00486 UART_TX_MODE
+0212   1683 1303      00487         BANK1
+                      00488         ;---configure spbrg for desired baud rate
+0214   3081           00489         MOVLW D'129' ;we will use 4800bps 
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0215   0099           00490         MOVWF SPBRG ;baud at 4mhz
+                      00491 
+                      00492         
+                      00493         ;---configure txsta
+0216   3024           00494         MOVLW B'00100100' ;configure txsta as :
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0217   0098           00495         MOVWF TXSTA ;
+                      00496         ;8 bit transmission - 6.bit
+                      00497         ;transmit enabled - 5.bit
+                      00498         ;asynchronous mode - 4.bit
+                      00499         ;enable high speed baud rate - 2.bit
+                      00500 
+0218   1283 1303      00501         BANK0
+                      00502         
+021A   3080           00503         MOVLW B'10000000' ;enable serial port
+021B   0098           00504         MOVWF RCSTA ;receive status reg
+                      00505         
+                      00506 
+                      00507 
+Warning[203]: Found opcode in column 1. (RETURN)
+021C   0008           00508 RETURN
+                      00509 ;=============================================================================
+                      00510 
+                      00511 
+                      00512 
+2100                  00513         ORG     0X2100                          ; data eeprom location
+2100   0001 0002 0003 00514         DE      1,2,3,4                         ; define first four eeprom locations as 1, 2, 3, and 4
+       0004 
+                      00515 
+                      00516 
+                      00517 
+                      00518 
+                      00519         END                       ; directive 'end of program'
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE 25
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ABDEN                             00000000
+ABDOVF                            00000007
+ADCON0                            0000001F
+ADCON1                            0000009F
+ADCS0                             00000004
+ADCS1                             00000005
+ADCS2                             00000006
+ADDEN                             00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+ANS0                              00000000
+ANS1                              00000001
+ANS10                             00000002
+ANS11                             00000003
+ANS2                              00000002
+ANS3                              00000003
+ANS4                              00000004
+ANS5                              00000005
+ANS6                              00000006
+ANS7                              00000007
+ANS8                              00000000
+ANS9                              00000001
+ANSEL                             0000011E
+ANSELH                            0000011F
+BANK0                             BANKSEL PORTA
+BANK1                             BANKSEL ADRESL
+BANK2                             BANKSEL ANSELH
+BAUDCTL                           0000009B
+BF                                00000000
+BRG0                              00000000
+BRG1                              00000001
+BRG10                             00000002
+BRG11                             00000003
+BRG12                             00000004
+BRG13                             00000005
+BRG14                             00000006
+BRG15                             00000007
+BRG16                             00000003
+BRG2                              00000002
+BRG3                              00000003
+BRG4                              00000004
+BRG5                              00000005
+BRG6                              00000006
+BRG7                              00000007
+BRG8                              00000000
+BRG9                              00000001
+BRGH                              00000002
+C                                 00000000
+C1CH0                             00000000
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE 26
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+C1CH1                             00000001
+C1IE                              00000005
+C1IF                              00000005
+C1OE                              00000005
+C1ON                              00000007
+C1OUT                             00000006
+C1POL                             00000004
+C1R                               00000002
+C1SEN                             00000005
+C1VREN                            00000007
+C2CH0                             00000000
+C2CH1                             00000001
+C2IE                              00000006
+C2IF                              00000006
+C2OE                              00000005
+C2ON                              00000007
+C2OUT                             00000006
+C2POL                             00000004
+C2R                               00000002
+C2REN                             00000004
+C2SYNC                            00000000
+C2VREN                            00000006
+CCP1CON                           00000017
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCPR                              00000015
+CCPR1H                            00000016
+CCPR1L                            00000015
+CE_HI                             BSF PORTC,3
+CE_LO                             BCF     PORTC,3
+CHS0                              00000002
+CHS1                              00000003
+CHS2                              00000004
+CHS3                              00000005
+CKE                               00000006
+CKP                               00000004
+CLK_HI                            BSF     PORTB,6
+CLK_LO                            BCF     PORTB,6
+CLK_LOOP                          0000005B
+CM1CON0                           00000119
+CM2CON0                           0000011A
+CM2CON1                           0000011B
+CMD_REGREAD                       00000FB0
+CMD_REGWRITE                      00000FA6
+CNT0                              00000074
+CNT1                              00000075
+CREN                              00000004
+CSN_HI                            BSF     PORTC,6
+CSN_LO                            BCF     PORTC,6
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE 27
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CSRC                              00000007
+D                                 00000005
+D0                                00000095
+D1                                00000093
+DATA_ADDRESS                      00000005
+DATA_TOREAD                       00000058
+DATA_TOWRITE                      00000057
+DC                                00000001
+DC1B0                             00000004
+DC1B1                             00000005
+DELAY                             00000091
+D_A                               00000005
+D_NOT_A                           00000005
+ECCPAS                            0000001D
+ECCPAS0                           00000004
+ECCPAS1                           00000005
+ECCPAS2                           00000006
+ECCPASE                           00000007
+EEADR                             0000010D
+EEADRH                            0000010F
+EECON1                            0000018C
+EECON2                            0000018D
+EEDAT                             0000010C
+EEDATA                            0000010C
+EEDATH                            0000010E
+EEIE                              00000004
+EEIF                              00000004
+EEPGD                             00000007
+EINT0                             000000BD
+END_INTERRUPT                     000000BE
+F                                 00000001
+FERR                              00000002
+FOOTER                            00000073
+FOOTER0                           000000B9
+FOOTER1                           000000BB
+FSR                               00000004
+FSR_TEMP                          00000078
+GIE                               00000007
+GO                                00000001
+GO_DONE                           00000001
+GO_NOT_DONE                       00000001
+HEADER                            00000072
+HTS                               00000002
+I2C_DATA                          00000005
+I2C_READ                          00000002
+I2C_START                         00000003
+I2C_STOP                          00000004
+INDF                              00000000
+INIT                              0000000E
+INIT_RXMODE                       00000057
+INIT_TXMODE                       0000005C
+INTCON                            0000000B
+INTE                              00000004
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE 28
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+INTEDG                            00000006
+INTERRUPT                         0000009A
+INTF                              00000001
+IOC                               00000096
+IOC0                              00000000
+IOC1                              00000001
+IOC2                              00000002
+IOC3                              00000003
+IOC4                              00000004
+IOC5                              00000005
+IOCA                              00000096
+IOCA0                             00000000
+IOCA1                             00000001
+IOCA2                             00000002
+IOCA3                             00000003
+IOCA4                             00000004
+IOCA5                             00000005
+IOCB                              00000116
+IOCB4                             00000004
+IOCB5                             00000005
+IOCB6                             00000006
+IOCB7                             00000007
+IRCF0                             00000004
+IRCF1                             00000005
+IRCF2                             00000006
+IRP                               00000007
+LTS                               00000001
+MAIN                              00000061
+MC1OUT                            00000007
+MC2OUT                            00000006
+MN0                               0000007E
+MOSI_HI                           BSF     PORTC,7
+MOSI_LO                           BCF     PORTC,7
+MSK                               00000093
+MSK0                              00000000
+MSK1                              00000001
+MSK2                              00000002
+MSK3                              00000003
+MSK4                              00000004
+MSK5                              00000005
+MSK6                              00000006
+MSK7                              00000007
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
+NOT_BOR                           00000000
+NOT_DONE                          00000001
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_RABPU                         00000007
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+NOT_W                             00000002
+NOT_WRITE                         00000002
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE 29
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+NRF_DELAYMS                       0000005F
+NRF_DELAYUS                       0000005E
+NRF_DELAY_MS                      00000FEC
+NRF_DELAY_ONEMS                   00000FE5
+NRF_DELAY_US                      00000FDD
+NRF_DLOOP                         0000005D
+NRF_GET_PAYLOAD                   00000106
+NRF_MSEC                          00000FE7
+NRF_MSEC0                         00000FED
+NRF_REG00                         00000020
+NRF_REG01                         00000021
+NRF_REG02                         00000022
+NRF_REG03                         00000023
+NRF_REG04                         00000024
+NRF_REG05                         00000025
+NRF_REG06                         00000026
+NRF_REG07                         00000027
+NRF_REG11                         00000032
+NRF_REG17                         00000033
+NRF_RX_MODE                       00000112
+NRF_SEND_PAYLOAD                  00000100
+NRF_TX_MODE                       0000010C
+NRF_USEC                          00000FDE
+OERR                              00000001
+OPTION_REG                        00000081
+OP_RXMODE                         00000064
+OP_TXMODE                         00000088
+OSCCON                            0000008F
+OSCTUNE                           00000090
+OSFIE                             00000007
+OSFIF                             00000007
+OSTS                              00000003
+P                                 00000004
+P1M0                              00000006
+P1M1                              00000007
+PAYLOADSIZE                       00000054
+PCL                               00000002
+PCLATH                            0000000A
+PCLATH_TEMP                       0000007F
+PCON                              0000008E
+PDC0                              00000000
+PDC1                              00000001
+PDC2                              00000002
+PDC3                              00000003
+PDC4                              00000004
+PDC5                              00000005
+PDC6                              00000006
+PEIE                              00000006
+PIE1                              0000008C
+PIE2                              0000008D
+PIR1                              0000000C
+PIR2                              0000000D
+PL_LOOP                           0000005C
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE 30
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PORTA                             00000005
+PORTB                             00000006
+PORTC                             00000007
+PR2                               00000092
+PRSEN                             00000007
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+PSSAC0                            00000002
+PSSAC1                            00000003
+PSSBD0                            00000000
+PSSBD1                            00000001
+PSTRCON                           0000019D
+PULSR                             00000002
+PULSS                             00000003
+PWM1CON                           0000001C
+R                                 00000002
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RA5                               00000005
+RABIE                             00000003
+RABIF                             00000000
+RADIO_CHECKFIFO                   00000EFD
+RADIO_CHECKSTATUS                 00000F18
+RADIO_CLRSTATUS                   00000F12
+RADIO_FLUSHFIFO                   00000F1E
+RADIO_READ_RXFIFO                 00000F03
+RADIO_RECV_DATA                   00000EF0
+RADIO_RX_INIT                     00000F38
+RADIO_SEND_DATA                   00000ED0
+RADIO_SETSETTINGS                 00000F43
+RADIO_TX_INIT                     00000F2D
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RC0                               00000000
+RC1                               00000001
+RC2                               00000002
+RC3                               00000003
+RC4                               00000004
+RC5                               00000005
+RC6                               00000006
+RC7                               00000007
+RCIDL                             00000006
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+RCSTA                             00000018
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE 31
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RD                                00000000
+RDR_HI                            BSF     PORTC,4
+RDR_LO                            BCF     PORTC,4
+READ_WRITE                        00000002
+REG_TOREAD                        00000056
+REG_TOWRITE                       00000055
+RFF0                              00000F0B
+RP0                               00000005
+RP1                               00000006
+RRD0                              00000EFA
+RSD0                              00000ED8
+RSD1                              00000EEE
+RX9                               00000006
+RX9D                              00000000
+RXDR0                             00000EF4
+RXDR1                             00000EF5
+RXPAYLOAD                         00000044
+RX_ADDR_P00                       00000028
+RX_ADDR_P01                       00000029
+RX_ADDR_P02                       0000002A
+RX_ADDR_P03                       0000002B
+RX_ADDR_P04                       0000002C
+R_NOT_W                           00000002
+R_W                               00000002
+S                                 00000003
+SBOREN                            00000004
+SCKP                              00000004
+SCS                               00000000
+SENB                              00000003
+SENDB                             00000003
+SET_RX_ADDRESS                    00000F91
+SET_TX_ADDRESS                    00000F7C
+SMP                               00000007
+SPBRG                             00000099
+SPBRGH                            0000009A
+SPEN                              00000007
+SPI_DATA0                         00000059
+SPI_DATA1                         0000005A
+SPI_RECVBYTE                      00000FC9
+SPI_SENDBYTE                      00000FB8
+SR0                               00000006
+SR1                               00000007
+SRB0                              00000FCD
+SRB1                              00000FD4
+SRB_MISO0                         00000FD2
+SRB_MISO1                         00000FD0
+SRCON                             0000019E
+SREN                              00000005
+SSB0                              00000FBA
+SSB1                              00000FC3
+SSB_MOSI0                         00000FC0
+SSB_MOSI1                         00000FBE
+SSPADD                            00000093
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE 32
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+SSPBUF                            00000013
+SSPCON                            00000014
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+SSPM3                             00000003
+SSPMSK                            00000093
+SSPOV                             00000006
+SSPSTAT                           00000094
+STATUS                            00000003
+STATUS_TEMP                       0000007E
+STRA                              00000000
+STRB                              00000001
+STRC                              00000002
+STRD                              00000003
+STRSYNC                           00000004
+SWDTEN                            00000000
+SYNC                              00000004
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1GINV                            00000007
+T1GSS                             00000001
+T1IE                              00000000
+T1IF                              00000000
+T1OSCEN                           00000003
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+T2IE                              00000001
+T2IF                              00000001
+TDS_HI                            BSF PORTC,5
+TDS_LO                            BCF     PORTC,5
+TEST                              0000007B
+TIMEOUT                           0000008C
+TMR0                              00000001
+TMR1                              0000000E
+TMR1CS                            00000001
+TMR1GE                            00000006
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE 33
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRANSWT                           0000008C
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISA5                            00000005
+TRISB                             00000086
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+TRISC                             00000087
+TRISC0                            00000000
+TRISC1                            00000001
+TRISC2                            00000002
+TRISC3                            00000003
+TRISC4                            00000004
+TRISC5                            00000005
+TRISC6                            00000006
+TRISC7                            00000007
+TRMT                              00000001
+TUN0                              00000000
+TUN1                              00000001
+TUN2                              00000002
+TUN3                              00000003
+TUN4                              00000004
+TX9                               00000006
+TX9D                              00000000
+TXDS0                             00000EE9
+TXDS1                             00000EEB
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXPAYLOAD                         00000034
+TXREG                             00000019
+TXSTA                             00000098
+TX_ADDR_B0                        0000002D
+TX_ADDR_B1                        0000002E
+TX_ADDR_B2                        0000002F
+TX_ADDR_B3                        00000030
+TX_ADDR_B4                        00000031
+UA                                00000001
+UAFLAG                            00000077
+UAPAYLOAD                         00000060
+UAPAYLOAD_TEMP                    00000071
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE 34
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+UAPL_COUNT                        0000007A
+UART_RX_MODE                      00000200
+UART_TX_MODE                      00000212
+UA_FSR                            00000079
+UA_STARTED                        000000A9
+UA_TRANSFER                       000000C8
+ULPWUE                            00000005
+VAR                               00000076
+VCFG                              00000006
+VP6EN                             00000004
+VR0                               00000000
+VR1                               00000001
+VR2                               00000002
+VR3                               00000003
+VRCON                             00000118
+VRR                               00000005
+W                                 00000000
+WCOL                              00000007
+WDTCON                            00000097
+WDTPS0                            00000001
+WDTPS1                            00000002
+WDTPS2                            00000003
+WDTPS3                            00000004
+WPU                               00000095
+WPU0                              00000000
+WPU1                              00000001
+WPU2                              00000002
+WPU4                              00000004
+WPU5                              00000005
+WPUA                              00000095
+WPUA0                             00000000
+WPUA1                             00000001
+WPUA2                             00000002
+WPUA4                             00000004
+WPUA5                             00000005
+WPUB                              00000115
+WPUB4                             00000004
+WPUB5                             00000005
+WPUB6                             00000006
+WPUB7                             00000007
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+WTHERE                            0000008D
+WUE                               00000001
+W_TEMP                            0000007D
+Z                                 00000002
+_BOD_NSLEEP                       00003EFF
+_BOD_OFF                          00003CFF
+_BOD_ON                           00003FFF
+_BOD_SBODEN                       00003DFF
+_BOREN_NSLEEP                     00003EFF
+_BOREN_OFF                        00003CFF
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE 35
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_BOREN_ON                         00003FFF
+_BOREN_SBODEN                     00003DFF
+_BOR_NSLEEP                       00003EFF
+_BOR_OFF                          00003CFF
+_BOR_ON                           00003FFF
+_BOR_SBODEN                       00003DFF
+_CONFIG                           00002007
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003F7F
+_CP_OFF                           00003FFF
+_CP_ON                            00003FBF
+_DEVID1                           00002006
+_EC_OSC                           00003FFB
+_EXTRC                            00003FFF
+_EXTRCIO                          00003FFE
+_EXTRC_OSC_CLKOUT                 00003FFF
+_EXTRC_OSC_NOCLKOUT               00003FFE
+_FCMEN_OFF                        000037FF
+_FCMEN_ON                         00003FFF
+_FOSC_EC                          00003FFB
+_FOSC_EXTRCCLK                    00003FFF
+_FOSC_EXTRCIO                     00003FFE
+_FOSC_HS                          00003FFA
+_FOSC_INTRCCLK                    00003FFD
+_FOSC_INTRCIO                     00003FFC
+_FOSC_LP                          00003FF8
+_FOSC_XT                          00003FF9
+_HS_OSC                           00003FFA
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_IESO_OFF                         00003BFF
+_IESO_ON                          00003FFF
+_INTOSC                           00003FFD
+_INTOSCIO                         00003FFC
+_INTRC_OSC_CLKOUT                 00003FFD
+_INTRC_OSC_NOCLKOUT               00003FFC
+_LP_OSC                           00003FF8
+_MCLRE_OFF                        00003FDF
+_MCLRE_ON                         00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FEF
+_WDTE_OFF                         00003FF7
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FF7
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FF9
+__16F690                          00000001
+__DEBUG                           1
+MPASM  5.51         NRF24L01_PIC16F690_V0.ASM   12-28-2020  18:17:27         PAGE 36
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+
+0000 : X---XXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0080 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+00C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXX------- ----------------
+0100 : XXXXXXXXXXXXXXXX XXXXXXXX-------- ---------------- ----------------
+0200 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXX--- ---------------- ----------------
+0EC0 : ---------------- XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0F00 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0F40 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0F80 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0FC0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX X---------------
+2000 : -------X-------- ---------------- ---------------- ----------------
+2100 : XXXX------------ ---------------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:   572
+Program Memory Words Free:  3524
+
+
+Errors   :     0
+Warnings :    44 reported,     0 suppressed
+Messages :    29 reported,     0 suppressed
+
+

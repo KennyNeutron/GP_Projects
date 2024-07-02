@@ -1,0 +1,36 @@
+// SourceBoost Linker Function Resource Usage Dump
+
+#GLOBAL:"global",line = 0,ram = 50.0,rom = 0;
+__div_16_16(unsigned short,unsigned short):"E:\Prg\compiler.trunk\picantc\libc\div.c",line = 116,ram = 9.0,rom = 47;
+__mul_16u_16u__16(unsigned short,unsigned short):"E:\Prg\compiler.trunk\picantc\libc\mul.c",line = 197,ram = 9.0,rom = 34;
+float32_from_int32(signed long):"E:\Prg\compiler.trunk\picantc\libc\softfloat\softfloat\softfloat.c",line = 870,ram = 12.0,rom = 88;
+NormaliseFloat32NA(void):"E:\Prg\compiler.trunk\picantc\libc\softfloat\softfloat\softfloat-macros",line = 989,ram = 0.0,rom = 24;
+roundFloat32NA(void):"E:\Prg\compiler.trunk\picantc\libc\softfloat\softfloat\softfloat.c",line = 515,ram = 14.0,rom = 349;
+packFloat32NA(void):"E:\Prg\compiler.trunk\picantc\libc\softfloat\softfloat\softfloat.c",line = 305,ram = 0.0,rom = 25;
+float32_to_int32(?):"E:\Prg\compiler.trunk\picantc\libc\softfloat\softfloat\softfloat.c",line = 945,ram = 24.0,rom = 474;
+float32_addsub(?,?,unsigned char):"E:\Prg\compiler.trunk\picantc\libc\softfloat\softfloat\softfloat.c",line = 1245,ram = 21.4,rom = 404;
+_float32_addSig(void):"E:\Prg\compiler.trunk\picantc\libc\softfloat\softfloat\softfloat.c",line = 1227,ram = 4.0,rom = 75;
+shift32RightJammingbSig(unsigned short):"E:\Prg\compiler.trunk\picantc\libc\softfloat\softfloat\softfloat-macros",line = 118,ram = 3.1,rom = 42;
+float32_mul(?,?):"E:\Prg\compiler.trunk\picantc\libc\softfloat\softfloat\softfloat.c",line = 1452,ram = 21.4,rom = 360;
+mul32To32sticky(void):"E:\Prg\compiler.trunk\picantc\libc\softfloat\softfloat\softfloat-macros",line = 554,ram = 6.0,rom = 134;
+float32_le(?,?):"E:\Prg\compiler.trunk\picantc\libc\softfloat\softfloat\softfloat.c",line = 1925,ram = 36.0,rom = 314;
+Wdt_Delay_Ms(unsigned char):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_Delay.c",line = 118,ram = 2.0,rom = 11;
+FCI_TOSTRING(signed short,unsigned char*,unsigned char):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_String.c",line = 184,ram = 12.0,rom = 148;
+FCI_FLOAT_TO_STRING(float,unsigned char,unsigned char*,unsigned char):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_String.c",line = 349,ram = 33.0,rom = 341;
+FCD_LCDDisplay0_RawSend(unsigned char,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\charge controller\flowcode\Charge Controller V1.c",line = 243,ram = 3.0,rom = 65;
+FCD_LCDDisplay0_Start(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\charge controller\flowcode\Charge Controller V1.c",line = 293,ram = 0.0,rom = 86;
+FCD_LCDDisplay0_Clear(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\charge controller\flowcode\Charge Controller V1.c",line = 326,ram = 0.0,rom = 18;
+FCD_LCDDisplay0_Cursor(unsigned char,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\charge controller\flowcode\Charge Controller V1.c",line = 363,ram = 2.0,rom = 31;
+FCD_LCDDisplay0_PrintString(unsigned char*,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\charge controller\flowcode\Charge Controller V1.c",line = 452,ram = 4.0,rom = 30;
+FCD_LCDDisplay0_ClearLine(unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\charge controller\flowcode\Charge Controller V1.c",line = 518,ram = 3.0,rom = 26;
+FC_CAL_Enable_ADC(unsigned char,unsigned char,unsigned char,unsigned char):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_ADC.c",line = 55,ram = 8.0,rom = 72;
+FC_CAL_Sample_ADC(unsigned char):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_ADC.c",line = 150,ram = 5.0,rom = 36;
+FC_CAL_Disable_ADC(void):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_ADC.c",line = 165,ram = 0.0,rom = 15;
+FCD_ADC0_ReadAsVoltage(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\charge controller\flowcode\Charge Controller V1.c",line = 613,ram = 18.0,rom = 154;
+main(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\charge controller\flowcode\Charge Controller V1.c",line = 728,ram = 3.0,rom = 69;
+interrupt(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\charge controller\flowcode\Charge Controller V1.c",line = 785,ram = 0.0,rom = 11;
+delay_us(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 5;
+delay_10us(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 14;
+delay_ms(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 44;
+_startup(void):"NoSourceFile",line = 0,ram = 0.0,rom = 42;
+#HEAP_BLOCK: 0, 181, 74;

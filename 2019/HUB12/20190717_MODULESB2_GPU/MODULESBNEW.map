@@ -1,0 +1,366 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Fri Aug 02 10:44:45 2019
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000004    program   0x0008e6
+                   .org_3       code   0x000500    program   0x0001c4
+                   .org_4       code   0x000600    program   0x0001fa
+                   .org_5       code   0x000700    program   0x0001c8
+                   .org_6       code   0x000800    program   0x0001d4
+.config_2007_MODULESBNEW.O       code   0x002007    program   0x000002
+                   .org_7       code   0x002100    program   0x000008
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x000476      
+                            0x000500    0x0005e1      
+                            0x000600    0x0006fc      
+                            0x000700    0x0007e3      
+                            0x000800    0x0008e9      
+                            0x002007    0x002007      
+                            0x002100    0x002103      
+            2086 out of 4359 program addresses used, program memory utilization is 47%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     CHAR   0x00069c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    CHARB   0x000700    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                     CLR0   0x000212    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                     CLR1   0x00021b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    CLRAM   0x00020c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+          CLRHUB1HUNDREDS   0x0001bf    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+          CLRHUB3HUNDREDS   0x0001ec    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    CLRT0   0x000400    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  CLRTRAM   0x0003fc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                CLR_ABIT0   0x0003ad    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+         CLR_AFFECTEDBITS   0x0003ab    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+    CLR_AFFECTEDBITS_LEFT   0x0003bb    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+   CLR_AFFECTEDBITS_RIGHT   0x0003d1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 CLR_LAF1   0x0003cf    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 CLR_LAF2   0x0003ce    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 CLR_LAF3   0x0003cd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 CLR_LAF4   0x0003cc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 CLR_LAF5   0x0003cb    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 CLR_LAF6   0x0003ca    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 CLR_LAF7   0x0003c9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 CLR_RAF1   0x0003e5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 CLR_RAF2   0x0003e4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 CLR_RAF3   0x0003e3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 CLR_RAF4   0x0003e2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 CLR_RAF5   0x0003e1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 CLR_RAF6   0x0003e0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 CLR_RAF7   0x0003df    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    COLON   0x000798    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    CONT1   0x000146    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   CONT11   0x00017c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   CONT12   0x000186    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   CONT13   0x00018c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   CONT14   0x000196    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   CONT15   0x00019c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   CONT16   0x0001a6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    CONT2   0x000150    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    CONT3   0x000156    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    CONT4   0x000160    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    CONT5   0x000166    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    CONT6   0x000171    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    CSRT0   0x000353    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    CSRT1   0x000359    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+               CURSORTEST   0x00033f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                DATALATCH   0x000079    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+               DATAUPDATE   0x000800    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    DBIT0   0x0008df    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    DBIT1   0x0008e1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 DELAY_MS   0x000230    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+              DELAY_ONEMS   0x000229    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 DELAY_US   0x000221    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  DISPHUB   0x0000bc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  DISPLAY   0x00008a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+              DISPLAYLOOP   0x000073    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+       DONTSCROLLHUB1DIG0   0x0001d6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+       DONTSCROLLHUB1DIG1   0x0001cc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+       DONTSCROLLHUB1DIG2   0x0001b3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+       DONTSCROLLHUB3DIG0   0x000202    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+       DONTSCROLLHUB3DIG1   0x0001f8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+       DONTSCROLLHUB3DIG2   0x0001e0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                      DOT   0x0007ab    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                     DSP0   0x00007d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    EIGHT   0x00075f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   F0LN00   0x0002a3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   F0LN01   0x000285    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   F0LN10   0x000294    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   F0LN11   0x000276    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                F0_LINE00   0x00029d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                F0_LINE01   0x00027f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                F0_LINE10   0x00028e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                F0_LINE11   0x000270    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   F1LN00   0x00030f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  F1LN002   0x00031d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   F1LN01   0x0002d5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  F1LN012   0x0002e3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   F1LN10   0x0002f2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  F1LN102   0x000300    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   F1LN11   0x0002b8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  F1LN112   0x0002c6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                F1_LINE00   0x000309    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                F1_LINE01   0x0002cf    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                F1_LINE10   0x0002ec    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                F1_LINE11   0x0002b2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                     FIVE   0x000726    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    FONT0   0x00026a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    FONT1   0x0002ac    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                     FOUR   0x000713    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 GUESTPOS   0x0007d1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                      HB1   0x000260    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                      HB2   0x00025a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                      HB3   0x000254    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                      HB4   0x00024e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                      HB5   0x000248    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                      HB6   0x000242    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                     HDP1   0x000266    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  HOMEPOS   0x0007be    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  HUBDUMP   0x000235    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                     INIT   0x000010    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+              INSERT_TRAM   0x000406    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                INS_TRAM0   0x000420    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                IT_LINE00   0x00041b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                IT_LINE01   0x000411    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                IT_LINE10   0x000416    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                IT_LINE11   0x00040c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                     MAIN   0x00004f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 MAINTEMP   0x000051    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                      MN0   0x00006c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                     MSEC   0x00022b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    MSEC0   0x000231    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                     NINE   0x000772    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                      ONE   0x0006c4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                       OT   0x000785    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                     POSG   0x000131    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   POSGH0   0x00013a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                     POSH   0x000129    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                READ8BITS   0x0008d7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                SCROLLING   0x000066    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    SEVEN   0x00074c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   SHFDT0   0x00032e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   SHFDT1   0x00033c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                SHIFTDATA   0x000326    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                      SIX   0x000739    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  SPIGDT0   0x0008da    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  SPIGDT1   0x0008e4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+               SPIGETDATA   0x000882    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                SW_LINE00   0x0003a7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                SW_LINE01   0x0003a1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                SW_LINE10   0x0003a4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                SW_LINE11   0x00039e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   TDUMP1   0x000398    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   TDUMP2   0x000370    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   TDUMP3   0x00037e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+               TDUMP_HUB1   0x00038c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+               TDUMP_HUB3   0x000392    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    THREE   0x0006ea    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 TRAMDUMP   0x00035f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+              TRAMHT_HUB3   0x000471    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+          TRAM_CURSORTEST   0x000449    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+             TRAM_HUBTEST   0x000463    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+              TRAM_SHIFTR   0x0003e7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                     TRS0   0x0003f3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                     TRS1   0x0003ee    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                      TWO   0x0006d7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   T_CHAR   0x000500    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  T_CHARB   0x000600    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  T_CSRT0   0x00045b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  T_CSRT1   0x00045f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  T_EIGHT   0x000656    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   T_FIVE   0x0005bf    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   T_FOUR   0x00059c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   T_NINE   0x000679    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    T_ONE   0x000533    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  T_SEVEN   0x000633    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    T_SIX   0x000610    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  T_THREE   0x000579    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    T_TWO   0x000556    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   T_ZERO   0x000510    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                     USEC   0x000222    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+               WRITE_TRAM   0x000426    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   WTRAM0   0x000428    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   WTRAM1   0x000439    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                     ZERO   0x0006b1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     INIT   0x000010    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                     MAIN   0x00004f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 MAINTEMP   0x000051    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                SCROLLING   0x000066    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                      MN0   0x00006c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+              DISPLAYLOOP   0x000073    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                DATALATCH   0x000079    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                     DSP0   0x00007d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  DISPLAY   0x00008a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  DISPHUB   0x0000bc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                     POSH   0x000129    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                     POSG   0x000131    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   POSGH0   0x00013a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    CONT1   0x000146    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    CONT2   0x000150    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    CONT3   0x000156    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    CONT4   0x000160    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    CONT5   0x000166    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    CONT6   0x000171    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   CONT11   0x00017c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   CONT12   0x000186    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   CONT13   0x00018c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   CONT14   0x000196    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   CONT15   0x00019c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   CONT16   0x0001a6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+       DONTSCROLLHUB1DIG2   0x0001b3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+          CLRHUB1HUNDREDS   0x0001bf    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+       DONTSCROLLHUB1DIG1   0x0001cc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+       DONTSCROLLHUB1DIG0   0x0001d6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+       DONTSCROLLHUB3DIG2   0x0001e0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+          CLRHUB3HUNDREDS   0x0001ec    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+       DONTSCROLLHUB3DIG1   0x0001f8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+       DONTSCROLLHUB3DIG0   0x000202    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    CLRAM   0x00020c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                     CLR0   0x000212    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                     CLR1   0x00021b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 DELAY_US   0x000221    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                     USEC   0x000222    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+              DELAY_ONEMS   0x000229    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                     MSEC   0x00022b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 DELAY_MS   0x000230    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    MSEC0   0x000231    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  HUBDUMP   0x000235    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                      HB6   0x000242    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                      HB5   0x000248    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                      HB4   0x00024e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                      HB3   0x000254    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                      HB2   0x00025a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                      HB1   0x000260    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                     HDP1   0x000266    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    FONT0   0x00026a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                F0_LINE11   0x000270    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   F0LN11   0x000276    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                F0_LINE01   0x00027f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   F0LN01   0x000285    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                F0_LINE10   0x00028e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   F0LN10   0x000294    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                F0_LINE00   0x00029d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   F0LN00   0x0002a3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    FONT1   0x0002ac    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                F1_LINE11   0x0002b2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   F1LN11   0x0002b8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  F1LN112   0x0002c6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                F1_LINE01   0x0002cf    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   F1LN01   0x0002d5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  F1LN012   0x0002e3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                F1_LINE10   0x0002ec    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   F1LN10   0x0002f2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  F1LN102   0x000300    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                F1_LINE00   0x000309    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   F1LN00   0x00030f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  F1LN002   0x00031d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                SHIFTDATA   0x000326    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   SHFDT0   0x00032e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   SHFDT1   0x00033c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+               CURSORTEST   0x00033f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    CSRT0   0x000353    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    CSRT1   0x000359    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 TRAMDUMP   0x00035f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   TDUMP2   0x000370    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   TDUMP3   0x00037e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+               TDUMP_HUB1   0x00038c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+               TDUMP_HUB3   0x000392    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   TDUMP1   0x000398    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                SW_LINE11   0x00039e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                SW_LINE01   0x0003a1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                SW_LINE10   0x0003a4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                SW_LINE00   0x0003a7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+         CLR_AFFECTEDBITS   0x0003ab    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                CLR_ABIT0   0x0003ad    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+    CLR_AFFECTEDBITS_LEFT   0x0003bb    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 CLR_LAF7   0x0003c9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 CLR_LAF6   0x0003ca    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 CLR_LAF5   0x0003cb    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 CLR_LAF4   0x0003cc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 CLR_LAF3   0x0003cd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 CLR_LAF2   0x0003ce    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 CLR_LAF1   0x0003cf    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+   CLR_AFFECTEDBITS_RIGHT   0x0003d1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 CLR_RAF7   0x0003df    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 CLR_RAF6   0x0003e0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 CLR_RAF5   0x0003e1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 CLR_RAF4   0x0003e2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 CLR_RAF3   0x0003e3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 CLR_RAF2   0x0003e4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 CLR_RAF1   0x0003e5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+              TRAM_SHIFTR   0x0003e7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                     TRS1   0x0003ee    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                     TRS0   0x0003f3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  CLRTRAM   0x0003fc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    CLRT0   0x000400    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+              INSERT_TRAM   0x000406    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                IT_LINE11   0x00040c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                IT_LINE01   0x000411    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                IT_LINE10   0x000416    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                IT_LINE00   0x00041b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                INS_TRAM0   0x000420    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+               WRITE_TRAM   0x000426    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   WTRAM0   0x000428    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   WTRAM1   0x000439    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+          TRAM_CURSORTEST   0x000449    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  T_CSRT0   0x00045b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  T_CSRT1   0x00045f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+             TRAM_HUBTEST   0x000463    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+              TRAMHT_HUB3   0x000471    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   T_CHAR   0x000500    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   T_ZERO   0x000510    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    T_ONE   0x000533    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    T_TWO   0x000556    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  T_THREE   0x000579    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   T_FOUR   0x00059c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   T_FIVE   0x0005bf    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  T_CHARB   0x000600    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    T_SIX   0x000610    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  T_SEVEN   0x000633    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  T_EIGHT   0x000656    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                   T_NINE   0x000679    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                     CHAR   0x00069c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                     ZERO   0x0006b1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                      ONE   0x0006c4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                      TWO   0x0006d7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    THREE   0x0006ea    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    CHARB   0x000700    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                     FOUR   0x000713    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                     FIVE   0x000726    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                      SIX   0x000739    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    SEVEN   0x00074c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    EIGHT   0x00075f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                     NINE   0x000772    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                       OT   0x000785    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    COLON   0x000798    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                      DOT   0x0007ab    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  HOMEPOS   0x0007be    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                 GUESTPOS   0x0007d1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+               DATAUPDATE   0x000800    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+               SPIGETDATA   0x000882    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                READ8BITS   0x0008d7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  SPIGDT0   0x0008da    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    DBIT0   0x0008df    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                    DBIT1   0x0008e1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+                  SPIGDT1   0x0008e4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190717_MODULESB2\MODULESBNEW.ASM
+
+

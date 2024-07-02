@@ -1,0 +1,30 @@
+CAM output for current project nrf24l01_gyro_v3doublesided_forjlcpcb.T3001
+Output on 28. Sep 2020, 19:44h
+Current project created using TARGET 13.4.0.51 smart
+Output created using PCBout V13.4.0.51
+DELIVERY ADDRESS:
+  
+  
+  
+  GB- 
+  Tel: 
+  FAX: 
+  eMail: 
+Size of PCB: 41.275 mm x 40 mm
+
+Description of created files as follows:
+
+nrf24l01_gyro_v3doublesided_forjlcpcb.Top = 16 = Copper top L2   ( *.Top )
+nrf24l01_gyro_v3doublesided_forjlcpcb.Bot = 2 = Copper bottom L1   ( *.Bot )
+nrf24l01_gyro_v3doublesided_forjlcpcb.Tool = drill tool list
+nrf24l01_gyro_v3doublesided_forjlcpcb.Drill = Galvanised drills
+nrf24l01_gyro_v3doublesided_forjlcpcb.Outline = 23 = PCB outline   ( *.Outline )
+nrf24l01_gyro_v3doublesided_forjlcpcb.StopTop = 18 = Solder stop mask top   ( *.StopTop )
+nrf24l01_gyro_v3doublesided_forjlcpcb.StopBot = 4 = Solder stop mask bottom   ( *.StopBot )
+nrf24l01_gyro_v3doublesided_forjlcpcb.PosiTop = 21 = Placement print top   ( *.PosiTop )
+nrf24l01_gyro_v3doublesided_forjlcpcb.PosiBot = 7 = Placement print bottom   ( *.PosiBot )
+nrf24l01_gyro_v3doublesided_forjlcpcb.PasteTop = 19 = Solder paste top   ( *.PasteTop )
+nrf24l01_gyro_v3doublesided_forjlcpcb.PasteBot = 5 = Solder paste bottom   ( *.PasteBot )
+nrf24l01_gyro_v3doublesided_forjlcpcb.Apr = TARGET 3001! aperture list
+nrf24l01_gyro_v3doublesided_forjlcpcb.Whl = Eagle compatible aperture list
+

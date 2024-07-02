@@ -1,0 +1,142 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Sat Apr 17 14:19:52 2021
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000004    program   0x00016a
+                   .org_3       code   0x000ea0    program   0x000010
+                   .org_4       code   0x000ed0    program   0x00021a
+.config_2007_NRF24L01_GYRO.O       code   0x002007    program   0x000002
+                   .org_5       code   0x002100    program   0x000008
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x0000b8      
+                            0x000ea0    0x000ea7      
+                            0x000ed0    0x000fdc      
+                            0x002007    0x002007      
+                            0x002100    0x002103      
+            464 out of 4359 program addresses used, program memory utilization is 10%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                BUTTON_C1   0x000088    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                BUTTON_C2   0x00008f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                BUTTON_C3   0x000096    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                BUTTON_C4   0x00009d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                BUTTON_C5   0x0000a4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                BUTTON_C6   0x0000ab    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                BUTTON_C7   0x0000b2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+             BUTTON_SHIFT   0x000081    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+              CMD_REGREAD   0x000f9c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+             CMD_REGWRITE   0x000f92    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                     INIT   0x000011    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                INTERRUPT   0x00006a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                     MAIN   0x000049    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+             NRF_DELAY_MS   0x000fd8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+          NRF_DELAY_ONEMS   0x000fd1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+             NRF_DELAY_US   0x000fc9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+          NRF_GET_PAYLOAD   0x000ea2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                 NRF_MSEC   0x000fd3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                NRF_MSEC0   0x000fd9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+         NRF_SEND_PAYLOAD   0x000ea0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                 NRF_USEC   0x000fca    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                     PBZ0   0x00006e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+             PRESS_BUZZER   0x00006c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+              RADIO_BEGIN   0x000f2d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+          RADIO_CHECKFIFO   0x000efd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+        RADIO_CHECKSTATUS   0x000f18    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+          RADIO_CLRSTATUS   0x000f12    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+          RADIO_FLUSHFIFO   0x000f1e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+        RADIO_READ_RXFIFO   0x000f03    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+          RADIO_RECV_DATA   0x000ef0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+          RADIO_SEND_DATA   0x000ed0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                     RFF0   0x000f0b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                     RRD0   0x000efa    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                     RSD0   0x000ed8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                     RSD1   0x000eee    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                    RXDR0   0x000ef4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                    RXDR1   0x000ef5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+           SET_RX_ADDRESS   0x000f7d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+           SET_TX_ADDRESS   0x000f68    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+             SPI_RECVBYTE   0x000fb5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+             SPI_SENDBYTE   0x000fa4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                     SRB0   0x000fb9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                     SRB1   0x000fc0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                SRB_MISO0   0x000fbe    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                SRB_MISO1   0x000fbc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                     SSB0   0x000fa6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                     SSB1   0x000faf    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                SSB_MOSI0   0x000fac    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                SSB_MOSI1   0x000faa    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                    TXDS0   0x000ee9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                    TXDS1   0x000eeb    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     INIT   0x000011    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                     MAIN   0x000049    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                INTERRUPT   0x00006a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+             PRESS_BUZZER   0x00006c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                     PBZ0   0x00006e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+             BUTTON_SHIFT   0x000081    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                BUTTON_C1   0x000088    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                BUTTON_C2   0x00008f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                BUTTON_C3   0x000096    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                BUTTON_C4   0x00009d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                BUTTON_C5   0x0000a4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                BUTTON_C6   0x0000ab    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                BUTTON_C7   0x0000b2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+         NRF_SEND_PAYLOAD   0x000ea0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+          NRF_GET_PAYLOAD   0x000ea2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+          RADIO_SEND_DATA   0x000ed0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                     RSD0   0x000ed8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                    TXDS0   0x000ee9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                    TXDS1   0x000eeb    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                     RSD1   0x000eee    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+          RADIO_RECV_DATA   0x000ef0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                    RXDR0   0x000ef4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                    RXDR1   0x000ef5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                     RRD0   0x000efa    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+          RADIO_CHECKFIFO   0x000efd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+        RADIO_READ_RXFIFO   0x000f03    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                     RFF0   0x000f0b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+          RADIO_CLRSTATUS   0x000f12    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+        RADIO_CHECKSTATUS   0x000f18    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+          RADIO_FLUSHFIFO   0x000f1e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+              RADIO_BEGIN   0x000f2d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+           SET_TX_ADDRESS   0x000f68    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+           SET_RX_ADDRESS   0x000f7d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+             CMD_REGWRITE   0x000f92    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+              CMD_REGREAD   0x000f9c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+             SPI_SENDBYTE   0x000fa4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                     SSB0   0x000fa6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                SSB_MOSI1   0x000faa    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                SSB_MOSI0   0x000fac    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                     SSB1   0x000faf    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+             SPI_RECVBYTE   0x000fb5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                     SRB0   0x000fb9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                SRB_MISO1   0x000fbc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                SRB_MISO0   0x000fbe    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                     SRB1   0x000fc0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+             NRF_DELAY_US   0x000fc9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                 NRF_USEC   0x000fca    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+          NRF_DELAY_ONEMS   0x000fd1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                 NRF_MSEC   0x000fd3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+             NRF_DELAY_MS   0x000fd8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+                NRF_MSEC0   0x000fd9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2021\NRF24l01_gyro_scoreboard\nrf_gyro_transmitter\nrf24l01_gyro.asm
+
+

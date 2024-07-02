@@ -1,0 +1,274 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Fri Oct 18 10:42:46 2019
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000004    program   0x000526
+                   .org_3       code   0x000500    program   0x000180
+                   .org_4       code   0x000700    program   0x000184
+                   .org_5       code   0x000800    program   0x0001b8
+                   .org_6       code   0x000900    program   0x000130
+                   .org_7       code   0x000a00    program   0x0000c0
+  .config_2007_HUBTEST0.O       code   0x002007    program   0x000002
+                   .org_8       code   0x002100    program   0x000008
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x000296      
+                            0x000500    0x0005bf      
+                            0x000700    0x0007c1      
+                            0x000800    0x0008db      
+                            0x000900    0x000997      
+                            0x000a00    0x000a5f      
+                            0x002007    0x002007      
+                            0x002100    0x002103      
+            1519 out of 4359 program addresses used, program memory utilization is 34%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                 ACKTEST0   0x0000b7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                     CLR0   0x000291    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  CLR_RAM   0x00028b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  COMMAND   0x00010c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+             CURSORX_TEST   0x0001c9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                    CXT08   0x0001d5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                   CXT08S   0x0001e3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                    CXT16   0x0001e6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                   CXT16S   0x0001f4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                    CXT24   0x0001f7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                   CXT24S   0x000205    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                    CXT32   0x000208    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                   CXT32S   0x000216    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                    CXT40   0x000219    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                   CXT40S   0x000227    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                    CXT48   0x00022a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                   CXT48S   0x000238    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                    CXT56   0x00023b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                   CXT56S   0x000249    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                    CXT64   0x00024c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                   CXT64S   0x00025a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  DATAH00   0x00026f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                 DATAH00A   0x000272    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                 DATAH00B   0x000275    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  DATAH01   0x000278    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  DATAH10   0x00027e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  DATAH11   0x000281    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                DATAINRAM   0x0001a1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  DATAREG   0x00025d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                 DELAY_MS   0x0000f6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+              DELAY_ONEMS   0x0000ef    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                 DELAY_US   0x0000e7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                     DIR0   0x0001a8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                     DIR1   0x0001ad    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                     DIR2   0x0001b5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                     DIR3   0x0001bf    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                    DISP0   0x0000ff    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  DISPLAY   0x0000fb    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                     DMP0   0x00019d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+               DMP_FONT00   0x00018b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+               DMP_FONT01   0x00018e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+               DMP_FONT02   0x000191    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                      DR0   0x000261    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                      DR1   0x00026b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                      DR2   0x00027a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                      DR3   0x000283    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                     DUMP   0x000165    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                    DUMP0   0x000179    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                F00_EIGHT   0x00058e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                 F00_FIVE   0x000570    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                 F00_FOUR   0x000566    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                 F00_HPOS   0x0005b6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                 F00_NINE   0x000598    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  F00_ONE   0x000548    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                   F00_OT   0x0005a2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+               F00_SCOLON   0x0005ac    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                F00_SEVEN   0x000584    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  F00_SIX   0x00057a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                F00_THREE   0x00055c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  F00_TWO   0x000552    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                 F00_ZERO   0x00053e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                F01_EIGHT   0x00079e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                 F01_FIVE   0x000768    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                 F01_FOUR   0x000756    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                 F01_NINE   0x0007b0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  F01_ONE   0x000720    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                F01_SEVEN   0x00078c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  F01_SIX   0x00077a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                F01_THREE   0x000744    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  F01_TWO   0x000732    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                 F01_ZERO   0x00070e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                   FONT00   0x000500    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+              FONT00_CONT   0x000527    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+             FONT00_CONT1   0x00052d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                FONT00_EX   0x00051c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                FONT00_NZ   0x00050b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+               FONT00_RET   0x00051a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                 FONT00_Z   0x000504    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                   FONT01   0x000700    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                   FONT02   0x000800    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  FONT02B   0x000900    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+             FONT02_EIGHT   0x000954    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+              FONT02_FIVE   0x0008ba    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+              FONT02_FOUR   0x000898    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+              FONT02_NINE   0x000976    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+               FONT02_ONE   0x000832    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+             FONT02_SEVEN   0x000932    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+               FONT02_SIX   0x000910    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+             FONT02_THREE   0x000876    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+               FONT02_TWO   0x000854    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+              FONT02_ZERO   0x000810    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                   I2CADD   0x0000a0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  I2CADD0   0x0000a4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  I2CADD1   0x0000ac    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  I2CBIT0   0x0000a8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  I2CBIT1   0x0000aa    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                    I2CR0   0x000068    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                    I2CR1   0x00006f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                    I2CR3   0x000066    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  I2CREAD   0x000039    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                 I2CSTART   0x0000be    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  I2CSTOP   0x0000d6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+            I2C_MASTERACK   0x000078    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+           I2C_MASTERNACK   0x00008c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+             I2C_SLAVEACK   0x0000b0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                     INIT   0x000010    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                     MAIN   0x000036    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                    MISO0   0x00006b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                    MISO1   0x00006d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                     MSEC   0x0000f1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                    MSEC0   0x0000f7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                SCL_PULSE   0x0000cf    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                   UPPERH   0x000177    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                     USEC   0x0000e8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     INIT   0x000010    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                     MAIN   0x000036    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  I2CREAD   0x000039    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                    I2CR3   0x000066    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                    I2CR0   0x000068    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                    MISO0   0x00006b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                    MISO1   0x00006d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                    I2CR1   0x00006f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+            I2C_MASTERACK   0x000078    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+           I2C_MASTERNACK   0x00008c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                   I2CADD   0x0000a0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  I2CADD0   0x0000a4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  I2CBIT0   0x0000a8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  I2CBIT1   0x0000aa    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  I2CADD1   0x0000ac    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+             I2C_SLAVEACK   0x0000b0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                 ACKTEST0   0x0000b7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                 I2CSTART   0x0000be    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                SCL_PULSE   0x0000cf    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  I2CSTOP   0x0000d6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                 DELAY_US   0x0000e7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                     USEC   0x0000e8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+              DELAY_ONEMS   0x0000ef    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                     MSEC   0x0000f1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                 DELAY_MS   0x0000f6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                    MSEC0   0x0000f7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  DISPLAY   0x0000fb    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                    DISP0   0x0000ff    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  COMMAND   0x00010c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                     DUMP   0x000165    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                   UPPERH   0x000177    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                    DUMP0   0x000179    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+               DMP_FONT00   0x00018b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+               DMP_FONT01   0x00018e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+               DMP_FONT02   0x000191    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                     DMP0   0x00019d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                DATAINRAM   0x0001a1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                     DIR0   0x0001a8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                     DIR1   0x0001ad    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                     DIR2   0x0001b5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                     DIR3   0x0001bf    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+             CURSORX_TEST   0x0001c9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                    CXT08   0x0001d5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                   CXT08S   0x0001e3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                    CXT16   0x0001e6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                   CXT16S   0x0001f4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                    CXT24   0x0001f7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                   CXT24S   0x000205    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                    CXT32   0x000208    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                   CXT32S   0x000216    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                    CXT40   0x000219    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                   CXT40S   0x000227    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                    CXT48   0x00022a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                   CXT48S   0x000238    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                    CXT56   0x00023b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                   CXT56S   0x000249    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                    CXT64   0x00024c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                   CXT64S   0x00025a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  DATAREG   0x00025d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                      DR0   0x000261    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                      DR1   0x00026b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  DATAH00   0x00026f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                 DATAH00A   0x000272    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                 DATAH00B   0x000275    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  DATAH01   0x000278    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                      DR2   0x00027a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  DATAH10   0x00027e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  DATAH11   0x000281    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                      DR3   0x000283    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  CLR_RAM   0x00028b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                     CLR0   0x000291    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                   FONT00   0x000500    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                 FONT00_Z   0x000504    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                FONT00_NZ   0x00050b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+               FONT00_RET   0x00051a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                FONT00_EX   0x00051c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+              FONT00_CONT   0x000527    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+             FONT00_CONT1   0x00052d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                 F00_ZERO   0x00053e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  F00_ONE   0x000548    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  F00_TWO   0x000552    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                F00_THREE   0x00055c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                 F00_FOUR   0x000566    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                 F00_FIVE   0x000570    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  F00_SIX   0x00057a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                F00_SEVEN   0x000584    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                F00_EIGHT   0x00058e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                 F00_NINE   0x000598    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                   F00_OT   0x0005a2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+               F00_SCOLON   0x0005ac    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                 F00_HPOS   0x0005b6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                   FONT01   0x000700    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                 F01_ZERO   0x00070e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  F01_ONE   0x000720    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  F01_TWO   0x000732    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                F01_THREE   0x000744    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                 F01_FOUR   0x000756    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                 F01_FIVE   0x000768    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  F01_SIX   0x00077a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                F01_SEVEN   0x00078c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                F01_EIGHT   0x00079e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                 F01_NINE   0x0007b0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                   FONT02   0x000800    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+              FONT02_ZERO   0x000810    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+               FONT02_ONE   0x000832    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+               FONT02_TWO   0x000854    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+             FONT02_THREE   0x000876    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+              FONT02_FOUR   0x000898    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+              FONT02_FIVE   0x0008ba    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+                  FONT02B   0x000900    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+               FONT02_SIX   0x000910    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+             FONT02_SEVEN   0x000932    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+             FONT02_EIGHT   0x000954    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+              FONT02_NINE   0x000976    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB6\TEST0\HUBTEST0.ASM
+
+

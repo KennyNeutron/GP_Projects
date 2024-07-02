@@ -1,0 +1,15 @@
+// SourceBoost Linker Function Resource Usage Dump
+
+#GLOBAL:"global",line = 0,ram = 46.2,rom = 0;
+__rem_8_8(unsigned char,unsigned char):"E:\Prg\compiler.trunk\picantc\libc\div.c",line = 206,ram = 5.0,rom = 17;
+FCM_RANDOMIZER(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\EDICE\EDICE.c",line = 356,ram = 5.0,rom = 158;
+FCD_led7seg0_ShowDigit(unsigned char,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\EDICE\EDICE.c",line = 172,ram = 5.0,rom = 112;
+FCD_led7seg0_ClearDigit(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\EDICE\EDICE.c",line = 338,ram = 0.0,rom = 6;
+main(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\EDICE\EDICE.c",line = 585,ram = 5.0,rom = 167;
+interrupt(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\EDICE\EDICE.c",line = 827,ram = 0.0,rom = 17;
+delay_ms(unsigned char):"NoSourceFile",line = 0,ram = 2.0,rom = 12;
+__rom_get(unsigned char,unsigned char):"NoSourceFile",line = 0,ram = 4.0,rom = 22;
+_startup(void):"NoSourceFile",line = 0,ram = 0.0,rom = 47;
+#HEAP_BLOCK: 0, 160, 95;
+#HEAP_BLOCK: 1, 288, 80;
+#HEAP_BLOCK: 2, 99, 13;

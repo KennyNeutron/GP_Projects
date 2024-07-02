@@ -1,0 +1,84 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Fri Aug 02 12:30:09 2019
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000004    program   0x0001dc
+.config_2007_MODULESB_OWNSPITX.O       code   0x002007    program   0x000002
+                   .org_3       code   0x002100    program   0x000008
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x0000f1      
+                            0x002007    0x002007      
+                            0x002100    0x002103      
+            244 out of 4359 program addresses used, program memory utilization is 5%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                    DBIT0   0x00008e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                    DBIT1   0x000093    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                 DELAY_MS   0x0000e1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+              DELAY_ONEMS   0x0000da    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+             DELAY_ONESEC   0x0000e6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                DELAY_SEC   0x0000ed    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                 DELAY_US   0x0000d2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                     INIT   0x000010    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                     MAIN   0x00003b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                      MN0   0x000040    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                      MN1   0x000044    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                      MN2   0x000051    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                     MSEC   0x0000dc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                    MSEC0   0x0000e2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                     SEC0   0x0000e8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                     SEC1   0x0000ee    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                SENDTODIS   0x00004f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                SENDTOGPU   0x000055    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                   SPIOUT   0x00008a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+              SPIOUT_CONT   0x000099    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                 SPISTART   0x0000a4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                  SPISTOP   0x0000bb    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                     SPWR   0x000084    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                     USEC   0x0000d3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     INIT   0x000010    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                     MAIN   0x00003b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                      MN0   0x000040    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                      MN1   0x000044    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                SENDTODIS   0x00004f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                      MN2   0x000051    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                SENDTOGPU   0x000055    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                     SPWR   0x000084    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                   SPIOUT   0x00008a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                    DBIT0   0x00008e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                    DBIT1   0x000093    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+              SPIOUT_CONT   0x000099    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                 SPISTART   0x0000a4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                  SPISTOP   0x0000bb    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                 DELAY_US   0x0000d2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                     USEC   0x0000d3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+              DELAY_ONEMS   0x0000da    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                     MSEC   0x0000dc    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                 DELAY_MS   0x0000e1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                    MSEC0   0x0000e2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+             DELAY_ONESEC   0x0000e6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                     SEC0   0x0000e8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                DELAY_SEC   0x0000ed    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+                     SEC1   0x0000ee    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\HUB12\20190731_MODULESB_OWNSPI\MODULESB_OWNSPITX.ASM
+
+

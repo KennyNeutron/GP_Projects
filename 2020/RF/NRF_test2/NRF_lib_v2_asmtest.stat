@@ -1,0 +1,37 @@
+// SourceBoost Linker Function Resource Usage Dump
+
+#GLOBAL:"global",line = 0,ram = 112.4,rom = 0;
+__div_16_16(unsigned short,unsigned short):"E:\Prg\compiler.trunk\picantc\libc\div.c",line = 116,ram = 9.0,rom = 31;
+Wdt_Delay_Ms(unsigned char):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_Delay.c",line = 118,ram = 2.0,rom = 11;
+FCI_SHEAD(unsigned char*,unsigned char,unsigned char*,unsigned char,unsigned char*,unsigned char):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_String.c",line = 683,ram = 14.0,rom = 278;
+FCI_SCOPY(unsigned char*,unsigned char,unsigned char*,unsigned char):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_String.c",line = 745,ram = 9.0,rom = 52;
+FCM_cmd_write_reg(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\NRF_test2\NRF_lib_v2_asmtest.c",line = 1095,ram = 1.0,rom = 38;
+FCD_SPI_Legacy0_SPI_Send_Char(unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\NRF_test2\NRF_lib_v2_asmtest.c",line = 565,ram = 1.0,rom = 4;
+FCM_cmd_read_reg(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\NRF_test2\NRF_lib_v2_asmtest.c",line = 1135,ram = 1.0,rom = 31;
+FCD_SPI_Legacy0_SPI_Get_Char(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\NRF_test2\NRF_lib_v2_asmtest.c",line = 586,ram = 2.0,rom = 11;
+FCM_radio_init_rx(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\NRF_test2\NRF_lib_v2_asmtest.c",line = 1167,ram = 0.0,rom = 59;
+FCM_set_tx_addr(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\NRF_test2\NRF_lib_v2_asmtest.c",line = 1355,ram = 1.0,rom = 72;
+FCM_set_rx_addr(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\NRF_test2\NRF_lib_v2_asmtest.c",line = 1271,ram = 1.0,rom = 72;
+FCM_flush_fifo_txrx(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\NRF_test2\NRF_lib_v2_asmtest.c",line = 1769,ram = 1.0,rom = 44;
+FCM_radio_init_tx(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\NRF_test2\NRF_lib_v2_asmtest.c",line = 1665,ram = 0.0,rom = 59;
+FCM_radio_send_data(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\NRF_test2\NRF_lib_v2_asmtest.c",line = 1817,ram = 1.0,rom = 129;
+FCM_check_status(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\NRF_test2\NRF_lib_v2_asmtest.c",line = 2069,ram = 0.0,rom = 15;
+FCM_radio_recieve_data(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\NRF_test2\NRF_lib_v2_asmtest.c",line = 1990,ram = 1.0,rom = 62;
+FCM_read_recieved_data(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\NRF_test2\NRF_lib_v2_asmtest.c",line = 2107,ram = 1.0,rom = 81;
+FC_CAL_SPI_Master_Init_1(void):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_SPI.c",line = 455,ram = 0.0,rom = 18;
+FC_CAL_SPI_Master_Byte_1(unsigned char):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_SPI.c",line = 516,ram = 3.0,rom = 14;
+FCD_SPI_Legacy0_SPI_Init(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\NRF_test2\NRF_lib_v2_asmtest.c",line = 542,ram = 0.0,rom = 11;
+FC_CAL_UART_Init_1(void):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_UART.c",line = 490,ram = 0.0,rom = 15;
+FCD_LCDDisplay0_RawSend(unsigned char,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\NRF_test2\NRF_lib_v2_asmtest.c",line = 766,ram = 3.0,rom = 107;
+FCD_LCDDisplay0_Start(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\NRF_test2\NRF_lib_v2_asmtest.c",line = 816,ram = 0.0,rom = 86;
+FCD_LCDDisplay0_Clear(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\NRF_test2\NRF_lib_v2_asmtest.c",line = 849,ram = 0.0,rom = 17;
+FCD_LCDDisplay0_Cursor(unsigned char,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\NRF_test2\NRF_lib_v2_asmtest.c",line = 886,ram = 2.0,rom = 30;
+FCD_LCDDisplay0_PrintNumber(signed short):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\NRF_test2\NRF_lib_v2_asmtest.c",line = 917,ram = 7.0,rom = 238;
+FCD_LCDDisplay0_PrintString(unsigned char*,unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\NRF_test2\NRF_lib_v2_asmtest.c",line = 975,ram = 4.0,rom = 28;
+main(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\NRF_test2\NRF_lib_v2_asmtest.c",line = 2241,ram = 17.0,rom = 329;
+interrupt(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\RF\NRF_test2\NRF_lib_v2_asmtest.c",line = 2508,ram = 0.0,rom = 11;
+delay_us(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 5;
+delay_10us(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 14;
+delay_ms(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 44;
+_startup(void):"NoSourceFile",line = 0,ram = 0.0,rom = 94;
+#HEAP_BLOCK: 0, 203, 52;

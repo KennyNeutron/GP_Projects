@@ -1,0 +1,170 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Mon Dec 28 18:17:29 2020
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_3       code   0x000000    program   0x000002
+                   .org_4       code   0x000004    program   0x0001ca
+                   .org_1       code   0x000100    program   0x000030
+                   .org_5       code   0x000200    program   0x00003a
+                   .org_2       code   0x000ed0    program   0x000242
+.config_2007_NRF24L01_PIC16F690_V0.O       code   0x002007    program   0x000002
+                   .org_6       code   0x002100    program   0x000008
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x0000e8      
+                            0x000100    0x000117      
+                            0x000200    0x00021c      
+                            0x000ed0    0x000ff0      
+                            0x002007    0x002007      
+                            0x002100    0x002103      
+            577 out of 4359 program addresses used, program memory utilization is 13%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+              CMD_REGREAD   0x000fb0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+             CMD_REGWRITE   0x000fa6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                       D0   0x000095    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+                       D1   0x000093    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+                    DELAY   0x000091    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+                    EINT0   0x0000bd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+            END_INTERRUPT   0x0000be    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+                  FOOTER0   0x0000b9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+                  FOOTER1   0x0000bb    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+                     INIT   0x00000e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+              INIT_RXMODE   0x000057    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+              INIT_TXMODE   0x00005c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+                INTERRUPT   0x00009a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+                     MAIN   0x000061    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+                      MN0   0x00007e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+             NRF_DELAY_MS   0x000fec    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+          NRF_DELAY_ONEMS   0x000fe5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+             NRF_DELAY_US   0x000fdd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+          NRF_GET_PAYLOAD   0x000106    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                 NRF_MSEC   0x000fe7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                NRF_MSEC0   0x000fed    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+              NRF_RX_MODE   0x000112    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+         NRF_SEND_PAYLOAD   0x000100    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+              NRF_TX_MODE   0x00010c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                 NRF_USEC   0x000fde    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                OP_RXMODE   0x000064    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+                OP_TXMODE   0x000088    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+          RADIO_CHECKFIFO   0x000efd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+        RADIO_CHECKSTATUS   0x000f18    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+          RADIO_CLRSTATUS   0x000f12    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+          RADIO_FLUSHFIFO   0x000f1e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+        RADIO_READ_RXFIFO   0x000f03    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+          RADIO_RECV_DATA   0x000ef0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+            RADIO_RX_INIT   0x000f38    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+          RADIO_SEND_DATA   0x000ed0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+        RADIO_SETSETTINGS   0x000f43    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+            RADIO_TX_INIT   0x000f2d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                     RFF0   0x000f0b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                     RRD0   0x000efa    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                     RSD0   0x000ed8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                     RSD1   0x000eee    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                    RXDR0   0x000ef4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                    RXDR1   0x000ef5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+           SET_RX_ADDRESS   0x000f91    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+           SET_TX_ADDRESS   0x000f7c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+             SPI_RECVBYTE   0x000fc9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+             SPI_SENDBYTE   0x000fb8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                     SRB0   0x000fcd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                     SRB1   0x000fd4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                SRB_MISO0   0x000fd2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                SRB_MISO1   0x000fd0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                     SSB0   0x000fba    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                     SSB1   0x000fc3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                SSB_MOSI0   0x000fc0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                SSB_MOSI1   0x000fbe    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                  TIMEOUT   0x00008c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+                  TRANSWT   0x00008c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+                    TXDS0   0x000ee9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                    TXDS1   0x000eeb    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+             UART_RX_MODE   0x000200    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+             UART_TX_MODE   0x000212    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+               UA_STARTED   0x0000a9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+              UA_TRANSFER   0x0000c8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+                   WTHERE   0x00008d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     INIT   0x00000e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+              INIT_RXMODE   0x000057    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+              INIT_TXMODE   0x00005c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+                     MAIN   0x000061    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+                OP_RXMODE   0x000064    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+                      MN0   0x00007e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+                OP_TXMODE   0x000088    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+                  TRANSWT   0x00008c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+                  TIMEOUT   0x00008c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+                   WTHERE   0x00008d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+                    DELAY   0x000091    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+                       D1   0x000093    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+                       D0   0x000095    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+                INTERRUPT   0x00009a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+               UA_STARTED   0x0000a9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+                  FOOTER0   0x0000b9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+                  FOOTER1   0x0000bb    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+                    EINT0   0x0000bd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+            END_INTERRUPT   0x0000be    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+              UA_TRANSFER   0x0000c8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+         NRF_SEND_PAYLOAD   0x000100    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+          NRF_GET_PAYLOAD   0x000106    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+              NRF_TX_MODE   0x00010c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+              NRF_RX_MODE   0x000112    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+             UART_RX_MODE   0x000200    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+             UART_TX_MODE   0x000212    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\nrf24l01_pic16f690_v0.asm
+          RADIO_SEND_DATA   0x000ed0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                     RSD0   0x000ed8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                    TXDS0   0x000ee9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                    TXDS1   0x000eeb    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                     RSD1   0x000eee    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+          RADIO_RECV_DATA   0x000ef0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                    RXDR0   0x000ef4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                    RXDR1   0x000ef5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                     RRD0   0x000efa    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+          RADIO_CHECKFIFO   0x000efd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+        RADIO_READ_RXFIFO   0x000f03    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                     RFF0   0x000f0b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+          RADIO_CLRSTATUS   0x000f12    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+        RADIO_CHECKSTATUS   0x000f18    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+          RADIO_FLUSHFIFO   0x000f1e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+            RADIO_TX_INIT   0x000f2d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+            RADIO_RX_INIT   0x000f38    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+        RADIO_SETSETTINGS   0x000f43    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+           SET_TX_ADDRESS   0x000f7c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+           SET_RX_ADDRESS   0x000f91    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+             CMD_REGWRITE   0x000fa6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+              CMD_REGREAD   0x000fb0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+             SPI_SENDBYTE   0x000fb8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                     SSB0   0x000fba    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                SSB_MOSI1   0x000fbe    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                SSB_MOSI0   0x000fc0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                     SSB1   0x000fc3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+             SPI_RECVBYTE   0x000fc9    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                     SRB0   0x000fcd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                SRB_MISO1   0x000fd0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                SRB_MISO0   0x000fd2    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                     SRB1   0x000fd4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+             NRF_DELAY_US   0x000fdd    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                 NRF_USEC   0x000fde    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+          NRF_DELAY_ONEMS   0x000fe5    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                 NRF_MSEC   0x000fe7    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+             NRF_DELAY_MS   0x000fec    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+                NRF_MSEC0   0x000fed    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\NRF24L01 ASM\NRF24L01_LIBKN.INC
+
+

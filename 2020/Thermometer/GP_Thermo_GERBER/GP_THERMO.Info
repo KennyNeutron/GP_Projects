@@ -1,0 +1,31 @@
+CAM output for current project GP_THERMO.T3001
+Output on 23. Nov 2020, 18:18h
+Current project created using TARGET 13.4.0.51 smart
+Output created using PCBout V13.4.0.51
+DELIVERY ADDRESS:
+  
+  
+  
+  GB- 
+  Tel: 
+  FAX: 
+  eMail: 
+Size of PCB: 205.105 mm x 100.457 mm
+
+Description of created files as follows:
+
+GP_THERMO.Top = 16 = Copper top L2   ( *.Top )
+GP_THERMO.Bot = 2 = Copper bottom L1   ( *.Bot )
+GP_THERMO.Tool = drill tool list
+GP_THERMO.Drill = Galvanised drills
+GP_THERMO.Outline = 23 = PCB outline   ( *.Outline )
+GP_THERMO.StopTop = 18 = Solder stop mask top   ( *.StopTop )
+GP_THERMO.StopBot = 4 = Solder stop mask bottom   ( *.StopBot )
+GP_THERMO.PosiTop = 21 = Placement print top   ( *.PosiTop )
+GP_THERMO.PosiBot = 7 = Placement print bottom   ( *.PosiBot )
+GP_THERMO.PasteBot = 5 = Solder paste bottom   ( *.PasteBot )
+GP_THERMO.Apr = TARGET 3001! aperture list
+GP_THERMO.Whl = Eagle compatible aperture list
+
+
+Caution: Smallest track is thiner than 0.150mm: (0.104at -40.72 | 0.735)

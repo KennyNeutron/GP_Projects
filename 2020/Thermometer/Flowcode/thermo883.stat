@@ -1,0 +1,36 @@
+// SourceBoost Linker Function Resource Usage Dump
+
+#GLOBAL:"global",line = 0,ram = 59.0,rom = 0;
+__div_8_8(unsigned char,unsigned char):"E:\Prg\compiler.trunk\picantc\libc\div.c",line = 176,ram = 5.0,rom = 17;
+__rem_8_8(unsigned char,unsigned char):"E:\Prg\compiler.trunk\picantc\libc\div.c",line = 206,ram = 5.0,rom = 17;
+FCM_intro(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\thermo883.c",line = 347,ram = 0.0,rom = 22;
+FCM_scan1(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\thermo883.c",line = 657,ram = 1.0,rom = 37;
+FCM_ikotled(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\thermo883.c",line = 395,ram = 0.0,rom = 28;
+FCM_scan2(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\thermo883.c",line = 695,ram = 1.0,rom = 37;
+FCM_scan3(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\thermo883.c",line = 733,ram = 1.0,rom = 37;
+FCM_scan4(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\thermo883.c",line = 771,ram = 1.0,rom = 37;
+FCM_display_temp(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\thermo883.c",line = 437,ram = 0.0,rom = 52;
+FCM_scan_off(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\thermo883.c",line = 809,ram = 0.0,rom = 34;
+FCM_seg_pattern(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\thermo883.c",line = 547,ram = 0.0,rom = 100;
+FCM_i2c_comm(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\thermo883.c",line = 847,ram = 0.0,rom = 43;
+FCD_I2C_Master0_MI2C_Start(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\thermo883.c",line = 270,ram = 0.0,rom = 2;
+FCD_I2C_Master0_MI2C_Transmit_Byte(unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\thermo883.c",line = 291,ram = 2.0,rom = 6;
+FCD_I2C_Master0_MI2C_Restart(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\thermo883.c",line = 277,ram = 0.0,rom = 2;
+FCD_I2C_Master0_MI2C_Receive_Byte(unsigned char):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\thermo883.c",line = 298,ram = 2.0,rom = 6;
+FCD_I2C_Master0_MI2C_Stop(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\thermo883.c",line = 284,ram = 0.0,rom = 2;
+FC_CAL_I2C_Master_Init_1(void):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_I2C.c",line = 301,ram = 0.0,rom = 5;
+FC_CAL_I2C_Master_Start_1(void):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_I2C.c",line = 390,ram = 0.0,rom = 23;
+FC_CAL_I2C_Master_Restart_1(void):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_I2C.c",line = 415,ram = 0.0,rom = 28;
+FC_CAL_I2C_Master_Stop_1(void):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_I2C.c",line = 441,ram = 0.0,rom = 25;
+FC_CAL_I2C_Master_TX_Byte_1(unsigned char):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_I2C.c",line = 468,ram = 4.0,rom = 70;
+FC_CAL_I2C_Master_RX_Byte_1(unsigned char):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_I2C.c",line = 521,ram = 4.0,rom = 67;
+FCD_I2C_Master0_MI2C_Init(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\thermo883.c",line = 263,ram = 0.0,rom = 2;
+main(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\thermo883.c",line = 991,ram = 0.0,rom = 58;
+interrupt(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\Thermometer\Flowcode\thermo883.c",line = 1067,ram = 0.0,rom = 11;
+delay_us(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 10;
+delay_ms(unsigned char):"NoSourceFile",line = 0,ram = 0.0,rom = 12;
+delay_s(unsigned char):"NoSourceFile",line = 0,ram = 1.0,rom = 15;
+_startup(void):"NoSourceFile",line = 0,ram = 0.0,rom = 67;
+#HEAP_BLOCK: 0, 160, 95;
+#HEAP_BLOCK: 1, 288, 80;
+#HEAP_BLOCK: 2, 97, 15;

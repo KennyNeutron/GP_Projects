@@ -1,0 +1,38 @@
+CAM output for current project AIDme_forJLCPCB.T3001
+Output on 26. Jul 2019, 13:45h
+Current project created using TARGET 19.4.0.27 discover
+Output created using TARGET 3001! V19.4.0.27
+Current Project from TARGET NC version: Commercial use is criminal!
+DELIVERY ADDRESS:
+  
+  
+  
+  GB- 
+  Tel: 
+  FAX: 
+  eMail: 
+Size of PCB: 41.8084 mm x 44.6786 mm
+
+Description of created files as follows:
+
+AIDme_forJLCPCB.Top = 16 = Copper top L1   ( *.Top )
+AIDme_forJLCPCB.Bot = 2 = Copper bottom L2   ( *.Bot )
+AIDme_forJLCPCB.Tool = drill tool list
+AIDme_forJLCPCB.Drill = Galvanised drills
+AIDme_forJLCPCB.Outline = 23 = PCB outline   ( *.Outline )
+AIDme_forJLCPCB.StopTop = 18 = Solder stop mask top   ( *.StopTop )
+AIDme_forJLCPCB.StopBot = 4 = Solder stop mask bottom   ( *.StopBot )
+AIDme_forJLCPCB.PosiTop = 21 = Placement print top   ( *.PosiTop )
+AIDme_forJLCPCB.PosiBot = 7 = Placement print bottom   ( *.PosiBot )
+AIDme_forJLCPCB.PasteTop = 19 = Solder paste top   ( *.PasteTop )
+AIDme_forJLCPCB.PasteBot = 5 = Solder paste bottom   ( *.PasteBot )
+AIDme_forJLCPCB.Mill = 25 = Milling   ( *.Mill )
+AIDme_forJLCPCB.Apr = TARGET 3001! aperture list
+AIDme_forJLCPCB.Whl = Eagle compatible aperture list
+
+
+Caution: Oblong holes Drill file includes 2 oblong holes!
+
+Caution: Smallest track is thiner than 0.150mm: (0.089 at -42.0824 | -14.986) on layer 16
+
+Caution: Thinest text is smaller than 0.150mm: (0.146 at -26.032604 | -8.89649) on layer 21

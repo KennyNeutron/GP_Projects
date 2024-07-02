@@ -1,0 +1,1307 @@
+MPASM  5.51      20191109_HUB6CPU16F690V1.ASM   12-3-2019  19:06:42         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 ;**********************************************************************
+                      00002 ;                                                                     *
+                      00003 ;    FILENAME:      20191109_HUB6CPU16F690V1.ASM                      *
+                      00004 ;    DATE:              2019.11.09                                        *
+                      00005 ;    FILE VERSION:                                                    *
+                      00006 ;                                                                     *
+                      00007 ;    AUTHOR:        KENNYNEUTRON                                      *
+                      00008 ;    COMPANY:       GER-PER ENGINEERING                               *
+                      00009 ;                                                                     * 
+                      00010 ;                                                                     *
+                      00011 ;**********************************************************************
+                      00012 ;                                                                     *
+                      00013 ;    FILES REQUIRED: P16F690.INC                                      *
+                      00014 ;                                                                     *
+                      00015 ;**********************************************************************
+                      00016 ;                                                                     *
+                      00017 ;    NOTES:                                                           *
+                      00018 ;                                                                     *
+                      00019 ;**********************************************************************
+                      00020 
+                      00021 
+                      00022         LIST            P=16F690                        ; LIST DIRECTIVE TO DEFINE PROCESSOR
+                      00023         #INCLUDE        <P16F690.INC>           ; PROCESSOR SPECIFIC VARIABLE DEFINITIONS
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC16F690 processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2013 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+                      00756         LIST
+                      00024         
+                      00025 
+2007   30EA           00026         __CONFIG    _CP_OFF & _CPD_OFF & _BOR_OFF & _PWRTE_ON & _WDT_ON & _HS_OSC & _MCLRE_ON & _FCMEN_O
+                            FF & _IESO_OFF
+                      00027 
+                      00028 ; '__CONFIG' DIRECTIVE IS USED TO EMBED CONFIGURATION DATA WITHIN .ASM FILE.
+                      00029 ; THE LABELS FOLLOWING THE DIRECTIVE ARE LOCATED IN THE RESPECTIVE .INC FILE.
+                      00030 ; SEE RESPECTIVE DATA SHEET FOR ADDITIONAL INFORMATION ON CONFIGURATION WORD.
+                      00031 
+                      00032 
+                      00033 
+                      00034 
+                      00035 
+                      00036 
+                      00037 ;***** VARIABLE DEFINITIONS
+  0000007D            00038 W_TEMP          EQU     0X7D                    ; VARIABLE USED FOR CONTEXT SAVING
+  0000007E            00039 STATUS_TEMP     EQU     0X7E                    ; VARIABLE USED FOR CONTEXT SAVING
+  0000007F            00040 PCLATH_TEMP     EQU     0X7F                    ; VARIABLE USED FOR CONTEXT SAVING
+                      00041 
+                      00042 ;COL_CNT EQU 0x21
+                      00043 
+MPASM  5.51      20191109_HUB6CPU16F690V1.ASM   12-3-2019  19:06:42         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00044 
+                      00045         ;#DEFINE C0_ON          BSF PORTC,      0       PORTC0=====>HI
+                      00046         ;#DEFINE C0_OFF         BCF PORTC,      0       PORTC0=====>LO
+                      00047 
+                      00048 
+                      00049         #DEFINE DAT_0           BCF             PORTC,7
+                      00050         #DEFINE DAT_1           BSF             PORTC,7
+                      00051 
+                      00052         #DEFINE CLK_0           BCF             PORTB,6
+                      00053         #DEFINE CLK_1           BSF             PORTB,6
+                      00054 
+                      00055         #DEFINE CS_0            BCF             PORTC,6
+                      00056         #DEFINE CS_1            BSF             PORTC,6
+                      00057 
+                      00058         #DEFINE BANK0           BANKSEL PORTA
+                      00059         #DEFINE BANK1           BANKSEL ADRESL
+                      00060         #DEFINE BANK2           BANKSEL ANSELH
+                      00061 
+                      00062 ;============================   BANK    0       ===========================
+Warning[205]: Found directive in column 1. (CBLOCK)
+                      00063 CBLOCK 0x20
+Warning[210]: Extra ","
+  00000020            00064                         DELAYUS, DELAYMS,  MILSEC, SEC,DELAYS,  ;DELAY VARIABLES                
+  00000025            00065                         LOOP,DATABUFF
+  00000027            00066                         COUNT0
+  00000028            00067                         CHAR0
+  00000029            00068                         RCV_BIT,RCV_DAT,RCV_TEMP,RCV_FBIT
+                      00069                         
+Warning[205]: Found directive in column 1. (ENDC)
+                      00070 ENDC
+                      00071 ;======================================================================
+                      00072 
+                      00073 
+                      00074 ;============================   BANK    1       ===========================
+Warning[205]: Found directive in column 1. (CBLOCK)
+                      00075 CBLOCK 0XA0
+                      00076                 
+                      00077         
+Warning[205]: Found directive in column 1. (ENDC)
+                      00078 ENDC
+                      00079 ;======================================================================
+                      00080 
+                      00081 
+                      00082 
+                      00083 ;============================   BANK    2       ===========================
+Warning[205]: Found directive in column 1. (CBLOCK)
+                      00084 CBLOCK 0X120
+                      00085         
+                      00086 
+Warning[205]: Found directive in column 1. (ENDC)
+                      00087 ENDC
+                      00088 ;======================================================================
+                      00089 
+MPASM  5.51      20191109_HUB6CPU16F690V1.ASM   12-3-2019  19:06:42         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00090 ;**********************************************************************
+0000                  00091         ORG             0X000                   ; PROCESSOR RESET VECTOR
+0000   2811           00092                 GOTO    INIT                    ;GO TO INITIALIZATION
+                      00093 
+                      00094 
+0004                  00095         ORG             0X004                   ; INTERRUPT VECTOR LOCATION
+0004   00FD           00096         MOVWF           W_TEMP                  ; SAVE OFF CURRENT W REGISTER CONTENTS
+0005   0803           00097         MOVF            STATUS,W                ; MOVE STATUS REGISTER INTO W REGISTER
+0006   00FE           00098         MOVWF           STATUS_TEMP             ; SAVE OFF CONTENTS OF STATUS REGISTER
+0007   080A           00099         MOVF            PCLATH,W                ; MOVE PCLATH REGISTER INTO W REGISTER
+0008   00FF           00100         MOVWF           PCLATH_TEMP             ; SAVE OFF CONTENTS OF PCLATH REGISTER
+0009   2880           00101         GOTO INTERRUPT
+                      00102 
+                      00103 ; ISR CODE CAN GO HERE OR BE LOCATED AS A CALL SUBROUTINE ELSEWHERE
+                      00104 
+000A   087F           00105         MOVF            PCLATH_TEMP,W           ; RETRIEVE COPY OF PCLATH REGISTER
+000B   008A           00106         MOVWF           PCLATH                  ; RESTORE PRE-ISR PCLATH REGISTER CONTENTS      
+000C   087E           00107         MOVF            STATUS_TEMP,W   ; RETRIEVE COPY OF STATUS REGISTER
+000D   0083           00108         MOVWF           STATUS                  ; RESTORE PRE-ISR STATUS REGISTER CONTENTS
+000E   0EFD           00109         SWAPF           W_TEMP,F
+000F   0E7D           00110         SWAPF           W_TEMP,W                ; RESTORE PRE-ISR W REGISTER CONTENTS
+0010   0009           00111         RETFIE                                          ; RETURN FROM INTERRUPT
+                      00112 
+                      00113 
+                      00114 
+                      00115 ;$$$$$$$$$$$$$$$$$$$$$  INITIALIZE      $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+                      00116 
+                      00117 ;DECLARE PORTC AS OUTPUT HERE:
+0011                  00118 INIT
+Warning[205]: Found directive in column 1. (BANKSEL)
+0011   1283 1703      00119 BANKSEL ANSEL
+Warning[203]: Found opcode in column 1. (CLRW)
+0013   0103           00120 CLRW
+Warning[203]: Found opcode in column 1. (MOVWF)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0014   009E           00121 MOVWF   ANSEL
+Warning[203]: Found opcode in column 1. (MOVWF)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0015   009F           00122 MOVWF   ANSELH
+                      00123 
+                      00124 
+                      00125 
+Warning[205]: Found directive in column 1. (BANKSEL)
+0016   1683 1303      00126 BANKSEL TRISC
+Warning[203]: Found opcode in column 1. (MOVLW)
+0018   3008           00127 MOVLW   B'00001000'
+Warning[203]: Found opcode in column 1. (MOVWF)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0019   0087           00128 MOVWF   TRISC
+                      00129 
+                      00130 
+001A   1683 1303      00131         BANKSEL TRISB
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+MPASM  5.51      20191109_HUB6CPU16F690V1.ASM   12-3-2019  19:06:42         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+001C   0186           00132         CLRF    TRISB
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+001D   1686           00133         BSF             TRISB,5
+                      00134         
+                      00135 
+                      00136         
+                      00137 ;       
+                      00138 ;       BANK1
+                      00139 ;       BCF             BAUDCTL,3
+                      00140 ;       MOVLW   0
+                      00141 ;       MOVWF   SPBRGH
+                      00142 ;       MOVLW   .129
+                      00143 ;       MOVWF   SPBRG
+                      00144 ;
+                      00145 ;       MOVLW   B'00100000' ;CONFIGURE TXSTA
+                      00146 ;       MOVWF   TXSTA
+                      00147 ;
+                      00148 ;       BANK0
+                      00149 ;       MOVLW B'10010000' 
+                      00150 ;       MOVWF RCSTA ;RECEIVE STATUS REG
+                      00151 
+                      00152 
+                      00153 
+                      00154         ;---CONFIGURE PERIPHERAL INTERRUPTS
+001E   3020           00155         MOVLW B'00100000' ;DISABLE ALL PERIPHERAL INTERRUPTS EXCEPT RECEIVER
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+001F   008C           00156         MOVWF PIE1 ;PERIPHERAL INTERRUPT ENABLE/DISABLE
+                      00157 
+                      00158         ;---CONFIGURE GENERAL INTERRUPTS
+0020   3040           00159         MOVLW B'01000000' ;DISABLE ALL INTERRUPTS EXCEPT PERIPHERAL
+0021   008B           00160         MOVWF INTCON ;INTERRUPT CONTROL REGISTER
+                      00161 
+                      00162         ;---CONFIGURE SPBRG FOR DESIRED BAUD RATE
+0022   3081           00163         MOVLW .129 ;WE WILL USE 4800bps 
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0023   0099           00164         MOVWF SPBRG ;BAUD AT 4MHZ
+                      00165 
+                      00166         ;---CONFIGURE TXSTA
+0024   3024           00167         MOVLW B'00100100' ;CONFIGURE TXSTA AS :
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0025   0098           00168         MOVWF TXSTA ;
+                      00169         ;8 BIT TRANSMISSION - 6.BIT
+                      00170         ;TRANSMIT ENABLED - 5.BIT
+                      00171         ;ASYNCHRONOUS MODE - 4.BIT
+                      00172         ;ENABLE HIGH SPEED BAUD RATE - 2.BIT
+                      00173 
+0026   1283           00174         BCF STATUS,RP0 ;SWITCH TO BANK0
+                      00175 
+0027   3080           00176         MOVLW B'10000000' ;ENABLE SERIAL PORT
+0028   0098           00177         MOVWF RCSTA ;RECEIVE STATUS REG
+                      00178 
+                      00179 ;       CLRF TMP_TX
+                      00180 
+MPASM  5.51      20191109_HUB6CPU16F690V1.ASM   12-3-2019  19:06:42         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0029   178B           00181         BSF INTCON,7 ;ENABLE ALL UNMASKED INTERRUPTS
+002A   1618           00182         BSF RCSTA,4 ;ENABLE USART RECEIVE
+                      00183 
+                      00184 
+                      00185 
+Warning[205]: Found directive in column 1. (BANKSEL)
+002B   1283 1303      00186 BANK0
+Warning[203]: Found opcode in column 1. (BCF)
+002D   1307           00187 CS_0
+002E   3000           00188         MOVLW   0
+002F   00A8           00189         MOVWF   CHAR0
+0030   00A9           00190         MOVWF   RCV_BIT
+0031   00AA           00191         MOVWF   RCV_DAT
+0032   00AC           00192         MOVWF   RCV_FBIT
+                      00193 
+                      00194 
+                      00195 ;       BCF     PORTC,0
+                      00196 ;       NOP
+                      00197 ;       NOP
+                      00198 ;       NOP
+                      00199 ;       NOP
+0033   1407           00200         BSF     PORTC,0
+0034   0000           00201         NOP
+0035   0000           00202         NOP
+0036   0000           00203         NOP
+0037   0000           00204         NOP
+                      00205 
+Warning[203]: Found opcode in column 1. (GOTO)
+0038   2839           00206 GOTO    MAIN    ; GO TO BEGINNING OF PROGRAM
+                      00207 ;$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+                      00208 
+                      00209 
+                      00210 ;#######################        MAIN PROGRAM  ##########################
+0039                  00211 MAIN
+                      00212 ;
+                      00213 ;       MOVLW   .10
+                      00214 ;       MOVWF   COUNT0
+                      00215 ;
+                      00216 ;MAN0
+                      00217 ;       MOVLW   0XAA                            ;HEADER
+                      00218 ;       MOVWF   DATABUFF
+                      00219 ;       CALL    DATA_GPU_SEND
+                      00220 ;
+                      00221 ;       MOVLW   0XA0                            ;CMD_CURSORX
+                      00222 ;       MOVWF   DATABUFF
+                      00223 ;       CALL    DATA_GPU_SEND
+                      00224 ;
+                      00225 ;       MOVLW   0X01                            ;CSR_LOW_BYTE
+                      00226 ;       MOVWF   DATABUFF
+                      00227 ;       CALL    DATA_GPU_SEND
+                      00228 ;
+                      00229 ;
+                      00230 ;       MOVLW   0X04                            ;CSR_HIGH_BYTE
+MPASM  5.51      20191109_HUB6CPU16F690V1.ASM   12-3-2019  19:06:42         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00231 ;       MOVWF   DATABUFF
+                      00232 ;       CALL    DATA_GPU_SEND
+                      00233 ;
+                      00234 ;
+                      00235 ;       MOVLW   0XA1                            ;CMD_COLOR
+                      00236 ;       MOVWF   DATABUFF
+                      00237 ;       CALL    DATA_GPU_SEND
+                      00238 ;
+                      00239 ;       MOVLW   0X01                            ;COLOR_GREEN
+                      00240 ;       MOVWF   DATABUFF
+                      00241 ;       CALL    DATA_GPU_SEND
+                      00242 ;
+                      00243 ;       MOVLW   0XA1                            ;CMD_COLOR
+                      00244 ;       MOVWF   DATABUFF
+                      00245 ;       CALL    DATA_GPU_SEND
+                      00246 ;
+                      00247 ;
+                      00248 ;
+                      00249 ;       MOVLW   0X00                            ;COLOR_RED
+                      00250 ;       MOVWF   DATABUFF
+                      00251 ;       CALL    DATA_GPU_SEND
+                      00252 ;
+                      00253 ;
+                      00254 ;
+                      00255 ;       MOVLW   0XA1                            ;CMD_COLOR
+                      00256 ;       MOVWF   DATABUFF
+                      00257 ;       CALL    DATA_GPU_SEND
+                      00258 ;
+                      00259 ;
+                      00260 ;
+                      00261 ;       MOVLW   0X02                            ;COLOR_YELLOW
+                      00262 ;       MOVWF   DATABUFF
+                      00263 ;       CALL    DATA_GPU_SEND
+                      00264 ;
+                      00265 ;
+                      00266 ;       MOVLW   0XA1                            ;CMD_COLOR
+                      00267 ;       MOVWF   DATABUFF
+                      00268 ;       CALL    DATA_GPU_SEND
+                      00269 ;
+                      00270 ;
+                      00271 ;
+                      00272 ;       MOVLW   0X01                            ;COLOR_GREEN
+                      00273 ;       MOVWF   DATABUFF
+                      00274 ;       CALL    DATA_GPU_SEND
+                      00275 ;
+                      00276 ;
+                      00277 ;       MOVLW   0XA2                            ;CMD_CHAR
+                      00278 ;       MOVWF   DATABUFF
+                      00279 ;       CALL    DATA_GPU_SEND
+                      00280 ;       
+                      00281 ;
+                      00282 ;
+                      00283 ;       MOVFW   RCV_DAT
+MPASM  5.51      20191109_HUB6CPU16F690V1.ASM   12-3-2019  19:06:42         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00284 ;
+                      00285 ;
+                      00286 ;       MOVWF   DATABUFF
+                      00287 ;       CALL    DATA_GPU_SEND
+                      00288 ;
+                      00289 ;
+                      00290 ;
+                      00291 ;
+                      00292 ;
+                      00293 ;
+                      00294 ;
+                      00295 ;
+                      00296 ;       MOVLW   0XA2                            ;CMD_CHAR
+                      00297 ;       MOVWF   DATABUFF
+                      00298 ;       CALL    DATA_GPU_SEND
+                      00299 ;       
+                      00300 ;
+                      00301 ;       MOVLW   0X34                            ;CHAR_LOW_E
+                      00302 ;       MOVWF   DATABUFF
+                      00303 ;       CALL    DATA_GPU_SEND
+                      00304 ;
+                      00305 ;
+                      00306 ;
+                      00307 ;       MOVLW   0XA2                            ;CMD_CHAR
+                      00308 ;       MOVWF   DATABUFF
+                      00309 ;       CALL    DATA_GPU_SEND
+                      00310 ;       
+                      00311 ;
+                      00312 ;       MOVLW   0X3D                            ;CHAR_LOW_N
+                      00313 ;       MOVWF   DATABUFF
+                      00314 ;       CALL    DATA_GPU_SEND
+                      00315 ;
+                      00316 ;
+                      00317 ;
+                      00318 ;       MOVLW   0XA2                            ;CMD_CHAR
+                      00319 ;       MOVWF   DATABUFF
+                      00320 ;       CALL    DATA_GPU_SEND
+                      00321 ;       
+                      00322 ;
+                      00323 ;       MOVLW   0X3D                            ;CHAR_LOW_N
+                      00324 ;       MOVWF   DATABUFF
+                      00325 ;       CALL    DATA_GPU_SEND
+                      00326 ;
+                      00327 ;
+                      00328 ;       MOVLW   0XA2                            ;CMD_CHAR
+                      00329 ;       MOVWF   DATABUFF
+                      00330 ;       CALL    DATA_GPU_SEND
+                      00331 ;       
+                      00332 ;
+                      00333 ;       MOVLW   0X48                            ;CHAR_LOW_Y
+                      00334 ;       MOVWF   DATABUFF
+                      00335 ;       CALL    DATA_GPU_SEND
+                      00336 ;
+MPASM  5.51      20191109_HUB6CPU16F690V1.ASM   12-3-2019  19:06:42         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00337 ;
+                      00338 ;
+                      00339 ;
+                      00340 ;
+                      00341 ;
+                      00342 ;       MOVLW   0XA3                    ;CMD_SCROLL
+                      00343 ;       MOVWF   DATABUFF
+                      00344 ;       CALL    DATA_GPU_SEND
+                      00345 ;       
+                      00346 ;
+                      00347 ;       MOVLW   0X00                    ;SCROLL_FALSE
+                      00348 ;       MOVWF   DATABUFF
+                      00349 ;       CALL    DATA_GPU_SEND
+                      00350 ;
+                      00351 ;
+                      00352 ;
+                      00353 ;       MOVLW   0XFE                    ;CMD_ENDCOM
+                      00354 ;       MOVWF   DATABUFF
+                      00355 ;       CALL    DATA_GPU_SEND
+                      00356 ;
+                      00357 ;       MOVLW   0XBB                    ;FOOTER
+                      00358 ;       MOVWF   DATABUFF
+                      00359 ;       CALL    DATA_GPU_SEND
+                      00360 ;
+                      00361 ;;      DECFSZ  COUNT0
+                      00362 ;;      GOTO    MAN0
+                      00363 
+Warning[203]: Found opcode in column 1. (NOP)
+0039   0000           00364 NOP
+Warning[203]: Found opcode in column 1. (CLRWDT)
+003A   0064           00365 CLRWDT
+Warning[203]: Found opcode in column 1. (GOTO)
+003B   2839           00366 GOTO    MAIN
+                      00367 
+                      00368 
+                      00369 
+                      00370 ;=================== CPU TO GPU COMMUNICATION =================
+003C                  00371 DATA_GPU_SEND
+                      00372 
+                      00373 
+Warning[203]: Found opcode in column 1. (BSF)
+003C   1707           00374 CS_1
+                      00375 
+003D   1987           00376                 BTFSC   PORTC,3         ;ACK
+                      00377 
+003E   283D           00378                 GOTO    $-1
+                      00379                 
+                      00380 
+Warning[203]: Found opcode in column 1. (MOVLW)
+003F   3003           00381 MOVLW   3
+Warning[203]: Found opcode in column 1. (CALL)
+0040   2060           00382 CALL    DELAY_US
+                      00383 
+MPASM  5.51      20191109_HUB6CPU16F690V1.ASM   12-3-2019  19:06:42         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[203]: Found opcode in column 1. (BCF)
+0041   1387           00384 DAT_0
+                      00385 
+Warning[203]: Found opcode in column 1. (BCF)
+0042   1306           00386 CLK_0
+                      00387 
+                      00388 
+Warning[203]: Found opcode in column 1. (MOVLW)
+0043   3008           00389 MOVLW   8
+Warning[203]: Found opcode in column 1. (MOVWF)
+0044   00A5           00390 MOVWF   LOOP
+                      00391 
+                      00392 
+0045                  00393 MN0
+Message[305]: Using default destination of 1 (file).
+0045   0DA6           00394                 RLF             DATABUFF
+0046   1C03           00395                 BTFSS   STATUS,C
+0047   2849           00396                 GOTO    DATIS0
+0048   284B           00397                 GOTO    DATIS1
+                      00398 
+0049                  00399 DATIS0
+0049   1387           00400                 DAT_0
+004A   284E           00401                 GOTO    MN1
+                      00402 
+004B                  00403 DATIS1
+004B   1787           00404                 DAT_1
+004C   284E           00405                 GOTO    MN1
+                      00406 
+Warning[203]: Found opcode in column 1. (NOP)
+004D   0000           00407 NOP
+                      00408 
+004E                  00409 MN1
+004E   1706           00410                 CLK_1
+004F   0000           00411                 NOP
+0050   0000           00412                 NOP
+0051   0000           00413                 NOP
+0052   0000           00414                 NOP
+0053   0000           00415                 NOP
+0054   0000           00416                 NOP
+0055   0000           00417                 NOP
+0056   0000           00418                 NOP
+0057   1306           00419                 CLK_0
+0058   0064           00420                 CLRWDT
+0059   0BA5           00421                 DECFSZ  LOOP,F
+005A   2845           00422                 GOTO    MN0
+                      00423 
+Warning[203]: Found opcode in column 1. (BCF)
+005B   1307           00424 CS_0
+                      00425 
+                      00426 
+Warning[203]: Found opcode in column 1. (BSF)
+005C   1706           00427 CLK_1
+Warning[203]: Found opcode in column 1. (BSF)
+MPASM  5.51      20191109_HUB6CPU16F690V1.ASM   12-3-2019  19:06:42         PAGE 10
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+005D   1787           00428 DAT_1
+                      00429 
+005E                  00430 DGS_EXIT
+005E   1307           00431                 CS_0
+                      00432 ;               MOVLW   3
+                      00433 ;               CALL    DELAY_US
+                      00434 
+                      00435 
+Warning[203]: Found opcode in column 1. (RETURN)
+005F   0008           00436 RETURN
+                      00437 ;====================================================================
+                      00438 
+                      00439 
+                      00440 
+                      00441 
+                      00442 
+                      00443 
+                      00444 
+                      00445 
+                      00446 
+                      00447 
+                      00448 
+                      00449 
+                      00450 
+                      00451 ;==========     DELAY USEC =========
+0060                  00452 DELAY_US
+                      00453 
+0060   00A0           00454         MOVWF   DELAYUS
+                      00455 
+0061                  00456 USEC
+                      00457 
+0061   0000           00458         NOP
+0062   0000           00459         NOP
+0063   0000           00460         NOP
+0064   0000           00461         NOP
+Warning[203]: Found opcode in column 1. (DECFSZ)
+0065   0BA0           00462 DECFSZ  DELAYUS,F
+                      00463 
+Warning[203]: Found opcode in column 1. (GOTO)
+0066   2861           00464 GOTO    USEC
+                      00465 
+Warning[203]: Found opcode in column 1. (RETURN)
+0067   0008           00466 RETURN
+                      00467 ;=================================
+                      00468 
+                      00469 
+                      00470 
+                      00471 ;=========== DELAY ONE MS ========
+0068                  00472 DELAY_ONEMS
+                      00473 
+0068   3005           00474         MOVLW   .5
+0069   00A5           00475         MOVWF   LOOP
+                      00476 
+MPASM  5.51      20191109_HUB6CPU16F690V1.ASM   12-3-2019  19:06:42         PAGE 11
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+006A                  00477 MSEC
+006A   30C8           00478         MOVLW   .200
+006B   2060           00479         CALL    DELAY_US
+006C   0BA5           00480         DECFSZ  LOOP,F
+006D   286A           00481         GOTO    MSEC
+                      00482 
+Warning[203]: Found opcode in column 1. (RETURN)
+006E   0008           00483 RETURN
+                      00484 ;==================================
+                      00485 
+                      00486 
+                      00487 ;=========== DELAY MS   ==========
+006F                  00488 DELAY_MS
+                      00489         
+006F   00A1           00490         MOVWF   DELAYMS
+0070                  00491 MSEC0
+0070   2068           00492         CALL    DELAY_ONEMS
+0071   0BA1           00493         DECFSZ  DELAYMS,F
+0072   2870           00494         GOTO    MSEC0
+Warning[203]: Found opcode in column 1. (RETURN)
+0073   0008           00495 RETURN
+                      00496 ;=================================
+                      00497 
+                      00498 ;=========== DELAY      ONE     SECOND ===
+0074                  00499 DELAY_ONESEC
+                      00500 
+0074   3005           00501         MOVLW   .5
+0075   00A3           00502         MOVWF   SEC
+0076                  00503 SEC0
+0076   30C8           00504         MOVLW   .200
+0077   206F           00505         CALL    DELAY_MS
+0078   0BA3           00506         DECFSZ  SEC,F
+0079   2876           00507         GOTO    SEC0
+Warning[203]: Found opcode in column 1. (RETURN)
+007A   0008           00508 RETURN
+                      00509 ;=================================
+                      00510 
+                      00511 ;========== DELAY SEC ============
+007B                  00512 DELAY_SEC
+                      00513 
+007B   00A4           00514         MOVWF   DELAYS
+007C                  00515 SEC1
+007C   2074           00516         CALL    DELAY_ONESEC
+007D   0BA4           00517         DECFSZ  DELAYS,F
+007E   287C           00518         GOTO    SEC1
+Warning[203]: Found opcode in column 1. (RETURN)
+007F   0008           00519 RETURN
+                      00520 ;=================================
+                      00521 
+                      00522 
+                      00523 
+0080                  00524 INTERRUPT:
+                      00525 
+MPASM  5.51      20191109_HUB6CPU16F690V1.ASM   12-3-2019  19:06:42         PAGE 12
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0080   138B           00526         BCF     INTCON,7        ;DISABLE ALL INTERRUPTS
+0081   1E8C           00527         BTFSS   PIR1,5          ;CHECK IF THE RCIF FLAG IS SET
+0082   2889           00528         GOTO    QUIT_INT        ;IF NOT RETURN BACK TO THE MAIN LOOP
+0083   081A           00529         MOVFW   RCREG           ;MOVE THE RECEIVED BYTE TO W
+0084   00AA           00530         MOVWF   RCV_DAT
+0085   00AB           00531         MOVWF   RCV_TEMP
+                      00532 
+                      00533 
+                      00534 
+0086   082A           00535         MOVFW   RCV_DAT
+                      00536 
+                      00537 
+0087   00A6           00538         MOVWF   DATABUFF
+                      00539 
+0088   203C           00540         CALL    DATA_GPU_SEND
+                      00541 
+                      00542 
+                      00543 ;
+                      00544 ;       MOVLW   0XFA
+                      00545 ;       SUBWF   RCV_TEMP
+                      00546 ;       BTFSC   STATUS,Z
+                      00547 ;       GOTO    ACKHEADER       ;IF     FA ACKNOWLED HEADER
+                      00548 ;
+                      00549 ;
+                      00550 ;       MOVLW   0XFB
+                      00551 ;       SUBWF   RCV_TEMP
+                      00552 ;       BTFSC   STATUS,Z
+                      00553 ;       GOTO    ACKFOOTER       ;IF     FB ACKNOWLED FOOTER
+                      00554 ;
+                      00555 ;       
+                      00556 ;       BTFSS   RCV_BIT,0
+                      00557 ;       GOTO    SAVEDAT
+                      00558 ;
+                      00559 ;
+                      00560 ;       GOTO    QUIT_INT
+                      00561 ;       
+                      00562 ;SAVEDAT
+                      00563 ;       BCF             RCV_BIT,0
+                      00564 ;       GOTO    QUIT_INT
+                      00565 ;
+                      00566 ;ACKFOOTER
+                      00567 ;       MOVLW   00
+                      00568 ;       MOVWF   RCV_DAT
+                      00569 ;       BCF             RCV_BIT,0
+                      00570 ;       BSF             RCV_BIT,0
+                      00571 ;       GOTO QUIT_INT
+                      00572 ;
+                      00573 ;
+                      00574 ;ACKHEADER
+                      00575 ;       BSF             RCV_BIT,0
+                      00576 ;       GOTO QUIT_INT
+                      00577 ;       
+                      00578 ;       NOP
+MPASM  5.51      20191109_HUB6CPU16F690V1.ASM   12-3-2019  19:06:42         PAGE 13
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00579         
+0089                  00580 QUIT_INT:
+0089   0000           00581         NOP
+008A   0009           00582         RETFIE
+                      00583 
+                      00584 
+                      00585 
+2100                  00586         ORG     0x2100                          ; data EEPROM location
+2100   0001 0002 0003 00587         DE      1,2,3,4                         ; define first four EEPROM locations as 1, 2, 3, and 4
+       0004 
+                      00588 
+                      00589 
+                      00590 
+                      00591 
+                      00592         END                       ; directive 'end of program'
+MPASM  5.51      20191109_HUB6CPU16F690V1.ASM   12-3-2019  19:06:42         PAGE 14
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ABDEN                             00000000
+ABDOVF                            00000007
+ADCON0                            0000001F
+ADCON1                            0000009F
+ADCS0                             00000004
+ADCS1                             00000005
+ADCS2                             00000006
+ADDEN                             00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+ANS0                              00000000
+ANS1                              00000001
+ANS10                             00000002
+ANS11                             00000003
+ANS2                              00000002
+ANS3                              00000003
+ANS4                              00000004
+ANS5                              00000005
+ANS6                              00000006
+ANS7                              00000007
+ANS8                              00000000
+ANS9                              00000001
+ANSEL                             0000011E
+ANSELH                            0000011F
+BANK0                             BANKSEL PORTA
+BANK1                             BANKSEL ADRESL
+BANK2                             BANKSEL ANSELH
+BAUDCTL                           0000009B
+BF                                00000000
+BRG0                              00000000
+BRG1                              00000001
+BRG10                             00000002
+BRG11                             00000003
+BRG12                             00000004
+BRG13                             00000005
+BRG14                             00000006
+BRG15                             00000007
+BRG16                             00000003
+BRG2                              00000002
+BRG3                              00000003
+BRG4                              00000004
+BRG5                              00000005
+BRG6                              00000006
+BRG7                              00000007
+BRG8                              00000000
+BRG9                              00000001
+BRGH                              00000002
+C                                 00000000
+C1CH0                             00000000
+MPASM  5.51      20191109_HUB6CPU16F690V1.ASM   12-3-2019  19:06:42         PAGE 15
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+C1CH1                             00000001
+C1IE                              00000005
+C1IF                              00000005
+C1OE                              00000005
+C1ON                              00000007
+C1OUT                             00000006
+C1POL                             00000004
+C1R                               00000002
+C1SEN                             00000005
+C1VREN                            00000007
+C2CH0                             00000000
+C2CH1                             00000001
+C2IE                              00000006
+C2IF                              00000006
+C2OE                              00000005
+C2ON                              00000007
+C2OUT                             00000006
+C2POL                             00000004
+C2R                               00000002
+C2REN                             00000004
+C2SYNC                            00000000
+C2VREN                            00000006
+CCP1CON                           00000017
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCPR                              00000015
+CCPR1H                            00000016
+CCPR1L                            00000015
+CHAR0                             00000028
+CHS0                              00000002
+CHS1                              00000003
+CHS2                              00000004
+CHS3                              00000005
+CKE                               00000006
+CKP                               00000004
+CLK_0                             BCF             PORTB,6
+CLK_1                             BSF             PORTB,6
+CM1CON0                           00000119
+CM2CON0                           0000011A
+CM2CON1                           0000011B
+COUNT0                            00000027
+CREN                              00000004
+CSRC                              00000007
+CS_0                              BCF             PORTC,6
+CS_1                              BSF             PORTC,6
+D                                 00000005
+DATABUFF                          00000026
+DATA_ADDRESS                      00000005
+DATA_GPU_SEND                     0000003C
+MPASM  5.51      20191109_HUB6CPU16F690V1.ASM   12-3-2019  19:06:42         PAGE 16
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+DATIS0                            00000049
+DATIS1                            0000004B
+DAT_0                             BCF             PORTC,7
+DAT_1                             BSF             PORTC,7
+DC                                00000001
+DC1B0                             00000004
+DC1B1                             00000005
+DELAYMS                           00000021
+DELAYS                            00000024
+DELAYUS                           00000020
+DELAY_MS                          0000006F
+DELAY_ONEMS                       00000068
+DELAY_ONESEC                      00000074
+DELAY_SEC                         0000007B
+DELAY_US                          00000060
+DGS_EXIT                          0000005E
+D_A                               00000005
+D_NOT_A                           00000005
+ECCPAS                            0000001D
+ECCPAS0                           00000004
+ECCPAS1                           00000005
+ECCPAS2                           00000006
+ECCPASE                           00000007
+EEADR                             0000010D
+EEADRH                            0000010F
+EECON1                            0000018C
+EECON2                            0000018D
+EEDAT                             0000010C
+EEDATA                            0000010C
+EEDATH                            0000010E
+EEIE                              00000004
+EEIF                              00000004
+EEPGD                             00000007
+F                                 00000001
+FERR                              00000002
+FSR                               00000004
+GIE                               00000007
+GO                                00000001
+GO_DONE                           00000001
+GO_NOT_DONE                       00000001
+HTS                               00000002
+I2C_DATA                          00000005
+I2C_READ                          00000002
+I2C_START                         00000003
+I2C_STOP                          00000004
+INDF                              00000000
+INIT                              00000011
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTERRUPT                         00000080
+INTF                              00000001
+IOC                               00000096
+MPASM  5.51      20191109_HUB6CPU16F690V1.ASM   12-3-2019  19:06:42         PAGE 17
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+IOC0                              00000000
+IOC1                              00000001
+IOC2                              00000002
+IOC3                              00000003
+IOC4                              00000004
+IOC5                              00000005
+IOCA                              00000096
+IOCA0                             00000000
+IOCA1                             00000001
+IOCA2                             00000002
+IOCA3                             00000003
+IOCA4                             00000004
+IOCA5                             00000005
+IOCB                              00000116
+IOCB4                             00000004
+IOCB5                             00000005
+IOCB6                             00000006
+IOCB7                             00000007
+IRCF0                             00000004
+IRCF1                             00000005
+IRCF2                             00000006
+IRP                               00000007
+LOOP                              00000025
+LTS                               00000001
+MAIN                              00000039
+MC1OUT                            00000007
+MC2OUT                            00000006
+MILSEC                            00000022
+MN0                               00000045
+MN1                               0000004E
+MSEC                              0000006A
+MSEC0                             00000070
+MSK                               00000093
+MSK0                              00000000
+MSK1                              00000001
+MSK2                              00000002
+MSK3                              00000003
+MSK4                              00000004
+MSK5                              00000005
+MSK6                              00000006
+MSK7                              00000007
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
+NOT_BOR                           00000000
+NOT_DONE                          00000001
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_RABPU                         00000007
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+NOT_W                             00000002
+NOT_WRITE                         00000002
+OERR                              00000001
+MPASM  5.51      20191109_HUB6CPU16F690V1.ASM   12-3-2019  19:06:42         PAGE 18
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+OPTION_REG                        00000081
+OSCCON                            0000008F
+OSCTUNE                           00000090
+OSFIE                             00000007
+OSFIF                             00000007
+OSTS                              00000003
+P                                 00000004
+P1M0                              00000006
+P1M1                              00000007
+PCL                               00000002
+PCLATH                            0000000A
+PCLATH_TEMP                       0000007F
+PCON                              0000008E
+PDC0                              00000000
+PDC1                              00000001
+PDC2                              00000002
+PDC3                              00000003
+PDC4                              00000004
+PDC5                              00000005
+PDC6                              00000006
+PEIE                              00000006
+PIE1                              0000008C
+PIE2                              0000008D
+PIR1                              0000000C
+PIR2                              0000000D
+PORTA                             00000005
+PORTB                             00000006
+PORTC                             00000007
+PR2                               00000092
+PRSEN                             00000007
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+PSSAC0                            00000002
+PSSAC1                            00000003
+PSSBD0                            00000000
+PSSBD1                            00000001
+PSTRCON                           0000019D
+PULSR                             00000002
+PULSS                             00000003
+PWM1CON                           0000001C
+QUIT_INT                          00000089
+R                                 00000002
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RA5                               00000005
+RABIE                             00000003
+RABIF                             00000000
+RB4                               00000004
+MPASM  5.51      20191109_HUB6CPU16F690V1.ASM   12-3-2019  19:06:42         PAGE 19
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RC0                               00000000
+RC1                               00000001
+RC2                               00000002
+RC3                               00000003
+RC4                               00000004
+RC5                               00000005
+RC6                               00000006
+RC7                               00000007
+RCIDL                             00000006
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+RCSTA                             00000018
+RCV_BIT                           00000029
+RCV_DAT                           0000002A
+RCV_FBIT                          0000002C
+RCV_TEMP                          0000002B
+RD                                00000000
+READ_WRITE                        00000002
+RP0                               00000005
+RP1                               00000006
+RX9                               00000006
+RX9D                              00000000
+R_NOT_W                           00000002
+R_W                               00000002
+S                                 00000003
+SBOREN                            00000004
+SCKP                              00000004
+SCS                               00000000
+SEC                               00000023
+SEC0                              00000076
+SEC1                              0000007C
+SENB                              00000003
+SENDB                             00000003
+SMP                               00000007
+SPBRG                             00000099
+SPBRGH                            0000009A
+SPEN                              00000007
+SR0                               00000006
+SR1                               00000007
+SRCON                             0000019E
+SREN                              00000005
+SSPADD                            00000093
+SSPBUF                            00000013
+SSPCON                            00000014
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+MPASM  5.51      20191109_HUB6CPU16F690V1.ASM   12-3-2019  19:06:42         PAGE 20
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+SSPM2                             00000002
+SSPM3                             00000003
+SSPMSK                            00000093
+SSPOV                             00000006
+SSPSTAT                           00000094
+STATUS                            00000003
+STATUS_TEMP                       0000007E
+STRA                              00000000
+STRB                              00000001
+STRC                              00000002
+STRD                              00000003
+STRSYNC                           00000004
+SWDTEN                            00000000
+SYNC                              00000004
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1GINV                            00000007
+T1GSS                             00000001
+T1IE                              00000000
+T1IF                              00000000
+T1OSCEN                           00000003
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+T2IE                              00000001
+T2IF                              00000001
+TMR0                              00000001
+TMR1                              0000000E
+TMR1CS                            00000001
+TMR1GE                            00000006
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+MPASM  5.51      20191109_HUB6CPU16F690V1.ASM   12-3-2019  19:06:42         PAGE 21
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TRISA4                            00000004
+TRISA5                            00000005
+TRISB                             00000086
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+TRISC                             00000087
+TRISC0                            00000000
+TRISC1                            00000001
+TRISC2                            00000002
+TRISC3                            00000003
+TRISC4                            00000004
+TRISC5                            00000005
+TRISC6                            00000006
+TRISC7                            00000007
+TRMT                              00000001
+TUN0                              00000000
+TUN1                              00000001
+TUN2                              00000002
+TUN3                              00000003
+TUN4                              00000004
+TX9                               00000006
+TX9D                              00000000
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+TXSTA                             00000098
+UA                                00000001
+ULPWUE                            00000005
+USEC                              00000061
+VCFG                              00000006
+VP6EN                             00000004
+VR0                               00000000
+VR1                               00000001
+VR2                               00000002
+VR3                               00000003
+VRCON                             00000118
+VRR                               00000005
+W                                 00000000
+WCOL                              00000007
+WDTCON                            00000097
+WDTPS0                            00000001
+WDTPS1                            00000002
+WDTPS2                            00000003
+WDTPS3                            00000004
+WPU                               00000095
+WPU0                              00000000
+WPU1                              00000001
+WPU2                              00000002
+WPU4                              00000004
+WPU5                              00000005
+MPASM  5.51      20191109_HUB6CPU16F690V1.ASM   12-3-2019  19:06:42         PAGE 22
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+WPUA                              00000095
+WPUA0                             00000000
+WPUA1                             00000001
+WPUA2                             00000002
+WPUA4                             00000004
+WPUA5                             00000005
+WPUB                              00000115
+WPUB4                             00000004
+WPUB5                             00000005
+WPUB6                             00000006
+WPUB7                             00000007
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+WUE                               00000001
+W_TEMP                            0000007D
+Z                                 00000002
+_BOD_NSLEEP                       00003EFF
+_BOD_OFF                          00003CFF
+_BOD_ON                           00003FFF
+_BOD_SBODEN                       00003DFF
+_BOREN_NSLEEP                     00003EFF
+_BOREN_OFF                        00003CFF
+_BOREN_ON                         00003FFF
+_BOREN_SBODEN                     00003DFF
+_BOR_NSLEEP                       00003EFF
+_BOR_OFF                          00003CFF
+_BOR_ON                           00003FFF
+_BOR_SBODEN                       00003DFF
+_CONFIG                           00002007
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003F7F
+_CP_OFF                           00003FFF
+_CP_ON                            00003FBF
+_DEVID1                           00002006
+_EC_OSC                           00003FFB
+_EXTRC                            00003FFF
+_EXTRCIO                          00003FFE
+_EXTRC_OSC_CLKOUT                 00003FFF
+_EXTRC_OSC_NOCLKOUT               00003FFE
+_FCMEN_OFF                        000037FF
+_FCMEN_ON                         00003FFF
+_FOSC_EC                          00003FFB
+_FOSC_EXTRCCLK                    00003FFF
+_FOSC_EXTRCIO                     00003FFE
+_FOSC_HS                          00003FFA
+_FOSC_INTRCCLK                    00003FFD
+_FOSC_INTRCIO                     00003FFC
+_FOSC_LP                          00003FF8
+_FOSC_XT                          00003FF9
+_HS_OSC                           00003FFA
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+MPASM  5.51      20191109_HUB6CPU16F690V1.ASM   12-3-2019  19:06:42         PAGE 23
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_IESO_OFF                         00003BFF
+_IESO_ON                          00003FFF
+_INTOSC                           00003FFD
+_INTOSCIO                         00003FFC
+_INTRC_OSC_CLKOUT                 00003FFD
+_INTRC_OSC_NOCLKOUT               00003FFC
+_LP_OSC                           00003FF8
+_MCLRE_OFF                        00003FDF
+_MCLRE_ON                         00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FEF
+_WDTE_OFF                         00003FF7
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FF7
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FF9
+__16F690                          00000001
+__DEBUG                           1
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+0000 : X---XXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0080 : XXXXXXXXXXX----- ---------------- ---------------- ----------------
+2000 : -------X-------- ---------------- ---------------- ----------------
+2100 : XXXX------------ ---------------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:   136
+Program Memory Words Free:  3960
+
+
+Errors   :     0
+Warnings :    39 reported,     0 suppressed
+Messages :     9 reported,     0 suppressed
+
+

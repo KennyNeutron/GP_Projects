@@ -1,0 +1,13 @@
+// SourceBoost Linker Function Resource Usage Dump
+
+#GLOBAL:"global",line = 0,ram = 58.0,rom = 0;
+FCM_SENDDATA(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\2X2 P10 SCOREBOARD\2X2 P10 SB FLOWCODE\USART_TEST.c",line = 343,ram = 0.0,rom = 95;
+FCD_RS2320_SendRS232Char(signed short):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\2X2 P10 SCOREBOARD\2X2 P10 SB FLOWCODE\USART_TEST.c",line = 275,ram = 2.0,rom = 6;
+FC_CAL_UART_Init_1(void):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_UART.c",line = 490,ram = 0.0,rom = 15;
+FC_CAL_UART_Send_1(unsigned short):"C:\Program Files (x86)\Flowcode\v5\CAL\PIC\PIC_CAL_UART.c",line = 616,ram = 0.0,rom = 5;
+main(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\2X2 P10 SCOREBOARD\2X2 P10 SB FLOWCODE\USART_TEST.c",line = 440,ram = 0.0,rom = 54;
+interrupt(void):"C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\2X2 P10 SCOREBOARD\2X2 P10 SB FLOWCODE\USART_TEST.c",line = 517,ram = 0.0,rom = 11;
+_startup(void):"NoSourceFile",line = 0,ram = 0.0,rom = 62;
+#HEAP_BLOCK: 0, 160, 95;
+#HEAP_BLOCK: 1, 288, 80;
+#HEAP_BLOCK: 2, 93, 19;

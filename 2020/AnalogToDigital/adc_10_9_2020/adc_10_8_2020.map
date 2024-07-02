@@ -1,0 +1,104 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Fri Oct 09 17:06:38 2020
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000004    program   0x000184
+.config_2007_ADC_10_8_2020.O       code   0x002007    program   0x000002
+                   .org_3       code   0x002100    program   0x000008
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x0000c5      
+                            0x002007    0x002007      
+                            0x002100    0x002103      
+            200 out of 4359 program addresses used, program memory utilization is 4%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+              ANALOG_READ   0x00002e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                     BLU0   0x0000a1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                     BLU1   0x0000a3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                   BLUX_0   0x0000ae    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                BLUX_NOT0   0x0000ac    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                    BLU_X   0x0000a6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                    BLU_Y   0x0000af    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                  CON_BLU   0x00009e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                  CON_GRN   0x00008c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                  CON_RED   0x00007a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                 DELAY_MS   0x0000bf    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+              DELAY_ONEMS   0x0000b8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                 DELAY_US   0x0000b0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                  DISPLAY   0x00006e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                      DP0   0x000070    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                      DP1   0x000072    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                     GRN0   0x00008f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                     GRN1   0x000091    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                   GRNX_0   0x00009c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                GRNX_NOT0   0x00009a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                    GRN_X   0x000094    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                    GRN_Y   0x00009d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                     INIT   0x000011    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                INTERRUPT   0x0000c4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                     MAIN   0x000027    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                     MSEC   0x0000ba    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                    MSEC0   0x0000c0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                     RED0   0x00007d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                     RED1   0x00007f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                   REDX_0   0x00008a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                REDX_NOT0   0x000088    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                    RED_X   0x000082    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                    RED_Y   0x00008b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                     USEC   0x0000b1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     INIT   0x000011    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                     MAIN   0x000027    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+              ANALOG_READ   0x00002e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                  DISPLAY   0x00006e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                      DP0   0x000070    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                      DP1   0x000072    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                  CON_RED   0x00007a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                     RED0   0x00007d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                     RED1   0x00007f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                    RED_X   0x000082    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                REDX_NOT0   0x000088    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                   REDX_0   0x00008a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                    RED_Y   0x00008b    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                  CON_GRN   0x00008c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                     GRN0   0x00008f    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                     GRN1   0x000091    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                    GRN_X   0x000094    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                GRNX_NOT0   0x00009a    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                   GRNX_0   0x00009c    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                    GRN_Y   0x00009d    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                  CON_BLU   0x00009e    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                     BLU0   0x0000a1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                     BLU1   0x0000a3    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                    BLU_X   0x0000a6    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                BLUX_NOT0   0x0000ac    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                   BLUX_0   0x0000ae    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                    BLU_Y   0x0000af    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                 DELAY_US   0x0000b0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                     USEC   0x0000b1    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+              DELAY_ONEMS   0x0000b8    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                     MSEC   0x0000ba    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                 DELAY_MS   0x0000bf    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                    MSEC0   0x0000c0    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+                INTERRUPT   0x0000c4    program     static C:\Users\gerpe\OneDrive\GER-PER 2016\Documents\KennyNeutron\2020\AnalogToDigital\adc_10_9_2020\adc_10_8_2020.asm
+
+
